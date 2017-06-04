@@ -17,8 +17,8 @@
 <script>
   import Bus from './../../bus.js';
   export default {
-    name: 'module1',
-    data () {
+    name: 'page2',
+    data: function() {
       return {
         divHtml: 'divHtml',
         vText: 'vText',
@@ -36,15 +36,11 @@
       doSth: function(){
         console.log("[Module1.doSth]" + this.divHtml);
         this.vIf = true;
-        Bus.$emit('imsg1', {a:1, b:2});
       }
     },
     watch:{
-      'vWatch':function (strVal, strOldVal) {
+      'vWatch': function (strVal, strOldVal) {
         console.log("[Module1.Watch.vWatch]" + strVal + "," + strOldVal);
-      },
-      'vIf': function (bVal, bOldVal) {
-        console.log("[Module1.Watch.vIf]" + bVal + "," + bOldVal);
       }
     }
   }
