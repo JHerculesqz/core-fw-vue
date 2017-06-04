@@ -10,7 +10,7 @@
     name: 'moduleRight',
     data: function() {
       return {
-        vText: 'moduleRight'
+        label: 'moduleRight'
       }
     },
     created: function () {
