@@ -15,13 +15,13 @@
       }
     },
     created: function () {
-      Bus.$on('imsgModuleRightShowHide', this.imsgModuleRightShowHide);
+      Bus.$on('imsgModuleRightShow', this.imsgModuleRightShow);
     },
     beforeDestroy: function () {
-      Bus.$off('imsgModuleRightShowHide', this.imsgModuleRightShowHide);
+      Bus.$off('imsgModuleRightShow', this.imsgModuleRightShow);
     },
     methods:{
-      imsgModuleRightShowHide: function(){
+      imsgModuleRightShow: function(){
         this.isHide = !this.isHide;
       }
     }
@@ -34,7 +34,7 @@
     height: 100%;
     width: 300px;
     right: 0;
-    top: 40px;
+    top: 70px;
     background-color: #e8e8e8;
   }
   .dpn {

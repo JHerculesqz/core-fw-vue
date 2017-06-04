@@ -1,7 +1,8 @@
 <template>
   <div class="moduleUp">
     <div class="title" v-text="label"></div>
-    <div class="clickShowHide" v-text="label4ShowHide" v-on:click="clickShowHide"></div>
+    <div class="clickShowLeft" v-text="lable4clickShowLeft" v-on:click="clickShowLeft"></div>
+    <div class="clickShowRight" v-text="lable4clickShowRight" v-on:click="clickShowRight"></div>
   </div>
 </template>
 
@@ -12,7 +13,8 @@
     data: function() {
       return {
         label: 'moduleUp(展示工具栏)',
-        label4ShowHide: "展开moduleRight"
+        lable4clickShowLeft: " | 展开moduleLeft",
+        lable4clickShowRight: " | 展开moduleRight"
       }
     },
     created: function () {
@@ -22,8 +24,11 @@
 
     },
     methods:{
-      clickShowHide: function(){
-        Bus.$emit("imsgModuleRightShowHide");
+      clickShowLeft: function(){
+        Bus.$emit("imsgModuleLeftShow");
+      },
+      clickShowRight: function(){
+        Bus.$emit("imsgModuleRightShow");
       }
     }
   }
@@ -37,7 +42,10 @@
   .moduleUp .title{
     float: left
   }
-  .moduleUp .clickShowHide{
+  .moduleUp .clickShowLeft{
+    float: left
+  }
+  .moduleUp .clickShowRight{
     float: left
   }
 </style>

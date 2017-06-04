@@ -1,5 +1,5 @@
 <template>
-  <div class="moduleLeft">
+  <div class="moduleLeft" v-bind:class="{ dpn: isHide }">
     <div v-text="label"></div>
     <ul>
       <li v-for="item in metrics">
@@ -16,6 +16,7 @@
     data: function(){
       return {
         label: "moduleLeft(展示指标项)",
+        isHide: true,
         metrics: [{
           id:1,
           label: "指标1"
@@ -25,19 +26,15 @@
         }]
       }
     },
-    methods:{
-      doSth: function(){
-        console.log("[Module1.doSth]" + this.divHtml);
-        this.vIf = true;
-        Bus.$emit('imsg1', {a:1, b:2});
-      }
+    created: function () {
+      Bus.$on('imsgModuleLeftShow', this.imsgModuleLeftShow);
     },
-    watch:{
-      'vWatch':function (strVal, strOldVal) {
-        console.log("[Module1.Watch.vWatch]" + strVal + "," + strOldVal);
-      },
-      'vIf': function (bVal, bOldVal) {
-        console.log("[Module1.Watch.vIf]" + bVal + "," + bOldVal);
+    beforeDestroy: function () {
+      Bus.$off('imsgModuleLeftShow', this.imsgModuleLeftShow);
+    },
+    methods:{
+      imsgModuleLeftShow: function(){
+        this.isHide = !this.isHide;
       }
     }
   }
@@ -49,6 +46,10 @@
     height: 100%;
     width: 300px;
     left: 0;
+    top: 70px;
     background-color: #e8e8e8
+  }
+  .dpn {
+    display: none;
   }
 </style>
