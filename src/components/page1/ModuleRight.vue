@@ -10,7 +10,7 @@
     name: 'moduleRight',
     data: function() {
       return {
-        label: 'moduleRight'
+        label: 'moduleRight(展示指标项详情)'
       }
     },
     created: function () {
@@ -29,6 +29,11 @@
 
 <style>
   .moduleRight {
-
+    position: absolute;
+    height: 100%;
+    width: 300px;
+    right: 0;
+    top: 40px;
+    background-color: #e8e8e8
   }
 </style>

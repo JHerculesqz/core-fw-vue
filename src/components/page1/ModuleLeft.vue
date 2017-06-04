@@ -1,6 +1,11 @@
 <template>
   <div class="moduleLeft">
-
+    <div v-text="label"></div>
+    <ul>
+      <li v-for="item in metrics">
+        {{item.label}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -10,16 +15,14 @@
     name: 'moduleLeft',
     data: function(){
       return {
-        divHtml: 'divHtml',
-        vText: 'vText',
-        vHtml: 'vHtml',
-        vIf: false,
-        vFor: [{
-          text:1
+        label: "moduleLeft(展示指标项)",
+        metrics: [{
+          id:1,
+          label: "指标1"
         }, {
-          text:2
-        }],
-        vWatch: "vWatch"
+          id:2,
+          label: "指标2"
+        }]
       }
     },
     methods:{
@@ -41,10 +44,11 @@
 </script>
 
 <style>
-  #module1 {
-    width:300px;
-    height:300px;
-    background: red;
-    float: left;
+  .moduleLeft {
+    position: absolute;
+    height: 100%;
+    width: 300px;
+    left: 0;
+    background-color: #e8e8e8
   }
 </style>

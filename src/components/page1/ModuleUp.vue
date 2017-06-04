@@ -10,7 +10,7 @@
     name: 'moduleUp',
     data: function() {
       return {
-          label: 'moduleUp'
+          label: 'moduleUp(展示工具栏)'
       }
     },
     created: function () {
@@ -27,6 +27,7 @@
 
 <style>
   .moduleUp {
-
+    height: 30px;
+    background-color: rgba(255,0,0,0.2)
   }
 </style>

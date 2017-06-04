@@ -10,7 +10,7 @@
     name: 'moduleCenter',
     data: function() {
         return {
-            label: 'moduleCenter'
+            label: 'moduleCenter(展示Topo)'
         }
     },
     created: function () {
@@ -29,6 +29,7 @@
 
 <style>
   .moduleCenter {
-
+    height: calc(100% - 30px);
+    background-color: rgba(0,255,0,0.2)
   }
 </style>

@@ -51,10 +51,10 @@
     list-style-type: none
   }
   .content{
-    height: calc(100% - 100px);
+    height: calc(100% - 40px);
   }
   .footer{
-    height: 60px;
+    height: 0px;
     background-color: #e8e8e8
   }
 </style>
