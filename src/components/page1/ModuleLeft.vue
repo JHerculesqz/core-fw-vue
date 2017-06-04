@@ -1,6 +1,7 @@
 <template>
-  <div class="moduleLeft" v-bind:class="{ dpn: isHide }">
+  <div class="moduleLeft" v-if="isShow">
     <div v-text="label"></div>
+    <button v-on:click="clickModuleLeftConfigShow">配置</button>
     <ul>
       <li v-for="item in metrics">
         {{item.label}}
@@ -16,25 +17,46 @@
     data: function(){
       return {
         label: "moduleLeft(展示指标项)",
-        isHide: true,
-        metrics: [{
-          id:1,
-          label: "指标1"
-        }, {
-          id:2,
-          label: "指标2"
-        }]
+        isShow: false,
+        metrics: []
       }
     },
     created: function () {
       Bus.$on('imsgModuleLeftShow', this.imsgModuleLeftShow);
+      Bus.$on('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
     },
     beforeDestroy: function () {
       Bus.$off('imsgModuleLeftShow', this.imsgModuleLeftShow);
+      Bus.$off('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
     },
     methods:{
       imsgModuleLeftShow: function(){
-        this.isHide = !this.isHide;
+        //1.
+        this.isShow = !this.isShow;
+
+        if(this.isShow){
+          //2.post to service
+          this.metrics = [{
+            id:1,
+            label: "指标1"
+          }, {
+            id:2,
+            label: "指标2"
+          }];
+        }
+      },
+      clickModuleLeftConfigShow: function(){
+        Bus.$emit("imsgModuleLeftConfigShow");
+      },
+      imsgModuleLeftDataUpdate: function(){
+        //1.post to service
+        this.metrics = [{
+          id:1,
+          label: "指标2"
+        }, {
+          id:2,
+          label: "指标3"
+        }];
       }
     }
   }
@@ -48,8 +70,5 @@
     left: 0;
     top: 70px;
     background-color: #e8e8e8
-  }
-  .dpn {
-    display: none;
   }
 </style>

@@ -14,15 +14,13 @@
         }
     },
     created: function () {
-        Bus.$on('imsg1', this.doSth);
+
     },
     beforeDestroy: function () {
-        Bus.$off('imsg1', this.doSth);
+
     },
     methods:{
-        doSth: function(oData){
-            console.log("[moduleCenter.doSth]" + JSON.stringify(oData));
-        }
+
     }
   }
 </script>

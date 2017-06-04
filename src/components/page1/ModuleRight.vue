@@ -1,5 +1,5 @@
 <template>
-  <div class="moduleRight" v-bind:class="{ dpn: isHide }">
+  <div class="moduleRight" v-if="isShow">
     <div v-text="label"></div>
   </div>
 </template>
@@ -11,7 +11,7 @@
     data: function() {
       return {
         label: 'moduleRight(展示指标项详情)',
-        isHide: true
+        isShow: false
       }
     },
     created: function () {
@@ -22,7 +22,7 @@
     },
     methods:{
       imsgModuleRightShow: function(){
-        this.isHide = !this.isHide;
+        this.isShow = !this.isShow;
       }
     }
   }
@@ -36,8 +36,5 @@
     right: 0;
     top: 70px;
     background-color: #e8e8e8;
-  }
-  .dpn {
-    display: none;
   }
 </style>

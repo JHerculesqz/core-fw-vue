@@ -1,6 +1,7 @@
 <template>
   <div class="page1">
     <module-left></module-left>
+    <module-left-config></module-left-config>
     <module-up></module-up>
     <module-center></module-center>
     <module-right></module-right>
@@ -9,12 +10,13 @@
 
 <script>
   import ModuleLeft from "./ModuleLeft";
+  import ModuleLeftConfig from "./ModuleLeftConfig";
   import ModuleUp from "./ModuleUp";
   import ModuleCenter from "./ModuleCenter";
   import ModuleRight from "./ModuleRight";
   export default {
     name: 'page1',
-    components: { ModuleLeft, ModuleUp, ModuleCenter, ModuleRight }
+    components: { ModuleLeft, ModuleLeftConfig, ModuleUp, ModuleCenter, ModuleRight }
   }
 </script>
 
