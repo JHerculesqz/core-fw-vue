@@ -44,7 +44,7 @@
   .moduleLeft {
     position: absolute;
     height: 100%;
-    width: 300px;
+    width: 200px;
     left: 0;
     top: 70px;
     background-color: #e8e8e8

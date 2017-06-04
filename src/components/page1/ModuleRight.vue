@@ -32,7 +32,7 @@
   .moduleRight {
     position: absolute;
     height: 100%;
-    width: 300px;
+    width: 200px;
     right: 0;
     top: 70px;
     background-color: #e8e8e8;
