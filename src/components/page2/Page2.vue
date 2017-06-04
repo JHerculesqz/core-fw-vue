@@ -1,5 +1,5 @@
 <template>
-  <div id="page2">
+  <div class="page2">
     page2
   </div>
 </template>
@@ -9,5 +9,7 @@
 </script>
 
 <style>
+  .page2{
 
+  }
 </style>
