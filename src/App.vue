@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <div class="header">
-      header
-      <!--<ul>-->
-        <!--<li>-->
-          <!--<router-link to="/">Page1</router-link>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<router-link to="/page2">Page2</router-link>-->
-        <!--</li>-->
-      <!--</ul>-->
+      <ul>
+        <li>
+          <router-link to="/">Page1</router-link>
+        </li>
+        <li>
+          <router-link to="/page2">Page2</router-link>
+        </li>
+      </ul>
     </div>
     <div class="content">
-      content
-      <!--<router-view></router-view>-->
+      <router-view></router-view>
     </div>
     <div class="footer">
       footer
@@ -41,6 +39,16 @@
   .header{
     height: 40px;
     background-color: #212121;
+  }
+  .header ul{
+    margin: 0;
+    padding: 0
+  }
+  .header ul li{
+    float: left;
+    margin-right: 20px;
+    margin-top: 0;
+    list-style-type: none
   }
   .content{
     height: calc(100% - 100px);
