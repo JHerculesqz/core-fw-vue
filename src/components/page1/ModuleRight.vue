@@ -1,5 +1,5 @@
 <template>
-  <div class="moduleRight">
+  <div class="moduleRight" v-bind:class="{ dpn: isHide }">
     <div v-text="label"></div>
   </div>
 </template>
@@ -10,18 +10,19 @@
     name: 'moduleRight',
     data: function() {
       return {
-        label: 'moduleRight(展示指标项详情)'
+        label: 'moduleRight(展示指标项详情)',
+        isHide: true
       }
     },
     created: function () {
-      Bus.$on('imsg1', this.doSth);
+      Bus.$on('imsgModuleRightShowHide', this.imsgModuleRightShowHide);
     },
     beforeDestroy: function () {
-      Bus.$off('imsg1', this.doSth);
+      Bus.$off('imsgModuleRightShowHide', this.imsgModuleRightShowHide);
     },
     methods:{
-      doSth: function(oData){
-        console.log("[moduleRight.doSth]" + JSON.stringify(oData));
+      imsgModuleRightShowHide: function(){
+        this.isHide = !this.isHide;
       }
     }
   }
@@ -34,6 +35,9 @@
     width: 300px;
     right: 0;
     top: 40px;
-    background-color: #e8e8e8
+    background-color: #e8e8e8;
+  }
+  .dpn {
+    display: none;
   }
 </style>

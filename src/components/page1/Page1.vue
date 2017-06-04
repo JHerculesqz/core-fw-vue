@@ -1,6 +1,6 @@
 <template>
   <div class="page1">
-    <module-left></module-left>
+    <!--<module-left></module-left>-->
     <module-up></module-up>
     <module-center></module-center>
     <module-right></module-right>

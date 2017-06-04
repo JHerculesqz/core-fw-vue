@@ -1,6 +1,7 @@
 <template>
   <div class="moduleUp">
-    <div v-text="label"></div>
+    <div class="title" v-text="label"></div>
+    <div class="clickShowHide" v-text="label4ShowHide" v-on:click="clickShowHide"></div>
   </div>
 </template>
 
@@ -10,7 +11,8 @@
     name: 'moduleUp',
     data: function() {
       return {
-          label: 'moduleUp(展示工具栏)'
+        label: 'moduleUp(展示工具栏)',
+        label4ShowHide: "展开moduleRight"
       }
     },
     created: function () {
@@ -20,7 +22,9 @@
 
     },
     methods:{
-
+      clickShowHide: function(){
+        Bus.$emit("imsgModuleRightShowHide");
+      }
     }
   }
 </script>
@@ -29,5 +33,11 @@
   .moduleUp {
     height: 30px;
     background-color: rgba(255,0,0,0.2)
+  }
+  .moduleUp .title{
+    float: left
+  }
+  .moduleUp .clickShowHide{
+    float: left
   }
 </style>
