@@ -1,24 +1,14 @@
 <template>
-  <div id="module1" style="float:left">
-    <p>Module1</p>
-    <div>{{ divHtml }}</div>
-    <div v-text="vText"></div>
-    <div v-html="vHtml"></div>
-    <div v-if="vIf">v-if</div>
-    <ul>
-      <li v-for="item in vFor">
-        <p v-text="item.text" v-on:click="doSth"></p>
-      </li>
-    </ul>
-    <input type="text" v-model="vWatch"/>
+  <div class="moduleLeft">
+
   </div>
 </template>
 
 <script>
   import Bus from './../../bus.js';
   export default {
-    name: 'module1',
-    data () {
+    name: 'moduleLeft',
+    data: function(){
       return {
         divHtml: 'divHtml',
         vText: 'vText',

@@ -1,38 +1,34 @@
 <template>
-  <div id="module2">
-    <div v-text="vText"></div>
+  <div class="moduleRight">
+    <div v-text="label"></div>
   </div>
 </template>
 
 <script>
   import Bus from './../../bus.js';
   export default {
-    name: 'module2',
-    data () {
+    name: 'moduleRight',
+    data: function() {
       return {
-        vText: 'vText4module2'
+        vText: 'moduleRight'
       }
     },
     created: function () {
-        Bus.$on('imsg1', this.doSth);
+      Bus.$on('imsg1', this.doSth);
     },
     beforeDestroy: function () {
-        Bus.$off('imsg1', this.doSth);
+      Bus.$off('imsg1', this.doSth);
     },
     methods:{
       doSth: function(oData){
-        console.log("[Module2.doSth]" + JSON.stringify(oData));
-        this.vText = JSON.stringify(oData);
+        console.log("[moduleRight.doSth]" + JSON.stringify(oData));
       }
     }
   }
 </script>
 
 <style>
-  #module2 {
-    width:300px;
-    height:300px;
-    background: yellowgreen;
-    float: left;
+  .moduleRight {
+
   }
 </style>

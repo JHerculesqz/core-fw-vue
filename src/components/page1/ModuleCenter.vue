@@ -28,7 +28,7 @@
 </script>
 
 <style>
-  #moduleCenter {
+  .moduleCenter {
 
   }
 </style>
