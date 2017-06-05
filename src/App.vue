@@ -26,35 +26,56 @@
 </script>
 
 <style>
-  body {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  #app {
-    height:100%;
-  }
-  .header{
-    height: 40px;
-    background-color: #212121;
-  }
-  .header ul{
-    margin: 0;
-    padding: 0
-  }
-  .header ul li{
-    float: left;
-    margin-right: 20px;
-    margin-top: 0;
-    list-style-type: none
-  }
-  .content{
-    height: calc(100% - 40px);
-  }
-  .footer{
-    height: 0px;
-    background-color: #e8e8e8
-  }
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+#app {
+  height:100%;
+}
+.header{
+  height: 50px;
+  background-color: #181b21;
+}
+.header .logo{
+  width: 280px;
+  height: 100%;
+  float: left;
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+}
+.header ul{
+  margin: 0;
+  padding: 0
+}
+.header ul li{
+  float: left;
+  margin-right: 15px;
+  margin-top: 0;
+  list-style-type: none
+}
+.header ul li a{
+  line-height: 50px;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 0 10px;
+  text-decoration: none;
+}
+.header ul li .active{
+  color:#00a0e9;
+}
+.content{
+  height: calc(100% - 50px);
+  position: relative;
+}
+.footer{
+  height: 0px;
+  background-color: #e8e8e8
+}
 </style>

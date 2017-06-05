@@ -1,5 +1,6 @@
 <template>
   <div class="moduleRight" v-if="isShow">
+    <div class="closeBtn" v-on:click="closeRightDialog"></div>
     <div v-text="label"></div>
   </div>
 </template>
@@ -23,6 +24,9 @@
     methods:{
       imsgModuleRightShow: function(){
         this.isShow = !this.isShow;
+      },
+      closeRightDialog:function(){
+        this.isShow = !this.isShow;
       }
     }
   }
@@ -32,9 +36,21 @@
   .moduleRight {
     position: absolute;
     height: 100%;
-    width: 200px;
+    width: 500px;
     right: 0;
-    top: 70px;
-    background-color: #e8e8e8;
+    top: 30px;
+    background-color: #1b1e25;
+  }
+  .moduleRight .closeBtn{
+    width: 23px;
+    height: 50px;
+    background-color: #181b21;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    right: 100%;
+    cursor:pointer;
   }
 </style>

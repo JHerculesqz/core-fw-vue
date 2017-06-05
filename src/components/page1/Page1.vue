@@ -23,6 +23,6 @@
 <style>
   .page1{
     height: 100%;
-    background-color: #f7b57c;
+    background-color: #fff;
   }
 </style>

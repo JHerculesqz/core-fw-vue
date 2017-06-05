@@ -37,7 +37,7 @@
 <style>
   .moduleUp {
     height: 30px;
-    background-color: rgba(255,0,0,0.2)
+    background-color: #fafafa
   }
   .moduleUp .title{
     float: left
