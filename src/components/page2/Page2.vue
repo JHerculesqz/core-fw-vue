@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import Bus from './../../bus.js';
+  import Bus from '../../walle/core/bus.js';
   export default {
     name: 'page2',
     data: function() {

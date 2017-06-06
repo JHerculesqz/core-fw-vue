@@ -1,32 +1,41 @@
 <template>
-  <div class="moduleRight" v-if="isShow">
-    <div class="closeBtn" v-on:click="closeRightDialog"></div>
-    <div v-text="label"></div>
+  <div class="moduleRight" v-bind:class="{ dpn: isHide }">
+    <div class="closeBtn" v-on:click="clickClose"></div>
+    <div>moduleRight(展示指标项详情)</div>
+    <component v-bind:is="rightModuleName"></component>
   </div>
 </template>
 
 <script>
-  import Bus from './../../bus.js';
+  import Bus from '@/walle/core/bus.js';
+  import ModuleRight1 from '@/components/page1/ModuleRight1';
+  import ModuleRight2 from '@/components/page1/ModuleRight2';
   export default {
     name: 'moduleRight',
+    components: {ModuleRight1, ModuleRight2},
     data: function() {
       return {
-        label: 'moduleRight(展示指标项详情)',
-        isShow: false
+        isHide: true,
+        rightModuleName: "ModuleRight1"
       }
     },
     created: function () {
       Bus.$on('imsgModuleRightShow', this.imsgModuleRightShow);
+      Bus.$on('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
     },
     beforeDestroy: function () {
       Bus.$off('imsgModuleRightShow', this.imsgModuleRightShow);
+      Bus.$off('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
     },
     methods:{
       imsgModuleRightShow: function(){
-        this.isShow = !this.isShow;
+        this.isHide = !this.isHide;
       },
-      closeRightDialog:function(){
-        this.isShow = !this.isShow;
+      imsgModuleRightUpdate: function(strRightModuleName){
+        this.rightModuleName = strRightModuleName;
+      },
+      clickClose:function(){
+        this.isHide = !this.isHide;
       }
     }
   }
@@ -52,5 +61,8 @@
     border-bottom-left-radius: 5px;
     right: 100%;
     cursor:pointer;
+  }
+  .dpn{
+    display: none;
   }
 </style>

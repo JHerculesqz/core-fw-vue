@@ -1,20 +1,18 @@
 <template>
   <div class="moduleUp">
-    <div class="title" v-text="label"></div>
-    <div class="clickShowLeft" v-text="lable4clickShowLeft" v-on:click="clickShowLeft"></div>
-    <div class="clickShowRight" v-text="lable4clickShowRight" v-on:click="clickShowRight"></div>
+    <div class="title">moduleUp(展示工具栏)</div>
+    <div class="clickShowLeft" v-on:click="clickShowLeft">" | 展开moduleLeft"</div>
+    <div class="clickShowRight" v-on:click="clickShowRight">" | 展开moduleRight"</div>
   </div>
 </template>
 
 <script>
-  import Bus from './../../bus.js';
+  import Bus from '@/walle/core/bus.js';
   export default {
     name: 'moduleUp',
     data: function() {
       return {
-        label: 'moduleUp(展示工具栏)',
-        lable4clickShowLeft: " | 展开moduleLeft",
-        lable4clickShowRight: " | 展开moduleRight"
+
       }
     },
     created: function () {
