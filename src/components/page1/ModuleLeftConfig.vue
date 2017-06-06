@@ -14,8 +14,8 @@
   import MarvelCheckTree from "@/walle/widget/tree/MarvelCheckTree";
 
   export default {
-    components: {MarvelCheckTree},
     name: 'moduleLeftConfig',
+    components: {MarvelCheckTree},
     data: function() {
       return {
         isHide: true
