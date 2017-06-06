@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Page1 from '@/components/page1/Page1'
 import Page2 from '@/components/page2/Page2'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
