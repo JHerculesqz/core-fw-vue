@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="oNode in treeNodes">
+    <li class="checkNode" v-for="oNode in treeNodes">
       <input type="checkbox" v-model="oNode.show"/>{{oNode.label}}
     </li>
   </ul>
@@ -35,5 +35,9 @@
 </script>
 
 <style>
-
+  .checkNode{
+    list-style:none;
+    line-height:40px;
+    color:#fff;
+  }
 </style>

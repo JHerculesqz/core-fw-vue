@@ -1,7 +1,7 @@
 <template>
-  <ul>
+  <ul class="marvelTree">
     <li v-for="oNode in treeNodes" v-if="oNode.show">
-      <p v-on:click="click" :id="oNode.id">{{oNode.label}}</p>
+      <p class="marvelTreeNodeText" v-on:click="click" :id="oNode.id">{{oNode.label}}</p>
     </li>
   </ul>
 </template>
@@ -48,5 +48,13 @@
 </script>
 
 <style>
-
+  .marvelTree{
+    margin:0;
+  }
+  .marvelTree .marvelTreeNodeText{
+    line-height:40px;
+    font-size:14px;
+    color:#fff;
+    margin:0;
+  }
 </style>

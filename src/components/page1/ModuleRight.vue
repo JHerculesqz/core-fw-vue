@@ -47,8 +47,9 @@
     height: 100%;
     width: 500px;
     right: 0;
-    top: 30px;
+    top: 0px;
     background-color: #1b1e25;
+    color: #ffffff;
   }
   .moduleRight .closeBtn{
     width: 23px;

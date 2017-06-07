@@ -1,8 +1,9 @@
 <template>
   <div class="moduleUp">
-    <div class="title">moduleUp(展示工具栏)</div>
-    <div class="clickShowLeft" v-on:click="clickShowLeft">" | 展开moduleLeft"</div>
-    <div class="clickShowRight" v-on:click="clickShowRight">" | 展开moduleRight"</div>
+    <div class="moduleUpTitle">moduleUp(展示工具栏)</div>
+    <!--<div class="clickShowLeft" v-on:click="clickShowLeft">" | 展开moduleLeft"</div>-->
+    <!--<div class="clickShowRight" v-on:click="clickShowRight">" | 展开moduleRight"</div>-->
+    <div class="rightDialogExpandFolderIcon" v-on:click="clickShowRight">》</div>
   </div>
 </template>
 
@@ -34,16 +35,41 @@
 
 <style>
   .moduleUp {
-    height: 30px;
-    background-color: #fafafa
+    height: 40px;
+    background-color: #222d38;
   }
-  .moduleUp .title{
-    float: left
+  .rightDialogIsShow{
+    width:calc(100% - 500px)
+  }
+  .moduleUp .moduleUpTitle{
+    height: 40px;
+    float: left;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #ffffff;
   }
   .moduleUp .clickShowLeft{
-    float: left
+    float: left;
+    color:#fff;
+    margin-left:20px;
+    font-size:12px;
+    line-height:40px;
   }
   .moduleUp .clickShowRight{
-    float: left
+    float: left;
+    color:#fff;
+    margin-left:20px;
+    font-size:12px;
+    line-height:40px;
+  }
+  .moduleUp .rightDialogExpandFolderIcon{
+    height: 40px;
+    float: right;
+    margin-right: 4px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #ffffff;
+    cursor:pointer;
   }
 </style>

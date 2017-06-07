@@ -29,12 +29,14 @@
 
 <style>
   .moduleCenter {
-    height: calc(100% - 30px);
-    background-color: rgba(0,255,0,0.2)
+    height: calc(100% - 40px);
+    background: url("../../../src/assets/images/map.jpg") no-repeat center;
+    background-size: cover;
   }
   .moduleCenter div{
     position: absolute;
     top: 50px;
     left: 200px;
+    color: #ffffff;
   }
 </style>
