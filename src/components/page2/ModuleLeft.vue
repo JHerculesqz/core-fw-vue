@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import Bus from "@/walle/core/bus.js";
+  import BusUtils from '@/walle/core/bus';
   import MarvelTree from "@/walle/widget/tree/MarvelTree";
 
   export default {
@@ -48,17 +48,17 @@
       }]);
       //endregion
 
-      Bus.$on('imsgModuleLeftShow', this.imsgModuleLeftShow);
-      Bus.$on('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
+      BusUtils.$on('imsgModuleLeftShow', this.imsgModuleLeftShow);
+      BusUtils.$on('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
     },
     beforeDestroy: function () {
-      Bus.$off('imsgModuleLeftShow', this.imsgModuleLeftShow);
-      Bus.$off('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
+      BusUtils.$off('imsgModuleLeftShow', this.imsgModuleLeftShow);
+      BusUtils.$off('imsgModuleLeftDataUpdate', this.imsgModuleLeftDataUpdate);
     },
     methods:{
       imsgModuleLeftDataUpdate: function(arrModuleLeftData){
         //1.imsg
-        Bus.$emit('imsgMarvelTreeSetData', arrModuleLeftData);
+        BusUtils.$emit('imsgMarvelTreeSetData', arrModuleLeftData);
       },
       clickModuleLeftShow: function(){
         //1.isHide
@@ -69,7 +69,7 @@
           var arrModuleLeftData = JSON.parse(localStorage.ModuleLeftData);
 
           //3.imsg
-          Bus.$emit('imsgMarvelTreeSetData', arrModuleLeftData);
+          BusUtils.$emit('imsgMarvelTreeSetData', arrModuleLeftData);
         }
       },
       clickModuleLeftHide: function(){
@@ -78,17 +78,17 @@
       },
       clickModuleLeftConfigShow: function(){
         //1.imsg
-        Bus.$emit("imsgMarvelTreeGetData");
+        BusUtils.$emit("imsgMarvelTreeGetData");
       },
       onGetTreeData: function(arrTreeNodes){
         //1.imsg
         var arrModuleLeftData = arrTreeNodes;
-        Bus.$emit("imsgModuleLeftConfigShow", arrModuleLeftData);
+        BusUtils.$emit("imsgModuleLeftConfigShow", arrModuleLeftData);
       },
       clickNode: function(oTreeNode){
         //1.imsg
-        Bus.$emit("imsgModuleRightUpdate", oTreeNode.tag);
-        Bus.$emit("imsgModuleCenterSetData", oTreeNode.label);
+        BusUtils.$emit("imsgModuleRightUpdate", oTreeNode.tag);
+        BusUtils.$emit("imsgModuleCenterSetData", oTreeNode.label);
       }
     }
   }

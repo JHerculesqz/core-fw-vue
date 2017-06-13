@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
+  import BusUtils from '@/walle/core/bus';
   export default {
     name: 'MarvelCheckTree',
     data: function() {
@@ -16,12 +16,12 @@
         }
     },
     created: function () {
-      Bus.$on('imsgMarvelCheckTreeSetData', this.imsgMarvelCheckTreeSetData);
-      Bus.$on('imsgMarvelCheckTreeGetData', this.imsgMarvelCheckTreeGetData);
+      BusUtils.$on('imsgMarvelCheckTreeSetData', this.imsgMarvelCheckTreeSetData);
+      BusUtils.$on('imsgMarvelCheckTreeGetData', this.imsgMarvelCheckTreeGetData);
     },
     beforeDestroy: function () {
-      Bus.$off('imsgMarvelCheckTreeSetData', this.imsgMarvelCheckTreeSetData);
-      Bus.$off('imsgMarvelCheckTreeGetData', this.imsgMarvelCheckTreeGetData);
+      BusUtils.$off('imsgMarvelCheckTreeSetData', this.imsgMarvelCheckTreeSetData);
+      BusUtils.$off('imsgMarvelCheckTreeGetData', this.imsgMarvelCheckTreeGetData);
     },
     methods:{
       imsgMarvelCheckTreeSetData: function(arrTreeNodes){

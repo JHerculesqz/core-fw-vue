@@ -3,15 +3,17 @@
     <div class="header">
       <ul>
         <li>
-          <router-link to="/">Page1</router-link>
+          <router-link to="/" exact>Page1(Vue常用特性)</router-link>
         </li>
         <li>
-          <router-link to="/page2">Page2</router-link>
+          <router-link to="/page2" exact>Page2(模块组合)</router-link>
         </li>
       </ul>
     </div>
     <div class="content">
-      <router-view></router-view>
+      <transition name="slide-fade">
+        <router-view></router-view>
+      </transition>
     </div>
     <div class="footer">
       footer
@@ -26,6 +28,7 @@
 </script>
 
 <style>
+
 body {
   position: fixed;
   width: 100%;
@@ -77,5 +80,16 @@ body {
 .footer{
   height: 0px;
   background-color: #e8e8e8
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(-430px);
+  opacity: 0;
 }
 </style>

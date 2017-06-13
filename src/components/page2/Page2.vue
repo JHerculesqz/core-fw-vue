@@ -1,53 +1,29 @@
 <template>
   <div class="page2">
-    <p>page2</p>
-    <div>{{ divHtml }}</div>
-    <div v-text="vText"></div>
-    <div v-html="vHtml"></div>
-    <div v-if="vIf">v-if</div>
-    <ul>
-      <li v-for="item in vFor">
-        <p v-text="item.text" v-on:click="doSth"></p>
-      </li>
-    </ul>
-    <input type="text" v-model="vWatch"/>
+    <module-left></module-left>
+    <module-left-config></module-left-config>
+    <module-up></module-up>
+    <module-center></module-center>
+    <module-right></module-right>
   </div>
 </template>
 
 <script>
-  import Bus from '../../walle/core/bus.js';
+  import ModuleLeft from "./ModuleLeft";
+  import ModuleLeftConfig from "./ModuleLeftConfig";
+  import ModuleUp from "./ModuleUp";
+  import ModuleCenter from "./ModuleCenter";
+  import ModuleRight from "./ModuleRight";
+
   export default {
     name: 'page2',
-    data: function() {
-      return {
-        divHtml: 'divHtml',
-        vText: 'vText',
-        vHtml: 'vHtml',
-        vIf: false,
-        vFor: [{
-          text:1
-        }, {
-          text:2
-        }],
-        vWatch: "vWatch"
-      }
-    },
-    methods:{
-      doSth: function(){
-        console.log("[Module1.doSth]" + this.divHtml);
-        this.vIf = true;
-      }
-    },
-    watch:{
-      'vWatch': function (strVal, strOldVal) {
-        console.log("[Module1.Watch.vWatch]" + strVal + "," + strOldVal);
-      }
-    }
+    components: { ModuleLeft, ModuleLeftConfig, ModuleUp, ModuleCenter, ModuleRight }
   }
 </script>
 
 <style>
   .page2{
-
+    height: 100%;
+    background-color: #fff;
   }
 </style>

@@ -5,7 +5,8 @@
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
+  import BusUtils from '@/walle/core/bus';
+
   export default {
     name: 'moduleCenter',
     data: function() {
@@ -14,10 +15,13 @@
         }
     },
     created: function () {
-      Bus.$on('imsgModuleCenterSetData', this.imsgModuleCenterSetData);
+      BusUtils.$on('imsgModuleCenterSetData', this.imsgModuleCenterSetData);
+    },
+    mounted: function(){
+
     },
     beforeDestroy: function () {
-      Bus.$off('imsgModuleCenterSetData', this.imsgModuleCenterSetData);
+      BusUtils.$off('imsgModuleCenterSetData', this.imsgModuleCenterSetData);
     },
     methods:{
       imsgModuleCenterSetData: function(strData){
@@ -30,7 +34,7 @@
 <style>
   .moduleCenter {
     height: calc(100% - 40px);
-    background: url("../../../src/assets/images/map.jpg") no-repeat center;
+    background: url("../../assets/images/map.jpg") no-repeat center;
     background-size: cover;
   }
   .moduleCenter div{

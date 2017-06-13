@@ -1,13 +1,14 @@
 <template>
-  <div class="moduleRight1">
-    <div>声卡1</div>
+  <div class="moduleRight2">
+    <div>声卡2</div>
   </div>
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
+  import BusUtils from '@/walle/core/bus';
+
   export default {
-    name: 'moduleRight1',
+    name: 'moduleRight2',
     data: function() {
       return {
 
@@ -26,7 +27,7 @@
 </script>
 
 <style>
-  .moduleRight1 {
+  .moduleRight2 {
 
   }
 </style>

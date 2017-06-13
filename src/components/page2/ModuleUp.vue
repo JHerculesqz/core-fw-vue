@@ -8,7 +8,8 @@
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
+  import BusUtils from '@/walle/core/bus';
+
   export default {
     name: 'moduleUp',
     data: function() {
@@ -24,10 +25,10 @@
     },
     methods:{
       clickShowLeft: function(){
-        Bus.$emit("imsgModuleLeftShow");
+        BusUtils.$emit("imsgModuleLeftShow");
       },
       clickShowRight: function(){
-        Bus.$emit("imsgModuleRightShow");
+        BusUtils.$emit("imsgModuleRightShow");
       }
     }
   }

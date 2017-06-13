@@ -7,9 +7,10 @@
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
-  import ModuleRight1 from '@/components/page1/ModuleRight1';
-  import ModuleRight2 from '@/components/page1/ModuleRight2';
+  import BusUtils from '@/walle/core/bus';
+  import ModuleRight1 from '@/components/page2/ModuleRight1';
+  import ModuleRight2 from '@/components/page2/ModuleRight2';
+
   export default {
     name: 'moduleRight',
     components: {ModuleRight1, ModuleRight2},
@@ -20,12 +21,12 @@
       }
     },
     created: function () {
-      Bus.$on('imsgModuleRightShow', this.imsgModuleRightShow);
-      Bus.$on('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
+      BusUtils.$on('imsgModuleRightShow', this.imsgModuleRightShow);
+      BusUtils.$on('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
     },
     beforeDestroy: function () {
-      Bus.$off('imsgModuleRightShow', this.imsgModuleRightShow);
-      Bus.$off('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
+      BusUtils.$off('imsgModuleRightShow', this.imsgModuleRightShow);
+      BusUtils.$off('imsgModuleRightUpdate', this.imsgModuleRightUpdate);
     },
     methods:{
       imsgModuleRightShow: function(){

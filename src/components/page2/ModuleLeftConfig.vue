@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import Bus from '@/walle/core/bus.js';
+  import BusUtils from '@/walle/core/bus';
   import MarvelCheckTree from "@/walle/widget/tree/MarvelCheckTree";
 
   export default {
@@ -22,10 +22,10 @@
       }
     },
     created: function () {
-        Bus.$on('imsgModuleLeftConfigShow', this.imsgModuleLeftConfigShow);
+        BusUtils.$on('imsgModuleLeftConfigShow', this.imsgModuleLeftConfigShow);
     },
     beforeDestroy: function () {
-        Bus.$off('imsgModuleLeftConfigShow', this.imsgModuleLeftConfigShow);
+        BusUtils.$off('imsgModuleLeftConfigShow', this.imsgModuleLeftConfigShow);
     },
     methods:{
       imsgModuleLeftConfigShow: function(arrModuleLeftData){
@@ -34,12 +34,12 @@
 
         if(!this.isHide){
           //2.imsg
-          Bus.$emit("imsgMarvelCheckTreeSetData", arrModuleLeftData);
+          BusUtils.$emit("imsgMarvelCheckTreeSetData", arrModuleLeftData);
         }
       },
       clickSave: function(){
         //1.get arrTreeNodes
-        Bus.$emit("imsgMarvelCheckTreeGetData");
+        BusUtils.$emit("imsgMarvelCheckTreeGetData");
       },
       onGetTreeData: function(arrTreeNodes){
         //1.post
@@ -47,7 +47,7 @@
         localStorage.ModuleLeftData = JSON.stringify(arrModuleLeftData);
 
         //2.imsg
-        Bus.$emit("imsgModuleLeftDataUpdate", arrModuleLeftData);
+        BusUtils.$emit("imsgModuleLeftDataUpdate", arrModuleLeftData);
       },
       clickClose: function(){
         //1.isHide
