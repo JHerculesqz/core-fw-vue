@@ -1,7 +1,7 @@
 <template>
   <div class="page1">
     <p>Page1</p>
-    <div>{{ divHtml }}</div>
+    <div id="jquery">{{ divHtml }}</div>
     <div v-text="vText"></div>
     <div v-html="vHtml"></div>
     <div v-bind:class="{ testClass: isTestClass}"></div>
@@ -53,6 +53,8 @@
         LogUtils.debug("Page1", "doSth", this.$store.getters.a);
         this.$store.dispatch("action1");
         LogUtils.debug("Page1", "doSth", this.$store.getters.a);
+        //jquery
+        $("#jquery").html("jquery test...");
       }
     },
     watch:{
