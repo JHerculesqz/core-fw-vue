@@ -1,10 +1,7 @@
-import DateUtils from "@/walle/component/date"
-
 export default {
-  debug: function (strModuleName, strMethodName, strMsg) {
-    var strLog = "[" + strModuleName + "." + strMethodName + "]" +
-      "[" + DateUtils.now() + "]" +
-      strMsg;
-    console.log(strLog);
+  split: function (strMsg, strSplitter) {
+    var arrRes = new Array();
+    arrRes = strMsg.split(strSplitter);
+    return arrRes;
   }
 }

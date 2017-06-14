@@ -8,6 +8,9 @@
         <li>
           <router-link to="/page2" exact>Page2(模块组合)</router-link>
         </li>
+        <li>
+          <router-link to="/page3" exact>Page3(控件库)</router-link>
+        </li>
       </ul>
     </div>
     <div class="content">
