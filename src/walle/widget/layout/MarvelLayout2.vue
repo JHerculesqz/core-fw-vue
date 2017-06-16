@@ -1,7 +1,18 @@
 <template>
-  <div v-bind:class="{ hasMargin: isMargin }">
-    <div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">
-      <slot></slot>
+  <div class="pageWrapper">
+    <div class="pageHead">
+      <slot name="head">head</slot>
+    </div>
+    <div class="pageCont4mix" v-bind:class="{ hasMargin: isMargin }">
+      <div v-bind:class="[classLarge1,classMiddle1,classSmall1,classMini1,classCustom1]">
+        <slot name="left"></slot>
+      </div>
+      <div v-bind:class="[classLarge2,classMiddle2,classSmall2,classMini2,classCustom2]">
+        <slot name="content"></slot>
+      </div>
+      <div v-bind:class="[classLarge3,classMiddle3,classSmall3,classMini3,classCustom3]">
+        <slot name="right"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -10,41 +21,85 @@
   import StrUtils from "@/walle/component/str";
 
   export default {
-    name: 'MarvelFrame',
-    props: ["media", "hasMargin", "classCustom"],
+    name: 'MarvelLayout2',
+    props: ["hasMargin", "media1", "media2", "media3", "classCustom1", "classCustom2", "classCustom3"],
     data: function() {
         return {
           isMargin: false,
-          classLarge: "large-24",
-          classMiddle: "middle-12",
-          classSmall: "small-8",
-          classMini: "mini-4"
+          classLarge1: "large-24",
+          classMiddle1: "middle-24",
+          classSmall1: "small-24",
+          classMini1: "mini-24",
+          classLarge2: "large-24",
+          classMiddle2: "middle-24",
+          classSmall2: "small-24",
+          classMini2: "mini-24",
+          classLarge3: "large-24",
+          classMiddle3: "middle-24",
+          classSmall3: "small-24",
+          classMini3: "mini-24",
         }
     },
     mounted: function () {
       //1.hasMargin
       this.isMargin = this.hasMargin == "true";
 
-      //2.media
-      var strMedia = this.media;
-      var arrMedia = StrUtils.split(strMedia, ",");
-      if(arrMedia[0] != undefined){
-        this.classLarge = "large-" + arrMedia[0];
+      //region left
+      var strMedia1 = this.media1;
+      var arrMedia1 = StrUtils.split(strMedia1, ",");
+      if(arrMedia1[0] != undefined){
+        this.classLarge1 = "large-" + arrMedia1[0];
       }
-      if(arrMedia[1] != undefined){
-        this.classMiddle = "middle-" + arrMedia[1];
+      if(arrMedia1[1] != undefined){
+        this.classMiddle1 = "middle-" + arrMedia1[1];
       }
-      if(arrMedia[2] != undefined){
-        this.classSmall = "small-" + arrMedia[2];
+      if(arrMedia1[2] != undefined){
+        this.classSmall1 = "small-" + arrMedia1[2];
       }
-      if(arrMedia[3] != undefined){
-        this.classMini = "mini-" + arrMedia[3];
+      if(arrMedia1[3] != undefined){
+        this.classMini1 = "mini-" + arrMedia1[3];
       }
+      //endregion
+
+      //region center
+      var strMedia2 = this.media2;
+      var arrMedia2 = StrUtils.split(strMedia2, ",");
+      if(arrMedia2[0] != undefined){
+        this.classLarge2 = "large-" + arrMedia2[0];
+      }
+      if(arrMedia2[1] != undefined){
+        this.classMiddle2 = "middle-" + arrMedia2[1];
+      }
+      if(arrMedia2[2] != undefined){
+        this.classSmall2 = "small-" + arrMedia2[2];
+      }
+      if(arrMedia2[3] != undefined){
+        this.classMini2 = "mini-" + arrMedia2[3];
+      }
+      //endregion
+
+      //region right
+      var strMedia3 = this.media3;
+      var arrMedia3 = StrUtils.split(strMedia3, ",");
+      if(arrMedia3[0] != undefined){
+        this.classLarge3 = "large-" + arrMedia3[0];
+      }
+      if(arrMedia3[1] != undefined){
+        this.classMiddle3 = "middle-" + arrMedia3[1];
+      }
+      if(arrMedia3[2] != undefined){
+        this.classSmall3 = "small-" + arrMedia3[2];
+      }
+      if(arrMedia3[3] != undefined){
+        this.classMini3 = "mini-" + arrMedia3[3];
+      }
+      //endregion
     }
   }
 </script>
 
 <style>
+  /*frame style*/
   .hasMargin>div {
     margin: 0 10px;
     box-sizing: border-box;
@@ -281,5 +336,34 @@
     .hasMargin>.large-22{width: calc(91.66666667% - 20px);display:inline-block;}
     .hasMargin>.large-23{width: calc(95.8333332% - 20px);display:inline-block;}
     .hasMargin>.large-24{width: calc(100% - 20px);display:inline-block;}
+  }
+
+
+  /*layout style*/
+  .pageWrapper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #f6f7f8;
+  }
+  .pageWrapper .pageHead{
+    height: 50px;
+    background-color: #17191f;
+  }
+  .pageWrapper .pageCont4Single{
+    height: calc(100% - 50px);
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .pageWrapper .pageCont4mix{
+    height: calc(100% - 50px);
+    padding: 30px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>

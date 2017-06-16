@@ -1,50 +1,34 @@
 <template>
-  <div v-bind:class="{ hasMargin: isMargin }">
-    <div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">
-      <slot></slot>
+  <div class="pageWrapper">
+    <div class="pageHead">
+      <slot name="head"></slot>
+    </div>
+    <div class="pageCont4Single" v-bind:class="{ hasMargin:isMargin }">
+      <div class="large-24 middle-24 small-24 mini-24" v-bind:class="[classCustom]">
+        <slot name="content"></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import StrUtils from "@/walle/component/str";
-
   export default {
-    name: 'MarvelFrame',
-    props: ["media", "hasMargin", "classCustom"],
+    name: 'MarvelLayout1',
+    props: ["hasMargin", "classCustom"],
     data: function() {
         return {
-          isMargin: false,
-          classLarge: "large-24",
-          classMiddle: "middle-12",
-          classSmall: "small-8",
-          classMini: "mini-4"
+          isMargin: false
         }
     },
     mounted: function () {
       //1.hasMargin
       this.isMargin = this.hasMargin == "true";
-
-      //2.media
-      var strMedia = this.media;
-      var arrMedia = StrUtils.split(strMedia, ",");
-      if(arrMedia[0] != undefined){
-        this.classLarge = "large-" + arrMedia[0];
-      }
-      if(arrMedia[1] != undefined){
-        this.classMiddle = "middle-" + arrMedia[1];
-      }
-      if(arrMedia[2] != undefined){
-        this.classSmall = "small-" + arrMedia[2];
-      }
-      if(arrMedia[3] != undefined){
-        this.classMini = "mini-" + arrMedia[3];
-      }
     }
   }
 </script>
 
 <style>
+  /*frame style*/
   .hasMargin>div {
     margin: 0 10px;
     box-sizing: border-box;
@@ -281,5 +265,34 @@
     .hasMargin>.large-22{width: calc(91.66666667% - 20px);display:inline-block;}
     .hasMargin>.large-23{width: calc(95.8333332% - 20px);display:inline-block;}
     .hasMargin>.large-24{width: calc(100% - 20px);display:inline-block;}
+  }
+
+
+  /*layout style*/
+  .pageWrapper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #f6f7f8;
+  }
+  .pageWrapper .pageHead{
+    height: 50px;
+    background-color: #17191f;
+  }
+  .pageWrapper .pageCont4Single{
+    height: calc(100% - 50px);
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .pageWrapper .pageCont4mix{
+    height: calc(100% - 50px);
+    padding: 30px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
