@@ -59,7 +59,6 @@
         var iOffsetTop = oEvent.target.getBoundingClientRect().top + window.scrollY;
         this.top = iOffsetTop + iEleHeight;
         this.left = iOffsetLeft + iEleWidth/2;
-        window.aaa = oEvent;
       },
       hideSubMenu: function(){
         this.show = false;

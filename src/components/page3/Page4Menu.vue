@@ -125,9 +125,9 @@
                   alert("用户设置");
                 }
               }, {
-                label: "系统设置",
+                label: "系统设置2",
                 onClick: function(){
-                  alert("系统设置");
+                  alert("系统设置2");
                 }
               }]
             }]
