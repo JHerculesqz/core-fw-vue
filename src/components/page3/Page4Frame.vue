@@ -1,6 +1,5 @@
 <template>
   <div class="page4Frame">
-    <p>Frame</p>
     <marvel-frame media="24,24,24,24" hasMargin="true" classCustom="classCustom1">
       <marvel-frame media="20,12,4,0" hasMargin="false" classCustom="classCustom2">1</marvel-frame>
       <marvel-frame media="4,12,20,24" hasMargin="false" classCustom="classCustom3">2</marvel-frame>
