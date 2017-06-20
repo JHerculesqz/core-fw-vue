@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import http from './walle/component/http'
+import dom from './walle/component/dom'
 
 Vue.config.productionTip = false;
 
@@ -13,6 +14,7 @@ new Vue({
   router,
   http,
   store,
+  dom,
   template: '<App/>',
   components: { App }
 });
