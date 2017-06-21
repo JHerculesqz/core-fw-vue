@@ -5,8 +5,8 @@
     <router-link to="/page3/page4Layout2" exact>Layout2</router-link>
     <router-link to="/page3/page4Loading1" exact>Loading1</router-link>
     <router-link to="/page3/page4Loading2" exact>Loading2</router-link>
-    <router-link to="/page3/page4Loading3" exact>Loading3</router-link>
     <router-link to="/page3/page4Menu" exact>Menu</router-link>
+    <router-link to="/page3/page4Accordion" exact>Accordion</router-link>
   </div>
 </template>
 

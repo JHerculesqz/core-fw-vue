@@ -6,10 +6,10 @@ import Page3 from '@/components/page3/Page3'
 import Page4Frame from '@/components/page3/Page4Frame'
 import Page4Layout1 from '@/components/page3/Page4Layout1'
 import Page4Layout2 from '@/components/page3/Page4Layout2'
-import Page4Menu from '@/components/page3/Page4Menu'
 import Page4Loading1 from '@/components/page3/Page4Loading1'
 import Page4Loading2 from '@/components/page3/Page4Loading2'
-import Page4Loading3 from '@/components/page3/Page4Loading3'
+import Page4Menu from '@/components/page3/Page4Menu'
+import Page4Accordion from '@/components/page3/Page4Accordion'
 
 Vue.use(Router);
 
@@ -49,12 +49,12 @@ export default new Router({
     name: 'page4Loading2',
     component: Page4Loading2
   }, {
-    path: '/page3/page4Loading3',
-    name: 'page4Loading3',
-    component: Page4Loading3
-  }, {
     path: '/page3/page4Menu',
     name: 'page4Menu',
     component: Page4Menu
+  }, {
+    path: '/page3/page4Accordion',
+    name: 'page4Accordion',
+    component: Page4Accordion
   }]
 })
