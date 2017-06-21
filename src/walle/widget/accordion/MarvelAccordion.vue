@@ -208,8 +208,9 @@
     left: 46px;
     top: 10px;
     background-color: #f4f5f6;
-    padding: 0 20px;
+    padding: 0 30px;
     border: 2px solid #fff;
+    display: none;
   }
   .folder .accordionItem .accordionItemSubMenu .accordionItemSubMenuItem{
     padding: 0px;

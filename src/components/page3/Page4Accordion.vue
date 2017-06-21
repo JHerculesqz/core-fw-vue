@@ -1,6 +1,6 @@
 <template>
   <div style="width: 180px;height:100%">
-    <marvel-accordion isFolder="false" hasShadow="false"
+    <marvel-accordion isFolder="false" hasShadow="true"
                       title="abc" titleIcon="icon-calculator"
                       :items="items"></marvel-accordion>
   </div>
