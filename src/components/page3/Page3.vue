@@ -9,6 +9,7 @@
     <router-link to="/page3/page4Accordion" exact>Accordion</router-link>
     <router-link to="/page3/page4Wizard" exact>Wizard</router-link>
     <router-link to="/page3/page4Crumb" exact>Crumb</router-link>
+    <router-link to="/page3/page4Button" exact>Button</router-link>
   </div>
 </template>
 
