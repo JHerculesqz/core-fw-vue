@@ -11,6 +11,7 @@ import Page4Loading2 from '@/components/page3/Page4Loading2'
 import Page4Menu from '@/components/page3/Page4Menu'
 import Page4Accordion from '@/components/page3/Page4Accordion'
 import Page4Wizard from '@/components/page3/Page4Wizard'
+import Page4Crumb from '@/components/page3/Page4Crumb'
 
 Vue.use(Router);
 
@@ -61,5 +62,9 @@ export default new Router({
     path: '/page3/page4Wizard',
     name: 'page4Wizard',
     component: Page4Wizard
+  }, {
+    path: '/page3/page4Crumb',
+    name: 'page4Crumb',
+    component: Page4Crumb
   }]
 })
