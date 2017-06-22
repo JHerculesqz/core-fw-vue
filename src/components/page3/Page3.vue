@@ -7,6 +7,7 @@
     <router-link to="/page3/page4Loading2" exact>Loading2</router-link>
     <router-link to="/page3/page4Menu" exact>Menu</router-link>
     <router-link to="/page3/page4Accordion" exact>Accordion</router-link>
+    <router-link to="/page3/page4Wizard" exact>Wizard</router-link>
   </div>
 </template>
 

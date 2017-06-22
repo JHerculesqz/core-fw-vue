@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?lp8vn9');
-  src:  url('fonts/icomoon.eot?lp8vn9#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?lp8vn9') format('truetype'),
-    url('fonts/icomoon.woff?lp8vn9') format('woff'),
-    url('fonts/icomoon.svg?lp8vn9#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?spfo1m');
+  src:  url('fonts/icomoon.eot?spfo1m#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?spfo1m') format('truetype'),
+    url('fonts/icomoon.woff?spfo1m') format('woff'),
+    url('fonts/icomoon.svg?spfo1m#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-marvelIcon-09:before {
+  content: "\eaf3";
+}
 .icon-marvelIcon-01:before {
   content: "\e900";
 }

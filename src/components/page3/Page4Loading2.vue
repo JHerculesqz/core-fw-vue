@@ -1,15 +1,9 @@
 <template>
   <marvel-frame hasMargin="false" media="24,24,24,24" classCustom="classCustom1">
-    <marvel-frame hasMargin="false" media="12,12,12,12" classCustom="classCustom2">
-      <button v-on:click="showLeft">show</button>
-      <button v-on:click="hideLeft">hide</button>
-      <marvel-loading></marvel-loading>
-    </marvel-frame>
-    <marvel-frame hasMargin="false" media="12,12,12,12" classCustom="classCustom3">
-      <!--<button v-on:click="showRight">show</button>-->
-      <!--<button v-on:click="hideRight">hide</button>-->
-      <!--<marvel-loading></marvel-loading>-->
-    </marvel-frame>
+    <button v-on:click="showEx">show</button>
+    <button v-on:click="setProgress">setProgress</button>
+    <button v-on:click="hideEx">hide</button>
+    <marvel-loading-mini ref="ref0"></marvel-loading-mini>
   </marvel-frame>
 
 
@@ -17,23 +11,35 @@
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
-  import MarvelLoading from "@/walle/widget/loading/MarvelLoading";
-  import BusUtils from '@/walle/core/bus';
+  import MarvelLoadingMini from "@/walle/widget/loading/MarvelLoadingMini";
 
   export default {
     name: 'page4Loading',
-    components: {MarvelFrame, MarvelLoading},
+    components: {MarvelFrame, MarvelLoadingMini},
     data: function() {
       return {
 
       }
     },
     methods: {
-      showLeft: function(){
-        BusUtils.$emit("imsgMarvelLoadingShow", "loading");
+      showEx: function(){
+        this.$refs.ref0.showEx("取消");
       },
-      hideLeft: function(){
-        BusUtils.$emit("imsgMarvelLoadingHide", "loading");
+      setProgress: function(){
+        var self = this;
+        self.$refs.ref0.setProgress(10, "step1...");
+        setTimeout(function(){
+          self.$refs.ref0.setProgress(30, "step2...");
+          setTimeout(function(){
+            self.$refs.ref0.setProgress(60, "step3...");
+            setTimeout(function(){
+              self.$refs.ref0.setProgress(100, "step4...");
+            },1000);
+          },1000);
+        },1000);
+      },
+      hideEx: function(){
+        this.$refs.ref0.hideEx();
       }
     }
   }
@@ -42,11 +48,5 @@
 <style>
   .classCustom1{
     height: 100%;margin-bottom: 10px;background-color: yellow;
-  }
-  .classCustom2{
-    height: 100%;margin-bottom: 10px;background-color: red;
-  }
-  .classCustom3{
-    height: 100%;margin-bottom: 10px;background-color: blue;
   }
 </style>
