@@ -1,12 +1,12 @@
 <template>
-  <div class="defaultBtn"
+  <div class="primaryBtn"
        v-bind:class="[large, mouseDown, focus, disable, classCustom]"
        v-on:click="onClick">{{ label }}</div>
 </template>
 
 <script>
   export default {
-    name: 'MarvelButton',
+    name: 'MarvelPrimaryButton',
     props: ["isLarge", "classCustom", "label"],
     data: function() {
         return {
@@ -37,9 +37,9 @@
 </script>
 
 <style scoped>
-  .defaultBtn{
-    border: 1px solid #ccc;
-    color: #333;
+  .primaryBtn{
+    color: #fff;
+    background-color: #3399ff;
     height: 32px;
     line-height: 32px;
     font-size: 14px;
@@ -48,8 +48,8 @@
     border-radius: 2px;
     cursor: pointer;
   }
-  .defaultBtn:hover{
-    border: 1px solid #60b0ff;
+  .primaryBtn:hover{
+    background-color: #60b0ff;
   }
   .large{
     height: 40px;
@@ -58,18 +58,13 @@
     line-height: 40px;
   }
   .mouseDown{
-    background-color: #f1f8ff;
-    color: #3399ff;
-    border: 1px solid #3399ff;
+    background-color: #006ad4 !important;
   }
   .focus{
-    color: #3399ff;
-    border: 1px solid #3399ff;
+    background-color: #3399ff;
   }
   .disable{
-    background-color: #f0f0f0;
-    color: #999;
-    border: 1px solid #ccc;
+    background-color: #aaa;
     pointer-events: none;
   }
 </style>

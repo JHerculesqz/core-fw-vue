@@ -1,13 +1,13 @@
 <template>
-  <div class="defaultBtn"
-       v-bind:class="[large, mouseDown, focus, disable, classCustom]"
+  <div class="iconTextBtn"
+       v-bind:class="[large, mouseDown, focus, disable, classCustom, icon]"
        v-on:click="onClick">{{ label }}</div>
 </template>
 
 <script>
   export default {
-    name: 'MarvelButton',
-    props: ["isLarge", "classCustom", "label"],
+    name: 'MarvelIconTxtButton',
+    props: ["isLarge", "classCustom", "label", "icon"],
     data: function() {
         return {
           large: "",
@@ -37,7 +37,7 @@
 </script>
 
 <style scoped>
-  .defaultBtn{
+  .iconTextBtn{
     border: 1px solid #ccc;
     color: #333;
     height: 32px;
@@ -48,7 +48,11 @@
     border-radius: 2px;
     cursor: pointer;
   }
-  .defaultBtn:hover{
+  .iconTextBtn:before{
+    margin-right: 10px;
+    color: #3399ff;
+  }
+  .iconTextBtn:hover{
     border: 1px solid #60b0ff;
   }
   .large{
@@ -71,5 +75,8 @@
     color: #999;
     border: 1px solid #ccc;
     pointer-events: none;
+  }
+  .disable:before{
+    color: #aaa;
   }
 </style>
