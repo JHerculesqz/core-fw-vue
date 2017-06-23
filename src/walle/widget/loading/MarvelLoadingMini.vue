@@ -55,7 +55,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .dpn { display: none; }
   /*loadingAnimate*/
   .icon {

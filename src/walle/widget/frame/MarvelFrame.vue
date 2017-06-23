@@ -44,7 +44,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .hasMargin>div {
     margin: 0 10px;
     box-sizing: border-box;

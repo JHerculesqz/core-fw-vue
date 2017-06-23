@@ -99,7 +99,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .dpn{display: none;}
   .accordionWrapper{
     padding: 20px 30px;

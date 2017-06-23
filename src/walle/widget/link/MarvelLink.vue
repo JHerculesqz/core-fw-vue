@@ -24,7 +24,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .linkWrapper{
     display: inline-block;
     color: #3399ff;

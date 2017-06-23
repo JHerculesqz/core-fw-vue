@@ -27,7 +27,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   /*frame style*/
   .hasMargin>div {
     margin: 0 10px;

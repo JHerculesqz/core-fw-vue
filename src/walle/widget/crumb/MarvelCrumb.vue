@@ -21,7 +21,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .crumbWrapper{
     overflow: hidden;
     height: 14px;

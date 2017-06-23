@@ -42,7 +42,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .wizardsWrapper{
     height: 100%;
     width: 100%;

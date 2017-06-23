@@ -34,7 +34,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .checkNode{
     list-style:none;
     line-height:40px;

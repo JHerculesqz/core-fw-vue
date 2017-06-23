@@ -48,7 +48,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .marvelTree{
     margin:0;
   }
