@@ -10,6 +10,7 @@
     <router-link to="/page3/page4Wizard" exact>Wizard</router-link>
     <router-link to="/page3/page4Crumb" exact>Crumb</router-link>
     <router-link to="/page3/page4Button" exact>Button</router-link>
+    <router-link to="/page3/page4Link" exact>Link</router-link>
     <router-link to="/page3/page4Leaflet" exact>Leaflet</router-link>
   </div>
 </template>
