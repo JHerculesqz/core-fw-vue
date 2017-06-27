@@ -5,9 +5,9 @@
       <input type="radio" v-bind:id="[id]" v-bind:name="[group]"
              v-bind:value="label" v-model="checkItem"
              :disabled="isDisable"/>
-      <label v-bind:for="[group]"></label>
+      <label v-bind:for="[id]"></label>
     </div>
-    <label v-bind:for="[group]" class="radioLabel"
+    <label v-bind:for="[id]" class="radioLabel"
            v-bind:class="{ dpn: isShowLabel }">{{ label }}</label>
   </div>
   <!--radio end-->
