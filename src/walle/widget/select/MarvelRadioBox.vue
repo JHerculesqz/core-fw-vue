@@ -32,6 +32,9 @@
       setStatus: function(bIsCheck, bIsDisable){
         this.checkItem = bIsCheck ? this.label: '';
         this.isDisable = bIsDisable;
+      },
+      getCheckItem: function(){
+        return this.checkItem;
       }
     }
   }

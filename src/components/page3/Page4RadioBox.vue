@@ -31,6 +31,7 @@
       this.$refs.ref1.setStatus(true, false);
       this.$refs.ref2.setStatus(false, true);
       this.$refs.ref3.setStatus(true, true);
+      console.log(this.$refs.ref1.getCheckItem());
     }
   }
 </script>
