@@ -1,24 +1,22 @@
 <template>
-  <div v-bind:class="classCustom">
-    <!--checkBoxSlide start-->
-    <div class="checkBoxSlideWrapper">
-      <div class="checkBoxSlide">
-        <input type="checkbox" v-bind:id="[id]" v-model="checkItem"
-               :disabled="isDisable"/>
-        <label v-bind:for="[id]"></label>
-      </div>
+  <!--checkBoxSlide start-->
+  <div class="checkBoxSlideWrapper">
+    <div class="checkBoxSlide">
+      <input type="checkbox" v-bind:id="[id]" v-model="checkItem"
+             :disabled="isDisable"/>
+      <label v-bind:for="[id]"></label>
     </div>
-    <!--checkBoxSlide end-->
   </div>
+  <!--checkBoxSlide end-->
 </template>
 
 <script>
   export default {
     name: 'MarvelSwitch',
-    props: ["id", "classCustom"],
+    props: ["id"],
     data: function() {
         return {
-          checkItem: "",
+          checkItem: false,
           isDisable: false,
         }
     },
@@ -29,6 +27,11 @@
       },
       getCheckItem: function(){
         return this.checkItem;
+      }
+    },
+    watch: {
+      "checkItem": function(strOldVal, strNewVal){
+        this.$emit("onChange", strOldVal, strNewVal);
       }
     }
   }

@@ -14,7 +14,7 @@ import Page4Wizard from '@/components/page3/Page4Wizard'
 import Page4Crumb from '@/components/page3/Page4Crumb'
 import Page4Button from '@/components/page3/Page4Button'
 import Page4Link from '@/components/page3/Page4Link'
-import Page4RadioBox from '@/components/page3/Page4RadioBox'
+import Page4Select from '@/components/page3/Page4Select'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
 
 Vue.use(Router);
@@ -79,9 +79,9 @@ export default new Router({
     name: 'page4Link',
     component: Page4Link
   }, {
-    path: '/page3/page4RadioBox',
-    name: 'page4RadioBox',
-    component: Page4RadioBox
+    path: '/page3/page4Select',
+    name: 'page4Select',
+    component: Page4Select
   }, {
     path: '/page3/page4Leaflet',
     name: 'page4Leaflet',

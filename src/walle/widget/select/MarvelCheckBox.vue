@@ -1,22 +1,22 @@
 <template>
-  <!--radio start-->
-  <div class="radioWrapper">
-    <div class="radio">
-      <input type="radio" v-bind:id="[id]" v-bind:name="[group]"
+  <!--checkBox start-->
+  <div class="checkBoxWrapper">
+    <div class="checkBox">
+      <input type="checkbox" v-bind:id="[id]"
              v-bind:value="label" v-model="checkItem"
              :disabled="isDisable"/>
       <label v-bind:for="[id]"></label>
     </div>
-    <label v-bind:for="[id]" class="radioLabel"
+    <label v-bind:for="[id]" class="checkBoxLabel "
            v-bind:class="{ dpn: isShowLabel }">{{ label }}</label>
   </div>
-  <!--radio end-->
+  <!--checkBox end-->
 </template>
 
 <script>
   export default {
-    name: 'MarvelRadioBox',
-    props: ["id", "group", "label", "showLabel"],
+    name: 'MarvelCheckBox',
+    props: ["id", "label", "showLabel"],
     data: function() {
         return {
           checkItem: "",
@@ -46,52 +46,56 @@
 
 <style scoped>
   *{box-sizing: border-box}
-  .radioWrapper{
+  .checkBoxWrapper{
     display: inline-block;
   }
   .dpn{
     display: none;
   }
-  .radioWrapper .radio{
-    width:16px;
-    height:16px;
-    position:relative;
+  .checkBoxWrapper .checkBox{
+    width: 16px;
+    height: 16px;
+    position: relative;
     float: left;
   }
-  .radioWrapper .radio input[type=radio]{
+  .checkBoxWrapper .checkBox input[type=checkbox]{
     /*pos*/
     margin: 0;
     padding: 0;
     /*style*/
-    visibility:hidden;
+    visibility: hidden;
   }
-  .radioWrapper .radio input[type=radio]:checked + label:after{
+  .checkBoxWrapper .checkBox input[type=checkbox]:checked + label:after{
     /*pos*/
     /*style*/
     opacity: 1;
+    border: 2px solid #fff;
     border-top: none;
     border-right: none;
   }
-  .radioWrapper .radio input[type=radio]:checked + label{
+  .checkBoxWrapper .checkBox input[type=checkbox]:checked + label{
     /*pos*/
     /*style*/
-    background-color: #3399ff;
+    background: #3399ff;
+    border: 1px solid rgba(0,0,0,0);
   }
-  .radioWrapper .radio input[type=radio]:disabled + label:after{
+  .checkBoxWrapper .checkBox input[type=checkbox]:disabled + label:after{
     /*pos*/
     /*style*/
-    background-color: #aaa;
+    border: 2px solid #999999;
+    border-top: none;
+    border-right: none;
   }
-  .radioWrapper .radio input[type=radio]:disabled + label{
+  .checkBoxWrapper .checkBox input[type=checkbox]:disabled + label{
     /*pos*/
     /*style*/
-    border:1px solid #999999;
+    border: 1px solid #999999;
     background-color: #f0f0f0;
     pointer-events: none;
   }
-  .radioWrapper .radio label{
+  .checkBoxWrapper .checkBox label{
     /*pos*/
-    position:absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -101,30 +105,37 @@
     /*style*/
     cursor: pointer;
     border: 1px solid #ccc;
-    border-radius: 100%;
+    border-radius: 2px;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
     -ms-transition: all .5s ease;
     -o-transition: all .5s ease;
     transition: all .5s ease;
   }
-  .radioWrapper .radio label:hover{
+  .checkBoxWrapper .checkBox label:hover{
     border: 1px solid #60b0ff;
   }
-  .radioWrapper .radio label:after{
+  .checkBoxWrapper .checkBox label:after{
     /*pos*/
     position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 100%;
-    top: 4px;
-    left: 4px;
+    width: 7px;
+    height: 4px;
+    top: 3px;
+    left: 2px;
     /*style*/
     opacity: 0;
     content: '';
-    background-color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
   }
-  .radioWrapper .radioLabel{
+  .checkBoxWrapper .checkBoxLabel{
     margin: 0 0 0 5px;
     padding: 0;
     float: left;
