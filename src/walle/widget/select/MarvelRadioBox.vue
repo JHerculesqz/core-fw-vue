@@ -3,7 +3,7 @@
   <div class="radioWrapper">
     <div class="radio">
       <input type="radio" v-bind:id="[id]" v-bind:name="[group]"
-             v-bind:value="label" v-model="checkItem"
+             v-bind:value="label" v-model="checkItem" v-on:change="onChange"
              :disabled="isDisable"/>
       <label v-bind:for="[id]"></label>
     </div>
@@ -24,6 +24,16 @@
           isShowLabel: true
         }
     },
+//    computed: {
+//      checkItem: {
+//        get: function() {
+//          return this.initValue;
+//        },
+//        set: function() {
+//          this.$emit("onChange", this.label)
+//        }
+//      }
+//    },
     mounted: function(){
       this.isShowLabel = this.showLabel == "false" ? true : false;
     },
@@ -34,11 +44,12 @@
       },
       getCheckItem: function(){
         return this.checkItem;
-      }
-    },
-    watch: {
-      "checkItem": function(strOldVal, strNewVal){
-        this.$emit("onChange", strOldVal, strNewVal);
+      },
+      onChange: function(){
+        console.log(this.$parent);
+//        console.log(this.label);
+//        this.checkItem = oEvent.target.checked ? this.label : "";
+        this.$emit("onChange", this.label);
       }
     }
   }

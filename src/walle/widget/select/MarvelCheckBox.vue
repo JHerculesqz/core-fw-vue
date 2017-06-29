@@ -19,7 +19,7 @@
     props: ["id", "label", "showLabel"],
     data: function() {
         return {
-          checkItem: "",
+          checkItem: false,
           isDisable: false,
           isShowLabel: true
         }
@@ -29,7 +29,7 @@
     },
     methods: {
       setStatus: function(bIsCheck, bIsDisable){
-        this.checkItem = bIsCheck ? this.label: '';
+        this.checkItem = bIsCheck;
         this.isDisable = bIsDisable;
       },
       getCheckItem: function(){
@@ -37,7 +37,7 @@
       }
     },
     watch: {
-      "checkItem": function(strOldVal, strNewVal){
+      checkItem: function(strNewVal, strOldVal){
         this.$emit("onChange", strOldVal, strNewVal);
       }
     }

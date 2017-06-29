@@ -30,7 +30,7 @@
       }
     },
     watch: {
-      "checkItem": function(strOldVal, strNewVal){
+      checkItem: function(strNewVal, strOldVal){
         this.$emit("onChange", strOldVal, strNewVal);
       }
     }
