@@ -4,9 +4,9 @@
       <button v-on:click="onClick4Radio">getStatus</button>
       <br>
       <marvel-radio-box ref="ref0" id="id1" group="group1"
-                        label="x1" showLabel="false" v-on:onChange="onChange4Radio"></marvel-radio-box>
+                        label="x1" showLabel="false"></marvel-radio-box>
       <marvel-radio-box ref="ref1" id="id2" group="group1"
-                        label="x212" showLabel="true" v-on:onChange="onChange4Radio"></marvel-radio-box>
+                        label="x2" showLabel="true" v-on:onChange="onChange4Radio"></marvel-radio-box>
       <br>
       <marvel-radio-box ref="ref2" id="id3" group="group2"
                         label="x3" showLabel="true"></marvel-radio-box>
@@ -53,7 +53,8 @@
       MarvelRadioBox, MarvelSwitch},
     data: function() {
       return {
-
+        group1: '',
+        group2: ''
       }
     },
     mounted: function(){
@@ -74,11 +75,13 @@
       this.$refs.ref11.setStatus(true, true);
     },
     methods: {
-      onChange4Radio: function(strVal){
-        //this.checkItem = strVal;
-      },
       onClick4Radio: function(){
-        console.log(this.$refs.ref0.getCheckItem() + "," + this.$refs.ref1.getCheckItem());
+        console.log("[Radio]getStatus..." +
+          this.$refs.ref0.getCheckItem() + "," +
+          this.$refs.ref1.getCheckItem());
+      },
+      onChange4Radio: function(strOldVal, strNewVal){
+        console.log("[Radio]change..." + strNewVal);
       },
       onClick4Switch: function () {
         console.log("[Switch]getStatus..." +

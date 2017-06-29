@@ -2,8 +2,8 @@
   <!--radio start-->
   <div class="radioWrapper">
     <div class="radio">
-      <input type="radio" v-bind:id="[id]" v-bind:name="[group]"
-             v-bind:value="label" v-model="checkItem" v-on:change="onChange"
+      <input type="radio" v-bind:id="[id]"
+             v-bind:value="label" v-model="$parent[group]" v-on:change="onClick"
              :disabled="isDisable"/>
       <label v-bind:for="[id]"></label>
     </div>
@@ -19,7 +19,6 @@
     props: ["id", "group", "label", "showLabel"],
     data: function() {
         return {
-          checkItem: "",
           isDisable: false,
           isShowLabel: true
         }
@@ -39,17 +38,20 @@
     },
     methods: {
       setStatus: function(bIsCheck, bIsDisable){
-        this.checkItem = bIsCheck ? this.label: '';
+        var strOldVal = this.$parent[this.group];
+        this.$parent[this.group] = bIsCheck ? this.label: '';
+        var strNewVal = this.$parent[this.group];
+        this.$emit("onChange", strOldVal, strNewVal);
         this.isDisable = bIsDisable;
       },
       getCheckItem: function(){
-        return this.checkItem;
+        return this.$parent[this.group];
       },
-      onChange: function(){
-        console.log(this.$parent);
-//        console.log(this.label);
-//        this.checkItem = oEvent.target.checked ? this.label : "";
-        this.$emit("onChange", this.label);
+      onClick: function(){
+        var strOldVal = this.$parent[this.group];
+        this.$parent[this.group] = this.label;
+        var strNewVal = this.$parent[this.group];
+        this.$emit("onChange", strOldVal, strNewVal);
       }
     }
   }
