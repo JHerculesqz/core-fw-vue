@@ -13,6 +13,7 @@
     <router-link to="/page3/page4Link" exact>Link</router-link>
     <router-link to="/page3/page4Select" exact>Select</router-link>
     <router-link to="/page3/page4Leaflet" exact>Leaflet</router-link>
+    <router-link to="/page3/page4Chart" exact>Chart</router-link>
   </div>
 </template>
 

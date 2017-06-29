@@ -16,6 +16,7 @@ import Page4Button from '@/components/page3/Page4Button'
 import Page4Link from '@/components/page3/Page4Link'
 import Page4Select from '@/components/page3/Page4Select'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
+import Page4Chart from '@/components/page3/Page4Chart'
 
 Vue.use(Router);
 
@@ -86,6 +87,10 @@ export default new Router({
     path: '/page3/page4Leaflet',
     name: 'page4Leaflet',
     component: Page4Leaflet
+  }, {
+    path: '/page3/page4Chart',
+    name: 'page4Chart',
+    component: Page4Chart
   }]
 })
 
