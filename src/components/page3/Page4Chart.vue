@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div style="width: 500px; height: 300px">
+    <div style="width: 500px; height: 300px;display: none">
       <marvel-chart-gauge ref="ref1" id="id1" theme="dark"></marvel-chart-gauge>
     </div>
-    <div style="width: 500px; height: 500px">
+    <div style="width: 500px; height: 500px;display: none">
       <marvel-chart-radar ref="ref2" id="id2" theme="dark"></marvel-chart-radar>
+    </div>
+    <div style="width: 500px; height: 500px;display: none">
+      <marvel-chart-scatter ref="ref3" id="id3" theme="dark"></marvel-chart-scatter>
+    </div>
+    <div style="width: 500px; height: 500px">
+      <marvel-chart-stack-line ref="ref4" id="id4" theme="dark"></marvel-chart-stack-line>
     </div>
   </div>
 </template>
@@ -12,10 +18,14 @@
 <script>
   import MarvelChartGauge from "@/walle/widget/echart/MarvelChartGauge";
   import MarvelChartRadar from "@/walle/widget/echart/MarvelChartRadar";
+  import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
+  import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
 
   export default {
     name: 'page4Chart',
     components: {
+      MarvelChartStackLine,
+      MarvelChartScatter,
       MarvelChartRadar,
       MarvelChartGauge },
     data: function() {
@@ -37,6 +47,59 @@
           ],
           seriesName: "",
           data: []
+        },
+        scatterData: {
+          title: "机床利用率",
+          name: "usage",
+          subtxt: "",
+          sublink: "",
+          topN: 3,
+          data: [{
+            name: "机床1",
+            value: [121.15,31.89, 100]
+          }, {
+            name: "机床2",
+            value: [120.38,37.35, 50]
+          }, {
+            name: "机床3",
+            value: [122.207216,29.985295, 20]
+          }, {
+            name: "机床4",
+            value: [123.97,47.33, 10]
+          }, {
+            name: "机床5",
+            value: [120.33,36.07, 1]
+          }]
+        },
+        stackLineData: {
+          y1Title: "机床状态用时(小时)",
+          y2Title: "机床在线率(%)",
+          category: ["加工", "待机", "离线", "机床在线率"],
+          data: [{
+            label: "2017-7-1",
+            value: [12, 3, 9, 50]
+          }, {
+            label: "2017-7-2",
+            value: [8, 4, 12, 33]
+          }, {
+            label: "2017-7-3",
+            value: [6, 10, 8, 25]
+          }, {
+            label: "2017-7-4",
+            value: [4, 10, 10, 17]
+          }, {
+            label: "2017-7-5",
+            value: [18, 3, 3, 75]
+          }, {
+            label: "2017-7-6",
+            value: [20, 3, 1, 83]
+          }, {
+            label: "2017-7-7",
+            value: [16, 3, 5, 66]
+          }, {
+            label: "2017-7-8",
+            value: [12, 6, 6, 50]
+          }]
         }
       }
     },
@@ -164,6 +227,12 @@
         }
         self.$refs.ref2.setData(self.radarData);
       },2000);
+      //3.
+      self.$refs.ref3.init();
+      self.$refs.ref3.setData(self.scatterData);
+      //4.
+      self.$refs.ref4.init();
+      self.$refs.ref4.setData(self.stackLineData);
     },
     methods: {
 

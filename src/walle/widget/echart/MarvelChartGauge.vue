@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'MarvelChart',
+    name: 'MarvelChartGauge',
     props: ["id", "theme"],
     data: function() {
         return {
