@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div style="width: 500px; height: 300px;display: none">
+    <div style="width: 500px; height: 300px;">
       <marvel-chart-gauge ref="ref1" id="id1" theme="dark"></marvel-chart-gauge>
     </div>
-    <div style="width: 500px; height: 500px;display: none">
+    <div style="width: 500px; height: 500px;">
       <marvel-chart-radar ref="ref2" id="id2" theme="dark"></marvel-chart-radar>
     </div>
-    <div style="width: 500px; height: 500px;display: none">
+    <div style="width: 500px; height: 500px;">
       <marvel-chart-scatter ref="ref3" id="id3" theme="dark"></marvel-chart-scatter>
     </div>
     <div style="width: 500px; height: 500px">

@@ -17,6 +17,7 @@ import Page4Link from '@/components/page3/Page4Link'
 import Page4Select from '@/components/page3/Page4Select'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
 import Page4Chart from '@/components/page3/Page4Chart'
+import Page4Grid from '@/components/page3/Page4Grid'
 
 Vue.use(Router);
 
@@ -91,6 +92,10 @@ export default new Router({
     path: '/page3/page4Chart',
     name: 'page4Chart',
     component: Page4Chart
+  }, {
+    path: '/page3/page4Grid',
+    name: 'page4Grid',
+    component: Page4Grid
   }]
 })
 
