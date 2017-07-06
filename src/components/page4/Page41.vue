@@ -201,16 +201,16 @@
 
         this.warnPanel = [{
           label: "加工:" + iCountStatus1,
-          level: "level1"
+          level: "level5"
         }, {
           label: "待机" + iCountStatus2,
-          level: "level2"
-        }, {
-          label: "离线" + iCountStatus3,
           level: "level3"
         }, {
+          label: "离线" + iCountStatus3,
+          level: "level6"
+        }, {
           label: "告警" + iCountWarn,
-          level: "level4"
+          level: "level1"
         }];
       }
     }

@@ -54,6 +54,9 @@
   .alarmGroup .level5:before{
     background-color: #3dcca6;
   }
+  .alarmGroup .level6:before{
+    background-color: #555555;
+  }
   .dark .alarm{
     color: #fff;
   }
