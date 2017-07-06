@@ -1,19 +1,20 @@
 <template>
   <div class="container large-24 middle-24 small-24 mini-24">
     <marvel-frame></marvel-frame>
-    <div class="toolbar large-24 middle-24 small-24 mini-24">
-      <div class="crumb large-8 middle-8 small-8 mini-8">
-        <marvel-crumb :items="crumbItems"></marvel-crumb>
+    <div class="toolbar">
+      <div class="crumb">
+        <marvel-crumb :items="crumbItems" theme="dark"></marvel-crumb>
       </div>
-      <div class="large-4 middle-4 small-4 mini-4">
-        切换视图:
-        <marvel-switch ref="refSwitch" id="refSwitch" v-on:onChange="onChange4Switch"></marvel-switch>
-      </div>
-      <div class="large-8 middle-8 small-8 mini-8">
-        <marvel-warning :items="warnPanel"></marvel-warning>
-      </div>
-      <div class="large-4 middle-4 small-4 mini-4">
+      <div class="search">
         搜索框占位置
+      </div>
+      <div class="bar"></div>
+      <div class="tip">
+        <marvel-warning :items="warnPanel" theme="dark"></marvel-warning>
+      </div>
+      <div class="bar"></div>
+      <div class="switch">
+        <marvel-switch ref="refSwitch" id="refSwitch" v-on:onChange="onChange4Switch"></marvel-switch>
       </div>
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
@@ -222,10 +223,30 @@
     height: 100%;
   }
   .toolbar{
-    height: 25px;
+    height: 36px;
+    width: 100%;
+    background-color: #41475a;
   }
   .crumb{
-    margin-top: 5px;
+    margin-top: 11px;
+    float: left;
+    margin-left: 20px;
+  }
+  .search,.tip,.switch,.bar{
+    float: right;
+    margin-right: 20px;
+  }
+  .search,.switch{
+    margin-top: 7px;
+  }
+  .tip{
+    margin-top: 9px;
+  }
+  .bar{
+    width: 1px;
+    height: 20px;
+    margin-top: 8px;
+    background-color: rgba(255,255,255,0.4);
   }
   .details{
     height: calc(100% - 25px);

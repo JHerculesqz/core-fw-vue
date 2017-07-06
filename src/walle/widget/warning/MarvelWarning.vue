@@ -39,6 +39,9 @@
     margin-top: 1px;
     border-radius: 100%;
   }
+  .alarmGroup .alarm:last-child{
+    margin-right: 0px;
+  }
   .alarmGroup .level1:before{
     background-color: #ff4c4c;
   }
@@ -55,7 +58,7 @@
     background-color: #3dcca6;
   }
   .alarmGroup .level6:before{
-    background-color: #555555;
+    background-color: rgba(255, 255, 255, 0.5);
   }
   .dark .alarm{
     color: #fff;
