@@ -15,9 +15,12 @@ import Page4Crumb from '@/components/page3/Page4Crumb'
 import Page4Button from '@/components/page3/Page4Button'
 import Page4Link from '@/components/page3/Page4Link'
 import Page4Select from '@/components/page3/Page4Select'
+import Page4Warning from '@/components/page3/Page4Warning'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
 import Page4Chart from '@/components/page3/Page4Chart'
 import Page4Grid from '@/components/page3/Page4Grid'
+import Page41 from '@/components/page4/Page41'
+import Page42 from '@/components/page4/Page42'
 
 Vue.use(Router);
 
@@ -85,6 +88,10 @@ export default new Router({
     name: 'page4Select',
     component: Page4Select
   }, {
+    path: '/page3/page4Warning',
+    name: 'page4Warning',
+    component: Page4Warning
+  }, {
     path: '/page3/page4Leaflet',
     name: 'page4Leaflet',
     component: Page4Leaflet
@@ -96,6 +103,14 @@ export default new Router({
     path: '/page3/page4Grid',
     name: 'page4Grid',
     component: Page4Grid
+  }, {
+    path: '/page4/page41',
+    name: 'page41',
+    component: Page41
+  }, {
+    path: '/page4/page42',
+    name: 'page42',
+    component: Page42
   }]
 })
 

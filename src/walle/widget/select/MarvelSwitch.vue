@@ -16,7 +16,7 @@
     props: ["id"],
     data: function() {
         return {
-          checkItem: false,
+          checkItem: true,
           isDisable: false,
         }
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="gisMap" v-bind:id="id"></div>
+  <div class="gisMap" v-bind:id="id" v-bind:style="{ display: isShow }"></div>
 </template>
 
 <script>
@@ -14,7 +14,9 @@
     data: function() {
         return {
           mapObj: undefined,
-          LeafIcon: undefined
+          LeafIcon: undefined,
+          iconObjs: [],
+          isShow: "block"
         }
     },
     methods: {
@@ -44,7 +46,7 @@
 //          shadowSize:   [50, 64],
 //            iconAnchor:   [22, 94],
 //          shadowAnchor: [4, 62],
-            popupAnchor:  [-3, -76]
+//            popupAnchor:  [-3, -76]
           }
         });
 
@@ -83,15 +85,34 @@
       addPolygon: function(arrPoints, strTips){
         L.polygon(arrPoints).addTo(this.mapObj).bindPopup(strTips);
       },
-      addIcon: function(iX, iY, strImgUrl, strTips){
+      addIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj){
         var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
-        L.marker([iX, iY], {icon: oIcon}).addTo(this.mapObj).bindPopup(strTips);
+        var oMarker = L.marker([iX, iY], {icon: oIcon}).addTo(this.mapObj)
+        oMarker.bindPopup(strTips);
+        oMarker.id = strId;
+        oMarker.buObj = oBuObj;
+        this.iconObjs.push(oMarker);
+      },
+      updateIcon: function(strId, strImgUrl, strTips, oBuObj){
+        for(var i=0;i<this.iconObjs.length;i++){
+          var oMarker = this.iconObjs[i];
+          if(oMarker.id == strId){
+            var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
+            oMarker.setIcon(oIcon);
+            oMarker.setPopupContent(strTips);
+            oMarker.buObj = oBuObj;
+            break;
+          }
+        }
       },
       addWater: function(){
         L.control.watermark({ position: 'bottomleft' }).addTo(this.mapObj);
       },
       addHeatMap: function(arrHeatData){
         L.heatLayer(arrHeatData, {radius: 10}).addTo(this.mapObj);
+      },
+      showOrHide: function(bIsShow){
+        this.isShow = bIsShow ? "block":"none";
       }
     }
   }
@@ -100,5 +121,8 @@
 <style scoped>
   .gisMap {
     width: 100%; height: 100%;
+  }
+  .dpn {
+    display: none;
   }
 </style>

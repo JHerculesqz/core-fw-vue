@@ -1,50 +1,51 @@
 <template>
-  <div v-bind:class="{ hasMargin: isMargin }">
-    <div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">
-      <slot></slot>
-    </div>
-  </div>
+  <div></div>
+  <!--<div v-bind:class="{ hasMargin: isMargin }">-->
+    <!--<div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">-->
+      <!--<slot></slot>-->
+    <!--</div>-->
+  <!--</div>-->
 </template>
 
 <script>
-  import StrUtils from "@/walle/component/str";
+//  import StrUtils from "@/walle/component/str";
 
   export default {
     name: 'MarvelFrame',
-    props: ["media", "hasMargin", "classCustom"],
+//    props: ["media", "hasMargin", "classCustom"],
     data: function() {
         return {
-          isMargin: false,
-          classLarge: "large-24",
-          classMiddle: "middle-12",
-          classSmall: "small-8",
-          classMini: "mini-4"
+//          isMargin: false,
+//          classLarge: "large-24",
+//          classMiddle: "middle-12",
+//          classSmall: "small-8",
+//          classMini: "mini-4"
         }
     },
     mounted: function () {
-      //1.hasMargin
-      this.isMargin = this.hasMargin == "true";
-
-      //2.media
-      var strMedia = this.media;
-      var arrMedia = StrUtils.split(strMedia, ",");
-      if(arrMedia[0] != undefined){
-        this.classLarge = "large-" + arrMedia[0];
-      }
-      if(arrMedia[1] != undefined){
-        this.classMiddle = "middle-" + arrMedia[1];
-      }
-      if(arrMedia[2] != undefined){
-        this.classSmall = "small-" + arrMedia[2];
-      }
-      if(arrMedia[3] != undefined){
-        this.classMini = "mini-" + arrMedia[3];
-      }
+//      //1.hasMargin
+//      this.isMargin = this.hasMargin == "true";
+//
+//      //2.media
+//      var strMedia = this.media;
+//      var arrMedia = StrUtils.split(strMedia, ",");
+//      if(arrMedia[0] != undefined){
+//        this.classLarge = "large-" + arrMedia[0];
+//      }
+//      if(arrMedia[1] != undefined){
+//        this.classMiddle = "middle-" + arrMedia[1];
+//      }
+//      if(arrMedia[2] != undefined){
+//        this.classSmall = "small-" + arrMedia[2];
+//      }
+//      if(arrMedia[3] != undefined){
+//        this.classMini = "mini-" + arrMedia[3];
+//      }
     }
   }
 </script>
 
-<style scoped>
+<style>
   .hasMargin>div {
     margin: 0 10px;
     box-sizing: border-box;

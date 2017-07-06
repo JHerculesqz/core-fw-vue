@@ -22,8 +22,9 @@
         [51.509, -0.08],
         [51.503, -0.06],
         [51.51, -0.047]], "2");
-      this.$refs.ref0.addIcon(51.5, -0.11, "/static/leaflet/images/shit.png", "1");
-      this.$refs.ref0.addIcon(51.5, -0.13, "/static/leaflet/images/shit.png", "2");
+      this.$refs.ref0.addIcon("id1", 51.5, -0.11, "/static/leaflet/images/shit.png", "1", {name: 1});
+      this.$refs.ref0.addIcon("id2", 51.5, -0.13, "/static/leaflet/images/shit.png", "2", {name: 2});
+      this.$refs.ref0.updateIcon("id2", "/static/leaflet/images/shit.png", "22", {name: 22});
       this.$refs.ref0.addWater();
       this.$refs.ref0.addHeatMap([
         [51.5, -0.11, "1"],
