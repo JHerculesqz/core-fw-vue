@@ -16,7 +16,7 @@
         <marvel-chart-stack-line ref="refStackLine" id="refStackLine" theme="dark"></marvel-chart-stack-line>
       </div>
       <div class="grid">
-        <marvel-grid></marvel-grid>
+        <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
   import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
-  import MarvelGrid from "../../walle/widget/gird/MarvelGrid";
+  import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   export default {
     components: {
       MarvelGrid,
@@ -64,7 +64,21 @@
           y2Title: "机床在线率(%)",
           category: ["加工", "待机", "离线", "机床在线率"],
           data: []
-        }
+        },
+        titles: [{
+          label: "时间",
+          width: "25%"
+        }, {
+          label: "加工时间占比(小时)",
+          width: "25%"
+        }, {
+          label: "待机时间占比(小时)",
+          width: "25%"
+        }, {
+          label: "离线时间占比(小时)",
+          width: "25%"
+        }],
+        rows: []
       }
     },
     mounted: function(){
@@ -77,6 +91,10 @@
       this._getStackLineDataMock();
       this._initStackLine();
       this._drawStackLine();
+
+      //3.grid
+      this._getGridDataMock();
+      this._setGridData();
     },
     methods: {
       _getScatterDataMock: function(){
@@ -123,6 +141,24 @@
       _drawStackLine: function(){
         this.$refs.refStackLine.setData(this.stackLineData);
       },
+      _getGridDataMock: function(){
+        this.rows = [];
+        var iCount = parseInt(Math.random() * 100);
+        for(var i=0;i<iCount;i++) {
+          var oRow = [];
+          for (var j = 0; j < 4; j++) {
+            var oCell = {
+              value: "value" + i,
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows.push(oRow);
+        }
+      },
+      _setGridData: function(){
+
+      },
       onClick4UsageSearch: function(){
         //1.scatter
         this._getScatterDataMock();
@@ -131,6 +167,10 @@
         //2.stackLine
         this._getStackLineDataMock();
         this._drawStackLine();
+
+        //3.grid
+        this._getGridDataMock();
+        this._setGridData();
       }
     }
   }
@@ -164,7 +204,7 @@
     height: 300px;
   }
   .details .grid{
-    width: 500px;
+    width: 100%;
     height: 300px;
   }
 </style>

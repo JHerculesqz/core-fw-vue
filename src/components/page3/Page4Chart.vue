@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chart">
     <div style="width: 500px; height: 300px;">
       <marvel-chart-gauge ref="ref1" id="id1" theme="dark"></marvel-chart-gauge>
     </div>
@@ -240,6 +240,9 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+  .chart{
+    height: 100%;
+    overflow-y: scroll;
+  }
 </style>

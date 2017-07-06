@@ -45,7 +45,7 @@
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb";
   import MarvelLeaflet from "@/walle/widget/leaflet/MarvelLeaflet";
   import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
-  import MarvelGrid from "@/walle/widget/gird/MarvelGrid";
+  import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelChartGauge from "@/walle/widget/echart/MarvelChartGauge";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   import MarvelChartRadar from "@/walle/widget/echart/MarvelChartRadar";

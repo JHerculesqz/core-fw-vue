@@ -19,7 +19,7 @@
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
       <marvel-leaflet ref="refGISMap" id="refGISMap" v-on:onClick="onGisMapClick"></marvel-leaflet>
-      <marvel-grid ref="refGrid"></marvel-grid>
+      <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb";
   import MarvelLeaflet from "@/walle/widget/leaflet/MarvelLeaflet";
   import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
-  import MarvelGrid from "@/walle/widget/gird/MarvelGrid";
+  import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelWarning from "../../walle/widget/warning/MarvelWarning";
   export default {
     components: {
@@ -55,7 +55,54 @@
         }],
         devLst: [],
         statusLst: [],
-        warnPanel: []
+        warnPanel: [],
+        titles: [{
+          label: "ID",
+          width: "5%"
+        }, {
+          label: "名称",
+          width: "5%"
+        }, {
+          label: "描述",
+          width: "15%"
+        }, {
+          label: "制造时间",
+          width: "5%"
+        }, {
+          label: "状态",
+          width: "5%"
+        }, {
+          label: "告警",
+          width: "5%"
+        }, {
+          label: "最近更新时间",
+          width: "10%"
+        }, {
+          label: "买家公司",
+          width: "10%"
+        }, {
+          label: "买家地址",
+          width: "5%"
+        }, {
+          label: "是否锁定",
+          width: "5%"
+        }, {
+          label: "所在城市",
+          width: "10%"
+        }, {
+          label: "所在部门",
+          width: "5%"
+        }, {
+          label: "绑定手机",
+          width: "5%"
+        }, {
+          label: "经度",
+          width: "5%"
+        }, {
+          label: "纬度",
+          width: "5%"
+        }],
+        rows: []
       }
     },
     mounted: function(){
@@ -71,6 +118,9 @@
 
       //2.warnPanel
       this._updateWarnPanel();
+
+      //3.grid
+      this._drawGrid();
 
       //3.getStatus by timer
       setInterval(function(){
@@ -112,7 +162,16 @@
             status: "加工",
             laser: "Raycus-500w",
             x: 51.5 + Math.random() * 0.1,
-            y: -0.09 + Math.random() * 0.1
+            y: -0.09 + Math.random() * 0.1,
+            desc: "",
+            createTime: "",
+            lastUpdateTime: "",
+            company: "",
+            addr: "",
+            lock: "",
+            city: "",
+            department: "",
+            phone: ""
           };
           this.devLst.push(oDev);
         }
@@ -213,6 +272,29 @@
           label: "告警" + iCountWarn,
           level: "level1"
         }];
+      },
+      _drawGrid: function(){
+        this.rows = [];
+        for(var i=0;i<10;i++){
+          var oDev = this.devLst[i];
+          var oRow = [];
+          oRow.push({value: oDev.id, type:"text"});
+          oRow.push({value: oDev.name, type:"text"});
+          oRow.push({value: oDev.desc, type:"text"});
+          oRow.push({value: oDev.createTime, type:"text"});
+          oRow.push({value: oDev.status, type:"text"});
+          oRow.push({value: oDev.warn, type:"text"});
+          oRow.push({value: oDev.lastUpdateTime, type:"text"});
+          oRow.push({value: oDev.company, type:"text"});
+          oRow.push({value: oDev.addr, type:"text"});
+          oRow.push({value: oDev.lock, type:"text"});
+          oRow.push({value: oDev.city, type:"text"});
+          oRow.push({value: oDev.department, type:"text"});
+          oRow.push({value: oDev.phone, type:"text"});
+          oRow.push({value: oDev.x, type:"text"});
+          oRow.push({value: oDev.y, type:"text"});
+          this.rows.push(oRow);
+        }
       }
     }
   }
