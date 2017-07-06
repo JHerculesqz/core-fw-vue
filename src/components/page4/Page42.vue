@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="layer3 large-16 middle-16 small-16 mini-16">
-          待实现表格
+          <marvel-grid :titles="titles4Warn" :rows="rows4Warn"></marvel-grid>
         </div>
       </div>
       <div class="basicInfo large-24 middle-24 small-24 mini-24">
@@ -34,7 +34,7 @@
         <div class="layer2 large-12 middle-12 small-12 mini-12" v-html="basicInfo2"></div>
       </div>
       <div class="advanceInfo large-24 middle-24 small-24 mini-24">
-        部件表格预留位置
+        <!--<marvel-grid :titles="titles4Advance" :rows="rows4Advance"></marvel-grid>-->
       </div>
     </div>
   </div>
@@ -84,7 +84,32 @@
           seriesName: "",
           data: []
         },
-        gridData: [],
+        titles4Warn: [{
+          label: "ID",
+          width: "12%"
+        }, {
+          label: "类型",
+          width: "12%"
+        }, {
+          label: "内容",
+          width: "12%"
+        }, {
+          label: "故障定位",
+          width: "12%"
+        }, {
+          label: "快速处置方式",
+          width: "12%"
+        }, {
+          label: "备注",
+          width: "12%"
+        }, {
+          label: "消除时间",
+          width: "19%"
+        }, {
+          label: "产生时间",
+          width: "19%"
+        }],
+        rows4Warn: [],
         basicInfo: "",
         basicInfo2: ""
       }
@@ -99,6 +124,7 @@
       this._setData4Radar();
 
       //3.grid
+      this._setData4WarnGrid();
 
       //4.basicInfo
       this._setData4BasicInfo();
@@ -232,6 +258,17 @@
           this.radarData.data = dataSH;
         }
         this.$refs.refRadar.setData(this.radarData);
+      },
+      _setData4WarnGrid: function(){
+        this.rows4Warn = [];
+        var iCount = parseInt(Math.random() * 100);
+        for(var i=0;i<iCount;i++) {
+          var oRow = [];
+          for (var j = 0; j < 8; j++) {
+            oRow.push({value: "value" + i, type: "text"});
+          }
+          this.rows4Warn.push(oRow);
+        }
       },
       _setData4BasicInfo: function(){
         this.basicInfo = "设备ID:3217031027<br>" +
