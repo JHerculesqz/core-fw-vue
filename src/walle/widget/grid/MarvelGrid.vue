@@ -13,7 +13,20 @@
         </thead>
         <tbody>
           <tr v-for="row in rows">
-            <td v-for="cell in row">{{ cell.value }}</td>
+            <td v-for="cell in row" v-if="cell.type == 'text'"
+                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">{{ cell.value }}</td>
+            <td v-for="cell in row" v-if="cell.type == 'icon'"
+                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
+              <span class="iconOnly" v-for="icon in cell.value"
+                    v-bind:class="[icon.value]"
+                    v-on:click="icon.onClick"></span>
+            </td>
+            <td v-for="cell in row" v-if="cell.type == 'textIcon'"
+                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
+              <span class="icon" v-bind:class="[cell.value.icon]"
+                    v-bind:style="{ color: cell.value.color }"></span>
+              <span>{{ cell.value.label }}</span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -88,6 +101,15 @@
 
         return arrRes;
       }
+    },
+    methods: {
+      _getWidth: function(iColIndex){
+        for(var i=0;i<this.titles.length;i++){
+          if(i == iColIndex){
+            return this.titles[iColIndex].width;
+          }
+        }
+      }
     }
   }
 </script>
@@ -117,6 +139,7 @@
   .gridWrapper .grid .gridCont thead{
     padding-right: 16px;
     position: relative;
+    box-sizing: border-box;
   }
   .gridWrapper .grid .gridCont thead tr th{
     height: 40px;
@@ -152,6 +175,9 @@
     color: #666;
     height: 60px;
     padding: 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .gridWrapper .grid .gridCont tbody tr .icon{
     margin-right: 8px;

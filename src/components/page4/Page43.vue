@@ -84,17 +84,14 @@
     mounted: function(){
       //1.scatter
       this._getScatterDataMock();
-      this._initScatter();
       this._drawScatter();
 
       //2.stackLine
       this._getStackLineDataMock();
-      this._initStackLine();
       this._drawStackLine();
 
       //3.grid
       this._getGridDataMock();
-      this._setGridData();
     },
     methods: {
       _getScatterDataMock: function(){
@@ -115,9 +112,6 @@
           value: [120.33,36.07, 300 * Math.random()]
         }];
       },
-      _initScatter: function(){
-        this.$refs.refScatter.init();
-      },
       _drawScatter: function(){
         this.$refs.refScatter.setData(this.scatterData);
       },
@@ -134,9 +128,6 @@
           };
           this.stackLineData.data.push(oData);
         }
-      },
-      _initStackLine: function(){
-        this.$refs.refStackLine.init();
       },
       _drawStackLine: function(){
         this.$refs.refStackLine.setData(this.stackLineData);
@@ -156,9 +147,6 @@
           this.rows.push(oRow);
         }
       },
-      _setGridData: function(){
-
-      },
       onClick4UsageSearch: function(){
         //1.scatter
         this._getScatterDataMock();
@@ -170,7 +158,6 @@
 
         //3.grid
         this._getGridDataMock();
-        this._setGridData();
       }
     }
   }

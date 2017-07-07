@@ -33,12 +33,51 @@
     },
     mounted: function(){
       this.rows = [];
-      for(var i=0;i<10;i++){
+      //1.
+      for(var i=0;i<2;i++){
         var oRow = [];
         for(var j=0;j<4;j++){
           var oCell = {
             value: "value" + i,
             type: "text"
+          };
+          oRow.push(oCell);
+        }
+        this.rows.push(oRow);
+      }
+      //2.
+      for(var i=0;i<2;i++){
+        var oRow = [];
+        for(var j=0;j<4;j++){
+          var oCell = {
+            value: [{
+              value: "icon-location2",
+              onClick: function(){
+                alert(Math.random());
+              }
+            }, {
+              value: "icon-location2",
+              onClick: function(){
+                alert(Math.random());
+              }
+            }],
+            type: "icon"
+          };
+          oRow.push(oCell);
+        }
+        this.rows.push(oRow);
+      }
+      //3.
+      for(var i=0;i<2;i++){
+        var oRow = [];
+        for(var j=0;j<4;j++){
+          var oCell = {
+            value: {
+              icon: "icon-podcast",
+              color: "#28aad3",
+              label: "shit"
+            },
+            type: "textIcon"
           };
           oRow.push(oCell);
         }
