@@ -19,7 +19,9 @@
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
       <marvel-leaflet ref="refGISMap" id="refGISMap" v-on:onClick="onGisMapClick"></marvel-leaflet>
-      <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
+      <div class="gridView">
+        <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
+      </div>
     </div>
   </div>
 </template>
@@ -93,7 +95,7 @@
           label: "所在部门",
           width: "5%"
         }, {
-          label: "绑定手机",
+          label: "绑定手机11",
           width: "5%"
         }, {
           label: "经度",
@@ -332,5 +334,11 @@
   }
   .details{
     height: calc(100% - 25px);
+  }
+  .details .gridView{
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fafafa;
   }
 </style>

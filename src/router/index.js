@@ -17,6 +17,7 @@ import Page4Link from '@/components/page3/Page4Link'
 import Page4Select from '@/components/page3/Page4Select'
 import Page4Warning from '@/components/page3/Page4Warning'
 import Page4Input from '@/components/page3/Page4Input'
+import Page4DashBoard from '@/components/page3/Page4DashBoard'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
 import Page4Chart from '@/components/page3/Page4Chart'
 import Page4Grid from '@/components/page3/Page4Grid'
@@ -97,6 +98,10 @@ export default new Router({
     path: '/page3/page4Input',
     name: 'page4Input',
     component: Page4Input
+  }, {
+    path: '/page3/page4DashBoard',
+    name: 'page4DashBoard',
+    component: Page4DashBoard
   }, {
     path: '/page3/page4Leaflet',
     name: 'page4Leaflet',

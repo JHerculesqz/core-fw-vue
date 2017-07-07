@@ -1,22 +1,70 @@
 <template>
   <div class="container large-24 middle-24 small-24 mini-24">
     <marvel-frame></marvel-frame>
-    <div class="toolbar">
-      <div class="crumb">
+    <div class="toolbar large-24 middle-24 small-24 mini-24">
+      <div class="crumb large-12 middle-20 small-20 mini-20">
         <marvel-crumb :items="crumbItems" theme="dark"></marvel-crumb>
       </div>
     </div>
-    <div class="details">
-      <marvel-icon-txt-button isLarge="false" label="查询" icon="icon-home3"
-                              v-on:onClick="onClick4UsageSearch"></marvel-icon-txt-button>
-      <div class="scatter">
-        <marvel-chart-scatter ref="refScatter" id="refScatter" theme="dark"></marvel-chart-scatter>
-      </div>
-      <div class="stackLine">
-        <marvel-chart-stack-line ref="refStackLine" id="refStackLine" theme="dark"></marvel-chart-stack-line>
-      </div>
-      <div class="grid">
-        <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
+    <div class="pageFrameWrapper">
+      <div class="session">
+        <div class="sessionName">机床运行分析</div>
+        <div class="searchConfigArea">
+          <div class="searchConfig large-6 small-8 mini-24">
+            <div class="configName">开始时间:</div>
+            <div class="configInput">
+              <marvel-input ref="ref4StartTime" status="" placeHolder="Please enter..."
+                            errMsg="输入错误..."></marvel-input>
+            </div>
+          </div>
+          <div class="searchConfig large-6 small-8 mini-24">
+            <div class="configName">结束时间:</div>
+            <div class="configInput">
+              <marvel-input ref="ref4EndTime" status="" placeHolder="Please enter..."
+                            errMsg="输入错误..."></marvel-input>
+            </div>
+          </div>
+          <div class="searchConfig large-8 small-8 mini-24">
+            <div class="configInput">
+              <marvel-select-card ref="refSelectCard"
+                                  :items="selectCardItems" size="mini"></marvel-select-card>
+            </div>
+          </div>
+          <div class="searchConfig large-4 small-6 mini-24">
+            <div class="searchBtn">
+              <marvel-primary-button isLarge="false" label="查询"
+                                     v-on:onClick="onClick4UsageSearch"></marvel-primary-button>
+            </div>
+          </div>
+        </div>
+        <div class="dashboards hasMargin">
+          <div class="chartDashboard large-12 small-24">
+            <marvel-dashboard title="热力图">
+              <div slot="customArea"></div>
+              <div slot="contArea" style="height: 100%">
+                <marvel-chart-scatter ref="refScatter" id="refScatter"
+                                      theme="dark"></marvel-chart-scatter>
+              </div>
+            </marvel-dashboard>
+          </div>
+          <div class="chartDashboard large-12 small-24">
+            <marvel-dashboard title="利用率趋势">
+              <div slot="customArea"></div>
+              <div slot="contArea" style="height: 100%">
+                <marvel-chart-stack-line ref="refStackLine" id="refStackLine"
+                                         theme="dark"></marvel-chart-stack-line>
+              </div>
+            </marvel-dashboard>
+          </div>
+          <div class="gridDashboard large-24 small-24">
+            <marvel-dashboard title="利用率详情">
+              <div slot="customArea"></div>
+              <div slot="contArea" style="height: 100%">
+                <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
+              </div>
+            </marvel-dashboard>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -26,20 +74,27 @@
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb";
   import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
-  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
+  import MarvelDashboard from "@/walle/widget/dashboard/MarvelDashboard";
+  import MarvelSelectCard from "@/walle/widget/select/MarvelSelectCard";
+  import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
+  import MarvelInput from "@/walle/widget/input/MarvelInput";
   export default {
     components: {
+      MarvelInput,
+      MarvelPrimaryButton,
+      MarvelSelectCard,
+      MarvelDashboard,
       MarvelGrid,
       MarvelChartStackLine,
-      MarvelIconTxtButton,
       MarvelChartScatter,
       MarvelCrumb,
       MarvelFrame},
     name: 'page43',
     data: function() {
       return {
+        //region crumbItems
         crumbItems: [{
           label: "商业洞察",
           click: function () {
@@ -51,6 +106,11 @@
 
           }
         }],
+        //endregion
+        //region selectCardItems
+        selectCardItems:["按年", "按月", "按日"],
+        //endregion
+        //region scatter
         scatterData: {
           title: "机床利用率",
           name: "usage",
@@ -59,12 +119,16 @@
           topN: 3,
           data: []
         },
+        //endregion
+        //region stackLine
         stackLineData: {
           y1Title: "机床状态用时(小时)",
           y2Title: "机床在线率(%)",
           category: ["加工", "待机", "离线", "机床在线率"],
           data: []
         },
+        //endregion
+        //region grid
         titles: [{
           label: "时间",
           width: "25%"
@@ -79,6 +143,7 @@
           width: "25%"
         }],
         rows: []
+        //endregion
       }
     },
     mounted: function(){
@@ -177,21 +242,99 @@
     float: left;
     margin-left: 20px;
   }
-  .details{
+  .pageFrameWrapper{
     width: 100%;
-    height: calc(100% - 36px);
+    padding: 0 40px;
+    box-sizing: border-box;
     overflow-y: auto;
+    background-color: #fafafa;
+    height:calc(100% - 25px);
   }
-  .details .scatter{
-    width: 500px;
-    height: 300px;
-  }
-  .details .stackLine{
-    width: 500px;
-    height: 300px;
-  }
-  .details .grid{
+  .pageFrameWrapper .session{
     width: 100%;
-    height: 300px;
+    margin-top: 30px;
+  }
+  .pageFrameWrapper .session:last-child{
+    margin-bottom: 20px;
+  }
+  .pageFrameWrapper .session .sessionName{
+    line-height: 22px;
+    color: #444;
+    font-size: 22px;
+    font-family: arial,"微软雅黑",sans-serif;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .pageFrameWrapper .session .searchConfigArea{
+    width: 100%;
+    overflow: hidden;
+    clear: both;
+  }
+
+  .searchConfigArea .searchConfig{
+    float: left;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .searchConfigArea .searchConfig .configName, .searchConfigArea .searchConfig .configInput{
+    float: left;
+  }
+  .searchConfigArea .searchConfig .configInput{
+    width: calc(100% - 120px);
+  }
+  .searchConfigArea .searchConfig .switchArea{
+    padding-top: 5px;
+    float: left;
+  }
+  .searchConfigArea .searchConfig .configName{
+    font-family: arial, "微软雅黑", sans-serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 32px;
+    width: 80px;
+  }
+  .searchConfigArea .searchConfig .configName2{
+    width: auto;
+    margin-right: 10px;
+  }
+  .searchConfigArea .searchConfig .searchBtn{
+    float: right;
+  }
+
+  .dashboards{
+    overflow: hidden;
+  }
+  .dashboards .chartDashboard, .dashboards .gridDashboard{
+    margin-bottom: 20px;
+  }
+  .dashboards .chartDashboard{
+    height:400px;
+  }
+  .dashboards .gridDashboard{
+    height: 800px;
+  }
+
+  .detailsCont{
+    height:100%;
+  }
+  .detailsCont .left,.detailsCont .right{
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .detailsCont .left{
+    border-right: 1px dashed #d5d5d5;
+  }
+  .detailsCont .left .deviceShowArea{
+    background: url("/static/demo/dev.jpg") no-repeat center;
+    background-size: contain;
+    height: 380px;
+  }
+  .detailsCont .left .deviceDescribe{
+    font-family: arial, "微软雅黑", sans-serif;
+    font-size: 14px;
+    height:calc( 100% - 380px);
+    color: #666;
+    line-height: 22px;
   }
 </style>

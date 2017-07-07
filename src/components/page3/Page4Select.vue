@@ -37,6 +37,10 @@
       <marvel-check-box ref="ref11" id="id12"
                         label="x4" showLabel="true"></marvel-check-box>
     </div>
+    <div>
+      <button v-on:click="onClick4SelectCard">获取</button><br>
+      <marvel-select-card ref="ref12" :items="items" size="mini"></marvel-select-card>
+    </div>
   </div>
 
 </template>
@@ -45,16 +49,19 @@
   import MarvelRadioBox from "@/walle/widget/select/MarvelRadioBox";
   import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
   import MarvelCheckBox from "@/walle/widget/select/MarvelCheckBox";
+  import MarvelSelectCard from "@/walle/widget/select/MarvelSelectCard";
 
   export default {
     name: 'page4RadioBox',
     components: {
+      MarvelSelectCard,
       MarvelCheckBox,
       MarvelRadioBox, MarvelSwitch},
     data: function() {
       return {
         group1: '',
-        group2: ''
+        group2: '',
+        items: ["100M", "200M", "300M", "400M"]
       }
     },
     mounted: function(){
@@ -98,6 +105,9 @@
       },
       onChange4Check: function(strOldVal, strNewVal){
         console.log("[CheckBox]change..." + strNewVal);
+      },
+      onClick4SelectCard: function(){
+        console.log("[SelectCard]..." + this.$refs.ref12.getSelectItem());
       }
     }
   }
