@@ -12,10 +12,10 @@
           chartData: undefined
         }
     },
+    mounted: function(){
+      this.chartObj = echarts.init(document.getElementById(this.id), this.theme);
+    },
     methods: {
-      init: function(){
-        this.chartObj = echarts.init(document.getElementById(this.id), this.theme);
-      },
       setData: function(oData){
         // Schema:date,AQIindex,PM2.5,PM10,CO,NO2,SO2
         this.chartData = oData;

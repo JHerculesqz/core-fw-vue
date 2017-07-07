@@ -12,10 +12,10 @@
           chartData: undefined
         }
     },
+    mounted: function(){
+      this.chartObj = echarts.init(document.getElementById(this.id), this.theme);
+    },
     methods: {
-      init: function(){
-        this.chartObj = echarts.init(document.getElementById(this.id), this.theme);
-      },
       setData: function(oData){
         this.chartData = oData;
         var option = {

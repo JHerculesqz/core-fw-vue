@@ -13,6 +13,7 @@
     <router-link to="/page3/page4Link" exact>Link</router-link>
     <router-link to="/page3/page4Select" exact>Select</router-link>
     <router-link to="/page3/page4Warning" exact>Warning</router-link>
+    <router-link to="/page3/page4Input" exact>Input</router-link>
     <router-link to="/page3/page4Leaflet" exact>Leaflet</router-link>
     <router-link to="/page3/page4Chart" exact>Chart</router-link>
     <router-link to="/page3/page4Grid" exact>Grid</router-link>
