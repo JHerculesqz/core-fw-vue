@@ -44,6 +44,7 @@
     name: 'page41',
     data: function() {
       return {
+        //region crumb
         crumbItems: [{
           label: "设备监控",
           click: function(){
@@ -55,9 +56,17 @@
 
           }
         }],
+        //endregion
+        //region devLst
         devLst: [],
+        //endregion
+        //region statusLst
         statusLst: [],
+        //endregion
+        //region warnPanel
         warnPanel: [],
+        //endregion
+        //region grid
         titles: [{
           label: "ID",
           width: "5%"
@@ -104,7 +113,11 @@
           label: "纬度",
           width: "5%"
         }],
-        rows: []
+        rows: [],
+        //endregion
+        //region timer
+        timer: undefined
+        //endregion
       }
     },
     mounted: function(){
@@ -125,7 +138,7 @@
       this._drawGrid();
 
       //3.getStatus by timer
-      setInterval(function(){
+      this.timer = setInterval(function(){
         //3.1.getStatusLst
         self._getStatusLstMock();
 
@@ -138,6 +151,11 @@
         //3.4.update warnPanel
         self._updateWarnPanel();
       }, 2000);
+    },
+    destroyed: function(){
+      if(this.timer != undefined){
+        clearInterval(this.timer);
+      }
     },
     methods: {
       onChange4Switch: function(){
