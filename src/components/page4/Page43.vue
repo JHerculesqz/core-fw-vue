@@ -320,7 +320,7 @@
     height:400px;
   }
   .dashboards .gridDashboard{
-    height: 800px;
+    height: 500px;
   }
 
   .detailsCont{
