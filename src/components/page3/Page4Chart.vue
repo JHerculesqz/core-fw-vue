@@ -9,8 +9,12 @@
     <div style="width: 500px; height: 500px;">
       <marvel-chart-scatter ref="ref3" id="id3" theme="dark"></marvel-chart-scatter>
     </div>
+    <div style="width: 1000px; height: 500px;">
+      <marvel-chart-scatter2 ref="ref4" id="id4" theme="dark"
+                             v-on:onClick="onScatterItemClick"></marvel-chart-scatter2>
+    </div>
     <div style="width: 500px; height: 500px">
-      <marvel-chart-stack-line ref="ref4" id="id4" theme="dark"></marvel-chart-stack-line>
+      <marvel-chart-stack-line ref="ref5" id="id5" theme="dark"></marvel-chart-stack-line>
     </div>
   </div>
 </template>
@@ -20,10 +24,12 @@
   import MarvelChartRadar from "@/walle/widget/echart/MarvelChartRadar";
   import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
+  import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
 
   export default {
     name: 'page4Chart',
     components: {
+      MarvelChartScatter2,
       MarvelChartStackLine,
       MarvelChartScatter,
       MarvelChartRadar,
@@ -53,7 +59,34 @@
           name: "usage",
           subtxt: "",
           sublink: "",
+          geoType: "china",
           topN: 3,
+          data: [{
+            name: "机床1",
+            value: [121.15,31.89, 100]
+          }, {
+            name: "机床2",
+            value: [120.38,37.35, 50]
+          }, {
+            name: "机床3",
+            value: [122.207216,29.985295, 20]
+          }, {
+            name: "机床4",
+            value: [123.97,47.33, 10]
+          }, {
+            name: "机床5",
+            value: [120.33,36.07, 1]
+          }]
+        },
+        scatterData2: {
+          title: "机床利用率",
+          name: "usage",
+          subtxt: "",
+          sublink: "",
+          geoType: "world",
+          geoZoom: 0.9,
+          topN: 5,
+          topNEx: 10,
           data: [{
             name: "机床1",
             value: [121.15,31.89, 100]
@@ -106,13 +139,11 @@
     mounted: function(){
       var self = this;
       //1.
-      self.$refs.ref1.init();
       setInterval(function () {
         self.gaugeData.value = (Math.random() * 100).toFixed(2) - 0;
         self.$refs.ref1.setData(self.gaugeData);
       },2000);
       //2.
-      self.$refs.ref2.init();
       setInterval(function () {
         //region data
         var dataBJ = [
@@ -228,14 +259,15 @@
         self.$refs.ref2.setData(self.radarData);
       },2000);
       //3.
-      self.$refs.ref3.init();
       self.$refs.ref3.setData(self.scatterData);
+      self.$refs.ref4.setData(self.scatterData2);
       //4.
-      self.$refs.ref4.init();
-      self.$refs.ref4.setData(self.stackLineData);
+      self.$refs.ref5.setData(self.stackLineData);
     },
     methods: {
-
+      onScatterItemClick: function(oItem){
+        console.log(oItem);
+      }
     }
   }
 </script>

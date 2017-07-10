@@ -19,6 +19,7 @@
       setData: function(oData){
         this.chartData = oData;
         var option = {
+          //region basic
           backgroundColor: '#404a59',
           title: {
             text: this.chartData.title,
@@ -29,9 +30,13 @@
               color: '#fff'
             }
           },
+          //endregion
+          //region tooltip
           tooltip : {
             trigger: 'item'
           },
+          //endregion
+          //region legend
           legend: {
             orient: 'vertical',
             y: 'bottom',
@@ -41,8 +46,10 @@
               color: '#fff'
             }
           },
+          //endregion
+          //region geo
           geo: {
-            map: 'china',
+            map: this.chartData.geoType,
             label: {
               emphasis: {
                 show: false
@@ -59,6 +66,8 @@
               }
             }
           },
+          //endregion
+          //region series
           series : [
             {
               name: this.chartData.name,
@@ -116,6 +125,7 @@
               zlevel: 1
             }
           ]
+          //endregion
         };
         this.chartObj.setOption(option, true);
       }

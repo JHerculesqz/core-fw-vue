@@ -45,22 +45,22 @@
           </div>
         </div>
         <div class="dashboards hasMargin">
-          <div class="chartDashboard large-12 small-24">
-            <marvel-dashboard title="新产生告警">
-              <div slot="customArea"></div>
-              <div slot="contArea" style="height: 100%">
-                <marvel-chart-gauge ref="refGauge" id="refGauge" theme="dark"></marvel-chart-gauge>
-              </div>
-            </marvel-dashboard>
-          </div>
-          <div class="chartDashboard large-12 small-24">
-            <marvel-dashboard title="未消除告警">
-              <div slot="customArea"></div>
-              <div slot="contArea" style="height: 100%">
-                <marvel-chart-gauge ref="refGauge2" id="refGauge2" theme="dark"></marvel-chart-gauge>
-              </div>
-            </marvel-dashboard>
-          </div>
+          <!--<div class="chartDashboard large-12 small-24">-->
+            <!--<marvel-dashboard title="新产生告警">-->
+              <!--<div slot="customArea"></div>-->
+              <!--<div slot="contArea" style="height: 100%">-->
+                <!--<marvel-chart-gauge ref="refGauge" id="refGauge" theme="dark"></marvel-chart-gauge>-->
+              <!--</div>-->
+            <!--</marvel-dashboard>-->
+          <!--</div>-->
+          <!--<div class="chartDashboard large-12 small-24">-->
+            <!--<marvel-dashboard title="未消除告警">-->
+              <!--<div slot="customArea"></div>-->
+              <!--<div slot="contArea" style="height: 100%">-->
+                <!--<marvel-chart-gauge ref="refGauge2" id="refGauge2" theme="dark"></marvel-chart-gauge>-->
+              <!--</div>-->
+            <!--</marvel-dashboard>-->
+          <!--</div>-->
           <div class="gridDashboard large-24 small-24">
             <marvel-dashboard title="告警列表">
               <div slot="customArea"></div>
@@ -73,19 +73,17 @@
       </div>
       <div class="session">
         <div class="sessionName">设备详情</div>
-        <div style="height: 800px;">
+        <div style="height: 400px;">
           <marvel-dashboard title="实时数据">
             <div slot="customArea"></div>
             <div slot="contArea" style="height: 100%">
-              <div class="detailsCont larg-24">
+              <div class="detailsCont large-24">
                 <div class="left large-10 small-24">
                   <div class="deviceShowArea"></div>
-                  <div class="deviceDescribe">
-                    <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
-                  </div>
+                  <div class="deviceDescribe"></div>
                 </div>
                 <div class="right large-14 small-24">
-                  <marvel-grid :titles="titles4Advance" :rows="rows4Advance"></marvel-grid>
+                  <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
                 </div>
               </div>
             </div>
@@ -102,7 +100,6 @@
   import MarvelLeaflet from "@/walle/widget/leaflet/MarvelLeaflet";
   import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
-  import MarvelChartGauge from "@/walle/widget/echart/MarvelChartGauge";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   import MarvelChartRadar from "@/walle/widget/echart/MarvelChartRadar";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
@@ -117,7 +114,6 @@
       MarvelInput,
       MarvelChartRadar,
       MarvelIconTxtButton,
-      MarvelChartGauge,
       MarvelGrid,
       MarvelSwitch,
       MarvelLeaflet,
@@ -141,20 +137,6 @@
         //endregion
         //region data4SingleDev
         data4SingleDev: {},
-        //endregion
-        //region gaugeData
-        gaugeData: {
-          title: "新产生告警",
-          key: "产生率",
-          value: 0
-        },
-        //endregion
-        //region gaugeData2
-        gaugeData2: {
-          title: "已消除告警",
-          key: "消除率",
-          value: 0
-        },
         //endregion
         //region 4warn
         titles4Warn: [{
@@ -223,11 +205,8 @@
 
       //1.setData
       this._getData4SingleDevMock();
-      this._setData4Gauge();
-      this._setData4Gauge2();
       this._setData4WarnGrid();
       this._setData4BasicInfo();
-      this._setData4AdvanceInfo();
 
       //2.basicInfo
       setInterval(function(){
@@ -236,6 +215,13 @@
       }, 2000);
     },
     methods: {
+      onClick4WarnSearch: function(){
+        //region 暂时保留
+//        this._setData4Gauge();
+//        this._setData4Gauge2();
+        //endregion
+        this._setData4WarnGrid();
+      },
       _getData4SingleDevMock: function(){
         var lstWarn = [];
         var iCount = parseInt(Math.random() * 20);
@@ -301,27 +287,11 @@
           rows4Advance: arrRows4Advance
         };
       },
-      _setData4Gauge: function(){
-        this.gaugeData.value = this.data4SingleDev.newWarnRate;
-        this.$refs.refGauge.setData(this.gaugeData);
-      },
-      _setData4Gauge2: function(){
-        this.gaugeData2.value = this.data4SingleDev.disposeWarnRate;
-        this.$refs.refGauge2.setData(this.gaugeData2);
-      },
       _setData4WarnGrid: function(){
         this.rows4Warn = this.data4SingleDev.warnLst;
       },
       _setData4BasicInfo: function(){
         this.rows4BasicInfo = this.data4SingleDev.basicInfos;
-      },
-      _setData4AdvanceInfo: function(){
-        this.rows4Advance = this.data4SingleDev.rows4Advance;
-      },
-      onClick4WarnSearch: function(){
-        this._setData4Gauge();
-        this._setData4Gauge2();
-        this._setData4WarnGrid();
       }
     }
   }
@@ -410,7 +380,7 @@
     height:400px;
   }
   .dashboards .gridDashboard{
-    height: 800px;
+    height: 400px;
   }
 
   .detailsCont{

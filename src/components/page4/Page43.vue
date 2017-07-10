@@ -8,7 +8,7 @@
     </div>
     <div class="pageFrameWrapper">
       <div class="session">
-        <div class="sessionName">机床运行分析</div>
+        <div class="sessionName">机床运行状态分析</div>
         <div class="searchConfigArea">
           <div class="searchConfig large-6 small-8 mini-24">
             <div class="configName">开始时间:</div>
@@ -38,16 +38,16 @@
           </div>
         </div>
         <div class="dashboards hasMargin">
-          <div class="chartDashboard large-12 small-24">
+          <div class="chartDashboard large-24 small-24">
             <marvel-dashboard title="热力图">
               <div slot="customArea"></div>
               <div slot="contArea" style="height: 100%">
-                <marvel-chart-scatter ref="refScatter" id="refScatter"
-                                      theme="dark"></marvel-chart-scatter>
+                <marvel-chart-scatter2 ref="refScatter" id="refScatter" theme="dark"
+                                       v-on:onClick="onScatterItemClick"></marvel-chart-scatter2>
               </div>
             </marvel-dashboard>
           </div>
-          <div class="chartDashboard large-12 small-24">
+          <div class="chartDashboard large-24 small-24">
             <marvel-dashboard title="利用率趋势">
               <div slot="customArea"></div>
               <div slot="contArea" style="height: 100%">
@@ -73,22 +73,22 @@
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb";
-  import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelDashboard from "@/walle/widget/dashboard/MarvelDashboard";
   import MarvelSelectCard from "@/walle/widget/select/MarvelSelectCard";
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
+  import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
   export default {
     components: {
+      MarvelChartScatter2,
       MarvelInput,
       MarvelPrimaryButton,
       MarvelSelectCard,
       MarvelDashboard,
       MarvelGrid,
       MarvelChartStackLine,
-      MarvelChartScatter,
       MarvelCrumb,
       MarvelFrame},
     name: 'page43',
@@ -116,9 +116,13 @@
           name: "usage",
           subtxt: "",
           sublink: "",
-          topN: 3,
+          geoType: "world",
+          geoZoom: 0.9,
+          topN: 100,
+          topNEx: 10,
           data: []
         },
+        selectItem: "",
         //endregion
         //region stackLine
         stackLineData: {
@@ -152,35 +156,52 @@
       this._drawScatter();
 
       //2.stackLine
-      this._getStackLineDataMock();
+      this._getStackLineDataMock(this.selectItem);
       this._drawStackLine();
 
       //3.grid
-      this._getGridDataMock();
+      this._getGridDataMock(this.selectItem);
     },
     methods: {
+      onClick4UsageSearch: function(){
+        //1.scatter
+        this._getScatterDataMock();
+        this._drawScatter();
+
+        //2.stackLine
+        this._getStackLineDataMock(this.selectItem);
+        this._drawStackLine();
+
+        //3.grid
+        this._getGridDataMock(this.selectItem);
+      },
+      onScatterItemClick: function(oItem){
+        //1.
+        this.selectItem = oItem;
+
+        //2.stackLine
+        this._getStackLineDataMock(this.selectItem);
+        this._drawStackLine();
+
+        //3.grid
+        this._getGridDataMock(this.selectItem);
+      },
       _getScatterDataMock: function(){
-        this.scatterData.data = [{
-          name: "机床1",
-          value: [121.15,31.89, 300 * Math.random()]
-        }, {
-          name: "机床2",
-          value: [120.38,37.35, 300 * Math.random()]
-        }, {
-          name: "机床3",
-          value: [122.207216,29.985295, 300 * Math.random()]
-        }, {
-          name: "机床4",
-          value: [123.97,47.33, 300 * Math.random()]
-        }, {
-          name: "机床5",
-          value: [120.33,36.07, 300 * Math.random()]
-        }];
+        this.scatterData.data = [];
+        for(var i=0;i<50;i++){
+          var oDev = {
+            name: "机床" + i,
+            value: [80 + Math.random()*10, 30 + Math.random()*10, 100 * Math.random()]
+          };
+          this.scatterData.data.push(oDev);
+        }
+
+        this.selectItem = this.scatterData.data[0];
       },
       _drawScatter: function(){
         this.$refs.refScatter.setData(this.scatterData);
       },
-      _getStackLineDataMock: function(){
+      _getStackLineDataMock: function(oSelectItem){
         this.stackLineData.data = [];
         for(var i=1;i<=30;i++){
           var d1 = 12 * Math.random();
@@ -197,7 +218,7 @@
       _drawStackLine: function(){
         this.$refs.refStackLine.setData(this.stackLineData);
       },
-      _getGridDataMock: function(){
+      _getGridDataMock: function(oSelectItem){
         this.rows = [];
         var iCount = parseInt(Math.random() * 100);
         for(var i=0;i<iCount;i++) {
@@ -211,18 +232,6 @@
           }
           this.rows.push(oRow);
         }
-      },
-      onClick4UsageSearch: function(){
-        //1.scatter
-        this._getScatterDataMock();
-        this._drawScatter();
-
-        //2.stackLine
-        this._getStackLineDataMock();
-        this._drawStackLine();
-
-        //3.grid
-        this._getGridDataMock();
       }
     }
   }
