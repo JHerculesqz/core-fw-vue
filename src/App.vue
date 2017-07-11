@@ -3,7 +3,7 @@
     <div class="header">
       <ul>
         <li>
-          <router-link to="/page4/page41" exact>设备监控</router-link>
+          <router-link to="/" exact>设备监控</router-link>
         </li>
         <li>
           <router-link to="/page4/page43" exact>商业洞察</router-link>
