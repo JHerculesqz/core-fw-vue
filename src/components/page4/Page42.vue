@@ -126,7 +126,7 @@
         crumbItems: [{
           label: "设备监控",
           click: function(){
-            window.location = "/page4/page41";
+
           }
         }, {
           label: "单站管理",
@@ -135,6 +135,9 @@
           }
         }],
         //endregion
+        //#region devId
+        devId: 0,
+        //#endregion
         //region data4SingleDev
         data4SingleDev: {},
         //endregion
@@ -202,6 +205,9 @@
     },
     mounted: function(){
       var self = this;
+
+      //0.set devId
+      this.devId = this.$route.query.id;
 
       //1.setData
       this._getData4SingleDevMock();

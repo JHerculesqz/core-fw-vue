@@ -202,13 +202,15 @@
           var strImgUrl = oDev.warn ?
             "/static/leaflet/images/dev1.png" :
             "/static/leaflet/images/dev2.png";
-          var strUrl = "/page4/page42?id=" + oDev.id;
           var strTips = "<b>" + oDev.name + "</b><br>" +
             oDev.status + "<br>" +
-            oDev.laser + "<br>" +
-            "<a href=\"" + strUrl + "\">单站管理</a><br>";
-          this.$refs.refGISMap.addIcon(oDev.id, oDev.x, oDev.y, strImgUrl, strTips, oDev);
+            oDev.laser + "<br>";
+          this.$refs.refGISMap.addIcon(oDev.id, oDev.x, oDev.y, strImgUrl, strTips, oDev,
+            this._onDBClickGisMap);
         }
+      },
+      _onDBClickGisMap: function(strId){
+        this.$router.push({name: "page42", query: { id: strId }});
       },
       _getStatusLstMock: function(){
         this.statusLst = [];
@@ -249,11 +251,9 @@
           var strImgUrl = oDev.warn ?
             "/static/leaflet/images/dev1.png" :
             "/static/leaflet/images/dev2.png";
-          var strUrl = "/page4/page42?id=" + oDev.id;
           var strTips = "<b>" + oDev.name + "</b><br>" +
             oDev.status + "<br>" +
-            oDev.laser + "<br>" +
-            "<a href=\"" + strUrl + "\">单站管理</a><br>";
+            oDev.laser + "<br>";
           this.$refs.refGISMap.updateIcon(oDev.id, strImgUrl, strTips, oDev);
         }
       },
