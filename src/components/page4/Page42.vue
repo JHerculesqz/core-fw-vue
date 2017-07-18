@@ -195,9 +195,6 @@
       }
     },
     methods: {
-      onClick4WarnSearch: function(){
-        this._setData4WarnGrid();
-      },
       _getData4SingleDevMock: function(oCallback){
         var self = this;
 
