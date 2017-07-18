@@ -45,7 +45,7 @@
     data: function() {
       return {
         //region const
-        debug: true,
+        debug: false,
         timerInterval: 2000,
         //endregion
         //region crumb
