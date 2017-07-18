@@ -190,8 +190,8 @@
             "/static/leaflet/images/dev1.png" :
             "/static/leaflet/images/dev2.png";
           var strTips = "<b>" + oDev.devId + "</b><br>" +
-            oDev.status + "<br>" +
-            oDev.warnCount + "<br>";
+            "状态:" + oDev.status + "<br>" +
+            "告警数量:" + oDev.warnCount + "<br>";
           this.$refs.refGISMap.addIcon(oDev.id, oDev.x, oDev.y, strImgUrl, strTips, oDev,
             this._onDBClickGisMap);
         }
@@ -258,8 +258,8 @@
             "/static/leaflet/images/dev1.png" :
             "/static/leaflet/images/dev2.png";
           var strTips = "<b>" + oDev.devId + "</b><br>" +
-            oDev.status + "<br>" +
-            oDev.warnCount + "<br>";
+            "状态:" + oDev.status + "<br>" +
+            "告警数量:" + oDev.warnCount + "<br>";
           this.$refs.refGISMap.updateIcon(oDev.id, strImgUrl, strTips, oDev);
         }
       }
