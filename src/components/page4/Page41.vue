@@ -192,7 +192,7 @@
           var strTips = "<b>" + oDev.devId + "</b><br>" +
             "状态:" + oDev.status + "<br>" +
             "告警数量:" + oDev.warnCount + "<br>";
-          this.$refs.refGISMap.addIcon(oDev.id, oDev.x, oDev.y, strImgUrl, strTips, oDev,
+          this.$refs.refGISMap.addIcon(oDev.devId, oDev.x, oDev.y, strImgUrl, strTips, oDev,
             this._onDBClickGisMap);
         }
       },
@@ -260,7 +260,7 @@
           var strTips = "<b>" + oDev.devId + "</b><br>" +
             "状态:" + oDev.status + "<br>" +
             "告警数量:" + oDev.warnCount + "<br>";
-          this.$refs.refGISMap.updateIcon(oDev.id, strImgUrl, strTips, oDev);
+          this.$refs.refGISMap.updateIcon(oDev.devId, strImgUrl, strTips, oDev);
         }
       }
     }
