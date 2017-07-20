@@ -48,6 +48,13 @@ module.exports = {
         pathRewrite: {
           '^/getBasicInfoByDevId': '/getBasicInfoByDevId'
         }
+      },
+      '/getUsageByClientNoAndStartTimeAndEndTime': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getUsageByClientNoAndStartTimeAndEndTime': '/getUsageByClientNoAndStartTimeAndEndTime'
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

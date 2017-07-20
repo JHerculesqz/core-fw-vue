@@ -13,20 +13,20 @@
         }
     },
     mounted: function(){
+      var self = this;
+
       this.chartObj = echarts.init(document.getElementById(this.id), this.theme);
+      this.chartObj.on("click", function(params){
+        if(params.componentType == "series" &&
+          params.componentSubType == "effectScatter"){
+          self.$emit("onClick", params.data);
+        }
+      });
     },
     methods: {
       setData: function(oData){
         var self=this;
         this.chartData = oData;
-
-        var geoCoordMap = {
-          "机床1":[121.15,31.89]
-        };
-
-        var data = [
-          {name: "机床1", value: 9}
-        ];
 
         var option = {
           //region basic
@@ -147,35 +147,13 @@
           //endregion
           //region series
           series : [{
-            name: this.chartData.name,
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            data: this.chartData.data,
-            symbolSize: function (val) {
-              return Math.max(val[2] / 10, 8);
-            },
-            label: {
-              normal: {
-                formatter: '{b}',
-                position: 'right',
-                show: false
-              },
-              emphasis: {
-                show: true
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: '#ddb926'
-              }
-            }
-          }, {
             name: "Top " + this.chartData.topN,
             type: 'effectScatter',
             coordinateSystem: 'geo',
-            data: this.chartData.data.sort(function (a, b) {
-              return b.value[2] - a.value[2];
-            }).slice(0, this.chartData.topN),
+//            data: this.chartData.data.sort(function (a, b) {
+//              return b.value[2] - a.value[2];
+//            }).slice(0, this.chartData.topN),
+            data: this.chartData.data,
             symbolSize: function (val) {
               return Math.max(val[2] / 10, 8);
             },
@@ -188,7 +166,7 @@
               normal: {
                 formatter: '{b}',
                 position: 'right',
-                show: true
+                show: false
               }
             },
             itemStyle: {
@@ -199,7 +177,7 @@
               }
             },
             zlevel: 1
-          },{
+          }, {
             id: 'bar',
             zlevel: 2,
             type: 'bar',
@@ -274,12 +252,6 @@
           });
         }, 0);
         this.chartObj.setOption(option, true);
-        this.chartObj.on("click", function(params){
-          if(params.componentType == "series" &&
-             params.componentSubType == "effectScatter"){
-            self.$emit("onClick", params.data);
-          }
-        });
       }
     }
   }

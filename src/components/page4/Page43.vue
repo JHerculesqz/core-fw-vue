@@ -25,10 +25,7 @@
             </div>
           </div>
           <div class="searchConfig large-8 small-8 mini-24">
-            <div class="configInput">
-              <marvel-select-card ref="refSelectCard"
-                                  :items="selectCardItems" size="mini"></marvel-select-card>
-            </div>
+
           </div>
           <div class="searchConfig large-4 small-6 mini-24">
             <div class="searchBtn">
@@ -94,6 +91,9 @@
     name: 'page43',
     data: function() {
       return {
+        //region const
+        debug: false,
+        //#endregion
         //region crumbItems
         crumbItems: [{
           label: "商业洞察",
@@ -107,9 +107,6 @@
           }
         }],
         //endregion
-        //region selectCardItems
-        selectCardItems:["按年", "按月", "按日"],
-        //endregion
         //region scatter
         scatterData: {
           title: "机床利用率",
@@ -118,7 +115,7 @@
           sublink: "",
           geoType: "world",
           geoZoom: 0.9,
-          topN: 100,
+          topN: 10,
           topNEx: 10,
           data: []
         },
@@ -134,7 +131,7 @@
         //endregion
         //region grid
         titles: [{
-          label: "时间",
+          label: "利用率",
           width: "25%"
         }, {
           label: "加工时间占比(小时)",
@@ -151,87 +148,127 @@
       }
     },
     mounted: function(){
-      //1.scatter
-      this._getScatterDataMock();
       this._drawScatter();
-
-      //2.stackLine
-      this._getStackLineDataMock(this.selectItem);
       this._drawStackLine();
-
-      //3.grid
-      this._getGridDataMock(this.selectItem);
     },
     methods: {
       onClick4UsageSearch: function(){
+        var self = this;
+
         //1.scatter
-        this._getScatterDataMock();
-        this._drawScatter();
-
-        //2.stackLine
-        this._getStackLineDataMock(this.selectItem);
-        this._drawStackLine();
-
-        //3.grid
-        this._getGridDataMock(this.selectItem);
+        this._getScatterDataMock(function(){
+          self._drawScatter();
+        });
       },
       onScatterItemClick: function(oItem){
-        //1.
         this.selectItem = oItem;
+        this.stackLineData.data = [];
+        this.rows = [];
 
-        //2.stackLine
-        this._getStackLineDataMock(this.selectItem);
-        this._drawStackLine();
-
-        //3.grid
-        this._getGridDataMock(this.selectItem);
-      },
-      _getScatterDataMock: function(){
-        this.scatterData.data = [];
-        for(var i=0;i<50;i++){
-          var oDev = {
-            name: "机床" + i,
-            value: [80 + Math.random()*10, 30 + Math.random()*10, 100 * Math.random()]
+        //1.update this.stackLineData and this.rows
+        var arrReportUsageOutTimeVo = this.selectItem.value[3].treeReportUsageOutTimeVo;
+        console.log(arrReportUsageOutTimeVo);
+        for(var i=0;i<arrReportUsageOutTimeVo.length;i++){
+          var oStackItem = arrReportUsageOutTimeVo[i];
+          var oStackLineData = {
+            label: oStackItem.time,
+            value: [oStackItem.hourProcess, oStackItem.hourAwait, oStackItem.hourOffline, oStackItem.usage]
           };
-          this.scatterData.data.push(oDev);
+          this.stackLineData.data.push(oStackLineData);
+
+          var oRowData = [{
+            value: oStackItem.usage,
+            type: "text"
+          }, {
+            value: oStackItem.hourProcess,
+            type: "text"
+          }, {
+            value: oStackItem.hourAwait,
+            type: "text"
+          }, {
+            value: oStackItem.hourOffline,
+            type: "text"
+          }];
+          this.rows.push(oRowData);
         }
 
-        this.selectItem = this.scatterData.data[0];
+        //2.update rows
+
+        //3.stackLine
+        this._drawStackLine();
+      },
+      _getScatterDataMock: function(oCallback){
+        this.scatterData.data = [];
+
+        if(this.debug){
+          //region debug
+
+          // 1.mock
+          for(var i=0;i<50;i++){
+            var oDevVo = {
+              treeReportUsageOutTimeVo: []
+            };
+            for(var j=1;j<=30;j++){
+              var d1 = 12 * Math.random();
+              var d2 = 12 * Math.random();
+              var d3 = 24 - d1 - d2;
+              var rate = d1 / 24 * 100;
+              oDevVo.treeReportUsageOutTimeVo.push({
+                time: "2017-7-" + j,
+                usage: rate,
+                hourProcess: d1,
+                hourAwait: d2,
+                hourOffline: d3
+              });
+            }
+
+            var oDev = {
+              name: "机床" + i,
+              value: [80 + Math.random()*10, 30 + Math.random()*10, 100 * Math.random(), oDevVo]
+            };
+            this.scatterData.data.push(oDev);
+          }
+
+          //2.callback
+          oCallback();
+
+          //endregion
+        }
+        else{
+          //region prod
+
+          //1.post getUsageByClientNoAndStartTimeAndEndTime
+          this.$http.post('/getUsageByClientNoAndStartTimeAndEndTime', {
+            reqBuVoStr: JSON.stringify({
+              clientNo:"client1",
+              startTime: "2017-7-1",
+              endTime: "2017-10-1"
+            })
+          }).then(res=>{
+            //2.更新this.scatterData.data
+            var oClientVo = res.data.resultObj.lstReportUsageOutClientNoVo[0];
+            var lstDevVo = oClientVo.lstReportUsageDevVo;
+            for(var i=0;i<lstDevVo.length;i++){
+              var oDevVo = lstDevVo[i];
+              var oDev = {
+                name: oDevVo.devId,
+                value: [oDevVo.x, oDevVo.y, oDevVo.usage, oDevVo]
+              };
+              this.scatterData.data.push(oDev);
+            }
+
+            //3.callback
+            oCallback();
+          });
+
+          //endregion
+        }
       },
       _drawScatter: function(){
         this.$refs.refScatter.setData(this.scatterData);
       },
-      _getStackLineDataMock: function(oSelectItem){
-        this.stackLineData.data = [];
-        for(var i=1;i<=30;i++){
-          var d1 = 12 * Math.random();
-          var d2 = 12 * Math.random();
-          var d3 = 24 - d1 - d2;
-          var rate = d1 / 24 * 100;
-          var oData = {
-            label: "2017-7-" + i,
-            value: [d1, d2, d3, rate]
-          };
-          this.stackLineData.data.push(oData);
-        }
-      },
       _drawStackLine: function(){
         this.$refs.refStackLine.setData(this.stackLineData);
-      },
-      _getGridDataMock: function(oSelectItem){
-        this.rows = [];
-        var iCount = parseInt(Math.random() * 100);
-        for(var i=0;i<iCount;i++) {
-          var oRow = [];
-          for (var j = 0; j < 4; j++) {
-            var oCell = {
-              value: "value" + i,
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows.push(oRow);
-        }
       }
     }
   }
