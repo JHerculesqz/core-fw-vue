@@ -45,7 +45,7 @@ body {
   background-color: #181b21;
 }
 .header .logo{
-  width: 200px;
+  width: 150px;
   height: 100%;
   float: left;
   color: #fff;

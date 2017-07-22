@@ -131,7 +131,7 @@
         //endregion
         //region grid
         titles: [{
-          label: "利用率",
+          label: "时间",
           width: "25%"
         }, {
           label: "加工时间占比(小时)",
@@ -167,7 +167,6 @@
 
         //1.update this.stackLineData and this.rows
         var arrReportUsageOutTimeVo = this.selectItem.value[3].treeReportUsageOutTimeVo;
-        console.log(arrReportUsageOutTimeVo);
         for(var i=0;i<arrReportUsageOutTimeVo.length;i++){
           var oStackItem = arrReportUsageOutTimeVo[i];
           var oStackLineData = {
@@ -177,7 +176,7 @@
           this.stackLineData.data.push(oStackLineData);
 
           var oRowData = [{
-            value: oStackItem.usage,
+            value: oStackItem.time,
             type: "text"
           }, {
             value: oStackItem.hourProcess,
