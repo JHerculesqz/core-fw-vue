@@ -148,8 +148,8 @@
       }
     },
     mounted: function(){
-      this._drawScatter();
-      this._drawStackLine();
+//      this._drawScatter();
+//      this._drawStackLine();
     },
     methods: {
       onClick4UsageSearch: function(){

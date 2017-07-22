@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="header">
+      <div class="logo icon-firefox">Au3Tech</div>
       <ul>
         <li>
           <router-link to="/" exact>设备监控</router-link>
@@ -44,14 +45,17 @@ body {
   background-color: #181b21;
 }
 .header .logo{
-  width: 280px;
+  width: 200px;
   height: 100%;
   float: left;
   color: #fff;
+  padding: 0 20px;
+  text-align: left;
   font-size: 26px;
-  font-weight: bold;
   line-height: 50px;
-  text-align: center;
+}
+.header .logo:before{
+  margin-right: 10px;
 }
 .header ul{
   margin: 0;
