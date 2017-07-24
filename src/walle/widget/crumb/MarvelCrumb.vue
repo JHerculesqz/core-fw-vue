@@ -2,7 +2,7 @@
   <!--crumb Start-->
   <div class="crumbWrapper" v-bind:class="[theme]">
     <div class="crumbItem" v-for="item in items">
-      <div class="name" v-on:click="onItemClick(item.label)">{{ item.label }}</div>
+      <div class="name" v-on:click="onCrumbItemClick(item.label)">{{ item.label }}</div>
       <div class="symbol icon-marvelIcon-02"></div>
     </div>
   </div>
@@ -19,8 +19,8 @@
         }
     },
     methods: {
-      onItemClick: function(strItemLabel){
-        this.$emit("onItemClick", strItemLabel);
+      onCrumbItemClick: function(strItemLabel){
+        this.$emit("onCrumbItemClick", strItemLabel);
       }
     }
   }

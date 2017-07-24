@@ -3,7 +3,7 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar">
       <div class="crumb">
-        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
       <div class="search">
         搜索框占位置
@@ -239,7 +239,7 @@
         }
       },
       _onDBClickGisMap: function(strId){
-        this.$router.push({name: "page42", query: { id: strId }});
+        this.$router.push({name: "page42", query: { clientNo: this.companyInfo.clientNo, devId: strId }});
       },
       _updateWarnPanel: function(){
         var iCountStatus1 = 0;

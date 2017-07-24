@@ -3,7 +3,7 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar large-24 middle-24 small-24 mini-24">
       <div class="crumb large-12 middle-20 small-20 mini-20">
-        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
     </div>
     <div class="pageFrameWrapper">
@@ -54,7 +54,7 @@
       <div class="session">
         <div class="sessionName">设备详情</div>
         <div style="height: 400px;">
-          <marvel-dashboard title="实时数据">
+          <marvel-dashboard title="基础信息">
             <div slot="customArea"></div>
             <div slot="contArea" style="height: 100%">
               <div class="detailsCont large-24">
@@ -65,6 +65,17 @@
                 <div class="right large-14 small-24">
                   <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
                 </div>
+              </div>
+            </div>
+          </marvel-dashboard>
+        </div>
+        <!--TODO：告警信息-->
+        <div style="height: 400px;">
+          <marvel-dashboard title="高级信息">
+            <div slot="customArea"></div>
+            <div slot="contArea" style="height: 100%">
+              <div class="detailsCont large-24">
+                <marvel-grid :titles="titles4AdvInfo" :rows="rows4AdvInfo"></marvel-grid>
               </div>
             </div>
           </marvel-dashboard>
@@ -103,17 +114,25 @@
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         timerInterval: 2000,
         //#endregion
         //#region crumbItems
-        crumbItems: ["设备监控", "单站管理"],
+        crumbItems: [{
+          label: "设备监控"
+        }, {
+          label: "单站管理"
+        }],
         //#endregion
         //#region devId
+        clientNo: "",
         devId: 0,
         //#endregion
         //#region data4SingleDev
-        data4SingleDev: {},
+        data4SingleDev: {
+          basicInfos: [],
+          advInfos: []
+        },
         //#endregion
         //#region 4warn
         titles4Warn: [{
@@ -139,13 +158,29 @@
         //#endregion
         //#region basicInfo
         titles4BasicInfo: [{
-          label: "属性",
+          label: "参数名称",
           width: "50%"
         }, {
-          label: "值",
+          label: "当前值",
           width: "50%"
         }],
         rows4BasicInfo: [],
+        //#endregion
+        //#region advInfo
+        titles4AdvInfo: [{
+          label: "参数ID",
+          width: "15%"
+        }, {
+          label: "参数名称",
+          width: "25%"
+        }, {
+          label: "当前值",
+          width: "30%"
+        }, {
+          label: "更新时间",
+          width: "30%"
+        }],
+        rows4AdvInfo: [],
         //#endregion
         //#region timer
         timer: undefined
@@ -155,8 +190,9 @@
     mounted: function(){
       var self = this;
 
-      //0.set devId
-      this.devId = this.$route.query.id;
+      //0.set clientNo/devId
+      this.clientNo = this.$route.query.clientNo;
+      this.devId = this.$route.query.devId;
 
       //1.setData
       this._getData4SingleDevMock(function(){
@@ -165,9 +201,12 @@
 
         //1.2._setData4BasicInfo
         self._setData4BasicInfo();
+
+        //1.3._setData4AdvInfo
+        self._setData4AdvInfo();
       });
 
-      //2.basicInfo
+      //2.timer
       this.timer = setInterval(function(){
         //1.setData
         self._getData4SingleDevMock(function(){
@@ -176,6 +215,9 @@
 
           //1.2._setData4BasicInfo
           self._setData4BasicInfo();
+
+          //1.3._setData4AdvInfo
+          self._setData4AdvInfo();
         });
       }, this.timerInterval);
     },
@@ -203,35 +245,7 @@
             [{value: "设备名称", type:"text"}, {value: "1", type:"text"}],
             [{value: "状态", type:"text"}, {value: "1", type:"text"}],
             [{value: "告警", type:"text"}, {value: "1", type:"text"}],
-            [{value: "最近更新时间", type:"text"}, {value: "1", type:"text"}],
-            [{value: "经度", type:"text"}, {value: "1", type:"text"}],
-            [{value: "纬度", type:"text"}, {value: "1", type:"text"}],
-            [{value: "软件版本", type:"text"}, {value: "1", type:"text"}],
-            [{value: "机床幅面", type:"text"}, {value: "1", type:"text"}],
-            [{value: "激光器型号", type:"text"}, {value: "1", type:"text"}],
-            [{value: "电机型号", type:"text"}, {value: "1", type:"text"}],
-            [{value: "切割头型号", type:"text"}, {value: "1", type:"text"}],
-            [{value: "X轴脉冲当量", type:"text"}, {value: "1", type:"text"}],
-            [{value: "X轴最大行程", type:"text"}, {value: "1", type:"text"}],
-            [{value: "Y轴双边驱动", type:"text"}, {value: "1", type:"text"}],
-            [{value: "Y轴脉冲当量", type:"text"}, {value: "1", type:"text"}],
-            [{value: "Y轴最大行程", type:"text"}, {value: "1", type:"text"}],
-            [{value: "激光器类型", type:"text"}, {value: "1", type:"text"}],
-            [{value: "激光器控制方式", type:"text"}, {value: "1", type:"text"}],
-            [{value: "调高器控制方式", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割速度", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时开光延时", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割功率", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割频率", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割高度", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割气体", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时切割气压", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时峰值电流", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时启用分段穿孔", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时启用渐进穿孔", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时穿孔延时", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时穿孔功率", type:"text"}, {value: "1", type:"text"}],
-            [{value: "加工时穿孔高度", type:"text"}, {value: "1", type:"text"}]
+            [{value: "最近更新时间", type:"text"}, {value: "1", type:"text"}]
           ];
 
           //2.warnLst
@@ -246,85 +260,124 @@
           }
           self.data4SingleDev.warnLst = lstWarn;
 
+          //3.advInfos
+          self.data4SingleDev.advInfos = [
+            [{value: "1001", type:"text"}, {value: "经度", type:"text"}, {value: Math.random(), type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1002", type:"text"}, {value: "纬度", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1003", type:"text"}, {value: "软件版本", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1004", type:"text"}, {value: "机床幅面", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1005", type:"text"}, {value: "激光器型号", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1006", type:"text"}, {value: "电机型号", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1007", type:"text"}, {value: "切割头型号", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1008", type:"text"}, {value: "X轴脉冲当量", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1009", type:"text"}, {value: "X轴最大行程", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1010", type:"text"}, {value: "Y轴双边驱动", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1011", type:"text"}, {value: "Y轴脉冲当量", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1012", type:"text"}, {value: "Y轴最大行程", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1013", type:"text"}, {value: "激光器类型", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1014", type:"text"}, {value: "激光器控制方式", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1015", type:"text"}, {value: "调高器控制方式", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1016", type:"text"}, {value: "加工时切割速度", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1017", type:"text"}, {value: "加工时开光延时", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1018", type:"text"}, {value: "加工时切割功率", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1019", type:"text"}, {value: "加工时切割频率", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1020", type:"text"}, {value: "加工时切割高度", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1021", type:"text"}, {value: "加工时切割气体", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1022", type:"text"}, {value: "加工时切割气压", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1023", type:"text"}, {value: "加工时峰值电流", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1024", type:"text"}, {value: "加工时启用分段穿孔", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1025", type:"text"}, {value: "加工时启用渐进穿孔", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1026", type:"text"}, {value: "加工时穿孔延时", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1027", type:"text"}, {value: "加工时穿孔功率", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}],
+            [{value: "1028", type:"text"}, {value: "加工时穿孔高度", type:"text"}, {value: "1", type:"text"}, {value: "2017-7-1 12:11:11", type:"text"}]
+          ];
+
           oCallback();
         }
         else{
           //1.post getBasicInfoByDevId
           self.$http.post('/getBasicInfoByDevId', {
             reqBuVoStr: JSON.stringify({
-              clientNo:"client1",
+              clientNo: self.clientNo,
               devId: self.devId
             })
           }).then(res=>{
-            //2.oDevBasicInfo to arrBasicInfo
-            var oDevBasicInfo = res.data.resultObj;
-            self.data4SingleDev.basicInfos = [
-              [{value: "设备ID", type:"text"}, {value: oDevBasicInfo.devId, type:"text"}],
-              [{value: "设备名称", type:"text"}, {value: oDevBasicInfo.mname, type:"text"}],
-              [{value: "状态", type:"text"}, {value: oDevBasicInfo.status, type:"text"}],
-              [{value: "告警", type:"text"}, {value: oDevBasicInfo.warnCount, type:"text"}],
-              [{value: "最近更新时间", type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
-              [{value: "经度", type:"text"}, {value: oDevBasicInfo.x, type:"text"}],
-              [{value: "纬度", type:"text"}, {value: oDevBasicInfo.y, type:"text"}],
-              [{value: "软件版本", type:"text"}, {value: oDevBasicInfo.tsoftVersion, type:"text"}],
-              [{value: "机床幅面", type:"text"}, {value: oDevBasicInfo.mjcfm, type:"text"}],
-              [{value: "激光器型号", type:"text"}, {value: oDevBasicInfo.mlaser, type:"text"}],
-              [{value: "电机型号", type:"text"}, {value: oDevBasicInfo.mdj, type:"text"}],
-              [{value: "切割头型号", type:"text"}, {value: oDevBasicInfo.mqgt, type:"text"}],
-              [{value: "X轴脉冲当量", type:"text"}, {value: oDevBasicInfo.txmcdl, type:"text"}],
-              [{value: "X轴最大行程", type:"text"}, {value: oDevBasicInfo.txzdxc, type:"text"}],
-              [{value: "Y轴双边驱动", type:"text"}, {value: oDevBasicInfo.tysbqd, type:"text"}],
-              [{value: "Y轴脉冲当量", type:"text"}, {value: oDevBasicInfo.tymcdl, type:"text"}],
-              [{value: "Y轴最大行程", type:"text"}, {value: oDevBasicInfo.tyzdxc, type:"text"}],
-              [{value: "激光器类型", type:"text"}, {value: oDevBasicInfo.tlaserType, type:"text"}],
-              [{value: "激光器控制方式", type:"text"}, {value: oDevBasicInfo.tjgqkzfs, type:"text"}],
-              [{value: "调高器控制方式", type:"text"}, {value: oDevBasicInfo.ttgqkzfs, type:"text"}],
-              [{value: "加工时切割速度", type:"text"}, {value: oDevBasicInfo.tjgsqgsd, type:"text"}],
-              [{value: "加工时开光延时", type:"text"}, {value: oDevBasicInfo.tjgskgys, type:"text"}],
-              [{value: "加工时切割功率", type:"text"}, {value: oDevBasicInfo.tjgsqggl, type:"text"}],
-              [{value: "加工时切割频率", type:"text"}, {value: oDevBasicInfo.tjgsqgpl, type:"text"}],
-              [{value: "加工时切割高度", type:"text"}, {value: oDevBasicInfo.tjgsqggd, type:"text"}],
-              [{value: "加工时切割气体", type:"text"}, {value: oDevBasicInfo.tjgsqgqt, type:"text"}],
-              [{value: "加工时切割气压", type:"text"}, {value: oDevBasicInfo.tjgsqgqy, type:"text"}],
-              [{value: "加工时峰值电流", type:"text"}, {value: oDevBasicInfo.tjgsfzdl, type:"text"}],
-              [{value: "加工时启用分段穿孔", type:"text"}, {value: oDevBasicInfo.tjgsqyfdck, type:"text"}],
-              [{value: "加工时启用渐进穿孔", type:"text"}, {value: oDevBasicInfo.tjgsqyjjck, type:"text"}],
-              [{value: "加工时穿孔延时", type:"text"}, {value: oDevBasicInfo.tjgsckys, type:"text"}],
-              [{value: "加工时穿孔功率", type:"text"}, {value: oDevBasicInfo.tjgsckgl, type:"text"}],
-              [{value: "加工时穿孔高度", type:"text"}, {value: oDevBasicInfo.tjgsckgd, type:"text"}]
-            ];
+            //2.oDevBasicInfo to basicInfos/advInfos
+            if(res.data.ok){
+              var oDevBasicInfo = res.data.resultObj;
+              self.data4SingleDev.basicInfos = [
+                [{value: "设备ID", type:"text"}, {value: oDevBasicInfo.devId, type:"text"}],
+                [{value: "设备名称", type:"text"}, {value: oDevBasicInfo.mname, type:"text"}],
+                [{value: "状态", type:"text"}, {value: oDevBasicInfo.status, type:"text"}],
+                [{value: "告警", type:"text"}, {value: oDevBasicInfo.warnCount, type:"text"}],
+                [{value: "最近更新时间", type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}]
+              ];
+              self.data4SingleDev.advInfos = [
+                [{value: "1001", type:"text"}, {value: "经度", type:"text"}, {value: oDevBasicInfo.x, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1002", type:"text"}, {value: "纬度", type:"text"}, {value: oDevBasicInfo.y, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1003", type:"text"}, {value: "软件版本", type:"text"}, {value: oDevBasicInfo.tsoftVersion, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1004", type:"text"}, {value: "机床幅面", type:"text"}, {value: oDevBasicInfo.mjcfm, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1005", type:"text"}, {value: "激光器型号", type:"text"}, {value: oDevBasicInfo.mlaser, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1006", type:"text"}, {value: "电机型号", type:"text"}, {value: oDevBasicInfo.mdj, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1007", type:"text"}, {value: "切割头型号", type:"text"}, {value: oDevBasicInfo.mqgt, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1008", type:"text"}, {value: "X轴脉冲当量", type:"text"}, {value: oDevBasicInfo.txmcdl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1009", type:"text"}, {value: "X轴最大行程", type:"text"}, {value: oDevBasicInfo.txzdxc, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1010", type:"text"}, {value: "Y轴双边驱动", type:"text"}, {value: oDevBasicInfo.tysbqd, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1011", type:"text"}, {value: "Y轴脉冲当量", type:"text"}, {value: oDevBasicInfo.tymcdl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1012", type:"text"}, {value: "Y轴最大行程", type:"text"}, {value: oDevBasicInfo.tyzdxc, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1013", type:"text"}, {value: "激光器类型", type:"text"}, {value: oDevBasicInfo.tlaserType, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1014", type:"text"}, {value: "激光器控制方式", type:"text"}, {value: oDevBasicInfo.tjgqkzfs, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1015", type:"text"}, {value: "调高器控制方式", type:"text"}, {value: oDevBasicInfo.ttgqkzfs, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1016", type:"text"}, {value: "加工时切割速度", type:"text"}, {value: oDevBasicInfo.tjgsqgsd, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1017", type:"text"}, {value: "加工时开光延时", type:"text"}, {value: oDevBasicInfo.tjgskgys, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1018", type:"text"}, {value: "加工时切割功率", type:"text"}, {value: oDevBasicInfo.tjgsqggl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1019", type:"text"}, {value: "加工时切割频率", type:"text"}, {value: oDevBasicInfo.tjgsqgpl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1020", type:"text"}, {value: "加工时切割高度", type:"text"}, {value: oDevBasicInfo.tjgsqggd, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1021", type:"text"}, {value: "加工时切割气体", type:"text"}, {value: oDevBasicInfo.tjgsqgqt, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1022", type:"text"}, {value: "加工时切割气压", type:"text"}, {value: oDevBasicInfo.tjgsqgqy, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1023", type:"text"}, {value: "加工时峰值电流", type:"text"}, {value: oDevBasicInfo.tjgsfzdl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1024", type:"text"}, {value: "加工时启用分段穿孔", type:"text"}, {value: oDevBasicInfo.tjgsqyfdck, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1025", type:"text"}, {value: "加工时启用渐进穿孔", type:"text"}, {value: oDevBasicInfo.tjgsqyjjck, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1026", type:"text"}, {value: "加工时穿孔延时", type:"text"}, {value: oDevBasicInfo.tjgsckys, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1027", type:"text"}, {value: "加工时穿孔功率", type:"text"}, {value: oDevBasicInfo.tjgsckgl, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}],
+                [{value: "1028", type:"text"}, {value: "加工时穿孔高度", type:"text"}, {value: oDevBasicInfo.tjgsckgd, type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}]
+              ];
 
-            //3.post getWarnLstByDevId
-            self.$http.post('/getWarnLstByDevId', {
-              reqBuVoStr: JSON.stringify({
-                clientNo:"client1",
-                devId: self.devId,
-                days: strDays,
-                all: !bIsNotAll
-              })
-            }).then(res=>{
-              //4.oDevBasicInfo to arrBasicInfo
-              self.data4SingleDev.warnLst = [];
-              var lstWarnInfo = res.data.resultObj;
-              for(var i=0;i<lstWarnInfo.length;i++){
-                var oWarnInfo = lstWarnInfo[i];
-                self.data4SingleDev.warnLst.push([
-                  {value: oWarnInfo.warnId, type:"text"},
-                  {value: oWarnInfo.warnContent, type:"text"},
-                  {value: oWarnInfo.end, type:"text"},
-                  {value: oWarnInfo.startTime, type:"text"},
-                  {value: oWarnInfo.endTime, type:"text"},
-                  {value: oWarnInfo.warnProcess, type:"text"}
-                ]);
-              }
+              //3.post getWarnLstByDevId
+              self.$http.post('/getWarnLstByDevId', {
+                reqBuVoStr: JSON.stringify({
+                  clientNo: self.clientNo,
+                  devId: self.devId,
+                  days: strDays,
+                  all: !bIsNotAll
+                })
+              }).then(res=>{
+                //4.oDevBasicInfo to arrBasicInfo
+                self.data4SingleDev.warnLst = [];
+                var lstWarnInfo = res.data.resultObj;
+                for(var i=0;i<lstWarnInfo.length;i++){
+                  var oWarnInfo = lstWarnInfo[i];
+                  self.data4SingleDev.warnLst.push([
+                    {value: oWarnInfo.warnId, type:"text"},
+                    {value: oWarnInfo.warnContent, type:"text"},
+                    {value: oWarnInfo.end, type:"text"},
+                    {value: oWarnInfo.startTime, type:"text"},
+                    {value: oWarnInfo.endTime, type:"text"},
+                    {value: oWarnInfo.warnProcess, type:"text"}
+                  ]);
+                }
 
-              oCallback();
-            });
+                oCallback();
+              });
+            }
           });
         }
       },
       _setData4BasicInfo: function(){
         this.rows4BasicInfo = this.data4SingleDev.basicInfos;
+      },
+      _setData4AdvInfo: function(){
+        this.rows4AdvInfo = this.data4SingleDev.advInfos;
       },
       _setData4WarnGrid: function(){
         this.rows4Warn = this.data4SingleDev.warnLst;
