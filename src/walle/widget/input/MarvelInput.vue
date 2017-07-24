@@ -8,16 +8,13 @@
 <script>
   export default {
     name: 'MarvelInput',
-    props: ["status", "placeHolder", "errMsg"],
+    props: ["status", "placeHolder", "errMsg", "inputMsg"],
     data: function() {
         return {
-          inputMsg: ""
+
         }
     },
     methods: {
-      setInputMsg: function(strInputMsg){
-        this.inputMsg = strInputMsg;
-      },
       getInputMsg: function(){
         return this.inputMsg;
       }

@@ -11,10 +11,11 @@
         <div class="sessionName">告警信息</div>
         <div class="searchConfigArea">
           <div class="searchConfig large-10 small-8 mini-24">
-            <div class="configName">查看周期:</div>
+            <div class="configName">查看周期(天):</div>
             <div class="configInput">
-              <marvel-input ref="ref4Days" status="" placeHolder="请输入想查看距今几天的告警..."
-                            errMsg="输入错误..."></marvel-input>
+              <marvel-input ref="ref4Days" status="" placeHolder="请输入距今天数..."
+                            errMsg="输入错误..."
+                            :inputMsg="inputMsg"></marvel-input>
             </div>
           </div>
           <div class="searchConfig large-14 small-18 mini-24">
@@ -136,6 +137,7 @@
         },
         //#endregion
         //#region 4warn
+        inputMsg: 30,
         titles4Warn: [{
           label: "告警ID",
           width: "13%"
@@ -196,7 +198,6 @@
       this.devId = this.$route.query.devId;
 
       this.$refs.refSwitch.setStatus(false, false);
-      this.$refs.ref4Days.setInputMsg(10);
 
       //1.setData
       this._getData4SingleDevMock(function(){
