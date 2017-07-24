@@ -45,18 +45,18 @@
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         timerInterval: 2000,
         //#endregion
         //#region crumb
-        crumbItems: ["设备监控", "GIS视图"],
+        crumbItems: [{
+          label: "设备监控"
+        }, {
+          label: "GIS视图"
+        }],
         //#endregion
-        //#region company
-        clientNo: "",
-        clientMapCenterX: 31.429,
-        clientMapCenterY: 104.589,
-        clientMapCenterZoomMin: 5,
-        clientMapCenterZoomMax: 18,
+        //#region companyInfo
+        companyInfo: {},
         //#endregion
         //#region devLst
         devLst: [],
@@ -101,12 +101,15 @@
       var self = this;
 
       //1.gisMap
-      //1.1.init gis map
-      this.$refs.refGISMap.init(this.clientMapCenterX, this.clientMapCenterY,
-        this.clientMapCenterZoomMin, this.clientMapCenterZoomMax,
-        "/static/leaflet/images/shit.png");
-      //1.2.getDevLst
+      //1.1.getDevLst
       this._getDevLstMock(function(){
+        //1.2.init gis map
+        self.$refs.refGISMap.init(self.companyInfo.clientMapCenterX,
+          self.companyInfo.clientMapCenterY,
+          self.companyInfo.clientMapCenterZoomMin,
+          self.companyInfo.clientMapCenterZoomMax,
+          "/static/leaflet/images/shit.png");
+
         //1.3.draw
         self._drawGisMap();
 
@@ -148,27 +151,36 @@
         var bIsGisView = this.$refs.refSwitch.getCheckItem();
         if(bIsGisView){
           this.$refs.refGISMap.showOrHide(true);
-          this.crumbItems[1].label="GIS视图";
+          this.crumbItems[1].label ="GIS视图";
         }
         else{
           this.$refs.refGISMap.showOrHide(false);
-          this.crumbItems[1].label="表格视图";
+          this.crumbItems[1].label ="表格视图";
         }
       },
       onGisMapClick: function(oPoint){
         console.log(oPoint);
       },
       _getDevLstMock: function(oCallback){
+        this.companyInfo = {};
         this.devLst = [];
 
         if(this.debug){
+          this.companyInfo = {
+            clientNo: "client1",
+            clientMapCenterX: "31.429",
+            clientMapCenterY: "104.589",
+            clientMapCenterZoomMin: "5",
+            clientMapCenterZoomMax: "18"
+          };
+
           for(var i=0;i<10;i++){
             var oDev = {
               id: i,
               clientNo: "client1",
               devId: "3217030228" + i,
-              x: this.clientMapCenterX + Math.random() * 10,
-              y: this.clientMapCenterY + Math.random() * 10,
+              x: parseFloat(this.companyInfo.clientMapCenterX) + Math.random() * 10,
+              y: parseFloat(this.companyInfo.clientMapCenterY) + Math.random() * 10,
               lastUpdateTime: "2017-07-14 10:00:00.540",
               status: Math.random() > 0.5 ? "加工": "待机",
               hasWarn: Math.random() > 0.5 ? true: false,
@@ -179,11 +191,15 @@
           oCallback();
         }
         else{
-          this.$http.post('/getDevLst', {
-            reqBuVoStr: JSON.stringify({clientNo:"client1"})
-          }).then(res=>{
-            this.devLst = res.data.resultObj;
-            oCallback();
+          this.$http.post('/getCompanyInfo', {}).then(res=>{
+            this.companyInfo = res.data.resultObj;
+
+            this.$http.post('/getDevLst', {
+              reqBuVoStr: JSON.stringify({clientNo:"client1"})
+            }).then(res=>{
+              this.devLst = res.data.resultObj;
+              oCallback();
+            });
           });
         }
       },

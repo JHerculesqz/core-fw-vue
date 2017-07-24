@@ -28,6 +28,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      '/getCompanyInfo': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getCompanyInfo': '/getCompanyInfo'
+        }
+      },
       '/getDevLst': {
         target: 'http://localhost',
         changeOrigin: true,

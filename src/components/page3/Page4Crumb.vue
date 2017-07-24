@@ -10,7 +10,13 @@
     components: {MarvelCrumb},
     data: function() {
       return {
-        items: ["system", "notify", "settings"]
+        items: [{
+          label: "system"
+        }, {
+          label: "notify"
+        }, {
+          label: "settings"
+        }]
       }
     },
     methods:{
