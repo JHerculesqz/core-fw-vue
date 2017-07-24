@@ -3,7 +3,7 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar large-24 middle-24 small-24 mini-24">
       <div class="crumb large-12 middle-20 small-20 mini-20">
-        <marvel-crumb :items="crumbItems" theme="dark"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
     </div>
     <div class="pageFrameWrapper">
@@ -102,30 +102,20 @@
     name: 'page42',
     data: function() {
       return {
-        //region const
+        //#region const
         debug: false,
         timerInterval: 2000,
-        //endregion
-        //region crumbItems
-        crumbItems: [{
-          label: "设备监控",
-          click: function(){
-
-          }
-        }, {
-          label: "单站管理",
-          click: function(){
-
-          }
-        }],
-        //endregion
+        //#endregion
+        //#region crumbItems
+        crumbItems: ["设备监控", "单站管理"],
+        //#endregion
         //#region devId
         devId: 0,
         //#endregion
-        //region data4SingleDev
+        //#region data4SingleDev
         data4SingleDev: {},
-        //endregion
-        //region 4warn
+        //#endregion
+        //#region 4warn
         titles4Warn: [{
           label: "告警ID",
           width: "13%"
@@ -146,8 +136,8 @@
           width: "20%"
         }],
         rows4Warn: [],
-        //endregion
-        //region basicInfo
+        //#endregion
+        //#region basicInfo
         titles4BasicInfo: [{
           label: "属性",
           width: "50%"
@@ -156,10 +146,10 @@
           width: "50%"
         }],
         rows4BasicInfo: [],
-        //endregion
-        //region timer
+        //#endregion
+        //#region timer
         timer: undefined
-        //endregion
+        //#endregion
       }
     },
     mounted: function(){
@@ -195,6 +185,11 @@
       }
     },
     methods: {
+      onCrumbItemClick: function(strItemLabel){
+        if("设备监控" == strItemLabel){
+          this.$router.push({name: "page41"});
+        }
+      },
       _getData4SingleDevMock: function(oCallback){
         var self = this;
 

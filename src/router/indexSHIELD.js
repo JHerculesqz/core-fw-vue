@@ -10,7 +10,7 @@ export default new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [{
-    path: '/page4/page41',
+    path: '/',
     name: 'page41',
     component: Page41
   }, {

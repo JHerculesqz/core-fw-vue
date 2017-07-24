@@ -3,7 +3,7 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar large-24 middle-24 small-24 mini-24">
       <div class="crumb large-12 middle-20 small-20 mini-20">
-        <marvel-crumb :items="crumbItems" theme="dark"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
     </div>
     <div class="pageFrameWrapper">
@@ -91,23 +91,13 @@
     name: 'page43',
     data: function() {
       return {
-        //region const
-        debug: false,
+        //#region const
+        debug: true,
         //#endregion
-        //region crumbItems
-        crumbItems: [{
-          label: "商业洞察",
-          click: function () {
-
-          }
-        }, {
-          label: "机床运行状态分析",
-          click: function () {
-
-          }
-        }],
-        //endregion
-        //region scatter
+        //#region crumbItems
+        crumbItems: ["商业洞察", "机床运行状态分析"],
+        //#endregion
+        //#region scatter
         scatterData: {
           title: "机床利用率",
           name: "usage",
@@ -120,16 +110,16 @@
           data: []
         },
         selectItem: "",
-        //endregion
-        //region stackLine
+        //#endregion
+        //#region stackLine
         stackLineData: {
           y1Title: "机床状态用时(小时)",
           y2Title: "机床在线率(%)",
           category: ["加工", "待机", "离线", "机床在线率"],
           data: []
         },
-        //endregion
-        //region grid
+        //#endregion
+        //#region grid
         titles: [{
           label: "时间",
           width: "25%"
@@ -144,7 +134,7 @@
           width: "25%"
         }],
         rows: []
-        //endregion
+        //#endregion
       }
     },
     mounted: function(){
@@ -152,6 +142,11 @@
 //      this._drawStackLine();
     },
     methods: {
+      onCrumbItemClick: function(strItemLabel){
+        if("商业洞察" == strItemLabel){
+          this.$router.push({name: "page43"});
+        }
+      },
       onClick4UsageSearch: function(){
         var self = this;
 

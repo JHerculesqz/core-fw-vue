@@ -3,7 +3,7 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar">
       <div class="crumb">
-        <marvel-crumb :items="crumbItems" theme="dark"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
       <div class="search">
         搜索框占位置
@@ -44,13 +44,13 @@
     name: 'page41',
     data: function() {
       return {
-        //region const
+        //#region const
         debug: true,
         timerInterval: 2000,
-        //endregion
-        //region crumb
+        //#endregion
+        //#region crumb
         crumbItems: ["设备监控", "GIS视图"],
-        //endregion
+        //#endregion
         //#region company
         clientNo: "",
         clientMapCenterX: 31.429,
@@ -61,10 +61,10 @@
         //#region devLst
         devLst: [],
         //#endregion
-        //region warnPanel
+        //#region warnPanel
         warnPanel: [],
-        //endregion
-        //region grid
+        //#endregion
+        //#region grid
         titles: [{
           label: "ID",
           width: "15%"
@@ -91,10 +91,10 @@
           width: "20%"
         }],
         rows: [],
-        //endregion
-        //region timer
+        //#endregion
+        //#region timer
         timer: undefined
-        //endregion
+        //#endregion
       }
     },
     mounted: function(){
@@ -139,6 +139,11 @@
       }
     },
     methods: {
+      onCrumbItemClick: function(strItemLabel){
+        if("设备监控" == strItemLabel){
+          this.$router.push({name: "page41"});
+        }
+      },
       onChange4Switch: function(){
         var bIsGisView = this.$refs.refSwitch.getCheckItem();
         if(bIsGisView){
