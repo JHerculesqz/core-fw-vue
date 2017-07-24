@@ -98,10 +98,11 @@
         });
         this.iconObjs.push(oMarker);
       },
-      updateIcon: function(strId, strImgUrl, strTips, oBuObj){
+      updateIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj){
         for(var i=0;i<this.iconObjs.length;i++){
           var oMarker = this.iconObjs[i];
           if(oMarker.id == strId){
+            oMarker.setLatLng([iX, iY]);
             var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
             oMarker.setIcon(oIcon);
             oMarker.setPopupContent(strTips);

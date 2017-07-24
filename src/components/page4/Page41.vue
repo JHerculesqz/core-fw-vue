@@ -45,25 +45,22 @@
     data: function() {
       return {
         //region const
-        debug: false,
+        debug: true,
         timerInterval: 2000,
         //endregion
         //region crumb
-        crumbItems: [{
-          label: "设备监控",
-          click: function(){
-
-          }
-        }, {
-          label: "GIS视图",
-          click: function(){
-
-          }
-        }],
+        crumbItems: ["设备监控", "GIS视图"],
         //endregion
-        //region devLst
+        //#region company
+        clientNo: "",
+        clientMapCenterX: 31.429,
+        clientMapCenterY: 104.589,
+        clientMapCenterZoomMin: 5,
+        clientMapCenterZoomMax: 18,
+        //#endregion
+        //#region devLst
         devLst: [],
-        //endregion
+        //#endregion
         //region warnPanel
         warnPanel: [],
         //endregion
@@ -105,7 +102,9 @@
 
       //1.gisMap
       //1.1.init gis map
-      this.$refs.refGISMap.init(51.505, -0.09, 13, 18, "/static/leaflet/images/shit.png");
+      this.$refs.refGISMap.init(this.clientMapCenterX, this.clientMapCenterY,
+        this.clientMapCenterZoomMin, this.clientMapCenterZoomMax,
+        "/static/leaflet/images/shit.png");
       //1.2.getDevLst
       this._getDevLstMock(function(){
         //1.3.draw
@@ -163,10 +162,10 @@
               id: i,
               clientNo: "client1",
               devId: "3217030228" + i,
-              x: 51.5 + Math.random() * 0.1,
-              y: -0.09 + Math.random() * 0.1,
+              x: this.clientMapCenterX + Math.random() * 10,
+              y: this.clientMapCenterY + Math.random() * 10,
               lastUpdateTime: "2017-07-14 10:00:00.540",
-              status: Math.random() > 0.5 ? "加工": "离线",
+              status: Math.random() > 0.5 ? "加工": "待机",
               hasWarn: Math.random() > 0.5 ? true: false,
               warnCount: (Math.random() * 10).toFixed(0)
             };
@@ -186,9 +185,31 @@
       _drawGisMap: function(){
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
-          var strImgUrl = false == oDev.hasWarn ?
-            "/static/leaflet/images/dev1.png" :
-            "/static/leaflet/images/dev2.png";
+          var strImgUrl = "";
+          if("加工" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-01.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-04.png";
+            }
+          }
+          else if("待机" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-02.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-05.png";
+            }
+          }
+          else if("离线" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-03.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-06.png";
+            }
+          }
           var strTips = "<b>" + oDev.devId + "</b><br>" +
             "状态:" + oDev.status + "<br>" +
             "告警数量:" + oDev.warnCount + "<br>";
@@ -254,13 +275,35 @@
       _updateGisMap: function(){
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
-          var strImgUrl = false == oDev.hasWarn ?
-            "/static/leaflet/images/dev1.png" :
-            "/static/leaflet/images/dev2.png";
+          var strImgUrl = "";
+          if("加工" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-01.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-04.png";
+            }
+          }
+          else if("待机" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-02.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-05.png";
+            }
+          }
+          else if("离线" == oDev.status){
+            if(oDev.hasWarn){
+              strImgUrl = "/static/demo/deviceIcon-03.png";
+            }
+            else{
+              strImgUrl = "/static/demo/deviceIcon-06.png";
+            }
+          }
           var strTips = "<b>" + oDev.devId + "</b><br>" +
             "状态:" + oDev.status + "<br>" +
             "告警数量:" + oDev.warnCount + "<br>";
-          this.$refs.refGISMap.updateIcon(oDev.devId, strImgUrl, strTips, oDev);
+          this.$refs.refGISMap.updateIcon(oDev.devId, oDev.x, oDev.y, strImgUrl, strTips, oDev);
         }
       }
     }

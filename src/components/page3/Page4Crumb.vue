@@ -1,5 +1,5 @@
 <template>
-  <marvel-crumb :items="items"></marvel-crumb>
+  <marvel-crumb :items="items" v-on:onItemClick="onItemClick"></marvel-crumb>
 </template>
 
 <script>
@@ -10,22 +10,12 @@
     components: {MarvelCrumb},
     data: function() {
       return {
-        items: [{
-          label: "system",
-          click: function(){
-            console.log("system...");
-          }
-        }, {
-          label: "notify",
-          click: function(){
-            console.log("notify...");
-          }
-        }, {
-          label: "settings",
-          click: function(){
-            console.log("settings...");
-          }
-        }]
+        items: ["system", "notify", "settings"]
+      }
+    },
+    methods:{
+      onItemClick: function(strItemLabel){
+        console.log(strItemLabel);
       }
     }
   }
