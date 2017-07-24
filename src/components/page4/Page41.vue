@@ -62,7 +62,19 @@
         devLst: [],
         //#endregion
         //#region warnPanel
-        warnPanel: [],
+        warnPanel: [{
+          label: "加工:0",
+          level: "level5"
+        }, {
+          label: "待机:0",
+          level: "level3"
+        }, {
+          label: "离线:0",
+          level: "level6"
+        }, {
+          label: "告警:0",
+          level: "level1"
+        }],
         //#endregion
         //#region grid
         titles: [{
@@ -267,13 +279,13 @@
           label: "加工:" + iCountStatus1,
           level: "level5"
         }, {
-          label: "待机" + iCountStatus2,
+          label: "待机:" + iCountStatus2,
           level: "level3"
         }, {
-          label: "离线" + iCountStatus3,
+          label: "离线:" + iCountStatus3,
           level: "level6"
         }, {
-          label: "告警" + iCountWarn,
+          label: "告警:" + iCountWarn,
           level: "level1"
         }];
       },

@@ -131,7 +131,8 @@
         //#region data4SingleDev
         data4SingleDev: {
           basicInfos: [],
-          advInfos: []
+          advInfos: [],
+          warnLst:[]
         },
         //#endregion
         //#region 4warn
@@ -193,6 +194,9 @@
       //0.set clientNo/devId
       this.clientNo = this.$route.query.clientNo;
       this.devId = this.$route.query.devId;
+
+      this.$refs.refSwitch.setStatus(false, false);
+      this.$refs.ref4Days.setInputMsg(10);
 
       //1.setData
       this._getData4SingleDevMock(function(){
