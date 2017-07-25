@@ -8,43 +8,47 @@
     </div>
     <div class="pageFrameWrapper">
       <div class="session">
-        <div class="sessionName">告警信息</div>
-        <div class="searchConfigArea">
-          <div class="searchConfig large-10 small-8 mini-24">
-            <div class="configName">查看周期(天):</div>
-            <div class="configInput">
-              <marvel-input ref="ref4Days" status="" placeHolder="请输入距今天数..."
-                            errMsg="输入错误..."
-                            :inputMsg="inputMsg"></marvel-input>
+        <div class="sessionName">设备详情</div>
+        <div style="height: 400px;">
+          <marvel-dashboard title="基础信息">
+            <div slot="customArea"></div>
+            <div slot="contArea" style="height: 100%;">
+              <div class="detailsCont large-24">
+                <div class="left mini-10">
+                  <div class="deviceShowArea"></div>
+                  <div class="deviceDescribe"></div>
+                </div>
+                <div class="right mini-14">
+                  <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="searchConfig large-14 small-18 mini-24">
-            <div class="configName configName2">仅查看未消除的告警</div>
-            <div class="switchArea">
-              <marvel-switch ref="refSwitch" id="refSwitch"></marvel-switch>
-            </div>
-          </div>
+          </marvel-dashboard>
         </div>
-        <div class="dashboards hasMargin">
-          <!--<div class="chartDashboard large-12 small-24">-->
-            <!--<marvel-dashboard title="新产生告警">-->
-              <!--<div slot="customArea"></div>-->
-              <!--<div slot="contArea" style="height: 100%">-->
-                <!--<marvel-chart-gauge ref="refGauge" id="refGauge" theme="dark"></marvel-chart-gauge>-->
-              <!--</div>-->
-            <!--</marvel-dashboard>-->
-          <!--</div>-->
-          <!--<div class="chartDashboard large-12 small-24">-->
-            <!--<marvel-dashboard title="未消除告警">-->
-              <!--<div slot="customArea"></div>-->
-              <!--<div slot="contArea" style="height: 100%">-->
-                <!--<marvel-chart-gauge ref="refGauge2" id="refGauge2" theme="dark"></marvel-chart-gauge>-->
-              <!--</div>-->
-            <!--</marvel-dashboard>-->
-          <!--</div>-->
-          <div class="gridDashboard large-24 small-24">
+      </div>
+
+      <div class="session">
+        <div class="dashboards">
+          <div class="gridDashboard">
             <marvel-dashboard title="告警列表">
-              <div slot="customArea"></div>
+              <div slot="customArea">
+                <div class="searchConfigArea">
+
+                  <div class="searchConfig">
+                    <div class="configName configName2">仅查看未消除的告警</div>
+                    <div class="switchArea">
+                      <marvel-switch ref="refSwitch" id="refSwitch"></marvel-switch>
+                    </div>
+                  </div>
+                  <div class="searchConfig">
+                    <div class="configName">查看周期(天):</div>
+                    <div class="configInput">
+                      <marvel-input ref="ref4Days" status="" placeHolder="请输入距今天数..."
+                                    errMsg="输入错误..."></marvel-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div slot="contArea" style="height: 100%">
                 <marvel-grid :titles="titles4Warn" :rows="rows4Warn"></marvel-grid>
               </div>
@@ -52,25 +56,8 @@
           </div>
         </div>
       </div>
+
       <div class="session">
-        <div class="sessionName">设备详情</div>
-        <div style="height: 400px;">
-          <marvel-dashboard title="基础信息">
-            <div slot="customArea"></div>
-            <div slot="contArea" style="height: 100%">
-              <div class="detailsCont large-24">
-                <div class="left large-10 small-24">
-                  <div class="deviceShowArea"></div>
-                  <div class="deviceDescribe"></div>
-                </div>
-                <div class="right large-14 small-24">
-                  <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
-                </div>
-              </div>
-            </div>
-          </marvel-dashboard>
-        </div>
-        <!--TODO：告警信息-->
         <div style="height: 400px;">
           <marvel-dashboard title="高级信息">
             <div slot="customArea"></div>
@@ -98,6 +85,8 @@
   import MarvelButton from "@/walle/widget/button/MarvelButton";
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelDashboard from "@/walle/widget/dashboard/MarvelDashboard";
+  import MarvelRouter from "@/walle/component/router";
+  import MarvelTimer from "@/walle/component/timer";
   export default {
     components: {
       MarvelDashboard,
@@ -110,7 +99,9 @@
       MarvelSwitch,
       MarvelLeaflet,
       MarvelCrumb,
-      MarvelFrame},
+      MarvelFrame,
+      MarvelRouter,
+      MarvelTimer},
     name: 'page42',
     data: function() {
       return {
@@ -136,8 +127,17 @@
           warnLst:[]
         },
         //#endregion
+        //#region basicInfo
+        titles4BasicInfo: [{
+          label: "参数名称",
+          width: "50%"
+        }, {
+          label: "当前值",
+          width: "50%"
+        }],
+        rows4BasicInfo: [],
+        //#endregion
         //#region 4warn
-        inputMsg: 30,
         titles4Warn: [{
           label: "告警ID",
           width: "13%"
@@ -159,16 +159,6 @@
         }],
         rows4Warn: [],
         //#endregion
-        //#region basicInfo
-        titles4BasicInfo: [{
-          label: "参数名称",
-          width: "50%"
-        }, {
-          label: "当前值",
-          width: "50%"
-        }],
-        rows4BasicInfo: [],
-        //#endregion
         //#region advInfo
         titles4AdvInfo: [{
           label: "参数ID",
@@ -185,21 +175,20 @@
         }],
         rows4AdvInfo: [],
         //#endregion
-        //#region timer
-        timer: undefined
-        //#endregion
       }
     },
     mounted: function(){
       var self = this;
 
       //0.set clientNo/devId
-      this.clientNo = this.$route.query.clientNo;
-      this.devId = this.$route.query.devId;
+      this.clientNo = MarvelRouter.getParam(this.$route, "clientNo");
+      this.devId = MarvelRouter.getParam(this.$route, "devId");
 
+      //1.init ref4Days/refSwitch
+      this.$refs.ref4Days.setInputMsg(10);
       this.$refs.refSwitch.setStatus(false, false);
 
-      //1.setData
+      //2.setData
       this._getData4SingleDevMock(function(){
         //1.1._setData4WarnGrid
         self._setData4WarnGrid();
@@ -211,8 +200,8 @@
         self._setData4AdvInfo();
       });
 
-      //2.timer
-      this.timer = setInterval(function(){
+      //3.timer
+      MarvelTimer.startTimer(function(){
         //1.setData
         self._getData4SingleDevMock(function(){
           //1.1._setData4WarnGrid
@@ -227,14 +216,12 @@
       }, this.timerInterval);
     },
     destroyed: function(){
-      if(this.timer != undefined){
-        clearInterval(this.timer);
-      }
+      MarvelTimer.endTimer();
     },
     methods: {
       onCrumbItemClick: function(strItemLabel){
         if("设备监控" == strItemLabel){
-          this.$router.push({name: "page41"});
+          MarvelRouter.to(this.$router, "page41");
         }
       },
       _getData4SingleDevMock: function(oCallback){
@@ -407,7 +394,7 @@
   }
   .pageFrameWrapper{
     width: 100%;
-    padding: 0 40px;
+    padding: 16px 40px 0 40px;
     box-sizing: border-box;
     overflow-y: auto;
     background-color: #fafafa;
@@ -415,7 +402,7 @@
   }
   .pageFrameWrapper .session{
     width: 100%;
-    margin-top: 30px;
+    margin-bottom: 30px;
   }
   .pageFrameWrapper .session:last-child{
     margin-bottom: 20px;
@@ -426,18 +413,22 @@
     font-size: 22px;
     font-family: arial,"微软雅黑",sans-serif;
     letter-spacing: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .pageFrameWrapper .session .searchConfigArea{
     width: 100%;
+    height: 48px;
+    padding-top: 9px;
     overflow: hidden;
     clear: both;
+    box-sizing: border-box;
   }
 
   .searchConfigArea .searchConfig{
-    float: left;
+    float: right;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-left: 20px;
+
   }
   .searchConfigArea .searchConfig .configName, .searchConfigArea .searchConfig .configInput{
     float: left;
@@ -454,7 +445,7 @@
     font-size: 14px;
     color: #666;
     line-height: 32px;
-    width: 80px;
+    width: 100px;
   }
   .searchConfigArea .searchConfig .configName2{
     width: auto;
@@ -466,9 +457,6 @@
 
   .dashboards{
     overflow: hidden;
-  }
-  .dashboards .chartDashboard, .dashboards .gridDashboard{
-    margin-bottom: 20px;
   }
   .dashboards .chartDashboard{
     height:400px;
@@ -486,12 +474,12 @@
     box-sizing: border-box;
   }
   .detailsCont .left{
-    border-right: 1px dashed #d5d5d5;
+    border: 1px dashed #d5d5d5;
   }
   .detailsCont .left .deviceShowArea{
     background: url("/static/demo/dev.jpg") no-repeat center;
     background-size: contain;
-    height: 380px;
+    height: 100%;
   }
   .detailsCont .left .deviceDescribe{
     font-family: arial, "微软雅黑", sans-serif;

@@ -124,7 +124,8 @@
     height: calc(100% - 32px);
   }
   .gridWrapper .empty{
-    background: url("/static/walle/grid_empty.png") no-repeat center;
+    background: url("/static/walle/emptyTip2.png") no-repeat center;
+    background-size: 14%;
   }
   .gridWrapper .grid .gridCont{
     width: 100%;
@@ -174,7 +175,7 @@
   }
   .gridWrapper .grid .gridCont tbody tr td{
     color: #666;
-    height: 60px;
+    height: 34px;
     padding: 0 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -201,6 +202,7 @@
   .gridWrapper .footArea{
     height: 32px;
     padding: 4px;
+    box-sizing: border-box;
     text-align: center;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;

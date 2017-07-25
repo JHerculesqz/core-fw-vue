@@ -4,9 +4,9 @@
       <div class="icon icon-newspaper"
            v-bind:class="[selectItem.icon]"></div>
       <div class="name">{{ selectItem.label }}</div>
-      <div class="expandAndFolderIcon icon-marvelIcon-03"></div>
+      <div class="expandAndFolderIcon icon-marvelIcon-24"></div>
     </div>
-    <div class="options" v-bind:class="{ dpn: !show }">
+    <div class="options" v-bind:class="{ hide: !show }">
       <div class="optionItem"
            v-for="item in items"
            v-bind:class="{ mouseDown: item.label == selectItem.label }"
@@ -50,9 +50,6 @@
 </script>
 
 <style scoped>
-  .dpn{
-    display: none;
-  }
   .dropdownBtn{
     border: 1px solid #ccc;
     white-space: nowrap;
@@ -65,8 +62,9 @@
   }
   .dropdownBtn .label{
     height: 32px;
-    padding: 0 10px 0 15px;
+    padding: 0 25px 0 15px;
     cursor: pointer;
+    position: relative;
   }
   .dropdownBtn .label .icon{
     color: #3399ff;
@@ -80,10 +78,12 @@
     font-size: 14px;
     line-height: 32px;
     float: left;
-    margin-right: 30px;
+    margin-right: 10px;
   }
   .dropdownBtn .label .expandAndFolderIcon{
     color: #777;
+    position: absolute;
+    right: 10px;
     font-size: 12px;
     line-height: 32px;
     float: left;
@@ -96,7 +96,7 @@
     height: 32px;
     white-space: nowrap;
     cursor: pointer;
-    padding: 0 22px 0 15px;
+    padding: 0 25px 0 15px;
   }
 
   .dropdownBtn .options .optionItem .icon{
@@ -111,7 +111,7 @@
     font-size: 14px;
     line-height: 32px;
     float: left;
-    margin-right: 30px;
+    margin-right: 10px;
   }
   .dropdownBtn .options .optionItem:hover{
     background-color: #f5f6f7;
@@ -138,6 +138,15 @@
     color: #999;
   }
   .disable .options{
-    display: none !important;
+    /*display: none !important;*/
+    border-top: none;
+    border-top: none;
+    height: 0;
+    overflow: hidden;
+  }
+  .hide{
+    border-top: none !important;
+    height: 0;
+    overflow: hidden;
   }
 </style>

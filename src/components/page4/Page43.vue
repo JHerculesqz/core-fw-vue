@@ -3,7 +3,8 @@
     <marvel-frame></marvel-frame>
     <div class="toolbar large-24 middle-24 small-24 mini-24">
       <div class="crumb large-12 middle-20 small-20 mini-20">
-        <marvel-crumb :items="crumbItems" theme="dark" v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
+        <marvel-crumb :items="crumbItems" theme="dark"
+                      v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
     </div>
     <div class="pageFrameWrapper">
@@ -77,6 +78,7 @@
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
+  import MarvelRouter from "@/walle/component/router";
   export default {
     components: {
       MarvelChartScatter2,
@@ -87,7 +89,8 @@
       MarvelGrid,
       MarvelChartStackLine,
       MarvelCrumb,
-      MarvelFrame},
+      MarvelFrame,
+      MarvelRouter},
     name: 'page43',
     data: function() {
       return {
@@ -95,7 +98,11 @@
         debug: true,
         //#endregion
         //#region crumbItems
-        crumbItems: ["商业洞察", "机床运行状态分析"],
+        crumbItems: [{
+          label: "商业洞察"
+        }, {
+          label:"机床运行状态分析"
+        }],
         //#endregion
         //#region scatter
         scatterData: {
@@ -144,7 +151,7 @@
     methods: {
       onCrumbItemClick: function(strItemLabel){
         if("商业洞察" == strItemLabel){
-          this.$router.push({name: "page43"});
+          MarvelRouter.to("page43");
         }
       },
       onClick4UsageSearch: function(){
@@ -284,7 +291,7 @@
   }
   .pageFrameWrapper{
     width: 100%;
-    padding: 0 40px;
+    padding: 16px 40px 0 40px;
     box-sizing: border-box;
     overflow-y: auto;
     background-color: #fafafa;
@@ -292,7 +299,7 @@
   }
   .pageFrameWrapper .session{
     width: 100%;
-    margin-top: 30px;
+    margin-bottom: 30px;
   }
   .pageFrameWrapper .session:last-child{
     margin-bottom: 20px;
@@ -303,7 +310,7 @@
     font-size: 22px;
     font-family: arial,"微软雅黑",sans-serif;
     letter-spacing: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .pageFrameWrapper .session .searchConfigArea{
     width: 100%;

@@ -33,6 +33,8 @@
   import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelWarning from "@/walle/widget/warning/MarvelWarning";
+  import MarvelRouter from "@/walle/component/router";
+  import MarvelTimer from "@/walle/component/timer";
   export default {
     components: {
       MarvelWarning,
@@ -40,7 +42,9 @@
       MarvelSwitch,
       MarvelLeaflet,
       MarvelCrumb,
-      MarvelFrame},
+      MarvelFrame,
+      MarvelRouter,
+      MarvelTimer},
     name: 'page41',
     data: function() {
       return {
@@ -104,9 +108,6 @@
         }],
         rows: [],
         //#endregion
-        //#region timer
-        timer: undefined
-        //#endregion
       }
     },
     mounted: function(){
@@ -134,7 +135,7 @@
 
       //2.getStatus by timer
       //2.1.timer
-      this.timer = setInterval(function(){
+      MarvelTimer.startTimer(function(){
         //2.2.getDevLst
         self._getDevLstMock(function(){
           //2.3.draw
@@ -149,14 +150,12 @@
       }, this.timerInterval);
     },
     destroyed: function(){
-      if(this.timer != undefined){
-        clearInterval(this.timer);
-      }
+      MarvelTimer.endTimer();
     },
     methods: {
       onCrumbItemClick: function(strItemLabel){
         if("设备监控" == strItemLabel){
-          this.$router.push({name: "page41"});
+          MarvelRouter.to(this.$router, "page41");
         }
       },
       onChange4Switch: function(){
@@ -251,7 +250,10 @@
         }
       },
       _onDBClickGisMap: function(strId){
-        this.$router.push({name: "page42", query: { clientNo: this.companyInfo.clientNo, devId: strId }});
+        MarvelRouter.to(this.$router, "page42", {
+          clientNo: this.companyInfo.clientNo,
+          devId: strId
+        });
       },
       _updateWarnPanel: function(){
         var iCountStatus1 = 0;
@@ -293,15 +295,16 @@
         this.rows = [];
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
-          var oRow = [];
-          oRow.push({value: oDev.devId, type:"text"});
-          oRow.push({value: oDev.devId, type:"text"});
-          oRow.push({value: oDev.status, type:"text"});
-          oRow.push({value: oDev.warnCount, type:"text"});
-          oRow.push({value: oDev.lastUpdateTime, type:"text"});
-          oRow.push({value: oDev.x, type:"text"});
-          oRow.push({value: oDev.y, type:"text"});
-          oRow.push({value: oDev.desc, type:"text"});
+          var oRow = [
+            {value: oDev.devId, type:"text"},
+            {value: oDev.devId, type:"text"},
+            {value: oDev.status, type:"text"},
+            {value: oDev.warnCount, type:"text"},
+            {value: oDev.lastUpdateTime, type:"text"},
+            {value: oDev.x, type:"text"},
+            {value: oDev.y, type:"text"},
+            {value: oDev.desc, type:"text"}
+          ];
           this.rows.push(oRow);
         }
       },
