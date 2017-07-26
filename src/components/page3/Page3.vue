@@ -15,6 +15,7 @@
     <router-link to="/page3/page4Warning" exact>Warning</router-link>
     <router-link to="/page3/page4Input" exact>Input</router-link>
     <router-link to="/page3/page4DashBoard" exact>DashBoard</router-link>
+    <router-link to="/page3/page4Tab" exact>Tab</router-link>
     <router-link to="/page3/page4Leaflet" exact>Leaflet</router-link>
     <router-link to="/page3/page4Chart" exact>Chart</router-link>
     <router-link to="/page3/page4Grid" exact>Grid</router-link>
