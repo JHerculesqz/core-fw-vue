@@ -198,7 +198,7 @@
           var selectedItems = [];
           var categoryData = [];
           var barData = [];
-          var maxBar = self.chartData.topNEx;
+          var maxBar = self.chartData.topN;
           var sum = 0;
           var count = 0;
 

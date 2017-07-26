@@ -11,24 +11,28 @@
       <div class="session">
         <div class="sessionName">设备利用率分析</div>
         <div class="searchConfigArea">
-          <div class="searchConfig large-6 small-8 mini-24">
+          <div class="searchConfig large-7 small-8 mini-24">
             <div class="configName">开始时间:</div>
             <div class="configInput">
               <marvel-input ref="ref4StartTime" status="" placeHolder="Please enter..."
                             errMsg="输入错误..."></marvel-input>
             </div>
           </div>
-          <div class="searchConfig large-6 small-8 mini-24">
+          <div class="searchConfig large-7 small-8 mini-24">
             <div class="configName">结束时间:</div>
             <div class="configInput">
               <marvel-input ref="ref4EndTime" status="" placeHolder="Please enter..."
                             errMsg="输入错误..."></marvel-input>
             </div>
           </div>
-          <div class="searchConfig large-8 small-8 mini-24">
-
+          <div class="searchConfig large-7 small-8 mini-24">
+            <div class="configName">利用率排名:</div>
+            <div class="configInput">
+              <marvel-input ref="ref4TopN" status="" placeHolder="Please enter..."
+                            errMsg="输入错误..."></marvel-input>
+            </div>
           </div>
-          <div class="searchConfig large-4 small-6 mini-24">
+          <div class="searchConfig large-3 small-24 mini-24">
             <div class="searchBtn">
               <marvel-primary-button isLarge="false" label="查询"
                                      v-on:onClick="onClick4UsageSearch"></marvel-primary-button>
@@ -97,7 +101,7 @@
     data: function() {
       return {
         //#region const
-        debug: false,
+        debug: true,
         //#endregion
         //#region crumbItems
         crumbItems: [{
@@ -114,8 +118,7 @@
           sublink: "",
           geoType: "world",
           geoZoom: 0.9,
-          topN: 10,
-          topNEx: 10,
+          topN: 5,
           data: []
         },
         selectItem: "",
@@ -149,6 +152,10 @@
     mounted: function(){
       var self = this;
 
+      //1.init input
+      this.$refs.ref4TopN.setInputMsg("5");
+
+      //2.init Scatter/StackLine
       setTimeout(function () {
         self._drawScatter();
         self._drawStackLine();
@@ -169,13 +176,15 @@
         });
       },
       onScatterItemClick: function(oItem){
+        //1.scroll
         MarvelScroll1.scroll("#anchor", "#pageFrameWrapper");
 
+        //2.set selectItem/stackLineData/grid
         this.selectItem = oItem;
         this.stackLineData.data = [];
         this.rows = [];
 
-        //1.update this.stackLineData and this.rows
+        //3.update this.stackLineData and this.rows
         var arrReportUsageOutTimeVo = this.selectItem.value[3].treeReportUsageOutTimeVo;
         for(var i=0;i<arrReportUsageOutTimeVo.length;i++){
           var oStackItem = arrReportUsageOutTimeVo[i];
@@ -201,13 +210,14 @@
           this.rows.push(oRowData);
         }
 
-        //2.update rows
-
-        //3.stackLine
+        //4.stackLine
         this._drawStackLine();
       },
       _getScatterDataMock: function(oCallback){
         this.scatterData.data = [];
+
+        //0.更新topN
+        this.scatterData.topN = this.$refs.ref4TopN.getInputMsg();
 
         if(this.debug){
           //region debug
@@ -283,7 +293,7 @@
   }
 </script>
 
-<style>
+<style scope>
   .container{
     height: 100%;
   }
@@ -347,6 +357,8 @@
     color: #666;
     line-height: 32px;
     width: 80px;
+    padding-right: 8px;
+    text-align: right;
   }
   .searchConfigArea .searchConfig .configName2{
     width: auto;

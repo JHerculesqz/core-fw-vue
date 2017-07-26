@@ -285,7 +285,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .container{
     height: 100%;
   }
