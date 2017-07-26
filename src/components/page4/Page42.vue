@@ -300,7 +300,7 @@
               self.data4SingleDev.basicInfos = [
                 [{value: "设备ID", type:"text"}, {value: oDevBasicInfo.devId, type:"text"}],
                 [{value: "设备名称", type:"text"}, {value: oDevBasicInfo.mname, type:"text"}],
-                [{value: "状态", type:"text"}, {value: oDevBasicInfo.status, type:"text"}],
+                [{value: "状态", type:"text"}, {value: oDevBasicInfo.uiStatus, type:"text"}],
                 [{value: "告警", type:"text"}, {value: oDevBasicInfo.warnCount, type:"text"}],
                 [{value: "最近更新时间", type:"text"}, {value: oDevBasicInfo.lastUpdateTime, type:"text"}]
               ];

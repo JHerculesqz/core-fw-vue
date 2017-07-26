@@ -7,9 +7,9 @@
                       v-on:onItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
     </div>
-    <div class="pageFrameWrapper">
+    <div class="pageFrameWrapper" id="pageFrameWrapper">
       <div class="session">
-        <div class="sessionName">机床运行状态分析</div>
+        <div class="sessionName">设备利用率分析</div>
         <div class="searchConfigArea">
           <div class="searchConfig large-6 small-8 mini-24">
             <div class="configName">开始时间:</div>
@@ -37,7 +37,7 @@
         </div>
         <div class="dashboards hasMargin">
           <div class="chartDashboard large-24 small-24">
-            <marvel-dashboard title="热力图">
+            <marvel-dashboard title="设备热力洞察">
               <div slot="customArea"></div>
               <div slot="contArea" style="height: 100%">
                 <marvel-chart-scatter2 ref="refScatter" id="refScatter" theme="dark"
@@ -46,7 +46,7 @@
             </marvel-dashboard>
           </div>
           <div class="chartDashboard large-24 small-24">
-            <marvel-dashboard title="利用率趋势">
+            <marvel-dashboard title="利用率趋势" id="anchor">
               <div slot="customArea"></div>
               <div slot="contArea" style="height: 100%">
                 <marvel-chart-stack-line ref="refStackLine" id="refStackLine"
@@ -79,6 +79,7 @@
   import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
   import MarvelRouter from "@/walle/component/router";
+  import MarvelScroll1 from "@/walle/component/scroll/scroll2";
   export default {
     components: {
       MarvelChartScatter2,
@@ -90,23 +91,24 @@
       MarvelChartStackLine,
       MarvelCrumb,
       MarvelFrame,
-      MarvelRouter},
+      MarvelRouter,
+      MarvelScroll1},
     name: 'page43',
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         //#endregion
         //#region crumbItems
         crumbItems: [{
           label: "商业洞察"
         }, {
-          label:"机床运行状态分析"
+          label:"设备利用率洞察"
         }],
         //#endregion
         //#region scatter
         scatterData: {
-          title: "机床利用率",
+          title: "",
           name: "usage",
           subtxt: "",
           sublink: "",
@@ -120,9 +122,9 @@
         //#endregion
         //#region stackLine
         stackLineData: {
-          y1Title: "机床状态用时(小时)",
-          y2Title: "机床在线率(%)",
-          category: ["加工", "待机", "离线", "机床在线率"],
+          y1Title: "设备状态用时(小时)",
+          y2Title: "设备在线率(%)",
+          category: ["加工", "待机", "离线", "设备在线率"],
           data: []
         },
         //#endregion
@@ -145,8 +147,12 @@
       }
     },
     mounted: function(){
-//      this._drawScatter();
-//      this._drawStackLine();
+      var self = this;
+
+      setTimeout(function () {
+        self._drawScatter();
+        self._drawStackLine();
+      }, 100);
     },
     methods: {
       onCrumbItemClick: function(strItemLabel){
@@ -163,6 +169,8 @@
         });
       },
       onScatterItemClick: function(oItem){
+        MarvelScroll1.scroll("#anchor", "#pageFrameWrapper");
+
         this.selectItem = oItem;
         this.stackLineData.data = [];
         this.rows = [];

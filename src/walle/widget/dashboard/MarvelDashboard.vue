@@ -34,12 +34,12 @@
     box-shadow: 0px 0px 6px rgba(0,0,0,0.05);
   }
   .dashboardWrapper .title{
-    height:40px;
+    height:48px;
     padding: 0 20px;
   }
   .dashboardWrapper .title .titleArea{
     color: #999;
-    line-height: 40px;
+    line-height: 48px;
     font-size: 20px;
     font-family: arial, "微软雅黑", sans-serif;
     float: left;
@@ -48,11 +48,13 @@
     float: right;
   }
   .dashboardWrapper .cont{
-    height: calc(100% - 40px);
-    padding: 20px;
+    height: calc(100% - 48px);
+    padding: 0 20px 20px 20px;
     box-sizing: border-box;
   }
   .dashboardWrapper .cont .contArea{
     height: 100%;
+    background: url("/static/walle/emptyTip3.png") no-repeat center;
+    background-size: 18%;
   }
 </style>
