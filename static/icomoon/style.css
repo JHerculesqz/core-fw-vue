@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?spfo1m');
-  src:  url('fonts/icomoon.eot?spfo1m#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?spfo1m') format('truetype'),
-    url('fonts/icomoon.woff?spfo1m') format('woff'),
-    url('fonts/icomoon.svg?spfo1m#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?qtel01');
+  src:  url('fonts/icomoon.eot?qtel01#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?qtel01') format('truetype'),
+    url('fonts/icomoon.woff?qtel01') format('woff'),
+    url('fonts/icomoon.svg?qtel01#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,32 +24,105 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-marvelIcon-09:before {
-  content: "\eaf3";
-}
 .icon-marvelIcon-01:before {
   content: "\e900";
+  color: #848484;
 }
 .icon-marvelIcon-02:before {
   content: "\e901";
+  color: #848484;
 }
 .icon-marvelIcon-03:before {
   content: "\e902";
+  color: #848484;
 }
 .icon-marvelIcon-04:before {
   content: "\e903";
+  color: #848484;
 }
 .icon-marvelIcon-05:before {
   content: "\e904";
+  color: #848484;
 }
 .icon-marvelIcon-06:before {
   content: "\e905";
+  color: #848484;
 }
 .icon-marvelIcon-07:before {
   content: "\e906";
+  color: #848484;
 }
 .icon-marvelIcon-08:before {
   content: "\e907";
+  color: #848484;
+}
+.icon-marvelIcon-09:before {
+  content: "\eaf3";
+  color: #848484;
+}
+.icon-marvelIcon-10:before {
+  content: "\eaf4";
+  color: #848484;
+}
+.icon-marvelIcon-11:before {
+  content: "\eaf5";
+  color: #848484;
+}
+.icon-marvelIcon-12:before {
+  content: "\eaf6";
+  color: #848484;
+}
+.icon-marvelIcon-13:before {
+  content: "\eaf7";
+  color: #848484;
+}
+.icon-marvelIcon-14:before {
+  content: "\eaf8";
+  color: #848484;
+}
+.icon-marvelIcon-15:before {
+  content: "\eaf9";
+  color: #848484;
+}
+.icon-marvelIcon-16:before {
+  content: "\eafa";
+  color: #848484;
+}
+.icon-marvelIcon-17:before {
+  content: "\eafb";
+  color: #848484;
+}
+.icon-marvelIcon-18:before {
+  content: "\eafc";
+  color: #848484;
+}
+.icon-marvelIcon-19:before {
+  content: "\eafd";
+  color: #848484;
+}
+.icon-marvelIcon-20:before {
+  content: "\eafe";
+  color: #848484;
+}
+.icon-marvelIcon-21:before {
+  content: "\eaff";
+  color: #848484;
+}
+.icon-marvelIcon-22:before {
+  content: "\eb00";
+  color: #848484;
+}
+.icon-marvelIcon-23:before {
+  content: "\eb01";
+  color: #848484;
+}
+.icon-marvelIcon-24:before {
+  content: "\eb02";
+  color: #848484;
+}
+.icon-marvelIcon-25:before {
+  content: "\eb03";
+  color: #848484;
 }
 .icon-home:before {
   content: "\e908";

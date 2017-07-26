@@ -47,6 +47,7 @@
     height: 100%;
     padding: 10px;
     border: 1px solid #cccccc;
+    box-sizing: border-box;
   }
   .tabWrapper .headArea{
     height: 30px;

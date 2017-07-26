@@ -19,7 +19,11 @@
                   <div class="deviceDescribe"></div>
                 </div>
                 <div class="right mini-14">
-                  <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
+                  <marvel-tab :tabItems="tabItems">
+                    <marvel-tab-item :isActive="tabItems[0].isActive">
+                      <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
+                    </marvel-tab-item>
+                  </marvel-tab>
                 </div>
               </div>
             </div>
@@ -87,8 +91,12 @@
   import MarvelDashboard from "@/walle/widget/dashboard/MarvelDashboard";
   import MarvelRouter from "@/walle/component/router";
   import MarvelTimer from "@/walle/component/timer";
+  import MarvelTab from "@/walle/widget/tab/MarvelTab";
+  import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   export default {
     components: {
+      MarvelTabItem,
+      MarvelTab,
       MarvelDashboard,
       MarvelPrimaryButton,
       MarvelButton,
@@ -126,6 +134,12 @@
           advInfos: [],
           warnLst:[]
         },
+        //#endregion
+        //#region tab
+        tabItems: [{
+          label: "基础信息",
+          isActive: true
+        }],
         //#endregion
         //#region basicInfo
         titles4BasicInfo: [{
@@ -467,6 +481,7 @@
 
   .detailsCont{
     height:100%;
+    background-color: #ffffff;
   }
   .detailsCont .left,.detailsCont .right{
     height: 100%;
