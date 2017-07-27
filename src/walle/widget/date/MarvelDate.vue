@@ -82,6 +82,9 @@
         for(var i=1;i<=iDayCount;i++){
           this.dayLst.push(i);
         }
+      },
+      getTime:function(){
+        return this.ySelect + "-" + this.mSelect + "-" + this.dSelect;
       }
     }
   }

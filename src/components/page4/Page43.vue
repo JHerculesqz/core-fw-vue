@@ -14,15 +14,15 @@
           <div class="searchConfig large-7 small-8 mini-24">
             <div class="configName">开始时间:</div>
             <div class="configInput">
-              <marvel-input ref="ref4StartTime" status="" placeHolder="Please enter..."
-                            errMsg="输入错误..."></marvel-input>
+              <marvel-date ref="ref4StartTime" yearStart="2014" yearEnd="2030" yearSelect="2016"
+                           monthSelect="1" daySelect="1"></marvel-date>
             </div>
           </div>
           <div class="searchConfig large-7 small-8 mini-24">
             <div class="configName">结束时间:</div>
             <div class="configInput">
-              <marvel-input ref="ref4EndTime" status="" placeHolder="Please enter..."
-                            errMsg="输入错误..."></marvel-input>
+              <marvel-date ref="ref4EndTime" yearStart="2014" yearEnd="2030" yearSelect="2017"
+                           monthSelect="12" daySelect="30"></marvel-date>
             </div>
           </div>
           <div class="searchConfig large-7 small-8 mini-24">
@@ -84,8 +84,10 @@
   import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
   import MarvelRouter from "@/walle/component/router";
   import MarvelScroll1 from "@/walle/component/scroll/scroll2";
+  import MarvelDate from "@/walle/widget/date/MarvelDate";
   export default {
     components: {
+      MarvelDate,
       MarvelChartScatter2,
       MarvelInput,
       MarvelPrimaryButton,
@@ -101,7 +103,7 @@
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         //#endregion
         //#region crumbItems
         crumbItems: [{
@@ -214,6 +216,8 @@
         this._drawStackLine();
       },
       _getScatterDataMock: function(oCallback){
+        var self = this;
+
         this.scatterData.data = [];
 
         //0.更新topN
@@ -260,20 +264,22 @@
           this.$http.post('/getUsageByClientNoAndStartTimeAndEndTime', {
             reqBuVoStr: JSON.stringify({
               clientNo:"client1",
-              startTime: "2017-7-1",
-              endTime: "2017-10-1"
+              startTime: self.$refs.ref4StartTime.getTime(),
+              endTime: self.$refs.ref4EndTime.getTime()
             })
           }).then(res=>{
             //2.更新this.scatterData.data
-            var oClientVo = res.data.resultObj.lstReportUsageOutClientNoVo[0];
-            var lstDevVo = oClientVo.lstReportUsageDevVo;
-            for(var i=0;i<lstDevVo.length;i++){
-              var oDevVo = lstDevVo[i];
-              var oDev = {
-                name: oDevVo.devId,
-                value: [oDevVo.x, oDevVo.y, oDevVo.usage, oDevVo]
-              };
-              this.scatterData.data.push(oDev);
+            if(res.data.resultObj.lstReportUsageOutClientNoVo.length > 0){
+              var oClientVo = res.data.resultObj.lstReportUsageOutClientNoVo[0];
+              var lstDevVo = oClientVo.lstReportUsageDevVo;
+              for(var i=0;i<lstDevVo.length;i++){
+                var oDevVo = lstDevVo[i];
+                var oDev = {
+                  name: oDevVo.devId,
+                  value: [oDevVo.x, oDevVo.y, oDevVo.usage, oDevVo]
+                };
+                this.scatterData.data.push(oDev);
+              }
             }
 
             //3.callback
@@ -332,13 +338,12 @@
   }
   .pageFrameWrapper .session .searchConfigArea{
     width: 100%;
-    overflow: hidden;
+    display: inline-block;
     clear: both;
   }
 
   .searchConfigArea .searchConfig{
     float: left;
-    overflow: hidden;
     margin-bottom: 20px;
   }
   .searchConfigArea .searchConfig .configName, .searchConfigArea .searchConfig .configInput{
