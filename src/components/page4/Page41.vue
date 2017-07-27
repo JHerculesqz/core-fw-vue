@@ -5,9 +5,9 @@
       <div class="crumb">
         <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
-      <div class="search">
-        搜索框占位置
-      </div>
+      <!--<div class="search">-->
+        <!--搜索框占位置-->
+      <!--</div>-->
       <div class="bar"></div>
       <div class="tip">
         <marvel-warning :items="warnPanel" theme="dark"></marvel-warning>
@@ -20,7 +20,7 @@
     <div class="details large-24 middle-24 small-24 mini-24">
       <marvel-leaflet ref="refGISMap" id="refGISMap" v-on:onClick="onGisMapClick"></marvel-leaflet>
       <div class="gridView">
-        <marvel-grid :titles="titles" :rows="rows"></marvel-grid>
+        <marvel-grid :titles="titles" :rows="rows" v-on:onIconClick="_onIconClick"></marvel-grid>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
     data: function() {
       return {
         //#region const
-        debug: false,
+        debug: true,
         timerInterval: 2000,
         //#endregion
         //#region crumb
@@ -82,17 +82,20 @@
         //#endregion
         //#region grid
         titles: [{
-          label: "ID",
+          label: "",
+          width: "3%"
+        }, {
+          label: "设备ID",
           width: "15%"
         }, {
-          label: "名称",
+          label: "设备名称",
           width: "15%"
         }, {
           label: "状态",
-          width: "5%"
+          width: "7%"
         }, {
           label: "告警",
-          width: "5%"
+          width: "7%"
         }, {
           label: "最近更新时间",
           width: "20%"
@@ -104,7 +107,7 @@
           width: "10%"
         }, {
           label: "备注",
-          width: "20%"
+          width: "13%"
         }],
         rows: [],
         //#endregion
@@ -263,15 +266,28 @@
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
           var oRow = [
+            {value: [{value: "icon-eye", color:"#808080"}], type:"icon" },
             {value: oDev.devId, type:"text"},
             {value: oDev.devId, type:"text"},
-            {value: oDev.uiStatus, type:"text"},
-            {value: oDev.warnCount, type:"text"},
+            {value: "icon-marvelIcon-16", color: "#3dcca6", label: oDev.uiStatus, type:"textIcon" },
+            {value: "icon-marvelIcon-16", color: "#ff4c4c", label: oDev.warnCount, type:"textIcon"},
             {value: oDev.lastUpdateTime, type:"text"},
             {value: oDev.x, type:"text"},
             {value: oDev.y, type:"text"},
             {value: oDev.desc, type:"text"}
           ];
+          if(oDev.status == 0){
+            oRow[3] = {value: "icon-marvelIcon-16", color: "#008958", label: oDev.uiStatus, type:"textIcon"};
+          }
+          else if(oDev.status == 1){
+            oRow[3] = {value: "icon-marvelIcon-16", color: "#ffaa00", label: oDev.uiStatus, type:"textIcon"};
+          }
+          else if(oDev.status == 2){
+            oRow[3] = {value: "icon-marvelIcon-16", color: "#666", label: oDev.uiStatus, type:"textIcon"};
+          }
+          if(oDev.hasWarn){
+            oRow[4] = {value: "icon-marvelIcon-16", color: "#ff4c4c", label: oDev.warnCount, type:"textIcon"};
+          }
           this.rows.push(oRow);
         }
       },
@@ -280,6 +296,13 @@
           var oDev = this.devLst[i];
           this.$refs.refGISMap.updateIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips, oDev);
         }
+      },
+      _onIconClick: function(oRow){
+        var strDevId = oRow[0].value;
+        MarvelRouter.to(this.$router, "page42", {
+          clientNo: this.companyInfo.clientNo,
+          devId: strDevId
+        });
       }
     }
   }

@@ -114,7 +114,7 @@
     data: function() {
       return {
         //#region const
-        debug: false,
+        debug: true,
         timerInterval: 2000,
         //#endregion
         //#region crumbItems

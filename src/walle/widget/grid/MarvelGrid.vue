@@ -12,20 +12,25 @@
         </tr>
         </thead>
         <tbody>
-          <tr v-for="row in rows">
-            <td v-for="cell in row" v-if="cell.type == 'text'"
-                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">{{ cell.value }}</td>
-            <td v-for="cell in row" v-if="cell.type == 'icon'"
+          <tr v-for="row in rowsInPage">
+            <td v-for="cell in row"
                 v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
-              <span class="iconOnly" v-for="icon in cell.value"
-                    v-bind:class="[icon.value]"
-                    v-on:click="icon.onClick"></span>
-            </td>
-            <td v-for="cell in row" v-if="cell.type == 'textIcon'"
-                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
-              <span class="icon" v-bind:class="[cell.value.icon]"
-                    v-bind:style="{ color: cell.value.color }"></span>
-              <span>{{ cell.value.label }}</span>
+              <div v-if="cell.type == 'text'">
+                {{ cell.value }}
+              </div>
+              <div v-else-if="cell.type == 'icon'">
+                <span class="iconOnly"
+                      v-for="icon in cell.value"
+                      v-bind:class="[icon.value]"
+                      v-bind:style="{ color: icon.color }"
+                      v-on:click="onIconClick(row)"></span>
+              </div>
+              <div v-else-if="cell.type == 'textIcon'">
+                <span class="icon"
+                      v-bind:class="[cell.value]"
+                      v-bind:style="{ color: cell.color }"></span>
+                <span>{{ cell.label }}</span>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -34,12 +39,13 @@
     <div class="footArea">
       <div class="foot">
         <div class="pageSwitch">
-          <div class="item icon-marvelIcon-04"></div>
+          <div class="item icon-marvelIcon-04" v-on:click="onPreClick"></div>
           <div class="item" v-for="item in pagination"
-               v-bind:class="{ current: curPageIndex == item }">{{ item }}</div>
-          <div class="item icon-marvelIcon-02"></div>
+               v-bind:class="{ current: curPageIndex == item }"
+               v-on:click="onPageItemClick(item)">{{ item }}</div>
+          <div class="item icon-marvelIcon-02" v-on:click="onNextClick"></div>
         </div>
-        <div class="text">跳转</div><input class="pageDrop"><div class="text">页</div>
+        <!--<div class="text">跳转</div><input class="pageDrop"><div class="text">页</div>-->
         <div class="text">共{{ rows.length}}条</div>
       </div>
     </div>
@@ -51,52 +57,38 @@
   export default {
     components: {MarvelCheckBox},
     name: 'MarvelGrid',
-    props: ["titles", "rows"],
+    props: ["titles", "rows", "limit"],
     data: function() {
         return {
+          totalPageCount: 1,
+          curPageIndex: 1,
+          limitEx: 5,
           skip: 0,
-          limit: 5,
-          curPageIndex: 1
+          rowsInPage: []
         }
     },
     computed: {
       pagination: function(){
-        //TODO:有点sb了，先实现一个再说
         var arrRes = [];
 
-        //1.if rows is null
-        if(0 == this.rows.length){
-          arrRes=[1];
+        //0.get this.totalPageCount/curPageIndex
+        this.limitEx = this.limit == undefined ? 5 : this.limit;
+        this.totalPageCount = Math.ceil(this.rows.length / this.limitEx);
+        this.curPageIndex = this.curPageIndex;
+        for(var i=1;i<=this.totalPageCount;i++){
+          arrRes.push(i);
         }
 
-        //2.calculate this.curPageIndex/iPageCount
-        var iPageCount = Math.ceil(this.rows.length / this.limit);
-        this.curPageIndex = parseInt(this.skip / this.limit) + 1;
+        //1.calc this.skip
+        this.skip = (this.curPageIndex-1) * this.limitEx;
 
-        var iPageDistance = iPageCount - this.curPageIndex + 1;
-        //3.iPageCount <= 5
-        if(iPageCount <= 5){
-          for(var i=1;i<=iPageCount;i++){
-            arrRes.push(i);
-          }
+        //2.calc this.rowsInPage
+        var iTmpRowCount = this.curPageIndex * this.limitEx;
+        if(iTmpRowCount <= this.rows.length){
+          this.rowsInPage = this.rows.slice(this.skip, this.skip + this.limitEx);
         }
         else{
-          //4.1.if iPageDistance <=5
-          if(iPageDistance <= 5){
-            for(var i=this.curPageIndex;i<=iPageCount;i++){
-              arrRes.push(i);
-            }
-          }
-          //4.2.if iPageDistance >5
-          else{
-            for(var i=this.curPageIndex;i<this.curPageIndex+5;i++){
-              arrRes.push(i);
-            }
-            if(iPageCount - (this.curPageIndex + 4) > 1){
-              arrRes.push("...");
-            }
-            arrRes.push(iPageCount);
-          }
+          this.rowsInPage = this.rows.slice(this.skip, this.rows.length);
         }
 
         return arrRes;
@@ -108,6 +100,22 @@
           if(i == iColIndex){
             return this.titles[iColIndex].width;
           }
+        }
+      },
+      onIconClick: function(oRow){
+        this.$emit("onIconClick", oRow);
+      },
+      onPreClick: function(){
+        if(this.curPageIndex > 1){
+          this.curPageIndex -= 1;
+        }
+      },
+      onPageItemClick: function(iCurPage){
+        this.curPageIndex = iCurPage;
+      },
+      onNextClick: function(){
+        if(this.curPageIndex < this.totalPageCount){
+          this.curPageIndex += 1;
         }
       }
     }
