@@ -49,7 +49,7 @@
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         timerInterval: 2000,
         //#endregion
         //#region crumb
@@ -298,7 +298,7 @@
         }
       },
       _onIconClick: function(oRow){
-        var strDevId = oRow[0].value;
+        var strDevId = oRow[1].value;
         MarvelRouter.to(this.$router, "page42", {
           clientNo: this.companyInfo.clientNo,
           devId: strDevId

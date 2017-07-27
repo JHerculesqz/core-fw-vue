@@ -21,7 +21,7 @@
                 <div class="right mini-14">
                   <marvel-tab :tabItems="tabItems">
                     <marvel-tab-item :isActive="tabItems[0].isActive">
-                      <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo"></marvel-grid>
+                      <marvel-grid :titles="titles4BasicInfo" :rows="rows4BasicInfo" limit="5"></marvel-grid>
                     </marvel-tab-item>
                   </marvel-tab>
                 </div>
@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div slot="contArea" style="height: 100%">
-                <marvel-grid :titles="titles4Warn" :rows="rows4Warn"></marvel-grid>
+                <marvel-grid :titles="titles4Warn" :rows="rows4Warn" limit="10"></marvel-grid>
               </div>
             </marvel-dashboard>
           </div>
@@ -67,7 +67,7 @@
             <div slot="customArea"></div>
             <div slot="contArea" style="height: 100%">
               <div class="detailsCont large-24">
-                <marvel-grid :titles="titles4AdvInfo" :rows="rows4AdvInfo"></marvel-grid>
+                <marvel-grid :titles="titles4AdvInfo" :rows="rows4AdvInfo" limit="10"></marvel-grid>
               </div>
             </div>
           </marvel-dashboard>
@@ -114,7 +114,7 @@
     data: function() {
       return {
         //#region const
-        debug: true,
+        debug: false,
         timerInterval: 2000,
         //#endregion
         //#region crumbItems
@@ -153,14 +153,14 @@
         //#endregion
         //#region 4warn
         titles4Warn: [{
+          label: "",
+          width: "3%"
+        }, {
           label: "告警ID",
           width: "13%"
         }, {
           label: "告警内容",
           width: "20%"
-        }, {
-          label: "是否消除",
-          width: "7%"
         }, {
           label: "产生时间",
           width: "20%"
@@ -169,9 +169,10 @@
           width: "20%"
         }, {
           label: "常见处理方法",
-          width: "20%"
+          width: "24%"
         }],
         rows4Warn: [],
+        limit4Warn: 10,
         //#endregion
         //#region advInfo
         titles4AdvInfo: [{
@@ -188,6 +189,7 @@
           width: "30%"
         }],
         rows4AdvInfo: [],
+        limit4AdvInfo: 10,
         //#endregion
       }
     },
@@ -363,14 +365,16 @@
                 var lstWarnInfo = res.data.resultObj;
                 for(var i=0;i<lstWarnInfo.length;i++){
                   var oWarnInfo = lstWarnInfo[i];
-                  self.data4SingleDev.warnLst.push([
+                  var strColor = oWarnInfo.end ? "#808080" : "#ff4c4c";
+                  var oRow = [
+                    {value: [{value: "icon-marvelIcon-17", color:strColor}], type:"icon" },
                     {value: oWarnInfo.warnId, type:"text"},
                     {value: oWarnInfo.warnContent, type:"text"},
-                    {value: oWarnInfo.end, type:"text"},
                     {value: oWarnInfo.startTime, type:"text"},
                     {value: oWarnInfo.endTime, type:"text"},
                     {value: oWarnInfo.warnProcess, type:"text"}
-                  ]);
+                  ];
+                  self.data4SingleDev.warnLst.push(oRow);
                 }
 
                 oCallback();
