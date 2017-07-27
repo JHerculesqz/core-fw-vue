@@ -27,5 +27,10 @@ export default {
     var oDate = new Date();
     var strRes = oDate.format("yyyyMMdd-hh:mm:ss");
     return strRes;
+  },
+  getDaysInOneMonth(strYear, strMonth){
+    var oMonth = parseInt(strMonth, 10);
+    var oDay= new Date(strYear, oMonth, 0);
+    return oDay.getDate();
   }
 }
