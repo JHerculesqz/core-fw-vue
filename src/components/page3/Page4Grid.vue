@@ -72,11 +72,9 @@
         var oRow = [];
         for(var j=0;j<4;j++){
           var oCell = {
-            value: {
-              icon: "icon-podcast",
-              color: "#28aad3",
-              label: "shit"
-            },
+            value: "icon-podcast",
+            color: "#28aad3",
+            label: "shit",
             type: "textIcon"
           };
           oRow.push(oCell);

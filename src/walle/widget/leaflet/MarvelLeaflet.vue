@@ -85,15 +85,22 @@
       addPolygon: function(arrPoints, strTips){
         L.polygon(arrPoints).addTo(this.mapObj).bindPopup(strTips);
       },
-      addIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj, oDBClickCallback){
+      addIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj,
+                        oDBClickCallback, oDragCallback){
         var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
-        var oMarker = L.marker([iX, iY], {icon: oIcon}).addTo(this.mapObj);
+        var bCanDrag = oDragCallback == undefined ? false : true;
+        var oMarker = new L.marker([iX, iY], {icon: oIcon, draggable:bCanDrag}).addTo(this.mapObj);
         oMarker.bindPopup(strTips);
         oMarker.id = strId;
         oMarker.buObj = oBuObj;
         oMarker.on("dblclick", function () {
           if(oDBClickCallback){
             oDBClickCallback(strId);
+          }
+        });
+        oMarker.on("dragend", function (event) {
+          if(oDragCallback){
+            oDragCallback(event.target);
           }
         });
         this.iconObjs.push(oMarker);
