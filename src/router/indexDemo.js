@@ -23,6 +23,7 @@ import Page4Date from '@/components/page3/Page4Date'
 import Page4Leaflet from '@/components/page3/Page4Leaflet'
 import Page4Chart from '@/components/page3/Page4Chart'
 import Page4Grid from '@/components/page3/Page4Grid'
+import Page4Location from '@/components/page3/Page4Location'
 
 Vue.use(Router);
 
@@ -121,6 +122,10 @@ export default new Router({
     path: '/page3/page4Date',
     name: 'page4Date',
     component: Page4Date
+  }, {
+    path: '/page3/page4Location',
+    name: 'page4Location',
+    component: Page4Location
   }]
 })
 
