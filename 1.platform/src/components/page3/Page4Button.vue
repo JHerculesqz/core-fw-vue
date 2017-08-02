@@ -1,43 +1,43 @@
 <template>
   <div>
     <div>
-      <marvel-button isLarge="true" classCustom="classCustom1" label="Large"
+      <marvel-button size="large" classCustom="classCustom1" label="Large"
                      v-on:onClick="onClick"></marvel-button>
-      <marvel-button isLarge="false" classCustom="classCustom1" label="Small"
+      <marvel-button  classCustom="classCustom1" label="Small"
                      v-on:onClick="onClick"></marvel-button>
-      <marvel-button ref="ref1" isLarge="false" classCustom="classCustom1" label="MouseDown"
+      <marvel-button ref="ref1"  classCustom="classCustom1" label="MouseDown"
                      v-on:onClick="onClick"></marvel-button>
-      <marvel-button ref="ref2" isLarge="false" classCustom="classCustom1" label="Focus"
+      <marvel-button ref="ref2"  classCustom="classCustom1" label="Focus"
                      v-on:onClick="onClick"></marvel-button>
-      <marvel-button ref="ref3" isLarge="false" classCustom="classCustom1" label="Disable"
+      <marvel-button ref="ref3"  classCustom="classCustom1" label="Disable"
                      v-on:onClick="onClick"></marvel-button>
     </div>
     <div>
-      <marvel-primary-button isLarge="true" classCustom="classCustom1" label="Large"
+      <marvel-primary-button size="large" classCustom="classCustom1" label="Large"
                      v-on:onClick="onClick"></marvel-primary-button>
-      <marvel-primary-button isLarge="false" classCustom="classCustom1" label="Small"
+      <marvel-primary-button  classCustom="classCustom1" label="Small"
                      v-on:onClick="onClick"></marvel-primary-button>
-      <marvel-primary-button ref="ref4" isLarge="false" classCustom="classCustom1" label="MouseDown"
+      <marvel-primary-button ref="ref4"  classCustom="classCustom1" label="MouseDown"
                      v-on:onClick="onClick"></marvel-primary-button>
-      <marvel-primary-button ref="ref5" isLarge="false" classCustom="classCustom1" label="Focus"
+      <marvel-primary-button ref="ref5"  classCustom="classCustom1" label="Focus"
                      v-on:onClick="onClick"></marvel-primary-button>
-      <marvel-primary-button ref="ref6" isLarge="false" classCustom="classCustom1" label="Disable"
+      <marvel-primary-button ref="ref6"  classCustom="classCustom1" label="Disable"
                      v-on:onClick="onClick"></marvel-primary-button>
     </div>
     <div>
-      <marvel-icon-txt-button isLarge="true" classCustom="classCustom1" label="Large"
+      <marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large"
                           icon="icon-home3"
                           v-on:onClick="onClick"></marvel-icon-txt-button>
-      <marvel-icon-txt-button isLarge="false" classCustom="classCustom1" label="Small"
+      <marvel-icon-txt-button  classCustom="classCustom1" label="Small"
                           icon="icon-home3"
                           v-on:onClick="onClick"></marvel-icon-txt-button>
-      <marvel-icon-txt-button ref="ref7" isLarge="false" classCustom="classCustom1" label="MouseDown"
+      <marvel-icon-txt-button ref="ref7"  classCustom="classCustom1" label="MouseDown"
                           icon="icon-home3"
                           v-on:onClick="onClick"></marvel-icon-txt-button>
-      <marvel-icon-txt-button ref="ref8" isLarge="false" classCustom="classCustom1" label="Focus"
+      <marvel-icon-txt-button ref="ref8"  classCustom="classCustom1" label="Focus"
                           icon="icon-home3"
                           v-on:onClick="onClick"></marvel-icon-txt-button>
-      <marvel-icon-txt-button ref="ref9" isLarge="false" classCustom="classCustom1" label="Disable"
+      <marvel-icon-txt-button ref="ref9"  classCustom="classCustom1" label="Disable"
                           icon="icon-home3"
                           v-on:onClick="onClick"></marvel-icon-txt-button>
     </div>
