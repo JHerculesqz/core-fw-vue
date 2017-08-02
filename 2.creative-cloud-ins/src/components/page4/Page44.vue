@@ -40,16 +40,8 @@
         </div>
       </div>
     </div>
-    <div class="details large-24 middle-24 small-24 mini-24">
-      <!--<marvel-button label="获得当前位置"-->
-                     <!--v-on:onClick="onBtnClick4GetLoc"></marvel-button>-->
-      <!--<marvel-input ref="ref0" placeHolder="设备ID" errMsg="输入错误..." status="disable"></marvel-input>-->
-      <!--<marvel-input ref="ref1" placeHolder="设备类型(1/2)" errMsg="输入错误..." status="disable"></marvel-input>-->
-      <!--<marvel-input ref="ref2" placeHolder="经度" errMsg="输入错误..."></marvel-input>-->
-      <!--<marvel-input ref="ref3" placeHolder="纬度" errMsg="输入错误..."></marvel-input>-->
-      <!--<marvel-button label="开站"-->
-                     <!--v-on:onClick="onBtnClick4InitDev"></marvel-button>-->
-      <marvel-leaflet ref="refGISMap" id="refGISMap"></marvel-leaflet>
+    <div class="mapArea large-24 middle-24 small-24 mini-24">
+      <marvel-leaflet ref="refGISMap2" id="refGISMap2"></marvel-leaflet>
     </div>
   </div>
 </template>
@@ -153,13 +145,13 @@
         }
       },
       _initGisMap: function(){
-        this.$refs.refGISMap.init(this.companyInfo.clientMapCenterX,
+        this.$refs.refGISMap2.init(this.companyInfo.clientMapCenterX,
           this.companyInfo.clientMapCenterY,
           this.companyInfo.clientMapCenterZoomMin,
           this.companyInfo.clientMapCenterZoomMax,
           "/static/leaflet/images/shit.png");
 
-        this.$refs.refGISMap.addIcon("myPos",
+        this.$refs.refGISMap2.addIcon("myPos",
           this.companyInfo.clientMapCenterX,
           this.companyInfo.clientMapCenterY,
           "/static/leaflet/images/2.png", "移动获得新坐标", undefined,
@@ -204,7 +196,7 @@
         });
       },
       _updateGisMap: function(){
-        this.$refs.refGISMap.updateIcon("myPos",
+        this.$refs.refGISMap2.updateIcon("myPos",
           this.companyInfo.clientMapCenterX,
           this.companyInfo.clientMapCenterY,
           "/static/leaflet/images/2.png", "移动获得新坐标", undefined);
@@ -239,6 +231,9 @@
     height: 36px;
     width: 100%;
     background-color: #41475a;
+  }
+  .mapArea{
+    height:100%;
   }
   .toolbar .crumb{
     margin-top: 11px;
