@@ -1,5 +1,5 @@
 <template>
-  <div class="inputWrapper" v-bind:class="[status]">
+  <div class="inputWrapper" v-bind:class="[status, theme, size]">
     <input class="inputDefault" type="text" :placeholder="placeHolder" v-model="inputMsg">
     <div class="errorTip icon-notification">{{ errMsg }}</div>
   </div>
@@ -8,7 +8,7 @@
 <script>
   export default {
     name: 'MarvelInput',
-    props: ["status", "placeHolder", "errMsg"],
+    props: ["status", "placeHolder", "errMsg", "theme", "size"],
     data: function() {
         return {
           inputMsg: ""
@@ -52,6 +52,19 @@
   }
   .inputWrapper .errorTip:before{
     margin-right: 10px;
+  }
+
+  .dark .inputDefault{
+    border: 1px solid rgba(255,255,255,0);
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  .mini .inputDefault{
+    height: 22px;
+    line-height: 22px;
+    font-size: 12px;
   }
 
   .error .inputDefault{
