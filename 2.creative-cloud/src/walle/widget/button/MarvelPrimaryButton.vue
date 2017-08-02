@@ -1,13 +1,13 @@
 <template>
   <div class="primaryBtn"
-       v-bind:class="[large, mouseDown, focus, disable, classCustom]"
+       v-bind:class="[size, mouseDown, focus, disable, classCustom]"
        v-on:click="onClick">{{ label }}</div>
 </template>
 
 <script>
   export default {
     name: 'MarvelPrimaryButton',
-    props: ["isLarge", "classCustom", "label"],
+    props: ["size", "classCustom", "label"],
     data: function() {
         return {
           large: "",
@@ -17,7 +17,7 @@
         }
     },
     mounted: function(){
-      this.large = this.isLarge == "true" ? "large" : "";
+
     },
     methods: {
       setBtnMouseDown: function(bIsEnable){
@@ -56,6 +56,12 @@
     padding: 0 30px;
     font-size: 16px;
     line-height: 40px;
+  }
+  .mini{
+    height: 22px;
+    padding: 0 16px;
+    font-size: 12px;
+    line-height: 22px;
   }
   .mouseDown{
     background-color: #006ad4 !important;
