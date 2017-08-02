@@ -3,7 +3,7 @@
     <div style="width:200px;">
       <button v-on:click="onClick4Input1">获取</button>
       <marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..."
-                    :inputMsg = "inputMsg"></marvel-input>
+                    :inputMsg = "inputMsg" theme="dark" size="mini"></marvel-input>
     </div>
     <div style="width:200px;">
       <button v-on:click="onClick4Input2">触发错误</button>
