@@ -54,6 +54,17 @@
     margin-right: 10px;
   }
 
+  .error .inputDefault{
+    border: 1px solid #ff4c4c !important;
+  }
+  .error .errorTip{
+    display: block;
+  }
+
+  .disable .inputDefault{
+    background-color: #f0f0f0;
+    pointer-events: none;
+  }
   .dark .inputDefault{
     border: 1px solid rgba(255,255,255,0);
     font-size: 14px;
@@ -65,17 +76,5 @@
     height: 22px;
     line-height: 22px;
     font-size: 12px;
-  }
-
-  .error .inputDefault{
-    border: 1px solid #ff4c4c !important;
-  }
-  .error .errorTip{
-    display: block;
-  }
-
-  .disable .inputDefault{
-    background-color: #f0f0f0;
-    pointer-events: none;
   }
 </style>
