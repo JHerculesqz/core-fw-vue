@@ -5,16 +5,50 @@
       <div class="crumb">
         <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
+      <div class="details">
+        <div class="detailsBlock">
+          <div class="detailsName">设备名称：</div>
+          <div class="detailsCont">
+            <marvel-input ref="ref0" theme="dark" size="mini" placeHolder="设备ID" errMsg="输入错误..." status="disable"></marvel-input>
+          </div>
+        </div>
+        <div class="detailsBlock">
+          <div class="detailsName">设备类型：</div>
+          <div class="detailsCont">
+            <marvel-input ref="ref1" theme="dark" size="mini" placeHolder="设备类型(1/2)" errMsg="输入错误..." status="disable"></marvel-input>
+          </div>
+        </div>
+        <div class="detailsBlock">
+          <div class="detailsName">设备经度：</div>
+          <div class="detailsCont">
+            <marvel-input ref="ref2" theme="dark" size="mini" placeHolder="经度" errMsg="输入错误..."></marvel-input>
+          </div>
+        </div>
+        <div class="detailsBlock">
+          <div class="detailsName">设备纬度：</div>
+          <div class="detailsCont">
+            <marvel-input ref="ref3" theme="dark" size="mini" placeHolder="纬度" errMsg="输入错误..."></marvel-input>
+          </div>
+        </div>
+        <div class="buttonBlock">
+          <marvel-primary-button size="mini" label="获得当前位置"
+                                 v-on:onClick="onBtnClick4GetLoc"></marvel-primary-button>
+        </div>
+        <div class="buttonBlock">
+          <marvel-primary-button size="mini" label="开站"
+                                 v-on:onClick="onBtnClick4InitDev"></marvel-primary-button>
+        </div>
+      </div>
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
-      <marvel-button isLarge="false" label="获得当前位置"
-                     v-on:onClick="onBtnClick4GetLoc"></marvel-button>
-      <marvel-input ref="ref0" placeHolder="设备ID" errMsg="输入错误..." status="disable"></marvel-input>
-      <marvel-input ref="ref1" placeHolder="设备类型(1/2)" errMsg="输入错误..." status="disable"></marvel-input>
-      <marvel-input ref="ref2" placeHolder="经度" errMsg="输入错误..."></marvel-input>
-      <marvel-input ref="ref3" placeHolder="纬度" errMsg="输入错误..."></marvel-input>
-      <marvel-button isLarge="false" label="开站"
-                     v-on:onClick="onBtnClick4InitDev"></marvel-button>
+      <!--<marvel-button label="获得当前位置"-->
+                     <!--v-on:onClick="onBtnClick4GetLoc"></marvel-button>-->
+      <!--<marvel-input ref="ref0" placeHolder="设备ID" errMsg="输入错误..." status="disable"></marvel-input>-->
+      <!--<marvel-input ref="ref1" placeHolder="设备类型(1/2)" errMsg="输入错误..." status="disable"></marvel-input>-->
+      <!--<marvel-input ref="ref2" placeHolder="经度" errMsg="输入错误..."></marvel-input>-->
+      <!--<marvel-input ref="ref3" placeHolder="纬度" errMsg="输入错误..."></marvel-input>-->
+      <!--<marvel-button label="开站"-->
+                     <!--v-on:onClick="onBtnClick4InitDev"></marvel-button>-->
       <marvel-leaflet ref="refGISMap" id="refGISMap"></marvel-leaflet>
     </div>
   </div>
@@ -25,13 +59,13 @@
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb";
   import MarvelLeaflet from "@/walle/widget/leaflet/MarvelLeaflet";
   import MarvelLocation from "@/walle/component/location"
-  import MarvelButton from "@/walle/widget/button/MarvelButton";
+  import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelRouter from "@/walle/component/router";
   export default {
     components: {
       MarvelInput,
-      MarvelButton,
+      MarvelPrimaryButton,
       MarvelLeaflet,
       MarvelCrumb,
       MarvelFrame,
@@ -206,7 +240,7 @@
     width: 100%;
     background-color: #41475a;
   }
-  .crumb{
+  .toolbar .crumb{
     margin-top: 11px;
     float: left;
     margin-left: 20px;
@@ -227,13 +261,33 @@
     margin-top: 8px;
     background-color: rgba(255,255,255,0.4);
   }
-  .details{
-    height: calc(100% - 25px);
+  .toolbar .details{
+    height:100%;
+    float: right;
+    overflow: hidden;
   }
-  .details .gridView{
+  .details .detailsBlock{
     height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #fafafa;
+    width: 160px;
+    float: left;
+    margin-right: 20px;
+  }
+  .details .detailsBlock .detailsName, .details .detailsBlock .detailsCont{
+    float: left;
+  }
+  .details .detailsBlock .detailsName{
+    width: 60px;
+    line-height: 36px;
+    font-size: 12px;
+    color: #fff;
+  }
+  .details .detailsBlock .detailsCont{
+    width: 100px;
+    padding-top: 5px;
+  }
+  .details .buttonBlock{
+    float: left;
+    margin-right: 20px;
+    padding-top: 5px;
   }
 </style>

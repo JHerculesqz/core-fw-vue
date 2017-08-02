@@ -34,7 +34,7 @@
           </div>
           <div class="searchConfig large-3 small-24 mini-24">
             <div class="searchBtn">
-              <marvel-primary-button isLarge="false" label="查询"
+              <marvel-primary-button label="查询"
                                      v-on:onClick="onClick4UsageSearch"></marvel-primary-button>
             </div>
           </div>
