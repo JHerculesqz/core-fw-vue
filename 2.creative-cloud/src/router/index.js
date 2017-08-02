@@ -5,7 +5,7 @@ import Page40 from '@/components/page4/Page40'
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   linkActiveClass: 'active',
   routes: [{
     path: '/',

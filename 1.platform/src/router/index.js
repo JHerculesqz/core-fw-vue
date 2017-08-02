@@ -28,7 +28,7 @@ import Page4Location from '@/components/page3/Page4Location'
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   linkActiveClass: 'active',
   routes: [{
     path: '/',
