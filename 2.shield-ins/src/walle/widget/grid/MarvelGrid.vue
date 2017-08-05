@@ -5,34 +5,34 @@
         <thead>
         <tr>
           <!--<th>-->
-            <!--<marvel-check-box ref="ref8" id="id9"-->
-                              <!--label="selectAll" showLabel="false"></marvel-check-box>-->
+          <!--<marvel-check-box ref="ref8" id="id9"-->
+          <!--label="selectAll" showLabel="false"></marvel-check-box>-->
           <!--</th>-->
           <th v-for="title in titles" v-bind:style="{ width: title.width }">{{ title.label }}</th>
         </tr>
         </thead>
         <tbody>
-          <tr v-for="row in rowsInPage">
-            <td v-for="cell in row"
-                v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
-              <div v-if="cell.type == 'text'" :title="cell.value">
-                {{ cell.value }}
-              </div>
-              <div v-else-if="cell.type == 'icon'">
+        <tr v-for="row in rowsInPage">
+          <td v-for="cell in row"
+              v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
+            <div v-if="cell.type == 'text'" :title="cell.value">
+              {{ cell.value }}
+            </div>
+            <div v-else-if="cell.type == 'icon'">
                 <span class="iconOnly"
                       v-for="icon in cell.value"
                       v-bind:class="[icon.value]"
                       v-bind:style="{ color: icon.color }"
                       v-on:click="onIconClick(row)"></span>
-              </div>
-              <div v-else-if="cell.type == 'textIcon'">
+            </div>
+            <div v-else-if="cell.type == 'textIcon'">
                 <span class="icon"
                       v-bind:class="[cell.value]"
                       v-bind:style="{ color: cell.color }"></span>
-                <span :title="cell.label">{{ cell.label }}</span>
-              </div>
-            </td>
-          </tr>
+              <span :title="cell.label">{{ cell.label }}</span>
+            </div>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -59,13 +59,13 @@
     name: 'MarvelGrid',
     props: ["titles", "rows", "limit"],
     data: function() {
-        return {
-          totalPageCount: 1,
-          curPageIndex: 1,
-          limitEx: 5,
-          skip: 0,
-          rowsInPage: []
-        }
+      return {
+        totalPageCount: 1,
+        curPageIndex: 1,
+        limitEx: 5,
+        skip: 0,
+        rowsInPage: []
+      }
     },
     computed: {
       pagination: function(){
@@ -85,7 +85,7 @@
         //2.calc this.rowsInPage
         var iTmpRowCount = this.curPageIndex * this.limitEx;
         if(iTmpRowCount <= this.rows.length){
-          this.rowsInPage = this.rows.slice(this.skip, this.skip + this.limitEx);
+          this.rowsInPage = this.rows.slice(this.skip, parseInt(this.skip) + parseInt(this.limitEx));
         }
         else{
           this.rowsInPage = this.rows.slice(this.skip, this.rows.length);
