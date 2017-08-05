@@ -29,42 +29,42 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/getCompanyInfo': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/getCompanyInfo': '/getCompanyInfo'
         }
       },
       '/getDevLst': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/getDevLst': '/getDevLst'
         }
       },
       '/getWarnLstByDevId': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/getWarnLstByDevId': '/getWarnLstByDevId'
         }
       },
       '/getBasicInfoByDevId': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/getBasicInfoByDevId': '/getBasicInfoByDevId'
         }
       },
       '/getUsageByClientNoAndStartTimeAndEndTime': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/getUsageByClientNoAndStartTimeAndEndTime': '/getUsageByClientNoAndStartTimeAndEndTime'
         }
       },
       '/initDevByDevId': {
-        target: 'http://localhost:81',
+        target: 'http://localhost',
         changeOrigin: true,
         pathRewrite: {
           '^/initDevByDevId': '/initDevByDevId'

@@ -157,7 +157,7 @@
           width: "3%"
         }, {
           label: "告警ID",
-          width: "13%"
+          width: "8%"
         }, {
           label: "告警内容",
           width: "20%"
@@ -169,7 +169,7 @@
           width: "20%"
         }, {
           label: "常见处理方法",
-          width: "24%"
+          width: "29%"
         }],
         rows4Warn: [],
         limit4Warn: 10,
