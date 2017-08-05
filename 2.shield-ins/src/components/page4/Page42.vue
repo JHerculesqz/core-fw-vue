@@ -183,7 +183,7 @@
           label: "90",
           icon: ""
         }, {
-          label: "All",
+          label: "所有",
           icon: ""
         }],
         //#endregion
@@ -214,7 +214,7 @@
       this.devId = MarvelRouter.getParam(this.$route, "devId");
 
       //1.init ref4Days/refSwitch
-      this.$refs.ref4Days.init(this.limit4Warn, "All");
+      this.$refs.ref4Days.init(this.limit4Warn, "所有");
       this.$refs.refSwitch.setStatus(false, false);
 
       //2.setData
