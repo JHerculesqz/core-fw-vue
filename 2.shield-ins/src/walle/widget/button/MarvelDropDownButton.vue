@@ -1,7 +1,7 @@
 <template>
   <div class="dropdownBtn">
     <div class="label" v-on:click="showOrHide">
-      <div class="icon icon-newspaper"
+      <div class="icon"
            v-bind:class="[selectItem.icon]"></div>
       <div class="name">{{ selectItem.label }}</div>
       <div class="expandAndFolderIcon icon-marvelIcon-24"></div>
@@ -44,6 +44,9 @@
       selectClick: function(oItem){
         this.selectItem = oItem;
         this.showOrHide();
+      },
+      getSelectItem: function(){
+        return this.selectItem.label;
       }
     }
   }
