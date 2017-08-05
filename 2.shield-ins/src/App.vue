@@ -48,7 +48,7 @@
     width: 150px;
     height: 100%;
     float: left;
-    background: url("../static/demo/logo.svg") no-repeat center;
+    background: url("/static/demo/logo.svg") no-repeat center;
     background-size: 70%;
   }
   .header ul{
