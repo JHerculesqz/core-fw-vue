@@ -61,6 +61,7 @@
                           v-on:onClick="onClick"></marvel-txt-button>
     </div>
     <div>
+      <button v-on:click="onDropDownClick">getCheckItem</button>
       <marvel-drop-down-button ref="ref14" classCustom="classCustom1"
                          v-on:onClick="onClick"></marvel-drop-down-button>
     </div>
@@ -116,6 +117,9 @@
     methods: {
       onClick : function(){
         alert(1);
+      },
+      onDropDownClick: function(){
+        console.log(this.$refs.ref14.getSelectItem());
       }
     }
   }
