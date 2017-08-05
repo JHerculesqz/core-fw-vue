@@ -47,8 +47,7 @@
                   <div class="searchConfig">
                     <div class="configName">查看周期(天):</div>
                     <div class="configInput">
-                      <marvel-input ref="ref4Days" status="" placeHolder="请输入距今天数..."
-                                    errMsg="输入错误..."></marvel-input>
+                      <marvel-drop-down-button ref="ref4Days"></marvel-drop-down-button>
                     </div>
                   </div>
                 </div>
@@ -93,8 +92,10 @@
   import MarvelTimer from "@/walle/component/timer";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelDropDownButton from "@/walle/widget/button/MarvelDropDownButton";
   export default {
     components: {
+      MarvelDropDownButton,
       MarvelTabItem,
       MarvelTab,
       MarvelDashboard,
@@ -172,7 +173,19 @@
           width: "29%"
         }],
         rows4Warn: [],
-        limit4Warn: 10,
+        limit4Warn: [{
+          label: "10",
+          icon: ""
+        }, {
+          label: "30",
+          icon: ""
+        }, {
+          label: "90",
+          icon: ""
+        }, {
+          label: "All",
+          icon: ""
+        }],
         //#endregion
         //#region advInfo
         titles4AdvInfo: [{
@@ -201,7 +214,7 @@
       this.devId = MarvelRouter.getParam(this.$route, "devId");
 
       //1.init ref4Days/refSwitch
-      this.$refs.ref4Days.setInputMsg(10);
+      this.$refs.ref4Days.init(this.limit4Warn, "All");
       this.$refs.refSwitch.setStatus(false, false);
 
       //2.setData
@@ -243,7 +256,7 @@
       _getData4SingleDevMock: function(oCallback){
         var self = this;
 
-        var strDays = this.$refs.ref4Days.getInputMsg();
+        var strDays = this.$refs.ref4Days.getSelectItem();
         var bIsNotAll = this.$refs.refSwitch.getCheckItem();
 
         if(this.debug){
