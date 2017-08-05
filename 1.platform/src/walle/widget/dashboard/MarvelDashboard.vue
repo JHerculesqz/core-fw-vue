@@ -32,10 +32,15 @@
     border-radius: 2px;
     height: 100%;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.05);
+    position:relative;
   }
   .dashboardWrapper .title{
     height:48px;
     padding: 0 20px;
+    position:absolute;
+    width:100%;
+    box-sizing:border-box;
+    z-index:1;
   }
   .dashboardWrapper .title .titleArea{
     color: #999;
@@ -51,6 +56,10 @@
     height: calc(100% - 48px);
     padding: 0 20px 20px 20px;
     box-sizing: border-box;
+    position:absolute;
+    width:100%;
+    top:48px;
+    left:0;
   }
   .dashboardWrapper .cont .contArea{
     height: 100%;
