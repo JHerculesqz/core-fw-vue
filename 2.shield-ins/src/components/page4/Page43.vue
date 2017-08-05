@@ -129,7 +129,7 @@
         stackLineData: {
           y1Title: "设备状态用时(小时)",
           y2Title: "设备在线率(%)",
-          category: ["加工", "待机", "离线", "设备在线率"],
+          category: ["加工", "待机", "离线", "未知", "设备在线率"],
           data: []
         },
         //#endregion
@@ -192,7 +192,7 @@
           var oStackItem = arrReportUsageOutTimeVo[i];
           var oStackLineData = {
             label: oStackItem.time,
-            value: [oStackItem.hourProcess, oStackItem.hourAwait, oStackItem.hourOffline, oStackItem.usage]
+            value: [oStackItem.hourProcess, oStackItem.hourAwait, oStackItem.hourOffline, oStackItem.hourUnknow, oStackItem.usage]
           };
           this.stackLineData.data.push(oStackLineData);
 
@@ -233,15 +233,17 @@
             };
             for(var j=1;j<=30;j++){
               var d1 = 12 * Math.random();
-              var d2 = 12 * Math.random();
-              var d3 = 24 - d1 - d2;
+              var d2 = 10 * Math.random();
+              var d3 = 2 * Math.random();
+              var d4 = 24 - d1 - d2 - d3;
               var rate = d1 / 24 * 100;
               oDevVo.treeReportUsageOutTimeVo.push({
                 time: "2017-7-" + j,
                 usage: rate,
                 hourProcess: d1,
                 hourAwait: d2,
-                hourOffline: d3
+                hourOffline: d3,
+                hourUnknow: d4
               });
             }
 
