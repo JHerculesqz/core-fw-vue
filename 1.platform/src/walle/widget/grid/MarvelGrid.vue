@@ -15,7 +15,7 @@
           <tr v-for="row in rowsInPage">
             <td v-for="cell in row"
                 v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
-              <div v-if="cell.type == 'text'">
+              <div v-if="cell.type == 'text'" :title="cell.value">
                 {{ cell.value }}
               </div>
               <div v-else-if="cell.type == 'icon'">
@@ -29,7 +29,7 @@
                 <span class="icon"
                       v-bind:class="[cell.value]"
                       v-bind:style="{ color: cell.color }"></span>
-                <span>{{ cell.label }}</span>
+                <span :title="cell.label">{{ cell.label }}</span>
               </div>
             </td>
           </tr>
