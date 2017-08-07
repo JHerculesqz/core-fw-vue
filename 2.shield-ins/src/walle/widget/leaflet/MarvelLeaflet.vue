@@ -105,7 +105,7 @@
         });
         this.iconObjs.push(oMarker);
       },
-      updateIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj){
+      updateIcon: function(strId, iX, iY, strImgUrl, strTips, bIsHide, oBuObj){
         for(var i=0;i<this.iconObjs.length;i++){
           var oMarker = this.iconObjs[i];
           if(oMarker.id == strId){
@@ -113,6 +113,12 @@
             var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
             oMarker.setIcon(oIcon);
             oMarker.setPopupContent(strTips);
+
+            if(bIsHide){
+              oMarker.setOpacity(0);
+              oMarker.closePopup();
+            }
+
             oMarker.buObj = oBuObj;
             break;
           }

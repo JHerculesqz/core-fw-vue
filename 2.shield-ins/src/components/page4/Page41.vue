@@ -18,6 +18,10 @@
       </div>
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
+      <!--<div style="width:500px;height: 300px; background-color: #f0f0f0;">-->
+        <!--<marvel-legend :legendItems="legendItems"-->
+                       <!--v-on:onLegendItemClick="onLegendItemClick"></marvel-legend>-->
+      <!--</div>-->
       <marvel-leaflet ref="refGISMap" id="refGISMap" v-on:onClick="onGisMapClick"></marvel-leaflet>
       <div class="gridView">
         <marvel-grid :titles="titles" :rows="rows" v-on:onIconClick="_onIconClick"></marvel-grid>
@@ -35,8 +39,10 @@
   import MarvelWarning from "@/walle/widget/warning/MarvelWarning";
   import MarvelRouter from "@/walle/component/router";
   import MarvelTimer from "@/walle/component/timer";
+  import MarvelLegend from "../../walle/widget/legend/MarvelLegend";
   export default {
     components: {
+      MarvelLegend,
       MarvelWarning,
       MarvelGrid,
       MarvelSwitch,
@@ -64,6 +70,21 @@
         //#endregion
         //#region devLst
         devLst: [],
+        //#endregion
+        //#region legendItems
+        legendItems: [{
+          label: "加工",
+          level: "level5",
+          isHide: true
+        }, {
+          label: "待机",
+          level: "level3",
+          isHide: false
+        }, {
+          label: "离线",
+          level: "level6",
+          isHide: false
+        }],
         //#endregion
         //#region warnPanel
         warnPanel: [{
@@ -294,7 +315,18 @@
       _updateGisMap: function(){
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
-          this.$refs.refGISMap.updateIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips, oDev);
+          var bIsHide = false;
+          if(this.legendItems[0].label == oDev.uiStatus){
+            bIsHide = this.legendItems[0].isHide;
+          }
+          else if(this.legendItems[1].label == oDev.uiStatus){
+            bIsHide = this.legendItems[1].isHide;
+          }
+          else if(this.legendItems[2].label == oDev.uiStatus){
+            bIsHide = this.legendItems[2].isHide;
+          }
+          this.$refs.refGISMap.updateIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips,
+            bIsHide, oDev);
         }
       },
       _onIconClick: function(oRow){
@@ -303,6 +335,9 @@
           clientNo: this.companyInfo.clientNo,
           devId: strDevId
         });
+      },
+      onLegendItemClick: function(){
+        this._updateGisMap();
       }
     }
   }
