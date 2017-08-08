@@ -85,6 +85,10 @@
           label: "离线",
           level: "level6",
           isHide: false
+        }, {
+          label: "告警",
+          level: "level1",
+          isHide: true
         }],
         //#endregion
         //#region warnPanel
@@ -319,15 +323,133 @@
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
           var bIsHide = false;
-          if(this.legendItems[0].label == oDev.uiStatus){
-            bIsHide = this.legendItems[0].isHide;
+          //1.加工/有告警
+          if(oDev.uiStatus == "加工" && oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[0].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
           }
-          else if(this.legendItems[1].label == oDev.uiStatus){
-            bIsHide = this.legendItems[1].isHide;
+          //2.加工/无告警
+          else if(oDev.uiStatus == "加工" && !oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[0].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = true;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
           }
-          else if(this.legendItems[2].label == oDev.uiStatus){
-            bIsHide = this.legendItems[2].isHide;
+          //3.待机/有告警
+          else if(oDev.uiStatus == "待机" && oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[1].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
           }
+          //4.待机/无告警
+          else if(oDev.uiStatus == "待机" && !oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[1].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = true;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+          }
+          //5.离线/有告警
+          else if(oDev.uiStatus == "离线" && oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[2].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+          }
+          //6.离线/无告警
+          else if(oDev.uiStatus == "离线" && !oDev.hasWarn){
+            var bHideThisStatus = this.legendItems[2].isHide;
+            var bOnlyWatchWarn = !this.legendItems[3].isHide;
+            if(bOnlyWatchWarn){
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = true;
+              }
+            }
+            else{
+              if(bHideThisStatus){
+                bIsHide = true;
+              }
+              else{
+                bIsHide = false;
+              }
+            }
+          }
+
           this.$refs.refGISMap.updateIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips,
             bIsHide, oDev);
         }
