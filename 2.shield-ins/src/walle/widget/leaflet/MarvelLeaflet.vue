@@ -118,6 +118,9 @@
               oMarker.setOpacity(0);
               oMarker.closePopup();
             }
+            else{
+              oMarker.setOpacity(1);
+            }
 
             oMarker.buObj = oBuObj;
             break;

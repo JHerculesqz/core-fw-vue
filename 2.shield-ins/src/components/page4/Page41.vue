@@ -6,7 +6,7 @@
         <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
       </div>
       <!--<div class="search">-->
-        <!--搜索框占位置-->
+      <!--搜索框占位置-->
       <!--</div>-->
       <div class="bar"></div>
       <div class="tip">
@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="details large-24 middle-24 small-24 mini-24">
-      <!--<div style="width:500px;height: 300px; background-color: #f0f0f0;">-->
-        <!--<marvel-legend :legendItems="legendItems"-->
-                       <!--v-on:onLegendItemClick="onLegendItemClick"></marvel-legend>-->
-      <!--</div>-->
       <marvel-leaflet ref="refGISMap" id="refGISMap" v-on:onClick="onGisMapClick"></marvel-leaflet>
+      <div class="legendArea" v-bind:class="{dpn: isLegendHide}">
+        <marvel-legend :legendItems="legendItems"
+                       v-on:onLegendItemClick="onLegendItemClick"></marvel-legend>
+      </div>
       <div class="gridView">
         <marvel-grid :titles="titles" :rows="rows" v-on:onIconClick="_onIconClick"></marvel-grid>
       </div>
@@ -72,10 +72,11 @@
         devLst: [],
         //#endregion
         //#region legendItems
+        isLegendHide: false,
         legendItems: [{
           label: "加工",
           level: "level5",
-          isHide: true
+          isHide: false
         }, {
           label: "待机",
           level: "level3",
@@ -187,10 +188,12 @@
         if(bIsGisView){
           this.$refs.refGISMap.showOrHide(true);
           this.crumbItems[1].label ="GIS视图";
+          this.isLegendHide = false;
         }
         else{
           this.$refs.refGISMap.showOrHide(false);
           this.crumbItems[1].label ="表格视图";
+          this.isLegendHide = true;
         }
       },
       onGisMapClick: function(oPoint){
@@ -381,5 +384,16 @@
     padding: 20px;
     box-sizing: border-box;
     background-color: #fafafa;
+  }
+  .details .legendArea{
+    pointer-events: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    z-index: 1000;
+  }
+  .dpn {
+    display: none;
   }
 </style>

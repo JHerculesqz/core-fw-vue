@@ -48,7 +48,7 @@
     display: inline-block;
     padding: 10px 16px;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #181b21;
   }
   .legendWrapper .LegendItem{
     height: 26px;
@@ -78,13 +78,13 @@
     background-color: #3dcca6;
   }
   .legendWrapper .LegendItem  .level6{
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
   }
   .legendWrapper .LegendItem .text{
     display: inline-block;
     margin-right: 10px;
     font-size: 14px;
-    color: #293035;
+    color: #FFFFFF;
     line-height: 26px;
   }
   .legendWrapper .LegendItem .visibleIcon{
