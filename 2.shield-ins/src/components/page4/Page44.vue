@@ -18,7 +18,7 @@
         <div class="inputBlock">
           <div class="detailsCont">
             <marvel-input ref="ref1" theme="dark" size=""
-                          placeHolder="请输入设备名称33333"
+                          placeHolder="请输入设备名称"
                           errMsg="输入错误..." status=""></marvel-input>
           </div>
           <div class="detailsBtn" v-on:click="onBtnClick4InitDev">开站</div>
