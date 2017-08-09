@@ -296,7 +296,7 @@
           var oRow = [
             {value: [{value: "icon-eye", color:"#808080"}], type:"icon" },
             {value: oDev.devId, type:"text"},
-            {value: oDev.devId, type:"text"},
+            {value: oDev.devName, type:"text"},
             {value: "icon-marvelIcon-16", color: "#3dcca6", label: oDev.uiStatus, type:"textIcon" },
             {value: "icon-marvelIcon-16", color: "#ff4c4c", label: oDev.warnCount, type:"textIcon"},
             {value: oDev.lastUpdateTime, type:"text"},

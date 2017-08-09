@@ -100,6 +100,7 @@
     white-space: nowrap;
     cursor: pointer;
     padding: 0 25px 0 15px;
+    background-color: #fff;
   }
 
   .dropdownBtn .options .optionItem .icon{

@@ -1,14 +1,14 @@
 <template>
   <div class="dashboardWrapper">
+    <div class="cont">
+      <div class="contArea">
+        <slot name="contArea"></slot>
+      </div>
+    </div>
     <div class="title">
       <div class="titleArea">{{ title }}</div>
       <div class="titleCustomArea">
         <slot name="customArea"></slot>
-      </div>
-    </div>
-    <div class="cont">
-      <div class="contArea">
-        <slot name="contArea"></slot>
       </div>
     </div>
   </div>
@@ -37,10 +37,11 @@
   .dashboardWrapper .title{
     height:48px;
     padding: 0 20px;
+    top:0;
+    left:0;
     position:absolute;
     width:100%;
     box-sizing:border-box;
-    z-index:1;
   }
   .dashboardWrapper .title .titleArea{
     color: #999;

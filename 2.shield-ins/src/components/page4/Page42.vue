@@ -433,14 +433,14 @@
     width: 100%;
     height: 48px;
     padding-top: 9px;
-    overflow: hidden;
+    /*overflow-flow: hidden;*/
     clear: both;
     box-sizing: border-box;
   }
 
   .searchConfigArea .searchConfig{
     float: right;
-    overflow: hidden;
+    /*overflow: hidden;*/
     margin-left: 20px;
 
   }
