@@ -65,19 +65,36 @@
     mounted: function(){
       var self = this;
 
-      //1._getCompanyInfoMock
-      this._getCompanyInfoMock(function(){
-        //2._initDevInfo
-        self._initDevInfo();
+      this._authorize(function(){
+        //1._getCompanyInfoMock
+        self._getCompanyInfoMock(function(){
+          //2._initDevInfo
+          self._initDevInfo();
 
-        //3._initGisMap
-        self._initGisMap();
+          //3._initGisMap
+          self._initGisMap();
+        });
       });
     },
     destroyed: function(){
 
     },
     methods: {
+      _authorize: function(oCallback){
+        var self = this;
+
+        this.$http.post('/getLoginUser', {}).then(res=>{
+          if(res.data.ok){
+            self.user = res.data.resultObj.user;
+            if(0 == res.data.resultObj.role){
+              oCallback();
+            }
+            else{
+              MarvelRouter.to(self.$router, "page40", { redirect: "/init"});
+            }
+          }
+        });
+      },
       _getCompanyInfoMock: function(oCallback){
         this.companyInfo = {};
 

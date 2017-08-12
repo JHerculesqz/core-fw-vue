@@ -15,7 +15,7 @@
              v-on:click="expandOrCollapseSubItems(item)">{{ item.label }}</div>
         <!--if not has subItems-->
         <div class="name" v-else
-             v-on:click="itemClick(item)">{{ item.label }}</div>
+             v-on:click="accordionItemClick(item)">{{ item.label }}</div>
         <!--if expand-->
         <div class="showAndHideSubMenu icon-marvelIcon-01"
              v-if="isExpandSubItems(item)"
@@ -33,7 +33,7 @@
         <div class="accordionItemSubMenuItem"
              v-for="subItem in item.subItems"
              v-bind:class="{ select: isItemOrSubItemSelect(subItem) }"
-             v-on:click="clickSubItem(subItem)">
+             v-on:click="accordionSubItemClick(subItem)">
           {{ subItem.label }}
           <div class="selectMark"></div>
         </div>
@@ -46,7 +46,8 @@
 <script>
   export default {
     name: 'MarvelAccordion',
-    props: ["isFolder", "hasShadow", "title", "titleIcon", "items"],
+    props: ["isFolder", "hasShadow", "title", "titleIcon", "items",
+      "defaultSelectLabel"],
     data: function() {
         return {
           lastSelectItemOrSubItemLabel: "",
@@ -67,6 +68,7 @@
       else{
         this.folder = "";
       }
+      this.lastSelectItemOrSubItemLabel = this.defaultSelectLabel;
     },
     methods: {
       showAndHide: function(){
@@ -78,9 +80,9 @@
       expandOrCollapseSubItems: function(oItem){
         oItem.expand = !oItem.expand;
       },
-      itemClick: function (oItem) {
+      accordionItemClick: function (oItem) {
         this.lastSelectItemOrSubItemLabel = oItem.label;
-        oItem.click();
+        this.$emit("accordionItemClick", oItem);
       },
       isItemOrSubItemSelect: function(oItem){
         return oItem.label == this.lastSelectItemOrSubItemLabel;
@@ -91,9 +93,9 @@
       isCollapseSubItems: function(oItem){
         return oItem.subItems != undefined && !oItem.expand;
       },
-      clickSubItem: function(oSubItem){
+      accordionSubItemClick: function(oSubItem){
         this.lastSelectItemOrSubItemLabel = oSubItem.label;
-        oSubItem.click();
+        this.$emit("accordionSubItemClick", oSubItem);
       }
     }
   }

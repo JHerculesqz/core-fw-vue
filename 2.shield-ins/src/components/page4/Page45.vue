@@ -1,15 +1,22 @@
 <template>
   <div class="container large-24 middle-24 small-24 mini-24">
     <marvel-frame></marvel-frame>
+    <div class="toolbar">
+      <div class="crumb">
+        <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
+      </div>
+    </div>
     <div class="leftArea">
       <!--accordionArea start-->
       <marvel-accordion isFolder="false" hasShadow="true"
                         title="管理" titleIcon="icon-user-tie"
-                        :items="accordionItems"></marvel-accordion>
+                        :defaultSelectLabel="defaultSelectLabel"
+                        :items="accordionItems"
+                        v-on:accordionItemClick="accordionItemClick"></marvel-accordion>
       <!--accordionArea end-->
     </div>
     <div class="rightArea">
-      <div class="panel userPanel dpn">
+      <div class="panel userPanel" v-bind:class="{ dpn: !isUserMgrShow }">
         <div class="upArea hasMargin">
           <div class="upAreaItem large-7 small-12 mini-24">
             <!--input area start-->
@@ -37,7 +44,8 @@
         </div>
         <div class="downArea">
           <!--grid area start-->
-          <marvel-grid :titles="userTitles" :rows="userRows"></marvel-grid>
+          <marvel-grid :titles="userTitles" :rows="userRows" :limit="limit"
+                       v-on:onIconClick="_onIconClick"></marvel-grid>
           <!--grid area end-->
         </div>
       </div>
@@ -56,8 +64,6 @@
             <div class="deviceInfoArea">
               <div class="deviceInfoText">设备ID：01001</div>
               <div class="deviceInfoText">设备名称：device1</div>
-              <div class="deviceInfoText">经度：100.11</div>
-              <div class="deviceInfoText">纬度：12.001</div>
             </div>
             <div class="deviceOperation">
               <div class="deviceOperationBox">
@@ -97,11 +103,20 @@
       return {
         //#region const
         debug: false,
+        timerInterval: 2000,
         //#endregion
         //#region companyInfo
         companyInfo: {},
         //#endregion
+        //#region crumb
+        crumbItems: [{
+          label: "管理"
+        }, {
+          label: "用户管理"
+        }],
+        //#endregion
         //#region accordion
+        defaultSelectLabel: "用户管理",
         accordionItems: [{
           label: "用户管理",
           icon: "icon-users"
@@ -111,47 +126,174 @@
         }],
         //#endregion
         //#region userGrid
+        isUserMgrShow: true,
         userTitles: [{
           label: "用户名",
-          width: "25%"
+          width: "35%"
         }, {
           label: "密码",
-          width: "25%"
+          width: "35%"
         }, {
           label: "角色",
           width: "25%"
         }, {
           label: "操作",
-          width: "25%"
+          width: "5%"
         }],
         skip: 0,
         limit: 10,
-        userRows: []
+        userRows: [],
+        //#endregion
+        //#region devMgr
         //#endregion
       }
     },
     mounted: function(){
       var self = this;
-      this.companyInfo = {
-        clientNo: "client1",
-        clientMapCenterX: "31.429",
-        clientMapCenterY: "104.589",
-        clientMapCenterZoomMin: "5",
-        clientMapCenterZoomMax: "18"
-      };
-      self.$refs.refGISMap4Mgr.init(self.companyInfo.clientMapCenterX,
-        self.companyInfo.clientMapCenterY,
-        self.companyInfo.clientMapCenterZoomMin,
-        self.companyInfo.clientMapCenterZoomMax,
-        "/static/leaflet/images/shit.png");
+      if(this.debug){
+        this.user = "debug";
+      }
+      else{
+        this._authorize(function(){
+          self._getDevLstMock(function(){
+            //1.init gis map
+            self.$refs.refGISMap4Mgr.init(self.companyInfo.clientMapCenterX,
+              self.companyInfo.clientMapCenterY,
+              self.companyInfo.clientMapCenterZoomMin,
+              self.companyInfo.clientMapCenterZoomMax,
+              "/static/leaflet/images/shit.png");
+
+            //2._getUserLstMock();
+            self._getUserLstMock();
+          });
+        });
+      }
     },
     destroyed: function(){
 
     },
     methods: {
+      _authorize: function(oCallback){
+        var self = this;
+
+        this.$http.post('/getLoginUser', {}).then(res=>{
+          if(res.data.ok){
+            self.user = res.data.resultObj.user;
+            if(0 == res.data.resultObj.role){
+              oCallback();
+            }
+            else{
+              MarvelRouter.to(self.$router, "page41");
+            }
+          }
+        });
+      },
+      _getDevLstMock: function(oCallback){
+        this.companyInfo = {};
+
+        if(this.debug){
+          this.companyInfo = {
+            clientNo: "client1",
+            clientMapCenterX: "31.429",
+            clientMapCenterY: "104.589",
+            clientMapCenterZoomMin: "5",
+            clientMapCenterZoomMax: "18"
+          };
+          oCallback();
+        }
+        else{
+          this.$http.post('/getCompanyInfo', {}).then(res=>{
+            this.companyInfo = res.data.resultObj;
+            oCallback();
+          });
+        }
+      },
+      _getUserLstMock: function(){
+        this.userRows = [];
+
+        if(this.debug){
+          for(var i=0;i<10;i++){
+            var oUser = {
+              user: i,
+              pwd: i,
+              role: 1
+            };
+            var oRow = [
+              {value: oUser.user, type:"text"},
+              {value: oUser.pwd, type:"text"},
+              {value: oUser.role, type:"text"},
+              {value: [{value: "icon-marvelIcon-20", color:"#808080"}], type:"icon" }
+            ];
+            this.userRows.push(oRow);
+          }
+        }
+        else{
+          this.$http.post('/getUserLst', {}).then(res=>{
+            for(var i=0;i<res.data.resultObj.lstUsers.length;i++){
+              var oUser = res.data.resultObj.lstUsers[i];
+              var oRow = [
+                {value: oUser.user, type:"text"},
+                {value: oUser.pwd, type:"text"},
+                {value: oUser.role, type:"text"},
+                {value: [{value: "icon-marvelIcon-20", color:"#808080"}], type:"icon" }
+              ];
+              this.userRows.push(oRow);
+            }
+          });
+        }
+      },
+      onCrumbItemClick: function(strItemLabel){
+        if("管理" == strItemLabel){
+          MarvelRouter.to(this.$router, "page45");
+        }
+      },
+      accordionItemClick: function(oItem){
+        //1.update crumb
+        this.crumbItems[1].label = oItem.label;
+
+        //2.update isXXMgrShow
+        if(oItem.label == "用户管理"){
+          this.isUserMgrShow =  true;
+          this.$refs.refGISMap4Mgr.showOrHide(false);
+        }
+        else if(oItem.label == "站点管理"){
+          this.isUserMgrShow =  false;
+          this.$refs.refGISMap4Mgr.showOrHide(true);
+        }
+      },
       onClick4AddUser: function(){
-        alert(1);
-      }
+        var strUser = this.$refs.refUser.getInputMsg();
+        var strPwd = this.$refs.refPwd.getInputMsg();
+        var iRole = this.$refs.refRole.getInputMsg();
+        if(this.debug){
+
+        }
+        else{
+          this.$http.post('/addUser', {
+            reqBuVoStr: JSON.stringify({
+              user: strUser,
+              pwd: strPwd,
+              role: iRole
+            })
+          }).then(res=>{
+            this._getUserLstMock();
+          });
+        }
+      },
+      _onIconClick: function(oRow){
+        if(this.debug){
+
+        }
+        else{
+          this.$http.post('/delUser', {
+            reqBuVoStr: JSON.stringify({
+              user: oRow[0].value
+            })
+          }).then(res=>{
+            this._getUserLstMock();
+          });
+        }
+      },
     }
   }
 </script>
@@ -163,14 +305,24 @@
   .container{
     height: 100%;
   }
+  .toolbar{
+    height: 36px;
+    width: 100%;
+    background-color: #41475a;
+  }
+  .crumb{
+    margin-top: 11px;
+    float: left;
+    margin-left: 20px;
+  }
   .container .leftArea{
-    width: 280px;
+    width: 200px;
     height: 100%;
     background-color: #f4f5f6;
     float: left;
   }
   .container .rightArea{
-    width: calc(100% - 280px);
+    width: calc(100% - 200px);
     height: 100%;
     float: right;
   }

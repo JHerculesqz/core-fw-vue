@@ -2,6 +2,7 @@
   <div style="width: 180px;height:100%">
     <marvel-accordion isFolder="false" hasShadow="true"
                       title="abc" titleIcon="icon-calculator"
+                      defaultSelectLabel="item1"
                       :items="items"></marvel-accordion>
   </div>
 </template>
@@ -19,22 +20,13 @@
           icon: "icon-office",
           expand: false,
           subItems: [{
-            label: "subItem1",
-            click: function(){
-              console.log("subItem1");
-            }
+            label: "subItem1"
           }, {
-            label: "subItem2",
-            click: function(){
-              console.log("subItem2");
-            }
+            label: "subItem2"
           }]
         }, {
           label: "item2",
-          icon: "icon-office",
-          click: function(){
-            console.log("item2");
-          }
+          icon: "icon-office"
         }]
       }
     }

@@ -9,7 +9,7 @@
         <li>
           <router-link :to="{name:'page43'}" exact>商业洞察</router-link>
         </li>
-        <li>
+        <li v-bind:class="{ dpn: isHide }">
           <router-link :to="{name:'page45'}" exact>管理</router-link>
         </li>
       </ul>
@@ -46,7 +46,8 @@
         debug: false,
         //#endregion
         //#region user
-        user: ""
+        user: "",
+        isHide: false
         //#endregion
       };
     },
@@ -66,7 +67,13 @@
         else{
           this.$http.post('/getLoginUser', {}).then(res=>{
             if(res.data.ok){
-              self.user = res.data.resultObj;
+              self.user = res.data.resultObj.user;
+              if(0 == res.data.resultObj.role){
+                self.isHide = false;
+              }
+              else{
+                self.isHide = true;
+              }
             }
           });
         }
@@ -76,7 +83,9 @@
 </script>
 
 <style>
-
+  .dpn {
+    display: none;
+  }
   body {
     position: fixed;
     width: 100%;

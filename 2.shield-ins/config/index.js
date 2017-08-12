@@ -97,6 +97,27 @@ module.exports = {
         pathRewrite: {
           '^/initDevByDevId': '/initDevByDevId'
         }
+      },
+      '/addUser': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/addUser': '/addUser'
+        }
+      },
+      '/getUserLst': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getUserLst': '/getUserLst'
+        }
+      },
+      '/delUser': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/delUser': '/delUser'
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
