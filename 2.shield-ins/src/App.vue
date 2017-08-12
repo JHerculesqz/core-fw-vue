@@ -9,7 +9,20 @@
         <li>
           <router-link :to="{name:'page43'}" exact>商业洞察</router-link>
         </li>
+        <li>
+          <router-link :to="{name:'page45'}" exact>管理</router-link>
+        </li>
       </ul>
+      <div class="userInfoArea">
+        <div class="userInfoItem">
+          <div class="userInfoIcon icon-marvelIcon-10"></div>
+          <div class="userInfoName">{{ user }}</div>
+        </div>
+        <div class="userInfoItem">
+          <div class="userInfoIcon icon-marvelIcon-12"></div>
+          <div class="userInfoName" v-on:click="onClickLogout">Logout</div>
+        </div>
+      </div>
     </div>
     <div class="content">
       <transition name="slide-fade">
@@ -23,8 +36,42 @@
 </template>
 
 <script>
+  import MarvelRouter from "@/walle/component/router";
+
   export default {
-    name: 'app'
+    name: 'app',
+    data: function(){
+      return {
+        //#region const
+        debug: false,
+        //#endregion
+        //#region user
+        user: ""
+        //#endregion
+      };
+    },
+    methods: {
+      onClickLogout: function(){
+        this.$http.post('/logout', {}).then(res=>{
+          MarvelRouter.to(this.$router, "page40");
+        });
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        var self = this;
+        if(this.debug){
+          this.user = "debug";
+        }
+        else{
+          this.$http.post('/getLoginUser', {}).then(res=>{
+            if(res.data.ok){
+              self.user = res.data.resultObj;
+            }
+          });
+        }
+      }
+    }
   }
 </script>
 
@@ -70,6 +117,29 @@
   }
   .header ul li .active{
     color:#00a0e9;
+  }
+  .header .userInfoArea{
+    height: 100%;
+    float: right;
+    overflow: hidden;
+  }
+  .header .userInfoArea .userInfoItem{
+    float: left;
+
+    margin-right: 20px;
+  }
+  .header .userInfoArea .userInfoItem .userInfoIcon{
+    float: left;
+    font-size: 24px;
+    line-height: 50px;
+    margin-right: 10px;
+    color: #FFFFFF;
+  }
+  .header .userInfoArea .userInfoItem .userInfoName{
+    float: left;
+    line-height: 50px;
+    font-size: 14px;
+    color: #ffffff;
   }
   .content{
     height: calc(100% - 50px);

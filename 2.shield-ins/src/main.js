@@ -9,6 +9,34 @@ import dom from './walle/component/dom'
 
 Vue.config.productionTip = false;
 
+const debug = false;
+router.beforeEach((to, from, next)=>{
+  //#region debug
+  if(debug){
+    next();
+  }
+  //#endregion
+  //#region product
+  else{
+    if (to.meta.requireAuth) {
+      Vue.http.post('/isLogin',{}).then((res)=>{
+        if(!res.data.ok){
+          next({
+            path: '/login',
+            query: {redirect: to.fullPath}
+          });
+        }
+        else{
+          next();
+        }});
+    }
+    else {
+      next();
+    }
+  }
+  //#endregion
+});
+
 new Vue({
   el: '#app',
   router,

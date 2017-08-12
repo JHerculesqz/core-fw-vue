@@ -12,6 +12,11 @@ export default {
       });
     }
   },
+  toEx: function(oRouter, strRedirectUrl){
+    oRouter.push({
+      path: strRedirectUrl
+    });
+  },
   getParam: function(oRouter, strKey){
     var strValue = oRouter.query[strKey];
     return strValue;

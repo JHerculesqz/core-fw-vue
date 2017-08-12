@@ -28,6 +28,34 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      '/login': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': '/login'
+        }
+      },
+      '/isLogin': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/isLogin': '/isLogin'
+        }
+      },
+      '/logout': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/logout': '/logout'
+        }
+      },
+      '/getLoginUser': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getLoginUser': '/getLoginUser'
+        }
+      },
       '/getCompanyInfo': {
         target: 'http://localhost',
         changeOrigin: true,
