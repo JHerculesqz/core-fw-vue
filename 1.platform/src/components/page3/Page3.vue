@@ -6,6 +6,7 @@
     <router-link to="/page3/page4Loading1" exact>Loading1</router-link>
     <router-link to="/page3/page4Loading2" exact>Loading2</router-link>
     <router-link to="/page3/page4Menu" exact>Menu</router-link>
+    <router-link to="/page3/page4MenuContext" exact>MenuContext</router-link>
     <router-link to="/page3/page4Accordion" exact>Accordion</router-link>
     <router-link to="/page3/page4Wizard" exact>Wizard</router-link>
     <router-link to="/page3/page4Crumb" exact>Crumb</router-link>
@@ -19,6 +20,7 @@
     <router-link to="/page3/page4Date" exact>Date</router-link>
     <router-link to="/page3/page4Location" exact>Location</router-link>
     <router-link to="/page3/page4Legend" exact>Legend</router-link>
+    <router-link to="/page3/page4List1" exact>List1</router-link>
     <br>
     <router-link to="/page3/page4Leaflet" exact>Leaflet</router-link>
     <router-link to="/page3/page4Chart" exact>Chart</router-link>

@@ -146,11 +146,7 @@
       //1.1.getDevLst
       this._getDevLstMock(function(){
         //1.2.init gis map
-        self.$refs.refGISMap.init(self.companyInfo.clientMapCenterX,
-          self.companyInfo.clientMapCenterY,
-          self.companyInfo.clientMapCenterZoomMin,
-          self.companyInfo.clientMapCenterZoomMax,
-          "/static/leaflet/images/shit.png");
+        self._initGisMap();
 
         //1.3.draw
         self._drawGisMap();
@@ -200,9 +196,6 @@
           this.isLegendHide = true;
         }
       },
-      onGisMapClick: function(oPoint){
-        console.log(oPoint);
-      },
       _getDevLstMock: function(oCallback){
         this.companyInfo = {};
         this.devLst = [];
@@ -240,8 +233,10 @@
           this.$http.post('/getCompanyInfo', {}).then(res=>{
             this.companyInfo = res.data.resultObj;
 
-            this.$http.post('/getDevLst', {
-              reqBuVoStr: JSON.stringify({clientNo:"client1"})
+            this.$http.post('/getDevLstByEnable', {
+              reqBuVoStr: JSON.stringify({
+                clientNo:"client1"
+              })
             }).then(res=>{
               this.devLst = res.data.resultObj;
               oCallback();
@@ -249,12 +244,22 @@
           });
         }
       },
+      _initGisMap: function(){
+        this.$refs.refGISMap.init(this.companyInfo.clientMapCenterX,
+          this.companyInfo.clientMapCenterY,
+          this.companyInfo.clientMapCenterZoomMin,
+          this.companyInfo.clientMapCenterZoomMax,
+          "/static/leaflet/images/shit.png");
+      },
       _drawGisMap: function(){
         for(var i=0;i<this.devLst.length;i++){
           var oDev = this.devLst[i];
           this.$refs.refGISMap.addIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips, oDev,
             this._onDBClickGisMap);
         }
+      },
+      onGisMapClick: function(oPoint){
+        console.log(oPoint);
       },
       _onDBClickGisMap: function(strId){
         MarvelRouter.to(this.$router, "page42", {
@@ -454,15 +459,15 @@
             bIsHide, oDev);
         }
       },
+      onLegendItemClick: function(){
+        this._updateGisMap();
+      },
       _onIconClick: function(oRow){
         var strDevId = oRow[1].value;
         MarvelRouter.to(this.$router, "page42", {
           clientNo: this.companyInfo.clientNo,
           devId: strDevId
         });
-      },
-      onLegendItemClick: function(){
-        this._updateGisMap();
       }
     }
   }

@@ -1,9 +1,13 @@
 <template>
-  <div class="container large-24 middle-24 small-24 mini-24">
+  <div class="container large-24 middle-24 small-24 mini-24" v-bind:class="[isContainerFold]">
     <marvel-frame></marvel-frame>
     <div class="toolbar">
       <div class="crumb">
         <marvel-crumb :items="crumbItems" theme="dark" v-on:onCrumbItemClick="onCrumbItemClick"></marvel-crumb>
+      </div>
+      <div class="switch" v-bind:class="{ dpn: isHideSwitch }">
+        <marvel-switch ref="refSwitch4DevMgr" id="refSwitch4DevMgr"
+                       v-on:onChange="onChange4Switch"></marvel-switch>
       </div>
     </div>
     <div class="leftArea">
@@ -12,7 +16,8 @@
                         title="管理" titleIcon="icon-user-tie"
                         :defaultSelectLabel="defaultSelectLabel"
                         :items="accordionItems"
-                        v-on:accordionItemClick="accordionItemClick"></marvel-accordion>
+                        v-on:accordionItemClick="accordionItemClick"
+                        v-on:afterShowOrHide="afterShowOrHide"></marvel-accordion>
       <!--accordionArea end-->
     </div>
     <div class="rightArea">
@@ -45,31 +50,29 @@
         <div class="downArea">
           <!--grid area start-->
           <marvel-grid :titles="userTitles" :rows="userRows" :limit="limit"
-                       v-on:onIconClick="_onIconClick"></marvel-grid>
+                       v-on:onIconClick="onIconClick4DelUser"></marvel-grid>
           <!--grid area end-->
         </div>
       </div>
       <div class="panel devicePanel">
         <div class="mapArea">
-          <marvel-leaflet ref="refGISMap4Mgr" id="refGISMap4Mgr"></marvel-leaflet>
-        </div>
-        <div class="deviceArea">
-          <div class="deviceIcons">
-            <div class="deviceIcon select"></div>
-            <div class="deviceIcon"></div>
-            <div class="deviceIcon"></div>
-            <div class="deviceIcon"></div>
-          </div>
-          <div class="deviceInfo">
-            <div class="deviceInfoArea">
-              <div class="deviceInfoText">设备ID：01001</div>
-              <div class="deviceInfoText">设备名称：device1</div>
-            </div>
-            <div class="deviceOperation">
-              <div class="deviceOperationBox">
-                <div class="add icon-plus"></div>
-                <div class="del icon-minus"></div>
-              </div>
+          <marvel-leaflet ref="refGISMap4DevMgr" id="refGISMap4DevMgr"></marvel-leaflet>
+          <marvel-menu-context ref="refContextMenu"
+                               :items="menuItems4DevMgr"
+                               v-on:onMenuItemClick="_onContextMenuItemClick"></marvel-menu-context>
+          <marvel-list1 :items="listItems" :bargeCount="listBargeCount"
+                        v-on:onListItemClick="onListItemClick"></marvel-list1>
+          <div class="gridArea">
+            <div style="height: 100%">
+              <marvel-dashboard title="站点管理">
+                <div slot="customArea"></div>
+                <div slot="contArea" style="height: 100%">
+                  <div class="large-24" style="height: 100%">
+                    <marvel-grid :titles="titles4DevMgr" :rows="rows4DevMgr"
+                                 v-on:onIconClick="onIconClick4DevMgr"></marvel-grid>
+                  </div>
+                </div>
+              </marvel-dashboard>
             </div>
           </div>
         </div>
@@ -86,10 +89,20 @@
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelRouter from "@/walle/component/router";
-  import MarvelAccordion from "../../walle/widget/accordion/MarvelAccordion";
-  import MarvelGrid from "../../walle/widget/grid/MarvelGrid";
+  import MarvelAccordion from "@/walle/widget/accordion/MarvelAccordion";
+  import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
+  import MarvelSwitch from "@/walle/widget/select/MarvelSwitch";
+  import MarvelTimer from "@/walle/component/timer";
+  import MarvelDashboard from "@/walle/widget/dashboard/MarvelDashboard";
+  import MarvelMenuContext from "@/walle/widget/menu/MarvelMenuContext";
+  import MarvelList1 from "@/walle/widget/list/MarvelList1";
   export default {
     components: {
+      MarvelList1,
+      MarvelMenuContext,
+      MarvelDashboard,
+      MarvelTimer,
+      MarvelSwitch,
       MarvelGrid,
       MarvelAccordion,
       MarvelInput,
@@ -103,10 +116,10 @@
       return {
         //#region const
         debug: false,
-        timerInterval: 2000,
+        timerInterval: 1000,
         //#endregion
-        //#region companyInfo
-        companyInfo: {},
+        //#region authorize
+        user: "",
         //#endregion
         //#region crumb
         crumbItems: [{
@@ -124,8 +137,9 @@
           label: "站点管理",
           icon: "icon-office"
         }],
+        isContainerFold: "",
         //#endregion
-        //#region userGrid
+        //#region userMgr
         isUserMgrShow: true,
         userTitles: [{
           label: "用户名",
@@ -145,51 +159,129 @@
         userRows: [],
         //#endregion
         //#region devMgr
+        //#region switch
+        isHideSwitch: true,
+        //#endregion
+        //#region contextMenu
+        menuItems4DevMgr: [{
+          icon: "icon-cancel-circle",
+          color: "#ff4c4c",
+          label: "关站"
+        }, {
+          icon: "icon-pencil",
+          color: "",
+          label: "编辑"
+        }],
+        //#endregion
+        //#region companyInfo
+        companyInfo: {},
+        //#endregion
+        //#region devLst
+        devLstEnable: [],
+        devLstDisable: [],
+        //#endregion
+        //#region grid
+        titles4DevMgr: [{
+          label: "设备ID",
+          width: "45%"
+        }, {
+          label: "设备名称",
+          width: "45%"
+        }, {
+          label: "关站",
+          width: "5%"
+        }, {
+          label: "编辑",
+          width: "5%"
+        }],
+        rows4DevMgr: [],
+        //#endregion
+        //#region listView
+        listItems: [],
+        listBargeCount: 0
+        //#endregion
         //#endregion
       }
     },
     mounted: function(){
       var self = this;
-      if(this.debug){
-        this.user = "debug";
-      }
-      else{
-        this._authorize(function(){
-          self._getDevLstMock(function(){
-            //1.init gis map
-            self.$refs.refGISMap4Mgr.init(self.companyInfo.clientMapCenterX,
-              self.companyInfo.clientMapCenterY,
-              self.companyInfo.clientMapCenterZoomMin,
-              self.companyInfo.clientMapCenterZoomMax,
-              "/static/leaflet/images/shit.png");
 
-            //2._getUserLstMock();
-            self._getUserLstMock();
-          });
+      this._authorize(function(){
+        self._getDevLstMock(function(){
+          self._initGisMap();
+          self._drawGisMap();
+          self._drawGrid();
+          self._drawListView();
+          self._getUserLstMock();
         });
-      }
+
+        //2.getStatus by timer
+        MarvelTimer.startTimer(function(){
+          self._getDevLstMock(function(){
+            self._updateGisMap();
+            self._drawListView();
+            self._drawGrid();
+          });
+        }, self.timerInterval);
+      });
     },
     destroyed: function(){
-
+      MarvelTimer.endTimer();
     },
     methods: {
       _authorize: function(oCallback){
         var self = this;
 
-        this.$http.post('/getLoginUser', {}).then(res=>{
-          if(res.data.ok){
-            self.user = res.data.resultObj.user;
-            if(0 == res.data.resultObj.role){
-              oCallback();
+        if(this.debug){
+          this.user = "debug";
+        }
+        else{
+          this.$http.post('/getLoginUser', {}).then(res=>{
+            if(res.data.ok){
+              self.user = res.data.resultObj.user;
+              if(0 == res.data.resultObj.role){
+                oCallback();
+              }
+              else{
+                MarvelRouter.to(self.$router, "page41");
+              }
             }
-            else{
-              MarvelRouter.to(self.$router, "page41");
-            }
-          }
-        });
+          });
+        }
+      },
+      onCrumbItemClick: function(strItemLabel){
+        if("管理" == strItemLabel){
+          MarvelRouter.to(this.$router, "page45");
+        }
+      },
+      accordionItemClick: function(oItem){
+        //1.update crumb
+        this.crumbItems[1].label = oItem.label;
+
+        //2.update isXXMgrShow
+        if(oItem.label == "用户管理"){
+          this.isUserMgrShow =  true;
+          this.isHideSwitch = true;
+          this.onChange4Switch();
+        }
+        else if(oItem.label == "站点管理"){
+          this.isUserMgrShow =  false;
+          this.isHideSwitch = false;
+          this.onChange4Switch();
+        }
+      },
+      afterShowOrHide: function(bIsFolder){
+        if(bIsFolder){
+          this.isContainerFold = "fold";
+        }
+        else{
+          this.isContainerFold = "";
+        }
       },
       _getDevLstMock: function(oCallback){
         this.companyInfo = {};
+        this.devLstEnable = [];
+        this.devLstDisable = [];
 
         if(this.debug){
           this.companyInfo = {
@@ -199,14 +291,206 @@
             clientMapCenterZoomMin: "5",
             clientMapCenterZoomMax: "18"
           };
+
+          for(var i=0;i<5;i++){
+            var oDev = {
+              id: i,
+              clientNo: "client1",
+              devId: "3217030228" + i,
+              devType: 1,
+              x: parseFloat(this.companyInfo.clientMapCenterX) + Math.random() * 10,
+              y: parseFloat(this.companyInfo.clientMapCenterY) + Math.random() * 10,
+              lastUpdateTime: "2017-07-14 10:00:00.540",
+              status: 0,
+              hasWarn: Math.random() > 0.5 ? true: false,
+              warnCount: (Math.random() * 10).toFixed(0),
+              uiStatus: Math.random() > 0.5 ? "加工": "待机",
+              uiImg: Math.random() > 0.5 ? "/static/demo/deviceIcon-01.png": "/static/demo/deviceIcon-04.png",
+              uiTips: "<b>3217030228_1</b><br>状态:离线<br>告警数量:1<br>"
+            };
+            this.devLstEnable.push(oDev);
+          }
+          for(var i=5;i<10;i++){
+            var oDev = {
+              id: i,
+              clientNo: "client1",
+              devId: "3217030228" + i,
+              devType: 1,
+              x: parseFloat(this.companyInfo.clientMapCenterX) + Math.random() * 10,
+              y: parseFloat(this.companyInfo.clientMapCenterY) + Math.random() * 10,
+              lastUpdateTime: "2017-07-14 10:00:00.540",
+              status: 0,
+              hasWarn: Math.random() > 0.5 ? true: false,
+              warnCount: (Math.random() * 10).toFixed(0),
+              uiStatus: Math.random() > 0.5 ? "加工": "待机",
+              uiImg: Math.random() > 0.5 ? "/static/demo/deviceIcon-01.png": "/static/demo/deviceIcon-04.png",
+              uiTips: "<b>3217030228_1</b><br>状态:离线<br>告警数量:1<br>"
+            };
+            this.devLstDisable.push(oDev);
+          }
+
           oCallback();
         }
         else{
           this.$http.post('/getCompanyInfo', {}).then(res=>{
             this.companyInfo = res.data.resultObj;
-            oCallback();
+
+            this.$http.post('/getDevLstByEnable', {
+              reqBuVoStr: JSON.stringify({
+                clientNo:"client1"
+              })
+            }).then(res=>{
+              this.devLstEnable = res.data.resultObj;
+
+              this.$http.post('/getDevLstByDisable', {
+                reqBuVoStr: JSON.stringify({
+                  clientNo:"client1"
+                })
+              }).then(res=>{
+                this.devLstDisable = res.data.resultObj;
+                oCallback();
+              });
+            });
           });
         }
+      },
+      _initGisMap: function(){
+        this.$refs.refGISMap4DevMgr.init(this.companyInfo.clientMapCenterX,
+          this.companyInfo.clientMapCenterY,
+          this.companyInfo.clientMapCenterZoomMin,
+          this.companyInfo.clientMapCenterZoomMax,
+          "/static/leaflet/images/shit.png");
+      },
+      _drawGisMap: function(){
+        for(var i=0;i<this.devLstEnable.length;i++){
+          var oDev = this.devLstEnable[i];
+          this.$refs.refGISMap4DevMgr.addIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips, oDev,
+            this._onDBClickGisMap, undefined, this._onContextMenuGisMap);
+        }
+      },
+      _onDBClickGisMap: function(strId){
+
+      },
+      _onContextMenuGisMap: function(oEvent, iX, iY, oBuObj){
+        this.$refs.refContextMenu.showSubMenu(iX, iY, oBuObj);
+      },
+      _onContextMenuItemClick: function(strMenuLabel, oBuObj){
+        //1.del->"关站"
+        if("关站" == strMenuLabel){
+          this._devEnable(oBuObj.devId, false);
+          this.$refs.refContextMenu.hideSubMenu();
+        }
+        //2.edit->"编辑"
+        else if("编辑" == strMenuLabel){
+          this._updateDevName(oBuObj.devId, "");
+        }
+      },
+      _updateGisMap: function(){
+        var lstDevId = [];
+        for(var i=0;i<this.devLstEnable.length;i++) {
+          var oDev = this.devLstEnable[i];
+          lstDevId.push(oDev.devId);
+        }
+        var oResDiffIcon = this.$refs.refGISMap4DevMgr.getNeedDiffIconLst(lstDevId);
+
+        //1.处理待关站的设备
+        for(var i=0;i<oResDiffIcon.delDevIdLst.length;i++){
+          var strDevId = oResDiffIcon.delDevIdLst[i];
+          this.$refs.refGISMap4DevMgr.delIcon(strDevId);
+        }
+
+        //2.处理待添加的设备
+        for(var i=0;i<oResDiffIcon.addDevIdLst.length;i++){
+          var strDevId = oResDiffIcon.addDevIdLst[i];
+          var oDev = this._findByDevId(strDevId);
+          this.$refs.refGISMap4DevMgr.addIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips, oDev,
+            this._onDBClickGisMap, undefined, this._onContextMenuGisMap);
+        }
+
+        //3.处理待更新的设备
+        for(var i=0;i<oResDiffIcon.updateDevIdLst.length;i++){
+          var strDevId = oResDiffIcon.updateDevIdLst[i];
+          var oDev = this._findByDevId(strDevId);
+          this.$refs.refGISMap4DevMgr.updateIcon(oDev.devId, oDev.x, oDev.y, oDev.uiImg, oDev.uiTips,
+            false, oDev);
+        }
+      },
+      _findByDevId: function(strDevId){
+        for(var i=0;i<this.devLstEnable.length;i++) {
+          var oDev = this.devLstEnable[i];
+          if(oDev.devId == strDevId){
+            return oDev;
+          }
+        }
+      },
+      _drawGrid: function(){
+        this.rows4DevMgr = [];
+        for(var i=0;i<this.devLstEnable.length;i++){
+          var oDev = this.devLstEnable[i];
+          var oRow = [
+            {value: oDev.devId, type:"text"},
+            {value: oDev.devName, type:"text"},
+            {value: [{value: "icon-marvelIcon-20", color:"#808080"}], type:"icon" },
+            {value: [{value: "icon-pencil", color:"#808080"}], type:"icon" }
+          ];
+          this.rows4DevMgr.push(oRow);
+        }
+      },
+      _drawListView: function(){
+        this.listItems = [];
+
+        for(var i=0;i<this.devLstDisable.length;i++){
+          var oDev = this.devLstDisable[i];
+          this.listItems.push({
+            icon: oDev.uiImg,
+            devId: oDev.devId,
+            devName: oDev.devName
+          });
+        }
+        this.listBargeCount = this.listItems.length;
+      },
+      onListItemClick: function(oItem){
+        this._devEnable(oItem.devId, true);
+      },
+      onChange4Switch: function(){
+        var bIsGisView = this.$refs.refSwitch4DevMgr.getCheckItem();
+        if(bIsGisView){
+          this.$refs.refGISMap4DevMgr.showOrHide(true);
+        }
+        else{
+          this.$refs.refGISMap4DevMgr.showOrHide(false);
+        }
+      },
+      onIconClick4DevMgr: function(oRow, oCell){
+        //1.del->"icon-marvelIcon-20"
+        if("icon-marvelIcon-20" == oCell.value){
+          this._devEnable(oRow[0].value, false);
+        }
+        //2.edit->"icon-pencil"
+        else if("icon-pencil" == oCell.value){
+          this._updateDevName(oRow[0].value, "");
+        }
+      },
+      _devEnable: function(strDevId, bIsEnable){
+        this.$http.post('/devEnable', {
+          reqBuVoStr: JSON.stringify({
+            clientNo:"client1",
+            devId: strDevId,
+            enable: bIsEnable
+          })
+        }).then(res=>{
+          if(res.data.ok){
+            if(bIsEnable){
+              alert("开站成功...");
+            }
+            else{
+              alert("关站成功...");
+            }
+          }
+        });
+      },
+      _updateDevName: function(strDevId, strDevNameNew){
+        alert("努力开发ing...");
       },
       _getUserLstMock: function(){
         this.userRows = [];
@@ -242,25 +526,6 @@
           });
         }
       },
-      onCrumbItemClick: function(strItemLabel){
-        if("管理" == strItemLabel){
-          MarvelRouter.to(this.$router, "page45");
-        }
-      },
-      accordionItemClick: function(oItem){
-        //1.update crumb
-        this.crumbItems[1].label = oItem.label;
-
-        //2.update isXXMgrShow
-        if(oItem.label == "用户管理"){
-          this.isUserMgrShow =  true;
-          this.$refs.refGISMap4Mgr.showOrHide(false);
-        }
-        else if(oItem.label == "站点管理"){
-          this.isUserMgrShow =  false;
-          this.$refs.refGISMap4Mgr.showOrHide(true);
-        }
-      },
       onClick4AddUser: function(){
         var strUser = this.$refs.refUser.getInputMsg();
         var strPwd = this.$refs.refPwd.getInputMsg();
@@ -280,7 +545,7 @@
           });
         }
       },
-      _onIconClick: function(oRow){
+      onIconClick4DelUser: function(oRow){
         if(this.debug){
 
         }
@@ -293,7 +558,7 @@
             this._getUserLstMock();
           });
         }
-      },
+      }
     }
   }
 </script>
@@ -315,15 +580,20 @@
     float: left;
     margin-left: 20px;
   }
+  .switch{
+    float: right;
+    margin-right: 20px;
+    margin-top: 7px;
+  }
   .container .leftArea{
     width: 200px;
-    height: 100%;
+    height: calc(100% - 36px);
     background-color: #f4f5f6;
     float: left;
   }
   .container .rightArea{
     width: calc(100% - 200px);
-    height: 100%;
+    height: calc(100% - 36px);
     float: right;
   }
   .container .rightArea .userPanel{
@@ -344,6 +614,9 @@
   .container .rightArea .panel .upArea .upAreaItem .btnWrapper{
     float: right;
   }
+  .container .rightArea .panel .downArea{
+    height:calc(100% - 106px);
+  }
   .container .rightArea .devicePanel{
     width: 100%;
     height: 100%;
@@ -352,6 +625,14 @@
   .container .rightArea .panel .mapArea{
     width: 100%;
     height: 100%;
+    background-color: #fafafa;
+    position: relative;
+  }
+  .container .rightArea .panel .mapArea .gridArea{
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 20px;
+    box-sizing: border-box;
   }
   .container .rightArea .panel .deviceArea{
     width: calc(100% - 40px);
@@ -405,6 +686,12 @@
   }
   .container .rightArea .panel .deviceArea .deviceInfo .deviceOperation{
     height: 60px;
+  }
+  .fold .leftArea{
+    width: 78px;
+  }
+  .fold .rightArea{
+    width: calc(100% - 78px);
   }
   .deviceOperation .deviceOperationBox{
     height: 100%;

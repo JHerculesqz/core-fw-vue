@@ -73,6 +73,7 @@
     methods: {
       showAndHide: function(){
         this.folder = this.folder == "folder" ? "" : "folder";
+        this.$emit("afterShowOrHide", this.folder);
       },
       hasSubItems: function(oItem){
         return oItem.subItems != undefined;

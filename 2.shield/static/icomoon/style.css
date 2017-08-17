@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?qtel01');
-  src:  url('fonts/icomoon.eot?qtel01#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?qtel01') format('truetype'),
-    url('fonts/icomoon.woff?qtel01') format('woff'),
-    url('fonts/icomoon.svg?qtel01#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?6unbd3');
+  src:  url('fonts/icomoon.eot?6unbd3#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?6unbd3') format('truetype'),
+    url('fonts/icomoon.woff?6unbd3') format('woff'),
+    url('fonts/icomoon.svg?6unbd3#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -62,55 +62,51 @@
 }
 .icon-marvelIcon-13:before {
   content: "\eaf7";
-
 }
 .icon-marvelIcon-14:before {
   content: "\eaf8";
-
 }
 .icon-marvelIcon-15:before {
   content: "\eaf9";
-
 }
 .icon-marvelIcon-16:before {
   content: "\eafa";
-
 }
 .icon-marvelIcon-17:before {
   content: "\eafb";
-
 }
 .icon-marvelIcon-18:before {
   content: "\eafc";
-
 }
 .icon-marvelIcon-19:before {
   content: "\eafd";
-
 }
 .icon-marvelIcon-20:before {
   content: "\eafe";
-
 }
 .icon-marvelIcon-21:before {
   content: "\eaff";
-
 }
 .icon-marvelIcon-22:before {
   content: "\eb00";
-
 }
 .icon-marvelIcon-23:before {
   content: "\eb01";
-
 }
 .icon-marvelIcon-24:before {
   content: "\eb02";
-
 }
 .icon-marvelIcon-25:before {
   content: "\eb03";
-
+}
+.icon-marvelIcon-26:before {
+  content: "\eb04";
+}
+.icon-marvelIcon-27:before {
+  content: "\eb05";
+}
+.icon-marvelIcon-28:before {
+  content: "\eb06";
 }
 .icon-home:before {
   content: "\e908";

@@ -23,7 +23,7 @@
                       v-for="icon in cell.value"
                       v-bind:class="[icon.value]"
                       v-bind:style="{ color: icon.color }"
-                      v-on:click="onIconClick(row)"></span>
+                      v-on:click="onIconClick(row, icon)"></span>
             </div>
             <div v-else-if="cell.type == 'textIcon'">
                 <span class="icon"
@@ -102,8 +102,8 @@
           }
         }
       },
-      onIconClick: function(oRow){
-        this.$emit("onIconClick", oRow);
+      onIconClick: function(oRow, oCell){
+        this.$emit("onIconClick", oRow, oCell);
       },
       onPreClick: function(){
         if(this.curPageIndex > 1){

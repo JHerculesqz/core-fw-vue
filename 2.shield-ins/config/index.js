@@ -56,48 +56,6 @@ module.exports = {
           '^/getLoginUser': '/getLoginUser'
         }
       },
-      '/getCompanyInfo': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/getCompanyInfo': '/getCompanyInfo'
-        }
-      },
-      '/getDevLst': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/getDevLst': '/getDevLst'
-        }
-      },
-      '/getWarnLstByDevId': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/getWarnLstByDevId': '/getWarnLstByDevId'
-        }
-      },
-      '/getBasicInfoByDevId': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/getBasicInfoByDevId': '/getBasicInfoByDevId'
-        }
-      },
-      '/getUsageByClientNoAndStartTimeAndEndTime': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/getUsageByClientNoAndStartTimeAndEndTime': '/getUsageByClientNoAndStartTimeAndEndTime'
-        }
-      },
-      '/initDevByDevId': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/initDevByDevId': '/initDevByDevId'
-        }
-      },
       '/addUser': {
         target: 'http://localhost',
         changeOrigin: true,
@@ -117,6 +75,62 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/delUser': '/delUser'
+        }
+      },
+      '/initDevByDevId': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/initDevByDevId': '/initDevByDevId'
+        }
+      },
+      '/getCompanyInfo': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getCompanyInfo': '/getCompanyInfo'
+        }
+      },
+      '/getDevLstByEnable': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getDevLstByEnable': '/getDevLstByEnable'
+        }
+      },
+      '/getDevLstByDisable': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getDevLstByDisable': '/getDevLstByDisable'
+        }
+      },
+      '/devEnable': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/devEnable': '/devEnable'
+        }
+      },
+      '/getBasicInfoByDevId': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getBasicInfoByDevId': '/getBasicInfoByDevId'
+        }
+      },
+      '/getWarnLstByDevId': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getWarnLstByDevId': '/getWarnLstByDevId'
+        }
+      },
+      '/getUsageByClientNoAndStartTimeAndEndTime': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getUsageByClientNoAndStartTimeAndEndTime': '/getUsageByClientNoAndStartTimeAndEndTime'
         }
       }
     },

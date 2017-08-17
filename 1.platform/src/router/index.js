@@ -9,6 +9,7 @@ import Page4Layout2 from '@/components/page3/Page4Layout2'
 import Page4Loading1 from '@/components/page3/Page4Loading1'
 import Page4Loading2 from '@/components/page3/Page4Loading2'
 import Page4Menu from '@/components/page3/Page4Menu'
+import Page4MenuContext from '@/components/page3/Page4MenuContext'
 import Page4Accordion from '@/components/page3/Page4Accordion'
 import Page4Wizard from '@/components/page3/Page4Wizard'
 import Page4Crumb from '@/components/page3/Page4Crumb'
@@ -25,6 +26,7 @@ import Page4Chart from '@/components/page3/Page4Chart'
 import Page4Grid from '@/components/page3/Page4Grid'
 import Page4Location from '@/components/page3/Page4Location'
 import Page4Legend from '@/components/page3/Page4Legend'
+import Page4List1 from '@/components/page3/Page4List1'
 
 Vue.use(Router);
 
@@ -67,6 +69,10 @@ export default new Router({
     path: '/page3/page4Menu',
     name: 'page4Menu',
     component: Page4Menu
+  }, {
+    path: '/page3/page4MenuContext',
+    name: 'page4MenuContext',
+    component: Page4MenuContext
   }, {
     path: '/page3/page4Accordion',
     name: 'page4Accordion',
@@ -131,6 +137,10 @@ export default new Router({
     path: '/page3/page4Legend',
     name: 'page4Legend',
     component: Page4Legend
+  }, {
+    path: '/page3/page4List1',
+    name: 'page4List1',
+    component: Page4List1
   }]
 })
 

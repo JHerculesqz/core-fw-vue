@@ -24,12 +24,13 @@
         var self = this;
 
         //1.
-        this.mapObj = L.map(this.id).setView([iX, iY], iZoom4Init);
+        this.mapObj = L.map(this.id, {
+          attributionControl: false
+        }).setView([iX, iY], iZoom4Init);
 
         //2.
         L.tileLayer(URL_GIS_MAP, {
           maxZoom: iZoom4Max,
-          attribution: '&copy; <a href="http://www.huawei.com">Marvel</a>',
           id: 'mapbox.streets'
         }).addTo(this.mapObj);
 
@@ -86,7 +87,7 @@
         L.polygon(arrPoints).addTo(this.mapObj).bindPopup(strTips);
       },
       addIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj,
-                        oDBClickCallback, oDragCallback){
+                        oDBClickCallback, oDragCallback, oContextMenuCallback){
         var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
         var bCanDrag = oDragCallback == undefined ? false : true;
         var oMarker = new L.marker([iX, iY], {icon: oIcon, draggable:bCanDrag}).addTo(this.mapObj);
@@ -101,6 +102,14 @@
         oMarker.on("dragend", function (event) {
           if(oDragCallback){
             oDragCallback(event.target);
+          }
+        });
+        oMarker.on("contextmenu", function(event){
+          if(oContextMenuCallback){
+            oContextMenuCallback(event,
+              event.originalEvent.x,
+              event.originalEvent.y,
+              event.target.buObj);
           }
         });
         this.iconObjs.push(oMarker);
@@ -126,6 +135,70 @@
             break;
           }
         }
+      },
+      delIcon: function(strId){
+        var iDelIndex = undefined;
+        for(var i=0;i<this.iconObjs.length;i++){
+          var oMarker = this.iconObjs[i];
+          if(oMarker.id == strId) {
+            this.mapObj.removeLayer(oMarker);
+            iDelIndex = i;
+            break;
+          }
+        }
+
+        if(undefined != iDelIndex){
+          this.iconObjs.splice(iDelIndex, iDelIndex);
+        }
+      },
+      getNeedDiffIconLst: function(lstDevId){
+        var oRes = {
+          delDevIdLst: [],
+          addDevIdLst: [],
+          updateDevIdLst: []
+        };
+
+        //1.get delDevIdLst/updateDevIdLst
+        for(var i=0;i<this.iconObjs.length;i++){
+          var oMarker = this.iconObjs[i];
+
+          var bIsExists = false;
+          for(var j=0;j<lstDevId.length;j++){
+            var strId = lstDevId[j];
+            if(oMarker.id == strId) {
+              bIsExists = true;
+              break;
+            }
+          }
+
+          if(!bIsExists){
+            oRes.delDevIdLst.push(oMarker.id);
+          }
+          else{
+            oRes.updateDevIdLst.push(strId);
+          }
+        }
+
+        //2.get addDevIdLst
+        for(var j=0;j<lstDevId.length;j++){
+          var strId = lstDevId[j];
+
+          var bIsExists = false;
+          for(var i=0;i<this.iconObjs.length;i++){
+            var oMarker = this.iconObjs[i];
+
+            if(oMarker.id == strId) {
+              bIsExists = true;
+              break;
+            }
+          }
+
+          if(!bIsExists){
+            oRes.addDevIdLst.push(strId);
+          }
+        }
+
+        return oRes;
       },
       addWater: function(){
         L.control.watermark({ position: 'bottomleft' }).addTo(this.mapObj);
