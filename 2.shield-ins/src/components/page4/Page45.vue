@@ -68,7 +68,7 @@
                 <div slot="customArea"></div>
                 <div slot="contArea" style="height: 100%">
                   <div class="large-24" style="height: 100%">
-                    <marvel-grid :titles="titles4DevMgr" :rows="rows4DevMgr"
+                    <marvel-grid :titles="titles4DevMgr" :rows="rows4DevMgr" :limit="limit4DevMgr"
                                  v-on:onIconClick="onIconClick4DevMgr"></marvel-grid>
                   </div>
                 </div>
@@ -195,6 +195,7 @@
           width: "5%"
         }],
         rows4DevMgr: [],
+        limit4DevMgr: 20,
         //#endregion
         //#region listView
         listItems: [],

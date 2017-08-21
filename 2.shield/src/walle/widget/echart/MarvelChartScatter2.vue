@@ -214,13 +214,14 @@
           }
 
           selectedItems.sort(function (a, b) {
-            return a.value[2] - b.value[2];
+            return b.value[2] - a.value[2];
           });
 
           for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
             categoryData.push(selectedItems[i].name);
             barData.push(selectedItems[i].value[2]);
           }
+          console.log(barData);
 
           this.setOption({
             yAxis: {

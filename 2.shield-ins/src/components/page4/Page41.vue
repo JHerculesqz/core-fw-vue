@@ -24,7 +24,7 @@
                        v-on:onLegendItemClick="onLegendItemClick"></marvel-legend>
       </div>
       <div class="gridView">
-        <marvel-grid :titles="titles" :rows="rows" v-on:onIconClick="_onIconClick"></marvel-grid>
+        <marvel-grid :titles="titles" :rows="rows" :limit="limit" v-on:onIconClick="_onIconClick"></marvel-grid>
       </div>
     </div>
   </div>
@@ -136,6 +136,7 @@
           width: "13%"
         }],
         rows: [],
+        limit: 20
         //#endregion
       }
     },
