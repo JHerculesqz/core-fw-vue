@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="logo"></div>
+      <div class="logo"
+           v-bind:style="{ backgroundImage : 'url(' + logoImgUrl + ')'}"></div>
       <ul>
         <li>
           <router-link :to="{name:'page41'}" exact>设备监控</router-link>
@@ -47,7 +48,10 @@
         //#endregion
         //#region user
         user: "",
-        isHide: false
+        isHide: false,
+        //#endregion
+        //#region logo
+        logoImgUrl: "/static/demo/logo1.png"
         //#endregion
       };
     },
@@ -104,7 +108,9 @@
     width: 150px;
     height: 100%;
     float: left;
-    background: url("/static/demo/logo.svg") no-repeat center;
+    /*background: url("/static/demo/logo.svg") no-repeat center;*/
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 70%;
   }
   .header ul{

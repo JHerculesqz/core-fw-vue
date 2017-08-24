@@ -2,8 +2,9 @@
   <div class="loginPage">
     <div class="loginBg" v-bind:class="[loginBgRandom]"></div>
     <div class="loginArea">
-      <div class="solgan1"></div>
-      <div class="solgan2">造云 | 你造物 我造云</div>
+      <div class="solgan1"
+           v-bind:style="{ backgroundImage : 'url(' + sloganImgUrl + ')'}"></div>
+      <div class="solgan2">{{ sloganLabel }}</div>
       <div class="inputArea">
         <div class="inputWrapper icon-marvelIcon-10">
           <input ref="ref0" type="text" placeholder="Username" v-model="user">
@@ -15,7 +16,7 @@
       </div>
       <div class="signIn" v-on:click="onClick">Sign In</div>
     </div>
-    <div class="copyRight">Copyright 2017 造云 – 鄂ICP备16005435号-3</div>
+    <div class="copyRight">{{ sloganCopyRight }}</div>
   </div>
 </template>
 
@@ -35,7 +36,12 @@
         //#endregion
         //#region user/pwd
         user: "",
-        pwd: ""
+        pwd: "",
+        //#endregion
+        //#region slogan
+        sloganImgUrl: "/static/demo/slogan1.png",//"/static/demo/slogan.svg",
+        sloganLabel: "锐 意 进 取 ， 科 技 创 新", //"造云 | 你造物 我造云",
+        sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
         //#endregion
       }
     },
@@ -88,8 +94,8 @@
     left: 0;
   }
   .loginBg0{
-     background: url("/static/demo/bg0.png") no-repeat center;
-   }
+    background: url("/static/demo/bg0.png") no-repeat center;
+  }
   .loginBg1{
     background: url("/static/demo/bg1.png") no-repeat center;
   }
@@ -169,13 +175,15 @@
       text-align: center;
       width: 100%;
       height: 40px;
-      background: url("/static/demo/slogan.svg") no-repeat center;
+      /*background: url("/static/demo/logo.png") no-repeat center;*/
+      background-position: center;
+      background-repeat: no-repeat;
       background-size: contain;
       margin-bottom: 20px;
     }
     .loginArea .solgan2{
       color: #ffffff;
-      font-size: 24px;
+      font-size: 16px;
       line-height: 24px;
       font-family: arial, "微软雅黑", sans-serif;
       text-align: center;
@@ -253,14 +261,16 @@
       text-align: center;
       width: 100%;
       height: 50px;
-      background: url("/static/demo/slogan.svg") no-repeat center;
+      /*background: url("/static/demo/logo.png") no-repeat center;*/
+      background-position: center;
+      background-repeat: no-repeat;
       background-size: contain;
       margin-bottom: 30px;
     }
     .loginArea .solgan2{
       color: #ffffff;
       font-size: 24px;
-      line-height: 24px;
+      line-height: 16px;
       font-family: arial, "微软雅黑", sans-serif;
       text-align: center;
       margin-bottom: 70px;
