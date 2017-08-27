@@ -3,9 +3,11 @@
     <div class="loginBg" v-bind:class="[loginBgRandom]"></div>
     <div class="loginArea">
       <div class="solgan1"
-           v-bind:style="{ backgroundImage : 'url(' + sloganImgUrl + ')'}"></div>
-      <div class="solgan2">{{ sloganLabel }}</div>
+           v-bind:style="{ backgroundImage : 'url(' + companyInfo.sloganImgUrl + ')'}"></div>
+      <div class="solgan2">{{ companyInfo.sloganLabel }}</div>
       <div class="inputArea">
+        <marvel-check-box ref="refRememberMe" id="refRememberMe"
+                          label="记住我" showLabel="true"></marvel-check-box>
         <div class="inputWrapper icon-marvelIcon-10">
           <input ref="ref0" type="text" placeholder="Username" v-model="user">
         </div>
@@ -16,14 +18,15 @@
       </div>
       <div class="signIn" v-on:click="onClick">Sign In</div>
     </div>
-    <div class="copyRight">{{ sloganCopyRight }}</div>
+    <div class="copyRight">{{ companyInfo.sloganCopyRight }}</div>
   </div>
 </template>
 
 <script>
   import MarvelRouter from "@/walle/component/router";
+  import MarvelCheckBox from "@/walle/widget/select/MarvelCheckBox";
   export default {
-    components: {},
+    components: {MarvelCheckBox},
     name: 'page40',
     data: function() {
       return {
@@ -38,10 +41,8 @@
         user: "",
         pwd: "",
         //#endregion
-        //#region slogan
-        sloganImgUrl: "/static/demo/slogan1.png",//"/static/demo/slogan.svg",
-        sloganLabel: "锐 意 进 取 ， 科 技 创 新", //"造云 | 你造物 我造云",
-        sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
+        //#region companyInfo
+        companyInfo: {},
         //#endregion
       }
     },
@@ -49,6 +50,25 @@
       var iRandom = Math.ceil(Math.random() * 5);
       this.loginBgRandom = "loginBg" + iRandom;
       this.redirectUrl = MarvelRouter.getParam(this.$route, "redirect");
+
+      if(this.debug){
+        this.companyInfo = {
+          clientNo: "client1",
+          clientMapCenterX: "31.429",
+          clientMapCenterY: "104.589",
+          clientMapCenterZoomMin: "5",
+          clientMapCenterZoomMax: "18",
+          logoImgUrl: "/static/demo/logo1.png",
+          sloganImgUrl: "/static/demo/slogan1.png",
+          sloganLabel: "锐 意 进 取 ， 科 技 创 新",
+          sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
+        };
+      }
+      else{
+        this.$http.post('/getCompanyInfo', {}).then(res=>{
+          this.companyInfo = res.data.resultObj;
+        });
+      }
     },
     destroyed: function(){
 
@@ -64,7 +84,8 @@
           this.$http.post('/login', {
             reqBuVoStr: JSON.stringify({
               user: this.user,
-              pwd: this.pwd
+              pwd: this.pwd,
+              rememberMe: this.$refs.refRememberMe.getCheckItem()
             })
           }).then(res=>{
             if(res.data.ok){

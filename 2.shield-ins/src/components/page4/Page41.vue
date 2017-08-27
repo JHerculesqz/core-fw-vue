@@ -207,7 +207,11 @@
             clientMapCenterX: "31.429",
             clientMapCenterY: "104.589",
             clientMapCenterZoomMin: "5",
-            clientMapCenterZoomMax: "18"
+            clientMapCenterZoomMax: "18",
+            logoImgUrl: "/static/demo/logo1.png",
+            sloganImgUrl: "/static/demo/slogan1.png",
+            sloganLabel: "锐 意 进 取 ， 科 技 创 新",
+            sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
           };
 
           for(var i=0;i<10;i++){

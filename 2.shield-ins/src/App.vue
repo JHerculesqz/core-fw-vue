@@ -51,7 +51,7 @@
         isHide: false,
         //#endregion
         //#region logo
-        logoImgUrl: "/static/demo/logo1.png"
+        logoImgUrl: ""
         //#endregion
       };
     },

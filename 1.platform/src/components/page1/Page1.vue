@@ -26,7 +26,7 @@
       return {
         divHtml: 'divHtml',
         vText: 'vText',
-        vHtml: 'vHtml',
+        vHtml: '<h1>vHtml</h1>',
         isTestClass: true,
         vIf: false,
         vFor: [{
