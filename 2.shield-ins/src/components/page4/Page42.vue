@@ -492,7 +492,7 @@
     border: 1px dashed #d5d5d5;
   }
   .detailsCont .left .deviceShowArea{
-    background: url("/static/demo/dev.jpg") no-repeat center;
+    background: url("/static/demo/dev1.jpg") no-repeat center;
     background-size: contain;
     height: 100%;
   }

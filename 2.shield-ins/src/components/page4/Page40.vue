@@ -6,8 +6,6 @@
            v-bind:style="{ backgroundImage : 'url(' + companyInfo.sloganImgUrl + ')'}"></div>
       <div class="solgan2">{{ companyInfo.sloganLabel }}</div>
       <div class="inputArea">
-        <marvel-check-box ref="refRememberMe" id="refRememberMe"
-                          label="记住我" showLabel="true"></marvel-check-box>
         <div class="inputWrapper icon-marvelIcon-10">
           <input ref="ref0" type="text" placeholder="Username" v-model="user">
         </div>
@@ -15,6 +13,10 @@
           <input ref="ref1" type="password" placeholder="Password" v-model="pwd"
                  v-on:keyup.enter="onClick">
         </div>
+      </div>
+      <div class="rememberMeArea">
+        <marvel-check-box ref="refRememberMe" id="refRememberMe"
+                          label="记住我" showLabel="true"></marvel-check-box>
       </div>
       <div class="signIn" v-on:click="onClick">Sign In</div>
     </div>
@@ -216,6 +218,13 @@
       overflow:hidden;
       margin: 0 auto 10px auto;
     }
+    .loginArea .rememberMeArea{
+      width: 100%;
+      margin: 0 auto 10px auto;
+    }
+    .loginArea .rememberMeArea *{
+      color: #ffffff !important;
+    }
     .loginArea .inputArea .inputWrapper{
       height: 44px;
       width: 100%;
@@ -300,8 +309,16 @@
     .loginArea .inputArea{
       height: 44px;
       width: 700px;
-      margin: 0 auto 60px auto;
+      margin: 0 auto 20px auto;
       clear: both;
+    }
+    .loginArea .rememberMeArea{
+      width: 100%;
+      width: 700px;
+      margin: 0 auto 40px auto;
+    }
+    .loginArea .rememberMeArea *{
+      color: #ffffff !important;
     }
     .loginArea .inputArea .inputWrapper{
       float: left;

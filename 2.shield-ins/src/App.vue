@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
       <div class="logo"
-           v-bind:style="{ backgroundImage : 'url(' + logoImgUrl + ')'}"></div>
+           v-bind:style="{ backgroundImage : 'url(' + companyInfo.logoImgUrl + ')'}"></div>
       <ul>
         <li>
           <router-link :to="{name:'page41'}" exact>设备监控</router-link>
@@ -50,10 +50,32 @@
         user: "",
         isHide: false,
         //#endregion
-        //#region logo
-        logoImgUrl: ""
+        //#region companyInfo
+        companyInfo: {},
         //#endregion
       };
+    },
+    mounted: function(){
+      var self = this;
+      this.companyInfo = {};
+      if(this.debug){
+        this.companyInfo = {
+          clientNo: "client1",
+          clientMapCenterX: "31.429",
+          clientMapCenterY: "104.589",
+          clientMapCenterZoomMin: "5",
+          clientMapCenterZoomMax: "18",
+          logoImgUrl: "/static/demo/logo1.png",
+          sloganImgUrl: "/static/demo/slogan1.png",
+          sloganLabel: "锐 意 进 取 ， 科 技 创 新",
+          sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
+        };
+      }
+      else{
+        this.$http.post('/getCompanyInfo', {}).then(res=>{
+          this.companyInfo = res.data.resultObj;
+        });
+      }
     },
     methods: {
       onClickLogout: function(){
