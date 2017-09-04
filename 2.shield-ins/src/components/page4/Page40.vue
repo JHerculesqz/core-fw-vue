@@ -53,29 +53,33 @@
       this.loginBgRandom = "loginBg" + iRandom;
       this.redirectUrl = MarvelRouter.getParam(this.$route, "redirect");
 
-      if(this.debug){
-        this.companyInfo = {
-          clientNo: "client1",
-          clientMapCenterX: "31.429",
-          clientMapCenterY: "104.589",
-          clientMapCenterZoomMin: "5",
-          clientMapCenterZoomMax: "18",
-          logoImgUrl: "/static/demo/logo1.png",
-          sloganImgUrl: "/static/demo/slogan1.png",
-          sloganLabel: "锐 意 进 取 ， 科 技 创 新",
-          sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
-        };
-      }
-      else{
-        this.$http.post('/getCompanyInfo', {}).then(res=>{
-          this.companyInfo = res.data.resultObj;
-        });
-      }
+      this._getCompanyInfo();
     },
     destroyed: function(){
 
     },
     methods: {
+      _getCompanyInfo: function(){
+        if(this.debug){
+          this.companyInfo = {
+            clientNo: "client1",
+            clientMapCenterX: "31.429",
+            clientMapCenterY: "104.589",
+            clientMapCenterZoomMin: "5",
+            clientMapCenterZoomMax: "18",
+            logoImgUrl: "/static/demo/logo1.png",
+            sloganImgUrl: "/static/demo/slogan1.png",
+            sloganLabel: "锐 意 进 取 ， 科 技 创 新",
+            sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3",
+            devImgUrl: "/static/demo/dev.jpg"
+          };
+        }
+        else{
+          this.$http.post('/getCompanyInfo', {}).then(res=>{
+            this.companyInfo = res.data.resultObj;
+          });
+        }
+      },
       onClick: function(){
         var self = this;
 

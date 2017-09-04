@@ -15,7 +15,8 @@
             <div slot="contArea" style="height: 100%;">
               <div class="detailsCont large-24">
                 <div class="left mini-10">
-                  <div class="deviceShowArea"></div>
+                  <div class="deviceShowArea"
+                       v-bind:style="{ backgroundImage : 'url(' + companyInfo.devImgUrl + ')'}"></div>
                   <div class="deviceDescribe"></div>
                 </div>
                 <div class="right mini-14">
@@ -125,6 +126,9 @@
           label: "单站管理"
         }],
         //#endregion
+        //#region companyInfo
+        companyInfo: {},
+        //#endregion
         //#region devId
         clientNo: "",
         devId: 0,
@@ -212,26 +216,12 @@
       //0.set clientNo/devId
       this.clientNo = MarvelRouter.getParam(this.$route, "clientNo");
       this.devId = MarvelRouter.getParam(this.$route, "devId");
+      this._getCompanyInfo(function(){
+        //1.init ref4Days/refSwitch
+        self.$refs.ref4Days.init(self.limit4Warn, "所有");
+        self.$refs.refSwitch.setStatus(false, false);
 
-      //1.init ref4Days/refSwitch
-      this.$refs.ref4Days.init(this.limit4Warn, "所有");
-      this.$refs.refSwitch.setStatus(false, false);
-
-      //2.setData
-      this._getData4SingleDevMock(function(){
-        //1.1._setData4WarnGrid
-        self._setData4WarnGrid();
-
-        //1.2._setData4BasicInfo
-        self._setData4BasicInfo();
-
-        //1.3._setData4AdvInfo
-        self._setData4AdvInfo();
-      });
-
-      //3.timer
-      MarvelTimer.startTimer(function(){
-        //1.setData
+        //2.setData
         self._getData4SingleDevMock(function(){
           //1.1._setData4WarnGrid
           self._setData4WarnGrid();
@@ -242,12 +232,53 @@
           //1.3._setData4AdvInfo
           self._setData4AdvInfo();
         });
-      }, this.timerInterval);
+
+        //3.timer
+        MarvelTimer.startTimer(function(){
+          //1.setData
+          self._getData4SingleDevMock(function(){
+            //1.1._setData4WarnGrid
+            self._setData4WarnGrid();
+
+            //1.2._setData4BasicInfo
+            self._setData4BasicInfo();
+
+            //1.3._setData4AdvInfo
+            self._setData4AdvInfo();
+          });
+        }, self.timerInterval);
+      });
     },
     destroyed: function(){
       MarvelTimer.endTimer();
     },
     methods: {
+      _getCompanyInfo: function(oCallback){
+        if(this.debug){
+          this.companyInfo = {
+            clientNo: "client1",
+            clientMapCenterX: "31.429",
+            clientMapCenterY: "104.589",
+            clientMapCenterZoomMin: "5",
+            clientMapCenterZoomMax: "18",
+            logoImgUrl: "/static/demo/logo1.png",
+            sloganImgUrl: "/static/demo/slogan1.png",
+            sloganLabel: "锐 意 进 取 ， 科 技 创 新",
+            sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3",
+            devImgUrl: "/static/demo/dev.jpg"
+          };
+
+          oCallback();
+        }
+        else{
+          this.$http.post('/getCompanyInfo', {}).then(res=>{
+            this.companyInfo = res.data.resultObj;
+            console.log(this.companyInfo);
+
+            oCallback();
+          });
+        }
+      },
       onCrumbItemClick: function(strItemLabel){
         if("设备监控" == strItemLabel){
           MarvelRouter.to(this.$router, "page41");
@@ -492,7 +523,8 @@
     border: 1px dashed #d5d5d5;
   }
   .detailsCont .left .deviceShowArea{
-    background: url("/static/demo/dev1.jpg") no-repeat center;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: contain;
     height: 100%;
   }
