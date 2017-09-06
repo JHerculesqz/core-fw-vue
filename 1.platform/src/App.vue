@@ -79,7 +79,7 @@
     height: 100%;
     float: left;
     /*color: #007df9;*/
-    color: #fff;
+    color: #ffaa00;
     font-size: 26px;
     font-weight: bold;
     line-height: 50px;
@@ -106,7 +106,7 @@
     text-decoration: none;
   }
   .header ul li .active{
-    color:#00f9ff;
+    color:#ffaa00;
   }
   .content{
     height: 100%;
