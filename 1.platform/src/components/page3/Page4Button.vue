@@ -295,7 +295,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   /*document fix style start*/
   .widgetShowSession{
     padding: 20px 100px;
