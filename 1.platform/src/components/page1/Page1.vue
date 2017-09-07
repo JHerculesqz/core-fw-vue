@@ -109,6 +109,9 @@
           }, {
             id: "Page4Loading1",
             label: "页面加载"
+          }, {
+            id: "Page4Loading2",
+            label: "页面加载_2"
           }]
         }, {
           label: "组件",
