@@ -8,8 +8,8 @@
 
 <script>
   import BusUtils from '@/walle/core/bus';
-  import ModuleRight1 from '@/components/page2/ModuleRight1';
-  import ModuleRight2 from '@/components/page2/ModuleRight2';
+  import ModuleRight1 from '@/components/page3/vue_bus/ModuleRight1';
+  import ModuleRight2 from '@/components/page3/vue_bus/ModuleRight2';
 
   export default {
     name: 'moduleRight',

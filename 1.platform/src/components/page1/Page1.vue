@@ -24,6 +24,14 @@
   import Page4Font from '@/components/page3/Page4Font'
   import Page4Icon from '@/components/page3/Page4Icon'
   import Page4VueBasic from '@/components/page3/Page4VueBasic'
+  import ModuleCenter from '@/components/page3/vue_bus/ModuleCenter'
+  import ModuleLeft from '@/components/page3/vue_bus/ModuleLeft'
+  import ModuleLeftConfig from '@/components/page3/vue_bus/ModuleLeftConfig'
+  import ModuleRight from '@/components/page3/vue_bus/ModuleRight'
+  import ModuleRight1 from '@/components/page3/vue_bus/ModuleRight1'
+  import ModuleRight2 from '@/components/page3/vue_bus/ModuleRight2'
+  import ModuleUp from '@/components/page3/vue_bus/ModuleUp'
+  import Page4VueBus from '@/components/page3/vue_bus/Page4VueBus'
   import Page4Frame from '@/components/page3/Page4Frame'
   import Page4Layout1 from '@/components/page3/Page4Layout1'
   import Page4Layout2 from '@/components/page3/Page4Layout2'
@@ -57,6 +65,7 @@
       Page4Font,
       Page4Icon,
       Page4VueBasic,
+      Page4VueBus,
       Page4Frame,
       Page4Layout1,
       Page4Layout2,
@@ -127,7 +136,7 @@
             id: "Page4VueBasic",
             label: "Vue基础"
           },{
-            id: "",
+            id: "Page4VueBus",
             label: "Vue消息"
           },{
             id: "",

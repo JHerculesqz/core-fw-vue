@@ -34,7 +34,7 @@
 <style>
   .moduleCenter {
     height: calc(100% - 40px);
-    background: url("../../assets/images/map.jpg") no-repeat center;
+    background: url("/static/walle/map.jpg") no-repeat center;
     background-size: cover;
   }
   .moduleCenter div{
