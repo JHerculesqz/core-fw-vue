@@ -21,7 +21,7 @@
   import LogUtils from '@/walle/component/log';
 
   export default {
-    name: 'page1',
+    name: 'page4VueBasic',
     data: function() {
       return {
         divHtml: 'divHtml',

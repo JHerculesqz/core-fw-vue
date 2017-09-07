@@ -19,8 +19,11 @@
 
 <script>
   import MarvelAccordion from "@/walle/widget/accordion/MarvelAccordion";
-  import Page2 from '@/components/page2/Page2'
-  import Page3 from '@/components/page3/Page3'
+  import Page4QuickStart from '@/components/page3/Page4QuickStart'
+  import Page4Color from '@/components/page3/Page4Color'
+  import Page4Font from '@/components/page3/Page4Font'
+  import Page4Icon from '@/components/page3/Page4Icon'
+  import Page4VueBasic from '@/components/page3/Page4VueBasic'
   import Page4Frame from '@/components/page3/Page4Frame'
   import Page4Layout1 from '@/components/page3/Page4Layout1'
   import Page4Layout2 from '@/components/page3/Page4Layout2'
@@ -49,8 +52,11 @@
   export default {
     components: {
       MarvelAccordion,
-      Page2,
-      Page3,
+      Page4QuickStart,
+      Page4Color,
+      Page4Font,
+      Page4Icon,
+      Page4VueBasic,
       Page4Frame,
       Page4Layout1,
       Page4Layout2,
@@ -81,7 +87,7 @@
         //#region accordion
         defaultSelectLabel: "快速入门",
         accordionItems: [{
-          id: "",
+          id: "Page4QuickStart",
           label: "快速入门",
           icon: "icon-paint-format"
         }, {
@@ -95,13 +101,13 @@
             id: "Page4Layout1",
             label: "布局"
           }, {
-            id: "",
+            id: "Page4Color",
             label: "色彩"
           }, {
-            id: "",
+            id: "Page4Font",
             label: "字体"
           }, {
-            id: "",
+            id: "Page4Icon",
             label: "图标"
           }, {
             id: "",
@@ -118,7 +124,7 @@
           icon: "icon-pacman",
           expand: false,
           subItems: [{
-            id: "",
+            id: "Page4VueBasic",
             label: "Vue基础"
           },{
             id: "",
@@ -239,7 +245,7 @@
         isContainerFold: "",
         //#endregion
         //#region right
-        rightModuleName: ""
+        rightModuleName: "Page4QuickStart"
         //#endregion
       }
     },
