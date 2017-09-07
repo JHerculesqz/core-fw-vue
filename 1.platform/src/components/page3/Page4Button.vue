@@ -1,39 +1,38 @@
 <template>
-  <div>
-    <div class="widgetShowSession">
-      <!--1级 start-->
-      <div class="title level1">Button</div>
-      <div class="describe">
-        Text button文本按钮、Text + icon button文本+图片按钮、Icon button图标按钮、纯文本按钮、Drop down button下拉按钮。
-      </div>
-      <!--1级 end-->
-      <!--2级 start-->
-      <div class="title level2">Important button</div>
-      <div class="describe">
-        文本按钮的一种，常用做强调重要或需要引起用户注意功能的按钮。其尺寸有大小之分，可根据使用场景选择合适尺寸。
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems1">
-          <marvel-tab-item :isActive="tabItems1[0].isActive">
-            <div class="showAreaInner">
-              <!--2级DemoView start-->
-              <marvel-primary-button size="large" classCustom="classCustom1" label="Large"
-                                     v-on:onClick="onClick"></marvel-primary-button>
-              <marvel-primary-button  classCustom="classCustom1" label="Small"
-                                      v-on:onClick="onClick"></marvel-primary-button>
-              <marvel-primary-button ref="ref4"  classCustom="classCustom1" label="MouseDown"
-                                     v-on:onClick="onClick"></marvel-primary-button>
-              <marvel-primary-button ref="ref5"  classCustom="classCustom1" label="Focus"
-                                     v-on:onClick="onClick"></marvel-primary-button>
-              <marvel-primary-button ref="ref6"  classCustom="classCustom1" label="Disable"
-                                     v-on:onClick="onClick"></marvel-primary-button>
-              <!--2级DemoView end-->
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems1[1].isActive">
-            <div class="codeArea">
-              <!--2级CodeView start-->
-              <pre v-highlight>
+  <div class="widgetShowSession">
+    <!--1级 start-->
+    <div class="title level1">Button</div>
+    <div class="describe">
+      Text button文本按钮、Text + icon button文本+图片按钮、Icon button图标按钮、纯文本按钮、Drop down button下拉按钮。
+    </div>
+    <!--1级 end-->
+    <!--2级 start-->
+    <div class="title level2">Important button</div>
+    <div class="describe">
+      文本按钮的一种，常用做强调重要或需要引起用户注意功能的按钮。其尺寸有大小之分，可根据使用场景选择合适尺寸。
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <marvel-primary-button size="large" classCustom="classCustom1" label="Large"
+                                   v-on:onClick="onClick"></marvel-primary-button>
+            <marvel-primary-button  classCustom="classCustom1" label="Small"
+                                    v-on:onClick="onClick"></marvel-primary-button>
+            <marvel-primary-button ref="ref4"  classCustom="classCustom1" label="MouseDown"
+                                   v-on:onClick="onClick"></marvel-primary-button>
+            <marvel-primary-button ref="ref5"  classCustom="classCustom1" label="Focus"
+                                   v-on:onClick="onClick"></marvel-primary-button>
+            <marvel-primary-button ref="ref6"  classCustom="classCustom1" label="Disable"
+                                   v-on:onClick="onClick"></marvel-primary-button>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
                 <code class="html">
 &lt;marvel-primary-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
 &lt;marvel-primary-button  classCustom="classCustom1" label="Small"
@@ -46,141 +45,140 @@
                        v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
                 </code>
               </pre>
-              <!--2级CodeView end-->
-            </div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
-      <!--2级 start-->
-      <div class="title level2">Secondary button</div>
-      <div class="describe">
-        文本按钮的一种。其尺寸有大小之分，可根据使用场景选择合适尺寸。
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems2">
-          <marvel-tab-item :isActive="tabItems2[0].isActive">
-            <div class="showAreaInner">
-              <marvel-button size="large" classCustom="classCustom1" label="Large"
-                             v-on:onClick="onClick"></marvel-button>
-              <marvel-button  classCustom="classCustom1" label="Small"
-                              v-on:onClick="onClick"></marvel-button>
-              <marvel-button ref="ref1"  classCustom="classCustom1" label="MouseDown"
-                             v-on:onClick="onClick"></marvel-button>
-              <marvel-button ref="ref2"  classCustom="classCustom1" label="Focus"
-                             v-on:onClick="onClick"></marvel-button>
-              <marvel-button ref="ref3"  classCustom="classCustom1" label="Disable"
-                             v-on:onClick="onClick"></marvel-button>
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems2[1].isActive">
-            <div class="codeArea"></div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
-      <!--2级 start-->
-      <div class="title level2">Text + icon button</div>
-      <div class="describe">
-        图标文字按钮，图文结合的形式，强调图形表达命令的可视性。其尺寸有大小之分，可根据使用场景选择合适尺寸。
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems3">
-          <marvel-tab-item :isActive="tabItems3[0].isActive">
-            <div class="showAreaInner">
-              <marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large"
-                                      icon="icon-home3"
-                                      v-on:onClick="onClick"></marvel-icon-txt-button>
-              <marvel-icon-txt-button  classCustom="classCustom1" label="Small"
-                                       icon="icon-home3"
-                                       v-on:onClick="onClick"></marvel-icon-txt-button>
-              <marvel-icon-txt-button ref="ref7"  classCustom="classCustom1" label="MouseDown"
-                                      icon="icon-home3"
-                                      v-on:onClick="onClick"></marvel-icon-txt-button>
-              <marvel-icon-txt-button ref="ref8"  classCustom="classCustom1" label="Focus"
-                                      icon="icon-home3"
-                                      v-on:onClick="onClick"></marvel-icon-txt-button>
-              <marvel-icon-txt-button ref="ref9"  classCustom="classCustom1" label="Disable"
-                                      icon="icon-home3"
-                                      v-on:onClick="onClick"></marvel-icon-txt-button>
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems3[1].isActive">
-            <div class="codeArea"></div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
-      <!--2级 start-->
-      <div class="title level2">Icon button</div>
-      <div class="describe">
-        图标按钮，优先级较低，一般适用于辅助功能。尺寸上无大小之分。
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems4">
-          <marvel-tab-item :isActive="tabItems4[0].isActive">
-            <div class="showAreaInner">
-              <marvel-icon-button classCustom="classCustom1" label="normal"
-                                  icon="icon-home3"
-                                  v-on:onClick="onClick"></marvel-icon-button>
-              <marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown"
-                                  icon="icon-home3"
-                                  v-on:onClick="onClick"></marvel-icon-button>
-              <marvel-icon-button ref="ref11" classCustom="classCustom1" label="disable"
-                                  icon="icon-home3"
-                                  v-on:onClick="onClick"></marvel-icon-button>
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems4[1].isActive">
-            <div class="codeArea"></div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
-      <!--2级 start-->
-      <div class="title level2">Text button</div>
-      <div class="describe">
-        文本按钮的一种，常用于表格内的操作。尺寸上无大小之分。
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems5">
-          <marvel-tab-item :isActive="tabItems5[0].isActive">
-            <div class="showAreaInner">
-              <marvel-txt-button classCustom="classCustom1" label="normal"
-                                 v-on:onClick="onClick"></marvel-txt-button>
-              <marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown"
-                                 v-on:onClick="onClick"></marvel-txt-button>
-              <marvel-txt-button ref="ref13" classCustom="classCustom1" label="disable"
-                                 v-on:onClick="onClick"></marvel-txt-button>
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems5[1].isActive">
-            <div class="codeArea"></div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
-      <!--2级 start-->
-      <div class="title level2">Drop down button</div>
-      <div class="describe">
-        下拉按钮，可在多个选项之间进行选择。尺寸上无大小之分。1111
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems6">
-          <marvel-tab-item :isActive="tabItems6[0].isActive">
-            <div class="showAreaInner">
-              <button v-on:click="onDropDownClick">getCheckItem</button>
-              <marvel-drop-down-button ref="ref14" classCustom="classCustom1"
-                                       v-on:onClick="onClick"></marvel-drop-down-button>
-            </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems6[1].isActive">
-            <div class="codeArea"></div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
     </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Secondary button</div>
+    <div class="describe">
+      文本按钮的一种。其尺寸有大小之分，可根据使用场景选择合适尺寸。
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <marvel-button size="large" classCustom="classCustom1" label="Large"
+                           v-on:onClick="onClick"></marvel-button>
+            <marvel-button  classCustom="classCustom1" label="Small"
+                            v-on:onClick="onClick"></marvel-button>
+            <marvel-button ref="ref1"  classCustom="classCustom1" label="MouseDown"
+                           v-on:onClick="onClick"></marvel-button>
+            <marvel-button ref="ref2"  classCustom="classCustom1" label="Focus"
+                           v-on:onClick="onClick"></marvel-button>
+            <marvel-button ref="ref3"  classCustom="classCustom1" label="Disable"
+                           v-on:onClick="onClick"></marvel-button>
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea"></div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Text + icon button</div>
+    <div class="describe">
+      图标文字按钮，图文结合的形式，强调图形表达命令的可视性。其尺寸有大小之分，可根据使用场景选择合适尺寸。
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems3">
+        <marvel-tab-item :isActive="tabItems3[0].isActive">
+          <div class="showAreaInner">
+            <marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large"
+                                    icon="icon-home3"
+                                    v-on:onClick="onClick"></marvel-icon-txt-button>
+            <marvel-icon-txt-button  classCustom="classCustom1" label="Small"
+                                     icon="icon-home3"
+                                     v-on:onClick="onClick"></marvel-icon-txt-button>
+            <marvel-icon-txt-button ref="ref7"  classCustom="classCustom1" label="MouseDown"
+                                    icon="icon-home3"
+                                    v-on:onClick="onClick"></marvel-icon-txt-button>
+            <marvel-icon-txt-button ref="ref8"  classCustom="classCustom1" label="Focus"
+                                    icon="icon-home3"
+                                    v-on:onClick="onClick"></marvel-icon-txt-button>
+            <marvel-icon-txt-button ref="ref9"  classCustom="classCustom1" label="Disable"
+                                    icon="icon-home3"
+                                    v-on:onClick="onClick"></marvel-icon-txt-button>
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems3[1].isActive">
+          <div class="codeArea"></div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Icon button</div>
+    <div class="describe">
+      图标按钮，优先级较低，一般适用于辅助功能。尺寸上无大小之分。
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems4">
+        <marvel-tab-item :isActive="tabItems4[0].isActive">
+          <div class="showAreaInner">
+            <marvel-icon-button classCustom="classCustom1" label="normal"
+                                icon="icon-home3"
+                                v-on:onClick="onClick"></marvel-icon-button>
+            <marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown"
+                                icon="icon-home3"
+                                v-on:onClick="onClick"></marvel-icon-button>
+            <marvel-icon-button ref="ref11" classCustom="classCustom1" label="disable"
+                                icon="icon-home3"
+                                v-on:onClick="onClick"></marvel-icon-button>
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems4[1].isActive">
+          <div class="codeArea"></div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Text button</div>
+    <div class="describe">
+      文本按钮的一种，常用于表格内的操作。尺寸上无大小之分。
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems5">
+        <marvel-tab-item :isActive="tabItems5[0].isActive">
+          <div class="showAreaInner">
+            <marvel-txt-button classCustom="classCustom1" label="normal"
+                               v-on:onClick="onClick"></marvel-txt-button>
+            <marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown"
+                               v-on:onClick="onClick"></marvel-txt-button>
+            <marvel-txt-button ref="ref13" classCustom="classCustom1" label="disable"
+                               v-on:onClick="onClick"></marvel-txt-button>
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems5[1].isActive">
+          <div class="codeArea"></div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Drop down button</div>
+    <div class="describe">
+      下拉按钮，可在多个选项之间进行选择。尺寸上无大小之分。1111
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems6">
+        <marvel-tab-item :isActive="tabItems6[0].isActive">
+          <div class="showAreaInner">
+            <button v-on:click="onDropDownClick">getCheckItem</button>
+            <marvel-drop-down-button ref="ref14" classCustom="classCustom1"
+                                     v-on:onClick="onClick"></marvel-drop-down-button>
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems6[1].isActive">
+          <div class="codeArea"></div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 

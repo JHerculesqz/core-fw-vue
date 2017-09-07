@@ -154,6 +154,9 @@
             id: "Page4Link",
             label: "控件(链接)"
           }, {
+            id: "Page4Select",
+            label: "控件(选择)"
+          }, {
             id: "Page4Input",
             label: "控件(文本输入)"
           }, {
