@@ -1,22 +1,163 @@
 <template>
-  <div class="chart">
-    <div style="width: 500px; height: 300px;">
-      <marvel-chart-gauge ref="ref1" id="id1" theme="dark"></marvel-chart-gauge>
+
+  <div class="widgetShowSession">
+    <div class="title level1">图表控件</div>
+    <div class="describe">
+      图表控件支持各种展现形式的图表，包括柱状图、饼图、曲线图、仪表盘、走势图等。
     </div>
-    <div style="width: 500px; height: 500px;">
-      <marvel-chart-radar ref="ref2" id="id2" theme="dark"></marvel-chart-radar>
+
+    <div class="title level2">仪表盘</div>
+    <div class="describe">
+      仪表盘
     </div>
-    <div style="width: 500px; height: 500px;">
-      <marvel-chart-scatter ref="ref3" id="id3" theme="dark"></marvel-chart-scatter>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div class="chart">
+              <div style="width: 500px; height: 350px;">
+                <marvel-chart-gauge ref="ref1" id="id1" theme="dark"></marvel-chart-gauge>
+              </div>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-chart-gauge ref="ref1" id="id1" theme="dark"&gt;&lt;/marvel-chart-gauge&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
     </div>
-    <div style="width: 1000px; height: 500px;">
-      <marvel-chart-scatter2 ref="ref4" id="id4" theme="dark"
-                             v-on:onClick="onScatterItemClick"></marvel-chart-scatter2>
+
+    <div class="title level2">能力图</div>
+    <div class="describe">
+      能力图
     </div>
-    <div style="width: 500px; height: 500px">
-      <marvel-chart-stack-line ref="ref5" id="id5" theme="dark"></marvel-chart-stack-line>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div class="chart">
+              <div style="width: 500px; height: 350px;">
+                <marvel-chart-radar ref="ref2" id="id2" theme="dark"></marvel-chart-radar>
+              </div>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-chart-radar ref="ref2" id="id2" theme="dark"&gt;&lt;/marvel-chart-radar&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
     </div>
+
+    <div class="title level2">地图</div>
+    <div class="describe">
+      地图
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems3">
+        <marvel-tab-item :isActive="tabItems3[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 500px; height: 350px;">
+              <marvel-chart-scatter ref="ref3" id="id3" theme="dark"></marvel-chart-scatter>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems3[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-chart-scatter ref="ref3" id="id3" theme="dark"&gt;&lt;/marvel-chart-scatter&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+
+    <div class="title level2">地图+柱状图</div>
+    <div class="describe">
+      地图+柱状图
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems4">
+        <marvel-tab-item :isActive="tabItems4[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 850px; height: 350px;">
+              <marvel-chart-scatter2 ref="ref4" id="id4" theme="dark"
+                                     v-on:onClick="onScatterItemClick"></marvel-chart-scatter2>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems4[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-chart-scatter2 ref="ref4" id="id4" theme="dark" v-on:onClick="onScatterItemClick"&gt;&lt;/marvel-chart-scatter2&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+
+    <div class="title level2">柱状图</div>
+    <div class="describe">
+      柱状图
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems5">
+        <marvel-tab-item :isActive="tabItems5[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 500px; height: 350px">
+              <marvel-chart-stack-line ref="ref5" id="id5" theme="dark"></marvel-chart-stack-line>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems5[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-chart-stack-line ref="ref5" id="id5" theme="dark"&gt;&lt;/marvel-chart-stack-line&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -25,6 +166,8 @@
   import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
   import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
+  import MarvelTab from "@/walle/widget/tab/MarvelTab";
+  import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
 
   export default {
     name: 'page4Chart',
@@ -33,9 +176,62 @@
       MarvelChartStackLine,
       MarvelChartScatter,
       MarvelChartRadar,
-      MarvelChartGauge },
+      MarvelChartGauge,
+      MarvelTab,
+      MarvelTabItem
+    },
     data: function() {
       return {
+        tabItems1: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems2: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems3: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems4: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems5: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
         gaugeData: {
           title: "新产生告警",
           key: "产生率",
@@ -133,18 +329,20 @@
             label: "2017-7-8",
             value: [12, 6, 6, 50]
           }]
-        }
+        },
+        interval1: null,
+        interval2: null
       }
     },
     mounted: function(){
       var self = this;
       //1.
-      setInterval(function () {
+      this.interval1 = setInterval(function () {
         self.gaugeData.value = (Math.random() * 100).toFixed(2) - 0;
         self.$refs.ref1.setData(self.gaugeData);
       },2000);
       //2.
-      setInterval(function () {
+      this.interval2 = setInterval(function () {
         //region data
         var dataBJ = [
           [55,9,56,0.46,18,6,1],
@@ -264,6 +462,14 @@
       //4.
       self.$refs.ref5.setData(self.stackLineData);
     },
+    beforeDestroy: function(){
+      if(this.interval1 != null){
+        clearInterval(this.interval1);
+      }
+      if(this.interval2 != null){
+        clearInterval(this.interval2);
+      }
+    },
     methods: {
       onScatterItemClick: function(oItem){
         console.log(oItem);
@@ -277,4 +483,70 @@
     height: 100%;
     overflow-y: scroll;
   }
+
+  .widgetShowSession {
+    padding: 20px 100px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .title {
+    color: #4d4d4d;
+  }
+
+  .level1 {
+    font-size: 32px;
+    line-height: 54px;
+  }
+
+  .level2{
+    margin-top: 40px;
+    font-size: 22px;
+    line-height: 48px;
+  }
+
+  .describe{
+    font-size: 14px;
+    color: #666;
+    line-height: 36px;
+  }
+
+  .showArea {
+    width: 100%;
+    height: 450px;
+  }
+
+  .codeArea{
+    width: 100%;
+    height:100%;
+    background-color: #f0f0f0;
+    overflow: auto;
+  }
+
+  .codeArea pre,.codeArea code{
+    padding: 0;
+    margin: 0;
+    min-width: 100%;
+    float: left;
+  }
+
+  .showAreaInner {
+    padding-top: 36px;
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.4);
+  }
+
 </style>

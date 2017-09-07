@@ -89,9 +89,10 @@
       Page4Grid,
       Page4Location,
       Page4Legend,
-      Page4List1,},
+      Page4List1,
+    },
     name: 'page1',
-    data: function() {
+    data: function () {
       return {
         //#region accordion
         defaultSelectLabel: "快速入门",
@@ -108,7 +109,10 @@
             label: "栅格"
           }, {
             id: "Page4Layout1",
-            label: "布局"
+            label: "布局1"
+          }, {
+            id: "Page4Layout2",
+            label: "布局2"
           }, {
             id: "Page4Color",
             label: "色彩"
@@ -228,7 +232,7 @@
           icon: "icon-book",
           expand: false,
           subItems: [{
-            id: "",
+            id: "Page4DashBoard",
             label: "Dashboard"
           }, {
             id: "",
@@ -259,18 +263,18 @@
       }
     },
     methods: {
-      accordionItemClick: function(oItem){
+      accordionItemClick: function (oItem) {
         this.rightModuleName = oItem.id;
       },
-      afterShowOrHide: function(bIsFolder){
-        if(bIsFolder){
+      afterShowOrHide: function (bIsFolder) {
+        if (bIsFolder) {
           this.isContainerFold = "fold";
         }
-        else{
+        else {
           this.isContainerFold = "";
         }
       },
-      accordionSubItemClick: function(oSubItem){
+      accordionSubItemClick: function (oSubItem) {
         this.rightModuleName = oSubItem.id;
       }
     }
@@ -278,20 +282,22 @@
 </script>
 
 <style>
-  .page1{
+  .page1 {
     position: absolute;
-    width:100%;
-    height:calc(100% - 50px);
-    top:50px;
+    width: 100%;
+    height: calc(100% - 50px);
+    top: 50px;
   }
-  .page1 .leftArea{
+
+  .page1 .leftArea {
     float: left;
-    height:100%;
+    height: 100%;
   }
-  .page1 .rightArea{
+
+  .page1 .rightArea {
     width: calc(100% - 234px);
     float: left;
-    height:100%;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
   }

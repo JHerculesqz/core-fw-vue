@@ -1,20 +1,67 @@
 <template>
-  <div style="width: 180px;height:100%">
-    <marvel-accordion isFolder="false" hasShadow="true"
-                      title="abc" titleIcon="icon-calculator"
-                      defaultSelectLabel="item1"
-                      :items="items"></marvel-accordion>
+  <div class="widgetShowSession">
+    <div class="title level1">Accordion</div>
+    <div class="describe">
+      According控件是可以在一个页面中显示多个panel面板，支持2层菜单结构，子菜单可折叠或展开，面板可折叠最小化。
+    </div>
+
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 180px;height:100%">
+              <marvel-accordion isFolder="false" hasShadow="true"
+                                title="abc" titleIcon="icon-calculator"
+                                defaultSelectLabel="item1"
+                                :items="items"></marvel-accordion>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+              <pre v-highlight>
+                <code class="html">
+&lt;marvel-accordion isFolder="false" hasShadow="true"
+                  title="abc" titleIcon="icon-calculator"
+                  defaultSelectLabel="item1"
+                  :items="items"&gt;&lt;/marvel-accordion&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
   </div>
 </template>
 
 <script>
-  import MarvelAccordion from "@/walle/widget/accordion/MarvelAccordion"
+  import MarvelAccordion from "@/walle/widget/accordion/MarvelAccordion";
+  import MarvelTab from "@/walle/widget/tab/MarvelTab";
+  import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
 
   export default {
     name: 'page4Accordion',
-    components: {MarvelAccordion},
-    data: function() {
+    components: {
+      MarvelAccordion,
+      MarvelTab,
+      MarvelTabItem
+    },
+    data: function () {
       return {
+        tabItems1: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
         items: [{
           label: "item1",
           icon: "icon-office",
@@ -33,6 +80,64 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .widgetShowSession {
+    padding: 20px 100px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .title {
+    color: #4d4d4d;
+  }
+
+  .level1 {
+    font-size: 32px;
+    line-height: 54px;
+  }
+
+  .describe{
+    font-size: 14px;
+    color: #666;
+    line-height: 36px;
+  }
+
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
+
+  .codeArea{
+    width: 100%;
+    height:100%;
+    background-color: #f0f0f0;
+    overflow: auto;
+  }
+
+  .codeArea pre,.codeArea code{
+    padding: 0;
+    margin: 0;
+    min-width: 100%;
+    float: left;
+  }
+
+  .showAreaInner {
+    padding-top: 36px;
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.4);
+  }
 
 </style>
