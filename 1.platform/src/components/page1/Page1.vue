@@ -187,6 +187,9 @@
             id: "Page4List1",
             label: "控件(悬浮List)"
           }, {
+            id: "Page4Legend",
+            label: "控件(图例)"
+          }, {
             id: "",
             label: "容器(窗口)"
           }, {
