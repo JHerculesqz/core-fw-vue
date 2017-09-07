@@ -139,6 +139,9 @@
             id: "Page4Menu",
             label: "导航(顶部菜单)"
           }, {
+            id: "Page4MenuContext",
+            label: "导航(右键菜单)"
+          }, {
             id: "Page4Accordion",
             label: "导航(手风琴)"
           }, {
