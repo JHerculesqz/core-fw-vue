@@ -16,7 +16,7 @@
               <div class="detailsCont large-24">
                 <div class="left mini-10">
                   <div class="deviceShowArea"
-                       v-bind:style="{ backgroundImage : 'url(' + companyInfo.devImgUrl + ')'}"></div>
+                       v-bind:style="{ backgroundImage : 'url(' + data4SingleDev.uiImgDetails + ')'}"></div>
                   <div class="deviceDescribe"></div>
                 </div>
                 <div class="right mini-14">
@@ -264,8 +264,7 @@
             logoImgUrl: "/static/demo/logo1.png",
             sloganImgUrl: "/static/demo/slogan1.png",
             sloganLabel: "锐 意 进 取 ， 科 技 创 新",
-            sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3",
-            devImgUrl: "/static/demo/dev.jpg"
+            sloganCopyRight: "Copyright 2017 Raycus – 鄂ICP备16005435号-3"
           };
 
           oCallback();
@@ -273,7 +272,6 @@
         else{
           this.$http.post('/getCompanyInfo', {}).then(res=>{
             this.companyInfo = res.data.resultObj;
-            console.log(this.companyInfo);
 
             oCallback();
           });
@@ -357,6 +355,7 @@
             //2.oDevBasicInfo to basicInfos/advInfos
             if(res.data.ok){
               var oDevBasicInfo = res.data.resultObj;
+              self.data4SingleDev.uiImgDetails = oDevBasicInfo.uiImgDetails;
               self.data4SingleDev.basicInfos = [];
               for(var i=0;i<oDevBasicInfo.lstBasicInfo.length;i++){
                 var oBasicInfo = oDevBasicInfo.lstBasicInfo[i];

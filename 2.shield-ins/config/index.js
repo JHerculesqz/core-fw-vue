@@ -29,105 +29,105 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/login': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/login': '/login'
         }
       },
       '/isLogin': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/isLogin': '/isLogin'
         }
       },
       '/logout': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/logout': '/logout'
         }
       },
       '/getLoginUser': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getLoginUser': '/getLoginUser'
         }
       },
       '/addUser': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/addUser': '/addUser'
         }
       },
       '/getUserLst': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getUserLst': '/getUserLst'
         }
       },
       '/delUser': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/delUser': '/delUser'
         }
       },
       '/initDevByDevId': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/initDevByDevId': '/initDevByDevId'
         }
       },
       '/getCompanyInfo': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getCompanyInfo': '/getCompanyInfo'
         }
       },
       '/getDevLstByEnable': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getDevLstByEnable': '/getDevLstByEnable'
         }
       },
       '/getDevLstByDisable': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getDevLstByDisable': '/getDevLstByDisable'
         }
       },
       '/devEnable': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/devEnable': '/devEnable'
         }
       },
       '/getBasicInfoByDevId': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getBasicInfoByDevId': '/getBasicInfoByDevId'
         }
       },
       '/getWarnLstByDevId': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getWarnLstByDevId': '/getWarnLstByDevId'
         }
       },
       '/getUsageByClientNoAndStartTimeAndEndTime': {
-        target: 'http://localhost',
+        target: 'http://localhost:9001',
         changeOrigin: true,
         pathRewrite: {
           '^/getUsageByClientNoAndStartTimeAndEndTime': '/getUsageByClientNoAndStartTimeAndEndTime'
