@@ -5,7 +5,7 @@
     <div class="wizardsItem"
          v-for="item in items"
          v-bind:class="{ complected: item.complected }"
-         v-bind:style="{ width: 100 / items.length + '%' }">
+         v-bind:style="{ width: 100 / items.length + '%' }" v-on:click="onWizardClick(item)">
       <div class="name">{{ item.label }}</div>
       <div class="decoration">
         <div class="bar"></div>
@@ -37,6 +37,10 @@
             oItem.complected = true;
           }
         }
+      },
+      onWizardClick: function(oItem){
+          this.setProgress(oItem.index);
+          this.$emit("onWizardClick", oItem);
       }
     }
   }

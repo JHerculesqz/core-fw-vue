@@ -1,6 +1,6 @@
 <template>
   <div>
-    ImportEx
+    ImportExParseFixInput
   </div>
 </template>
 
@@ -8,7 +8,7 @@
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
   export default {
     components: {MarvelFrame},
-    name: 'ImportEx',
+    name: 'ImportExParseFixInput',
     data: function() {
       return {
 
@@ -29,5 +29,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    ImportEx
+    ImportExFileMgr
   </div>
 </template>
 
@@ -8,7 +8,7 @@
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
   export default {
     components: {MarvelFrame},
-    name: 'ImportEx',
+    name: 'ImportExFileMgr',
     data: function() {
       return {
 
@@ -29,5 +29,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>
