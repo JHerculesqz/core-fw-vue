@@ -93,9 +93,7 @@
     width: 240px;
     height: 100%;
     float: left;
-    /*background: url("/static/demo/logo.svg") no-repeat center;*/
-    background-position: center;
-    background-repeat: no-repeat;
+    background: url("/static/demo/logo.png") no-repeat center;
     background-size: 70%;
   }
   .header ul{
