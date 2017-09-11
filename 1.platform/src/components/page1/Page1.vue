@@ -37,6 +37,7 @@
   import Page4Layout2 from '@/components/page3/Page4Layout2'
   import Page4Loading1 from '@/components/page3/Page4Loading1'
   import Page4Loading2 from '@/components/page3/Page4Loading2'
+  import Page4Dialog from '@/components/page3/Page4Dialog'
   import Page4Menu from '@/components/page3/Page4Menu'
   import Page4MenuContext from '@/components/page3/Page4MenuContext'
   import Page4Accordion from '@/components/page3/Page4Accordion'
@@ -90,6 +91,7 @@
       Page4Location,
       Page4Legend,
       Page4List1,
+      Page4Dialog,
     },
     name: 'page1',
     data: function () {
@@ -209,7 +211,7 @@
             id: "Page4Legend",
             label: "控件(图例)"
           }, {
-            id: "",
+            id: "Page4Dialog",
             label: "容器(窗口)"
           }, {
             id: "Page4Tab",

@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div>
+  <div class="importExWrapper">
+    <div class="importEx_head">
       <marvel-wizard ref="refWizard" :items="items"
                      v-on:onWizardClick="onWizardClick"></marvel-wizard>
     </div>
-    <div>
+    <div class="importEx_cont">
       <component v-bind:is="downModuleName"></component>
     </div>
   </div>
@@ -61,5 +61,23 @@
 </script>
 
 <style scoped>
-
+.importExWrapper{
+  width: 100%;
+  height:100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.importEx_head{
+  height:120px;
+  background-color: #282746;
+  padding: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+  .importEx_cont{
+    height: calc(100% - 120px);
+    background-color: #282746;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+  }
 </style>

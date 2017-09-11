@@ -1,13 +1,13 @@
 <template>
   <div class="iconTextBtn"
-       v-bind:class="[size, mouseDown, focus, disable, classCustom, icon]"
+       v-bind:class="[size, mouseDown, focus, disable, classCustom, icon, theme]"
        v-on:click="onClick">{{ label }}</div>
 </template>
 
 <script>
   export default {
     name: 'MarvelIconTxtButton',
-    props: ["size", "classCustom", "label", "icon"],
+    props: ["size", "classCustom", "label", "icon", "theme"],
     data: function() {
         return {
           mouseDown: "",
@@ -53,6 +53,20 @@
   }
   .iconTextBtn:hover{
     border: 1px solid #60b0ff;
+  }
+  .dark{
+    border: 1px solid #36365b;
+    color: #ffffff;
+    border-radius: 32px;
+    cursor: pointer;
+    background-color: #36365b;
+  }
+  .dark:before{
+    margin-right: 10px;
+    color: #ffffff;
+  }
+  .dark:hover{
+    border:1px solid #6262a8;
   }
   .large{
     height: 40px;

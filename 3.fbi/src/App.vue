@@ -80,6 +80,7 @@
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #1e1f37;
   }
   #app {
     height:100%;

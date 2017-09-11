@@ -1,14 +1,39 @@
 <template>
-  <div style="width:100%;height:300px;">
-    <marvel-grid :titles="titles" :rows="rows" :limit="limit"></marvel-grid>
+  <div style="width:100%;height:100%;">
+    <div class="title">
+      <div class="titleArea">
+        <div class="titleIcon icon-upload"></div>
+        <div class="titleName">文件列表</div>
+      </div>
+      <div class="operationArea">
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="上传"
+                                icon="icon-upload"
+                                theme="dark"
+                                v-on:onClick="onClick4Upload"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="下载模板"
+                                icon="icon-download"
+                                theme="dark"
+                                v-on:onClick="onClick4Download"></marvel-icon-txt-button>
+        <!--<marvel-dialog :show="showDialog">-->
+          <!---->
+        <!--</marvel-dialog>-->
+      </div>
+    </div>
+    <div class="gridArea">
+      <marvel-grid :titles="titles" :rows="rows" :limit="limit"></marvel-grid>
+    </div>
   </div>
 </template>
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
+  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   export default {
     components: {
+      MarvelIconTxtButton,
       MarvelGrid,
       MarvelFrame
     },
@@ -49,7 +74,10 @@
         }],
         skip: 0,
         limit: 20,
-        rows: []
+        rows: [],
+        //#endregion
+        //#region dialog
+        showDialog: false
         //#endregion
       }
     },
@@ -95,10 +123,54 @@
     destroyed: function () {
 
     },
-    methods: {}
+    methods: {
+      onClick4Upload: function(){
+          this.showDialog = true;
+      },
+      onClick4Download: function(){
+          if(this.debug){
+              alert("下载成功...");
+          }
+          else{
+              //TODO:
+          }
+      }
+    }
   }
 </script>
 
 <style scoped>
-
+  .title{
+    height: 62px;
+    margin-bottom: 10px;
+  }
+  .title .titleArea{
+    height: 100%;
+    float: left;
+  }
+  .title .titleArea .titleIcon{
+    height: 100%;
+    float: left;
+    line-height: 62px;
+    font-size: 34px;
+    color: #8b90b3;
+    margin-right: 10px;
+  }
+  .title .titleArea .titleName{
+    height: 100%;
+    float: left;
+    line-height: 62px;
+    font-size: 18px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .title .operationArea{
+    height: 100%;
+    padding-top: 15px;
+    box-sizing: border-box;
+    float: right;
+  }
+  .gridArea{
+    height:calc(100% - 62px);
+  }
 </style>
