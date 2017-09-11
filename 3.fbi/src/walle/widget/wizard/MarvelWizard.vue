@@ -30,6 +30,16 @@
       setProgress: function(iIndex){
         for(var i=0;i<this.items.length;i++){
           var oItem = this.items[i];
+          if(oItem.index > iIndex){
+            var strTmp = oItem.label;
+            oItem.label = " ";
+            oItem.label = strTmp;
+            oItem.complected = false;
+          }
+        }
+
+        for(var i=0;i<this.items.length;i++){
+          var oItem = this.items[i];
           if(oItem.index == iIndex){
             var strTmp = oItem.label;
             oItem.label = " ";
