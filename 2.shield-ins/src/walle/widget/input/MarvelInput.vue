@@ -65,6 +65,9 @@
     background-color: #f0f0f0;
     pointer-events: none;
   }
+  .dark{
+    background-color: #000000;
+  }
   .dark .inputDefault{
     border: 1px solid rgba(255,255,255,0);
     font-size: 14px;

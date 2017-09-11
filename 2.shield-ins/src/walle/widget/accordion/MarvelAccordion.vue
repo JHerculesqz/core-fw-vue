@@ -108,6 +108,9 @@
     padding: 20px 30px;
     background-color: #f4f5f6;
     height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .accordionShadow{
     -moz-box-shadow:0px 0px 5px #999 inset;               /* For Firefox3.6+ */
@@ -230,4 +233,18 @@
   }
   .select .accordionItemCont .icon{color:#3399ff}
   .select .accordionItemCont .name{color:#3399ff}
+
+  ::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.4);
+  }
 </style>

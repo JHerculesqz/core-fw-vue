@@ -270,7 +270,7 @@
 
   /*layout style*/
   .pageWrapper{
-    position: fixed;
+    /*position: fixed;*///待确定
     width: 100%;
     height: 100%;
     top: 0;

@@ -12,6 +12,7 @@
     "test": "npm run e2e"
   },
   "dependencies": {
+    "konva": "^1.6.8",
     "leaflet.heat": "^0.2.0",
     "moment": "^2.18.1",
     "vue": "^2.3.3",
