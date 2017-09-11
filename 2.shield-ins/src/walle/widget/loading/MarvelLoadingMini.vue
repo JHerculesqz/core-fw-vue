@@ -1,7 +1,8 @@
 <template>
   <!--微观loading start-->
   <div style="margin-top: 10px;margin-left: 10px;">
-    <div class="microLoading" v-bind:class="{ dpn: !show }">
+    <div class="microLoading" v-show="show"
+         v-bind:class="[theme]">
       <div class="loadingBoard">
         <div class="loadingIcon">
           <div class="icon">
@@ -27,6 +28,7 @@
 <script>
   export default {
     name: 'MarvelLoadingMini',
+    props: ['theme'],
     data: function() {
         return {
           show: false,
@@ -150,5 +152,24 @@
     color: #3399ff;
     float: left;
     cursor: pointer;
+  }
+
+  .dark{}
+  .dark .loadingBoard{}
+  .dark .loadingBoard .loadingIcon{}
+  .dark .loadingBoard .loadingIcon .container1 > div,
+  .dark .loadingBoard .loadingIcon .container2 > div,
+  .dark .loadingBoard .loadingIcon .container3 > div{}
+  .dark .loadingBoard .loadingTip{
+    color: #8b90b3;
+  }
+  .dark .loadingBoard .loadingBar{
+    background-color: #1a1827;
+  }
+  .dark .loadingBoard .loadingBar .currentRate{
+    background-color: #3dcca6;
+  }
+  .dark .loadingBoard .loadingCancel{
+    color: #3dcca6;
   }
 </style>
