@@ -19,12 +19,13 @@
   export default {
     components: {
       MarvelWizard,
-      MarvelFrame,ImportExFileMgr,ImportExParseFixInput,ImportExParseInput},
+      MarvelFrame, ImportExFileMgr, ImportExParseFixInput, ImportExParseInput
+    },
     name: 'ImportEx',
-    data: function() {
+    data: function () {
       return {
         //#region const
-        debug: false,
+        debug: true,
         //#endregion
         //#region wizard
         items: [{
@@ -32,11 +33,11 @@
           label: "数据上传",
           index: 1
         }, {
-          id: "ImportExParseFixInput",
+          id: "ImportExParseInput",
           label: "脚本解析",
           index: 2
         }, {
-          id: "ImportExParseInput",
+          id: "ImportExParseFixInput",
           label: "解析修正",
           index: 3
         }],
@@ -44,14 +45,15 @@
         //#endregion
       }
     },
-    mounted: function(){
+    mounted: function () {
+      //1.初始化向导
       this.$refs.refWizard.setProgress(1);
     },
-    destroyed: function(){
+    destroyed: function () {
 
     },
     methods: {
-      onWizardClick: function(oWizardItem){
+      onWizardClick: function (oWizardItem) {
         this.downModuleName = oWizardItem.id;
       }
     }
