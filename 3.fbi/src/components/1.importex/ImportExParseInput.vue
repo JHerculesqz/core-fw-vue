@@ -143,9 +143,7 @@
 
         if(this.debug){
           this._updateLoadingBar4ParseStartMock(function(){
-            self.$refs.refImportExResult.init(function(){
-
-            });
+            self.$refs.refImportExResult.init();
           });
         }
         else{

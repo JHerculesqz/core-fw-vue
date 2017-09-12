@@ -376,7 +376,7 @@
 
     },
     methods: {
-      init: function(oCallbackAfterInit){
+      init: function(){
         if(this.debug){
           this._getParseResult4NeMock();
           this._getParseResult4BoardMock();
@@ -385,7 +385,6 @@
           this._getParseResult4PathMock();
           this._getParseResult4SubNetMock();
           this._getParseResult4SiteMock();
-          oCallbackAfterInit();
         }
         else{
 //          TODO

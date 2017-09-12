@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div>导出待人工修复数据</div>
     <div>
-      <import-ex-result></import-ex-result>
+      <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                              label="导出待人工修复数据"
+                              icon="icon-download"
+                              theme="dark"
+                              v-on:onClick="onClick4Download"></marvel-icon-txt-button>
     </div>
-
   </div>
 </template>
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
-  import ImportExResult from "@/components/1.importex/ImportExResult";
+  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   export default {
     components: {
-      ImportExResult,
+      MarvelIconTxtButton,
       MarvelFrame},
     name: 'ImportExParseFixInput',
     data: function() {
@@ -23,14 +25,14 @@
     },
     mounted: function(){
       var self = this;
-
-
     },
     destroyed: function(){
 
     },
     methods: {
-
+      onClick4Download:function(){
+          alert("downloadClick");
+      }
     }
   }
 </script>
