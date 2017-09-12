@@ -51,7 +51,8 @@
       </div>
     </div>
     <div class="gridArea">
-      <marvel-grid :titles="titles" :rows="rows" :limit="limit"></marvel-grid>
+      <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr" :limit="limit4FileMgr"
+                   theme="dark"></marvel-grid>
     </div>
   </div>
 </template>
@@ -81,7 +82,7 @@
         debug: true,
         //#endregion
         //#region fileGrid
-        titles: [{
+        titles4FileMgr: [{
           label: "序号",
           width: "5%"
         }, {
@@ -109,9 +110,9 @@
           label: "操作",
           width: "13%"
         }],
-        skip: 0,
-        limit: 20,
-        rows: [],
+        skip4FileMgr: 0,
+        limit4FileMgr: 20,
+        rows4FileMgr: [],
         //#endregion
         //#region upload dialog
         showDialog: false,
@@ -163,14 +164,14 @@
         this._updateMem4UploadCancel();
       },
       _getFileListMock: function(){
-        this.rows = [];
+        this.rows4FileMgr = [];
 
         for (var i = 0; i < 100; i++) {
           var oRow = [];
           for (var j = 0; j < 9; j++) {
             if(j != 8){
               var oCell = {
-                value: "value" + Math.random() * 100,
+                value: "value" + i,//Math.random() * 100
                 type: "text"
               };
               oRow.push(oCell);
@@ -193,7 +194,7 @@
               oRow.push(oCell);
             }
           }
-          this.rows.push(oRow);
+          this.rows4FileMgr.push(oRow);
         }
       },
       _updateMem4UploadShow : function(){

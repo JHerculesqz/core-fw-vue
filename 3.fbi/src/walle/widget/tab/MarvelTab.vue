@@ -1,15 +1,17 @@
 <template>
   <!--tab start-->
-  <div class="tabWrapper theme1">
-    <div class="headArea">
-      <div class="headItem" v-for="tabItem in tabItems"
-           v-bind:class="{ active : tabItem.isActive }"
-           v-on:click="onTabClick(tabItem.label)">
-        {{ tabItem.label }}
+  <div class="tabOutsideBox" v-bind:class="[theme]">
+    <div class="tabWrapper theme1">
+      <div class="headArea">
+        <div class="headItem" v-for="tabItem in tabItems"
+             v-bind:class="{ active : tabItem.isActive }"
+             v-on:click="onTabClick(tabItem.label)">
+          {{ tabItem.label }}
+        </div>
       </div>
-    </div>
-    <div class="contArea">
-      <slot></slot>
+      <div class="contArea">
+        <slot></slot>
+      </div>
     </div>
   </div>
   <!--tab end-->
@@ -18,7 +20,7 @@
 <script>
   export default {
     name: 'MarvelTab',
-    props: ["tabItems"],
+    props: ["tabItems", "theme"],
     data: function() {
         return {
 
@@ -42,6 +44,10 @@
 </script>
 
 <style scoped>
+  .tabOutsideBox{
+    width: 100%;
+    height: 100%;
+  }
   .tabWrapper{
     width: 100%;
     height: 100%;
@@ -88,8 +94,6 @@
   .theme1 .headArea .active{
     border-bottom: 3px solid #3399ff;
     box-sizing: border-box;
-    font-weight: bold;
-
   }
 
   .theme2 .headArea .headItem{
@@ -100,6 +104,47 @@
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
     background-color: #ffffff;
+
+  }
+
+  .dark .tabWrapper{
+    border: 1px solid transparent;
+    background-color: #161C36;
+  }
+  .dark .tabWrapper .headArea{
+    border-bottom: 1px solid rgb(128, 128, 128);
+  }
+  .dark .tabWrapper .headArea .headItem{
+    color: #FFFFFF;
+  }
+  .dark .tabWrapper .headArea .headItem:hover{
+    color: #3399ff;
+  }
+  .dark .tabWrapper .contArea{
+    background-color: transparent;
+  }
+  .dark .tabWrapper .contArea .cont{
+  }
+
+  .dark .theme1 .headArea .headItem{
+    border-bottom: 3px solid rgba(0,0,0,0);
+    line-height: 27px;
+  }
+  .dark .theme1 .headArea .active{
+    border-bottom: 3px solid #3399ff;
+    box-sizing: border-box;
+    font-weight: bold;
+
+  }
+
+  .dark .theme2 .headArea .headItem{
+    /*margin-top: 1px;*/
+  }
+  .dark .theme2 .headArea .active{
+    border-top: 1px solid  rgb(128, 128, 128);
+    border-left: 1px solid  rgb(128, 128, 128);
+    border-right: 1px solid  rgb(128, 128, 128);
+    background-color: #161C36;
 
   }
 </style>

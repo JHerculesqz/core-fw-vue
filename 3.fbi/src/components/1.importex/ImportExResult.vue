@@ -1,39 +1,39 @@
 <template>
-  <div>
-    <marvel-tab :tabItems="tabItems">
+  <div style="height: 100%">
+    <marvel-tab :tabItems="tabItems" theme="dark">
       <marvel-tab-item :isActive="tabItems[0].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Ne" :rows="rows4Ne" :limit="limit4Ne"></marvel-grid>
+          <marvel-grid :titles="titles4Ne" :rows="rows4Ne" :limit="limit4Ne" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[1].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Board" :rows="rows4Board" :limit="limit4Board"></marvel-grid>
+          <marvel-grid :titles="titles4Board" :rows="rows4Board" :limit="limit4Board" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[2].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Fiber" :rows="rows4Fiber" :limit="limit4Fiber"></marvel-grid>
+          <marvel-grid :titles="titles4Fiber" :rows="rows4Fiber" :limit="limit4Fiber" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[3].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Cross" :rows="rows4Cross" :limit="limit4Cross"></marvel-grid>
+          <marvel-grid :titles="titles4Cross" :rows="rows4Cross" :limit="limit4Cross" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[4].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Path" :rows="rows4Path" :limit="limit4Path"></marvel-grid>
+          <marvel-grid :titles="titles4Path" :rows="rows4Path" :limit="limit4Path" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[5].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4SubNet" :rows="rows4SubNet" :limit="limit4SubNet"></marvel-grid>
+          <marvel-grid :titles="titles4SubNet" :rows="rows4SubNet" :limit="limit4SubNet" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[6].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Site" :rows="rows4Site" :limit="limit4Site"></marvel-grid>
+          <marvel-grid :titles="titles4Site" :rows="rows4Site" :limit="limit4Site" theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
     </marvel-tab>
@@ -59,6 +59,31 @@
         //#region const
         debug: true,
         //#endregion
+        //#region tab
+        tabItems: [{
+          label: "网元",
+          isActive: true
+        },{
+          label: "单板",
+          isActive: false
+        },{
+          label: "光纤",
+          isActive: false
+        },{
+          label: "交叉",
+          isActive: false
+        },{
+          label: "路径",
+          isActive: false
+        },{
+          label: "保护子网",
+          isActive: false
+        },{
+          label: "站点",
+          isActive: false
+        }],
+        //endregion
+        //#region result
         //#region grid4Ne
         titles4Ne: [{
           label: "",
@@ -341,81 +366,60 @@
         limit4Site: 20,
         rows4Site: [],
         //#endregion
-        //#region tab
-        tabItems: [{
-          label: "网元",
-          isActive: true
-        },{
-          label: "单板",
-          isActive: false
-        },{
-          label: "光纤",
-          isActive: false
-        },{
-          label: "交叉",
-          isActive: false
-        },{
-          label: "路径",
-          isActive: false
-        },{
-          label: "保护子网",
-          isActive: false
-        },{
-          label: "站点",
-          isActive: false
-        }]
-        //endregion
+        //#endregion
       }
     },
     mounted: function () {
-      var self = this;
-      if (this.debug) {
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 9; j++) {
-            if(j != 8){
-              var oCell = {
-                value: "value" + i,
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
-            else{
-              var oCell = {
-                value: [{
-                  value: "icon-location2",
-                  onClick: function () {
-                    alert(Math.random());
-                  }
-                }, {
-                  value: "icon-location2",
-                  onClick: function () {
-                    alert(Math.random());
-                  }
-                }],
-                type: "icon"
-              };
-              oRow.push(oCell);
-            }
-          }
-          this.rows.push(oRow);
-        }
-      }
-      else{
-
-      }
-
+//      var self = this;
+//      if (this.debug) {
+//        for (var i = 0; i < 100; i++) {
+//          var oRow = [];
+//          for (var j = 0; j < 9; j++) {
+//            if(j != 8){
+//              var oCell = {
+//                value: "value" + i,
+//                type: "text"
+//              };
+//              oRow.push(oCell);
+//            }
+//            else{
+//              var oCell = {
+//                value: [{
+//                  value: "icon-location2",
+//                  onClick: function () {
+//                    alert(Math.random());
+//                  }
+//                }, {
+//                  value: "icon-location2",
+//                  onClick: function () {
+//                    alert(Math.random());
+//                  }
+//                }],
+//                type: "icon"
+//              };
+//              oRow.push(oCell);
+//            }
+//          }
+//          this.rows.push(oRow);
+//        }
+//      }
+//      else{
+//
+//      }
     },
     destroyed: function () {
 
     },
-    methods: {}
+    methods: {
+
+    }
   }
 </script>
 
 <style scoped>
   .showAreaInner{
-    padding-top: 36px;
+    padding-top: 10px;
     box-sizing: border-box;
+    height:100%;
   }
 </style>

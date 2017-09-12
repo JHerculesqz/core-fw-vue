@@ -1,7 +1,7 @@
 <template>
-  <div class="gridWrapper">
+  <div class="gridWrapper" v-bind:class="[theme]">
     <div class="grid" v-bind:class="{ empty: 0 == rows.length }">
-      <table class="gridCont">
+      <table class="gridCont" cellspacing="0" cellpadding="0" border="0">
         <thead>
         <tr>
           <!--<th>-->
@@ -57,7 +57,7 @@
   export default {
     components: {MarvelCheckBox},
     name: 'MarvelGrid',
-    props: ["titles", "rows", "limit"],
+    props: ["titles", "rows", "limit", "theme"],
     data: function() {
       return {
         totalPageCount: 1,
@@ -140,6 +140,8 @@
     height: 100%;
     overflow: hidden;
     display: block;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
   }
   table thead, tbody tr{
     display: table;
@@ -147,7 +149,7 @@
     table-layout: fixed;
   }
   .gridWrapper .grid .gridCont thead{
-    padding-right: 16px;
+    padding-right: 8px;
     position: relative;
     box-sizing: border-box;
   }
@@ -157,19 +159,23 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #333;
-    text-align: left;
     padding: 0 8px;
     position: relative;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
   }
   .gridWrapper .grid .gridCont thead tr th:last-child:after{
     content: "";
     height: 40px;
     background-color: #e1e4e5;
-    width: 16px;
+    width: 8px;
     display: inline-block;
     position: absolute;
     top: 0;
-    right: -16px;
+    right: -8px;
   }
   .gridWrapper .grid .gridCont thead tr .titleIcon{
     float: right;
@@ -183,11 +189,14 @@
   }
   .gridWrapper .grid .gridCont tbody tr td{
     color: #666;
-    height: 34px;
+    height: 40px;
     padding: 0 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    font-size: 16px;
   }
   .gridWrapper .grid .gridCont tbody tr .icon{
     margin-right: 8px;
@@ -262,5 +271,98 @@
     margin: 0 4px;
     padding: 0 4px;
     font-size: 12px;
+  }
+
+  .dark{
+    background-color: #161C36;
+  }
+  .dark .grid{}
+  .dark .empty{}
+  .dark .grid .gridCont{
+    border: 1px solid rgb(128, 128, 128);
+  }
+  .dark .grid .gridCont thead{}
+  .dark .grid .gridCont thead tr th{
+    background-color: #2a3255;
+    color: #ffffff;
+    border-bottom: 1px solid rgb(128, 128, 128);
+    border-right: 1px solid rgb(128, 128, 128);
+  }
+  .dark .grid .gridCont thead tr th:last-child:after{
+    background-color: #2a3255;
+  }
+  .dark .grid .gridCont thead tr .titleIcon{
+  }
+  .dark .grid .gridCont tbody{
+  }
+  .dark .grid .gridCont tbody tr td{
+    color: #ffffff;
+    border-bottom: 1px solid rgb(128, 128, 128);
+    border-right: 1px solid rgb(128, 128, 128);
+  }
+  .dark .grid .gridCont tbody tr td:last-child{
+    border-right: none;
+  }
+  .dark .grid .gridCont tbody tr td:last-child{
+    color: #ffffff;
+    border-right: none;
+  }
+  .dark .grid .gridCont tbody tr .icon{
+  }
+  .dark .grid .gridCont tbody tr .iconOnly{
+  }
+  .dark .grid .gridCont tbody tr .iconOnly:hover{
+    color: #3399ff;
+  }
+  .dark .grid .gridCont tbody tr:nth-child(odd){
+    background-color: #161C36;
+  }
+  .dark .grid .gridCont tbody tr:nth-child(even){
+    background-color: #263257;
+  }
+  .dark .grid .gridCont tbody tr:hover{
+    background-color: #1d3b60;
+  }
+
+  .dark .footArea{
+    border-top: none;
+    border-bottom: 1px solid rgb(128, 128, 128);
+  }
+  .dark .footArea .foot{
+  }
+  .dark .footArea .foot .pageSwitch{
+  }
+  .dark .footArea .foot .pageSwitch .item{
+    color: #ffffff;
+  }
+  .dark .footArea .foot .pageSwitch .item:hover{
+    color: #fff;
+    background-color: #60b0ff;
+  }
+  .dark .footArea .foot .pageSwitch .current{
+    color: #fff;
+    background-color: #3399ff !important;
+  }
+  .dark .footArea .foot .pageDrop{
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  .dark .footArea .foot .text{
+    color: #ffffff;
+  }
+
+  ::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+    background-color: rgba(0,0,0,0);
+    box-shadow:-1px 0 rgb(128, 128, 128);
+  }
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.4);
   }
 </style>
