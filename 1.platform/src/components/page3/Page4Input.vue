@@ -41,8 +41,8 @@
       当判断输入信息非法或者错误时，可以提示错误。
     </div>
     <div class="showArea">
-      <marvel-tab :tabItems="tabItems1">
-        <marvel-tab-item :isActive="tabItems1[0].isActive">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="width:200px;">
@@ -52,7 +52,7 @@
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
-        <marvel-tab-item :isActive="tabItems1[1].isActive">
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
               <pre v-highlight>
@@ -71,8 +71,8 @@
       将input框设置为禁用状态
     </div>
     <div class="showArea">
-      <marvel-tab :tabItems="tabItems1">
-        <marvel-tab-item :isActive="tabItems1[0].isActive">
+      <marvel-tab :tabItems="tabItems3">
+        <marvel-tab-item :isActive="tabItems3[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="width:200px;">
@@ -82,7 +82,7 @@
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
-        <marvel-tab-item :isActive="tabItems1[1].isActive">
+        <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
               <pre v-highlight>
@@ -95,23 +95,61 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+
+    <div class="title level2">多行文本框</div>
+    <div class="describe">
+      多行文本框
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems4">
+        <marvel-tab-item :isActive="tabItems4[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:200px;">
+              <button v-on:click="onClick4Input4">获取</button>
+              <marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
+                                  :inputMsg="inputMsg2" theme="dark" size="mini">
+              </marvel-multi-input>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems4[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+&lt;marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
+                    :inputMsg="inputMsg2" theme="dark" size="mini"&gt;
+&lt;/marvel-multi-input&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
   </div>
 </template>
 
 <script>
-  import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelHight from "@/walle/component/highlight";
+  import MarvelInput from "@/walle/widget/input/MarvelInput";
+  import MarvelMultiInput from "@/walle/widget/input/MarvelMultiInput";
 
   export default {
     name: 'page4Input',
     components: {
+      MarvelMultiInput,
       MarvelInput,
       MarvelTab,
       MarvelTabItem
     },
     data: function () {
       return {
+        //#region document data
         tabItems1: [
           {
             label: "Demo View",
@@ -142,13 +180,29 @@
             isActive: false
           }
         ],
+        tabItems4: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        //#endregion
+        //#region custom data
         inputMsg: "",
         status1: "",
         status2: "",
-        status3: ""
+        status3: "",
+        inputMsg2: "",
+        status4: "",
+        //#endregion
       }
     },
     methods: {
+      //#region custom methods
       onClick4Input1: function () {
         console.log(this.$refs.ref0.getInputMsg());
       },
@@ -157,7 +211,11 @@
       },
       onClick4Input3: function () {
         this.status3 = "disable";
-      }
+      },
+      onClick4Input4: function () {
+        console.log(this.$refs.ref1.getInputMsg());
+      },
+      //#endregion
     }
   }
 </script>

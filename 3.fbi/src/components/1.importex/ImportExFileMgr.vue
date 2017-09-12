@@ -13,27 +13,37 @@
                                 label="上传"
                                 icon="icon-upload"
                                 theme="dark"
-                                v-on:onClick="onClick4Upload"></marvel-icon-txt-button>
+                                v-on:onClick="onClick4UploadShow"></marvel-icon-txt-button>
         <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                 label="下载模板"
                                 icon="icon-download"
                                 theme="dark"
                                 v-on:onClick="onClick4Download"></marvel-icon-txt-button>
         <marvel-dialog theme="dark" :showDialog="showDialog"
-                       title="上传" width="500" height="300"
+                       title="数据上传" width="500" height="300"
                        v-on:onClickDialogClose="onClickDialogClose">
           <div slot="dialogCont">
-            待美工实现
+            <div class="fileSelectArea">
+              <marvel-upload ref="ref4Upload" theme="dark"
+                             placeHolder="Please choose a file"></marvel-upload>
+            </div>
+            <div>
+              <marvel-multi-input ref="ref4Remark" :status="status4Remark"
+                                  placeHolder="请输入备注信息..."
+                                  height="100"
+                                  :inputMsg="inputMsg4Remark" theme="dark">
+              </marvel-multi-input>
+            </div>
           </div>
           <div slot="dialogFoot">
             <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                     label="上传"
-                                    icon="icon-download"
+                                    icon="icon-upload"
                                     theme="dark"
                                     v-on:onClick="onClick4UploadOK"></marvel-icon-txt-button>
             <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                     label="取消"
-                                    icon="icon-download"
+                                    icon="icon-cancel-circle"
                                     theme="dark"
                                     v-on:onClick="onClick4UploadCancel"></marvel-icon-txt-button>
           </div>
@@ -52,8 +62,12 @@
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   import MarvelDialog from "@/walle/widget/dialog/MarvelDialog";
   import MarvelLoadingMini from "@/walle/widget/loading/MarvelLoadingMini";
+  import MarvelUpload from "@/walle/widget/upload/MarvelUpload";
+  import MarvelMultiInput from "@/walle/widget/input/MarvelMultiInput";
   export default {
     components: {
+      MarvelMultiInput,
+      MarvelUpload,
       MarvelLoadingMini,
       MarvelDialog,
       MarvelIconTxtButton,
@@ -66,7 +80,7 @@
         //#region const
         debug: true,
         //#endregion
-        //#region grid
+        //#region fileGrid
         titles: [{
           label: "序号",
           width: "5%"
@@ -99,8 +113,11 @@
         limit: 20,
         rows: [],
         //#endregion
-        //#region dialog
-        showDialog: false
+        //#region upload dialog
+        showDialog: false,
+        file: undefined,
+        status4Remark: "",
+        inputMsg4Remark: "",
         //#endregion
       }
     },
@@ -108,12 +125,52 @@
       var self = this;
 
       if (this.debug) {
+        self._getFileListMock();
+      }
+      else{
+        //TODO:
+      }
+    },
+    destroyed: function () {
+
+    },
+    methods: {
+      //#region upload
+      onClick4UploadShow: function(){
+        this._updateMem4UploadShow();
+      },
+      onClick4UploadOK: function(){
+        var self = this;
+
+        if(this.debug){
+          //1._updateMem4UploadStart
+          self._updateMem4UploadStart();
+
+          //2.更新进度条
+          self._updateLoadingBar4UploadStartMock(function(){
+            //3.更新文件列表
+            self._getFileListMock();
+          });
+        }
+        else{
+          //TODO:
+        }
+      },
+      onClick4UploadCancel: function(){
+        this._updateMem4UploadCancel();
+      },
+      onClickDialogClose: function(){
+        this._updateMem4UploadCancel();
+      },
+      _getFileListMock: function(){
+        this.rows = [];
+
         for (var i = 0; i < 100; i++) {
           var oRow = [];
           for (var j = 0; j < 9; j++) {
             if(j != 8){
               var oCell = {
-                value: "value" + i,
+                value: "value" + Math.random() * 100,
                 type: "text"
               };
               oRow.push(oCell);
@@ -138,47 +195,38 @@
           }
           this.rows.push(oRow);
         }
-      }
-      else{
-
-      }
-    },
-    destroyed: function () {
-
-    },
-    methods: {
-      //#region upload
-      onClick4Upload: function(){
-          this.showDialog = true;
       },
-      onClick4UploadOK: function(){
+      _updateMem4UploadShow : function(){
+        this.showDialog = true;
+        this.file = undefined;
+        this.inputMsg4Remark = "";
+      },
+      _updateMem4UploadStart : function(){
+        this.showDialog = false;
+        this.file = this.$refs.ref4Upload.getFile();
+        this.inputMsg4Remark = this.$refs.ref4Remark.getInputMsg();
+      },
+      _updateLoadingBar4UploadStartMock : function(oCallback){
         var self = this;
 
-        this.showDialog = false;
-        this.$refs.refMiniLoading.showEx("取消");
-
-        if(this.debug){
-          self.$refs.refMiniLoading.setProgress(10, "上传ing");
+        self.$refs.refMiniLoading.showEx("取消");
+        self.$refs.refMiniLoading.setProgress(10, "上传ing");
+        setTimeout(function(){
+          self.$refs.refMiniLoading.setProgress(30, "上传ing");
           setTimeout(function(){
-            self.$refs.refMiniLoading.setProgress(30, "上传ing");
+            self.$refs.refMiniLoading.setProgress(60, "上传ing");
             setTimeout(function(){
-              self.$refs.refMiniLoading.setProgress(60, "上传ing");
-              setTimeout(function(){
-                self.$refs.refMiniLoading.setProgress(100, "完成");
-                self.$refs.refMiniLoading.hideEx();
-              },1000);
+              self.$refs.refMiniLoading.setProgress(100, "完成");
+              self.$refs.refMiniLoading.hideEx();
+              oCallback();
             },1000);
           },1000);
-        }
-        else{
-          //TODO:
-        }
+        },1000);
       },
-      onClick4UploadCancel: function(){
+      _updateMem4UploadCancel : function(){
         this.showDialog = false;
-      },
-      onClickDialogClose: function(){
-        this.showDialog = false;
+        this.file = undefined;
+        this.inputMsg4Remark = "";
       },
       //#endregion
       //#region download
@@ -232,6 +280,9 @@
     padding-top: 15px;
     box-sizing: border-box;
     float: right;
+  }
+  .fileSelectArea{
+    margin-bottom: 20px;
   }
   .gridArea{
     height:calc(100% - 62px);

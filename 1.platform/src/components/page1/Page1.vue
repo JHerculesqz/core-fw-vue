@@ -57,6 +57,7 @@
   import Page4Location from '@/components/page3/Page4Location'
   import Page4Legend from '@/components/page3/Page4Legend'
   import Page4List1 from '@/components/page3/Page4List1'
+  import Page4Upload from '@/components/page3/Page4Upload'
 
   export default {
     components: {
@@ -92,6 +93,7 @@
       Page4Legend,
       Page4List1,
       Page4Dialog,
+      Page4Upload,
     },
     name: 'page1',
     data: function () {
@@ -190,7 +192,7 @@
             id: "Page4Date",
             label: "控件(时间日期)"
           }, {
-            id: "",
+            id: "Page4Upload",
             label: "控件(文件上传)"
           }, {
             id: "",

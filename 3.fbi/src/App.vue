@@ -7,20 +7,20 @@
           <router-link :to="{name:'ImportEx'}" exact>脚本解析</router-link>
         </li>
         <li>
-          <router-link :to="{name:''}" exact>网络还原</router-link>
+          <router-link :to="{name:'Topo'}" exact>网络还原</router-link>
         </li>
         <li>
-          <router-link :to="{name:''}" exact>网络规划</router-link>
+          <router-link :to="{name:'Plan'}" exact>网络规划</router-link>
         </li>
         <li>
-          <router-link :to="{name:''}" exact>网络设计</router-link>
+          <router-link :to="{name:'Design'}" exact>网络设计</router-link>
         </li>
-        <li>
-          <router-link :to="{name:''}" exact>对比分析</router-link>
-        </li>
-        <li>
-          <router-link :to="{name:''}" exact>割接分析</router-link>
-        </li>
+        <!--<li>-->
+          <!--<router-link :to="{name:'Test4'}" exact>对比分析</router-link>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<router-link :to="{name:'Test5'}" exact>割接分析</router-link>-->
+        <!--</li>-->
       </ul>
       <div class="userInfoArea">
 
@@ -105,17 +105,17 @@
     float: left;
     margin-right: 15px;
     margin-top: 0;
-    list-style-type: none
+    list-style-type: none;;
   }
   .header ul li a{
     line-height: 60px;
-    color: #ffffff;
+    color: #999;
     font-size: 16px;
     padding: 0 10px;
     text-decoration: none;
   }
   .header ul li .active{
-    color:#00a0e9;
+    color:#fff;
   }
   .header .userInfoArea{
     height: 100%;
