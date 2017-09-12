@@ -49,9 +49,6 @@
       //1.初始化向导
       this.$refs.refWizard.setProgress(1);
     },
-    destroyed: function () {
-
-    },
     methods: {
       onWizardClick: function (oWizardItem) {
         this.downModuleName = oWizardItem.id;
@@ -74,7 +71,7 @@
   box-sizing: border-box;
   padding: 20px;
 }
-  .importEx_cont{
+.importEx_cont{
     height: calc(100% - 120px);
     background-color: #282746;
     padding: 0 20px 20px 20px;
