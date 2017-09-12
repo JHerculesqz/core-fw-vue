@@ -370,47 +370,132 @@
       }
     },
     mounted: function () {
-//      var self = this;
-//      if (this.debug) {
-//        for (var i = 0; i < 100; i++) {
-//          var oRow = [];
-//          for (var j = 0; j < 9; j++) {
-//            if(j != 8){
-//              var oCell = {
-//                value: "value" + i,
-//                type: "text"
-//              };
-//              oRow.push(oCell);
-//            }
-//            else{
-//              var oCell = {
-//                value: [{
-//                  value: "icon-location2",
-//                  onClick: function () {
-//                    alert(Math.random());
-//                  }
-//                }, {
-//                  value: "icon-location2",
-//                  onClick: function () {
-//                    alert(Math.random());
-//                  }
-//                }],
-//                type: "icon"
-//              };
-//              oRow.push(oCell);
-//            }
-//          }
-//          this.rows.push(oRow);
-//        }
-//      }
-//      else{
-//
-//      }
+      this.init();
     },
     destroyed: function () {
 
     },
     methods: {
+      init: function(oCallbackAfterInit){
+        if(this.debug){
+          this._getParseResult4NeMock();
+          this._getParseResult4BoardMock();
+          this._getParseResult4FiberMock();
+          this._getParseResult4CrossMock();
+          this._getParseResult4PathMock();
+          this._getParseResult4SubNetMock();
+          this._getParseResult4SiteMock();
+          oCallbackAfterInit();
+        }
+        else{
+//          TODO
+        }
+      },
+      _getParseResult4NeMock: function(){
+        this.rows4Ne = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 16; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Ne.push(oRow);
+        }
+      },
+      _getParseResult4BoardMock: function(){
+        this.rows4Board = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 9; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Board.push(oRow);
+        }
+      },
+      _getParseResult4FiberMock: function(){
+        this.rows4Fiber = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 13; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Fiber.push(oRow);
+        }
+      },
+      _getParseResult4CrossMock: function(){
+        this.rows4Cross = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 14; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Cross.push(oRow);
+        }
+      },
+      _getParseResult4PathMock: function(){
+        this.rows4Path = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 15; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Path.push(oRow);
+        }
+      },
+      _getParseResult4SubNetMock: function(){
+        this.rows4SubNet = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 4; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4SubNet.push(oRow);
+        }
+      },
+      _getParseResult4SiteMock: function(){
+        this.rows4Site = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          for (var j = 0; j < 9; j++) {
+            var oCell = {
+              value: "value" + i,//Math.random() * 100
+              type: "text"
+            };
+            oRow.push(oCell);
+          }
+          this.rows4Site.push(oRow);
+        }
+      },
 
     }
   }

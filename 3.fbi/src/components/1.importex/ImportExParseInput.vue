@@ -15,14 +15,16 @@
                                 theme="dark"
                                 v-on:onClick="onClick4ParseShow"></marvel-icon-txt-button>
         <marvel-dialog theme="dark" :showDialog="showDialog"
-                       title="脚本解析" width="500" height="300"
+                       title="脚本解析" width="600" height="400"
                        v-on:onClickDialogClose="onClickDialogClose">
           <div slot="dialogCont">
-            <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr" :limit="limit4FileMgr"
+            <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr"
+                         :limit="limit4FileMgr"
                          theme="dark"></marvel-grid>
           </div>
           <div slot="dialogFoot">
-            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+            <marvel-icon-txt-button ref="refParseOK"
+                                    size="normal" classCustom="classCustom1"
                                     label="解析"
                                     icon="icon-rocket"
                                     theme="dark"
@@ -37,7 +39,7 @@
       </div>
     </div>
     <div class="tabArea">
-      <import-ex-result></import-ex-result>
+      <import-ex-result ref="refImportExResult"></import-ex-result>
     </div>
   </div>
 </template>
@@ -61,10 +63,13 @@
     name: 'ImportExParseInput',
     data: function () {
       return {
+        //#region const
+        debug: true,
+        //#endregion
         //#region parse
         showDialog: false,
         titles4FileMgr: [{
-          label: "CheckBox",
+          label: "",
           width: "5%"
         }, {
           label: "文件名",
@@ -92,17 +97,81 @@
     },
     methods: {
       onClick4ParseShow: function(){
+        this.showDialog = true;
+        this.$refs.refParseOK.setBtnDisable(false);
+        this._getFileLstMock(function(){
 
+        });
       },
       onClick4ParseOK: function(){
-
+        this._updateMem4DialogOK();
       },
       onClick4ParseCancel: function(){
-
+        this._updateMem4DialogClose();
       },
       onClickDialogClose: function(){
+        this._updateMem4DialogClose();
+      },
+      _getFileLstMock : function(oCallback){
+        this.rows4FileMgr = [];
 
-      }
+        if(this.debug){
+          for (var i = 0; i < 100; i++) {
+            var oRow = [];
+            for (var j = 0; j < 4; j++) {
+              var oCell = {
+                value: "value" + i,
+                type: "text"
+              };
+              oRow.push(oCell);
+            }
+            this.rows4FileMgr.push(oRow);
+          }
+
+          oCallback();
+        }
+        else{
+          //TODO:
+        }
+      },
+      _updateMem4DialogOK: function(){
+        var self = this;
+
+        this.showDialog = false;
+
+        //TODO:1.获取文件列表选项
+
+        if(this.debug){
+          this._updateLoadingBar4ParseStartMock(function(){
+            self.$refs.refImportExResult.init(function(){
+
+            });
+          });
+        }
+        else{
+            //TODO:
+        }
+      },
+      _updateMem4DialogClose: function(){
+        this.showDialog = false;
+      },
+      _updateLoadingBar4ParseStartMock : function(oCallback){
+        var self = this;
+
+        self.$refs.refMiniLoading.showEx("取消");
+        self.$refs.refMiniLoading.setProgress(10, "解析网元");
+        setTimeout(function(){
+          self.$refs.refMiniLoading.setProgress(30, "解析单板");
+          setTimeout(function(){
+            self.$refs.refMiniLoading.setProgress(60, "解析交叉");
+            setTimeout(function(){
+              self.$refs.refMiniLoading.setProgress(100, "解析完成");
+              self.$refs.refMiniLoading.hideEx();
+              oCallback();
+            },1000);
+          },1000);
+        },1000);
+      },
     }
   }
 </script>
