@@ -17,7 +17,7 @@
         <marvel-dialog theme="dark" :showDialog="showDialog"
                        title="脚本解析" width="600" height="400"
                        v-on:onClickDialogClose="onClickDialogClose">
-          <div slot="dialogCont">
+          <div style="height: 100%" slot="dialogCont">
             <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr"
                          :limit="limit4FileMgr"
                          theme="dark"></marvel-grid>
