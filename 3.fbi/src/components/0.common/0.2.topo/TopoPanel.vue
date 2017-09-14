@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%; height: 100%;">
     <div style="width: 100%;height:30px">
-      <topo-toolbar></topo-toolbar>
+      <topo-toolbar v-bind:items="items"></topo-toolbar>
     </div>
     <div style="width:100%;height:calc(100% - 30px);position: relative;">
       <topo-left-area ref="ref4LeftArea"
@@ -28,6 +28,7 @@
       TopoToolbar
     },
     name: "TopoPanel",
+    props:["items"],
     data: function () {
       return {
 
@@ -44,10 +45,13 @@
         this.$emit("onTreeNodeClick", oTreeNode);
       },
       selectNe:function(strNeId){
-          alert(strNeId);
+          alert("selectNe");
       },
       selectLink:function(strLinkId){
-        alert(strLinkId);
+        alert("selectLink");
+      },
+      updateTopo:function(oTopo){
+          alert("updateTopo");
       }
     }
   }

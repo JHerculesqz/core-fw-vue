@@ -119,7 +119,6 @@
         }
       },
       onClickRow: function(oRow){
-          console.log(oRow);
           this.$emit("onClickRow",oRow);
       }
     }

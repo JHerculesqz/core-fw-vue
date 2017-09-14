@@ -1,50 +1,82 @@
 <template>
-  <div>
+  <div class="fullPathArea">
     <marvel-tab :tabItems="tabItems1" theme="dark">
       <marvel-tab-item :isActive="tabItems1[0].isActive">
-        <div>路径</div>
-        <div style="height:100px">
-          <marvel-grid :titles="titles4FullPath" :rows="rows4FullPath" :limit="limit4FullPath"
-                       theme="dark" v-on:onClickRow="onClickFullPathRow"></marvel-grid>
+        <div class="tabContArea">
+          <div class="titleArea">
+            <div class="titleName">路径</div>
+            <div class="btnArea">
+              <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                      label="导出"
+                                      icon="icon-download"
+                                      theme="dark"
+                                      v-on:onClick="onClick4ExportFullPath"></marvel-icon-txt-button>
+              <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                      label="删除"
+                                      icon="icon-bin"
+                                      theme="dark"
+                                      v-on:onClick="onClick4DelFullPath"></marvel-icon-txt-button>
+            </div>
+          </div>
+          <div class="firstGridArea">
+            <marvel-grid ref="ref4FullPathGrid" :titles="titles4FullPath"
+                         :rows="rows4FullPath"
+                         :limit="limit4FullPath"
+                         theme="dark"
+                         v-on:onClickRow="onClickFullPathRow"></marvel-grid>
+          </div>
+          <div class="dynamicArea" v-show="showRouter">
+            <div class="titleArea">
+              <div class="titleName">路由详情</div>
+              <div class="btnArea">
+                <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                        label="导出"
+                                        icon="icon-download"
+                                        theme="dark"
+                                        v-on:onClick="onClick4ExportFullPathRouter"></marvel-icon-txt-button>
+              </div>
+            </div>
+            <div class="secondGridArea">
+              <marvel-grid :titles="titles4FullRouter"
+                           :rows="rows4FullRouter"
+                           :limit="limit4FullRouter"
+                           theme="dark"></marvel-grid>
+            </div>
+          </div>
         </div>
-        <div>路由详情</div>
-        <div>
-          <marvel-grid v-show="showRouter" :titles="titles4FullRouter" :rows="rows4FullRouter" :limit="limit4FullRouter"
-                       theme="dark"></marvel-grid>
-        </div>
-
       </marvel-tab-item>
-
       <marvel-tab-item :isActive="tabItems1[1].isActive">
-        <div>
-          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                  label="业务局向"
-                                  icon="icon-upload"
-                                  theme="dark"
-                                  v-on:onClick="onClick4BusinessOK"></marvel-icon-txt-button>
-          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                  label="导出"
-                                  icon="icon-upload"
-                                  theme="dark"
-                                  v-on:onClick="onClick4ExportBusOK"></marvel-icon-txt-button>
+        <div class="titleArea">
+          <div class="btnArea">
+            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                    label="业务局向"
+                                    icon="icon-upload"
+                                    theme="dark"
+                                    v-on:onClick="onClick4Business"></marvel-icon-txt-button>
+            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                    label="导出"
+                                    icon="icon-download"
+                                    theme="dark"
+                                    v-on:onClick="onClick4ExportBusiness"></marvel-icon-txt-button>
+          </div>
         </div>
-        <div>
-          <marvel-grid :titles="titles4Business" :rows="rows4Business" :limit="limit4Business"
-                       theme="dark"></marvel-grid>
+        <div class="firstGridArea">
+          <marvel-grid :titles="titles4Business"
+                       :rows="rows4Business"
+                       :limit="limit4Business"
+                       theme="dark"
+                       v-on:onClickRow="onClickRow4Business"></marvel-grid>
         </div>
       </marvel-tab-item>
-
     </marvel-tab>
   </div>
 </template>
 
 <script>
-
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
-
   export default {
     components: {
       MarvelIconTxtButton,
@@ -251,15 +283,18 @@
         }
       },
       onClickFullPathRow: function (oRow) {
+        var self = this;
         this.showRouter = true;
         if (this.debug) {
-          this._getFullRouterMock(oRow);
+          this._getFullRouterMock(oRow, function (arrRouters) {
+            self.$emit("onClickFullPathRow", arrRouters);
+          });
         }
         else {
           //TODO:
         }
       },
-      _getFullRouterMock: function (oRow) {
+      _getFullRouterMock: function (oRow, oAfterCallBack) {
         this.rows4FullRouter = [];
 
         for (var i = 0; i < 100; i++) {
@@ -273,8 +308,17 @@
           }
           this.rows4FullRouter.push(oRow);
         }
+        oAfterCallBack(this.rows4FullRouter);
       },
-      onClick4BusinessOK: function () {
+      onClick4ExportFullPathRouter: function () {
+        if (this.debug) {
+          alert("导出路由详情");
+        }
+        else {
+          //TODO:
+        }
+      },
+      onClick4Business: function () {
         if (this.debug) {
           alert("局向");
           this._getBusinessMock();
@@ -283,7 +327,7 @@
           //TODO:
         }
       },
-      onClick4ExportBusOK: function () {
+      onClick4ExportBusiness: function () {
         if (this.debug) {
           alert("导出");
         }
@@ -291,13 +335,69 @@
           //TODO:
         }
       },
+      onClickRow4Business: function (oRow) {
+        this.$emit("onClickRow4Business", oRow);
+      },
+      onClick4ExportFullPath: function () {
+        if (this.debug) {
+          alert("导出完整路径信息");
+        }
+        else {
+          //TODO:
+        }
+      },
+      onClick4DelFullPath: function () {
+        //获取勾选项
+//        var arrCheckRows = this.$refs.ref4FullPathGrid.getCheckRows();
+        if (this.debug) {
+          alert("删除完整路径");
+        }
+        else {
+          //TODO:
+        }
+      }
     }
-
   }
-
 </script>
 
-<style>
-
-
+<style scoped>
+  .fullPathArea{
+    height:100%;
+  }
+  .tabContArea{
+    height:100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .titleArea{
+    width: 100%;
+    height: 52px;
+  }
+  .titleName{
+    float: left;
+    height: 52px;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+    line-height: 52px;
+  }
+  .btnArea{
+    height: 52px;
+    padding: 10px 0;
+    box-sizing: border-box;
+    float: right;
+  }
+  .firstGridArea{
+    height: calc(100% - 52px);
+  }
+  .dynamicArea{
+    padding-top: 20px;
+    box-sizing: border-box;
+  }
+  .secondGridArea{
+    height: 300px;
+  }
+  .classCustom1{
+    margin-left: 20px;
+  }
 </style>

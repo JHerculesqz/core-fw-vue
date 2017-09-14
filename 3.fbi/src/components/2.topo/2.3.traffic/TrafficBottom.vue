@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div class="trafficBottomWrapper">
     <marvel-tab :tabItems="tabItems1" theme="dark">
       <marvel-tab-item :isActive="tabItems1[0].isActive">
-        <full-path></full-path>
+        <full-path v-on:onClickFullPathRow="onClickFullPathRow"
+                   v-on:onClickRow4Business="onClickRow4Business"></full-path>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems1[1].isActive">
-        <part-path></part-path>
+        <part-path v-on:onClickPartPathRow="onClickPartPathRow"></part-path>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems1[2].isActive">
-        <discrete-cross></discrete-cross>
+        <discrete-cross v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></discrete-cross>
       </marvel-tab-item>
     </marvel-tab>
   </div>
@@ -48,11 +49,26 @@
         }],
         //#endregion
       };
+    },
+    methods: {
+      onClickFullPathRow: function (arrRouters) {
+        this.$emit("onClickFullPathRow", arrRouters);
+      },
+      onClickRow4Business:function(oRow){
+        this.$emit("onClickRow4Business", oRow);
+      },
+      onClickPartPathRow: function(arrRouters){
+        this.$emit("onClickPartPathRow", arrRouters);
+      },
+      onClickRow4DiscreteCross:function(oRow){
+        this.$emit("onClickRow4DiscreteCross", oRow);
+      }
     }
   }
-
 </script>
 
-<style>
-
+<style scoped>
+  .trafficBottomWrapper{
+    height:100%;
+  }
 </style>
