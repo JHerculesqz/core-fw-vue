@@ -1,0 +1,47 @@
+<template>
+  <marvel-left-ext-panel
+    theme="dark"
+    width="250"
+    show="true"
+    canDrag="false">
+    <div slot="content" style="color: #fff;height: 100%">
+      <marvel-z-tree theme="dark">
+        <marvel-z-tree-item :model="data4LeftArea" theme="dark"
+                            v-on:onTreeNodeClick="onTreeNodeClick"></marvel-z-tree-item>
+      </marvel-z-tree>
+    </div>
+  </marvel-left-ext-panel>
+</template>
+
+<script>
+  import MarvelLeftExtPanel from "@/walle/widget/extPanel/MarvelLeftExtPanel";
+  import MarvelZTree from "@/walle/widget/tree/MarvelZTree";
+  import MarvelZTreeItem from "@/walle/widget/tree/MarvelZTreeItem";
+  export default {
+    components: {
+      MarvelZTreeItem,
+      MarvelZTree,
+      MarvelLeftExtPanel
+    },
+    name: "TopoLeftArea",
+    data: function () {
+      return {
+        //#region phyTopo
+        data4LeftArea: {}
+        //#endregion
+      }
+    },
+    methods: {
+      setData4LeftArea: function(oData4LeftArea){
+        this.data4LeftArea = oData4LeftArea;
+      },
+      onTreeNodeClick: function(oTreeNode){
+        this.$emit("onTreeNodeClick", oTreeNode);
+      }
+    }
+  }
+</script>
+
+<style>
+
+</style>

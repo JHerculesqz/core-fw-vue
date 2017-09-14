@@ -58,6 +58,9 @@
   import Page4Legend from '@/components/page3/Page4Legend'
   import Page4List1 from '@/components/page3/Page4List1'
   import Page4Upload from '@/components/page3/Page4Upload'
+  import Page4Toolbar from '@/components/page3/Page4Toolbar'
+  import Page4ExtPanel from '@/components/page3/Page4ExtPanel'
+  import Page4ZTree from '@/components/page3/Page4ZTree'
 
   export default {
     components: {
@@ -94,6 +97,9 @@
       Page4List1,
       Page4Dialog,
       Page4Upload,
+      Page4Toolbar,
+      Page4ExtPanel,
+      Page4ZTree,
     },
     name: 'page1',
     data: function () {
@@ -143,10 +149,10 @@
           subItems: [{
             id: "Page4VueBasic",
             label: "Vue基础"
-          },{
+          }, {
             id: "Page4VueBus",
             label: "Vue消息"
-          },{
+          }, {
             id: "",
             label: "表单"
           }, {
@@ -213,13 +219,19 @@
             id: "Page4Legend",
             label: "控件(图例)"
           }, {
+            id: "Page4Toolbar",
+            label: "控件(Toolbar)"
+          }, {
+            id: "Page4ZTree",
+            label: "控件(Tree)"
+          }, {
             id: "Page4Dialog",
             label: "容器(窗口)"
           }, {
             id: "Page4Tab",
             label: "容器(页签)"
           }, {
-            id: "",
+            id: "Page4ExtPanel",
             label: "容器(扩展面板)"
           }, {
             id: "",

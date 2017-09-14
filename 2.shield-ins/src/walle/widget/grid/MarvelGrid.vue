@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="row in rowsInPage">
+        <tr v-for="row in rowsInPage" v-on:click="onClickRow(row)">
           <td v-for="cell in row"
               v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
             <div v-if="cell.type == 'text'" :title="cell.value">
@@ -117,6 +117,10 @@
         if(this.curPageIndex < this.totalPageCount){
           this.curPageIndex += 1;
         }
+      },
+      onClickRow: function(oRow){
+          console.log(oRow);
+          this.$emit("onClickRow",oRow);
       }
     }
   }

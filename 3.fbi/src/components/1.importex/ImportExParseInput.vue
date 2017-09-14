@@ -46,7 +46,7 @@
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
-  import ImportExResult from "@/components/1.importex/ImportExResult";
+  import ImportExResult from "@/components/0.common/0.1.resourcePanel/ImportExResult";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelLoadingMini from "@/walle/widget/loading/MarvelLoadingMini";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";

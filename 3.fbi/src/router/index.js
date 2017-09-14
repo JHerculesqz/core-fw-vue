@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ImportEx from '@/components/1.importex/ImportEx'
-import Topo from '@/components/2.topo/Topo'
+import Topo from '@/components/2.topo/2.1.main/Topo'
 import Plan from '@/components/3.buPlan/Plan'
 import Design from '@/components/4.buDesign/Design'
 
