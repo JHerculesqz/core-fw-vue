@@ -2,7 +2,7 @@
   <marvel-left-ext-panel
     theme="dark"
     width="250"
-    show="true"
+    show="false"
     canDrag="false">
     <div slot="content" style="color: #fff;height: 100%">
       <marvel-z-tree theme="dark">

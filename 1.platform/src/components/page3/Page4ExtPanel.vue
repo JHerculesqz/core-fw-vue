@@ -21,7 +21,7 @@
                 <marvel-bottom-ext-panel
                   theme="dark"
                   height="100"
-                  show="true"
+                  show="false"
                   canDrag="false">
                   <div slot="content" style="color: #fff">hello world</div>
                 </marvel-bottom-ext-panel>

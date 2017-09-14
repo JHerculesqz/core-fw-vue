@@ -20,7 +20,7 @@
     props: ['theme', 'width', 'show', 'canDrag'],
     data: function() {
       return {
-        showEx: this.show
+        showEx: this.show == "true"
       }
     },
     computed: {

@@ -9,7 +9,7 @@
       <div>
         <topo-center-area></topo-center-area>
       </div>
-      <topo-right-area></topo-right-area>
+      <topo-right-area ref="ref4RightArea"></topo-right-area>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@
       TopoLeftArea,
       TopoToolbar
     },
-    name: "MainTopo",
+    name: "TopoPanel",
     data: function () {
       return {
 
@@ -37,8 +37,17 @@
       setData4LeftArea: function(oData4LeftArea){
         this.$refs.ref4LeftArea.setData4LeftArea(oData4LeftArea);
       },
+      setData4RightArea: function(oData4RightArea){
+        this.$refs.ref4RightArea.setData4RightArea(oData4RightArea);
+      },
       onTreeNodeClick: function(oTreeNode){
         this.$emit("onTreeNodeClick", oTreeNode);
+      },
+      selectNe:function(strNeId){
+          alert(strNeId);
+      },
+      selectLink:function(strLinkId){
+        alert(strLinkId);
       }
     }
   }

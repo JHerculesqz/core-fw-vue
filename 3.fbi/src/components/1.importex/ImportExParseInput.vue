@@ -39,14 +39,14 @@
       </div>
     </div>
     <div class="tabArea">
-      <import-ex-result ref="refImportExResult"></import-ex-result>
+      <phy-grid-panel ref="ref4PhyGridPanel"></phy-grid-panel>
     </div>
   </div>
 </template>
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
-  import ImportExResult from "@/components/0.common/0.1.resourcePanel/ImportExResult";
+  import PhyGridPanel from "@/components/0.common/0.1.resourcePanel/PhyGridPanel";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelLoadingMini from "@/walle/widget/loading/MarvelLoadingMini";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
@@ -54,7 +54,7 @@
   export default {
     components: {
       MarvelGrid,
-      ImportExResult,
+      PhyGridPanel,
       MarvelLoadingMini,
       MarvelIconTxtButton,
       MarvelDialog,
@@ -143,7 +143,7 @@
 
         if(this.debug){
           this._updateLoadingBar4ParseStartMock(function(){
-            self.$refs.refImportExResult.init();
+            self.$refs.ref4PhyGridPanel.init();
           });
         }
         else{

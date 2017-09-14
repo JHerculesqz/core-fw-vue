@@ -3,7 +3,11 @@
     <marvel-tab :tabItems="tabItems" theme="dark">
       <marvel-tab-item :isActive="tabItems[0].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Ne" :rows="rows4Ne" :limit="limit4Ne" theme="dark"></marvel-grid>
+          <marvel-grid :titles="titles4Ne"
+                       :rows="rows4Ne"
+                       :limit="limit4Ne"
+                       v-on:onClickRow="onClickRow4Ne"
+                       theme="dark"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[1].isActive">
@@ -13,7 +17,11 @@
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[2].isActive">
         <div class="showAreaInner">
-          <marvel-grid :titles="titles4Fiber" :rows="rows4Fiber" :limit="limit4Fiber" theme="dark"></marvel-grid>
+          <marvel-grid :titles="titles4Fiber"
+                       :rows="rows4Fiber"
+                       :limit="limit4Fiber"
+                       theme="dark"
+                       v-on:onClickRow="onClickRow4Fiber"></marvel-grid>
         </div>
       </marvel-tab-item>
       <marvel-tab-item :isActive="tabItems[3].isActive">
@@ -53,7 +61,7 @@
       MarvelTab,
       MarvelTabItem
     },
-    name: 'ImportExResult',
+    name: 'PhyGridPanel',
     data: function () {
       return {
         //#region const
@@ -370,7 +378,7 @@
       }
     },
     mounted: function () {
-      this.init();
+
     },
     destroyed: function () {
 
@@ -389,6 +397,12 @@
         else{
 //          TODO
         }
+      },
+      onClickRow4Ne: function(oRow){
+        this.$emit("onClickRow4Ne",oRow);
+      },
+      onClickRow4Fiber: function(oRow){
+        this.$emit("onClickRow4Fiber",oRow);
       },
       _getParseResult4NeMock: function(){
         this.rows4Ne = [];

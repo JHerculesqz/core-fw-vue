@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <marvel-tab :tabItems="tabItems1" theme="dark">
       <marvel-tab-item :isActive="tabItems1[0].isActive">
@@ -11,10 +10,8 @@
       <marvel-tab-item :isActive="tabItems1[2].isActive">
         <discrete-cross></discrete-cross>
       </marvel-tab-item>
-
     </marvel-tab>
   </div>
-
 </template>
 
 <script>
