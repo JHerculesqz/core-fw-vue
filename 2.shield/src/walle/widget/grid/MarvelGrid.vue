@@ -353,19 +353,4 @@
   .dark .footArea .foot .text{
     color: #ffffff;
   }
-
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
-    box-shadow:-1px 0 rgb(128, 128, 128);
-  }
-  ::-webkit-scrollbar-track{
-    border-radius: 10px;
-    background-color: rgba(0,0,0,0);
-  }
-  ::-webkit-scrollbar-thumb{
-    border-radius: 10px;
-    background-color: rgba(255,255,255,0.4);
-  }
 </style>

@@ -4,11 +4,11 @@
       <topo-toolbar v-bind:items="items"></topo-toolbar>
     </div>
     <div style="width:100%;height:calc(100% - 30px);position: relative;">
+      <topo-center-area ref="ref4TopoCenterArea"
+                        v-bind:theme="theme"
+                        v-bind:id="id4Topo"></topo-center-area>
       <topo-left-area ref="ref4LeftArea"
                       v-on:onTreeNodeClick="onTreeNodeClick"></topo-left-area>
-      <div>
-        <topo-center-area></topo-center-area>
-      </div>
       <topo-right-area ref="ref4RightArea"></topo-right-area>
     </div>
   </div>
@@ -28,30 +28,34 @@
       TopoToolbar
     },
     name: "TopoPanel",
-    props:["items"],
+    props: ["theme", "items", "id4Topo"],
     data: function () {
-      return {
-
-      }
+      return {}
     },
     methods: {
-      setData4LeftArea: function(oData4LeftArea){
+      setData4LeftArea: function (oData4LeftArea) {
         this.$refs.ref4LeftArea.setData4LeftArea(oData4LeftArea);
       },
-      setData4RightArea: function(oData4RightArea){
+      setData4RightArea: function (oData4RightArea) {
         this.$refs.ref4RightArea.setData4RightArea(oData4RightArea);
       },
-      onTreeNodeClick: function(oTreeNode){
+      onTreeNodeClick: function (oTreeNode) {
         this.$emit("onTreeNodeClick", oTreeNode);
       },
-      selectNe:function(strNeId){
-          alert("selectNe");
+      selectNe: function (strNeId) {
+        alert("selectNe");
       },
-      selectLink:function(strLinkId){
+      selectLink: function (strLinkId) {
         alert("selectLink");
       },
-      updateTopo:function(oTopo){
-          alert("updateTopo");
+      updateTopo: function (oTopo) {
+        alert("updateTopo");
+      },
+      initTopo: function (oAfterCallBack) {
+        this.$refs.ref4TopoCenterArea.init(oAfterCallBack);
+      },
+      drawTopo: function(oTopoData){
+        this.$refs.ref4TopoCenterArea.draw(oTopoData);
       }
     }
   }

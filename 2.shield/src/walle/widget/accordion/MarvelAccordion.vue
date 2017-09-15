@@ -233,18 +233,4 @@
   }
   .select .accordionItemCont .icon{color:#3399ff}
   .select .accordionItemCont .name{color:#3399ff}
-
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
-  }
-  ::-webkit-scrollbar-track{
-    border-radius: 10px;
-    background-color: rgba(0,0,0,0);
-  }
-  ::-webkit-scrollbar-thumb{
-    border-radius: 10px;
-    background-color: #808080;
-  }
 </style>

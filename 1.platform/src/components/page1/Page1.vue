@@ -61,6 +61,7 @@
   import Page4Toolbar from '@/components/page3/Page4Toolbar'
   import Page4ExtPanel from '@/components/page3/Page4ExtPanel'
   import Page4ZTree from '@/components/page3/Page4ZTree'
+  import Page4Topo from '@/components/page3/Page4Topo'
 
   export default {
     components: {
@@ -100,6 +101,7 @@
       Page4Toolbar,
       Page4ExtPanel,
       Page4ZTree,
+      Page4Topo
     },
     name: 'page1',
     data: function () {
@@ -162,7 +164,7 @@
             id: "Page4Leaflet",
             label: "GIS"
           }, {
-            id: "",
+            id: "Page4Topo",
             label: "Topo"
           }, {
             id: "Page4Chart",
