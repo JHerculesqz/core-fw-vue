@@ -16,7 +16,10 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <marvel-menu :items="items"></marvel-menu>
+            <marvel-menu :items="items"
+                         theme="dark"
+                         v-on:menuItemClick="menuItemClick"
+                         v-on:subMenuItemClick="subMenuItemClick"></marvel-menu>
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
@@ -45,9 +48,11 @@
 
   export default {
     name: 'page4Menu',
-    components: {MarvelTabItem,
-      MarvelTab,MarvelMenu},
-    data: function() {
+    components: {
+      MarvelTabItem,
+      MarvelTab, MarvelMenu
+    },
+    data: function () {
       return {
         //#region document data
         tabItems1: [{
@@ -122,18 +127,18 @@
           }]
         }, {
           label: "menu2",
-          groups:[{
+          groups: [{
             name: "group1",
             sessions: [{
               label: "拓扑",
               items: [{
                 label: "拓扑管理",
-                onClick: function(){
+                onClick: function () {
                   alert("拓扑管理");
                 }
               }, {
                 label: "IP拓扑管理",
-                onClick: function(){
+                onClick: function () {
                   alert("IP拓扑管理");
                 }
               }]
@@ -141,12 +146,12 @@
               label: "性能管理",
               items: [{
                 label: "模板管理",
-                onClick: function(){
+                onClick: function () {
                   alert("模板管理");
                 }
               }, {
                 label: "任务管理",
-                onClick: function(){
+                onClick: function () {
                   alert("任务管理");
                 }
               }]
@@ -156,13 +161,13 @@
             sessions: [{
               label: "监视",
               items: [{
-                label : "KPI监视",
-                onClick: function(){
+                label: "KPI监视",
+                onClick: function () {
                   alert("IP拓扑管理");
                 }
               }, {
-                label : "GDP监视",
-                onClick: function(){
+                label: "GDP监视",
+                onClick: function () {
                   alert("GDP监视");
                 }
               }]
@@ -170,12 +175,12 @@
               label: "设置",
               items: [{
                 label: "用户设置",
-                onClick: function(){
+                onClick: function () {
                   alert("用户设置");
                 }
               }, {
                 label: "系统设置2",
-                onClick: function(){
+                onClick: function () {
                   alert("系统设置2");
                 }
               }]
@@ -184,71 +189,93 @@
         }]
         //#endregion
       }
+    },
+    methods: {
+      menuItemClick: function (oMenuItem) {
+        alert(oMenuItem.label);
+      },
+      subMenuItemClick: function (oMenuItem, oGroup, oSession, oSubItem) {
+        alert("oMenuItem: " + oMenuItem.label + ",oGroup:" + oGroup.label +
+          ",oSession:" + oSession.label + ",oSubItem:" + oSubItem.label);
+      }
     }
   }
 </script>
 
 <style scoped>
   /*document fix style start*/
-  .widgetShowSession{
+  .widgetShowSession {
     padding: 20px 100px;
-    width:100%;
+    width: 100%;
     box-sizing: border-box;
   }
-  .title{
+
+  .title {
     color: #4d4d4d;
   }
-  .level1{
+
+  .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-  .level2{
+
+  .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-  .describe{
+
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-  .showArea{
-    width:100%;
-  }
-  .codeArea{
+
+  .showArea {
     width: 100%;
-    height:100%;
+  }
+
+  .codeArea {
+    width: 100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-  .codeArea pre,.codeArea code{
+
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-  .showAreaInner{
+
+  .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
-  .showArea{
-    height:250px;
+  .showArea {
+    height: 250px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 

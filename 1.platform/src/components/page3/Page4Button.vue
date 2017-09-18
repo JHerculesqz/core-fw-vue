@@ -230,6 +230,30 @@
         </marvel-tab>
       </div>
       <!--2级 end-->
+      <!--2级 start-->
+      <div class="title level2">导航式Button</div>
+      <div class="describe">
+        导航式Button
+      </div>
+      <div class="showArea">
+        <marvel-tab :tabItems="tabItems7">
+          <marvel-tab-item :isActive="tabItems7[0].isActive">
+            <div class="showAreaInner">
+              <marvel-tab-button ref="ref4TabBtn" label="点我"
+                                 v-on:onClick="onClick4TabBtn"></marvel-tab-button>
+            </div>
+          </marvel-tab-item>
+          <marvel-tab-item :isActive="tabItems7[1].isActive">
+            <div class="codeArea">
+              <pre v-highlight>
+                <code class="html">
+                </code>
+              </pre>
+            </div>
+          </marvel-tab-item>
+        </marvel-tab>
+      </div>
+      <!--2级 end-->
     </div>
   </div>
 </template>
@@ -244,10 +268,12 @@
   import MarvelIconButton from "@/walle/widget/button/MarvelIconButton";
   import MarvelTxtButton from "@/walle/widget/button/MarvelTxtButton";
   import MarvelDropDownButton from "@/walle/widget/button/MarvelDropDownButton";
+  import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
 
   export default {
     name: 'page4Button',
     components: {
+      MarvelTabButton,
       MarvelTabItem,
       MarvelTab,
       MarvelDropDownButton,
@@ -300,6 +326,13 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems7: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
         items: [{
@@ -340,7 +373,11 @@
       },
       onDropDownClick: function () {
         console.log(this.$refs.ref14.getSelectItem());
-      }
+      },
+      onClick4TabBtn: function () {
+        this.$refs.ref4TabBtn.setActive(true);
+        alert("onClick4TabBtn");
+      },
       //#endregion
     }
   }
