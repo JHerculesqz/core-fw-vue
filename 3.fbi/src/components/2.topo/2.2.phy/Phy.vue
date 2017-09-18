@@ -55,15 +55,15 @@
           icon: 'icon-download'
         }, {
           id: 5,
-          label: '布局对齐',
+          label: '布局',
           icon: 'icon-target'
         }, {
           id: 6,
-          label: '显示设置',
+          label: '设置',
           icon: 'icon-target'
         }, {
           id: 7,
-          label: '平移模式',
+          label: '平移',
           icon: 'icon-target'
         }, {
           id: 8,

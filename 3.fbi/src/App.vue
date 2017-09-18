@@ -87,7 +87,7 @@
     background-color: #1e1f37;
   }
   .header{
-    height: 60px;
+    height: 50px;
     background-color: #1a1827;
   }
   .header .logo{
@@ -108,7 +108,7 @@
     list-style-type: none;;
   }
   .header ul li a{
-    line-height: 60px;
+    line-height: 50px;
     color: #999;
     font-size: 16px;
     padding: 0 10px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="menuNavWrapper">
+  <div class="menuNavWrapper" v-bind:class="[theme]">
     <div class="menuNavItemsWrapper">
       <div class="menuItem" v-for="item in items"
            v-bind:class="{ active: item.active }"
@@ -17,7 +17,7 @@
           <div class="subMenuTitle">{{ session.label }}</div>
           <div class="subMenuItem"
                v-for="item in session.items"
-               v-on:click="item.onClick">
+               v-on:click="subMenuItemClick(group, session, item)">
             {{ item.label }}
           </div>
         </div>
@@ -29,7 +29,7 @@
 <script>
   export default {
     name: 'MarvelMenu',
-    props: ["items"],
+    props: ["items", "theme"],
     data: function() {
         return {
           curMenuItem: {},
@@ -59,9 +59,15 @@
         var iOffsetTop = oEvent.target.getBoundingClientRect().top + window.scrollY;
         this.top = iOffsetTop + iEleHeight;
         this.left = iOffsetLeft + iEleWidth/2;
+
+        //3.emit event
+        this.$emit("menuItemClick", this.curMenuItem);
       },
       hideSubMenu: function(){
         this.show = false;
+      },
+      subMenuItemClick: function(group, session, item){
+          this.$emit("subMenuItemClick", this.curMenuItem, group, session, item);
       }
     },
     directives:{
@@ -116,6 +122,7 @@
     border-radius: 2px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     overflow: hidden;
+    z-index: 2;
   }
   .subMenuItemsWrapper .subMenuGroup{
     padding: 0 30px;
@@ -137,5 +144,33 @@
   }
   .subMenuItemsWrapper .subMenuGroup .subMenuSession .subMenuItem:last-child{
     margin-bottom: 0;
+  }
+
+  .dark{
+    background-color: #17191f;
+  }
+  .dark .menuNavItemsWrapper{}
+  .dark .menuItem{
+    color: #a7abbe;
+    border-bottom: 3px solid rgba(0,0,0,0);
+  }
+  .dark .active{
+    color: #fff;
+    border-bottom: 3px solid #3dcaa6;
+  }
+
+  .dark .subMenuItemsWrapper{
+    background-color: #17191f;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  .dark .subMenuItemsWrapper .subMenuGroup{}
+  .dark .subMenuItemsWrapper .subMenuGroup .subMenuSession{}
+  .dark .subMenuItemsWrapper .subMenuGroup .subMenuSession .subMenuTitle{
+    color: #ffffff;
+  }
+  .dark .subMenuItemsWrapper .subMenuGroup .subMenuSession .subMenuItem{
+    color: #a7abbe;
+  }
+  .dark .subMenuItemsWrapper .subMenuGroup .subMenuSession .subMenuItem:last-child{
   }
 </style>

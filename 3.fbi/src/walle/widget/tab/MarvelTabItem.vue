@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" v-bind:class="{ sink: !isActive }">
+  <div class="cont" v-bind:class="{ dpn: !isActive }">
     <slot></slot>
   </div>
 </template>
@@ -54,7 +54,7 @@
     width: 100%;
     height: 100%;
   }
-  .sink{
+  .dpn{
     display: none;
   }
 
