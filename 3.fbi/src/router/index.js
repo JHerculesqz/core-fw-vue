@@ -4,6 +4,7 @@ import ImportEx from '@/components/1.importex/ImportEx'
 import Topo from '@/components/2.topo/2.1.main/Topo'
 import Plan from '@/components/3.buPlan/Plan'
 import SolutionMgr from '@/components/4.buDesign/4.1.solutionMgr/SolutionMgr'
+import SolutionDetails from '@/components/4.buDesign/4.2.solutionDetails/SolutionDetails'
 
 Vue.use(Router);
 
@@ -26,6 +27,10 @@ export default new Router({
     path: '/SolutionMgr',
     name: 'SolutionMgr',
     component: SolutionMgr
+  }, {
+    path: '/SolutionDetails',
+    name: 'SolutionDetails',
+    component: SolutionDetails
   }]
 })
 

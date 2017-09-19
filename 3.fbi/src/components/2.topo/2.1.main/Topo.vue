@@ -45,8 +45,7 @@
       }
     },
     mounted: function(){
-      this.$refs.ref4Phy.setActive(true);
-      this.$refs.ref4Traffic.setActive(false);
+      this._activeTabBtn(true);
     },
     methods: {
       onClickPhy: function () {
