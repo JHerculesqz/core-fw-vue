@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import ImportEx from '@/components/1.importex/ImportEx'
 import Topo from '@/components/2.topo/2.1.main/Topo'
 import Plan from '@/components/3.buPlan/Plan'
-import Design from '@/components/4.buDesign/Design'
+import SolutionMgr from '@/components/4.buDesign/4.1.solutionMgr/SolutionMgr'
 
 Vue.use(Router);
 
@@ -23,9 +23,9 @@ export default new Router({
     name: 'Plan',
     component: Plan
   }, {
-    path: '/Design',
-    name: 'Design',
-    component: Design
+    path: '/SolutionMgr',
+    name: 'SolutionMgr',
+    component: SolutionMgr
   }]
 })
 

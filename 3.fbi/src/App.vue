@@ -13,7 +13,7 @@
           <router-link :to="{name:'Plan'}" exact>网络规划</router-link>
         </li>
         <li>
-          <router-link :to="{name:'Design'}" exact>网络设计</router-link>
+          <router-link :to="{name:'SolutionMgr'}" exact>网络设计</router-link>
         </li>
         <!--<li>-->
           <!--<router-link :to="{name:'Test4'}" exact>对比分析</router-link>-->
