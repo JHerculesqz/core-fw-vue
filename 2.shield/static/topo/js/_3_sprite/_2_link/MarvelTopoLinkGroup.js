@@ -130,7 +130,7 @@
       var oGroup = new Konva.Group({
         x: 0,
         y: 0,
-        id: oBuObj.id
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo)
       });
       oGroup.tag = oBuObj;
 
@@ -160,7 +160,7 @@
       //event
       oLine.on("click", function (evt) {
         console.log("link click");
-        _setSelectLinkStyle(this, oTopo);
+        onLinkClick(oGroup, oTopo);
       });
       oLine.on("mouseover", function (evt) {
         _setMouseHoverStyle(this, oTopo)
@@ -180,8 +180,48 @@
 
     //#region event
 
-    var _setSelectLinkStyle = function (oLine, oTopo) {
+    var onLinkClick = function (oGroup, oTopo) {
+      //1.ctrl press
+      if (keyboardJS.isCtrlPress) {
+        if (oGroup.tag.uiSelectLink == undefined || false == oGroup.tag.uiSelectLink) {
+          //1.1.select current oGroup
+          oGroup.tag.uiSelectLink = true;
+          _setSelectLinkStyle(oGroup.children[0], oTopo);
+          oTopo.Layer.reDraw(oTopo.ins.layerLink);
+        }
+        else {
+          //1.2.unSelect current oGroup
+          oGroup.tag.uiSelectLink = false;
+          _setUnSelectLinkStyle(oGroup.children[0], oTopo);
+          oTopo.Layer.reDraw(oTopo.ins.layerLink);
+        }
+      }
+      //2.ctrl not press
+      else {
+        //2.1.unSelectAll
+        self.unSelectLinks(oTopo);
+        oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
 
+        //2.2.select current oGroup
+        oGroup.tag.uiSelectLink = true;
+        _setSelectLinkStyle(oGroup.children[0], oTopo);
+        oTopo.Layer.reDraw(oTopo.ins.layerLink);
+      }
+    };
+
+    var _setSelectLinkStyle = function (oLine, oTopo) {
+      oLine.shadowEnabled(true);
+      oLine.shadowColor(oTopo.Resource.getTheme().link.selectColor);
+      oLine.shadowBlur(5);
+      oLine.shadowOffset({
+        x: 0,
+        y: 0
+      });
+      oLine.shadowOpacity(1);
+    };
+
+    var _setUnSelectLinkStyle = function (oLine, oTopo) {
+      oLine.shadowEnabled(false);
     };
 
     var _setMouseHoverStyle = function (oLine, oTopo) {
@@ -505,6 +545,37 @@
         }
       }
       self.draw(arrLinks4ReDraw, oTopo);
+    };
+
+    this.unSelectLinks = function (oTopo) {
+      //1.get arrSelectNode
+      var arrSelectLinkGroup = _getSelectLinkGroups(oTopo);
+
+      //2.遍历，unSelect
+      for (var i = 0; i < arrSelectLinkGroup.length; i++) {
+        var oSelectLinkGroup = arrSelectLinkGroup[i];
+        oSelectLinkGroup.tag.uiSelectLink = false;
+        _setUnSelectLinkStyle(oSelectLinkGroup.children[0]);
+      }
+
+      oTopo.Layer.reDraw(oTopo.ins.layerLink);
+    };
+
+    var _getSelectLinkGroups = function (oTopo) {
+      //1.findAll
+      var arrSelectGroupExists =
+        oTopo.Stage.findGroupByTagAttr("uiSelectLink", true, oTopo);
+
+      return arrSelectGroupExists;
+    };
+
+    this.selectLinksById = function (arrLinkId, oTopo) {
+      arrLinkId.forEach(function (linkId, index) {
+        var oLinkGroup = oTopo.Stage.findOne(linkId, oTopo);
+        oLinkGroup.tag.uiSelectLink = true;
+        _setSelectLinkStyle(oLinkGroup.children[0], oTopo);
+      });
+      oTopo.Layer.reDraw(oTopo.ins.layerLink);
     };
 
     //#endregion

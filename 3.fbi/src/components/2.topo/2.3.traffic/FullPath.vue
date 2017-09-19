@@ -1,74 +1,47 @@
 <template>
   <div class="fullPathArea">
-    <marvel-tab :tabItems="tabItems1" theme="dark">
-      <marvel-tab-item :isActive="tabItems1[0].isActive">
-        <div class="tabContArea">
-          <div class="titleArea">
-            <div class="titleName">路径</div>
-            <div class="btnArea">
-              <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                      label="导出"
-                                      icon="icon-download"
-                                      theme="dark"
-                                      v-on:onClick="onClick4ExportFullPath"></marvel-icon-txt-button>
-              <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                      label="删除"
-                                      icon="icon-bin"
-                                      theme="dark"
-                                      v-on:onClick="onClick4DelFullPath"></marvel-icon-txt-button>
-            </div>
-          </div>
-          <div class="firstGridArea">
-            <marvel-grid ref="ref4FullPathGrid" :titles="titles4FullPath"
-                         :rows="rows4FullPath"
-                         :limit="limit4FullPath"
-                         theme="dark"
-                         v-on:onClickRow="onClickFullPathRow"></marvel-grid>
-          </div>
-          <div class="dynamicArea" v-show="showRouter">
-            <div class="titleArea">
-              <div class="titleName">路由详情</div>
-              <div class="btnArea">
-                <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                        label="导出"
-                                        icon="icon-download"
-                                        theme="dark"
-                                        v-on:onClick="onClick4ExportFullPathRouter"></marvel-icon-txt-button>
-              </div>
-            </div>
-            <div class="secondGridArea">
-              <marvel-grid :titles="titles4FullRouter"
-                           :rows="rows4FullRouter"
-                           :limit="limit4FullRouter"
-                           theme="dark"></marvel-grid>
-            </div>
-          </div>
+    <div class="staticArea">
+      <div class="titleArea">
+        <div class="titleName">路径</div>
+        <div class="btnArea">
+          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                  label="导出"
+                                  icon="icon-download"
+                                  theme="dark"
+                                  v-on:onClick="onClick4ExportFullPath"></marvel-icon-txt-button>
+          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                  label="删除"
+                                  icon="icon-bin"
+                                  theme="dark"
+                                  v-on:onClick="onClick4DelFullPath"></marvel-icon-txt-button>
         </div>
-      </marvel-tab-item>
-      <marvel-tab-item :isActive="tabItems1[1].isActive">
-        <div class="titleArea">
-          <div class="btnArea">
-            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                    label="业务局向"
-                                    icon="icon-upload"
-                                    theme="dark"
-                                    v-on:onClick="onClick4Business"></marvel-icon-txt-button>
-            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                    label="导出"
-                                    icon="icon-download"
-                                    theme="dark"
-                                    v-on:onClick="onClick4ExportBusiness"></marvel-icon-txt-button>
-          </div>
+      </div>
+      <div class="firstGridArea">
+        <marvel-grid ref="ref4FullPathGrid" :titles="titles4FullPath"
+                     :rows="rows4FullPath"
+                     :limit="limit4FullPath"
+                     theme="dark"
+                     v-on:onClickRow="onClickFullPathRow"></marvel-grid>
+      </div>
+    </div>
+    <div class="dynamicArea" v-show="showRouter">
+      <div class="titleArea">
+        <div class="titleName">路由详情</div>
+        <div class="btnArea">
+          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                  label="导出"
+                                  icon="icon-download"
+                                  theme="dark"
+                                  v-on:onClick="onClick4ExportFullPathRouter"></marvel-icon-txt-button>
         </div>
-        <div class="firstGridArea">
-          <marvel-grid :titles="titles4Business"
-                       :rows="rows4Business"
-                       :limit="limit4Business"
-                       theme="dark"
-                       v-on:onClickRow="onClickRow4Business"></marvel-grid>
-        </div>
-      </marvel-tab-item>
-    </marvel-tab>
+      </div>
+      <div class="secondGridArea">
+        <marvel-grid :titles="titles4FullRouter"
+                     :rows="rows4FullRouter"
+                     :limit="limit4FullRouter"
+                     theme="dark"></marvel-grid>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -89,15 +62,6 @@
       return {
         //#region const
         debug: true,
-        //#endregion
-        //#region tbl data
-        tabItems1: [{
-          label: "路径详情",
-          isActive: true
-        }, {
-          label: "业务局向",
-          isActive: false
-        }],
         //#endregion
         //#region fullPathGrid
         titles4FullPath: [{
@@ -196,48 +160,6 @@
         limit4FullRouter: 20,
         rows4FullRouter: [],
         //#endregion
-        //#region businessGrid
-        titles4Business: [{
-          label: "",
-          width: "5%"
-        }, {
-          label: "源/宿端网元",
-          width: "13%"
-        }, {
-          label: "宿/源端网元",
-          width: "12%"
-        }, {
-          label: "VC12数量",
-          width: "8%"
-        }, {
-          label: "VC3数量",
-          width: "13%"
-        }, {
-          label: "VC4数量",
-          width: "10%"
-        }, {
-          label: "VC4_4C数量",
-          width: "13%"
-        }, {
-          label: "VC4_8C数量",
-          width: "13%"
-        }, {
-          label: "VC4_16C数量",
-          width: "13%"
-        }, {
-          label: "VC4_64C数量",
-          width: "13%"
-        }, {
-          label: "业务量(等效2M)",
-          width: "13%"
-        }, {
-          label: "业务量分布比例",
-          width: "13%"
-        }],
-        skip4Business: 0,
-        limit4Business: 20,
-        rows4Business: [],
-        //#endregion
       };
     },
     mounted: function () {
@@ -245,7 +167,6 @@
 
       if (this.debug) {
         self._getFullPathMock();
-        self._getBusinessMock();
       }
       else {
         //TODO:
@@ -265,21 +186,6 @@
             oRow.push(oCell);
           }
           this.rows4FullPath.push(oRow);
-        }
-      },
-      _getBusinessMock: function () {
-        this.rows4Business = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 13; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows4Business.push(oRow);
         }
       },
       onClickFullPathRow: function (oRow) {
@@ -318,26 +224,6 @@
           //TODO:
         }
       },
-      onClick4Business: function () {
-        if (this.debug) {
-          alert("局向");
-          this._getBusinessMock();
-        }
-        else {
-          //TODO:
-        }
-      },
-      onClick4ExportBusiness: function () {
-        if (this.debug) {
-          alert("导出");
-        }
-        else {
-          //TODO:
-        }
-      },
-      onClickRow4Business: function (oRow) {
-        this.$emit("onClickRow4Business", oRow);
-      },
       onClick4ExportFullPath: function () {
         if (this.debug) {
           alert("导出完整路径信息");
@@ -364,10 +250,9 @@
   .fullPathArea{
     height:100%;
   }
-  .tabContArea{
-    height:100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+  .staticArea{
+    width: 100%;
+    height: 100%;
   }
   .titleArea{
     width: 100%;
@@ -378,7 +263,7 @@
     height: 52px;
     font-size: 16px;
     color: #FFFFFF;
-    font-weight: bold;
+    /*font-weight: bold;*/
     line-height: 52px;
   }
   .btnArea{
@@ -392,12 +277,26 @@
   }
   .dynamicArea{
     padding-top: 20px;
+    height:100%;
     box-sizing: border-box;
   }
   .secondGridArea{
-    height: 300px;
+    height: calc(100% - 52px);
   }
   .classCustom1{
     margin-left: 20px;
+  }
+
+  @media (min-width: 1280px){
+    .staticArea{
+      width: calc(50% - 10px);
+      float: left;
+      margin-right: 20px;
+    }
+    .dynamicArea{
+      width: calc(50% - 10px);
+      float: left;
+      padding: 0;
+    }
   }
 </style>

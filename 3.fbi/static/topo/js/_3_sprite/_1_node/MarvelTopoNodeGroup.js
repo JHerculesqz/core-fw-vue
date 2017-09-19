@@ -1,5 +1,5 @@
-(function($){
-  $.MarvelTopoNodeGroup = function() {
+(function ($) {
+  $.MarvelTopoNodeGroup = function () {
     var self = this;
 
     //#region Const
@@ -11,19 +11,19 @@
 
     //#region draw
 
-    this.draw = function(oBuObj, oTopo){
-      if(!oBuObj.uiExpandNode){
+    this.draw = function (oBuObj, oTopo) {
+      if (!oBuObj.uiExpandNode) {
         return _drawCollapse(oBuObj, undefined, oTopo);
       }
-      else{
+      else {
         return _drawExpand(oBuObj, undefined, oTopo);
       }
     };
 
-    var _drawCollapse = function(oBuObj, oExpandGroupExists, oTopo){
+    var _drawCollapse = function (oBuObj, oExpandGroupExists, oTopo) {
       //#region 1.remove
 
-      if(oExpandGroupExists){
+      if (oExpandGroupExists) {
         _removeGroupExists(oExpandGroupExists, oTopo);
       }
 
@@ -39,7 +39,7 @@
 
       //0.oGroup
       var oGroup = new Konva.Group({
-        id: oBuObj.id,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
         x: oGroupExistsPos.x,
         y: oGroupExistsPos.y,
         draggable: true
@@ -77,21 +77,21 @@
 
       //#region 5.event
 
-      oGroup.on('mouseover', function(evt) {
+      oGroup.on('mouseover', function (evt) {
         self._onNodeGroupOrNodeMouseOver(oGroup, oTopo);
       });
-      oGroup.on('mouseout', function(evt) {
+      oGroup.on('mouseout', function (evt) {
         self._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
       });
-      oGroup.on('dblclick', function(evt) {
+      oGroup.on('dblclick', function (evt) {
         _onCollpaseGroupDBClick(oBuObj, oGroup, oTopo);
         //联动链路
         oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
       });
-      oGroup.on("click", function(evt){
+      oGroup.on("click", function (evt) {
         self._onNodeGroupOrNodeClick(oGroup, oTopo);
       });
-      oGroup.on('dragmove', function(evt){
+      oGroup.on('dragmove', function (evt) {
         //var arrSelectNode = _getSelectNodeGroupAndNodes(oTopo);
         //for(var i=0;i<arrSelectNode.length;i++){
         //    var oSelectNode = arrSelectNode[i];
@@ -107,10 +107,10 @@
 
       return oGroup;
     };
-    var _drawExpand = function(oBuObj, oCollapseGroupExists, oTopo){
+    var _drawExpand = function (oBuObj, oCollapseGroupExists, oTopo) {
       //#region 1.remove
 
-      if(oCollapseGroupExists){
+      if (oCollapseGroupExists) {
         _removeGroupExists(oCollapseGroupExists, oTopo);
       }
 
@@ -126,7 +126,7 @@
 
       //0.oGroup
       var oGroup = new Konva.Group({
-        id: oBuObj.id,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
         x: oGroupExistsPos.x,
         y: oGroupExistsPos.y,
         opacity: oBuObj.opacity ? oBuObj.opacity : 1.0,
@@ -165,7 +165,7 @@
 
       //#region 5.nodes in Group
 
-      for(var i=0;i<oBuObj.children.length;i++){
+      for (var i = 0; i < oBuObj.children.length; i++) {
         var oBuObjItem = oBuObj.children[i];
         oTopo.Sprite.Node.drawInGroup(oBuObjItem, oGroup, oTopo);
       }
@@ -174,21 +174,21 @@
 
       //#region 6.event
 
-      oGroup.on('mouseover', function(evt) {
+      oGroup.on('mouseover', function (evt) {
         self._onNodeGroupOrNodeMouseOver(oGroup, oTopo);
       });
-      oGroup.on('mouseout', function(evt) {
+      oGroup.on('mouseout', function (evt) {
         self._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
       });
-      oGroup.on('dblclick', function(evt) {
+      oGroup.on('dblclick', function (evt) {
         _onExpandGroupDBClick(oBuObj, oGroup, oTopo);
         //联动链路
         oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
       });
-      oGroup.on("click", function(evt){
+      oGroup.on("click", function (evt) {
         self._onNodeGroupOrNodeClick(oGroup, oTopo);
       });
-      oGroup.on('dragmove', function(evt){
+      oGroup.on('dragmove', function (evt) {
         //1.联动关联的链路
         oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
       });
@@ -197,11 +197,11 @@
 
       return oGroup;
     };
-    var _removeGroupExists = function(oExpandOrCollapseGroupExists, oTopo){
+    var _removeGroupExists = function (oExpandOrCollapseGroupExists, oTopo) {
       oExpandOrCollapseGroupExists.destroy();
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
-    var _getGroupExistsPos = function(oBuObj, oExpandOrCollapseGroupExists){
+    var _getGroupExistsPos = function (oBuObj, oExpandOrCollapseGroupExists) {
       var iX = oExpandOrCollapseGroupExists == undefined ?
         oBuObj.x : oExpandOrCollapseGroupExists.getPosition().x;
       var iY = oExpandOrCollapseGroupExists == undefined ?
@@ -217,40 +217,44 @@
 
     //#region event
 
-    this._onNodeGroupOrNodeMouseOver = function(oGroup, oTopo){
+    this._onNodeGroupOrNodeMouseOver = function (oGroup, oTopo) {
       _setMouseHoverStyle(oGroup.children[0], oTopo);
     };
-    this._onNodeGroupOrNodeMouseOut = function(oGroup, oTopo){
+    this._onNodeGroupOrNodeMouseOut = function (oGroup, oTopo) {
       _setMouseHoverOutStyle(oGroup.children[0], oTopo);
     };
-    var _onCollpaseGroupDBClick = function(oBuObj, oGroup, oTopo){
+    var _onCollpaseGroupDBClick = function (oBuObj, oGroup, oTopo) {
       _drawExpand(oBuObj, oGroup, oTopo);
     };
-    var _onExpandGroupDBClick = function(oBuObj, oGroup, oTopo){
+    var _onExpandGroupDBClick = function (oBuObj, oGroup, oTopo) {
       _drawCollapse(oBuObj, oGroup, oTopo);
     };
-    this._onNodeGroupOrNodeClick = function(oGroup, oTopo){
+    this._onNodeGroupOrNodeClick = function (oGroup, oTopo) {
       //1.ctrl press
-      if(keyboardJS.isCtrlPress){
-        if(oGroup.tag.uiSelectNode == undefined || false == oGroup.tag.uiSelectNode){
+      if (keyboardJS.isCtrlPress) {
+        if (oGroup.tag.uiSelectNode == undefined || false == oGroup.tag.uiSelectNode) {
           //1.1.select current oGroup
           oGroup.tag.uiSelectNode = true;
           _setSelectNodeStyle(oGroup.children[0], oTopo);
+          oTopo.Layer.reDraw(oTopo.ins.layerNode);
         }
         else {
-          //1.2.select current oGroup
+          //1.2.unSelect current oGroup
           oGroup.tag.uiSelectNode = false;
           _setUnSelectNodeStyle(oGroup.children[0], oTopo);
+          oTopo.Layer.reDraw(oTopo.ins.layerNode);
         }
       }
       //2.ctrl not press
-      else{
+      else {
         //2.1.unSelectAll
-        oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
+        self.unSelectNodeGroupAndNodes(oTopo);
+        oTopo.Sprite.LinkGroup.unSelectLinks(oTopo);
 
         //2.2.select current oGroup
         oGroup.tag.uiSelectNode = true;
         _setSelectNodeStyle(oGroup.children[0], oTopo);
+        oTopo.Layer.reDraw(oTopo.ins.layerNode);
       }
     };
 
@@ -258,30 +262,30 @@
 
     //#region style
 
-    this._setLabelCenter = function(iIconWidth, iIconHeight, oLabel){
+    this._setLabelCenter = function (iIconWidth, iIconHeight, oLabel) {
       oLabel.setOffset({
         x: -iIconWidth / 2 + oLabel.getWidth() / 2,
         y: -iIconHeight
       });
     };
 
-    var _setSelectNodeStyle = function(oImage, oTopo){
-      // oImage.fillEnabled(true);
-      // oImage.fill(oTopo.Resource.getTheme().node.selectColor);
+    var _setSelectNodeStyle = function (oImage, oTopo) {
+      //oImage.fillEnabled(true);
+      //oImage.fill(oTopo.Resource.getTheme().node.selectColor);
       oImage.strokeEnabled(true);
       oImage.stroke(oTopo.Resource.getTheme().node.selectColor);
       oImage.strokeWidth(4);
       oImage.lineJoin("round");
       oImage.lineCap("round");
-      oTopo.Layer.reDraw(oTopo.ins.layerNode);
+      //oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
 
-    var _setUnSelectNodeStyle = function(oImage){
+    var _setUnSelectNodeStyle = function (oImage) {
       // oImage.fillEnabled(false);
       oImage.strokeEnabled(false);
     };
 
-    var _setMouseHoverStyle = function(oImage, oTopo){
+    var _setMouseHoverStyle = function (oImage, oTopo) {
       document.body.style.cursor = 'pointer';
 
       oImage.shadowEnabled(true);
@@ -290,14 +294,14 @@
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
 
-    var _setMouseHoverOutStyle = function(oImage, oTopo){
+    var _setMouseHoverOutStyle = function (oImage, oTopo) {
       document.body.style.cursor = 'default';
 
       oImage.shadowEnabled(false);
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
 
-    var _groupDragMoveEvent = function(oGroup, oTopo){
+    var _groupDragMoveEvent = function (oGroup, oTopo) {
       oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
     };
 
@@ -305,13 +309,13 @@
 
     //#region imsg
 
-    this.expandAllNodeGroup = function(oTopo){
+    this.expandAllNodeGroup = function (oTopo) {
       //1.findAll
       var arrCollapseGroupExists =
         oTopo.Stage.findGroupByTagAttr("uiExpandNode", false, oTopo);
 
       //2.expand
-      for(var i=0;i<arrCollapseGroupExists.length;i++){
+      for (var i = 0; i < arrCollapseGroupExists.length; i++) {
         var oCollapseGroupExists = arrCollapseGroupExists[i];
         _drawExpand(oCollapseGroupExists.tag, oCollapseGroupExists, oTopo);
         //联动链路
@@ -319,13 +323,13 @@
       }
     };
 
-    this.collapseAllNodeGroup = function(oTopo){
+    this.collapseAllNodeGroup = function (oTopo) {
       //1.findAll
       var arrExpandGroupExists =
         oTopo.Stage.findGroupByTagAttr("uiExpandNode", true, oTopo);
 
       //2.expand
-      for(var i=0;i<arrExpandGroupExists.length;i++){
+      for (var i = 0; i < arrExpandGroupExists.length; i++) {
         var oExpandGroupExists = arrExpandGroupExists[i];
         _drawCollapse(oExpandGroupExists.tag, oExpandGroupExists, oTopo);
         //联动链路
@@ -333,27 +337,27 @@
       }
     };
 
-    this.unSelectNodeGroupAndNodes = function(oTopo){
+    this.unSelectNodeGroupAndNodes = function (oTopo) {
       //1.get arrSelectNode
       var arrSelectNode = _getSelectNodeGroupAndNodes(oTopo);
 
       //2.遍历，unSelect
-      for(var i=0;i<arrSelectNode.length;i++) {
+      for (var i = 0; i < arrSelectNode.length; i++) {
         var oSelectNode = arrSelectNode[i];
-        oSelectNode.tag.uiSelectNode = true;
+        oSelectNode.tag.uiSelectNode = false;
         _setUnSelectNodeStyle(oSelectNode.children[0]);
       }
 
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
-      oTopo.Layer.reDraw(oTopo.ins.layerLink);
+      //oTopo.Layer.reDraw(oTopo.ins.layerLink);
     };
 
-    this.zoomInSelectNodeGroupAndNodes = function(oTopo){
+    this.zoomInSelectNodeGroupAndNodes = function (oTopo) {
       //1.get arrSelectNode
       var arrSelectNode = _getSelectNodeGroupAndNodes(oTopo);
 
       //2.遍历，放大
-      for(var i=0;i<arrSelectNode.length;i++){
+      for (var i = 0; i < arrSelectNode.length; i++) {
         var oSelectNode = arrSelectNode[i];
         var oScaleOld = oSelectNode.scale();
         oSelectNode.scale({
@@ -364,12 +368,12 @@
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
 
-    this.zoomOutSelectNodeGroupAndNodes = function(oTopo){
+    this.zoomOutSelectNodeGroupAndNodes = function (oTopo) {
       //1.get arrSelectNode
       var arrSelectNode = _getSelectNodeGroupAndNodes(oTopo);
 
       //2.遍历，放大
-      for(var i=0;i<arrSelectNode.length;i++){
+      for (var i = 0; i < arrSelectNode.length; i++) {
         var oSelectNode = arrSelectNode[i];
         var oScaleOld = oSelectNode.scale();
         oSelectNode.scale({
@@ -380,7 +384,7 @@
       oTopo.Layer.reDraw(oTopo.ins.layerNode);
     };
 
-    var _getSelectNodeGroupAndNodes = function(oTopo){
+    var _getSelectNodeGroupAndNodes = function (oTopo) {
       //1.findAll
       var arrSelectGroupExists =
         oTopo.Stage.findGroupByTagAttr("uiSelectNode", true, oTopo);
@@ -389,34 +393,44 @@
     };
 
     //获取绘制的节点，如果该节点绘制过，直接返回该节点；如果没有绘制过，返回它的父节点
-    this.getDrawnNodeById = function(strId, oTopo){
-      var oGroup =  this.getDrawnGroupById(strId, oTopo);
-      if(oGroup){
+    this.getDrawnNodeById = function (strId, oTopo) {
+      var oGroup = this.getDrawnGroupById(strId, oTopo);
+      if (oGroup) {
         return oGroup.tag;
       }
     };
 
-    this.getDrawnGroupById = function(strId, oTopo){
-      var oGroup =  oTopo.Stage.findOne(strId, oTopo);
+    this.getDrawnGroupById = function (strId, oTopo) {
+      var oGroup = oTopo.Stage.findOne(strId, oTopo);
       //如果绘制过，直接返回
-      if(oGroup){
+      if (oGroup) {
         return oGroup;
       }
       //如果没有绘制过，返回父节点
-      else{
+      else {
         var oCollapseGroups = oTopo.Stage.findGroupByTagAttr("uiExpandNode", false, oTopo);
-        for(var i = 0, len = oCollapseGroups.length; i < len; i++){
+        for (var i = 0, len = oCollapseGroups.length; i < len; i++) {
           var oCollapseGroup = oCollapseGroups[i];
-          var b = oCollapseGroup.tag.children.some(function(oChild, index){
+          var b = oCollapseGroup.tag.children.some(function (oChild, index) {
             return oChild.id === strId;
           });
-          if(b){
+          if (b) {
             return oCollapseGroup;
           }
         }
       }
       return undefined;
     };
+
+    this.selectNodesById = function (arrNodeIds, oTopo) {
+      arrNodeIds.forEach(function (nodeId, index) {
+        var oNodeGroup = oTopo.Stage.findOne(nodeId, oTopo);
+        oNodeGroup.tag.uiSelectNode = true;
+        _setSelectNodeStyle(oNodeGroup.children[0], oTopo);
+      });
+      oTopo.Layer.reDraw(oTopo.ins.layerNode);
+    };
+
 
     //#endregion
   }

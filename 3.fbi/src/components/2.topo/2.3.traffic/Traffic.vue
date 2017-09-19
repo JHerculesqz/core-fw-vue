@@ -9,7 +9,7 @@
     </div>
     <marvel-bottom-ext-panel
       theme="dark"
-      height="400"
+      height="300"
       show="true"
       canDrag="false">
       <div slot="content" style="height: 100%">
@@ -62,15 +62,15 @@
           icon: 'icon-download'
         }, {
           id: 5,
-          label: '布局对齐',
+          label: '布局',
           icon: 'icon-target'
         }, {
           id: 6,
-          label: '显示设置',
+          label: '设置',
           icon: 'icon-target'
         }, {
           id: 7,
-          label: '平移模式',
+          label: '平移',
           icon: 'icon-target'
         }, {
           id: 8,
@@ -102,6 +102,7 @@
     },
     mounted: function () {
       this._getPhyTopo();
+      console.log("Traffic mounted");
     },
     methods: {
       _getPhyTopo: function () {
@@ -127,9 +128,9 @@
           this.$refs.ref4MainTopo4Traffic.setData4LeftArea(oData4LeftArea);
           var self = this;
           this._getTopoDataMock(function (oTopoData) {
-//            self.$refs.ref4MainTopo4Traffic.initTopo(function () {
-//              self.$refs.ref4MainTopo4Traffic.drawTopo(oTopoData);
-//            });
+            self.$refs.ref4MainTopo4Traffic.initTopo(function () {
+              self.$refs.ref4MainTopo4Traffic.drawTopo(oTopoData);
+            });
           });
         }
         else {

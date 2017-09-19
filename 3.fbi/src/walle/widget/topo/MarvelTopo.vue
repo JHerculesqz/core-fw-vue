@@ -31,6 +31,7 @@
             },
             link: {
               labelColor: "#fff",
+              selectColor: 'rgba(255,255,255,0.75)',
               linkColor: {
                 linkType1: "#ababb5",
                 linkType2: "#FF4c4c",
@@ -96,6 +97,12 @@
       },
       collapseAllLinkGroup: function () {
         this.oTopo.Sprite.LinkGroup.collapseAllLinkGroup(this.oTopo);
+      },
+      selectNodes: function(arrNodeId){
+        this.oTopo.Sprite.NodeGroup.selectNodesById(arrNodeId, this.oTopo);
+      },
+      selectLinks: function(arrLinkId){
+        this.oTopo.Sprite.LinkGroup.selectLinksById(arrLinkId, this.oTopo);
       }
 
     }

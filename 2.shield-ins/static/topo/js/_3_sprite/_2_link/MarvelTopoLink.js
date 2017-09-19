@@ -1,5 +1,5 @@
-(function($){
-  $.MarvelTopoLink = function() {
+(function ($) {
+  $.MarvelTopoLink = function () {
     var self = this;
 
     //#region Const
@@ -10,10 +10,10 @@
 
     //#region draw
 
-    this.draw = function(oBuObj, iOffsetIndex, oTopo){
+    this.draw = function (oBuObj, iOffsetIndex, oTopo) {
       //remove
       var oLinkExists = oTopo.Stage.findOne(oBuObj.id, oTopo);
-      if(oLinkExists){
+      if (oLinkExists) {
         oLinkExists.destroy();
         oTopo.Layer.reDraw(oTopo.ins.layerLink);
       }
@@ -32,16 +32,16 @@
         y: oTopo.Sprite.Node.getCenterPos(oNodeDst).y
       };
       var iOffsetHeight = 0;
-      if(0 == iOffsetIndex % 2){
-        iOffsetHeight = iOffsetIndex/2 * OFFSET;
+      if (0 == iOffsetIndex % 2) {
+        iOffsetHeight = iOffsetIndex / 2 * OFFSET;
       }
-      else{
-        iOffsetHeight = -(iOffsetIndex+1)/2 * OFFSET;
+      else {
+        iOffsetHeight = -(iOffsetIndex + 1) / 2 * OFFSET;
       }
       var oPosMid = _getBezierPoint(oPosStart, oPosEnd, iOffsetHeight);
 
       var oLine = new Konva.Line({
-        id: oBuObj.id,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
         points: [oPosStart.x, oPosStart.y, oPosMid.x, oPosMid.y, oPosEnd.x, oPosEnd.y],
         stroke: oTopo.Resource.getTheme().link.linkColor[oBuObj.uiLinkColorKey],
         strokeWidth: oBuObj.uiLinkWidth,
@@ -57,19 +57,19 @@
 
     //#region style
 
-    var _getBezierPoint = function(oPointStart, oPointEnd, iHeight){
+    var _getBezierPoint = function (oPointStart, oPointEnd, iHeight) {
       //1.oPointMid
       var oPointMid = {
-        x: (oPointEnd.x - oPointStart.x)/2 + oPointStart.x,
-        y: (oPointEnd.y - oPointStart.y)/2 + oPointStart.y
+        x: (oPointEnd.x - oPointStart.x) / 2 + oPointStart.x,
+        y: (oPointEnd.y - oPointStart.y) / 2 + oPointStart.y
       };
 
       //2.iSin/iCos
       var iDistance = Math.sqrt(
         Math.pow(oPointEnd.x - oPointStart.x, 2) +
         Math.pow(oPointEnd.y - oPointStart.y, 2), 2);
-      var iSin = (oPointEnd.y - oPointStart.y)/iDistance;
-      var iCos = (oPointEnd.x - oPointStart.x)/iDistance;
+      var iSin = (oPointEnd.y - oPointStart.y) / iDistance;
+      var iCos = (oPointEnd.x - oPointStart.x) / iDistance;
 
       //3.iOffsetX/iOffsetY
       var iOffsetX = iHeight * iSin;

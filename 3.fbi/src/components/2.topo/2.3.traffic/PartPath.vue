@@ -244,7 +244,7 @@
     height: 52px;
     font-size: 16px;
     color: #FFFFFF;
-    font-weight: bold;
+    /*font-weight: bold;*/
     line-height: 52px;
   }
   .btnArea{

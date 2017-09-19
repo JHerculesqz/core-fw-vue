@@ -2,9 +2,13 @@
   <div class="widgetShowSession">
     <div class="title level1">Accordion</div>
     <div class="describe">
+      According控件
+    </div>
+    <!--2级 start-->
+    <div class="title level2">Accordion</div>
+    <div class="describe">
       According控件是可以在一个页面中显示多个panel面板，支持2层菜单结构，子菜单可折叠或展开，面板可折叠最小化。
     </div>
-
     <div class="showArea">
       <marvel-tab :tabItems="tabItems1">
         <marvel-tab-item :isActive="tabItems1[0].isActive">
@@ -22,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
 &lt;marvel-accordion isFolder="false" hasShadow="true"
                   title="abc" titleIcon="icon-calculator"
@@ -35,6 +39,41 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
+
+    <!--2级 start-->
+    <div class="title level2">Accordion2</div>
+    <div class="describe">
+      According2
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 120px;height:100%; background-color: rgb(26, 25, 39);">
+              <marvel-accordion2 v-bind:items="items2"
+                                 theme="dark"
+              v-on:onClickItem="onClickItem"
+              v-on:onClickSubItem="onClickSubItem"></marvel-accordion2>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+&lt;marvel-accordion2 v-bind:items="items2" theme="dark"&gt;&lt;/marvel-accordion2&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -42,10 +81,12 @@
   import MarvelAccordion from "@/walle/widget/accordion/MarvelAccordion";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelAccordion2 from "@/walle/widget/accordion/MarvelAccordion2";
 
   export default {
     name: 'page4Accordion',
     components: {
+      MarvelAccordion2,
       MarvelAccordion,
       MarvelTab,
       MarvelTabItem
@@ -53,6 +94,16 @@
     data: function () {
       return {
         tabItems1: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems2: [
           {
             label: "Demo View",
             isActive: true
@@ -74,7 +125,32 @@
         }, {
           label: "item2",
           icon: "icon-office"
+        }],
+        items2: [{
+          label: "完整路径",
+          icon: "icon-podcast",
+          fold: true,
+          children: [{
+            label: "路由信息",
+            active: true
+          }, {
+            label: "业务局向"
+          }]
+        }, {
+          label: "不完整路径",
+          icon: "icon-feed"
+        }, {
+          label: "离散交叉",
+          icon: "icon-mic"
         }]
+      }
+    },
+    methods: {
+      onClickItem: function(oItem){
+        alert(oItem.label);
+      },
+      onClickSubItem: function(oItem, oSubItem){
+        alert(oItem.label + " " + oSubItem.label);
       }
     }
   }
@@ -96,7 +172,7 @@
     line-height: 54px;
   }
 
-  .describe{
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
@@ -107,14 +183,14 @@
     height: 400px;
   }
 
-  .codeArea{
+  .codeArea {
     width: 100%;
-    height:100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
 
-  .codeArea pre,.codeArea code{
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
@@ -126,18 +202,20 @@
     box-sizing: border-box;
   }
 
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 
 </style>

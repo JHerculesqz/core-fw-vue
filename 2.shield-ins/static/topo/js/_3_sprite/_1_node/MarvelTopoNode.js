@@ -1,5 +1,5 @@
-(function($){
-  $.MarvelTopoNode = function() {
+(function ($) {
+  $.MarvelTopoNode = function () {
     var self = this;
 
     //#region Const
@@ -11,7 +11,7 @@
 
     //#region draw
 
-    this.draw = function(oBuObj, oTopo){
+    this.draw = function (oBuObj, oTopo) {
       //#region 1.getPos
 
       var oPos = _getPos(oBuObj);
@@ -21,7 +21,7 @@
       //#region 2.node
 
       var oGroup = new Konva.Group({
-        id: oBuObj.id,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
         x: oPos.x,
         y: oPos.y,
         draggable: true
@@ -58,16 +58,16 @@
 
       //#region 4.event
 
-      oGroup.on('mouseover', function(evt) {
+      oGroup.on('mouseover', function (evt) {
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOver(oGroup, oTopo);
       });
-      oGroup.on('mouseout', function(evt) {
+      oGroup.on('mouseout', function (evt) {
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
       });
-      oGroup.on('click', function(evt) {
+      oGroup.on('click', function (evt) {
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, oTopo);
       });
-      oGroup.on('dragmove', function(evt){
+      oGroup.on('dragmove', function (evt) {
         //1.联动关联的链路
         oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
       });
@@ -75,7 +75,7 @@
       return oGroup;
     };
 
-    this.drawInGroup = function(oBuObj, oExpandGroupExists, oTopo){
+    this.drawInGroup = function (oBuObj, oExpandGroupExists, oTopo) {
       //region 1.getPos
 
       var oPos = _getPos(oBuObj);
@@ -85,22 +85,22 @@
       //#region 2.node
 
       var oGroup = new Konva.Group({
-        id: oBuObj.id,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
         x: oPos.x,
         y: oPos.y,
         draggable: true,
-        dragBoundFunc: function(pos) {
+        dragBoundFunc: function (pos) {
           var x = oExpandGroupExists.getChildren()[0].x();
           var y = oExpandGroupExists.getChildren()[0].y();
           var radius = oExpandGroupExists.tag.uiRadius;
           var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
-          if(scale < 1){
+          if (scale < 1) {
             return {
               y: Math.round((pos.y - y) * scale + y),
               x: Math.round((pos.x - x) * scale + x)
             };
           }
-          else{
+          else {
             return pos;
           }
         }
@@ -137,17 +137,17 @@
 
       //#region 4.event
 
-      oGroup.on('mouseover', function(evt) {
+      oGroup.on('mouseover', function (evt) {
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOver(oGroup, oTopo);
       });
-      oGroup.on('mouseout', function(evt) {
+      oGroup.on('mouseout', function (evt) {
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
       });
-      oGroup.on('click', function(evt) {
+      oGroup.on('click', function (evt) {
         evt.cancelBubble = true;
         oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, oTopo);
       });
-      oGroup.on('dragmove', function(evt){
+      oGroup.on('dragmove', function (evt) {
         //TODO:调用LinkGroup
         oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
       });
@@ -157,7 +157,7 @@
       return oGroup;
     };
 
-    var _getPos = function(oBuObj){
+    var _getPos = function (oBuObj) {
       return {
         x: oBuObj.x,
         y: oBuObj.y
@@ -176,16 +176,16 @@
 
     //#region imsg
 
-    this.getCenterPos = function(oGroup){
+    this.getCenterPos = function (oGroup) {
       var x = oGroup.children[0].width() / 2 + oGroup.x();
       var y = oGroup.children[0].height() / 2 + oGroup.y();
-      for(;;){
+      for (; ;) {
         var oGroup = oGroup.getParent();
-        if(oGroup && oGroup.nodeType === "Group"){
+        if (oGroup && oGroup.nodeType === "Group") {
           x = x + oGroup.x();
           y = y + oGroup.y();
         }
-        else{
+        else {
           break;
         }
       }

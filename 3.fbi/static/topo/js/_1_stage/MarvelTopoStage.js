@@ -1,5 +1,5 @@
-(function($){
-  $.MarvelTopoStage = function() {
+(function ($) {
+  $.MarvelTopoStage = function () {
     var self = this;
 
     //#region Const
@@ -14,7 +14,7 @@
 
     //#region init
 
-    this.init = function(strId, iWidth, iHeight, oTopo){
+    this.init = function (strId, iWidth, iHeight, oTopo) {
       //#region 1._initContainer
 
       _initContainer(strId, oTopo);
@@ -24,6 +24,7 @@
       //#region 2.init oStage
 
       var oStage = new Konva.Stage({
+        id: $.MarvelTopoStage.id++,
         container: strId,
         width: iWidth,
         height: iHeight,
@@ -67,9 +68,9 @@
 
     //#region event
 
-    var _initEventWheel = function(strId, oStage){
+    var _initEventWheel = function (strId, oStage) {
       //TODO:需要缩小绑定事件的范围
-      document.getElementById(strId).addEventListener('wheel', function(e){
+      document.getElementById(strId).addEventListener('wheel', function (e) {
         e.preventDefault();
         var oldScale = oStage.scaleX();
         var mousePointTo = {
@@ -77,7 +78,7 @@
           y: oStage.getPointerPosition().y / oldScale - oStage.y() / oldScale
         };
         var newScale = e.deltaY > 0 ? oldScale * ZOOM_SCALE : oldScale / ZOOM_SCALE;
-        oStage.scale({ x: newScale, y: newScale });
+        oStage.scale({x: newScale, y: newScale});
         var newPos = {
           x: -(mousePointTo.x - oStage.getPointerPosition().x / newScale) * newScale,
           y: -(mousePointTo.y - oStage.getPointerPosition().y / newScale) * newScale
@@ -86,23 +87,24 @@
         oStage.batchDraw();
       });
     };
-    var _initEventAddMinus = function(oTopo){
-      keyboardJS.bind('=', function(e) {
+    var _initEventAddMinus = function (oTopo) {
+      keyboardJS.bind('=', function (e) {
         oTopo.Sprite.NodeGroup.zoomInSelectNodeGroupAndNodes();
       });
-      keyboardJS.bind('-', function(e) {
+      keyboardJS.bind('-', function (e) {
         oTopo.Sprite.NodeGroup.zoomOutSelectNodeGroupAndNodes();
       });
     };
-    var _initEventClick = function(oStageRect, oTopo){
-      oStageRect.on("click", function(evt){
+    var _initEventClick = function (oStageRect, oTopo) {
+      oStageRect.on("click", function (evt) {
         oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
+        oTopo.Sprite.LinkGroup.unSelectLinks(oTopo);
       });
     };
-    var _initEventCtrlPress = function(oTopo){
-      keyboardJS.bind('ctrl', function(e) {
+    var _initEventCtrlPress = function (oTopo) {
+      keyboardJS.bind('ctrl', function (e) {
         keyboardJS.isCtrlPress = true;
-      }, function(e){
+      }, function (e) {
         keyboardJS.isCtrlPress = false;
       });
     };
@@ -112,18 +114,19 @@
     //#region imsg
 
     this.findOne = function (strId, oTopo) {
-      var oEle = oTopo.ins.stage.findOne("#" + strId);
+      var strWrapperId = self.getIdentityValue(strId, oTopo);
+      var oEle = oTopo.ins.stage.findOne("#" + strWrapperId);
       return oEle;
     };
 
-    this.findGroupByTagAttr = function(strAttrKey, oAttrValue, oTopo){
+    this.findGroupByTagAttr = function (strAttrKey, oAttrValue, oTopo) {
       var arrRes = [];
 
       var arrGroup = oTopo.ins.stage.find("Group");
-      for(var i=0;i<arrGroup.length;i++){
+      for (var i = 0; i < arrGroup.length; i++) {
         var oGroup = arrGroup[i];
-        if(undefined != oGroup.tag[strAttrKey]){
-          if(oGroup.tag[strAttrKey] == oAttrValue){
+        if (undefined != oGroup.tag[strAttrKey]) {
+          if (oGroup.tag[strAttrKey] == oAttrValue) {
             arrRes.push(oGroup);
           }
         }
@@ -132,6 +135,11 @@
       return arrRes;
     };
 
+    this.getIdentityValue = function (value, oTopo) {
+      return oTopo.ins.stage.id() + "_" + value;
+    };
+
     //#endregion
   }
+  $.MarvelTopoStage.id = 1;
 })(jQuery);

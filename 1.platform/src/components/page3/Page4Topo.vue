@@ -21,6 +21,8 @@
               <button v-on:click="onClickCollapseNodeGroup">collapseNodeGroup</button>
               <button v-on:click="onClickExpandLinkGroup">expandLinkGroup</button>
               <button v-on:click="onClickCollapseLinkGroup">collapseLinkGroup</button>
+              <button v-on:click="onClickSelectNodes">selectNodes</button>
+              <button v-on:click="onClickSelectLinks">selectLinks</button>
               <div style="width: 800px; height: 340px;">
                 <marvel-topo ref="ref4Topo" id="topo" theme="dark"></marvel-topo>
               </div>
@@ -381,6 +383,12 @@
       },
       onClickCollapseLinkGroup: function(){
         this.$refs.ref4Topo.collapseAllLinkGroup();
+      },
+      onClickSelectNodes: function(){
+        this.$refs.ref4Topo.selectNodes(["node0", "node1"]);
+      },
+      onClickSelectLinks: function(){
+        this.$refs.ref4Topo.selectLinks(["link0", "link1", "link2"]);
       }
     }
   }
