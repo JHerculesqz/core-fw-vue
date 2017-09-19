@@ -98,11 +98,15 @@
       collapseAllLinkGroup: function () {
         this.oTopo.Sprite.LinkGroup.collapseAllLinkGroup(this.oTopo);
       },
-      selectNodes: function(arrNodeId){
+      selectNodesById: function(arrNodeId){
         this.oTopo.Sprite.NodeGroup.selectNodesById(arrNodeId, this.oTopo);
       },
-      selectLinks: function(arrLinkId){
+      selectLinksById: function(arrLinkId){
         this.oTopo.Sprite.LinkGroup.selectLinksById(arrLinkId, this.oTopo);
+      },
+      unSelectAll: function(){
+        this.oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(this.oTopo);
+        this.oTopo.Sprite.LinkGroup.unSelectLinks(this.oTopo);
       }
 
     }

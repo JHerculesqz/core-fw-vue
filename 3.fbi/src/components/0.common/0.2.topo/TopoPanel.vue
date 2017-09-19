@@ -40,13 +40,17 @@
         this.$refs.ref4RightArea.setData4RightArea(oData4RightArea);
       },
       onTreeNodeClick: function (oTreeNode) {
+        this.selectNe(oTreeNode.id);
         this.$emit("onTreeNodeClick", oTreeNode);
       },
       selectNe: function (strNeId) {
-        alert("selectNe");
+        this.$refs.ref4TopoCenterArea.unSelectAll();
+        this.$refs.ref4TopoCenterArea.selectNodesById([strNeId]);
       },
       selectLink: function (strLinkId) {
         alert("selectLink");
+        this.$refs.ref4TopoCenterArea.unSelectAll();
+        this.$refs.ref4TopoCenterArea.selectLinksById([strLinkId]);
       },
       updateTopo: function (oTopo) {
         alert("updateTopo");
@@ -54,7 +58,7 @@
       initTopo: function (oAfterCallBack) {
         this.$refs.ref4TopoCenterArea.init(oAfterCallBack);
       },
-      drawTopo: function(oTopoData){
+      drawTopo: function (oTopoData) {
         this.$refs.ref4TopoCenterArea.draw(oTopoData);
       }
     }

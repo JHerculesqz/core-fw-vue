@@ -89,8 +89,6 @@
     },
     mounted: function () {
       var self = this;
-
-
     },
     destroyed: function () {
 

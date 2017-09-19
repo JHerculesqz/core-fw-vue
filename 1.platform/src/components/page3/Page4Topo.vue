@@ -385,10 +385,10 @@
         this.$refs.ref4Topo.collapseAllLinkGroup();
       },
       onClickSelectNodes: function(){
-        this.$refs.ref4Topo.selectNodes(["node0", "node1"]);
+        this.$refs.ref4Topo.selectNodesById(["node0", "node1"]);
       },
       onClickSelectLinks: function(){
-        this.$refs.ref4Topo.selectLinks(["link0", "link1", "link2"]);
+        this.$refs.ref4Topo.selectLinksById(["link0", "link1", "link2"]);
       }
     }
   }

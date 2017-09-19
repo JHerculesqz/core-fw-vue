@@ -287,7 +287,7 @@
     margin-left: 20px;
   }
 
-  @media (min-width: 1280px){
+  @media (min-width: 1980px){
     .staticArea{
       width: calc(50% - 10px);
       float: left;

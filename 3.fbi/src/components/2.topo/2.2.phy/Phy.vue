@@ -100,7 +100,6 @@
     mounted: function () {
       this._getPhyTopo();
       this.$refs.ref4PhyGridPanel.init();
-      console.log("Phy mounted");
     },
     methods: {
       _getPhyTopo: function () {
@@ -111,16 +110,16 @@
             name: 'root',
             icon: "icon-address-book",
             children: [{
-              id: 'CDMXDFCTHM1',
-              name: 'CDMXDFCTHM1',
+              id: 'nodeBase0',
+              name: 'nodeBase0',
               icon: "icon-address-book",
             }, {
-              id: 'CDMXDFCTHM2',
-              name: 'CDMXDFCTHM2',
+              id: 'nodeBase1',
+              name: 'nodeBase1',
               icon: "icon-address-book"
             }, {
-              id: 'CDMXDFCTHM3',
-              name: 'CDMXDFCTHM3',
+              id: 'nodeBase2',
+              name: 'nodeBase2',
               icon: "icon-address-book"
             }]
           };
@@ -305,7 +304,7 @@
             srcNodeId: "nodeBase2",
             dstNodeId: "node1_1",
             uiLabelL: "nodeBase0",
-            uiLabelM: "gLink" + i,
+            uiLabelM: "gLink" + i + 0,
             uiLabelR: "nodeBase1",
             uiLinkExpand: false,
             uiLink: true,
@@ -318,7 +317,7 @@
             srcNodeId: "nodeBase2",
             dstNodeId: "node1_1",
             uiLabelL: "nodeBase0",
-            uiLabelM: "gLink" + i,
+            uiLabelM: "gLink" + i + 1,
             uiLabelR: "nodeBase1",
             uiLinkExpand: false,
             uiLink: true,
@@ -331,7 +330,7 @@
             srcNodeId: "nodeBase2",
             dstNodeId: "node1_2",
             uiLabelL: "nodeBase0",
-            uiLabelM: "gLink" + i,
+            uiLabelM: "gLink" + i + 2,
             uiLabelR: "nodeBase1",
             uiLinkExpand: false,
             uiLink: true,
@@ -344,7 +343,7 @@
             srcNodeId: "nodeBase2",
             dstNodeId: "node1_2",
             uiLabelL: "nodeBase0",
-            uiLabelM: "gLink" + i,
+            uiLabelM: "gLink" + i + 3,
             uiLabelR: "nodeBase1",
             uiLinkExpand: false,
             uiLink: true,
@@ -469,7 +468,7 @@
       },
       onClickRow4Ne: function (oRow) {
         this._getDevPropsByDevId(oRow.id);
-        this.$refs.ref4MainTopo4Phy.selectNe(oRow.id);
+//        this.$refs.ref4MainTopo4Phy.selectNe(oRow.id);
       },
       onClickRow4Fiber: function (oRow) {
         this._getLinkPropsByLinkId(oRow.id);

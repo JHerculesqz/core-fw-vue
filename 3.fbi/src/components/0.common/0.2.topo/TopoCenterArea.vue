@@ -27,6 +27,15 @@
       },
       draw: function (oTopoData) {
         this.$refs.ref4Topo.draw(oTopoData);
+      },
+      unSelectAll: function(){
+        this.$refs.ref4Topo.unSelectAll();
+      },
+      selectNodesById: function(arrNodeId){
+        this.$refs.ref4Topo.selectNodesById(arrNodeId);
+      },
+      selectLinksById: function(arrLinkId){
+        this.$refs.ref4Topo.selectLinksById(arrNodeId);
       }
     }
   }

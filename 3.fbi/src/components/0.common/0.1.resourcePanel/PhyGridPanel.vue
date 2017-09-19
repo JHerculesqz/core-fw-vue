@@ -71,22 +71,22 @@
         tabItems: [{
           label: "网元",
           isActive: true
-        },{
+        }, {
           label: "单板",
           isActive: false
-        },{
+        }, {
           label: "光纤",
           isActive: false
-        },{
+        }, {
           label: "交叉",
           isActive: false
-        },{
+        }, {
           label: "路径",
           isActive: false
-        },{
+        }, {
           label: "保护子网",
           isActive: false
-        },{
+        }, {
           label: "站点",
           isActive: false
         }],
@@ -297,7 +297,7 @@
         }, {
           label: "源低阶时隙",
           width: "13%"
-        },{
+        }, {
           label: "宿网元名称",
           width: "13%"
         }, {
@@ -366,7 +366,7 @@
         }, {
           label: "备注",
           width: "13%"
-        },{
+        }, {
           label: "操作",
           width: "13%"
         }],
@@ -384,8 +384,8 @@
 
     },
     methods: {
-      init: function(){
-        if(this.debug){
+      init: function () {
+        if (this.debug) {
           this._getParseResult4NeMock();
           this._getParseResult4BoardMock();
           this._getParseResult4FiberMock();
@@ -394,23 +394,24 @@
           this._getParseResult4SubNetMock();
           this._getParseResult4SiteMock();
         }
-        else{
+        else {
 //          TODO
         }
       },
-      onClickRow4Ne: function(oRow){
-        this.$emit("onClickRow4Ne",oRow);
+      onClickRow4Ne: function (oRow) {
+        this.$emit("onClickRow4Ne", oRow);
       },
-      onClickRow4Fiber: function(oRow){
-        this.$emit("onClickRow4Fiber",oRow);
+      onClickRow4Fiber: function (oRow) {
+        this.$emit("onClickRow4Fiber", oRow);
       },
-      _getParseResult4NeMock: function(){
+      _getParseResult4NeMock: function () {
         this.rows4Ne = [];
 
         for (var i = 0; i < 100; i++) {
           var oRow = [];
           for (var j = 0; j < 16; j++) {
             var oCell = {
+              id: "nodeBase" + j % 3,
               value: "value" + i,//Math.random() * 100
               type: "text"
             };
@@ -419,7 +420,7 @@
           this.rows4Ne.push(oRow);
         }
       },
-      _getParseResult4BoardMock: function(){
+      _getParseResult4BoardMock: function () {
         this.rows4Board = [];
 
         for (var i = 0; i < 100; i++) {
@@ -434,13 +435,14 @@
           this.rows4Board.push(oRow);
         }
       },
-      _getParseResult4FiberMock: function(){
+      _getParseResult4FiberMock: function () {
         this.rows4Fiber = [];
 
         for (var i = 0; i < 100; i++) {
           var oRow = [];
           for (var j = 0; j < 13; j++) {
             var oCell = {
+              id: "gLink100" + j % 4,
               value: "value" + i,//Math.random() * 100
               type: "text"
             };
@@ -449,7 +451,7 @@
           this.rows4Fiber.push(oRow);
         }
       },
-      _getParseResult4CrossMock: function(){
+      _getParseResult4CrossMock: function () {
         this.rows4Cross = [];
 
         for (var i = 0; i < 100; i++) {
@@ -464,7 +466,7 @@
           this.rows4Cross.push(oRow);
         }
       },
-      _getParseResult4PathMock: function(){
+      _getParseResult4PathMock: function () {
         this.rows4Path = [];
 
         for (var i = 0; i < 100; i++) {
@@ -479,7 +481,7 @@
           this.rows4Path.push(oRow);
         }
       },
-      _getParseResult4SubNetMock: function(){
+      _getParseResult4SubNetMock: function () {
         this.rows4SubNet = [];
 
         for (var i = 0; i < 100; i++) {
@@ -494,7 +496,7 @@
           this.rows4SubNet.push(oRow);
         }
       },
-      _getParseResult4SiteMock: function(){
+      _getParseResult4SiteMock: function () {
         this.rows4Site = [];
 
         for (var i = 0; i < 100; i++) {
@@ -515,9 +517,9 @@
 </script>
 
 <style scoped>
-  .showAreaInner{
+  .showAreaInner {
     padding-top: 10px;
     box-sizing: border-box;
-    height:100%;
+    height: 100%;
   }
 </style>
