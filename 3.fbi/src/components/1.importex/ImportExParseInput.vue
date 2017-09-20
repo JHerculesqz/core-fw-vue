@@ -13,11 +13,12 @@
                                 label="解析"
                                 icon="icon-rocket"
                                 theme="dark"
-                                v-on:onClick="onClick4ParseShow"></marvel-icon-txt-button>
+                                v-on:onClick="onClick4ParseShow"
+                                ref="refIconTxtButton4Parse"></marvel-icon-txt-button>
         <marvel-dialog theme="dark" :showDialog="showDialog"
                        title="脚本解析" width="600" height="400"
                        v-on:onClickDialogClose="onClickDialogClose">
-          <div style="height: 100%" slot="dialogCont">
+          <div class="dialogContent" slot="dialogCont">
             <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr"
                          :limit="limit4FileMgr"
                          theme="dark"></marvel-grid>
@@ -70,16 +71,16 @@
         showDialog: false,
         titles4FileMgr: [{
           label: "",
-          width: "5%"
+          width: "8%"
         }, {
           label: "文件名",
-          width: "13%"
+          width: "32%"
         }, {
           label: "文件类型",
-          width: "12%"
+          width: "30%"
         }, {
           label: "时隙模式",
-          width: "8%"
+          width: "30%"
         }],
         skip4FileMgr: 0,
         limit4FileMgr: 20,
@@ -94,97 +95,107 @@
 
     },
     methods: {
-      onClick4ParseShow: function(){
+      onClick4ParseShow: function () {
         this.showDialog = true;
         this.$refs.refParseOK.setBtnDisable(false);
-        this._getFileLstMock(function(){
+        this._getFileLstMock(function () {
 
         });
       },
-      onClick4ParseOK: function(){
+      onClick4ParseOK: function () {
         this._updateMem4DialogOK();
       },
-      onClick4ParseCancel: function(){
+      onClick4ParseCancel: function () {
         this._updateMem4DialogClose();
       },
-      onClickDialogClose: function(){
+      onClickDialogClose: function () {
         this._updateMem4DialogClose();
       },
-      _getFileLstMock : function(oCallback){
+      _getFileLstMock: function (oCallback) {
         this.rows4FileMgr = [];
 
-        if(this.debug){
-          for (var i = 0; i < 100; i++) {
-            var oRow = [];
-            for (var j = 0; j < 4; j++) {
-              var oCell = {
-                value: "value" + i,
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
+        if (this.debug) {
+          for(var i=1;i<10;i++){
+            var oRow = [{
+              value: i,
+              type: "text"
+            }, {
+              value: "ALU"+i+".zip",
+              type: "text"
+            }, {
+              value: "ZIP",
+              type: "text"
+            }, {
+              value: "s00290253",
+              type: "text"
+            }];
+
             this.rows4FileMgr.push(oRow);
           }
-
           oCallback();
         }
-        else{
+        else {
           //TODO:
         }
       },
-      _updateMem4DialogOK: function(){
+      _updateMem4DialogOK: function () {
         var self = this;
 
         this.showDialog = false;
 
         //TODO:1.获取文件列表选项
 
-        if(this.debug){
-          this._updateLoadingBar4ParseStartMock(function(){
+        if (this.debug) {
+          this._updateLoadingBar4ParseStartMock(function () {
             self.$refs.ref4PhyGridPanel.init();
           });
         }
-        else{
-            //TODO:
+        else {
+          //TODO:
         }
       },
-      _updateMem4DialogClose: function(){
+      _updateMem4DialogClose: function () {
         this.showDialog = false;
       },
-      _updateLoadingBar4ParseStartMock : function(oCallback){
+      _updateLoadingBar4ParseStartMock: function (oCallback) {
         var self = this;
 
         self.$refs.refMiniLoading.showEx("取消");
+        self.$refs.refIconTxtButton4Parse.setBtnDisable(true);
         self.$refs.refMiniLoading.setProgress(10, "解析网元");
-        setTimeout(function(){
+        setTimeout(function () {
           self.$refs.refMiniLoading.setProgress(30, "解析单板");
-          setTimeout(function(){
+          setTimeout(function () {
             self.$refs.refMiniLoading.setProgress(60, "解析交叉");
-            setTimeout(function(){
+            setTimeout(function () {
               self.$refs.refMiniLoading.setProgress(100, "解析完成");
               self.$refs.refMiniLoading.hideEx();
+              self.$refs.refIconTxtButton4Parse.setBtnDisable(false);
               oCallback();
-            },1000);
-          },1000);
-        },1000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
       },
     }
   }
 </script>
 
 <style scoped>
-  .importExResultWrapper{
-    height:100%;
+  .importExResultWrapper {
+    height: 100%;
   }
-  .title{
+
+  .title {
     height: 62px;
     margin-bottom: 10px;
   }
-  .title .titleArea{
+
+  .title .titleArea {
     height: 100%;
     float: left;
   }
-  .title .titleArea .titleIcon{
+
+  .title .titleArea .titleIcon {
     height: 100%;
     float: left;
     line-height: 62px;
@@ -192,7 +203,8 @@
     color: #8b90b3;
     margin-right: 10px;
   }
-  .title .titleArea .titleName{
+
+  .title .titleArea .titleName {
     height: 100%;
     float: left;
     line-height: 62px;
@@ -200,20 +212,27 @@
     color: #fff;
     margin-right: 10px;
   }
-  .title .titleArea .loadingArea{
+
+  .title .titleArea .loadingArea {
     padding-top: 10px;
     box-sizing: border-box;
     float: left;
     width: 300px;
-    height:100%;
+    height: 100%;
   }
-  .title .operationArea{
+
+  .title .operationArea {
     height: 100%;
     padding-top: 15px;
     box-sizing: border-box;
     float: right;
   }
-  .tabArea{
-    height:calc(100% - 62px);
+
+  .dialogContent {
+    height: 100%;
+  }
+
+  .tabArea {
+    height: calc(100% - 62px);
   }
 </style>

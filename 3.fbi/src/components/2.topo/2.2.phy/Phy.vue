@@ -10,7 +10,7 @@
       height="300"
       show="true"
       canDrag="false">
-      <div slot="content" style="height: 100%">
+      <div class="phyContent" slot="content">
         <phy-grid-panel ref="ref4PhyGridPanel"
                         v-on:onClickRow4Ne="onClickRow4Ne"
                         v-on:onClickRow4Fiber="onClickRow4Fiber"></phy-grid-panel>
@@ -426,40 +426,229 @@
       onTreeNodeClick: function (oTreeNode) {
         this._getDevPropsByDevId(oTreeNode.id);
       },
-      _getDevPropsByDevId: function (strDevId) {
+      _getDevPropsByDevId: function (oRow) {
         if (this.debug) {
-          var oData4RightArea = [];
-          for (var i = 0; i < 100; i++) {
-            var oRow = [];
-            for (var j = 0; j < 2; j++) {
-              var oCell = {
-                value: "value" + i,
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
-            oData4RightArea.push(oRow);
-          }
+          var oData4RightArea = [
+            [{
+              value: "搬迁状态",
+              type: "text"
+            },{
+              value: oRow[8].value,
+              type: "text"
+            }],[{
+              value: "高阶使用容量",
+              type: "text"
+            },{
+              value: oRow[9].value,
+              type: "text"
+            }],[{
+              value: "高阶交叉个数",
+              type: "text"
+            },{
+              value: oRow[10].value,
+              type: "text"
+            }],[{
+              value: "低阶使用容量",
+              type: "text"
+            },{
+              value: oRow[11].value,
+              type: "text"
+            }],[{
+              value: "低阶交叉个数",
+              type: "text"
+            },{
+              value: oRow[12].value,
+              type: "text"
+            }],[{
+              value: "低阶等效VC4容量",
+              type: "text"
+            },{
+              value: "4",
+              type: "text"
+            }],[{
+              value: "低阶等效VC4个数",
+              type: "text"
+            },{
+              value: "5",
+              type: "text"
+            }],[{
+              value: "网元ID",
+              type: "text"
+            },{
+              value: oRow[1].value,//TODO:待修改表格控件后修改
+              type: "text"
+            }],[{
+              value: "网元名称",
+              type: "text"
+            },{
+              value:oRow[2].value,
+              type: "text"
+            }],[{
+              value: "网元类型",
+              type: "text"
+            },{
+              value: oRow[4].value,
+              type: "text"
+            }],[{
+              value: "设备厂商",
+              type: "text"
+            },{
+              value: oRow[5].value,
+              type: "text"
+            }],[{
+              value: "子架类型",
+              type: "text"
+            },{
+              value: oRow[6].value,
+              type: "text"
+            }],[{
+              value: "时隙模式",
+              type: "text"
+            },{
+              value: oRow[7].value,
+              type: "text"
+            }],[{
+              value: "IP地址",
+              type: "text"
+            },{
+              value: "-",
+              type: "text"
+            }],[{
+              value: "版本号",
+              type: "text"
+            },{
+              value: "-",
+              type: "text"
+            }],[{
+              value: "领域",
+              type: "text"
+            },{
+              value: oRow[3].value,
+              type: "text"
+            }]
+            ]
+
           this.$refs.ref4MainTopo4Phy.setData4RightArea(oData4RightArea);
         }
         else {
           //TODO:
         }
       },
-      _getLinkPropsByLinkId: function (strLinkId) {
+      _getLinkPropsByLinkId: function (oRow) {
         if (this.debug) {
-          var oData4RightArea = [];
-          for (var i = 0; i < 100; i++) {
-            var oRow = [];
-            for (var j = 0; j < 2; j++) {
-              var oCell = {
-                value: "value" + i,
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
-            oData4RightArea.push(oRow);
-          }
+          var strSrcNe = oRow[5].value;
+          var strDstNe = oRow[7].value;
+          var oData4RightArea = [
+            [{
+              value: "链路利用率",
+              type: "text"
+            },{
+              value: oRow[8].value,
+              type: "text"
+            }],[{
+              value: "光纤名称",
+              type: "text"
+            },{
+              value: oRow[1].value,
+              type: "text"
+            }],[{
+              value: "光纤级别",
+              type: "text"
+            },{
+              value: oRow[2].value,
+              type: "text"
+            }],[{
+              value: "光纤放向",
+              type: "text"
+            },{
+              value: oRow[3].value,
+              type: "text"
+            }],[{
+              value: "光纤长度",
+              type: "text"
+            },{
+              value: oRow[10].value,
+              type: "text"
+            }],[{
+              value: "源端网络类型",
+              type: "text"
+            },{
+              value: "SDH",
+              type: "text"
+            }],[{
+              value: "源网元ID",
+              type: "text"
+            },{
+              value: oRow[4].value,
+              type: "text"
+            }],[{
+              value: "源网元名称",
+              type: "text"
+            },{
+              value: oRow[4].value,//TODO:待修改表格控件后修改
+              type: "text"
+            }],[{
+              value: "源网元槽位",
+              type: "text"
+            },{
+              value:strSrcNe.substring(strSrcNe.indexOf("-")),
+              type: "text"
+            }],[{
+              value: "源单板名称",
+              type: "text"
+            },{
+              value: strSrcNe.substring(strSrcNe.indexOf("-"),strSrcNe.lastIndexOf("-")),
+              type: "text"
+            }],[{
+              value: "源端口",
+              type: "text"
+            },{
+              value: strSrcNe.substring(strSrcNe.lastIndexOf("-"),strSrcNe.length),
+              type: "text"
+            }],[{
+              value: "宿端网络类型",
+              type: "text"
+            },{
+              value: "SDH",
+              type: "text"
+            }],[{
+              value: "宿网元ID",
+              type: "text"
+            },{
+              value: oRow[6].value,
+              type: "text"
+            }],[{
+              value: "宿网元名称",
+              type: "text"
+            },{
+              value: oRow[6].value,
+              type: "text"
+            }],[{
+              value: "宿网元槽位",
+              type: "text"
+            },{
+              value: strDstNe.substring(strDstNe.indexOf("-")),
+              type: "text"
+            }],[{
+              value: "宿单板名称",
+              type: "text"
+            },{
+              value: strDstNe.substring(strDstNe.indexOf("-"),strDstNe.lastIndexOf("-")),
+              type: "text"
+            }],[{
+              value: "宿端口",
+              type: "text"
+            },{
+              value: strDstNe.substring(strDstNe.lastIndexOf("-"),strDstNe.length),
+              type: "text"
+            }],[{
+              value: "数据来源",
+              type: "text"
+            },{
+              value: oRow[9].value,
+              type: "text"
+            }]
+          ];
           this.$refs.ref4MainTopo4Phy.setData4RightArea(oData4RightArea);
         }
         else {
@@ -467,12 +656,12 @@
         }
       },
       onClickRow4Ne: function (oRow) {
-        this._getDevPropsByDevId(oRow.id);
-//        this.$refs.ref4MainTopo4Phy.selectNe(oRow.id);
+        this._getDevPropsByDevId(oRow);
+        this.$refs.ref4MainTopo4Phy.selectNe(oRow[1].value);
       },
       onClickRow4Fiber: function (oRow) {
-        this._getLinkPropsByLinkId(oRow.id);
-        this.$refs.ref4MainTopo4Phy.selectLink(oRow.id);
+        this._getLinkPropsByLinkId(oRow);
+        this.$refs.ref4MainTopo4Phy.selectLink(oRow[1].value);
       }
     }
   }
@@ -484,5 +673,8 @@
     height: 100%;
     position: relative;
     background-color: #272743;
+  }
+  .phyContent{
+    height:100%;
   }
 </style>

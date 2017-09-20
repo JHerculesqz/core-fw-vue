@@ -9,10 +9,15 @@
                                 theme="dark"
                                 v-on:onClick="onClick4ExportPartPath"></marvel-icon-txt-button>
         <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                label="删除"
+                                label="网络删除"
                                 icon="icon-bin"
                                 theme="dark"
                                 v-on:onClick="onClick4DelPartPath"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="删除"
+                                icon="icon-bin"
+                                theme="dark"
+                                v-on:onClick="onClick4DelPartPathAndCross"></marvel-icon-txt-button>
       </div>
     </div>
     <div class="firstGridArea">
@@ -172,32 +177,217 @@
       _getPartPathMock: function () {
         this.rows4PartPath = [];
 
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 16; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
+        for (var i = 0; i < 10; i++) {
+          var oRow = [{
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
+            type: "text"
+          }, {
+            value: "VC12",
+            type: "text"
+          }, {
+            value: "单向",
+            type: "text"
+          }, {
+            value: "nodeBase0",
+            type: "text"
+          }, {
+            value: "8-SL16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "nodeBase2",
+            type: "text"
+          }, {
+            value: "18-JQ16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "-",
+            type: "text"
+          }, {
+            value: "否",
+            type: "text"
+          }, {
+            value: "路径源或者宿未落地",
+            type: "text"
+          }, {
+            value: "删除路由上的低阶业务",
+            type: "text"
+          }];
           this.rows4PartPath.push(oRow);
         }
       },
       _getPartRouterMock: function (oRow, oAfterCallback) {
-        this.rows4PartRouter = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 13; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows4PartRouter.push(oRow);
-        }
+        this.rows4PartRouter = [[{
+          value: 1,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value,
+          type: "text"
+        }, {
+          value: oRow[7].value,
+          type: "text"
+        }, {
+          value: oRow[8].value,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value + 1,
+          type: "text"
+        }, {
+          value: oRow[7].value + 1,
+          type: "text"
+        }, {
+          value: oRow[8].value + 1,
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "VC12",
+          type: "text"
+        }, {
+          value: "1",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 2,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value+1,
+          type: "text"
+        }, {
+          value: oRow[7].value+1,
+          type: "text"
+        }, {
+          value: oRow[8].value+1,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value,
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "Fiber",
+          type: "text"
+        }, {
+          value: "2",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 3,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value,
+          type: "text"
+        }, {
+          value: oRow[11].value,
+          type: "text"
+        }, {
+          value: oRow[12].value,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value + 1,
+          type: "text"
+        }, {
+          value: oRow[11].value + 1,
+          type: "text"
+        }, {
+          value: oRow[12].value + 1,
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "VC12",
+          type: "text"
+        }, {
+          value: "3",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 4,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value+1,
+          type: "text"
+        }, {
+          value: oRow[11].value+1,
+          type: "text"
+        }, {
+          value: oRow[12].value+1,
+          type: "text"
+        }, {
+          value: oRow[9].value,
+          type: "text"
+        }, {
+          value: oRow[10].value + 2,
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "Fiber",
+          type: "text"
+        }, {
+          value: "4",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }]];
 
         oAfterCallback(this.rows4PartRouter);
       },
@@ -223,6 +413,11 @@
         //获取勾选项
 //        var arrCheckRows = this.$refs.ref4PartPathGrid.getCheckRows();
         alert("onClick4DelPartPath");
+      },
+      onClick4DelPartPathAndCross:function(){
+        //获取勾选项
+//        var arrCheckRows = this.$refs.ref4PartPathGrid.getCheckRows();
+        alert("onClick4DelPartPathAndCross");
       }
     }
   }

@@ -15,19 +15,6 @@
                    v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></component>
       </keep-alive>
     </div>
-    <!---->
-    <!--<marvel-tab :tabItems="tabItems1" theme="dark">-->
-    <!--<marvel-tab-item :isActive="tabItems1[0].isActive">-->
-    <!--<full-path v-on:onClickFullPathRow="onClickFullPathRow"-->
-    <!--v-on:onClickRow4Business="onClickRow4Business"></full-path>-->
-    <!--</marvel-tab-item>-->
-    <!--<marvel-tab-item :isActive="tabItems1[1].isActive">-->
-    <!--<part-path v-on:onClickPartPathRow="onClickPartPathRow"></part-path>-->
-    <!--</marvel-tab-item>-->
-    <!--<marvel-tab-item :isActive="tabItems1[2].isActive">-->
-    <!--<discrete-cross v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></discrete-cross>-->
-    <!--</marvel-tab-item>-->
-    <!--</marvel-tab>-->
   </div>
 </template>
 
@@ -90,7 +77,7 @@
           icon: "icon-podcast",
           fold: false,
           children: [{
-            label: "路由信息",
+            label: "业务详情",
             active: true
           }, {
             label: "业务局向"
@@ -127,8 +114,8 @@
         }
       },
       onClickSubItem: function (oItem, oSubItem) {
-        if (oSubItem.label == "路由信息") {
-          this.moduleName = "PartPath";
+        if (oSubItem.label == "业务详情") {
+          this.moduleName = "FullPath";
         }
         else if (oSubItem.label == "业务局向") {
           this.moduleName = "Business";

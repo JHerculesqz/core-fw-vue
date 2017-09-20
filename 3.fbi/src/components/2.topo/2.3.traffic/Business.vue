@@ -1,6 +1,7 @@
 <template>
   <div class="businessArea">
     <div class="titleArea">
+      <div class="titleName">业务局向</div>
       <div class="btnArea">
         <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                 label="业务局向"
@@ -90,7 +91,7 @@
       var self = this;
 
       if (this.debug) {
-        self._getBusinessMock();
+        //self._getBusinessMock();
       }
       else {
         //TODO:
@@ -100,17 +101,45 @@
       _getBusinessMock: function () {
         this.rows4Business = [];
 
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 13; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows4Business.push(oRow);
-        }
+        var oRow = [{
+          value: 1,
+          type: "text"
+        },{
+          value: "nodeBase0",
+          type: "text"
+        },{
+          value: "nodeBase2",
+          type: "text"
+        },{
+          value: "40",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "0",
+          type: "text"
+        },{
+          value: "40",
+          type: "text"
+        },{
+          value: "100%",
+          type: "text"
+        }];
+
+        this.rows4Business.push(oRow);
       },
       onClick4Business: function () {
         if (this.debug) {
@@ -144,6 +173,15 @@
   .titleArea {
     width: 100%;
     height: 52px;
+  }
+
+  .titleName{
+    float: left;
+    height: 52px;
+    font-size: 16px;
+    color: #FFFFFF;
+    /*font-weight: bold;*/
+    line-height: 52px;
   }
 
   .btnArea {

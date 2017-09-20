@@ -10,10 +10,15 @@
                                   theme="dark"
                                   v-on:onClick="onClick4ExportFullPath"></marvel-icon-txt-button>
           <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                  label="删除"
+                                  label="网络删除"
                                   icon="icon-bin"
                                   theme="dark"
                                   v-on:onClick="onClick4DelFullPath"></marvel-icon-txt-button>
+          <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                  label="删除"
+                                  icon="icon-bin"
+                                  theme="dark"
+                                  v-on:onClick="onClick4DelFullPathAndCross"></marvel-icon-txt-button>
         </div>
       </div>
       <div class="firstGridArea">
@@ -176,15 +181,54 @@
       _getFullPathMock: function () {
         this.rows4FullPath = [];
 
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 15; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
+        for (var i = 0; i < 40; i++) {
+          var oRow = [{
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
+            type: "text"
+          }, {
+            value: "VC12",
+            type: "text"
+          }, {
+            value: "单向",
+            type: "text"
+          }, {
+            value: "TDM",
+            type: "text"
+          }, {
+            value: "nodeBase0",
+            type: "text"
+          }, {
+            value: "8-SL16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "nodeBase2",
+            type: "text"
+          }, {
+            value: "18-JQ16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "-",
+            type: "text"
+          }, {
+            value: "否",
+            type: "text"
+          }];
+
           this.rows4FullPath.push(oRow);
         }
       },
@@ -201,19 +245,203 @@
         }
       },
       _getFullRouterMock: function (oRow, oAfterCallBack) {
-        this.rows4FullRouter = [];
+        this.rows4FullRouter = [[{
+          value: 1,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value,
+          type: "text"
+        }, {
+          value: oRow[7].value,
+          type: "text"
+        }, {
+          value: oRow[8].value,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value + 1,
+          type: "text"
+        }, {
+          value: oRow[7].value + 1,
+          type: "text"
+        }, {
+          value: oRow[8].value + 1,
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "VC12",
+          type: "text"
+        }, {
+          value: "1",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 2,
+          type: "text"
+        }, {
+          value: oRow[5].value,
+          type: "text"
+        }, {
+          value: oRow[6].value+1,
+          type: "text"
+        }, {
+          value: oRow[7].value+1,
+          type: "text"
+        }, {
+          value: oRow[8].value+1,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value,
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "Fiber",
+          type: "text"
+        }, {
+          value: "2",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 3,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value,
+          type: "text"
+        }, {
+          value: oRow[11].value,
+          type: "text"
+        }, {
+          value: oRow[12].value,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value + 1,
+          type: "text"
+        }, {
+          value: oRow[11].value + 1,
+          type: "text"
+        }, {
+          value: oRow[12].value + 1,
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "VC12",
+          type: "text"
+        }, {
+          value: "3",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 4,
+          type: "text"
+        }, {
+          value: "nodeBase1",
+          type: "text"
+        }, {
+          value: oRow[10].value+1,
+          type: "text"
+        }, {
+          value: oRow[11].value+1,
+          type: "text"
+        }, {
+          value: oRow[12].value+1,
+          type: "text"
+        }, {
+          value: oRow[9].value,
+          type: "text"
+        }, {
+          value: oRow[10].value + 2,
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "-",
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "Fiber",
+          type: "text"
+        }, {
+          value: "4",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }],[{
+          value: 5,
+          type: "text"
+        }, {
+          value: oRow[9].value,
+          type: "text"
+        }, {
+          value: oRow[10].value+1,
+          type: "text"
+        }, {
+          value: oRow[11].value+1,
+          type: "text"
+        }, {
+          value: oRow[12].value+1,
+          type: "text"
+        }, {
+          value: oRow[9].value,
+          type: "text"
+        }, {
+          value: oRow[10].value + 2,
+          type: "text"
+        }, {
+          value: oRow[11].value + 2,
+          type: "text"
+        }, {
+          value: oRow[12].value + 2,
+          type: "text"
+        }, {
+          value: "正向工作",
+          type: "text"
+        }, {
+          value: "VC12",
+          type: "text"
+        }, {
+          value: "5",
+          type: "text"
+        }, {
+          value: "",
+          type: "text"
+        }]];
 
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 13; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows4FullRouter.push(oRow);
-        }
         oAfterCallBack(this.rows4FullRouter);
       },
       onClick4ExportFullPathRouter: function () {
@@ -236,7 +464,17 @@
         //获取勾选项
 //        var arrCheckRows = this.$refs.ref4FullPathGrid.getCheckRows();
         if (this.debug) {
-          alert("删除完整路径");
+          alert("网络删除完整路径");
+        }
+        else {
+          //TODO:
+        }
+      },
+      onClick4DelFullPathAndCross: function () {
+        //获取勾选项
+//        var arrCheckRows = this.$refs.ref4FullPathGrid.getCheckRows();
+        if (this.debug) {
+          alert("删除完整路径及路径经过交叉");
         }
         else {
           //TODO:
@@ -247,18 +485,24 @@
 </script>
 
 <style scoped>
-  .fullPathArea{
+  .fullPathArea {
     height:100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
-  .staticArea{
+
+  .staticArea {
     width: 100%;
     height: 100%;
   }
-  .titleArea{
+
+  .titleArea {
     width: 100%;
     height: 52px;
   }
-  .titleName{
+
+  .titleName {
     float: left;
     height: 52px;
     font-size: 16px;
@@ -266,34 +510,40 @@
     /*font-weight: bold;*/
     line-height: 52px;
   }
-  .btnArea{
+
+  .btnArea {
     height: 52px;
     padding: 10px 0;
     box-sizing: border-box;
     float: right;
   }
-  .firstGridArea{
+
+  .firstGridArea {
     height: calc(100% - 52px);
   }
-  .dynamicArea{
+
+  .dynamicArea {
     padding-top: 20px;
-    height:100%;
+    height: 100%;
     box-sizing: border-box;
   }
-  .secondGridArea{
+
+  .secondGridArea {
     height: calc(100% - 52px);
   }
-  .classCustom1{
+
+  .classCustom1 {
     margin-left: 20px;
   }
 
-  @media (min-width: 1980px){
-    .staticArea{
+  @media (min-width: 1980px) {
+    .staticArea {
       width: calc(50% - 10px);
       float: left;
       margin-right: 20px;
     }
-    .dynamicArea{
+
+    .dynamicArea {
       width: calc(50% - 10px);
       float: left;
       padding: 0;

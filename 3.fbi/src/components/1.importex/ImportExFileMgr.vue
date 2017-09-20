@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;height:100%;">
+  <div class="importExFileMgrWrapper">
     <div class="title">
       <div class="titleArea">
         <div class="titleIcon icon-upload"></div>
@@ -24,8 +24,10 @@
                        v-on:onClickDialogClose="onClickDialogClose">
           <div slot="dialogCont">
             <div class="fileSelectArea">
-              <marvel-upload ref="ref4Upload" theme="dark"
-                             placeHolder="Please choose a file"></marvel-upload>
+              <marvel-upload ref="ref4Upload"
+                             theme="dark"
+                             placeHolder="Please choose a file"
+                             v-on:onSelectFileBtnClick="onSelectFileBtnClick"></marvel-upload>
             </div>
             <div>
               <marvel-multi-input ref="ref4Remark" :status="status4Remark"
@@ -36,6 +38,7 @@
             </div>
           </div>
           <div slot="dialogFoot">
+            <div v-show="showOverride">该文件已存在,点击"上传"将覆盖原来文件</div>
             <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                     label="上传"
                                     icon="icon-upload"
@@ -51,8 +54,12 @@
       </div>
     </div>
     <div class="gridArea">
-      <marvel-grid :titles="titles4FileMgr" :rows="rows4FileMgr" :limit="limit4FileMgr"
-                   theme="dark"></marvel-grid>
+      <marvel-grid
+        :titles="titles4FileMgr"
+        :rows="rows4FileMgr"
+        :limit="limit4FileMgr"
+        theme="dark"
+        v-on:onIconClick="onGridRowIconClick"></marvel-grid>
     </div>
   </div>
 </template>
@@ -87,28 +94,28 @@
           width: "5%"
         }, {
           label: "文件名",
-          width: "13%"
+          width: "15%"
         }, {
           label: "文件类型",
-          width: "12%"
+          width: "8%"
         }, {
           label: "上传人",
           width: "8%"
         }, {
           label: "上传时间",
-          width: "13%"
+          width: "15%"
         }, {
           label: "解析状态",
-          width: "10%"
+          width: "8%"
         }, {
           label: "解析时间",
-          width: "13%"
+          width: "15%"
         }, {
           label: "备注",
-          width: "13%"
+          width: "17%"
         }, {
           label: "操作",
-          width: "13%"
+          width: "8%"
         }],
         skip4FileMgr: 0,
         limit4FileMgr: 20,
@@ -116,6 +123,7 @@
         //#endregion
         //#region upload dialog
         showDialog: false,
+        showOverride:false,
         file: undefined,
         status4Remark: "",
         inputMsg4Remark: "",
@@ -128,7 +136,7 @@
       if (this.debug) {
         self._getFileListMock();
       }
-      else{
+      else {
         //TODO:
       }
     },
@@ -137,107 +145,134 @@
     },
     methods: {
       //#region upload
-      onClick4UploadShow: function(){
+      onClick4UploadShow: function () {
         this._updateMem4UploadShow();
       },
-      onClick4UploadOK: function(){
+      onClick4UploadOK: function () {
         var self = this;
-
-        if(this.debug){
+        this.showOverride = false;
+        if (this.debug) {
           //1._updateMem4UploadStart
           self._updateMem4UploadStart();
 
           //2.更新进度条
-          self._updateLoadingBar4UploadStartMock(function(){
+          self._updateLoadingBar4UploadStartMock(function () {
             //3.更新文件列表
             self._getFileListMock();
           });
         }
-        else{
+        else {
           //TODO:
         }
       },
-      onClick4UploadCancel: function(){
+      onClick4UploadCancel: function () {
+        this.showOverride = false;
         this._updateMem4UploadCancel();
       },
-      onClickDialogClose: function(){
+      onClickDialogClose: function () {
         this._updateMem4UploadCancel();
       },
-      _getFileListMock: function(){
+      _getFileListMock: function () {
         this.rows4FileMgr = [];
 
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 9; j++) {
-            if(j != 8){
-              var oCell = {
-                value: "value" + i,//Math.random() * 100
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
-            else{
-              var oCell = {
-                value: [{
-                  value: "icon-location2",
-                  onClick: function () {
-                    alert(Math.random());
-                  }
-                }, {
-                  value: "icon-location2",
-                  onClick: function () {
-                    alert(Math.random());
-                  }
-                }],
-                type: "icon"
-              };
-              oRow.push(oCell);
-            }
-          }
-          this.rows4FileMgr.push(oRow);
+        for (var i = 1; i < 10; i++) {
+          var oRowDefault = [{
+            value: i,
+            type: "text"
+          }, {
+            value: "ALU" + i + ".zip",
+            type: "text"
+          }, {
+            value: "ZIP",
+            type: "text"
+          }, {
+            value: "s00290253",
+            type: "text"
+          }, {
+            value: "2017-08-31 09:53:42",
+            type: "text"
+          }, {
+            value: "已解析",
+            type: "text"
+          }, {
+            value: "2017-08-31 09:57:42",
+            type: "text"
+          }, {
+            value: " ",
+            type: "text"
+          }, {
+            value: [{
+              value: "icon-bin"
+            }, {
+              value: "icon-download"
+            }],
+            type: "icon"
+          }];
+          this.rows4FileMgr.push(oRowDefault);
         }
       },
-      _updateMem4UploadShow : function(){
+      _updateMem4UploadShow: function () {
         this.showDialog = true;
         this.file = undefined;
         this.inputMsg4Remark = "";
       },
-      _updateMem4UploadStart : function(){
+      _updateMem4UploadStart: function () {
         this.showDialog = false;
         this.file = this.$refs.ref4Upload.getFile();
         this.inputMsg4Remark = this.$refs.ref4Remark.getInputMsg();
       },
-      _updateLoadingBar4UploadStartMock : function(oCallback){
+      _updateLoadingBar4UploadStartMock: function (oCallback) {
         var self = this;
 
         self.$refs.refMiniLoading.showEx("取消");
         self.$refs.refMiniLoading.setProgress(10, "上传ing");
-        setTimeout(function(){
+        setTimeout(function () {
           self.$refs.refMiniLoading.setProgress(30, "上传ing");
-          setTimeout(function(){
+          setTimeout(function () {
             self.$refs.refMiniLoading.setProgress(60, "上传ing");
-            setTimeout(function(){
+            setTimeout(function () {
               self.$refs.refMiniLoading.setProgress(100, "完成");
               self.$refs.refMiniLoading.hideEx();
               oCallback();
-            },1000);
-          },1000);
-        },1000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
       },
-      _updateMem4UploadCancel : function(){
+      _updateMem4UploadCancel: function () {
         this.showDialog = false;
         this.file = undefined;
         this.inputMsg4Remark = "";
       },
-      //#endregion
-      //#region download
-      onClick4Download: function(){
-          if(this.debug){
-              alert("下载成功...");
+      onGridRowIconClick: function (oRow, oCell) {
+        if (this.debug) {
+          if(oCell.value =="icon-bin"){
+            alert("icon-bin");
           }
           else{
-              //TODO:
+            alert("icon-download");
           }
+        }
+        else {
+          //TODO:
+        }
+      },
+      onSelectFileBtnClick:function(oFile){
+        for(var i=0;i<this.rows4FileMgr.length;i++){
+          if(oFile.name == this.rows4FileMgr[i][1].value){
+            this.showOverride = true;
+            break;
+          }
+        }
+      },
+      //#endregion
+      //#region download
+      onClick4Download: function () {
+        if (this.debug) {
+          alert("下载成功...");
+        }
+        else {
+          //TODO:
+        }
       }
       //#endregion
     }
@@ -245,15 +280,22 @@
 </script>
 
 <style scoped>
-  .title{
+  .importExFileMgrWrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
     height: 62px;
     margin-bottom: 10px;
   }
-  .title .titleArea{
+
+  .title .titleArea {
     height: 100%;
     float: left;
   }
-  .title .titleArea .titleIcon{
+
+  .title .titleArea .titleIcon {
     height: 100%;
     float: left;
     line-height: 62px;
@@ -261,7 +303,8 @@
     color: #8b90b3;
     margin-right: 10px;
   }
-  .title .titleArea .titleName{
+
+  .title .titleArea .titleName {
     height: 100%;
     float: left;
     line-height: 62px;
@@ -269,23 +312,27 @@
     color: #fff;
     margin-right: 10px;
   }
-  .title .titleArea .loadingArea{
+
+  .title .titleArea .loadingArea {
     padding-top: 10px;
     box-sizing: border-box;
     float: left;
     width: 300px;
-    height:100%;
+    height: 100%;
   }
-  .title .operationArea{
+
+  .title .operationArea {
     height: 100%;
     padding-top: 15px;
     box-sizing: border-box;
     float: right;
   }
-  .fileSelectArea{
+
+  .fileSelectArea {
     margin-bottom: 20px;
   }
-  .gridArea{
-    height:calc(100% - 62px);
+
+  .gridArea {
+    height: calc(100% - 62px);
   }
 </style>
