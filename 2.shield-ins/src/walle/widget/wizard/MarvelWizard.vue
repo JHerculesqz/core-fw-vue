@@ -40,7 +40,7 @@
 
         for(var i=0;i<this.items.length;i++){
           var oItem = this.items[i];
-          if(oItem.index == iIndex){
+          if((oItem.index == iIndex)||((oItem.index < iIndex)&&(oItem.complected == false))){
             var strTmp = oItem.label;
             oItem.label = " ";
             oItem.label = strTmp;

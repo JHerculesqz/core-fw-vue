@@ -22,6 +22,7 @@
       onSelectFileBtnClick: function(evt){
         this.file = evt.target.files[0];
         this.fileName = this.file.name;
+        this.$emit("onSelectFileBtnClick",this.file);
       },
       getFile: function(){
           return this.file;
