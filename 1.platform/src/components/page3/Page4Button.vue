@@ -214,7 +214,7 @@
           <marvel-tab-item :isActive="tabItems6[0].isActive">
             <div class="showAreaInner">
               <button v-on:click="onDropDownClick">getCheckItem</button>
-              <marvel-drop-down-button ref="ref14" classCustom="classCustom1"
+              <marvel-drop-down-button ref="ref14" disable="" theme="dark" width="100%"
                                        v-on:onClick="onClick"></marvel-drop-down-button>
             </div>
           </marvel-tab-item>

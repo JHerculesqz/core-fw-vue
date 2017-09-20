@@ -74,6 +74,38 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+
+    <!--2级 start-->
+    <div class="title level2">Accordion3</div>
+    <div class="describe">
+      According3
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 200px;height:100%; background-color: rgb(26, 25, 39);">
+              <marvel-accordion3 :items="items3" title="fuck"
+                                 v-on:onClickItem="onClickItem"></marvel-accordion3>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -82,10 +114,12 @@
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelAccordion2 from "@/walle/widget/accordion/MarvelAccordion2";
+  import MarvelAccordion3 from "@/walle/widget/accordion/MarvelAccordion3";
 
   export default {
     name: 'page4Accordion',
     components: {
+      MarvelAccordion3,
       MarvelAccordion2,
       MarvelAccordion,
       MarvelTab,
@@ -93,26 +127,30 @@
     },
     data: function () {
       return {
-        tabItems1: [
-          {
-            label: "Demo View",
-            isActive: true
-          },
-          {
-            label: "Code View",
-            isActive: false
-          }
-        ],
-        tabItems2: [
-          {
-            label: "Demo View",
-            isActive: true
-          },
-          {
-            label: "Code View",
-            isActive: false
-          }
-        ],
+        //#region document data
+        tabItems1: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems2: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems3: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        //#endregion
+        //#region custom data
         items: [{
           label: "item1",
           icon: "icon-office",
@@ -142,7 +180,18 @@
         }, {
           label: "离散交叉",
           icon: "icon-mic"
+        }],
+        items3:[{
+          active: true,
+          label: "方案1"
+        }, {
+          active: false,
+          label: "方案2"
+        }, {
+          active: false,
+          label: "方案3"
         }]
+        //#endregion
       }
     },
     methods: {

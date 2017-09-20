@@ -66,13 +66,13 @@
     pointer-events: none;
   }
   .dark{
-    background-color: #000000;
+    background-color: transparent;
   }
   .dark .inputDefault{
-    border: 1px solid rgba(255,255,255,0);
+    border: 1px solid #8b90b3;
     font-size: 14px;
     color: #ffffff;
-    background-color: rgba(255,255,255,0.2);
+    background-color: transparent;
   }
 
   .mini .inputDefault{

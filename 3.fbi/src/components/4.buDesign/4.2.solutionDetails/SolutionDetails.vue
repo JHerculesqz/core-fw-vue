@@ -4,11 +4,11 @@
       <marvel-tab-button ref="ref4Phy" label="STEP1.新建华为网络"
                          v-on:onClick="onClickPhy"></marvel-tab-button>
       <marvel-tab-button ref="ref4InsertDev" label="STEP2.环插设备"
-                         v-on:onClick="onClickTraffic"></marvel-tab-button>
+                         v-on:onClick="onClickInsertDev"></marvel-tab-button>
       <marvel-tab-button ref="ref4Traffic" label="STEP3.业务搜索"
                          v-on:onClick="onClickTraffic"></marvel-tab-button>
       <marvel-tab-button ref="ref4ModifyTraffic" label="STEP4.割接业务"
-                         v-on:onClick="onClickTraffic"></marvel-tab-button>
+                         v-on:onClick="onClickModifyTraffic"></marvel-tab-button>
     </div>
     <div class="topoArea">
       <div class="topoAreaCont">
@@ -27,6 +27,7 @@
   import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
   import Phy from "@/components/2.topo/2.2.phy/Phy";
   import Traffic from "@/components/2.topo/2.3.traffic/Traffic";
+  import SolutionDetailsS2 from "@/components/4.buDesign/4.2.solutionDetails/SolutionDetailsS2";
 
   export default {
     components: {
@@ -35,7 +36,8 @@
       Traffic,
       MarvelTabItem,
       MarvelTab,
-      Phy
+      Phy,
+      SolutionDetailsS2
     },
     name: 'SolutionDetails',
     data: function () {
@@ -49,20 +51,30 @@
       }
     },
     mounted: function () {
-      this._activeTabBtn(true);
+      this._activeTabBtn(true, false, false, false);
     },
     methods: {
       onClickPhy: function () {
-        this._activeTabBtn(true);
+        this._activeTabBtn(true, false, false, false);
         this.moduleName = "Phy";
       },
+      onClickInsertDev: function(){
+        this._activeTabBtn(false, true, false, false);
+        this.moduleName = "SolutionDetailsS2";
+      },
       onClickTraffic: function () {
-        this._activeTabBtn(false);
+        this._activeTabBtn(false, false, true, false);
         this.moduleName = "Traffic";
       },
-      _activeTabBtn : function(bIsActivePhy){
+      onClickModifyTraffic: function () {
+        this._activeTabBtn(false, false, false, true);
+        this.moduleName = "SolutionDetailsS4";
+      },
+      _activeTabBtn : function(bIsActivePhy, bIsActiveInsertDev, bIsActiveTraffic, bIsActiveModifyTraffic){
         this.$refs.ref4Phy.setActive(bIsActivePhy);
-        this.$refs.ref4Traffic.setActive(!bIsActivePhy);
+        this.$refs.ref4InsertDev.setActive(bIsActiveInsertDev);
+        this.$refs.ref4Traffic.setActive(bIsActiveTraffic);
+        this.$refs.ref4ModifyTraffic.setActive(bIsActiveModifyTraffic);
       }
     }
   }

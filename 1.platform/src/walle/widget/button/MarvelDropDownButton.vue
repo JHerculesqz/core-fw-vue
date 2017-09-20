@@ -1,18 +1,22 @@
 <template>
-  <div class="dropdownBtn">
-    <div class="label" v-on:click="showOrHide">
-      <div class="icon"
-           v-bind:class="[selectItem.icon]"></div>
-      <div class="name">{{ selectItem.label }}</div>
-      <div class="expandAndFolderIcon icon-marvelIcon-24"></div>
-    </div>
-    <div class="options" v-bind:class="{ hide: !show }">
-      <div class="optionItem"
-           v-for="item in items"
-           v-bind:class="{ mouseDown: item.label == selectItem.label }"
-           v-on:click="selectClick(item)">
-        <div class="icon" v-bind:class="[item.icon]"></div>
-        <div class="name">{{ item.label }}</div>
+  <div class="dropdownBtnWrapper" v-bind:class="theme">
+    <div class="dropdownBtn"
+         v-bind:class="disable"
+         v-bind:style="{ width: width }">
+      <div class="label" v-on:click="showOrHide">
+        <div class="icon"
+             v-bind:class="[selectItem.icon]"></div>
+        <div class="name">{{ selectItem.label }}</div>
+        <div class="expandAndFolderIcon icon-marvelIcon-24"></div>
+      </div>
+      <div class="options" v-bind:class="{ hide: !show }">
+        <div class="optionItem"
+             v-for="item in items"
+             v-bind:class="{ mouseDown: item.label == selectItem.label }"
+             v-on:click="selectClick(item)">
+          <div class="icon" v-bind:class="[item.icon]"></div>
+          <div class="name">{{ item.label }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +25,7 @@
 <script>
   export default {
     name: 'MarvelDropDownButton',
+    props: ["disable", "theme", "width"],
     data: function() {
         return {
           items: [],
@@ -53,6 +58,10 @@
 </script>
 
 <style scoped>
+  .dropdownBtnWrapper{
+    width: 100%;
+    height:100%;
+  }
   .dropdownBtn{
     border: 1px solid #ccc;
     white-space: nowrap;
@@ -152,5 +161,68 @@
     border-top: none !important;
     height: 0;
     overflow: hidden;
+  }
+
+  .dark{}
+  .dark .dropdownBtn{
+    border: 1px solid #8b90b3;
+  }
+  .dark .dropdownBtn:hover{
+    border: 1px solid #3399ff;
+  }
+  .dark .dropdownBtn .label{}
+  .dark .dropdownBtn .label .icon{
+    color: #3399ff;
+  }
+  .dark .dropdownBtn .label .name{
+    color: #fff;
+  }
+  .dark .dropdownBtn .label .expandAndFolderIcon{
+    color: #8b90b3;
+  }
+
+  .dark .dropdownBtn .options{
+    border-top: 1px solid #8b90b3;
+  }
+  .dark .dropdownBtn .options .optionItem{
+    background-color: #1e1f36;
+  }
+
+  .dark .dropdownBtn .options .optionItem .icon{
+    color: #3399ff;
+  }
+  .dark .dropdownBtn .options .optionItem .name{
+    color: #ffffff;
+  }
+  .dark .dropdownBtn .options .optionItem:hover{
+    background-color: #66b3ff;
+  }
+  .dark .dropdownBtn .options .optionItem:hover .name{
+    color: #fff;
+  }
+  .dark .dropdownBtn .options .optionItem:hover .icon{
+    color: #fff;
+  }
+  .dark .dropdownBtn .options .mouseDown{
+    background-color: #3399ff !important;
+  }
+  .dark .dropdownBtn .options .mouseDown .name,.dropdownBtn .options .mouseDown .icon{
+    color:#fff !important;
+  }
+  .dark .disable{
+    pointer-events: none;
+  }
+  .dark .disable .label{
+    background-color: rgba(0,0,0,0.4);
+  }
+  .dark .disable .label .icon,.disable .label .expandAndFolderIcon{
+    color: rgba(255,255,255,0.4);
+  }
+  .dark .disable .label .name{
+    color: #8d8d8d;
+  }
+  .dark .disable .options{
+  }
+  .dark .hide{
   }
 </style>
