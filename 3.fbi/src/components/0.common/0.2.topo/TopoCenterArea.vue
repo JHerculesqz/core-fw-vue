@@ -35,7 +35,7 @@
         this.$refs.ref4Topo.selectNodesById(arrNodeId);
       },
       selectLinksById: function(arrLinkId){
-        this.$refs.ref4Topo.selectLinksById(arrNodeId);
+        this.$refs.ref4Topo.selectLinksById(arrLinkId);
       }
     }
   }

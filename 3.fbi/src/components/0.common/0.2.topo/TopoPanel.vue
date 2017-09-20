@@ -1,9 +1,9 @@
 <template>
-  <div style="width: 100%; height: 100%;">
-    <div style="width: 100%;height:30px">
+  <div class="topoPanelWrapper">
+    <div class="toolbarPanel">
       <topo-toolbar v-bind:items="items"></topo-toolbar>
     </div>
-    <div style="width:100%;height:calc(100% - 30px);position: relative;">
+    <div class="topoPanelContent">
       <topo-center-area ref="ref4TopoCenterArea"
                         v-bind:theme="theme"
                         v-bind:id="id4Topo"></topo-center-area>
@@ -48,7 +48,6 @@
         this.$refs.ref4TopoCenterArea.selectNodesById([strNeId]);
       },
       selectLink: function (strLinkId) {
-        alert("selectLink");
         this.$refs.ref4TopoCenterArea.unSelectAll();
         this.$refs.ref4TopoCenterArea.selectLinksById([strLinkId]);
       },
@@ -66,6 +65,20 @@
 
 </script>
 
-<style>
+<style scoped>
+  .topoPanelWrapper {
+    width: 100%;
+    height: 100%;
+  }
 
+  .toolbarPanel {
+    width: 100%;
+    height: 30px;
+  }
+
+  .topoPanelContent {
+    width: 100%;
+    height: calc(100% - 30px);
+    position: relative;
+  }
 </style>

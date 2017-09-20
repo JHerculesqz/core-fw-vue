@@ -4,7 +4,7 @@
     width="250"
     show="false"
     canDrag="false">
-    <div slot="content" style="color: #fff;height: 100%;">
+    <div class="topoRightAreaGrid" slot="content">
       <marvel-grid theme="dark"
                    :titles="titles4Props"
                    :rows="rows4Props"
@@ -46,6 +46,10 @@
 
 </script>
 
-<style>
+<style scoped>
+  .topoRightAreaGrid{
+    color: #fff;
+    height: 100%;
+  }
 
 </style>

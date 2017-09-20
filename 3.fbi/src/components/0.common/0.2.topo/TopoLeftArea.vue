@@ -4,7 +4,7 @@
     width="250"
     show="false"
     canDrag="false">
-    <div slot="content" style="color: #fff;height: 100%">
+    <div class="topoLeftAreaZtree" slot="content">
       <marvel-z-tree theme="dark">
         <marvel-z-tree-item :model="data4LeftArea" theme="dark"
                             v-on:onTreeNodeClick="onTreeNodeClick"></marvel-z-tree-item>
@@ -32,16 +32,19 @@
       }
     },
     methods: {
-      setData4LeftArea: function(oData4LeftArea){
+      setData4LeftArea: function (oData4LeftArea) {
         this.data4LeftArea = oData4LeftArea;
       },
-      onTreeNodeClick: function(oTreeNode){
+      onTreeNodeClick: function (oTreeNode) {
         this.$emit("onTreeNodeClick", oTreeNode);
       }
     }
   }
 </script>
 
-<style>
-
+<style scoped>
+  .topoLeftAreaZtree {
+    color: #fff;
+    height: 100%;
+  }
 </style>
