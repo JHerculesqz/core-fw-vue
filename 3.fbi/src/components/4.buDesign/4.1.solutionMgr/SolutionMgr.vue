@@ -24,7 +24,7 @@
         <marvel-accordion3 :items="items" title="割接方案列表"
                            v-on:onClickItem="onClickSolutionItem"></marvel-accordion3>
       </div>
-      <div class="downRightArea empty">
+      <div class="downRightArea" v-bind:class="{empty: !showSummaryPanel}">
         <solution-summary ref="ref4SolutionSummary"
                           v-bind:showSummaryPanel="showSummaryPanel"
                           v-on:onClickDel="onClickDelSolution"></solution-summary>

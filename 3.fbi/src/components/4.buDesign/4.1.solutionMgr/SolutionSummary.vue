@@ -17,7 +17,7 @@
         <div class="sessionName">描述: </div>
         <div class="sessionCont">{{solutionDescription}}</div>
       </div>
-      <div class="session mini-24">
+      <div class="session mini-24 autoArea">
         <div class="sessionName">方案范围:</div>
         <div class="gridArea">
           <marvel-grid :titles="titles4SelectNodes"
@@ -29,14 +29,26 @@
     </div>
     <div class="downArea">
       <div class="btnArea">
-        <marvel-primary-button classCustom="classCustom1" label="查看"
-                               v-on:onClick="onClickView"></marvel-primary-button>
-        <marvel-primary-button classCustom="classCustom1" label="提交"
-                               v-on:onClick="onClickSubmit"></marvel-primary-button>
-        <marvel-primary-button classCustom="classCustom1" label="撤销"
-                               v-on:onClick="onClickRevoke"></marvel-primary-button>
-        <marvel-primary-button classCustom="classCustom1" label="删除"
-                               v-on:onClick="onClickDel"></marvel-primary-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="查看"
+                                icon="icon-upload"
+                                theme="dark"
+                                v-on:onClick="onClickView"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="提交"
+                                icon="icon-upload"
+                                theme="dark"
+                                v-on:onClick="onClickSubmit"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="撤销"
+                                icon="icon-upload"
+                                theme="dark"
+                                v-on:onClick="onClickRevoke"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                label="删除"
+                                icon="icon-upload"
+                                theme="dark"
+                                v-on:onClick="onClickDel"></marvel-icon-txt-button>
       </div>
 
     </div>
@@ -48,9 +60,11 @@
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid.vue";
   import MarvelFrame from '@/walle/widget/frame/MarvelFrame';
+  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
 
   export default {
     components: {
+      MarvelIconTxtButton,
       MarvelGrid,
       MarvelPrimaryButton,
       MarvelFrame,
@@ -71,11 +85,8 @@
         //#endregion
         //#region selectNodes
         titles4SelectNodes: [{
-          label: "",
-          width: "5%"
-        }, {
           label: "网元名称",
-          width: "13%"
+          width: "100%"
         }],
         skip4SelectNodes: 0,
         limit4SelectNodes: 20,
@@ -110,7 +121,6 @@
         this.$emit("onClickDel", this.solutionName);
       }
     }
-
   }
 
 </script>
@@ -131,9 +141,10 @@
     overflow: hidden;
   }
   .sessionName{
-    height: 14px;
-    line-height: 14px;
-    font-size: 14px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: bold;
     width:100px;
     color: #bdc1dd;
     float: left;
@@ -142,14 +153,20 @@
     height: 14px;
     line-height: 14px;
     font-size: 14px;
+    width: calc(100% - 100px);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     float: left;
     color: #bdc1dd;
   }
+  .autoArea{
+    height:calc(100% - 160px);
+  }
   .gridArea{
     width: 100%;
-    height:240px;
-    padding-top: 24px;
+    height:100%;
+    padding-top: 30px;
     box-sizing: border-box;
   }
 

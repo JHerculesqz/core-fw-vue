@@ -1,6 +1,6 @@
 <template>
   <marvel-dialog theme="dark" :showDialog="showDialog"
-                 title="新建割接方案" width="850" height="500"
+                 title="新建割接方案" width="850" height="650"
                  v-on:onClickDialogClose="onClickDialogClose">
     <div slot="dialogCont" class="dialogContArea">
       <div class="session">
@@ -26,6 +26,14 @@
           </div>
         </div>
       </div>
+      <div  class="session2">
+        <div class="sessionName2">描述:</div>
+        <div class="describeArea">
+          <marvel-multi-input ref="ref4Description" placeHolder="请输入描述信息..."
+                              theme="dark" size="">
+          </marvel-multi-input>
+        </div>
+      </div>
       <div class="session2">
         <div class="sessionName2">方案范围:</div>
         <div class="neSelectArea">
@@ -47,35 +55,34 @@
           </div>
         </div>
       </div>
-      <div  class="session2">
-        <div class="sessionName2">描述:</div>
-        <div class="describeArea">
-          <marvel-multi-input ref="ref4Description" placeHolder="请输入描述信息..."
-                              theme="dark" size="">
-          </marvel-multi-input>
-        </div>
-      </div>
     </div>
     <div slot="dialogFoot">
-      <marvel-primary-button classCustom="classCustom1" label="确定"
-                             v-on:onClick="onClickOk"></marvel-primary-button>
-      <marvel-primary-button classCustom="classCustom1" label="取消"
-                             v-on:onClick="onClickCancel"></marvel-primary-button>
+      <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                              label="确定"
+                              icon="icon-upload"
+                              theme="dark"
+                              v-on:onClick="onClickOk"></marvel-icon-txt-button>
+      <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                              label="取消"
+                              icon="icon-cancel-circle"
+                              theme="dark"
+                              v-on:onClick="onClickCancel"></marvel-icon-txt-button>
     </div>
   </marvel-dialog>
 </template>
 
 <script>
-
   import MarvelDialog from "@/walle/widget/dialog/MarvelDialog.vue";
   import MarvelPrimaryButton from "@/walle/widget/button/MarvelPrimaryButton";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid.vue";
   import MarvelInput from "@/walle/widget/input/MarvelInput";
   import MarvelMultiInput from "@/walle/widget/input/MarvelMultiInput";
   import MarvelDropDownButton from "@/walle/widget/button/MarvelDropDownButton";
+  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
 
   export default {
     components: {
+      MarvelIconTxtButton,
       MarvelDropDownButton,
       MarvelMultiInput,
       MarvelInput,
@@ -99,10 +106,10 @@
         //#region Nodes
         titles4Nodes: [{
           label: "",
-          width: "5%"
+          width: "10%"
         }, {
           label: "网元名称",
-          width: "13%"
+          width: "90%"
         }],
         skip4Nodes: 0,
         limit4Nodes: 20,
@@ -111,10 +118,10 @@
         //#region selectNodes
         titles4SelectNodes: [{
           label: "",
-          width: "5%"
+          width: "10%"
         }, {
           label: "网元名称",
-          width: "13%"
+          width: "90%"
         }],
         skip4SelectNodes: 0,
         limit4SelectNodes: 20,
@@ -164,7 +171,11 @@
         this.solutionUserName = this.$refs.ref4UserName.getSelectItem();
         this.solutionType = this.$refs.ref4SolutionType.getSelectItem();
         this.solutionDescription = this.$refs.ref4Description.getInputMsg();
-        this.$emit("onClickOk", this.solutionName, this.solutionUserName, this.solutionType, this.solutionDescription, this.rows4SelectNodes);
+        var arrNodes = [];
+        this.rows4SelectNodes.forEach(function(oRow, index){
+          arrNodes.push(oRow[1]);
+        });
+        this.$emit("onClickOk", this.solutionName, this.solutionUserName, this.solutionType, this.solutionDescription, arrNodes);
       },
       onClickCancel: function () {
         this.$emit("onClickCancel");
@@ -187,26 +198,32 @@
 
         for (var i = 0; i < 100; i++) {
           var oRow = [];
-          for (var j = 0; j < 2; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
+          var oCell1 = {
+            value: "",
+            type: "text"
+          };
+          var oCell2 = {
+            value: "VLD_Optix3500-" + i,//Math.random() * 100
+            type: "text"
+          };
+          oRow.push(oCell1);
+          oRow.push(oCell2);
           this.rows4Nodes.push(oRow);
         }
       },
       onClickAddNode: function () {
         if (this.debug) {
           var oRow = [];
-          for (var j = 0; j < 2; j++) {
-            var oCell = {
-              value: "value" + Math.round(Math.random() * 100),
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
+          var oCell1 = {
+            value: "",
+            type: "text"
+          };
+          var oCell2 = {
+            value: "VLD_Optix3500-1",
+            type: "text"
+          };
+          oRow.push(oCell1);
+          oRow.push(oCell2);
           this.rows4SelectNodes.push(oRow);
         }
         else {
@@ -224,7 +241,6 @@
         }
       }
     }
-
   }
 
 </script>
@@ -240,10 +256,11 @@
 }
   .session{
     margin-bottom: 20px;
-    clear: both;
     height: 32px;
     font-size: 14px;
     overflow: visible;
+    width: 50%;
+    float: left;
   }
   .sessionCont{
     float: left;
@@ -271,6 +288,9 @@
     font-size: 14px;
     overflow: visible;
   }
+  .session2:last-child{
+    margin-bottom: 0;
+  }
   .sessionName{
     height:32px;
     line-height: 32px;
@@ -285,7 +305,7 @@
     margin-bottom: 10px;
   }
   .neSelectArea{
-    height:200px;
+    height:240px;
   }
   .neSelectLeft{
     float: left;
@@ -296,7 +316,7 @@
     float: left;
     width:10%;
     height: 100%;
-    padding: 30px 0;
+    padding: 50px 0;
     box-sizing: border-box;
   }
   .selectBtn{
@@ -320,6 +340,6 @@
     height: 100%;
   }
   .describeArea{
-    height:100px;
+    height:60px;
   }
 </style>

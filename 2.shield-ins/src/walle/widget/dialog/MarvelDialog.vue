@@ -1,7 +1,7 @@
 <template>
   <div class="tipDialogBg dark" v-show="showDialog">
     <div class="tipDialogWrapper"
-         v-bind:style="{ width: width + 'px', height: height + 'px'}">
+         v-bind:style="{ width: width + 'px', height: height + 'px', 'margin-top':-height/2 + 'px', 'margin-left':-width/2 + 'px'}">
       <div class="tipDialogTitleArea">
         <div class="titleName">{{ title }}</div>
         <div class="closeBtn icon-marvelIcon-20"
@@ -46,9 +46,8 @@
   }
   .tipDialogBg .tipDialogWrapper{
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 50%;
-    margin-left: -173px;
     border-radius: 2px;
     box-shadow: 0 0 30px 2px rgba(0,0,0,0.2);
     pointer-events: auto;
