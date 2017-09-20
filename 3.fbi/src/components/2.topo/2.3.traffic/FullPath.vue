@@ -2,7 +2,7 @@
   <div class="fullPathArea">
     <div class="staticArea">
       <div class="titleArea">
-        <div class="titleName">路径</div>
+        <div class="titleName">业务详情</div>
         <div class="btnArea">
           <marvel-icon-txt-button size="normal" classCustom="classCustom1"
                                   label="导出"
