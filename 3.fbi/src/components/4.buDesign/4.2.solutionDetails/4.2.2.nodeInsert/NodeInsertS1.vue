@@ -1,13 +1,10 @@
 <template>
-  <phy-topo ref="ref4MainTopo4Phy"
-            id4Topo="phyTopo"
-            :toolbarItems="toolbarItems"
+  <phy-topo ref="refNodeInsertS1"
+            :toolbarItems="toolbarItems" id4Topo="nodeInseertS1Topo"
             v-on:onTreeNodeClick="onTreeNodeClick"
             v-on:onToolbarItemClick="onToolbarItemClick"
             v-on:onClickRow4Ne="onClickRow4Ne"
-            v-on:onClickRow4Fiber="onClickRow4Fiber"
-            v-on:onGridRowIconClick4Fiber="onGridRowIconClick4Fiber"
-            v-on:onGridRowIconClick4Cross="onGridRowIconClick4Cross">
+            v-on:onClickRow4Fiber="onClickRow4Fiber">
   </phy-topo>
 </template>
 
@@ -18,7 +15,8 @@
     components: {
       PhyTopo,
     },
-    name: "Phy",
+    name: 'NodeInsertS1',
+    props: ["solutionName"],
     data: function () {
       return {
         //#region const
@@ -26,10 +24,6 @@
         //#endregion
         //#region toolbar
         toolbarItems: [{
-          id: 0,
-          label: '拓扑还原',
-          icon: 'icon-marvelIcon-30'
-        },{
           id: 1,
           label: '添加',
           icon: 'icon-marvelIcon-31'
@@ -41,10 +35,6 @@
           id: 3,
           label: '重置',
           icon: 'icon-marvelIcon-33'
-        }, {
-          id: 4,
-          label: '导出',
-          icon: 'icon-download'
         }, {
           id: 5,
           label: '布局',
@@ -70,20 +60,12 @@
           label: '全屏',
           icon: 'icon-marvelIcon-40'
         }, {
-          id: 11,
-          label: '显示流量',
-          icon: 'icon-marvelIcon-42'
-        }, {
           id: 12,
           label: '创建光纤',
           icon: 'icon-marvelIcon-44'
-        }, {
-          id: 13,
-          label: '返回上层',
-          icon: 'icon-marvelIcon-45'
         }],
         //#endregion
-      };
+      }
     },
     mounted: function () {
       //1._getData4Tree
@@ -139,17 +121,13 @@
               id: 'nodeBase1',
               name: 'nodeBase1',
               icon: "icon-address-book"
-            }, {
-              id: 'nodeBase2',
-              name: 'nodeBase2',
-              icon: "icon-address-book"
             }]
           };
         }
         else {
           //TODO:
         }
-        this.$refs.ref4MainTopo4Phy.setData4LeftArea(oData4LeftArea);
+        this.$refs.refNodeInsertS1.setData4LeftArea(oData4LeftArea);
       },
       _getData4Topo: function () {
         var self = this;
@@ -161,59 +139,9 @@
           };
           //#region node
 
-          //#region 光站点
-          var arrNodeGroup = [];
-          for (var i = 0; i < 2; i++) {
-            var iX = Math.random() * 400;
-            var iY = Math.random() * 200;
-            var oNodeGroup = {
-              id: "nodeGroup" + i,
-              x: iX,
-              y: iY,
-              uiImgKey: "nodeGroup",
-              uiImgKey4Expand: "nodeGroupExpand",
-              uiLabel: "nodeGroup" + i,
-              uiExpandNode: false,
-              uiExpandNodeWidth: 200,
-              uiExpandNodeHeight: 200,
-              uiNode: true,
-              children: [{
-                id: "node" + i + "_1",
-                x: 50,
-                y: 50,
-                uiImgKey: "node",
-                uiLabel: "node" + i + "_1",
-                uiNode: true
-              }, {
-                id: "node" + i + "_2",
-                x: 100,
-                y: 100,
-                uiImgKey: "node",
-                uiLabel: "node" + i + "_2",
-                uiNode: true
-              }]
-            };
-            arrNodeGroup.push(oNodeGroup);
-          }
-          oTopoData.nodeGroups = arrNodeGroup;
-          //#endregion
-
           //#region 网元
           var arrNode = [];
           for (var i = 0; i < 2; i++) {
-            var iX = Math.random() * 400;
-            var iY = Math.random() * 200;
-            var oNode = {
-              id: "node" + i,
-              x: iX,
-              y: iY,
-              uiImgKey: "node",
-              uiLabel: "node" + i,
-              uiNode: true
-            };
-            arrNode.push(oNode);
-          }
-          for (var i = 0; i < 3; i++) {
             var iX = Math.random() * 400;
             var iY = Math.random() * 200;
             var oNode = {
@@ -251,7 +179,7 @@
           //#endregion
 
           //#region 网元与网元之间的捆绑链路
-          for (var i = 0; i < 2; i++) {
+          for (var i = 0; i < 1; i++) {
             //oLink1和oLink2为一组
             var oLink1 = {
               id: "gLink" + i + "_" + i,
@@ -315,131 +243,10 @@
           }
           //#endregion
 
-          //#region 网元与光设备之间的捆绑链路
-          for (var i = 100; i < 101; i++) {
-            var oLink1 = {
-              id: "gLink" + i + 0,
-              srcNodeId: "nodeBase2",
-              dstNodeId: "node1_1",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i + 0,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 0,
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            var oLink2 = {
-              id: "gLink" + i + 1,
-              srcNodeId: "nodeBase2",
-              dstNodeId: "node1_1",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i + 1,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 0,
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            var oLink3 = {
-              id: "gLink" + i + 2,
-              srcNodeId: "nodeBase2",
-              dstNodeId: "node1_2",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i + 2,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 1,
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-            var oLink4 = {
-              id: "gLink" + i + 3,
-              srcNodeId: "nodeBase2",
-              dstNodeId: "node1_2",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i + 3,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 1,
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-            arrLink.push(oLink1);
-            arrLink.push(oLink2);
-            arrLink.push(oLink3);
-            arrLink.push(oLink4);
-          }
-          //#endregion
-
-          //#region 光设备与光设备之间的捆绑链路
-          for (var i = 200; i < 201; i++) {
-            var oLink1 = {
-              id: "gLink" + i + 0,
-              srcNodeId: "node0_1",
-              dstNodeId: "node1_1",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 0,
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            var oLink2 = {
-              id: "gLink" + i + 1,
-              srcNodeId: "node0_1",
-              dstNodeId: "node1_1",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 0,
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            var oLink3 = {
-              id: "gLink" + i + 2,
-              srcNodeId: "node0_2",
-              dstNodeId: "node1_2",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 1,
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-            var oLink4 = {
-              id: "gLink" + i + 3,
-              srcNodeId: "node0_2",
-              dstNodeId: "node1_2",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "gLink" + i,
-              uiLabelR: "nodeBase1",
-              uiLinkExpand: false,
-              uiLink: true,
-              uiLinkGroupId: "groupLink" + i + 1,
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-            arrLink.push(oLink1);
-            arrLink.push(oLink2);
-            arrLink.push(oLink3);
-            arrLink.push(oLink4);
-          }
-          //#endregion
           oTopoData.links = arrLink;
           //#endregion
-          self.$refs.ref4MainTopo4Phy.initTopo(function () {
-            self.$refs.ref4MainTopo4Phy.drawTopo(oTopoData);
+          self.$refs.refNodeInsertS1.initTopo(function () {
+            self.$refs.refNodeInsertS1.drawTopo(oTopoData);
           });
         }
         else {
@@ -552,8 +359,8 @@
         else {
           //TODO:
         }
-        this.$refs.ref4MainTopo4Phy.setData4RightArea(oData4RightArea);
-        this.$refs.ref4MainTopo4Phy.selectNe(strNeId);
+        this.$refs.refNodeInsertS1.setData4RightArea(oData4RightArea);
+        this.$refs.refNodeInsertS1.selectNe(strNeId);
       },
       _getLinkPropsByLinkId: function (strLinkId) {
         var oData4RightArea = [];
@@ -675,14 +482,14 @@
         else {
           //TODO:
         }
-        this.$refs.ref4MainTopo4Phy.setData4RightArea(oData4RightArea);
-        this.$refs.ref4MainTopo4Phy.selectLink(strLinkId);
+        this.$refs.refNodeInsertS1.setData4RightArea(oData4RightArea);
+        this.$refs.refNodeInsertS1.selectLink(strLinkId);
       },
       _getData4PhyGridPanelNe: function(){
         var oRows4Ne = [];
 
         if(this.debug){
-          for (var i = 0; i < 3; i++) {
+          for (var i = 0; i < 2; i++) {
             var oRow = [{
               value: i + 1,
               type: "text"
@@ -740,13 +547,13 @@
           //TODO:
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelNe(oRows4Ne);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelNe(oRows4Ne);
       },
       _getData4PhyGridPanelBoard: function () {
         var oRows4Board = [];
 
         if(this.debug){
-          for (var i = 0; i < 40; i++) {
+          for (var i = 0; i < 4; i++) {
             var oRow = [{
               value: i + 1,
               type: "text"
@@ -782,13 +589,13 @@
           //TODO:
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelBoard(oRows4Board);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelBoard(oRows4Board);
       },
       _getData4PhyGridPanelFiber: function () {
         var oRows4Fiber = [];
 
         if(this.debug){
-          for (var i = 0; i < 100; i++) {
+          for (var i = 0; i < 3; i++) {
             var oRow = [{
               value: i + 1,
               type: "text"
@@ -840,13 +647,13 @@
           //TODO
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelFiber(oRows4Fiber);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelFiber(oRows4Fiber);
       },
       _getData4PhyGridPanelCross: function () {
         var oRows4Cross = [];
 
         if(this.debug){
-          for (var i = 0; i < 40; i++) {
+          for (var i = 0; i < 10; i++) {
             var oRow = [{
               value: i + 1,
               type: "text"
@@ -902,13 +709,13 @@
           //TODO:
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelCross(oRows4Cross);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelCross(oRows4Cross);
       },
       _getData4PhyGridPanelSubnet: function () {
         var oRows4SubNet = [];
 
         if(this.debug){
-          for (var i = 0; i < 100; i++) {
+          for (var i = 0; i < 2; i++) {
             var oRow = [{
               value: i+1,
               type: "text"
@@ -930,13 +737,13 @@
           //TODO:
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelSubnet(oRows4SubNet);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelSubnet(oRows4SubNet);
       },
       _getData4PhyGridPanelSite: function () {
         var oRows4Site = [];
 
         if(this.debug){
-          for (var i = 0; i < 100; i++) {
+          for (var i = 0; i < 3; i++) {
             var oRow = [{
               value: i+1,
               type: "text"
@@ -975,7 +782,7 @@
           //TODO:
         }
 
-        this.$refs.ref4MainTopo4Phy.setData4PhyGridPanelSite(oRows4Site);
+        this.$refs.refNodeInsertS1.setData4PhyGridPanelSite(oRows4Site);
       },
       //#endregion
       //#region callback

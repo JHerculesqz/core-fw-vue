@@ -48,6 +48,7 @@
       this._activeTabBtn(true);
     },
     methods: {
+      //#region inner
       onClickPhy: function () {
         this._activeTabBtn(true);
         this.moduleName = "Phy";
@@ -60,6 +61,13 @@
         this.$refs.ref4Phy.setActive(bIsActivePhy);
         this.$refs.ref4Traffic.setActive(!bIsActivePhy);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

@@ -330,298 +330,43 @@
 
     },
     methods: {
-      init: function () {
-        if (this.debug) {
-          this._getParseResult4NeMock();
-          this._getParseResult4BoardMock();
-          this._getParseResult4FiberMock();
-          this._getParseResult4CrossMock();
-          this._getParseResult4SubNetMock();
-          this._getParseResult4SiteMock();
-        }
-        else {
-//          TODO
-        }
-      },
+      //#region inner
+
+      //#endregion
+      //#region callback
       onClickRow4Ne: function (oRow) {
         this.$emit("onClickRow4Ne", oRow);
       },
       onClickRow4Fiber: function (oRow) {
         this.$emit("onClickRow4Fiber", oRow);
       },
-      _getParseResult4NeMock: function () {
-        this.rows4Ne = [];
-
-        for (var i = 0; i < 3; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "nodeBase" + i,
-            type: "text"
-          }, {
-            value: "nodeBase" + i,
-            type: "text"
-          }, {
-            value: "SDH",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "OSN3500",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "Huawei",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "metro001",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "华为模式",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "未设计",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "2.344G",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "2",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "4.160G",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "1",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "-",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "-",//Math.random() * 100
-            type: "text"
-          }, {
-            value: "-",//Math.random() * 100
-            type: "text"
-          }];
-
-          this.rows4Ne.push(oRow);
-        }
-      },
-      _getParseResult4BoardMock: function () {
-        this.rows4Board = [];
-
-        for (var i = 0; i < 40; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "nodeBase" + Math.floor(i / 10),
-            type: "text"
-          }, {
-            value: "nodeBase" + Math.floor(i / 10),
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "N2PQ1",
-            type: "text"
-          }, {
-            value: "PDH单板",
-            type: "text"
-          }, {
-            value: "SDH",
-            type: "text"
-          }, {
-            value: "-",
-            type: "text"
-          }, {
-            value: "metro001",
-            type: "text"
-          }];
-          this.rows4Board.push(oRow);
-        }
-      },
-      _getParseResult4FiberMock: function () {
-        this.rows4Fiber = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "link" + i,
-            type: "text"
-          }, {
-            value: "STM1",
-            type: "text"
-          }, {
-            value: "单纤单向",
-            type: "text"
-          }, {
-            value: "nodeBase" + i,
-            type: "text"
-          }, {
-            value: "7-N1SLT1-" + i,
-            type: "text"
-          }, {
-            value: "nodeBase" + (i + 1),
-            type: "text"
-          }, {
-            value: "1-S2L-" + i,
-            type: "text"
-          }, {
-            value: "90%",
-            type: "text"
-          }, {
-            value: "系统导入",
-            type: "text"
-          }, {
-            value: "1",
-            type: "text"
-          }, {
-            value: "-",
-            type: "text"
-          }, {
-            value: [{
-              value: "icon-bin"
-            }, {
-              value: "icon-marvelIcon-30",
-            }],
-            type: "icon"
-          }];
-          this.rows4Fiber.push(oRow);
-        }
-      },
-      _getParseResult4CrossMock: function () {
-        this.rows4Cross = [];
-
-        for (var i = 0; i < 40; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "nodeBase" + Math.floor(i / 10),
-            type: "text"
-          }, {
-            value: "VC12",
-            type: "text"
-          }, {
-            value: "7-N1SLT1-" + i,
-            type: "text"
-          }, {
-            value: "1",
-            type: "text"
-          }, {
-            value: "2",
-            type: "text"
-          }, {
-            value: "7-N1SLT1-" + i + 1,
-            type: "text"
-          }, {
-            value: "1",
-            type: "text"
-          }, {
-            value: "2",
-            type: "text"
-          }, {
-            value: "工作",
-            type: "text"
-          }, {
-            value: "是",
-            type: "text"
-          }, {
-            value: "-",
-            type: "text"
-          }, {
-            value: "",
-            type: "text"
-          }, {
-            value: [{
-              value: "icon-bin"
-            }, {
-              value: "icon-marvelIcon-30",
-            }],
-            type: "icon"
-          }];
-
-          this.rows4Cross.push(oRow);
-        }
-      },
-      _getParseResult4SubNetMock: function () {
-        this.rows4SubNet = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [{
-            value: i+1,
-            type: "text"
-          },{
-            value: "复用段线性保护1:N_1",
-            type: "text"
-          },{
-            value: "复用段线性保护1:N",
-            type: "text"
-          },{
-            value: "STM16",
-            type: "text"
-          }];
-
-          this.rows4SubNet.push(oRow);
-        }
-      },
-      _getParseResult4SiteMock: function () {
-        this.rows4Site = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [{
-            value: i+1,
-            type: "text"
-          },{
-            value: "nodeGroup0",
-            type: "text"
-          },{
-            value: "100.0",
-            type: "text"
-          },{
-            value: "20.0",
-            type: "text"
-          },{
-            value: "nodeBase0,nodeBase1",
-            type: "text"
-          },{
-            value: "SDH",
-            type: "text"
-          },{
-            value: "未知",
-            type: "text"
-          },{
-            value: "-",
-            type: "text"
-          },{
-            value: [{
-              value: "icon-pencil"
-            }],
-            type: "icon"
-          }];
-
-          this.rows4Site.push(oRow);
-        }
-      },
       onGridRowIconClick4Fiber: function (oRow, oCell) {
-        if (this.debug) {
-          alert(oCell.value);
-        }
-        else {
-          //TODO:
-        }
+        this.$emit("onGridRowIconClick4Fiber", oRow, oCell);
       },
       onGridRowIconClick4Cross: function (oRow, oCell) {
-        if (this.debug) {
-          alert(oCell.value);
-        }
-        else {
-          //TODO:
-        }
-      }
+        this.$emit("onGridRowIconClick4Cross", oRow, oCell);
+      },
+      //#endregion
+      //#region 3rd
+      setData4PhyGridPanelNe: function(oData4PhyGridPanelNe){
+        this.rows4Ne = oData4PhyGridPanelNe;
+      },
+      setData4PhyGridPanelBoard: function(oData4PhyGridPanelBoard){
+        this.rows4Board = oData4PhyGridPanelBoard;
+      },
+      setData4PhyGridPanelFiber: function(oData4PhyGridPanelFiber){
+        this.rows4Fiber = oData4PhyGridPanelFiber;
+      },
+      setData4PhyGridPanelCross: function(oData4PhyGridPanelCross){
+        this.rows4Cross = oData4PhyGridPanelCross;
+      },
+      setData4PhyGridPanelSubnet: function(oData4PhyGridPanelSubnet){
+        this.rows4SubNet = oData4PhyGridPanelSubnet;
+      },
+      setData4PhyGridPanelSite: function(oData4PhyGridPanelSite){
+        this.rows4Site = oData4PhyGridPanelSite;
+      },
+      //#endregion
     }
   }
 </script>

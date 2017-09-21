@@ -130,19 +130,47 @@
       };
     },
     mounted: function () {
-      if (this.debug) {
-        var self = this;
-        this._getUserNamesMock(function (arrUserNames, strSelectLabel) {
-          self.$refs.ref4UserName.init(arrUserNames, strSelectLabel);
-        });
-        this._getNodesMock();
-      }
-      else {
+      var self = this;
 
-      }
+      this._getUserNames(function (arrUserNames, strSelectLabel) {
+        self.$refs.ref4UserName.init(arrUserNames, strSelectLabel);
+      });
+      this._getNodes();
       this._initSolutionType();
     },
     methods: {
+      //#region inner
+      //#region mounted
+      _getUserNames: function (oAfterCallBack) {
+        var arrUserNames = [];
+        arrUserNames.push({
+          label: "习主席",
+          icon: "icon-user"
+        });
+        arrUserNames.push({
+          label: "李克强总理",
+          icon: "icon-user"
+        });
+        oAfterCallBack(arrUserNames, arrUserNames[0].label);
+      },
+      _getNodes: function () {
+        this.rows4Nodes = [];
+
+        for (var i = 0; i < 100; i++) {
+          var oRow = [];
+          var oCell1 = {
+            value: "",
+            type: "text"
+          };
+          var oCell2 = {
+            value: "VLD_Optix3500-" + i,//Math.random() * 100
+            type: "text"
+          };
+          oRow.push(oCell1);
+          oRow.push(oCell2);
+          this.rows4Nodes.push(oRow);
+        }
+      },
       _initSolutionType: function () {
         var arrSolutionType = [];
         arrSolutionType.push({
@@ -163,54 +191,8 @@
         });
         this.$refs.ref4SolutionType.init(arrSolutionType, arrSolutionType[0].label);
       },
-      onClickDialogClose: function () {
-        this.$emit("onClickDialogClose");
-      },
-      onClickOk: function () {
-        this.solutionName = this.$refs.ref4SolutionName.getInputMsg();
-        this.solutionUserName = this.$refs.ref4UserName.getSelectItem();
-        this.solutionType = this.$refs.ref4SolutionType.getSelectItem();
-        this.solutionDescription = this.$refs.ref4Description.getInputMsg();
-        var arrNodes = [];
-        this.rows4SelectNodes.forEach(function(oRow, index){
-          arrNodes.push(oRow[1]);
-        });
-        this.$emit("onClickOk", this.solutionName, this.solutionUserName, this.solutionType, this.solutionDescription, arrNodes);
-      },
-      onClickCancel: function () {
-        this.$emit("onClickCancel");
-      },
-      _getUserNamesMock: function (oAfterCallBack) {
-        var arrUserNames = [];
-        arrUserNames.push({
-          label: "习主席",
-          icon: "icon-user"
-        });
-        arrUserNames.push({
-          label: "李克强总理",
-          icon: "icon-user"
-        });
-        oAfterCallBack(arrUserNames, arrUserNames[0].label);
-
-      },
-      _getNodesMock: function () {
-        this.rows4Nodes = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          var oCell1 = {
-            value: "",
-            type: "text"
-          };
-          var oCell2 = {
-            value: "VLD_Optix3500-" + i,//Math.random() * 100
-            type: "text"
-          };
-          oRow.push(oCell1);
-          oRow.push(oCell2);
-          this.rows4Nodes.push(oRow);
-        }
-      },
+      //#endregion
+      //#region dialog
       onClickAddNode: function () {
         if (this.debug) {
           var oRow = [];
@@ -227,7 +209,7 @@
           this.rows4SelectNodes.push(oRow);
         }
         else {
-
+          //TODO:
         }
       },
       onClickDelNode: function () {
@@ -237,12 +219,36 @@
           }
         }
         else {
-
+          //TODO:
         }
-      }
+      },
+      //#endregion
+      //#endregion
+      //#region callback
+      onClickOk: function () {
+        this.solutionName = this.$refs.ref4SolutionName.getInputMsg();
+        this.solutionUserName = this.$refs.ref4UserName.getSelectItem();
+        this.solutionType = this.$refs.ref4SolutionType.getSelectItem();
+        this.solutionDescription = this.$refs.ref4Description.getInputMsg();
+        var arrNodes = [];
+        this.rows4SelectNodes.forEach(function(oRow, index){
+          arrNodes.push(oRow[1]);
+        });
+        this.$emit("onClickOk", this.solutionName, this.solutionUserName, this.solutionType,
+          this.solutionDescription, arrNodes);
+      },
+      onClickDialogClose: function () {
+        this.$emit("onClickDialogClose");
+      },
+      onClickCancel: function () {
+        this.$emit("onClickCancel");
+      },
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
-
 </script>
 
 <style scoped>

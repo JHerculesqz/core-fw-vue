@@ -47,7 +47,7 @@
 
 <script>
   import MarvelFrame from "@/walle/widget/frame/MarvelFrame";
-  import PhyGridPanel from "@/components/0.common/0.1.resourcePanel/PhyGridPanel";
+  import PhyGridPanel from "@/components/0.common/0.1.phyGridPanel/PhyGridPanel";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelLoadingMini from "@/walle/widget/loading/MarvelLoadingMini";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
@@ -89,29 +89,323 @@
       }
     },
     mounted: function () {
-      var self = this;
+
     },
     destroyed: function () {
 
     },
     methods: {
+      //#region inner
+      //#region mounted
+      _getData4PhyGridPanelNe: function(){
+        var oRows4Ne = [];
+
+        if(this.debug){
+          for (var i = 0; i < 3; i++) {
+            var oRow = [{
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "nodeBase" + i,
+              type: "text"
+            }, {
+              value: "nodeBase" + i,
+              type: "text"
+            }, {
+              value: "SDH",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "OSN3500",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "Huawei",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "metro001",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "华为模式",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "未设计",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "2.344G",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "2",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "4.160G",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "1",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "-",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "-",//Math.random() * 100
+              type: "text"
+            }, {
+              value: "-",//Math.random() * 100
+              type: "text"
+            }];
+
+            oRows4Ne.push(oRow);
+          }
+        }
+        else{
+          //TODO:
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelNe(oRows4Ne);
+      },
+      _getData4PhyGridPanelBoard: function () {
+        var oRows4Board = [];
+
+        if(this.debug){
+          for (var i = 0; i < 40; i++) {
+            var oRow = [{
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "nodeBase" + Math.floor(i / 10),
+              type: "text"
+            }, {
+              value: "nodeBase" + Math.floor(i / 10),
+              type: "text"
+            }, {
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "N2PQ1",
+              type: "text"
+            }, {
+              value: "PDH单板",
+              type: "text"
+            }, {
+              value: "SDH",
+              type: "text"
+            }, {
+              value: "-",
+              type: "text"
+            }, {
+              value: "metro001",
+              type: "text"
+            }];
+            oRows4Board.push(oRow);
+          }
+        }
+        else{
+          //TODO:
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelBoard(oRows4Board);
+      },
+      _getData4PhyGridPanelFiber: function () {
+        var oRows4Fiber = [];
+
+        if(this.debug){
+          for (var i = 0; i < 100; i++) {
+            var oRow = [{
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "link" + i,
+              type: "text"
+            }, {
+              value: "STM1",
+              type: "text"
+            }, {
+              value: "单纤单向",
+              type: "text"
+            }, {
+              value: "nodeBase" + i,
+              type: "text"
+            }, {
+              value: "7-N1SLT1-" + i,
+              type: "text"
+            }, {
+              value: "nodeBase" + (i + 1),
+              type: "text"
+            }, {
+              value: "1-S2L-" + i,
+              type: "text"
+            }, {
+              value: "90%",
+              type: "text"
+            }, {
+              value: "系统导入",
+              type: "text"
+            }, {
+              value: "1",
+              type: "text"
+            }, {
+              value: "-",
+              type: "text"
+            }, {
+              value: [{
+                value: "icon-bin"
+              }, {
+                value: "icon-marvelIcon-30",
+              }],
+              type: "icon"
+            }];
+            oRows4Fiber.push(oRow);
+          }
+        }
+        else{
+          //TODO
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelFiber(oRows4Fiber);
+      },
+      _getData4PhyGridPanelCross: function () {
+        var oRows4Cross = [];
+
+        if(this.debug){
+          for (var i = 0; i < 40; i++) {
+            var oRow = [{
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "nodeBase" + Math.floor(i / 10),
+              type: "text"
+            }, {
+              value: "VC12",
+              type: "text"
+            }, {
+              value: "7-N1SLT1-" + i,
+              type: "text"
+            }, {
+              value: "1",
+              type: "text"
+            }, {
+              value: "2",
+              type: "text"
+            }, {
+              value: "7-N1SLT1-" + i + 1,
+              type: "text"
+            }, {
+              value: "1",
+              type: "text"
+            }, {
+              value: "2",
+              type: "text"
+            }, {
+              value: "工作",
+              type: "text"
+            }, {
+              value: "是",
+              type: "text"
+            }, {
+              value: "-",
+              type: "text"
+            }, {
+              value: "",
+              type: "text"
+            }, {
+              value: [{
+                value: "icon-bin"
+              }, {
+                value: "icon-marvelIcon-30",
+              }],
+              type: "icon"
+            }];
+
+            oRows4Cross.push(oRow);
+          }
+        }
+        else{
+          //TODO:
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelCross(oRows4Cross);
+      },
+      _getData4PhyGridPanelSubnet: function () {
+        var oRows4SubNet = [];
+
+        if(this.debug){
+          for (var i = 0; i < 100; i++) {
+            var oRow = [{
+              value: i+1,
+              type: "text"
+            },{
+              value: "复用段线性保护1:N_1",
+              type: "text"
+            },{
+              value: "复用段线性保护1:N",
+              type: "text"
+            },{
+              value: "STM16",
+              type: "text"
+            }];
+
+            oRows4SubNet.push(oRow);
+          }
+        }
+        else{
+          //TODO:
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelSubnet(oRows4SubNet);
+      },
+      _getData4PhyGridPanelSite: function () {
+        var oRows4Site = [];
+
+        if(this.debug){
+          for (var i = 0; i < 100; i++) {
+            var oRow = [{
+              value: i+1,
+              type: "text"
+            },{
+              value: "nodeGroup0",
+              type: "text"
+            },{
+              value: "100.0",
+              type: "text"
+            },{
+              value: "20.0",
+              type: "text"
+            },{
+              value: "nodeBase0,nodeBase1",
+              type: "text"
+            },{
+              value: "SDH",
+              type: "text"
+            },{
+              value: "未知",
+              type: "text"
+            },{
+              value: "-",
+              type: "text"
+            },{
+              value: [{
+                value: "icon-pencil"
+              }],
+              type: "icon"
+            }];
+
+            oRows4Site.push(oRow);
+          }
+        }
+        else{
+          //TODO:
+        }
+
+        this.$refs.ref4PhyGridPanel.setData4PhyGridPanelSite(oRows4Site);
+      },
+      //#endregion
+      //#region dialog
       onClick4ParseShow: function () {
         this.showDialog = true;
         this.$refs.refParseOK.setBtnDisable(false);
-        this._getFileLstMock(function () {
+        this._getFileLst(function () {
 
         });
       },
-      onClick4ParseOK: function () {
-        this._updateMem4DialogOK();
-      },
-      onClick4ParseCancel: function () {
-        this._updateMem4DialogClose();
-      },
-      onClickDialogClose: function () {
-        this._updateMem4DialogClose();
-      },
-      _getFileLstMock: function (oCallback) {
+      _getFileLst: function (oCallback) {
         this.rows4FileMgr = [];
 
         if (this.debug) {
@@ -132,50 +426,79 @@
 
             this.rows4FileMgr.push(oRow);
           }
-          oCallback();
         }
         else {
           //TODO:
         }
+
+        oCallback();
+      },
+      onClick4ParseOK: function () {
+        this._updateMem4DialogOK();
+      },
+      onClick4ParseCancel: function () {
+        this._updateMem4DialogClose();
+      },
+      onClickDialogClose: function () {
+        this._updateMem4DialogClose();
       },
       _updateMem4DialogOK: function () {
         var self = this;
 
-        this.showDialog = false;
-
         //TODO:1.获取文件列表选项
 
+        this.showDialog = false;
+
+        this._updateLoadingBar4ParseStart(function () {
+          //1.1._getData4PhyGridPanelNe
+          self._getData4PhyGridPanelNe();
+          //1.2._getData4PhyGridPanelBoard
+          self._getData4PhyGridPanelBoard();
+          //1.3._getData4PhyGridPanelFiber
+          self._getData4PhyGridPanelFiber();
+          //1.4._getData4PhyGridPanelCross
+          self._getData4PhyGridPanelCross();
+          //1.5._getData4PhyGridPanelSubnet
+          self._getData4PhyGridPanelSubnet();
+          //1.6._getData4PhyGridPanelSite
+          self._getData4PhyGridPanelSite();
+        });
+      },
+      _updateMem4DialogClose: function () {
+        this.showDialog = false;
+      },
+      _updateLoadingBar4ParseStart: function (oCallback) {
+        var self = this;
+
         if (this.debug) {
-          this._updateLoadingBar4ParseStartMock(function () {
-            self.$refs.ref4PhyGridPanel.init();
-          });
+          self.$refs.refMiniLoading.showEx("取消");
+          self.$refs.refIconTxtButton4Parse.setBtnDisable(true);
+          self.$refs.refMiniLoading.setProgress(10, "解析网元");
+          setTimeout(function () {
+            self.$refs.refMiniLoading.setProgress(30, "解析单板");
+            setTimeout(function () {
+              self.$refs.refMiniLoading.setProgress(60, "解析交叉");
+              setTimeout(function () {
+                self.$refs.refMiniLoading.setProgress(100, "解析完成");
+                self.$refs.refMiniLoading.hideEx();
+                self.$refs.refIconTxtButton4Parse.setBtnDisable(false);
+                oCallback();
+              }, 1000);
+            }, 1000);
+          }, 1000);
         }
         else {
           //TODO:
         }
       },
-      _updateMem4DialogClose: function () {
-        this.showDialog = false;
-      },
-      _updateLoadingBar4ParseStartMock: function (oCallback) {
-        var self = this;
+      //#endregion
+      //#endregion
+      //#region callback
 
-        self.$refs.refMiniLoading.showEx("取消");
-        self.$refs.refIconTxtButton4Parse.setBtnDisable(true);
-        self.$refs.refMiniLoading.setProgress(10, "解析网元");
-        setTimeout(function () {
-          self.$refs.refMiniLoading.setProgress(30, "解析单板");
-          setTimeout(function () {
-            self.$refs.refMiniLoading.setProgress(60, "解析交叉");
-            setTimeout(function () {
-              self.$refs.refMiniLoading.setProgress(100, "解析完成");
-              self.$refs.refMiniLoading.hideEx();
-              self.$refs.refIconTxtButton4Parse.setBtnDisable(false);
-              oCallback();
-            }, 1000);
-          }, 1000);
-        }, 1000);
-      },
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

@@ -38,12 +38,19 @@
       }
     },
     methods: {
+      //#region inner
+
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
       setData4RightArea: function(oData4RightArea){
         this.rows4Props = oData4RightArea;
       }
+      //#endregion
     }
   }
-
 </script>
 
 <style scoped>

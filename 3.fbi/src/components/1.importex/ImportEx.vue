@@ -50,9 +50,17 @@
       this.$refs.refWizard.setProgress(1);
     },
     methods: {
+      //#region inner
       onWizardClick: function (oWizardItem) {
         this.downModuleName = oWizardItem.id;
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

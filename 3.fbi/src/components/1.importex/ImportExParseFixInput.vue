@@ -24,15 +24,23 @@
       }
     },
     mounted: function(){
-      var self = this;
+
     },
     destroyed: function(){
 
     },
     methods: {
+      //#region inner
       onClick4Download:function(){
-          alert("downloadClick");
+        alert("downloadClick");
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

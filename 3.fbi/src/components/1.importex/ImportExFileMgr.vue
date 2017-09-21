@@ -131,114 +131,110 @@
       }
     },
     mounted: function () {
-      var self = this;
-
-      if (this.debug) {
-        self._getFileListMock();
-      }
-      else {
-        //TODO:
-      }
+      this._getFileList();
     },
     destroyed: function () {
 
     },
     methods: {
+      //#region inner
       //#region upload
       onClick4UploadShow: function () {
-        this._updateMem4UploadShow();
+        this.showDialog = true;
+        this.file = undefined;
+        this.inputMsg4Remark = "";
       },
       onClick4UploadOK: function () {
         var self = this;
-        this.showOverride = false;
-        if (this.debug) {
-          //1._updateMem4UploadStart
-          self._updateMem4UploadStart();
 
-          //2.更新进度条
-          self._updateLoadingBar4UploadStartMock(function () {
-            //3.更新文件列表
-            self._getFileListMock();
-          });
+        //1._updateMem4UploadStart
+        this._updateMem4UploadStart();
+        //2.更新进度条
+        this._updateLoadingBar4UploadStart(function () {
+          //3.更新文件列表
+          self._getFileList();
+        });
+      },
+      _updateMem4UploadStart: function () {
+        this.showOverride = false;
+        this.showDialog = false;
+        this.file = this.$refs.ref4Upload.getFile();
+        this.inputMsg4Remark = this.$refs.ref4Remark.getInputMsg();
+      },
+      _updateLoadingBar4UploadStart: function (oCallback) {
+        var self = this;
+
+        if(this.debug){
+          self.$refs.refMiniLoading.showEx("取消");
+          self.$refs.refMiniLoading.setProgress(10, "上传ing");
+          setTimeout(function () {
+            self.$refs.refMiniLoading.setProgress(30, "上传ing");
+            setTimeout(function () {
+              self.$refs.refMiniLoading.setProgress(60, "上传ing");
+              setTimeout(function () {
+                self.$refs.refMiniLoading.setProgress(100, "完成");
+                self.$refs.refMiniLoading.hideEx();
+                oCallback();
+              }, 1000);
+            }, 1000);
+          }, 1000);
         }
-        else {
+        else{
+          //TODO:
+        }
+      },
+      _getFileList: function () {
+        this.rows4FileMgr = [];
+
+        if(this.debug){
+          for (var i = 1; i < 10; i++) {
+            var oRowDefault = [{
+              value: i,
+              type: "text"
+            }, {
+              value: "ALU" + i + ".zip",
+              type: "text"
+            }, {
+              value: "ZIP",
+              type: "text"
+            }, {
+              value: "s00290253",
+              type: "text"
+            }, {
+              value: "2017-08-31 09:53:42",
+              type: "text"
+            }, {
+              value: "已解析",
+              type: "text"
+            }, {
+              value: "2017-08-31 09:57:42",
+              type: "text"
+            }, {
+              value: " ",
+              type: "text"
+            }, {
+              value: [{
+                value: "icon-bin"
+              }, {
+                value: "icon-download"
+              }],
+              type: "icon"
+            }];
+            this.rows4FileMgr.push(oRowDefault);
+          }
+        }
+        else{
           //TODO:
         }
       },
       onClick4UploadCancel: function () {
-        this.showOverride = false;
         this._updateMem4UploadCancel();
       },
       onClickDialogClose: function () {
         this._updateMem4UploadCancel();
       },
-      _getFileListMock: function () {
-        this.rows4FileMgr = [];
-
-        for (var i = 1; i < 10; i++) {
-          var oRowDefault = [{
-            value: i,
-            type: "text"
-          }, {
-            value: "ALU" + i + ".zip",
-            type: "text"
-          }, {
-            value: "ZIP",
-            type: "text"
-          }, {
-            value: "s00290253",
-            type: "text"
-          }, {
-            value: "2017-08-31 09:53:42",
-            type: "text"
-          }, {
-            value: "已解析",
-            type: "text"
-          }, {
-            value: "2017-08-31 09:57:42",
-            type: "text"
-          }, {
-            value: " ",
-            type: "text"
-          }, {
-            value: [{
-              value: "icon-bin"
-            }, {
-              value: "icon-download"
-            }],
-            type: "icon"
-          }];
-          this.rows4FileMgr.push(oRowDefault);
-        }
-      },
-      _updateMem4UploadShow: function () {
-        this.showDialog = true;
-        this.file = undefined;
-        this.inputMsg4Remark = "";
-      },
-      _updateMem4UploadStart: function () {
-        this.showDialog = false;
-        this.file = this.$refs.ref4Upload.getFile();
-        this.inputMsg4Remark = this.$refs.ref4Remark.getInputMsg();
-      },
-      _updateLoadingBar4UploadStartMock: function (oCallback) {
-        var self = this;
-
-        self.$refs.refMiniLoading.showEx("取消");
-        self.$refs.refMiniLoading.setProgress(10, "上传ing");
-        setTimeout(function () {
-          self.$refs.refMiniLoading.setProgress(30, "上传ing");
-          setTimeout(function () {
-            self.$refs.refMiniLoading.setProgress(60, "上传ing");
-            setTimeout(function () {
-              self.$refs.refMiniLoading.setProgress(100, "完成");
-              self.$refs.refMiniLoading.hideEx();
-              oCallback();
-            }, 1000);
-          }, 1000);
-        }, 1000);
-      },
       _updateMem4UploadCancel: function () {
+        this.showOverride = false;
         this.showDialog = false;
         this.file = undefined;
         this.inputMsg4Remark = "";
@@ -274,6 +270,13 @@
           //TODO:
         }
       }
+      //#endregion
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

@@ -22,6 +22,13 @@
 
     },
     methods: {
+      //#region inner
+
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
       init: function (oAfterCallBack) {
         this.$refs.ref4Topo.init(oAfterCallBack);
       },
@@ -37,6 +44,7 @@
       selectLinksById: function(arrLinkId){
         this.$refs.ref4Topo.selectLinksById(arrLinkId);
       }
+      //#endregion
     }
   }
 

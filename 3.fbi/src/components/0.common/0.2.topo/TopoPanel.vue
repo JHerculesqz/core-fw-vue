@@ -1,15 +1,18 @@
 <template>
   <div class="topoPanelWrapper">
     <div class="toolbarPanel">
-      <topo-toolbar v-bind:items="items"></topo-toolbar>
+      <topo-toolbar v-bind:toolbarItems="toolbarItems"
+                    v-on:onToolbarItemClick="onToolbarItemClick"></topo-toolbar>
     </div>
     <div class="topoPanelContent">
       <topo-center-area ref="ref4TopoCenterArea"
                         v-bind:theme="theme"
                         v-bind:id="id4Topo"></topo-center-area>
       <topo-left-area ref="ref4LeftArea"
+                      v-if="showLeftAreaEx"
                       v-on:onTreeNodeClick="onTreeNodeClick"></topo-left-area>
-      <topo-right-area ref="ref4RightArea"></topo-right-area>
+      <topo-right-area ref="ref4RightArea"
+                       v-if="showRightAreaEx"></topo-right-area>
     </div>
   </div>
 </template>
@@ -28,20 +31,28 @@
       TopoToolbar
     },
     name: "TopoPanel",
-    props: ["theme", "items", "id4Topo"],
+    props: ["theme", "toolbarItems", "id4Topo", "showLeftArea", "showRightArea"],
     data: function () {
       return {}
     },
     methods: {
+      //#region inner
+
+      //#endregion
+      //#region callback
+      onTreeNodeClick: function (oTreeNode) {
+        this.$emit("onTreeNodeClick", oTreeNode);
+      },
+      onToolbarItemClick: function(oToolbarItem){
+        this.$emit("onToolbarItemClick", oToolbarItem);
+      },
+      //#endregion
+      //#region 3rd
       setData4LeftArea: function (oData4LeftArea) {
         this.$refs.ref4LeftArea.setData4LeftArea(oData4LeftArea);
       },
       setData4RightArea: function (oData4RightArea) {
         this.$refs.ref4RightArea.setData4RightArea(oData4RightArea);
-      },
-      onTreeNodeClick: function (oTreeNode) {
-        this.selectNe(oTreeNode.id);
-        this.$emit("onTreeNodeClick", oTreeNode);
       },
       selectNe: function (strNeId) {
         this.$refs.ref4TopoCenterArea.unSelectAll();
@@ -51,18 +62,36 @@
         this.$refs.ref4TopoCenterArea.unSelectAll();
         this.$refs.ref4TopoCenterArea.selectLinksById([strLinkId]);
       },
-      updateTopo: function (oTopo) {
-        alert("updateTopo");
-      },
       initTopo: function (oAfterCallBack) {
         this.$refs.ref4TopoCenterArea.init(oAfterCallBack);
       },
       drawTopo: function (oTopoData) {
         this.$refs.ref4TopoCenterArea.draw(oTopoData);
-      }
+      },
+      updateTopo: function (oTopo) {
+        alert("updateTopo");
+      },
+      //#endregion
+    },
+    computed: {
+      showLeftAreaEx: function(){
+          if(this.showLeftArea === false){
+              return false;
+          }
+          else{
+              return true;
+          }
+      },
+      showRightAreaEx: function(){
+        if(this.showRightArea === false){
+          return false;
+        }
+        else{
+          return true;
+        }
+      },
     }
   }
-
 </script>
 
 <style scoped>

@@ -32,12 +32,19 @@
       }
     },
     methods: {
+      //#region inner
+
+      //#endregion
+      //#region callback
+      onTreeNodeClick: function (oTreeNode) {
+        this.$emit("onTreeNodeClick", oTreeNode);
+      },
+      //#endregion
+      //#region 3rd
       setData4LeftArea: function (oData4LeftArea) {
         this.data4LeftArea = oData4LeftArea;
       },
-      onTreeNodeClick: function (oTreeNode) {
-        this.$emit("onTreeNodeClick", oTreeNode);
-      }
+      //#endregion
     }
   }
 </script>

@@ -64,30 +64,84 @@
       }
     },
     mounted: function () {
-      if (this.debug) {
-        var self = this;
-        this._getSolutionsMock(function () {
-          if (self.items.length) {
-            var arrItems = self.items.filter(function (oItem, index) {
-              return oItem.active == true;
-            });
-            self.showSummaryPanel = true;
-            self.$refs.ref4SolutionSummary.setData(arrItems[0]);
-          }
-        });
-      }
-      else {
+      var self = this;
 
-      }
+      this._getSolutions(function () {
+        if (self.items.length) {
+          var arrItems = self.items.filter(function (oItem, index) {
+            return oItem.active == true;
+          });
+          self.showSummaryPanel = true;
+          self.$refs.ref4SolutionSummary.setData(arrItems[0]);
+        }
+      });
     },
     methods: {
+      //#region inner
+      _getSolutions: function (oAfterCallBack) {
+        this.items = [];
+
+        if (this.debug) {
+          var lstNe = [];
+          for(var i=0;i<8;i++){
+            var oRow = [];
+            oRow.push({
+              value: "VLD_Optix3500-" + i,
+              type: "text"
+            });
+            lstNe.push(oRow);
+          }
+          this.items.push({
+            active: true,
+            label: "墨西哥CT环1-环插",
+            solutionName: '墨西哥CT环1-环插',
+            solutionUserName: '近平',
+            solutionType: '节点式环插',
+            solutionDescription: '墨西哥CT环1-搬迁环1时需要的华为设备，完成插入设备动作',
+            rows4SelectNodes: lstNe
+          });
+          this.items.push({
+            active: false,
+            label: "墨西哥CT环1-业务割接",
+            solutionName: '墨西哥CT环1-业务割接',
+            solutionUserName: '克强',
+            solutionType: '节点式环插',
+            solutionDescription: '墨西哥CT环1-完成搬迁环1时需要搬迁环1涉及的业务',
+            rows4SelectNodes: lstNe
+          });
+          this.items.push({
+            active: false,
+            label: "墨西哥CT链3-环插",
+            solutionName: '墨西哥CT链3-环插',
+            solutionUserName: '克强',
+            solutionType: '节点式环插',
+            solutionDescription: '墨西哥CT链3-搬迁链3时需要的华为设备，完成插入设备动作',
+            rows4SelectNodes: lstNe
+          });
+          this.items.push({
+            active: false,
+            label: "墨西哥CT链3-业务割接",
+            solutionName: '墨西哥CT链3-业务割接',
+            solutionUserName: '近平',
+            solutionType: '节点式环插',
+            solutionDescription: '墨西哥CT链3-完成搬迁链3时需要搬迁环1涉及的业务',
+            rows4SelectNodes: lstNe
+          });
+        }
+        else{
+          //TODO:
+        }
+
+        oAfterCallBack();
+      },
       onClickCreateSolution: function () {
         this.showDialog = true;
       },
       onClickCreateSolutionClose: function () {
         this.showDialog = false;
       },
-      onClickCreateSolutionOK: function (solutionName, solutionUserName, solutionType, solutionDescription, rows4SelectNodes) {
+      onClickCreateSolutionOK: function (solutionName, solutionUserName, solutionType,
+                                         solutionDescription, rows4SelectNodes) {
         this.items.forEach(function (oItem, index) {
           oItem.active = false;
         });
@@ -107,56 +161,6 @@
       },
       onClickCreateSolutionCancel: function () {
         this.showDialog = false;
-      },
-      _getSolutionsMock: function (oAfterCallBack) {
-        this.items = [];
-
-        var lstNe = [];
-        for(var i=0;i<8;i++){
-            var oRow = [];
-            oRow.push({
-              value: "VLD_Optix3500-" + i,
-              type: "text"
-            });
-          lstNe.push(oRow);
-        }
-        this.items.push({
-          active: true,
-          label: "墨西哥CT环1-环插",
-          solutionName: '墨西哥CT环1-环插',
-          solutionUserName: '近平',
-          solutionType: '节点式环插',
-          solutionDescription: '墨西哥CT环1-搬迁环1时需要的华为设备，完成插入设备动作',
-          rows4SelectNodes: lstNe
-        });
-        this.items.push({
-          active: false,
-          label: "墨西哥CT环1-业务割接",
-          solutionName: '墨西哥CT环1-业务割接',
-          solutionUserName: '克强',
-          solutionType: '节点式环插',
-          solutionDescription: '墨西哥CT环1-完成搬迁环1时需要搬迁环1涉及的业务',
-          rows4SelectNodes: lstNe
-        });
-        this.items.push({
-          active: false,
-          label: "墨西哥CT链3-环插",
-          solutionName: '墨西哥CT链3-环插',
-          solutionUserName: '克强',
-          solutionType: '节点式环插',
-          solutionDescription: '墨西哥CT链3-搬迁链3时需要的华为设备，完成插入设备动作',
-          rows4SelectNodes: lstNe
-        });
-        this.items.push({
-          active: false,
-          label: "墨西哥CT链3-业务割接",
-          solutionName: '墨西哥CT链3-业务割接',
-          solutionUserName: '近平',
-          solutionType: '节点式环插',
-          solutionDescription: '墨西哥CT链3-完成搬迁链3时需要搬迁环1涉及的业务',
-          rows4SelectNodes: lstNe
-        });
-        oAfterCallBack();
       },
       onClickSolutionItem: function (oItem) {
         this.$refs.ref4SolutionSummary.setData(oItem);
@@ -179,7 +183,14 @@
           this.items[0].active = true;
           this.$refs.ref4SolutionSummary.setData(this.items[0]);
         }
-      }
+      },
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

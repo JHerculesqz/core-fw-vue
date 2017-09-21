@@ -98,6 +98,21 @@
 
     },
     methods: {
+      //#region inner
+      onClickView: function(){
+        MarvelRouter.to(this.$router, "SolutionDetails", {name: this.solutionName});
+      },
+      onClickSubmit: function(){
+        alert("onClickSubmit");
+      },
+      onClickRevoke: function(){
+        alert("onClickSubmit");
+      },
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
       setData: function(oSummary){
         this.solutionName = oSummary.solutionName;
         this.solutionUserName = oSummary.solutionUserName;
@@ -106,20 +121,10 @@
         this.rows4SelectNodes = [];
         this.rows4SelectNodes = this.rows4SelectNodes.concat(oSummary.rows4SelectNodes);
       },
-      onClickView: function(){
-        //TODO:应该还需要传递solutionName
-        MarvelRouter.to(this.$router, "SolutionDetails");
-      },
-      onClickSubmit: function(){
-        alert("onClickSubmit");
-      },
-      onClickRevoke: function(){
-        alert("onClickSubmit");
-      },
       onClickDel: function(){
-        alert("onClickDel");
         this.$emit("onClickDel", this.solutionName);
-      }
+      },
+      //#endregion
     }
   }
 

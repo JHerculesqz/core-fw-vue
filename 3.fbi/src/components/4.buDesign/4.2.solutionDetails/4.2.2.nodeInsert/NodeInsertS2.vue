@@ -1,8 +1,8 @@
 <template>
   <div class="phyWrapper">
     <topo-panel ref="ref4MainTopo4S2"
-                showLeftArea="false"
-                showRightArea="false"
+                :showLeftArea="false"
+                :showRightArea="false"
                 v-bind:items="items"
                 id4Topo="MainTopo4S2"
                 theme="dark"></topo-panel>
@@ -27,7 +27,8 @@
       TopoPanel
 
     },
-    name: 'SolutionDetailsS2',
+    name: 'NodeInsertS2',
+    props: ["solutionName"],
     data: function () {
       return {
         //#region const
@@ -50,6 +51,7 @@
       this._getPhyTopo();
     },
     methods: {
+      //#region inner
       _getPhyTopo: function () {
         var self = this;
         if (this.debug) {
@@ -113,6 +115,13 @@
 
         oAfterCallBack(oTopoData);
       },
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

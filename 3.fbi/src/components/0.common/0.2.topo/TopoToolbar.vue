@@ -1,6 +1,6 @@
 <template>
   <marvel-toolbar
-    v-bind:items="items" theme="dark"
+    v-bind:items="toolbarItems" theme="dark"
     v-on:onToolbarItemClick="onToolbarItemClick"></marvel-toolbar>
 </template>
 
@@ -12,7 +12,7 @@
       MarvelToolbar
     },
     name: "TopoToolbar",
-    props: ["items"],
+    props: ["toolbarItems"],
     data: function () {
       return {
         //#region const
@@ -21,12 +21,19 @@
       }
     },
     methods: {
+      //#region inner
+
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
       onToolbarItemClick: function (oItem) {
-        alert(oItem);
+        this.$emit("onToolbarItemClick", oItem);
       }
+      //#endregion
     }
   }
-
 </script>
 
 <style>

@@ -8,7 +8,7 @@
     components: {
 
     },
-    name: 'SolutionDetailsS3',
+    name: 'NodeInsertS3',
     data: function () {
       return {
         //#region const
@@ -20,7 +20,15 @@
 
     },
     methods: {
+      //#region inner
 
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>
