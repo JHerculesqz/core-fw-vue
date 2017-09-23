@@ -725,14 +725,41 @@
         this.rows4DiscreteCross = [];
         if (this.debug) {
           for (var i = 0; i < 100; i++) {
-            var oRow = [];
-            for (var j = 0; j < 11; j++) {
-              var oCell = {
-                value: "value" + i,//Math.random() * 100
-                type: "text"
-              };
-              oRow.push(oCell);
-            }
+            var oRow = [{
+              value: i + 1,
+              type: "text"
+            }, {
+              value: "nodeBase" + i,
+              type: "text"
+            }, {
+              value: "VC12",
+              type: "text"
+            }, {
+              value: "15-SLNO-1",
+              type: "text"
+            }, {
+              value: "1",
+              type: "text"
+            }, {
+              value: "2",
+              type: "text"
+            }, {
+              value: "10-SLNO-1",
+              type: "text"
+            }, {
+              value: "1",
+              type: "text"
+            }, {
+              value: "2",
+              type: "text"
+            }, {
+              value: "工作",
+              type: "text"
+            }, {
+              value: "-",
+              type: "text"
+            }];
+
             this.rows4DiscreteCross.push(oRow);
           }
         }
