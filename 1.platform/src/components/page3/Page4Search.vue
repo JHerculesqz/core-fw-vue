@@ -1,20 +1,23 @@
 <template>
   <div class="widgetShowSession">
     <!--1级 start-->
-    <div class="title level1">Wizard</div>
+    <div class="title level1">搜索</div>
     <div class="describe">
-      Wizard控件是一个向导控件，用于描述一个流程，能够清晰看到流程进行到哪一个步。
+      搜索控件
     </div>
     <!--1级 end-->
     <!--2级 start-->
+    <div class="title level2">关键字搜索</div>
+    <div class="describe">
+      关键字搜索
+    </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems1">
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div>
-              <button v-on:click="setProgress">setProgress</button>
-              <marvel-wizard ref="ref0" :items="items"></marvel-wizard>
+            <div class="panel">
+              <MarvelSearch placeholder="请输入关键字..." v-on:search="search1"></MarvelSearch>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -24,7 +27,7 @@
             <!--2级CodeView start-->
               <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-wizard ref="ref0" :items="items"&gt;&lt;/marvel-wizard&gt;
+                  &lt;MarvelSearch placeholder="请输入关键字..." v-on:search="search1"&gt;&lt;/MarvelSearch&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -33,16 +36,19 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
-
     <!--2级 start-->
+    <div class="title level2">分类搜索</div>
+    <div class="describe">
+      分类搜索
+    </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems2">
         <marvel-tab-item :isActive="tabItems2[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="background-color: #000000">
-              <marvel-wizard-tab theme="dark"
-                                 :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
+            <div class="panel">
+              <MarvelSearchWithDropDown placeholder="请输入关键字..." @search="search2"
+                                        :selectItems="selectItems"></MarvelSearchWithDropDown>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -52,8 +58,8 @@
             <!--2级CodeView start-->
               <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-wizard-tab theme="dark"
-                                     :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"&gt;&lt;/marvel-wizard-tab&gt;
+                  &lt;MarvelSearchWithDropDown placeholder="请输入关键字..." @search="search2"
+                                            :selectItems="selectItems"&gt;&lt;/MarvelSearchWithDropDown&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -66,19 +72,19 @@
 </template>
 
 <script>
-  import MarvelWizard from "@/walle/widget/wizard/MarvelWizard";
-  import MarvelWizardTab from "@/walle/widget/wizard/MarvelWizardTab";
+  import MarvelSearch from '@/walle/widget/search/MarvelSearch';
+  import MarvelSearchWithDropDown from '@/walle/widget/search/MarvelSearchWithDropDown';
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
 
   export default {
-    name: 'page4Wizard',
     components: {
-      MarvelWizard,
-      MarvelWizardTab,
+      MarvelSearch,
+      MarvelSearchWithDropDown,
       MarvelTab,
       MarvelTabItem
     },
+    name:"Page4Search",
     data: function () {
       return {
         //#region document data
@@ -103,50 +109,36 @@
           }
         ],
         //#endregion
-        //#region custom data
-        //#region wizard
-        items: [{
-          label: "Basic Information",
-          index: 1
-        }, {
-          label: "Condition",
-          index: 2
-        }, {
-          label: "Action",
-          index: 3
-        }],
-        //#endregion
-        //#region wizardTab
-        wizardTabs: [{
-          index: 1,
-          label: "拓扑还原",
-          isActive: true
-        }, {
-          index: 2,
-          label: "业务还原",
-          isActive: false
-        }]
-        //#endregion
+        //#region Custom data
+        selectItems: [
+          {
+            label: "ip"
+          },
+          {
+            label: "网元名称",
+            selected: true
+          },
+          {
+            label: "组名"
+          }
+        ]
         //#endregion
       }
     },
     methods: {
-      //#region wizard
-      setProgress: function () {
-        this.$refs.ref0.setProgress(1);
-        this.$refs.ref0.setProgress(2);
+      search1: function (strSearchValue) {
+        console.log(strSearchValue);
       },
-      //#endregion
-      //#region wizardTab
-      onClickWizardTab: function (iIndex) {
-        alert(iIndex);
+      search2: function (strSearchKey, strSearchValue) {
+        console.log(strSearchKey);
+        console.log(strSearchValue);
       }
-      //#endregion
     }
-  }
+  };
 </script>
 
 <style scoped>
+  /*document fix style start*/
 
   .widgetShowSession {
     padding: 20px 100px;
@@ -163,15 +155,16 @@
     line-height: 54px;
   }
 
+  .level2 {
+    margin-top: 40px;
+    font-size: 22px;
+    line-height: 48px;
+  }
+
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
-  }
-
-  .showArea {
-    width: 100%;
-    height: 400px;
   }
 
   .codeArea {
@@ -208,5 +201,19 @@
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+  /*document fix style end*/
+  /*document custom style start*/
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
+  /*document custom style end*/
+  /*custom style start*/
+  .panel {
+    padding: 10px;
+    width: 400px;
+    height: 50px;
+  }
+  /*custom style end*/
 
 </style>

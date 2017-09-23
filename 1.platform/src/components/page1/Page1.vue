@@ -62,6 +62,10 @@
   import Page4ExtPanel from '@/components/page3/Page4ExtPanel'
   import Page4ZTree from '@/components/page3/Page4ZTree'
   import Page4Topo from '@/components/page3/Page4Topo'
+  import Page4Search from '@/components/page3/Page4Search'
+  import Page4TimeLine from '@/components/page3/Page4TimeLine'
+  import Page4Prompt from '@/components/page3/Page4Prompt'
+  import Page4MenuDropDown from '@/components/page3/Page4MenuDropDown'
 
   export default {
     components: {
@@ -101,7 +105,11 @@
       Page4Toolbar,
       Page4ExtPanel,
       Page4ZTree,
-      Page4Topo
+      Page4Topo,
+      Page4Search,
+      Page4TimeLine,
+      Page4Prompt,
+      Page4MenuDropDown
     },
     name: 'page1',
     data: function () {
@@ -176,6 +184,9 @@
             id: "Page4MenuContext",
             label: "导航(右键菜单)"
           }, {
+            id: "Page4MenuDropDown",
+            label: "导航(顶部附属菜单)"
+          }, {
             id: "Page4Accordion",
             label: "导航(手风琴)"
           }, {
@@ -203,7 +214,7 @@
             id: "Page4Upload",
             label: "控件(文件上传)"
           }, {
-            id: "",
+            id: "Page4Search",
             label: "控件(搜索框)"
           }, {
             id: "Page4Warning",
@@ -212,7 +223,7 @@
             id: "",
             label: "控件(时间选择器)"
           }, {
-            id: "",
+            id: "Page4TimeLine",
             label: "控件(时间线)"
           }, {
             id: "Page4List1",
@@ -239,11 +250,11 @@
             id: "",
             label: "消息(局部)"
           }, {
-            id: "",
-            label: "容器(全局)"
+            id: "Page4Prompt",
+            label: "消息(全局)"
           }, {
             id: "",
-            label: "容器(系统消息)"
+            label: "消息(系统消息)"
           }]
         }, {
           label: "典型页面",
