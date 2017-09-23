@@ -4,7 +4,7 @@
   <div class="wizard2Wrapper" v-bind:class="theme">
     <div class="wizard2Item" v-bind:class="{ active : item.isActive }"
          v-for="item in wizardTabs"
-         v-on:click="onClick(item.index)">
+         v-on:click="onClick(item)">
       <div class="decorationArea">
         <div class="decorationLeft"></div>
         <div class="decorationRight"></div>
@@ -28,17 +28,17 @@
     },
     methods: {
       //#region inner
-      onClick: function (iIndex) {
+      onClick: function (oClickItem) {
         for(var i=0;i<this.wizardTabs.length;i++){
           var oItem = this.wizardTabs[i];
-          if(oItem.index == iIndex){
+          if(oItem.index == oClickItem.index){
             oItem.isActive = true;
           }
           else{
             oItem.isActive = false;
           }
         }
-        this.$emit("onClick", iIndex);
+        this.$emit("onClick", oClickItem);
       }
       //#endregion
     }

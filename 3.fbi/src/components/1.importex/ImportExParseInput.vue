@@ -417,10 +417,10 @@
               value: "ALU"+i+".zip",
               type: "text"
             }, {
-              value: "ZIP",
+              value: "ALU",
               type: "text"
             }, {
-              value: "s00290253",
+              value: "朗讯模式",
               type: "text"
             }];
 

@@ -1,10 +1,8 @@
 <template>
   <div class="topoWrapper">
     <div class="customTabWrapper">
-      <marvel-tab-button ref="ref4Phy" label="拓扑还原"
-                         v-on:onClick="onClickPhy"></marvel-tab-button>
-      <marvel-tab-button ref="ref4Traffic" label="业务还原"
-                         v-on:onClick="onClickTraffic"></marvel-tab-button>
+      <marvel-wizard-tab theme="dark"
+                         :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
     </div>
     <div class="topoArea">
       <div class="topoAreaCont">
@@ -22,11 +20,11 @@
   import Phy from "@/components/2.topo/2.2.phy/Phy";
   import Traffic from "@/components/2.topo/2.3.traffic/Traffic";
   import MarvelTxtButton from "@/walle/widget/button/MarvelTxtButton";
-  import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
+  import MarvelWizardTab from "@/walle/widget/wizard/MarvelWizardTab";
 
   export default {
     components: {
-      MarvelTabButton,
+      MarvelWizardTab,
       MarvelTxtButton,
       Traffic,
       MarvelTabItem,
@@ -39,6 +37,17 @@
         //#region const
         debug: true,
         //#endregion
+        //#region wizardTab
+        wizardTabs: [{
+          index: 1,
+          label: "拓扑还原",
+          isActive: true
+        }, {
+          index: 2,
+          label: "业务还原",
+          isActive: false
+        }],
+        //#endregion
         //#region moduleName
         moduleName: "Phy"
         //#endregion
@@ -49,18 +58,14 @@
     },
     methods: {
       //#region inner
-      onClickPhy: function () {
-        this._activeTabBtn(true);
-        this.moduleName = "Phy";
+      onClickWizardTab: function (oItem) {
+        if(oItem.index == 1){
+          this.moduleName = "Phy";
+        }
+        else {
+          this.moduleName = "Traffic";
+        }
       },
-      onClickTraffic: function () {
-        this._activeTabBtn(false);
-        this.moduleName = "Traffic";
-      },
-      _activeTabBtn : function(bIsActivePhy){
-        this.$refs.ref4Phy.setActive(bIsActivePhy);
-        this.$refs.ref4Traffic.setActive(!bIsActivePhy);
-      }
       //#endregion
       //#region callback
 

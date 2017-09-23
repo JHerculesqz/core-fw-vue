@@ -138,8 +138,8 @@
       },
       //#endregion
       //#region wizardTab
-      onClickWizardTab: function (iIndex) {
-        alert(iIndex);
+      onClickWizardTab: function (oItem) {
+        alert(oItem.index);
       }
       //#endregion
     }
@@ -147,7 +147,7 @@
 </script>
 
 <style scoped>
-
+  /*document fix style start*/
   .widgetShowSession {
     padding: 20px 100px;
     width: 100%;
@@ -167,11 +167,6 @@
     font-size: 14px;
     color: #666;
     line-height: 36px;
-  }
-
-  .showArea {
-    width: 100%;
-    height: 400px;
   }
 
   .codeArea {
@@ -208,5 +203,14 @@
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+  /*document fix style end*/
+  /*document custom style start*/
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
 
+  /*document custom style end*/
+  /*custom style start*/
+  /*custom style end*/
 </style>
