@@ -8,13 +8,13 @@
     </div>
     <div class="rightPart">
       <keep-alive>
-      <component :ref="moduleName"
-                 :is="moduleName"
-                 v-on:onClickFullPathRow="onClickFullPathRow"
-                 v-on:onClickRow4Business="onClickRow4Business"
-                 v-on:onClick4Business="onClick4Business"
-                 v-on:onClickPartPathRow="onClickPartPathRow"
-                 v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></component>
+        <component :ref="moduleName"
+                   :is="moduleName"
+                   v-on:onClickFullPathRow="onClickFullPathRow"
+                   v-on:onClickRow4Business="onClickRow4Business"
+                   v-on:onClick4Business="onClick4Business"
+                   v-on:onClickPartPathRow="onClickPartPathRow"
+                   v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></component>
       </keep-alive>
     </div>
   </div>
