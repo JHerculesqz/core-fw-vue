@@ -26,16 +26,12 @@
 </template>
 
 <script>
-  import MarvelTab from "@/walle/widget/tab/MarvelTab";
-  import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   export default {
     components: {
       MarvelIconTxtButton,
-      MarvelGrid,
-      MarvelTab,
-      MarvelTabItem
+      MarvelGrid
     },
     name: "Business",
     data: function () {
@@ -88,68 +84,10 @@
       };
     },
     mounted: function () {
-      var self = this;
 
-      if (this.debug) {
-        //self._getBusinessMock();
-      }
-      else {
-        //TODO:
-      }
     },
     methods: {
-      _getBusinessMock: function () {
-        this.rows4Business = [];
-
-        var oRow = [{
-          value: 1,
-          type: "text"
-        },{
-          value: "nodeBase0",
-          type: "text"
-        },{
-          value: "nodeBase2",
-          type: "text"
-        },{
-          value: "40",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "0",
-          type: "text"
-        },{
-          value: "40",
-          type: "text"
-        },{
-          value: "100%",
-          type: "text"
-        }];
-
-        this.rows4Business.push(oRow);
-      },
-      onClick4Business: function () {
-        if (this.debug) {
-          alert("局向");
-          this._getBusinessMock();
-        }
-        else {
-          //TODO:
-        }
-      },
+      //#region inner
       onClick4ExportBusiness: function () {
         if (this.debug) {
           alert("导出");
@@ -158,9 +96,20 @@
           //TODO:
         }
       },
+      //#endregion
+      //#region callback
       onClickRow4Business: function (oRow) {
         this.$emit("onClickRow4Business", oRow);
       },
+      onClick4Business: function () {
+        this.$emit("onClick4Business");
+      },
+      //#endregion
+      //#region 3rd
+      setBusinessData: function(rows4Business){
+        this.rows4Business = rows4Business;
+      }
+      //#endregion
     }
   }
 </script>

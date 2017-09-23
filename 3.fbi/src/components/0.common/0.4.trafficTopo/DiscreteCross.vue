@@ -76,29 +76,10 @@
       };
     },
     mounted: function () {
-      if (this.debug) {
-        this._getDiscreteCrossMock();
-      }
-      else {
-        //TODO
-      }
+
     },
     methods: {
-      _getDiscreteCrossMock: function () {
-        this.rows4DiscreteCross = [];
-
-        for (var i = 0; i < 100; i++) {
-          var oRow = [];
-          for (var j = 0; j < 11; j++) {
-            var oCell = {
-              value: "value" + i,//Math.random() * 100
-              type: "text"
-            };
-            oRow.push(oCell);
-          }
-          this.rows4DiscreteCross.push(oRow);
-        }
-      },
+      //#region inner
       onClick4ExportDiscreteCross: function () {
         if (this.debug) {
           alert("ExportDiscreteCross");
@@ -107,9 +88,17 @@
           //TODO:
         }
       },
+      //#endregion
+      //#region callback
       onClickRow4DiscreteCross:function(oRow){
-          this.$emit("onClickRow4DiscreteCross",oRow);
+        this.$emit("onClickRow4DiscreteCross",oRow);
+      },
+      //#endregion
+      //#region 3rd
+      setDiscreteCrossData: function(rows4DiscreteCross){
+        this.rows4DiscreteCross = rows4DiscreteCross;
       }
+      //#endregion
     }
   }
 

@@ -13,7 +13,9 @@
     <div class="topoArea">
       <div class="topoAreaCont">
         <keep-alive>
-          <component v-bind:is="moduleName" solutionName="solutionName"></component>
+          <component v-bind:is="moduleName"
+                     solutionName="solutionName"
+                     v-on:onClickS2Next="onClickS2Next"></component>
         </keep-alive>
       </div>
     </div>
@@ -89,7 +91,10 @@
       },
       //#endregion
       //#region callback
-
+      onClickS2Next: function(){
+        this._activeTabBtn(false, false, true, false);
+        this.moduleName = "NodeInsertS3";
+      }
       //#endregion
       //#region 3rd
 

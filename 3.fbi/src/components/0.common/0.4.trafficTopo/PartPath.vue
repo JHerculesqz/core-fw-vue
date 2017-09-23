@@ -166,243 +166,10 @@
       };
     },
     mounted: function () {
-      if (this.debug) {
-        this._getPartPathMock();
-      }
-      else {
-        //TODO
-      }
+
     },
     methods: {
-      _getPartPathMock: function () {
-        this.rows4PartPath = [];
-
-        for (var i = 0; i < 10; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
-            type: "text"
-          }, {
-            value: "VC12",
-            type: "text"
-          }, {
-            value: "单向",
-            type: "text"
-          }, {
-            value: "nodeBase0",
-            type: "text"
-          }, {
-            value: "8-SL16-" + i,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "nodeBase2",
-            type: "text"
-          }, {
-            value: "18-JQ16-" + i,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "-",
-            type: "text"
-          }, {
-            value: "否",
-            type: "text"
-          }, {
-            value: "路径源或者宿未落地",
-            type: "text"
-          }, {
-            value: "删除路由上的低阶业务",
-            type: "text"
-          }];
-          this.rows4PartPath.push(oRow);
-        }
-      },
-      _getPartRouterMock: function (oRow, oAfterCallback) {
-        this.rows4PartRouter = [[{
-          value: 1,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value,
-          type: "text"
-        }, {
-          value: oRow[7].value,
-          type: "text"
-        }, {
-          value: oRow[8].value,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value + 1,
-          type: "text"
-        }, {
-          value: oRow[7].value + 1,
-          type: "text"
-        }, {
-          value: oRow[8].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "1",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 2,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value+1,
-          type: "text"
-        }, {
-          value: oRow[7].value+1,
-          type: "text"
-        }, {
-          value: oRow[8].value+1,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "2",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 3,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: oRow[11].value,
-          type: "text"
-        }, {
-          value: oRow[12].value,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value + 1,
-          type: "text"
-        }, {
-          value: oRow[11].value + 1,
-          type: "text"
-        }, {
-          value: oRow[12].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "3",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 4,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value+1,
-          type: "text"
-        }, {
-          value: oRow[11].value+1,
-          type: "text"
-        }, {
-          value: oRow[12].value+1,
-          type: "text"
-        }, {
-          value: oRow[9].value,
-          type: "text"
-        }, {
-          value: oRow[10].value + 2,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "4",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }]];
-
-        oAfterCallback(this.rows4PartRouter);
-      },
-      onClickPartPathRow: function (oRow) {
-        var self = this;
-        this.showRouter = true;
-        if (this.debug) {
-          this._getPartRouterMock(oRow, function (arrRouters) {
-            self.$emit("onClickPartPathRow", arrRouters);
-          });
-        }
-        else {
-          //TODO:
-        }
-      },
+      //#region inner
       onClick4ExportRouter: function () {
         alert("onClick4ExportRouter");
       },
@@ -414,27 +181,44 @@
 //        var arrCheckRows = this.$refs.ref4PartPathGrid.getCheckRows();
         alert("onClick4DelPartPath");
       },
-      onClick4DelPartPathAndCross:function(){
+      onClick4DelPartPathAndCross: function () {
         //获取勾选项
 //        var arrCheckRows = this.$refs.ref4PartPathGrid.getCheckRows();
         alert("onClick4DelPartPathAndCross");
+      },
+      //#endregion
+      //#region callback
+      onClickPartPathRow: function (oRow) {
+        this.showRouter = true;
+        this.$emit("onClickPartPathRow", oRow);
+      },
+      //#endregion
+      //#region 3rd
+      setPartPathData: function (rows4PartPath) {
+        this.rows4PartPath = rows4PartPath;
+      },
+      setData4PartPathRouter: function (rows4PartRouter) {
+        this.rows4PartRouter = rows4PartRouter;
       }
+      //#endregion
     }
   }
 </script>
 
 <style scoped>
-  .partPathArea{
-    height:100%;
+  .partPathArea {
+    height: 100%;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .titleArea{
+
+  .titleArea {
     width: 100%;
     height: 52px;
   }
-  .titleName{
+
+  .titleName {
     float: left;
     height: 52px;
     font-size: 16px;
@@ -442,23 +226,28 @@
     /*font-weight: bold;*/
     line-height: 52px;
   }
-  .btnArea{
+
+  .btnArea {
     height: 52px;
     padding: 10px 0;
     box-sizing: border-box;
     float: right;
   }
-  .firstGridArea{
+
+  .firstGridArea {
     height: calc(100% - 52px);
   }
-  .dynamicArea{
+
+  .dynamicArea {
     padding-top: 20px;
     box-sizing: border-box;
   }
-  .secondGridArea{
+
+  .secondGridArea {
     height: 300px;
   }
-  .classCustom1{
+
+  .classCustom1 {
     margin-left: 20px;
   }
 </style>

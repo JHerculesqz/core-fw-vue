@@ -51,16 +51,12 @@
 </template>
 
 <script>
-  import MarvelTab from "@/walle/widget/tab/MarvelTab";
-  import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
   export default {
     components: {
       MarvelIconTxtButton,
-      MarvelGrid,
-      MarvelTab,
-      MarvelTabItem
+      MarvelGrid
     },
     name: "FullPath",
     data: function () {
@@ -168,282 +164,10 @@
       };
     },
     mounted: function () {
-      var self = this;
 
-      if (this.debug) {
-        self._getFullPathMock();
-      }
-      else {
-        //TODO:
-      }
     },
     methods: {
-      _getFullPathMock: function () {
-        this.rows4FullPath = [];
-
-        for (var i = 0; i < 40; i++) {
-          var oRow = [{
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
-            type: "text"
-          }, {
-            value: "VC12",
-            type: "text"
-          }, {
-            value: "单向",
-            type: "text"
-          }, {
-            value: "TDM",
-            type: "text"
-          }, {
-            value: "nodeBase0",
-            type: "text"
-          }, {
-            value: "8-SL16-" + i,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "nodeBase2",
-            type: "text"
-          }, {
-            value: "18-JQ16-" + i,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: i + 1,
-            type: "text"
-          }, {
-            value: "-",
-            type: "text"
-          }, {
-            value: "否",
-            type: "text"
-          }];
-
-          this.rows4FullPath.push(oRow);
-        }
-      },
-      onClickFullPathRow: function (oRow) {
-        var self = this;
-        this.showRouter = true;
-        if (this.debug) {
-          this._getFullRouterMock(oRow, function (arrRouters) {
-            self.$emit("onClickFullPathRow", arrRouters);
-          });
-        }
-        else {
-          //TODO:
-        }
-      },
-      _getFullRouterMock: function (oRow, oAfterCallBack) {
-        this.rows4FullRouter = [[{
-          value: 1,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value,
-          type: "text"
-        }, {
-          value: oRow[7].value,
-          type: "text"
-        }, {
-          value: oRow[8].value,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value + 1,
-          type: "text"
-        }, {
-          value: oRow[7].value + 1,
-          type: "text"
-        }, {
-          value: oRow[8].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "1",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 2,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value+1,
-          type: "text"
-        }, {
-          value: oRow[7].value+1,
-          type: "text"
-        }, {
-          value: oRow[8].value+1,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "2",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 3,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: oRow[11].value,
-          type: "text"
-        }, {
-          value: oRow[12].value,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value + 1,
-          type: "text"
-        }, {
-          value: oRow[11].value + 1,
-          type: "text"
-        }, {
-          value: oRow[12].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "3",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 4,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value+1,
-          type: "text"
-        }, {
-          value: oRow[11].value+1,
-          type: "text"
-        }, {
-          value: oRow[12].value+1,
-          type: "text"
-        }, {
-          value: oRow[9].value,
-          type: "text"
-        }, {
-          value: oRow[10].value + 2,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "4",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }],[{
-          value: 5,
-          type: "text"
-        }, {
-          value: oRow[9].value,
-          type: "text"
-        }, {
-          value: oRow[10].value+1,
-          type: "text"
-        }, {
-          value: oRow[11].value+1,
-          type: "text"
-        }, {
-          value: oRow[12].value+1,
-          type: "text"
-        }, {
-          value: oRow[9].value,
-          type: "text"
-        }, {
-          value: oRow[10].value + 2,
-          type: "text"
-        }, {
-          value: oRow[11].value + 2,
-          type: "text"
-        }, {
-          value: oRow[12].value + 2,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "5",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }]];
-
-        oAfterCallBack(this.rows4FullRouter);
-      },
+      //#region inner
       onClick4ExportFullPathRouter: function () {
         if (this.debug) {
           alert("导出路由详情");
@@ -479,14 +203,29 @@
         else {
           //TODO:
         }
+      },
+      //#endregion
+      //#region callback
+      onClickFullPathRow: function (oRow) {
+        this.showRouter = true;
+        this.$emit("onClickFullPathRow", oRow);
+      },
+      //#endregion
+      //#region 3rd
+      setFullPathData: function (rows4FullPath) {
+        this.rows4FullPath = rows4FullPath;
+      },
+      setData4FullPathRouter: function (rows4FullRouter) {
+        this.rows4FullRouter = rows4FullRouter;
       }
+      //#endregion
     }
   }
 </script>
 
 <style scoped>
   .fullPathArea {
-    height:100%;
+    height: 100%;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;

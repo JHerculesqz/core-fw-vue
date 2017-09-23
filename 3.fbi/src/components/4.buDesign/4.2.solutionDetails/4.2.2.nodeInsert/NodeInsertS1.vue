@@ -1,6 +1,6 @@
 <template>
   <phy-topo ref="refNodeInsertS1"
-            :toolbarItems="toolbarItems" id4Topo="nodeInseertS1Topo"
+            :toolbarItems="toolbarItems" id4Topo="nodeInsertS1Topo"
             v-on:onTreeNodeClick="onTreeNodeClick"
             v-on:onToolbarItemClick="onToolbarItemClick"
             v-on:onClickRow4Ne="onClickRow4Ne"
@@ -24,6 +24,10 @@
         //#endregion
         //#region toolbar
         toolbarItems: [{
+          id: 0,
+          label: '导入华为网络',
+          icon: 'icon-marvelIcon-49'
+        },{
           id: 1,
           label: '添加',
           icon: 'icon-marvelIcon-31'
@@ -141,19 +145,42 @@
 
           //#region 网元
           var arrNode = [];
-          for (var i = 0; i < 2; i++) {
-            var iX = Math.random() * 400;
-            var iY = Math.random() * 200;
-            var oNode = {
-              id: "nodeBase" + i,
-              x: iX,
-              y: iY,
-              uiImgKey: "node",
-              uiLabel: "nodeBase" + i,
-              uiNode: true
-            };
-            arrNode.push(oNode);
-          }
+          var oNode1 = {
+            id: "VNE1",
+            x: Math.random() * 800,
+            y: Math.random() * 300,
+            uiImgKey: "node",
+            uiLabel: "VNE1",
+            uiNode: true
+          };
+          arrNode.push(oNode1);
+          var oNode2 = {
+            id: "nodeBase0",
+            x: Math.random() * 800,
+            y: Math.random() * 300,
+            uiImgKey: "node",
+            uiLabel: "nodeBase0",
+            uiNode: true
+          };
+          arrNode.push(oNode2);
+          var oNode3= {
+            id: "nodeBase1",
+            x: Math.random() * 800,
+            y: Math.random() * 300,
+            uiImgKey: "node",
+            uiLabel: "nodeBase1",
+            uiNode: true
+          };
+          arrNode.push(oNode3);
+          var oNode4= {
+            id: "VNE2",
+            x: Math.random() * 800,
+            y: Math.random() * 300,
+            uiImgKey: "node",
+            uiLabel: "VNE2",
+            uiNode: true
+          };
+          arrNode.push(oNode4);
           oTopoData.nodes = arrNode;
           //#endregion
 
@@ -161,88 +188,43 @@
           //#region link
           var arrLink = [];
           //#region 网元与网元之间的单条链路
-          for (var i = 0; i < 3; i++) {
-            var oLink = {
-              id: "link" + i,
-              srcNodeId: "nodeBase0",
-              dstNodeId: "nodeBase1",
-              uiLabelL: "nodeBase0",
-              uiLabelM: "link" + i,
-              uiLabelR: "nodeBase1",
-              uiLink: true,
-              uiLinkColorKey: "linkType1",
-              uiLinkWidth: 3,
-              uiDash: [10, 5]
-            };
-            arrLink.push(oLink);
-          }
+          var oLink1 = {
+            id: "link1",
+            srcNodeId: "VNE1",
+            dstNodeId: "nodeBase0",
+            uiLabelL: "VNE1",
+            uiLabelM: "link1",
+            uiLabelR: "nodeBase0",
+            uiLink: true,
+            uiLinkColorKey: "linkType1",
+            uiLinkWidth: 3
+          };
+          arrLink.push(oLink1);
+          var oLink2 = {
+            id: "link2",
+            srcNodeId: "nodeBase0",
+            dstNodeId: "nodeBase1",
+            uiLabelL: "nodeBase0",
+            uiLabelM: "link2",
+            uiLabelR: "nodeBase1",
+            uiLink: true,
+            uiLinkColorKey: "linkType1",
+            uiLinkWidth: 3
+          };
+          arrLink.push(oLink2);
+          var oLink3 = {
+            id: "link3",
+            srcNodeId: "nodeBase1",
+            dstNodeId: "VNE2",
+            uiLabelL: "nodeBase1",
+            uiLabelM: "link3",
+            uiLabelR: "VNE2",
+            uiLink: true,
+            uiLinkColorKey: "linkType1",
+            uiLinkWidth: 3
+          };
+          arrLink.push(oLink3);
           //#endregion
-
-          //#region 网元与网元之间的捆绑链路
-          for (var i = 0; i < 1; i++) {
-            //oLink1和oLink2为一组
-            var oLink1 = {
-              id: "gLink" + i + "_" + i,
-              srcNodeId: "nodeBase" + i,
-              dstNodeId: "nodeBase" + (i + 1),
-              uiLinkGroupId: "groupLink" + i + "_" + i,
-              uiLink: true,
-              uiLinkExpand: false,
-              uiLabelL: "nodeBase" + i,
-              uiLabelM: "link" + i,
-              uiLabelR: "nodeBase" + (i + 1),
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            var oLink2 = {
-              id: "gLink" + i + "_" + (i + 1),
-              srcNodeId: "nodeBase" + i,
-              dstNodeId: "nodeBase" + (i + 1),
-              uiLinkGroupId: "groupLink" + i + "_" + i,
-              uiLink: true,
-              uiLinkExpand: false,
-              uiLabelL: "nodeBase" + i,
-              uiLabelM: "link" + i,
-              uiLabelR: "nodeBase" + (i + 1),
-              uiLinkColorKey: "linkType2",
-              uiLinkWidth: 3
-            };
-            //oLink3和oLink4为一组
-            var oLink3 = {
-              id: "gLink" + i + "_" + (i + 2),
-              srcNodeId: "nodeBase" + i,
-              dstNodeId: "nodeBase" + (i + 1),
-              uiLinkGroupId: "groupLink" + i + "_" + (i + 1),
-              uiLink: true,
-              uiLinkExpand: false,
-              uiLabelL: "nodeBase" + i,
-              uiLabelM: "link" + i,
-              uiLabelR: "nodeBase" + (i + 1),
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-
-            var oLink4 = {
-              id: "gLink" + i + "_" + (i + 3),
-              srcNodeId: "nodeBase" + i,
-              dstNodeId: "nodeBase" + (i + 1),
-              uiLinkGroupId: "groupLink" + i + "_" + (i + 1),
-              uiLink: true,
-              uiLinkExpand: false,
-              uiLabelL: "nodeBase" + i,
-              uiLabelM: "link" + i,
-              uiLabelR: "nodeBase" + (i + 1),
-              uiLinkColorKey: "linkType3",
-              uiLinkWidth: 3
-            };
-
-            arrLink.push(oLink1);
-            arrLink.push(oLink2);
-            arrLink.push(oLink3);
-            arrLink.push(oLink4);
-          }
-          //#endregion
-
           oTopoData.links = arrLink;
           //#endregion
           self.$refs.refNodeInsertS1.initTopo(function () {

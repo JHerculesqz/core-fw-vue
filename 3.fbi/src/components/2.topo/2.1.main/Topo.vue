@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;">
+  <div class="topoWrapper">
     <div class="customTabWrapper">
       <marvel-tab-button ref="ref4Phy" label="拓扑还原"
                          v-on:onClick="onClickPhy"></marvel-tab-button>
@@ -73,6 +73,11 @@
 </script>
 
 <style scoped>
+
+  .topoWrapper{
+    height:100%;
+  }
+
   .customTabWrapper {
     height: 32px;
     box-sizing: border-box;
