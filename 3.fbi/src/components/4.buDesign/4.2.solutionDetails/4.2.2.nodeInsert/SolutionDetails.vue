@@ -1,21 +1,14 @@
 <template>
   <div class="main">
     <div class="customTabWrapper">
-      <marvel-tab-button ref="refNodeInsertS1" label="STEP1.新建华为网络"
-                         v-on:onClick="onClickPhy"></marvel-tab-button>
-      <marvel-tab-button ref="refNodeInsertS2" label="STEP2.环插设备"
-                         v-on:onClick="onClickInsertDev"></marvel-tab-button>
-      <marvel-tab-button ref="refNodeInsertS3" label="STEP3.业务搜索"
-                         v-on:onClick="onClickTraffic"></marvel-tab-button>
-      <marvel-tab-button ref="refNodeInsertS4" label="STEP4.割接业务"
-                         v-on:onClick="onClickModifyTraffic"></marvel-tab-button>
+      <marvel-wizard-tab theme="dark"
+                         :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
     </div>
     <div class="topoArea">
       <div class="topoAreaCont">
         <keep-alive>
           <component v-bind:is="moduleName"
-                     solutionName="solutionName"
-                     v-on:onClickS2Next="onClickS2Next"></component>
+                     solutionName="solutionName"></component>
         </keep-alive>
       </div>
     </div>
@@ -27,29 +20,54 @@
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelTxtButton from "@/walle/widget/button/MarvelTxtButton";
-  import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
+  import MarvelWizardTab from "@/walle/widget/wizard/MarvelWizardTab";
   import NodeInsertS1 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS1";
   import NodeInsertS2 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS2";
   import NodeInsertS3 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS3";
   import NodeInsertS4 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS4";
+  import NodeInsertS5 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS5";
 
   export default {
     components: {
+      MarvelWizardTab,
       MarvelRouter,
-      MarvelTabButton,
       MarvelTxtButton,
       MarvelTabItem,
       MarvelTab,
       NodeInsertS1,
       NodeInsertS2,
       NodeInsertS3,
-      NodeInsertS4
+      NodeInsertS4,
+      NodeInsertS5
     },
     name: 'SolutionDetails',
     data: function () {
       return {
         //#region const
         debug: true,
+        //#endregion
+        //#region wizardTab
+        wizardTabs: [{
+          index: 1,
+          label: "新建华为网络",
+          isActive: true
+        }, {
+          index: 2,
+          label: "环插设备",
+          isActive: false
+        }, {
+          index: 3,
+          label: "确认不可割接业务",
+          isActive: false
+        }, {
+          index: 4,
+          label: "割接穿通业务",
+          isActive: false
+        }, {
+          index: 5,
+          label: "割接落地业务",
+          isActive: false
+        }],
         //#endregion
         //#region params
         solutionName: "",
@@ -62,39 +80,29 @@
     mounted: function () {
       //1.get solutionName
       this.solutionName = MarvelRouter.getParam(this.$route, "name");
-      //2.
-      this._activeTabBtn(true, false, false, false);
     },
     methods: {
       //#region inner
-      onClickPhy: function () {
-        this._activeTabBtn(true, false, false, false);
-        this.moduleName = "NodeInsertS1";
-      },
-      onClickInsertDev: function(){
-        this._activeTabBtn(false, true, false, false);
-        this.moduleName = "NodeInsertS2";
-      },
-      onClickTraffic: function () {
-        this._activeTabBtn(false, false, true, false);
-        this.moduleName = "NodeInsertS3";
-      },
-      onClickModifyTraffic: function () {
-        this._activeTabBtn(false, false, false, true);
-        this.moduleName = "NodeInsertS4";
-      },
-      _activeTabBtn : function(bIsActivePhy, bIsActiveInsertDev, bIsActiveTraffic, bIsActiveModifyTraffic){
-        this.$refs.refNodeInsertS1.setActive(bIsActivePhy);
-        this.$refs.refNodeInsertS2.setActive(bIsActiveInsertDev);
-        this.$refs.refNodeInsertS3.setActive(bIsActiveTraffic);
-        this.$refs.refNodeInsertS4.setActive(bIsActiveModifyTraffic);
+      onClickWizardTab: function (oItem) {
+        if(oItem.index == 1){
+          this.moduleName = "NodeInsertS1";
+        }
+        else if(oItem.index == 2){
+          this.moduleName = "NodeInsertS2";
+        }
+        else if(oItem.index == 3){
+          this.moduleName = "NodeInsertS3";
+        }
+        else if(oItem.index == 4){
+          this.moduleName = "NodeInsertS4";
+        }
+        else {
+          this.moduleName = "NodeInsertS5";
+        }
       },
       //#endregion
       //#region callback
-      onClickS2Next: function(){
-        this._activeTabBtn(false, false, true, false);
-        this.moduleName = "NodeInsertS3";
-      }
+
       //#endregion
       //#region 3rd
 

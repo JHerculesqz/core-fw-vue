@@ -44,10 +44,15 @@
         <div class="down">
           <div class="gridFootBtn">
             <marvel-icon-txt-button size="normal" classCustom="classCustom1"
-                                    label="确定"
+                                    label="环插"
                                     icon="icon-checkmark"
                                     theme="dark"
                                     v-on:onClick="onClickInsertOk"></marvel-icon-txt-button>
+            <marvel-icon-txt-button size="normal" classCustom="classCustom1"
+                                    label="查看环插结果"
+                                    icon="icon-checkmark"
+                                    theme="dark"
+                                    v-on:onClick="onClickInsertViewResult"></marvel-icon-txt-button>
           </div>
         </div>
       </div>
@@ -85,6 +90,10 @@
           id: 1,
           label: '批量环插设备',
           icon: 'icon-marvelIcon-31'
+        }, {
+          id: 2,
+          label: '现网同步',
+          icon: 'icon-sphere'
         }],
         //#endregion
         //#region dialog
@@ -174,6 +183,9 @@
         }
         else if (oToolbarItem.id == 1) {
           alert("批量环插设备");
+        }
+        else if(oToolbarItem.id == 2){
+          alert("现网同步");
         }
       },
       _getNodes: function (oAfterCallBack) {
@@ -395,12 +407,15 @@
         this.showDialog = false;
       },
       onClickInsertOk:function(){
-          if(this.debug){
-              alert(111);
-          }
-          else{
-              //TODO:
-          }
+        if(this.debug){
+          alert(111);
+        }
+        else{
+          //TODO:
+        }
+      },
+      onClickInsertViewResult:function(){
+
       },
       //#endregion
 

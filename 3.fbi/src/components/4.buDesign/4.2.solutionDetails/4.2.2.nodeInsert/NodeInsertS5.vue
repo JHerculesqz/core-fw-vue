@@ -1,8 +1,8 @@
 <template>
   <node-insert-s4-s5-topo ref="ref4S4S5Topo"
-                          id4LeftTopo="nodeInsertS4BeforeInsertTopo"
-                          id4RightTopo="nodeInsertS4AfterInsertTopo"
-                          :showRelativePort="false"
+                          id4LeftTopo="nodeInsertS5BeforeInsertTopo"
+                          id4RightTopo="nodeInsertS5AfterInsertTopo"
+                          :showRelativePort="true"
                           v-on:onClickRow4NotInsertTraffic="onClickRow4NotInsertTraffic"
                           v-on:onClick4ExportNotInsertTraffic="onClick4ExportNotInsertTraffic"
                           v-on:onClick4OperationLogNotInsert="onClick4OperationLogNotInsert"
@@ -11,6 +11,8 @@
                           v-on:onClick4ExportRelativePort="onClick4ExportRelativePort"
                           v-on:onClick4ImportRelativePort="onClick4ImportRelativePort"
                           v-on:onClickRow4InsertTraffic="onClickRow4InsertTraffic"
+                          v-on:onCheckRow4NotInsert="onCheckRow4NotInsert"
+                          v-on:onUnCheckRow4NotInsert="onUnCheckRow4NotInsert"
                           v-on:onClick4Recovery="onClick4Recovery"
                           v-on:onClick4RecoveryAll="onClick4RecoveryAll"
                           v-on:onClick4ExportScript="onClick4ExportScript"
@@ -25,7 +27,7 @@
     components: {
       NodeInsertS4S5Topo,
     },
-    name: 'NodeInsertS4',
+    name: 'NodeInsertS5',
     data: function () {
       return {
         //#region const
@@ -447,6 +449,63 @@
       },
       onClick4ImportRelativePort: function () {
         console.log("onClick4ImportRelativePort");
+      },
+      onCheckRow4NotInsert: function (oRow) {
+        this._setData4RelativePort();
+      },
+      _getRelativeDataMock: function (arrCheckRow, oAfterCallBack) {
+        var rows4RelativeTraffic = [];
+        for (var i = 0; i < 10; i++) {
+          var oRow = [{
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
+            type: "text"
+          }, {
+            value: "VC12",
+            type: "text"
+          }, {
+            value: "单向",
+            type: "text"
+          }, {
+            value: "TDM",
+            type: "text"
+          }, {
+            value: "nodeBase0",
+            type: "text"
+          }, {
+            value: "8-SL16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "nodeBase2",
+            type: "text"
+          }];
+          rows4RelativeTraffic.push(oRow);
+        }
+
+        oAfterCallBack(rows4RelativeTraffic);
+      },
+      onUnCheckRow4NotInsert: function (oRow) {
+        this._setData4RelativePort();
+      },
+      _setData4RelativePort: function () {
+        var self = this;
+        if (this.debug) {
+          var arrCheckRow = this.$refs.ref4S4S5Topo.getCheckRow4NotInsert();
+          this._getRelativeDataMock(arrCheckRow, function (rows4RelativeTraffic) {
+            self.$refs.ref4S4S5Topo.setData4RelativePort(rows4RelativeTraffic);
+          });
+        }
+        else {
+          //TODO
+        }
       },
       //#endregion
       //#region Insert

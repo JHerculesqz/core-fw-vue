@@ -1,261 +1,49 @@
 <template>
-  <traffic-topo ref="ref4TrafficTopo" id4Topo="nodeInsertS3Topo"
-                v-bind:toolbarItems="toolbarItems"
-                v-on:onTreeNodeClick="onTreeNodeClick"
-                v-on:onToolbarItemClick="onToolbarItemClick"
-                v-on:onClickAccordionItem="onClickAccordionItem"
-                v-on:onClickFullPathRow="onClickFullPathRow"
-                v-on:onClickRow4Business="onClickRow4Business"
-                v-on:onClick4Business="onClick4Business"
-                v-on:onClickPartPathRow="onClickPartPathRow"
-                v-on:onClickRow4DiscreteCross="onClickRow4DiscreteCross"></traffic-topo>
+  <node-insert-s3-topo ref="ref4ConfirmPathTopo" id4Topo="nodeInsertS3Topo"
+                       :showLeftArea="showLeftArea" :showRightArea="showRightArea"
+                       v-bind:toolbarItems="toolbarItems"
+                       v-on:onToolbarItemClick="onToolbarItemClick"
+                       v-on:onClickConfirmPathRow="onClickConfirmPathRow"></node-insert-s3-topo>
 </template>
 
 <script>
-  import TrafficTopo from "@/components/0.common/0.4.trafficTopo/TrafficTopo";
+  import NodeInsertS3Topo from "@/components/0.common/0.5.nodeInsertS3Topo/NodeInsertS3Topo";
 
   export default {
     components: {
-      TrafficTopo
+      NodeInsertS3Topo,
     },
-    name: "NodeInsertS2",
+    name: "NodeInsertS3",
     data: function () {
       return {
         //#region const
         debug: true,
         //endregion
-        //#region toolbar
+        //#region topo
         toolbarItems: [{
           id: 0,
-          label: '路径搜索',
-          icon: 'icon-target'
-        }, {
-          id: 1,
-          label: '拓扑还原',
-          icon: 'icon-target'
-        }, {
-          id: 2,
-          label: '保存',
-          icon: 'icon-floppy-disk'
-        }, {
-          id: 3,
-          label: '重置',
-          icon: 'icon-target'
-        }, {
-          id: 4,
-          label: '导出',
-          icon: 'icon-download'
-        }, {
-          id: 5,
-          label: '布局对齐',
-          icon: 'icon-target'
-        }, {
-          id: 6,
-          label: '显示设置',
-          icon: 'icon-target'
-        }, {
-          id: 7,
-          label: '平移模式',
-          icon: 'icon-target'
-        }, {
-          id: 8,
-          label: '最佳视图',
-          icon: 'icon-target'
-        }, {
-          id: 9,
-          label: '过滤',
-          icon: 'icon-target'
-        }, {
-          id: 10,
-          label: '全屏',
-          icon: 'icon-target'
-        }, {
-          id: 11,
-          label: '显示流量',
-          icon: 'icon-target'
-        }, {
-          id: 12,
-          label: '创建光纤',
-          icon: 'icon-target'
-        }, {
-          id: 13,
-          label: '返回上层',
-          icon: 'icon-cloud-upload'
+          label: '现网同步',
+          icon: 'icon-sphere'
         }],
+        showLeftArea: false,
+        showRightArea: false,
         //#endregion
         //#region traffic
-        //#region fullPath
-        rows4FullPath: [],
-        //#endregion
-        //#region business
-        rows4Business: [],
-        //#endregion
-        //#region partPath
-        rows4PartPath: [],
-        //#endregion
-        //#region discreteCross
-        rows4DiscreteCross: [],
-        //#endregion
+
         //#endregion
       };
     },
     mounted: function () {
-      //1. _getData4Tree
-      this._getData4Tree();
-      //2. _getData4Topo
+      //1. _getData4Topo
       this._getData4Topo();
-      //3.1 _getData4GridFullPath
-      this._getData4GridFullPath();
-      //3.2 _getData4GridBusiness
-//      this._getData4GridBusiness();
-      //3.3 _getData4GridPartPath
-      this._getData4GridPartPath();
-      //3.4 _getData4GridDiscreteCross
-      this._getData4GridDiscreteCross();
+      //2._getConfirmPathData
+      this._getConfirmPathData();
     },
     methods: {
       //#region inner
       //#region topo
-      onTreeNodeClick: function (oTreeNode) {
-        this._getDevPropsByDevId(oTreeNode.id);
-        this.$refs.ref4TrafficTopo.selectNe(oTreeNode.id);
-      },
-      _getDevPropsByDevId: function (strNeId) {
-        var oData4RightArea = [];
-        if (this.debug) {
-          oData4RightArea = [
-            [{
-              value: "搬迁状态",
-              type: "text"
-            }, {
-              value: "未设计",
-              type: "text"
-            }], [{
-              value: "高阶使用容量",
-              type: "text"
-            }, {
-              value: "0.156G",
-              type: "text"
-            }], [{
-              value: "高阶交叉个数",
-              type: "text"
-            }, {
-              value: "1",
-              type: "text"
-            }], [{
-              value: "低阶使用容量",
-              type: "text"
-            }, {
-              value: "0.156G",
-              type: "text"
-            }], [{
-              value: "低阶交叉个数",
-              type: "text"
-            }, {
-              value: "2",
-              type: "text"
-            }], [{
-              value: "低阶等效VC4容量",
-              type: "text"
-            }, {
-              value: "4",
-              type: "text"
-            }], [{
-              value: "低阶等效VC4个数",
-              type: "text"
-            }, {
-              value: "5",
-              type: "text"
-            }], [{
-              value: "网元ID",
-              type: "text"
-            }, {
-              value: strNeId,
-              type: "text"
-            }], [{
-              value: "网元名称",
-              type: "text"
-            }, {
-              value: strNeId,
-              type: "text"
-            }], [{
-              value: "网元类型",
-              type: "text"
-            }, {
-              value: "SDH",
-              type: "text"
-            }], [{
-              value: "设备厂商",
-              type: "text"
-            }, {
-              value: "Huawei",
-              type: "text"
-            }], [{
-              value: "子架类型",
-              type: "text"
-            }, {
-              value: "metro001",
-              type: "text"
-            }], [{
-              value: "时隙模式",
-              type: "text"
-            }, {
-              value: "华为时隙",
-              type: "text"
-            }], [{
-              value: "IP地址",
-              type: "text"
-            }, {
-              value: "-",
-              type: "text"
-            }], [{
-              value: "版本号",
-              type: "text"
-            }, {
-              value: "-",
-              type: "text"
-            }], [{
-              value: "领域",
-              type: "text"
-            }, {
-              value: "SDH",
-              type: "text"
-            }]
-          ];
-        }
-        else {
-          //TODO:
-        }
-        this.$refs.ref4TrafficTopo.setData4RightArea(oData4RightArea);
-      },
       onToolbarItemClick: function (oToolbarItem) {
         console.log(oToolbarItem);
-      },
-      _getData4Tree: function () {
-        if (this.debug) {
-          var oData4LeftArea = {
-            id: "root",
-            name: 'root',
-            icon: "icon-address-book",
-            children: [{
-              id: 'nodeBase0',
-              name: 'nodeBase0',
-              icon: "icon-address-book",
-            }, {
-              id: 'nodeBase1',
-              name: 'nodeBase1',
-              icon: "icon-address-book"
-            }, {
-              id: 'nodeBase2',
-              name: 'nodeBase2',
-              icon: "icon-address-book"
-            }]
-          };
-          this.$refs.ref4TrafficTopo.setData4LeftArea(oData4LeftArea);
-        }
-        else {
-          //TODO:
-        }
       },
       _getData4Topo: function () {
         var self = this;
@@ -549,252 +337,85 @@
         else {
           //TODO
         }
-        this.$refs.ref4TrafficTopo.initTopo(function () {
-          self.$refs.ref4TrafficTopo.drawTopo(oTopoData);
+        this.$refs.ref4ConfirmPathTopo.initTopo(function () {
+          self.$refs.ref4ConfirmPathTopo.drawTopo(oTopoData);
         });
       },
       //#endregion
       //#region traffic
-      _getData4GridFullPath: function () {
-        this.rows4FullPath = [];
+      _getConfirmPathData: function () {
         if (this.debug) {
-          for (var i = 0; i < 40; i++) {
-            var oRow = [{
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
-              type: "text"
-            }, {
-              value: "VC12",
-              type: "text"
-            }, {
-              value: "单向",
-              type: "text"
-            }, {
-              value: "TDM",
-              type: "text"
-            }, {
-              value: "nodeBase0",
-              type: "text"
-            }, {
-              value: "8-SL16-" + i,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "nodeBase2",
-              type: "text"
-            }, {
-              value: "18-JQ16-" + i,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "-",
-              type: "text"
-            }, {
-              value: "否",
-              type: "text"
-            }];
-            this.rows4FullPath.push(oRow);
-          }
-
-          this.$refs.ref4TrafficTopo.setFullPathData(this.rows4FullPath);
+          this._getConfirmPathDataMock();
         }
         else {
           //TODO
         }
       },
-      _getData4GridBusiness: function (oAfterCallBack) {
-        this.rows4Business = [];
-        if (this.debug) {
+      _getConfirmPathDataMock: function () {
+        var rows4ConfirmPath = [];
+        for (var i = 0; i < 40; i++) {
           var oRow = [{
-            value: 1,
+            value: i + 1,
+            type: "text"
+          }, {
+            value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
+            type: "text"
+          }, {
+            value: "VC12",
+            type: "text"
+          }, {
+            value: "单向",
+            type: "text"
+          }, {
+            value: "TDM",
             type: "text"
           }, {
             value: "nodeBase0",
             type: "text"
           }, {
+            value: "8-SL16-" + i,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
+            value: i + 1,
+            type: "text"
+          }, {
             value: "nodeBase2",
             type: "text"
           }, {
-            value: "40",
+            value: "18-JQ16-" + i,
             type: "text"
           }, {
-            value: "0",
+            value: i + 1,
             type: "text"
           }, {
-            value: "0",
+            value: i + 1,
             type: "text"
           }, {
-            value: "0",
+            value: "-",
             type: "text"
           }, {
-            value: "0",
-            type: "text"
-          }, {
-            value: "0",
-            type: "text"
-          }, {
-            value: "0",
-            type: "text"
-          }, {
-            value: "40",
-            type: "text"
-          }, {
-            value: "100%",
+            value: "否",
             type: "text"
           }];
-          this.rows4Business.push(oRow);
-          oAfterCallBack();
+          rows4ConfirmPath.push(oRow);
         }
-        else {
-          //TODO
-        }
+        this.$refs.ref4ConfirmPathTopo.setConfirmPathData(rows4ConfirmPath);
       },
-      _getData4GridPartPath: function () {
-        this.rows4PartPath = [];
-        if (this.debug) {
-          for (var i = 0; i < 10; i++) {
-            var oRow = [{
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "0001/E1_/CDMXDFCU/CDMXDFTP_" + i,
-              type: "text"
-            }, {
-              value: "VC12",
-              type: "text"
-            }, {
-              value: "单向",
-              type: "text"
-            }, {
-              value: "nodeBase0",
-              type: "text"
-            }, {
-              value: "8-SL16-" + i,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "nodeBase2",
-              type: "text"
-            }, {
-              value: "18-JQ16-" + i,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "-",
-              type: "text"
-            }, {
-              value: "否",
-              type: "text"
-            }, {
-              value: "路径源或者宿未落地",
-              type: "text"
-            }, {
-              value: "删除路由上的低阶业务",
-              type: "text"
-            }];
-            this.rows4PartPath.push(oRow);
-          }
-        }
-        else {
-          //TODO
-        }
-      },
-      _getData4GridDiscreteCross: function () {
-        this.rows4DiscreteCross = [];
-        if (this.debug) {
-          for (var i = 0; i < 100; i++) {
-            var oRow = [{
-              value: i + 1,
-              type: "text"
-            }, {
-              value: "nodeBase" + i,
-              type: "text"
-            }, {
-              value: "VC12",
-              type: "text"
-            }, {
-              value: "15-SLNO-1",
-              type: "text"
-            }, {
-              value: "1",
-              type: "text"
-            }, {
-              value: "2",
-              type: "text"
-            }, {
-              value: "10-SLNO-1",
-              type: "text"
-            }, {
-              value: "1",
-              type: "text"
-            }, {
-              value: "2",
-              type: "text"
-            }, {
-              value: "工作",
-              type: "text"
-            }, {
-              value: "-",
-              type: "text"
-            }];
-            this.rows4DiscreteCross.push(oRow);
-          }
-        }
-        else {
-          //TODO
-        }
-      },
-      onClickAccordionItem: function (oAccordionItem) {
-        if (oAccordionItem.label == "业务详情") {
-          this.$refs.ref4TrafficTopo.setFullPathData(this.rows4FullPath);
-        }
-        else if (oAccordionItem.label == "业务局向") {
-          this.$refs.ref4TrafficTopo.setBusinessData(this.rows4Business);
-        }
-        else if (oAccordionItem.label == "不完整路径") {
-          this.$refs.ref4TrafficTopo.setPartPathData(this.rows4PartPath);
-        }
-        else if (oAccordionItem.label == "离散交叉") {
-          this.$refs.ref4TrafficTopo.setDiscreteCrossData(this.rows4DiscreteCross);
-        }
-      },
-      onClickFullPathRow: function (oRow) {
+      onClickConfirmPathRow: function(oRow){
         var self = this;
-        this._getFullPathRouter(oRow, function (rows4FullRouter) {
-          //1.更新路由详情表
-          self.$refs.ref4TrafficTopo.setData4FullPathRouter(rows4FullRouter);
-          //2.更新topo
-          var oTopo = self._generateTopoData4FullRouter(rows4FullRouter);
-          self.$refs.ref4TrafficTopo.updateTopo(oTopo);
+        this._getRoute(oRow, function (arrRouteBeforeInsert) {
+          self.$refs.ref4ConfirmPathTopo.setData4ConfirmPathRouter(arrRouteBeforeInsert);
+
+          //TODO:updateTopo
         });
       },
-      _getFullPathRouter: function (oRow, oAfterCallBack) {
-        var rows4FullRouter = [];
-
+      _getRoute: function (oRow, oAfterCallBack) {
+        var arrRouteBeforeInsert = [];
         if (this.debug) {
-          rows4FullRouter = [[{
+          arrRouteBeforeInsert = [[{
             value: 1,
             type: "text"
           }, {
@@ -992,211 +613,9 @@
           }]];
         }
         else {
-          //TODO:
+          //TODO
         }
-
-        oAfterCallBack(rows4FullRouter);
-      },
-      _generateTopoData4FullRouter: function (rows4FullRouter) {
-        //TODO:
-        var oTopo = {};
-        return oTopo;
-      },
-      onClick4Business: function () {
-        var self = this;
-        this._getData4GridBusiness(function () {
-          self.$refs.ref4TrafficTopo.setBusinessData(self.rows4Business);
-        });
-      },
-      onClickRow4Business: function (oRow) {
-        var self = this;
-        this._generateTopoData4Business(oRow, function (oTopo) {
-          self.$refs.ref4TrafficTopo.updateTopo(oTopo);
-        });
-      },
-      _generateTopoData4Business: function (oRow, oAfterCallBack) {
-        //TODO:
-        var oTopo = {};
-        oAfterCallBack(oTopo);
-      },
-      onClickPartPathRow: function (oRow) {
-        //TODO:
-        var self = this;
-        this._getPartPathRouter(oRow, function (rows4PartRouter) {
-          //更新路由详情表
-          self.$refs.ref4TrafficTopo.setData4PartPathRouter(rows4PartRouter);
-          //更新topo
-          var oTopo = self._generateTopoData4PartRouter(rows4PartRouter);
-          self.$refs.ref4TrafficTopo.updateTopo(oTopo);
-        });
-      },
-      _getPartPathRouter: function (oRow, oAfterCallback) {
-        var rows4PartRouter = [[{
-          value: 1,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value,
-          type: "text"
-        }, {
-          value: oRow[7].value,
-          type: "text"
-        }, {
-          value: oRow[8].value,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value + 1,
-          type: "text"
-        }, {
-          value: oRow[7].value + 1,
-          type: "text"
-        }, {
-          value: oRow[8].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "1",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }], [{
-          value: 2,
-          type: "text"
-        }, {
-          value: oRow[5].value,
-          type: "text"
-        }, {
-          value: oRow[6].value + 1,
-          type: "text"
-        }, {
-          value: oRow[7].value + 1,
-          type: "text"
-        }, {
-          value: oRow[8].value + 1,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "2",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }], [{
-          value: 3,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value,
-          type: "text"
-        }, {
-          value: oRow[11].value,
-          type: "text"
-        }, {
-          value: oRow[12].value,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value + 1,
-          type: "text"
-        }, {
-          value: oRow[11].value + 1,
-          type: "text"
-        }, {
-          value: oRow[12].value + 1,
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "VC12",
-          type: "text"
-        }, {
-          value: "3",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }], [{
-          value: 4,
-          type: "text"
-        }, {
-          value: "nodeBase1",
-          type: "text"
-        }, {
-          value: oRow[10].value + 1,
-          type: "text"
-        }, {
-          value: oRow[11].value + 1,
-          type: "text"
-        }, {
-          value: oRow[12].value + 1,
-          type: "text"
-        }, {
-          value: oRow[9].value,
-          type: "text"
-        }, {
-          value: oRow[10].value + 2,
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "-",
-          type: "text"
-        }, {
-          value: "正向工作",
-          type: "text"
-        }, {
-          value: "Fiber",
-          type: "text"
-        }, {
-          value: "4",
-          type: "text"
-        }, {
-          value: "",
-          type: "text"
-        }]];
-
-        oAfterCallback(rows4PartRouter);
-      },
-      _generateTopoData4PartRouter: function (rows4PartRouter) {
-        var oTopo = {};
-        return oTopo;
-      },
-      onClickRow4DiscreteCross: function (oRow) {
-        this.$refs.ref4TrafficTopo.selectNe(oRow.id)
+        oAfterCallBack(arrRouteBeforeInsert);
       },
       //#endregion
       //#endregion
