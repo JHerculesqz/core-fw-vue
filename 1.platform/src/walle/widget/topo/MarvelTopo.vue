@@ -10,9 +10,6 @@
     data: function () {
       return {
         oTopo: undefined,
-        nodes: [],
-        nodeGroups: [],
-        links: []
       };
     },
     methods: {
@@ -44,69 +41,45 @@
         //#region Topo
         var oTopo = new window.$.MarvelTopo();
         this.oTopo = oTopo;
-        //Resource
-        var self = this;
-        oTopo.Resource.init(this.theme, IMG_MAP, THEME_DARK, function () {
-          //Stage
-          var displayVal = window.$("#" + self.id).css("display");
-          var oWidth, oHeight;
-          if (displayVal == "none") {
-            window.$("#" + self.id).css("display", "block");
-            oWidth = window.$("#" + self.id).width();
-            oHeight = window.$("#" + self.id).height();
-            window.$("#" + self.id).attr("display", "none");
-          }
-          else {
-            oWidth = window.$("#" + self.id).width();
-            oHeight = window.$("#" + self.id).height();
-          }
-          oTopo.ins.stage = oTopo.Stage.init(self.id,
-            oWidth, oHeight, oTopo);
-          oTopo.ins.layerLink = oTopo.Layer.init(oTopo);
-          oTopo.ins.layerNode = oTopo.Layer.init(oTopo);
+        //init
+        oTopo.Api.init(oTopo, {
+          id: this.id,
+          themeKey: this.theme,
+          imgMap: IMG_MAP,
+          themeSetting: THEME_DARK
+        }, function () {
           oAfterCallBack();
         });
-        //#endregion
       },
       draw: function (oTopoData) {
-        this.nodes = oTopoData.nodes;
-        this.nodeGroups = oTopoData.nodeGroups;
-        this.links = oTopoData.links;
-        //nodeGroups
-        for (var i = 0; i < this.nodeGroups.length; i++) {
-          this.oTopo.Sprite.NodeGroup.draw(this.nodeGroups[i], this.oTopo);
-        }
-        //nodes
-        for (var i = 0; i < this.nodes.length; i++) {
-          this.oTopo.Sprite.Node.draw(this.nodes[i], this.oTopo);
-        }
-        this.oTopo.Layer.reDraw(this.oTopo.ins.layerNode);
-
-        //links
-        this.oTopo.Sprite.LinkGroup.draw(this.links, this.oTopo);
-        this.oTopo.Layer.reDraw(this.oTopo.ins.layerLink);
+        this.oTopo.Api.draw(this.oTopo, oTopoData);
       },
       expandAllNodeGroup: function () {
-        this.oTopo.Sprite.NodeGroup.expandAllNodeGroup(this.oTopo);
+        this.oTopo.Api.expandAllNodeGroup(this.oTopo);
       },
       collapseAllNodeGroup: function () {
-        this.oTopo.Sprite.NodeGroup.collapseAllNodeGroup(this.oTopo);
+        this.oTopo.Api.collapseAllNodeGroup(this.oTopo);
       },
       expandAllLinkGroup: function () {
-        this.oTopo.Sprite.LinkGroup.expandAllLinkGroup(this.oTopo);
+        this.oTopo.Api.expandAllLinkGroup(this.oTopo);
       },
       collapseAllLinkGroup: function () {
-        this.oTopo.Sprite.LinkGroup.collapseAllLinkGroup(this.oTopo);
+        this.oTopo.Api.collapseAllLinkGroup(this.oTopo);
       },
-      selectNodesById: function(arrNodeId){
-        this.oTopo.Sprite.NodeGroup.selectNodesById(arrNodeId, this.oTopo);
+      selectNodesById: function (arrNodeId) {
+        this.oTopo.Api.selectNodesById(this.oTopo, arrNodeId);
       },
-      selectLinksById: function(arrLinkId){
-        this.oTopo.Sprite.LinkGroup.selectLinksById(arrLinkId, this.oTopo);
+      selectLinksById: function (arrLinkId) {
+        this.oTopo.Api.selectLinksById(this.oTopo, arrLinkId);
       },
-      unSelectAll: function(){
-        this.oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(this.oTopo);
-        this.oTopo.Sprite.LinkGroup.unSelectLinks(this.oTopo);
+      unSelectAll: function () {
+        this.oTopo.Api.unSelectAll(this.oTopo);
+      },
+      getTopoData: function () {
+        return this.oTopo.Api.getTopoData(this.oTopo);
+      },
+      updateTopo: function (oTopoData) {
+        this.oTopo.Api.updateTopo(this.oTopo, oTopoData);
       }
 
     }

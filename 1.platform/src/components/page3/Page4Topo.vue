@@ -170,6 +170,7 @@
           uiLink: true,
           uiLinkColorKey: "linkType1",
           uiLinkWidth: 3,
+          uiDirection: 2,
           uiDash: [10, 5]
         };
         arrLink.push(oLink);

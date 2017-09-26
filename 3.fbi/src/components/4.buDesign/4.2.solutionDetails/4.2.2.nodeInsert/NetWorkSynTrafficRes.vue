@@ -18,7 +18,7 @@
     components: {
       TrafficTopo
     },
-    name: "Traffic",
+    name: "NetWorkSynTrafficRes",
     data: function () {
       return {
         //#region const

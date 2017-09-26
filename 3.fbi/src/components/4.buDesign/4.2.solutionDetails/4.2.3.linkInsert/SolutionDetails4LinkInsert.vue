@@ -13,7 +13,7 @@
     components: {
 
     },
-    name: 'SolutionDetails4Single',
+    name: 'SolutionDetails4LinkInsert',
     data: function () {
       return {
         //#region const

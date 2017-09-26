@@ -1,31 +1,31 @@
 (function($){
-  $.MarvelTopoLayer = function() {
-    var self = this;
+    $.MarvelTopoLayer = function() {
+        var self = this;
 
-    //#region Fields
+        //#region Fields
 
-    //#endregion
+        //#endregion
 
-    //#region init
+        //#region init
 
-    this.init = function(oTopo){
-      var oLayer = new Konva.Layer();
-      oTopo.ins.stage.add(oLayer);
-      return oLayer;
-    };
+        this.init = function(oTopo){
+            var oLayer = new Konva.Layer();
+            oTopo.ins.stage.add(oLayer);
+            return oLayer;
+        };
 
-    this.reDraw = function(oLayer){
-      oLayer.batchDraw();
-    };
+        this.reDraw = function(oLayer){
+            oLayer.batchDraw();
+        };
 
-    //#endregion
+        //#endregion
 
-    //#region imsg
+        //#region imsg
 
-    this.moveToBottom = function(oLayer){
-      oLayer.moveToBottom();
-    };
+        this.moveToBottom = function(oLayer){
+            oLayer.moveToBottom();
+        };
 
-    //#endregion
-  }
+        //#endregion
+    }
 })(jQuery);

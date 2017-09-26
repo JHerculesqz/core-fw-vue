@@ -1,5 +1,5 @@
 (function($){
-  $.MarvelTopoBox = function() {
-    var self = this;
-  }
+    $.MarvelTopoBox = function() {
+        var self = this;
+    }
 })(jQuery);

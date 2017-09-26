@@ -5,7 +5,7 @@
 
     //#region Const
 
-    var OFFSET = 10;
+    var OFFSET = 15;
 
     //#endregion
 
@@ -113,10 +113,11 @@
       });
 
       arrLinks4Draw.forEach(function (oLink, index) {
-        _drawLink(arrLinks, oLink, index, oTopo);
+        _drawLinkEx(arrLinks, oLink, index, arrLinks4Draw.length, oTopo);
       });
     };
 
+    //可删除，用_drawLinkEx替换
     var _drawLink = function (arrSrcLinks, oBuObj, iOffsetIndex, oTopo) {
       //remove
       var oLinkExists = oTopo.Stage.findOne(oBuObj.id, oTopo);
@@ -176,6 +177,136 @@
       return oLine;
     };
 
+    var _drawLinkEx = function (arrSrcLinks, oBuObj, iOffsetIndex, linkCount, oTopo) {
+      //remove
+      var oLinkExists = oTopo.Stage.findOne(oBuObj.id, oTopo);
+      if (oLinkExists) {
+        oLinkExists.destroy();
+      }
+
+      var position = _getPositionEx(oBuObj, iOffsetIndex, linkCount, oTopo);
+
+      //group
+      var oGroup = new Konva.Group({
+        x: 0,
+        y: 0,
+        id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo)
+      });
+      oGroup.tag = oBuObj;
+
+      //line
+      var oLine = new Konva.Line({
+        points: [position.start1.x, position.start1.y, position.start2.x, position.start2.y, position.start3.x, position.start3.y,
+          position.middle.x, position.middle.y,
+          position.end3.x, position.end3.y, position.end2.x, position.end2.y, position.end1.x, position.end1.y],
+        stroke: _getLinkColor(oBuObj, oTopo),
+        strokeWidth: _getLinkWidth(oBuObj, oTopo),
+        dash: _getLinkDash(oBuObj, oTopo)
+      });
+      oGroup.add(oLine);
+      //单向箭头
+      if (oBuObj.uiDirection == 1) {
+        if (iOffsetIndex == 0) {
+          var oArrow = _drawArrow({
+            sX: position.middle.x,
+            sY: position.middle.y,
+            eX: position.end3.x,
+            eY: position.end3.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+        }
+        else {
+          var oArrow = _drawArrow({
+            sX: position.end3.x,
+            sY: position.end3.y,
+            eX: position.end2.x,
+            eY: position.end2.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+        }
+      }
+      //双向箭头
+      else if (oBuObj.uiDirection == 2) {
+        if (iOffsetIndex == 0) {
+          var oArrow = _drawArrow({
+            sX: position.middle.x,
+            sY: position.middle.y,
+            eX: position.end3.x,
+            eY: position.end3.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+          var oArrow = _drawArrow({
+            sX: position.middle.x,
+            sY: position.middle.y,
+            eX: position.start3.x,
+            eY: position.start3.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+        }
+        else {
+          var oArrow = _drawArrow({
+            sX: position.end3.x,
+            sY: position.end3.y,
+            eX: position.end2.x,
+            eY: position.end2.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+          var oArrow = _drawArrow({
+            sX: position.start3.x,
+            sY: position.start3.y,
+            eX: position.start2.x,
+            eY: position.start2.y
+          }, oBuObj, oTopo);
+          oGroup.add(oArrow);
+        }
+      }
+
+      //label
+      var oCenterLabel = new Konva.Text({
+        x: 0,
+        y: 0,
+        text: _genLinkCenterLabel(oBuObj, oTopo),
+        fontSize: 12,
+        fill: _getCenterLabelColor(oBuObj, oTopo)
+      });
+      _setCenterLabelPosition(oCenterLabel, position.middle);
+      oGroup.add(oCenterLabel);
+
+      oTopo.ins.layerLink.add(oGroup);
+
+      //event
+      oGroup.on("click", function (evt) {
+        console.log("link click");
+        onLinkClick(oGroup, oTopo);
+      });
+      oGroup.on("mouseover", function (evt) {
+        _setMouseHoverStyle(this, oTopo)
+      });
+      oGroup.on("mouseout", function (evt) {
+        _setMouseHoverOutStyle(this, oTopo);
+      });
+      oGroup.on("dblclick", function (evt) {
+        console.log("link dblclick");
+        _dblClickLink(arrSrcLinks, oGroup, oTopo);
+      });
+
+      return oLine;
+    };
+
+    var _drawArrow = function (oPos, oBuObj, oTopo) {
+      var oArrow = new Konva.Arrow({
+        points: [oPos.sX, oPos.sY, oPos.eX, oPos.eY],
+        pointerWidth: 8,
+        pointerHeight: 8,
+        fill: _getLinkColor(oBuObj, oTopo),
+        stroke: _getLinkColor(oBuObj, oTopo),
+        strokeWidth: _getLinkWidth(oBuObj, oTopo),
+        lineJoin: "round",
+        lineCap: "round"
+      });
+      return oArrow;
+    };
+
     //#endregion
 
     //#region event
@@ -186,13 +317,13 @@
         if (oGroup.tag.uiSelectLink == undefined || false == oGroup.tag.uiSelectLink) {
           //1.1.select current oGroup
           oGroup.tag.uiSelectLink = true;
-          _setSelectLinkStyle(oGroup.children[0], oTopo);
+          _setSelectLinkStyle(oGroup, oTopo);
           oTopo.Layer.reDraw(oTopo.ins.layerLink);
         }
         else {
           //1.2.unSelect current oGroup
           oGroup.tag.uiSelectLink = false;
-          _setUnSelectLinkStyle(oGroup.children[0], oTopo);
+          _setUnSelectLinkStyle(oGroup, oTopo);
           oTopo.Layer.reDraw(oTopo.ins.layerLink);
         }
       }
@@ -204,24 +335,29 @@
 
         //2.2.select current oGroup
         oGroup.tag.uiSelectLink = true;
-        _setSelectLinkStyle(oGroup.children[0], oTopo);
+        _setSelectLinkStyle(oGroup, oTopo);
         oTopo.Layer.reDraw(oTopo.ins.layerLink);
       }
     };
 
-    var _setSelectLinkStyle = function (oLine, oTopo) {
-      oLine.shadowEnabled(true);
-      oLine.shadowColor(oTopo.Resource.getTheme().link.selectColor);
-      oLine.shadowBlur(5);
-      oLine.shadowOffset({
-        x: 0,
-        y: 0
+    var _setSelectLinkStyle = function (oLinkGroup, oTopo) {
+      oLinkGroup.children.forEach(function (oChild, index) {
+        oChild.shadowEnabled(true);
+        oChild.shadowColor(oTopo.Resource.getTheme().link.selectColor);
+        oChild.shadowBlur(5);
+        oChild.shadowOffset({
+          x: 0,
+          y: 0
+        });
+        oChild.shadowOpacity(1);
       });
-      oLine.shadowOpacity(1);
+
     };
 
-    var _setUnSelectLinkStyle = function (oLine, oTopo) {
-      oLine.shadowEnabled(false);
+    var _setUnSelectLinkStyle = function (oLinkGroup, oTopo) {
+      oLinkGroup.children.forEach(function (oChild, index) {
+        oChild.shadowEnabled(false);
+      });
     };
 
     var _setMouseHoverStyle = function (oLine, oTopo) {
@@ -268,6 +404,7 @@
 
     //#region style
 
+    //可删除
     var _getBezierPoint = function (oPointStart, oPointEnd, iHeight) {
       //1.oPointMid
       var oPointMid = {
@@ -293,7 +430,7 @@
       };
     };
 
-    //这个函数中算中间节点的代码可以参考_getBezierPoint中计算方式优化
+    //可删除，这个函数中算中间节点的代码可以参考_getBezierPoint中计算方式优化
     var _getPosition = function (oBuObj, iOffsetIndex, oTopo) {
       //oNodeSrc/oNodeDst
       var oNodeSrc = oTopo.Sprite.NodeGroup.getDrawnGroupById(oBuObj.srcNodeId, oTopo);
@@ -374,6 +511,179 @@
 
     };
 
+    var _getPositionEx = function (oBuObj, iOffsetIndex, linkCount, oTopo) {
+      //oNodeSrc/oNodeDst
+      var oNodeSrc = oTopo.Sprite.NodeGroup.getDrawnGroupById(oBuObj.srcNodeId, oTopo);
+      var oNodeDst = oTopo.Sprite.NodeGroup.getDrawnGroupById(oBuObj.dstNodeId, oTopo);
+
+      var oNodeSrcPos = oTopo.Sprite.Node.getCenterPos(oNodeSrc);
+      var oNodeDstPos = oTopo.Sprite.Node.getCenterPos(oNodeDst);
+
+      //确保源节点在宿节点的左侧
+      var reverse = false;
+      if (oNodeDstPos.x < oNodeSrcPos.x) {
+        var temp = oNodeSrcPos;
+        oNodeSrcPos = oNodeDstPos;
+        oNodeDstPos = temp;
+        reverse = true;
+      }
+
+      var s1X = oNodeSrcPos.x;
+      var s1Y = oNodeSrcPos.y;
+      var s2X, s2Y, s3X, s3Y, mX, mY, e3X, e3Y, e2X, e2Y, e1X, e1Y;
+      var e1X = oNodeDstPos.x;
+      var e1Y = oNodeDstPos.y;
+
+      var oIndex, step;
+      //如果为奇数
+      if (iOffsetIndex % 2 == 1) {
+        oIndex = (iOffsetIndex + 1) / 2;
+
+      }
+      //如果为偶数
+      else {
+        oIndex = iOffsetIndex / 2;
+      }
+      step = oIndex * OFFSET;
+
+      var length = Math.sqrt(Math.pow(s1X - e1X, 2) + Math.pow(s1Y - e1Y, 2));
+      var a1 = Math.atan(step / (length / 2));
+      var a2 = Math.atan(Math.abs(s1Y - e1Y) / Math.abs(s1X - e1X));
+      var radius = Math.sqrt(Math.pow(step, 2) + Math.pow(length / 2, 2));
+      var centerLength = length - oNodeSrcPos.width / 2 - oNodeDstPos.width / 2;
+      var a3, a4;
+      if (linkCount % 2 == 1) {
+        a3 = a4 = 0.5 * Math.PI / ((linkCount - 1) / 2) * oIndex;
+      }
+      else {
+        a3 = a4 = 0.5 * Math.PI / ((linkCount) / 2) * oIndex;
+      }
+      //1.区分两种场景
+      //1.1如果源节点的y坐标大于宿节点的y坐标
+      if (s1Y > e1Y) {
+        //如果为奇数
+        if (iOffsetIndex % 2 === 1) {
+          mX = s1X + radius * Math.cos(a2 + a1);
+          mY = s1Y - radius * Math.sin(a2 + a1);
+          s2X = s1X + (oNodeSrcPos.width / 2) * Math.cos(a3 + a2);
+          s2Y = s1Y - (oNodeSrcPos.width / 2) * Math.sin(a3 + a2);
+          s3X = mX - (centerLength / 2) * Math.cos(a2);
+          s3Y = mY + (centerLength / 2) * Math.sin(a2);
+          e3X = mX + (centerLength / 2) * Math.cos(a2);
+          e3Y = mY - (centerLength / 2) * Math.sin(a2);
+          e2X = e1X - (oNodeDstPos.width / 2) * Math.cos(a4 - a2);
+          e2Y = e1Y - (oNodeDstPos.width / 2) * Math.sin(a4 - a2);
+        }
+        //如果为偶数
+        else {
+          mX = s1X + radius * Math.cos(a2 - a1);
+          mY = s1Y - radius * Math.sin(a2 - a1);
+          s2X = s1X + (oNodeSrcPos.width / 2) * Math.cos(a3 - a2);
+          s2Y = s1Y + (oNodeSrcPos.width / 2) * Math.sin(a3 - a2);
+          s3X = mX - (centerLength / 2) * Math.cos(a2);
+          s3Y = mY + (centerLength / 2) * Math.sin(a2);
+          e3X = mX + (centerLength / 2) * Math.cos(a2);
+          e3Y = mY - (centerLength / 2) * Math.sin(a2);
+          e2X = e1X - (oNodeDstPos.width / 2) * Math.cos(a4 + a2);
+          e2Y = e1Y + (oNodeDstPos.width / 2) * Math.sin(a4 + a2);
+        }
+      }
+      //1.2如果源节点的y坐标小于宿节点的y坐标
+      else {
+        //如果为奇数
+        if (iOffsetIndex % 2 === 1) {
+          mX = s1X + radius * Math.cos(a2 + a1);
+          mY = s1Y + radius * Math.sin(a2 + a1);
+          s2X = s1X + (oNodeSrcPos.width / 2) * Math.cos(a3 + a2);
+          s2Y = s1Y + (oNodeSrcPos.width / 2) * Math.sin(a3 + a2);
+          s3X = mX - (centerLength / 2) * Math.cos(a2);
+          s3Y = mY - (centerLength / 2) * Math.sin(a2);
+          e3X = mX + (centerLength / 2) * Math.cos(a2);
+          e3Y = mY + (centerLength / 2) * Math.sin(a2);
+          e2X = e1X - (oNodeDstPos.width / 2) * Math.cos(a4 - a2);
+          e2Y = e1Y + (oNodeDstPos.width / 2) * Math.sin(a4 - a2);
+        }
+        //如果为偶数
+        else {
+          mX = s1X + radius * Math.cos(a2 - a1);
+          mY = s1Y + radius * Math.sin(a2 - a1);
+          s2X = s1X + (oNodeSrcPos.width / 2) * Math.cos(a3 - a2);
+          s2Y = s1Y - (oNodeSrcPos.width / 2) * Math.sin(a3 - a2);
+          s3X = mX - (centerLength / 2) * Math.cos(a2);
+          s3Y = mY - (centerLength / 2) * Math.sin(a2);
+          e3X = mX + (centerLength / 2) * Math.cos(a2);
+          e3Y = mY + (centerLength / 2) * Math.sin(a2);
+          e2X = e1X - (oNodeDstPos.width / 2) * Math.cos(a4 + a2);
+          e2Y = e1Y - (oNodeDstPos.width / 2) * Math.sin(a4 + a2);
+        }
+      }
+
+      if (reverse) {
+        return {
+          start1: {
+            x: e1X,
+            y: e1Y
+          },
+          start2: {
+            x: e2X,
+            y: e2Y
+          },
+          start3: {
+            x: e3X,
+            y: e3Y
+          },
+          middle: {
+            x: mX,
+            y: mY
+          },
+          end3: {
+            x: s3X,
+            y: s3Y
+          },
+          end2: {
+            x: s2X,
+            y: s2Y
+          },
+          end1: {
+            x: s1X,
+            y: s1Y
+          }
+        }
+      }
+      else {
+        return {
+          start1: {
+            x: s1X,
+            y: s1Y
+          },
+          start2: {
+            x: s2X,
+            y: s2Y
+          },
+          start3: {
+            x: s3X,
+            y: s3Y
+          },
+          middle: {
+            x: mX,
+            y: mY
+          },
+          end3: {
+            x: e3X,
+            y: e3Y
+          },
+          end2: {
+            x: e2X,
+            y: e2Y
+          },
+          end1: {
+            x: e1X,
+            y: e1Y
+          }
+        }
+      }
+    };
+
     var _setCenterLabelPosition = function (oLabel, oPosition) {
       oLabel.setOffset({
         x: -oPosition.x + oLabel.getWidth() / 2,
@@ -445,9 +755,7 @@
           oNode.children.forEach(function (oChildNode, index) {
             if (oChildNode.id === oBuObj.srcNodeId || oChildNode.id === oBuObj.dstNodeId) {
               if (_isGroupLink(oBuObj)) {
-                oBuObj.children.forEach(function (oChildLink, index) {
-                  arrLinks.push(oChildLink);
-                })
+                arrLinks = arrLinks.concat(oBuObj.children);
               }
               else {
                 arrLinks.push(oBuObj);
@@ -555,7 +863,7 @@
       for (var i = 0; i < arrSelectLinkGroup.length; i++) {
         var oSelectLinkGroup = arrSelectLinkGroup[i];
         oSelectLinkGroup.tag.uiSelectLink = false;
-        _setUnSelectLinkStyle(oSelectLinkGroup.children[0]);
+        _setUnSelectLinkStyle(oSelectLinkGroup);
       }
 
       oTopo.Layer.reDraw(oTopo.ins.layerLink);
@@ -573,7 +881,7 @@
       arrLinkId.forEach(function (linkId, index) {
         var oLinkGroup = oTopo.Stage.findOne(linkId, oTopo);
         oLinkGroup.tag.uiSelectLink = true;
-        _setSelectLinkStyle(oLinkGroup.children[0], oTopo);
+        _setSelectLinkStyle(oLinkGroup, oTopo);
       });
       oTopo.Layer.reDraw(oTopo.ins.layerLink);
     };

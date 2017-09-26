@@ -72,19 +72,34 @@
 
           //#region 网元
           var arrNode = [];
-          for (var i = 0; i < 3; i++) {
-            var iX = Math.random() * 400;
-            var iY = Math.random() * 200;
-            var oNode = {
-              id: "nodeBase" + i,
-              x: iX,
-              y: iY,
-              uiImgKey: "node",
-              uiLabel: "nodeBase" + i,
-              uiNode: true
-            };
-            arrNode.push(oNode);
-          }
+          var oNode1 = {
+            id: "VNE1",
+            x: Math.random() * 400,
+            y: Math.random() * 200,
+            uiImgKey: "node",
+            uiLabel: "VNE1",
+            uiNode: true
+          };
+          arrNode.push(oNode1);
+          var oNode2 = {
+            id: "nodeBase0",
+            x: Math.random() * 400,
+            y: Math.random() * 200,
+            uiImgKey: "node",
+            uiLabel: "nodeBase0",
+            uiNode: true
+          };
+          arrNode.push(oNode2);
+          var oNode3 = {
+            id: "nodeBase1",
+            x: Math.random() * 400,
+            y: Math.random() * 200,
+            uiImgKey: "node",
+            uiLabel: "nodeBase1",
+            uiNode: true
+          };
+          arrNode.push(oNode3);
+          console.log(arrNode);
           oTopoData.nodes = arrNode;
           //#endregion
 
@@ -95,33 +110,33 @@
           //#region 网元与网元之间的单条链路
           var oLink1 = {
             id: "link1",
-            srcNodeId: "nodeBase0",
-            dstNodeId: "nodeBase1",
-            uiLabelL: "nodeBase0",
+            srcNodeId: "VNE1",
+            dstNodeId: "nodeBase0",
+            uiLabelL: "VNE1",
             uiLabelM: "link1",
-            uiLabelR: "nodeBase1",
+            uiLabelR: "nodeBase0",
             uiLink: true,
             uiLinkColorKey: "linkType1",
             uiLinkWidth: 3
           };
           var oLink2 = {
             id: "link2",
-            srcNodeId: "nodeBase1",
-            dstNodeId: "nodeBase2",
-            uiLabelL: "nodeBase1",
+            srcNodeId: "nodeBase0",
+            dstNodeId: "nodeBase1",
+            uiLabelL: "nodeBase0",
             uiLabelM: "link2",
-            uiLabelR: "nodeBase2",
+            uiLabelR: "nodeBase1",
             uiLink: true,
             uiLinkColorKey: "linkType1",
             uiLinkWidth: 3
           };
           var oLink3 = {
             id: "link3",
-            srcNodeId: "nodeBase0",
-            dstNodeId: "nodeBase2",
-            uiLabelL: "nodeBase0",
+            srcNodeId: "VNE1",
+            dstNodeId: "nodeBase1",
+            uiLabelL: "VNE1",
             uiLabelM: "link3",
-            uiLabelR: "nodeBase2",
+            uiLabelR: "nodeBase1",
             uiLink: true,
             uiLinkColorKey: "linkType1",
             uiLinkWidth: 3
@@ -423,12 +438,200 @@
         this.$refs.ref4S4S5Topo.updateTopo(arrRouteBeforeInsert, arrRouteAfterInsert);
       },
       _getTopoData4BeforeInsert: function (arrRouteBeforeInsert) {
-        var oTopo = [];
-        return oTopo;
+        var oTopoData = {
+          nodes: [],
+          nodeGroups: [],
+          links: []
+        };
+        //#region 网元
+        var arrNode = [];
+        var oNode1 = {
+          id: "VNE1",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "VNE1",
+          uiNode: true
+        };
+        arrNode.push(oNode1);
+        var oNode2 = {
+          id: "nodeBase0",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "nodeBase0",
+          uiNode: true
+        };
+        arrNode.push(oNode2);
+        var oNode3 = {
+          id: "nodeBase1",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "nodeBase1",
+          uiNode: true
+        };
+        arrNode.push(oNode3);
+        console.log(arrNode);
+        oTopoData.nodes = arrNode;
+        //#endregion
+
+        //#region link
+        var arrLink = [];
+        var oLink1 = {
+          id: "link1",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase0",
+          uiLabelL: "VNE1",
+          uiLabelM: "link1",
+          uiLabelR: "nodeBase0",
+          uiLink: true,
+          uiLinkColorKey: "linkType1",
+          uiLinkWidth: 3
+        };
+        var oLink2 = {
+          id: "link2",
+          srcNodeId: "nodeBase0",
+          dstNodeId: "nodeBase1",
+          uiLabelL: "nodeBase0",
+          uiLabelM: "link2",
+          uiLabelR: "nodeBase1",
+          uiLink: true,
+          uiLinkColorKey: "linkType2",
+          uiLinkWidth: 3,
+          uiDirection:2
+        };
+        var oLink3 = {
+          id: "link3",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase1",
+          uiLabelL: "VNE1",
+          uiLabelM: "link3",
+          uiLabelR: "nodeBase1",
+          uiLink: true,
+          uiLinkColorKey: "linkType2",
+          uiLinkWidth: 3,
+          uiDirection:2
+        };
+        var oLink4= {
+          id: "link4",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase0",
+          uiLabelL: "VNE1",
+          uiLabelM: "0001/E1_/CDMXDFCU/CDMXDFTP",
+          uiLabelR: "nodeBase0",
+          uiLink: true,
+          uiLinkColorKey: "linkType3",
+          uiLinkWidth: 3,
+          uiDirection:2,
+          uiDash: [10, 5]
+        };
+        arrLink.push(oLink1);
+        arrLink.push(oLink2);
+        arrLink.push(oLink3);
+        arrLink.push(oLink4);
+        oTopoData.links = arrLink;
+        //#endregion
+
+        return oTopoData;
       },
       _getTopoData4AfterInsert: function (arrRouteAfterInsert) {
-        var oTopo = [];
-        return oTopo;
+        var oTopoData = {
+          nodes: [],
+          nodeGroups: [],
+          links: []
+        };
+        //#region 网元
+        var arrNode = [];
+        var oNode1 = {
+          id: "VNE1",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "VNE1",
+          uiNode: true
+        };
+        arrNode.push(oNode1);
+        var oNode2 = {
+          id: "nodeBase0",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "nodeBase0",
+          uiNode: true
+        };
+        arrNode.push(oNode2);
+        var oNode3 = {
+          id: "nodeBase1",
+          x: Math.random() * 400,
+          y: Math.random() * 200,
+          uiImgKey: "node",
+          uiLabel: "nodeBase1",
+          uiNode: true
+        };
+        arrNode.push(oNode3);
+        console.log(arrNode);
+        oTopoData.nodes = arrNode;
+        //#endregion
+
+        //#region link
+        var arrLink = [];
+        var oLink1 = {
+          id: "link1",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase0",
+          uiLabelL: "VNE1",
+          uiLabelM: "link1",
+          uiLabelR: "nodeBase0",
+          uiLink: true,
+          uiLinkColorKey: "linkType1",
+          uiLinkWidth: 3
+        };
+        var oLink2 = {
+          id: "link2",
+          srcNodeId: "nodeBase0",
+          dstNodeId: "nodeBase1",
+          uiLabelL: "nodeBase0",
+          uiLabelM: "link2",
+          uiLabelR: "nodeBase1",
+          uiLink: true,
+          uiLinkColorKey: "linkType2",
+          uiLinkWidth: 3,
+          uiDirection:2
+        };
+        var oLink3 = {
+          id: "link3",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase1",
+          uiLabelL: "VNE1",
+          uiLabelM: "link3",
+          uiLabelR: "nodeBase1",
+          uiLink: true,
+          uiLinkColorKey: "linkType2",
+          uiLinkWidth: 3,
+          uiDirection:2
+        };
+        var oLink4= {
+          id: "link4",
+          srcNodeId: "VNE1",
+          dstNodeId: "nodeBase0",
+          uiLabelL: "VNE1",
+          uiLabelM: "0001/E1_/CDMXDFCU/CDMXDFTP",
+          uiLabelR: "nodeBase0",
+          uiLink: true,
+          uiLinkColorKey: "linkType3",
+          uiLinkWidth: 3,
+          uiDirection:2,
+          uiDash: [10, 5]
+        };
+        arrLink.push(oLink1);
+        arrLink.push(oLink2);
+        arrLink.push(oLink3);
+        arrLink.push(oLink4);
+        oTopoData.links = arrLink;
+        //#endregion
+
+        return oTopoData;
       },
       onClick4ExportNotInsertTraffic: function () {
         console.log("onClick4ExportNotInsertTraffic");

@@ -232,7 +232,7 @@
         this.solutionDescription = this.$refs.ref4Description.getInputMsg();
         var arrNodes = [];
         this.rows4SelectNodes.forEach(function(oRow, index){
-          arrNodes.push(oRow[1]);
+          arrNodes.push([oRow[1]]);
         });
         this.$emit("onClickOk", this.solutionName, this.solutionUserName, this.solutionType,
           this.solutionDescription, arrNodes);

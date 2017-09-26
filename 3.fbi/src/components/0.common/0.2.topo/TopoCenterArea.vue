@@ -43,7 +43,11 @@
       },
       selectLinksById: function(arrLinkId){
         this.$refs.ref4Topo.selectLinksById(arrLinkId);
-      }
+      },
+      updateTopo: function (oTopoData) {
+        this.$refs.ref4Topo.updateTopo(oTopoData);
+//        console.log("updateTopo");
+      },
       //#endregion
     }
   }

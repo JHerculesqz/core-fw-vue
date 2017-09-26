@@ -68,8 +68,9 @@
       drawTopo: function (oTopoData) {
         this.$refs.ref4TopoCenterArea.draw(oTopoData);
       },
-      updateTopo: function (oTopo) {
-        console.log("updateTopo");
+      updateTopo: function (oTopoData) {
+        this.$refs.ref4TopoCenterArea.updateTopo(oTopoData);
+//        console.log("updateTopo");
       },
       //#endregion
     },
