@@ -20,11 +20,7 @@
         debug: true,
         //endregion
         //#region topo
-        toolbarItems: [{
-          id: 0,
-          label: '现网同步',
-          icon: 'icon-sphere'
-        }],
+        toolbarItems: [],
         showLeftArea: false,
         showRightArea: false,
         //#endregion

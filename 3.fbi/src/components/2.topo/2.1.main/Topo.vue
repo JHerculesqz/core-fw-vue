@@ -54,7 +54,7 @@
       }
     },
     mounted: function(){
-      this._activeTabBtn(true);
+
     },
     methods: {
       //#region inner

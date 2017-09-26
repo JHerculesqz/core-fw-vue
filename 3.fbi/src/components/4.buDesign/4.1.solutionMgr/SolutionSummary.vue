@@ -100,7 +100,18 @@
     methods: {
       //#region inner
       onClickView: function(){
-        MarvelRouter.to(this.$router, "SolutionDetails", {name: this.solutionName});
+          if(this.solutionType == "节点式环插"){
+            MarvelRouter.to(this.$router, "SolutionDetails", {name: this.solutionName});
+          }
+          else if(this.solutionType == "单站"){
+            MarvelRouter.to(this.$router, "SolutionDetails4Single", {name: this.solutionName});
+          }
+          else if(this.solutionType == "链路式环插"){
+            MarvelRouter.to(this.$router, "SolutionDetails4LinkInsert", {name: this.solutionName});
+          }
+          else if(this.solutionType == "端到端搬迁"){
+            MarvelRouter.to(this.$router, "SolutionDetails4E2EInsert", {name: this.solutionName});
+          }
       },
       onClickSubmit: function(){
         alert("onClickSubmit");

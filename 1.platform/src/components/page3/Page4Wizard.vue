@@ -22,7 +22,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
                   &lt;marvel-wizard ref="ref0" :items="items"&gt;&lt;/marvel-wizard&gt;
                 </code>
@@ -41,7 +41,10 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="background-color: #000000">
-              <marvel-wizard-tab theme="dark"
+              <button v-on:click="setWarn">setWarn</button>
+              <button v-on:click="setNotWarn">setNotWarn</button>
+              <marvel-wizard-tab ref="ref4WizardTabs"
+                                 theme="dark"
                                  :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
             </div>
             <!--2级DemoView end-->
@@ -50,7 +53,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
                   &lt;marvel-wizard-tab theme="dark"
                                      :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"&gt;&lt;/marvel-wizard-tab&gt;
@@ -120,11 +123,13 @@
         wizardTabs: [{
           index: 1,
           label: "拓扑还原",
-          isActive: true
+          isActive: true,
+          isWarn: false,
         }, {
           index: 2,
           label: "业务还原",
-          isActive: false
+          isActive: false,
+          isWarn: true,
         }]
         //#endregion
         //#endregion
@@ -140,7 +145,13 @@
       //#region wizardTab
       onClickWizardTab: function (oItem) {
         alert(oItem.index);
-      }
+      },
+      setWarn: function () {
+        this.$refs.ref4WizardTabs.setItemWarnOrNot([1], true);
+      },
+      setNotWarn: function () {
+        this.$refs.ref4WizardTabs.setItemWarnOrNot([1], false);
+      },
       //#endregion
     }
   }
@@ -203,6 +214,7 @@
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix style end*/
   /*document custom style start*/
   .showArea {

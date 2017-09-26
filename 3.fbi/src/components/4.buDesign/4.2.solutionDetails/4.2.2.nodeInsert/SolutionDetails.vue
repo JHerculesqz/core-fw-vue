@@ -1,8 +1,24 @@
 <template>
   <div class="main">
     <div class="customTabWrapper">
-      <marvel-wizard-tab theme="dark"
-                         :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
+      <div class="tabArea">
+        <marvel-wizard-tab ref="ref4SoulutionWizardTab"
+                           theme="dark"
+                           :wizardTabs="wizardTabs"
+                           v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
+      </div>
+      <div class="btnArea">
+        <marvel-icon-txt-button size="normal" classCustom="classCustom"
+                                label="现网同步"
+                                icon="icon-checkmark"
+                                theme="dark"
+                                v-on:onClick="onClickNetWorkSynBtn"></marvel-icon-txt-button>
+        <marvel-icon-txt-button size="normal" classCustom="classCustom"
+                                label="查看同步结果"
+                                icon="icon-checkmark"
+                                theme="dark"
+                                v-on:onClick="onClickNetWorkSynRes"></marvel-icon-txt-button>
+      </div>
     </div>
     <div class="topoArea">
       <div class="topoAreaCont">
@@ -23,12 +39,16 @@
   import MarvelWizardTab from "@/walle/widget/wizard/MarvelWizardTab";
   import NodeInsertS1 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS1";
   import NodeInsertS2 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS2";
+  import NodeInsertS2Res from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS2Res";
   import NodeInsertS3 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS3";
   import NodeInsertS4 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS4";
   import NodeInsertS5 from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NodeInsertS5";
+  import NetWorkSynTrafficRes from "@/components/4.buDesign/4.2.solutionDetails/4.2.2.nodeInsert/NetWorkSynTrafficRes";
+  import MarvelIconTxtButton from "@/walle/widget/button/MarvelIconTxtButton";
 
   export default {
     components: {
+      MarvelIconTxtButton,
       MarvelWizardTab,
       MarvelRouter,
       MarvelTxtButton,
@@ -36,9 +56,11 @@
       MarvelTab,
       NodeInsertS1,
       NodeInsertS2,
+      NodeInsertS2Res,
       NodeInsertS3,
       NodeInsertS4,
-      NodeInsertS5
+      NodeInsertS5,
+      NetWorkSynTrafficRes,
     },
     name: 'SolutionDetails',
     data: function () {
@@ -50,23 +72,28 @@
         wizardTabs: [{
           index: 1,
           label: "新建华为网络",
-          isActive: true
+          isActive: true,
+          isWarn:false,
         }, {
           index: 2,
           label: "环插设备",
-          isActive: false
+          isActive: false,
+          isWarn:false,
         }, {
           index: 3,
           label: "确认不可割接业务",
-          isActive: false
+          isActive: false,
+          isWarn:false,
         }, {
           index: 4,
           label: "割接穿通业务",
-          isActive: false
+          isActive: false,
+          isWarn:false,
         }, {
           index: 5,
           label: "割接落地业务",
-          isActive: false
+          isActive: false,
+          isWarn:false,
         }],
         //#endregion
         //#region params
@@ -100,6 +127,18 @@
           this.moduleName = "NodeInsertS5";
         }
       },
+      onClickNetWorkSynBtn:function(){
+          if(this.debug){
+            //alert("onClickNetWorkSynBtn");
+            this.$refs.ref4SoulutionWizardTab.setItemWarnOrNot([2,4,5],true);
+          }
+          else{
+              //TODO:
+          }
+      },
+      onClickNetWorkSynRes:function(){
+        this.moduleName = "NetWorkSynTrafficRes";
+      }
       //#endregion
       //#region callback
 
@@ -116,13 +155,28 @@
     height: 100%;
   }
   .customTabWrapper {
-    height: 32px;
+    height: 52px;
     box-sizing: border-box;
-    padding: 10px 10px 0 10px;
+    padding: 0px 10px;
+  }
+  .tabArea{
+    float: left;
+    height:100%;
+    padding-top: 15px;
+    box-sizing: border-box;
+  }
+  .btnArea{
+    float: right;
+    height:100%;
+    padding-top: 10px;
+    box-sizing: border-box;
+  }
+  .classCustom{
+    margin-right: 20px;
   }
   .topoArea {
-    height: calc(100% - 32px);
-    padding: 10px;
+    height: calc(100% - 52px);
+    padding: 0px 10px 10px 10px;
     box-sizing: border-box;
   }
   .topoAreaCont{

@@ -67,10 +67,6 @@
           id: 12,
           label: '创建光纤',
           icon: 'icon-marvelIcon-44'
-        }, {
-          id: 13,
-          label: '现网同步',
-          icon: 'icon-sphere'
         }],
         //#endregion
       }

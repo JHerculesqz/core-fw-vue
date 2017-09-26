@@ -2,7 +2,7 @@
   <!--使用潜规则 父容器高度应保证大于78px-->
   <!-- wizards start-->
   <div class="wizard2Wrapper" v-bind:class="theme">
-    <div class="wizard2Item" v-bind:class="{ active : item.isActive }"
+    <div class="wizard2Item" v-bind:class="{ active : item.isActive, tip:item.isWarn }"
          v-for="item in wizardTabs"
          v-on:click="onClick(item)">
       <div class="decorationArea">
@@ -13,6 +13,7 @@
         <div class="wizardNum">{{item.index}}</div>
         <div class="wizardName">{{item.label}}</div>
         <div class="wizardRight icon-marvelIcon-66"></div>
+        <div class="wizardRedPoint"></div>
       </div>
     </div>
   </div>
@@ -29,17 +30,31 @@
     methods: {
       //#region inner
       onClick: function (oClickItem) {
-        for(var i=0;i<this.wizardTabs.length;i++){
+        for (var i = 0; i < this.wizardTabs.length; i++) {
           var oItem = this.wizardTabs[i];
-          if(oItem.index == oClickItem.index){
+          if (oItem.index == oClickItem.index) {
             oItem.isActive = true;
           }
-          else{
+          else {
             oItem.isActive = false;
           }
         }
         this.$emit("onClick", oClickItem);
+      },
+      //#endregion
+      //#region 3rd
+      setItemWarnOrNot: function (arrItemIndex, bIsWarn) {
+        for (var i = 0; i < this.wizardTabs.length; i++) {
+          var oItem = this.wizardTabs[i];
+          if (arrItemIndex.indexOf(oItem.index) != -1 && bIsWarn) {
+            oItem.isWarn = true;
+          }
+          else if (arrItemIndex.indexOf(oItem.index) != -1 && !bIsWarn) {
+            oItem.isWarn = false;
+          }
+        }
       }
+
       //#endregion
     }
   }
@@ -138,6 +153,21 @@
     line-height: 22px;
     color: #ccc;
     text-align: left;
+  }
+
+  .wizardRedPoint {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #ff4400;
+    display: none;
+  }
+
+  .tip .wizardRedPoint {
+    display: block;
   }
 
   .active .decorationArea .decorationLeft {

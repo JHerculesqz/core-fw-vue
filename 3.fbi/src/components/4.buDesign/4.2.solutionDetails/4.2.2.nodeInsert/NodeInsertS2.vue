@@ -90,10 +90,6 @@
           id: 1,
           label: '批量环插设备',
           icon: 'icon-marvelIcon-31'
-        }, {
-          id: 2,
-          label: '现网同步',
-          icon: 'icon-sphere'
         }],
         //#endregion
         //#region dialog
@@ -183,9 +179,6 @@
         }
         else if (oToolbarItem.id == 1) {
           alert("批量环插设备");
-        }
-        else if(oToolbarItem.id == 2){
-          alert("现网同步");
         }
       },
       _getNodes: function (oAfterCallBack) {
@@ -415,7 +408,7 @@
         }
       },
       onClickInsertViewResult:function(){
-
+        this.$parent.moduleName="NodeInsertS2Res";
       },
       //#endregion
 
