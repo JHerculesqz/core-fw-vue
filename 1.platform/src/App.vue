@@ -38,7 +38,9 @@
     name: 'app',
     data: function() {
       return {
+        //#region logo
         logo: "Fuck UI 2.0"
+        //#endregion
       }
     },
   }

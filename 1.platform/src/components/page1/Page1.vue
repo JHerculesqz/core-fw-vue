@@ -292,7 +292,7 @@
       }
     },
     methods: {
-        //#region inner
+      //#region inner
       accordionItemClick: function (oItem) {
         this.rightModuleName = oItem.id;
       },
