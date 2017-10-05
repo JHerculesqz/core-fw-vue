@@ -45,11 +45,14 @@
     name: 'page0',
     data: function() {
       return {
+        //#region mouseWheel
         mouseWheelCount: 0,
         MOUSE_WHEEL_0: 0,
         MOUSE_WHEEL_1: 3,
         MOUSE_WHEEL_2: 6,
         MOUSE_WHEEL_3: 9,
+        //#endregion
+        //#region page0_1
         page0_1: {
           title: "Fuck UI 2.0",
           contentLst: ["统一：UI设计标准化",
@@ -57,6 +60,8 @@
             "高效：快速原型开发，快速设计反馈"],
           show: true
         },
+        //#endregion
+        //#region page0_2
         page0_2: {
           subTitle: "Question",
           title: "WEB开发痛点",
@@ -65,6 +70,8 @@
             "如何最小成本、最快速度进行设计试错"],
           show: false
         },
+        //#endregion
+        //#region page0_3
         page0_3: {
           subTitle: "Solution",
           title: "标准/组件/控件",
@@ -73,9 +80,11 @@
             "丰富的大数据展示控件"],
           show: false
         }
+        //#endregion
       }
     },
     methods:{
+      //#region inner
       onMouseWheel: function(evt){
         //1.update mouseWheelCount
         if(evt.wheelDelta < 0){
@@ -114,6 +123,13 @@
           this.page0_3.show = true;
         }
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>

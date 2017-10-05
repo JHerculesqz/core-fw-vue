@@ -1,54 +1,51 @@
 <template>
-  <div>
-    <div class="widgetShowSession">
-      <!--1级 start-->
-      <div class="title level1">Topo</div>
-      <div class="describe">
-        Topo
-      </div>
-      <!--1级 end-->
-      <!--2级 start-->
-      <div class="title level2">Topo</div>
-      <div class="describe">
-        Topo
-      </div>
-      <div class="showArea">
-        <marvel-tab :tabItems="tabItems1">
-          <marvel-tab-item :isActive="tabItems1[0].isActive">
-            <div class="showAreaInner">
-              <!--2级DemoView start-->
-              <button v-on:click="onClickExpandNodeGroup">expandNodeGroup</button>
-              <button v-on:click="onClickCollapseNodeGroup">collapseNodeGroup</button>
-              <button v-on:click="onClickExpandLinkGroup">expandLinkGroup</button>
-              <button v-on:click="onClickCollapseLinkGroup">collapseLinkGroup</button>
-              <button v-on:click="onClickSelectNodes">selectNodes</button>
-              <button v-on:click="onClickSelectLinks">selectLinks</button>
-              <div style="width: 800px; height: 340px;">
-                <marvel-topo ref="ref4Topo" id="topo" theme="dark"></marvel-topo>
-              </div>
-              <!--2级DemoView end-->
+  <div class="widgetShowSession">
+    <!--1级 start-->
+    <div class="title level1">Topo</div>
+    <div class="describe">
+      Topo
+    </div>
+    <!--1级 end-->
+    <!--2级 start-->
+    <div class="title level2">Topo</div>
+    <div class="describe">
+      Topo
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <button v-on:click="onClickExpandNodeGroup">expandNodeGroup</button>
+            <button v-on:click="onClickCollapseNodeGroup">collapseNodeGroup</button>
+            <button v-on:click="onClickExpandLinkGroup">expandLinkGroup</button>
+            <button v-on:click="onClickCollapseLinkGroup">collapseLinkGroup</button>
+            <button v-on:click="onClickSelectNodes">selectNodes</button>
+            <button v-on:click="onClickSelectLinks">selectLinks</button>
+            <div style="width: 800px; height: 340px;">
+              <marvel-topo ref="ref4Topo" id="topo" theme="dark"></marvel-topo>
             </div>
-          </marvel-tab-item>
-          <marvel-tab-item :isActive="tabItems1[1].isActive">
-            <div class="codeArea">
-              <!--2级CodeView start-->
-              <pre v-highlight>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
                 <code class="html">
 
                 </code>
               </pre>
-              <!--2级CodeView end-->
-            </div>
-          </marvel-tab-item>
-        </marvel-tab>
-      </div>
-      <!--2级 end-->
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
     </div>
+    <!--2级 end-->
   </div>
 </template>
 
 <script>
-
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
@@ -79,6 +76,7 @@
       }
     },
     mounted: function(){
+      //#region custom
       var oTopoData = {
         nodes: [],
         nodeGroups: [],
@@ -370,17 +368,18 @@
       this.$refs.ref4Topo.init(function(){
         self.$refs.ref4Topo.draw(oTopoData);
       });
-
+      //#endregion
     },
     methods: {
+      //#region inner
       onClickExpandNodeGroup: function(){
-          this.$refs.ref4Topo.expandAllNodeGroup();
+        this.$refs.ref4Topo.expandAllNodeGroup();
       },
       onClickCollapseNodeGroup: function(){
         this.$refs.ref4Topo.collapseAllNodeGroup();
       },
       onClickExpandLinkGroup: function(){
-         this.$refs.ref4Topo.expandAllLinkGroup();
+        this.$refs.ref4Topo.expandAllLinkGroup();
       },
       onClickCollapseLinkGroup: function(){
         this.$refs.ref4Topo.collapseAllLinkGroup();
@@ -391,9 +390,15 @@
       onClickSelectLinks: function(){
         this.$refs.ref4Topo.selectLinksById(["link0", "link1", "link2"]);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
-
 </script>
 
 <style scoped>
@@ -403,68 +408,56 @@
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
   .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
   .showArea {
     width: 100%;
   }
-
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
     height: 100%;
   }
-
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
-
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {

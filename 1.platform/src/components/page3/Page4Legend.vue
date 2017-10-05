@@ -83,10 +83,16 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onLegendItemClick: function(){
         console.log(this.items);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

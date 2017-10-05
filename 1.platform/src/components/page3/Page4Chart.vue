@@ -1,11 +1,12 @@
 <template>
-
   <div class="widgetShowSession">
+    <!--1级 start-->
     <div class="title level1">图表控件</div>
     <div class="describe">
       图表控件支持各种展现形式的图表，包括柱状图、饼图、曲线图、仪表盘、走势图等。
     </div>
-
+    <!--1级 end-->
+    <!--2级 start-->
     <div class="title level2">仪表盘</div>
     <div class="describe">
       仪表盘
@@ -36,7 +37,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">能力图</div>
     <div class="describe">
       能力图
@@ -67,7 +70,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">地图</div>
     <div class="describe">
       地图
@@ -96,7 +101,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">地图+柱状图</div>
     <div class="describe">
       地图+柱状图
@@ -126,7 +133,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">柱状图</div>
     <div class="describe">
       柱状图
@@ -155,9 +164,8 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
-
+    <!--2级 end-->
   </div>
-
 </template>
 
 <script>
@@ -182,6 +190,7 @@
     },
     data: function() {
       return {
+        //#region document data
         tabItems1: [
           {
             label: "Demo View",
@@ -232,6 +241,8 @@
             isActive: false
           }
         ],
+        //#endregion
+        //#region custom data
         gaugeData: {
           title: "新产生告警",
           key: "产生率",
@@ -332,9 +343,11 @@
         },
         interval1: null,
         interval2: null
+        //#endregion
       }
     },
     mounted: function(){
+      //#region custom
       var self = this;
       //1.
       this.interval1 = setInterval(function () {
@@ -461,92 +474,93 @@
       self.$refs.ref4.setData(self.scatterData2);
       //4.
       self.$refs.ref5.setData(self.stackLineData);
+      //#endregion
     },
     beforeDestroy: function(){
+      //#region custom
       if(this.interval1 != null){
         clearInterval(this.interval1);
       }
       if(this.interval2 != null){
         clearInterval(this.interval2);
       }
+      //#endregion
     },
     methods: {
+      //#region inner
       onScatterItemClick: function(oItem){
         console.log(oItem);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>
 
 <style scoped>
-  .chart{
-    height: 100%;
-    overflow-y: scroll;
-  }
-
+  /*document fix style start*/
   .widgetShowSession {
     padding: 20px 100px;
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
-  .level2{
-    margin-top: 40px;
-    font-size: 22px;
-    line-height: 48px;
-  }
-
-  .describe{
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
-  .showArea {
+  .codeArea {
     width: 100%;
-    height: 450px;
-  }
-
-  .codeArea{
-    width: 100%;
-    height:100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
-  .codeArea pre,.codeArea code{
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
-
+  /*document fix  style end*/
+  /*document custom style start*/
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
+  /*document custom style end*/
+  /*custom style start*/
+  .chart{
+    height: 100%;
+    overflow-y: scroll;
+  }
+  /*custom style end*/
 </style>

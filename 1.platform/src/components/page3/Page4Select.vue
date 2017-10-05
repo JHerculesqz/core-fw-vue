@@ -236,7 +236,7 @@
       }
     },
     mounted: function(){
-      //#region custom mounted
+      //#region custom
       //1.
       this.$refs.ref0.setStatus(false, false);
       this.$refs.ref1.setStatus(true, false);
@@ -255,7 +255,7 @@
       //#endregion
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick4Radio: function(){
         console.log("[Radio]getStatus..." +
           this.$refs.ref0.getCheckItem() + "," +
@@ -283,6 +283,12 @@
       onClick4SelectCard: function(){
         console.log("[SelectCard]..." + this.$refs.ref12.getSelectItem());
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

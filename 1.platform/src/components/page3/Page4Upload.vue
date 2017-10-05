@@ -1,10 +1,12 @@
 <template>
   <div class="widgetShowSession">
+    <!--1级 start-->
     <div class="title level1">文件上传</div>
     <div class="describe">
       文件上传
     </div>
-
+    <!--1级 end-->
+    <!--2级 start-->
     <div class="title level2">单文件上传</div>
     <div class="describe">
       单文件上传
@@ -34,6 +36,7 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -70,10 +73,16 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onTestBtnClick: function(){
-          console.log(this.$refs.ref0.getFile());
+        console.log(this.$refs.ref0.getFile());
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

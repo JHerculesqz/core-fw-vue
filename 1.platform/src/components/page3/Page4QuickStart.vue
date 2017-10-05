@@ -54,12 +54,18 @@ npm install FuckUI -S
       }
     },
     mounted: function(){
-      //#region custom mounted
+      //#region custom
 
       //#endregion
     },
     methods: {
-      //#region custom methods
+      //#region inner
+
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
 
       //#endregion
     }

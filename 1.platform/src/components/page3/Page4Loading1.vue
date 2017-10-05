@@ -60,7 +60,7 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       showGlobal: function(){
         this.$refs.ref0.imsgMarvelLoadingShow("global loading...");
       },
@@ -76,6 +76,12 @@
       hideRight: function(){
         this.$refs.ref2.imsgMarvelLoadingHide();
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

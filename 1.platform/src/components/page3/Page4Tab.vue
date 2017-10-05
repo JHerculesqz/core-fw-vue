@@ -106,7 +106,13 @@
       }
     },
     methods:{
-      //#region custom methods
+      //#region inner
+
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
 
       //#endregion
     }

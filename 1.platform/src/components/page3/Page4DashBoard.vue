@@ -1,11 +1,16 @@
 <template>
-
   <div class="widgetShowSession">
+    <!--1级 start-->
     <div class="title level1">DashBoard</div>
     <div class="describe">
       DashBoard页面xxx
     </div>
-
+    <!--1级 end-->
+    <!--2级 start-->
+    <div class="title level2">DashBoard</div>
+    <div class="describe">
+      DashBoard
+    </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems1">
         <marvel-tab-item :isActive="tabItems1[0].isActive">
@@ -36,8 +41,8 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
   </div>
-
 </template>
 
 <script>
@@ -56,16 +61,16 @@
   },
     data: function() {
       return {
-        tabItems1: [
-          {
-            label: "Demo View",
-            isActive: true
-          },
-          {
-            label: "Code View",
-            isActive: false
-          }
-        ],
+        //#region document data
+        tabItems1: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        //#endregion
+        //#region custom data
         items: [{
           label: "system",
           click: function(){
@@ -82,70 +87,68 @@
             console.log("settings...");
           }
         }]
+        //#endregion
       }
     }
   }
 </script>
 
 <style scoped>
-
+  /*document fix style start*/
   .widgetShowSession {
     padding: 20px 100px;
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
-  .describe{
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
-  .showArea {
+  .codeArea {
     width: 100%;
-    height: 550px;
-  }
-
-  .codeArea{
-    width: 100%;
-    height:100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
-  .codeArea pre,.codeArea code{
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+  /*document fix  style end*/
+  /*document custom style start*/
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
+  /*document custom style end*/
+  /*custom style start*/
 
+  /*custom style end*/
 </style>

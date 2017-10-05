@@ -1,4 +1,5 @@
 <template>
+  <!--TODO:切换几次view就很慢，待定位-->
   <div>
     <div class="widgetShowSession">
       <!--1级 start-->
@@ -75,7 +76,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems2[1].isActive">
             <div class="codeArea">
-              <pre v-hightlight>
+              <pre v-highlight>
                 <code class="html">
                   &lt;marvel-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick">&lt;/marvel-button&gt;
                   &lt;marvel-button classCustom="classCustom1" label="Small" v-on:onClick="onClick">&lt;/marvel-button&gt;
@@ -117,7 +118,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems3[1].isActive">
             <div class="codeArea">
-              <pre v-hightlight>
+              <pre v-highlight>
                 <code class="html">
                   &lt;marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
@@ -158,7 +159,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems4[1].isActive">
             <div class="codeArea">
-               <pre v-hightlight>
+               <pre v-highlight>
                 <code class="html">
                   &lt;marvel-icon-button classCustom="classCustom1" label="normal" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-button&gt;
@@ -192,7 +193,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems5[1].isActive">
             <div class="codeArea">
-               <pre v-hightlight>
+               <pre v-highlight>
                 <code class="html">
                   &lt;marvel-txt-button classCustom="classCustom1" label="normal" v-on:onClick="onClick">&lt;/marvel-txt-button&gt;
                   &lt;marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown" v-on:onClick="onClick">&lt;/marvel-txt-button&gt;
@@ -220,7 +221,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems6[1].isActive">
             <div class="codeArea">
-              <pre v-hightlight>
+              <pre v-highlight>
                 <code class="html">
 &lt;marvel-drop-down-button ref="ref14" classCustom="classCustom1" v-on:onClick="onClick"&gt;&lt;/marvel-drop-down-button&gt;
                 </code>
@@ -367,17 +368,23 @@
       //#endregion
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick: function () {
-        alert(1);
+        console.log(1);
       },
       onDropDownClick: function () {
         console.log(this.$refs.ref14.getSelectItem());
       },
       onClick4TabBtn: function () {
         this.$refs.ref4TabBtn.setActive(true);
-        alert("onClick4TabBtn");
+        console.log("onClick4TabBtn");
       },
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }
@@ -390,78 +397,64 @@
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
   .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
   .showArea {
     width: 100%;
   }
-
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
-
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
     height: 250px;
   }
-
   /*document custom style end*/
   /*custom style start*/
   .classCustom1 {
     margin-right: 20px;
   }
-
   /*custom style end*/
 </style>

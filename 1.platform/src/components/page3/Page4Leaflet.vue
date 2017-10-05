@@ -66,7 +66,7 @@
       }
     },
     mounted: function(){
-      //#region custom mounted
+      //#region custom
       this.$refs.ref0.init(51.505, -0.09, 13, 18, "/static/leaflet/images/shit.png");
       this.$refs.ref0.setCenter(51.505, -0.09, 18);
       this.$refs.ref0.addMarker(51.5, -0.09, "<b>Hello world!</b><br>Hello world!");
@@ -91,7 +91,7 @@
       //#endregion
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick: function(oPoint){
         console.log(oPoint);
       },
@@ -101,6 +101,12 @@
       onDrag: function(oItem){
         console.log(oItem);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

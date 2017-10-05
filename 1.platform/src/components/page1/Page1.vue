@@ -11,7 +11,7 @@
                         v-on:accordionSubItemClick="accordionSubItemClick"></marvel-accordion>
       <!--accordionArea end-->
     </div>
-    <div class="rightArea">
+    <div class="rightArea" v-bind:class="isContainerFold">
       <component v-bind:is="rightModuleName"></component>
     </div>
   </div>
@@ -292,6 +292,7 @@
       }
     },
     methods: {
+        //#region inner
       accordionItemClick: function (oItem) {
         this.rightModuleName = oItem.id;
       },
@@ -306,6 +307,13 @@
       accordionSubItemClick: function (oSubItem) {
         this.rightModuleName = oSubItem.id;
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>
@@ -329,5 +337,9 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  .page1 .fold{
+    width: calc(100% - 76px);
   }
 </style>

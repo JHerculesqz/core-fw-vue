@@ -75,7 +75,7 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       showEx: function(){
         this.$refs.ref0.showEx("取消");
       },
@@ -95,6 +95,12 @@
       hideEx: function(){
         this.$refs.ref0.hideEx();
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

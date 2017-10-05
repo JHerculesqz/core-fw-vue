@@ -7,6 +7,10 @@
     </div>
     <!--1级 end-->
     <!--2级 start-->
+    <div class="title level2">Wizard1</div>
+    <div class="describe">
+      Wizard1
+    </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems1">
         <marvel-tab-item :isActive="tabItems1[0].isActive">
@@ -35,6 +39,10 @@
     <!--2级 end-->
 
     <!--2级 start-->
+    <div class="title level2">Wizard2</div>
+    <div class="describe">
+      Wizard2
+    </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems2">
         <marvel-tab-item :isActive="tabItems2[0].isActive">
@@ -136,6 +144,7 @@
       }
     },
     methods: {
+      //#region inner
       //#region wizard
       setProgress: function () {
         this.$refs.ref0.setProgress(1);
@@ -152,6 +161,13 @@
       setNotWarn: function () {
         this.$refs.ref4WizardTabs.setItemWarnOrNot([1], false);
       },
+      //#endregion
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

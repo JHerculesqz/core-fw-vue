@@ -70,15 +70,21 @@
       }
     },
     mounted: function(){
-      //#region custom mounted
+      //#region custom
       this.$refs.ref0.setDisable(false);
       //#endregion
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick: function(e){
         console.log(e);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

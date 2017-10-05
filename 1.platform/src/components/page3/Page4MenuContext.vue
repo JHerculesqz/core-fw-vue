@@ -113,13 +113,19 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick: function(){
         this.$refs.ref0.showSubMenu(500,400);
       },
       onMenuItemClick: function(strMenuItemLabel){
         alert(strMenuItemLabel);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

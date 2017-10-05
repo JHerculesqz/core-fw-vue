@@ -44,6 +44,7 @@
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
   import MarvelWarning from "@/walle/widget/warning/MarvelWarning";
+
   export default {
     name: 'page4Warning',
     components: {MarvelTabItem,
@@ -78,11 +79,17 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick: function(){
         this.items[0].label = "运行:100";
         this.items[0].level = "level2";
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

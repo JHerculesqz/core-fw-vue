@@ -72,23 +72,29 @@
       }
     },
     mounted: function(){
-      //#region custom mounted
+      //#region custom
       for(var i=0;i<100;i++){
-        this.items.push({
+        this.listItems.push({
           icon: "/static/walle/deviceIcon-04.png",
           devId: i,
           devName: i
         });
       }
-      this.bargeCount = this.items.length;
+      this.bargeCount = this.listItems.length;
       //#endregion
     },
     methods:{
-      //#region custom methods
+      //#region inner
       onListItemClick: function(oItem){
         this.items.splice(0,1);
         this.bargeCount = this.items.length;
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
       //#endregion
     }
   }

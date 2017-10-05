@@ -1,10 +1,12 @@
 <template>
   <div class="widgetShowSession">
+    <!--1级 start-->
     <div class="title level1">输入框</div>
     <div class="describe">
       输入框控件，支持正常输入、错误提示、禁用等功能。
     </div>
-
+    <!--1级 end-->
+    <!--2级 start-->
     <div class="title level2">正常输入</div>
     <div class="describe">
       正常输入，可以获取用户输入的信息
@@ -35,7 +37,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">错误提示</div>
     <div class="describe">
       当判断输入信息非法或者错误时，可以提示错误。
@@ -65,7 +69,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">禁用</div>
     <div class="describe">
       将input框设置为禁用状态
@@ -95,7 +101,9 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
 
+    <!--2级 start-->
     <div class="title level2">多行文本框</div>
     <div class="describe">
       多行文本框
@@ -129,6 +137,7 @@
         </marvel-tab-item>
       </marvel-tab>
     </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -202,7 +211,7 @@
       }
     },
     methods: {
-      //#region custom methods
+      //#region inner
       onClick4Input1: function () {
         console.log(this.$refs.ref0.getInputMsg());
       },
@@ -216,77 +225,72 @@
         console.log(this.$refs.ref1.getInputMsg());
       },
       //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   }
 </script>
 
 <style scoped>
-
+  /*document fix style start*/
   .widgetShowSession {
     padding: 20px 100px;
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
-  .level2 {
-    margin-top: 40px;
-    font-size: 22px;
-    line-height: 48px;
-  }
-
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
-  .showArea {
-    width: 100%;
-    height: 400px;
-  }
-
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+  /*document fix  style end*/
+  /*document custom style start*/
+  .showArea {
+    width: 100%;
+    height: 400px;
+  }
+  /*document custom style end*/
+  /*custom style start*/
 
+  /*custom style end*/
 </style>

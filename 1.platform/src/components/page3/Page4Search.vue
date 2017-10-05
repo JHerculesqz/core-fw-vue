@@ -109,7 +109,7 @@
           }
         ],
         //#endregion
-        //#region Custom data
+        //#region custom data
         selectItems: [
           {
             label: "ip"
@@ -126,6 +126,7 @@
       }
     },
     methods: {
+      //#region inner
       search1: function (strSearchValue) {
         console.log(strSearchValue);
       },
@@ -133,70 +134,66 @@
         console.log(strSearchKey);
         console.log(strSearchValue);
       }
+      //#endregion
+      //#region callback
+
+      //#endregion
+      //#region 3rd
+
+      //#endregion
     }
   };
 </script>
 
 <style scoped>
   /*document fix style start*/
-
   .widgetShowSession {
     padding: 20px 100px;
     width: 100%;
     box-sizing: border-box;
   }
-
   .title {
     color: #4d4d4d;
   }
-
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-
   .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
-
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
@@ -215,5 +212,4 @@
     height: 50px;
   }
   /*custom style end*/
-
 </style>
