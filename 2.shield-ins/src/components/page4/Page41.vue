@@ -170,7 +170,7 @@
           //2.4.update warnPanel
           self._updateWarnPanel();
 
-          //2.5.grid
+          //2.6.grid
           self._drawGrid();
         });
       }, this.timerInterval);
