@@ -1,215 +1,181 @@
 <template>
-  <div class="gisMap" v-bind:id="id" v-bind:style="{ display: isShow }"></div>
+  <div class="gisMap" v-bind:id="id"
+       v-bind:style="{ display: isShow }"></div>
 </template>
 
 <script>
 //  import "leaflet/dist/leaflet.css"
 //  import "leaflet"
 //  import "leaflet.heat"
-
-  const URL_GIS_MAP = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
   export default {
     name: 'MarvelLeaflet',
     props: ["id"],
     data: function() {
-        return {
-          mapObj: undefined,
-          LeafIcon: undefined,
-          iconObjs: [],
-          isShow: "block"
-        }
+      return {
+        gisObj: undefined,
+        isShow: "block"
+      }
+    },
+    mounted: function(){
+      this.gisObj = new window.$.MarvelGis();
     },
     methods: {
-      init: function(iX, iY, iZoom4Init, iZoom4Max, strUrlWater){
+      //#region inner
+
+      //#endregion
+      //#region callback
+      _onZoom: function(e){
+        this.$emit("onZoom", e);
+      },
+      _onClick: function(e){
+        this.$emit("onClick", e);
+      },
+      _onContextMenu: function (e) {
+        this.$emit("onContextMenu", e);
+      },
+      _onMarkerDBClick: function(e){
+        this.$emit("onMarkerDBClick", e);
+      },
+      _onMarkerDrag: function(e){
+        this.$emit("onMarkerDrag", e);
+      },
+      _onCircleDBClick: function(e){
+        this.$emit("onCircleDBClick", e);
+      },
+      //#endregion
+      //#region 3rd
+
+      //#region Map
+      init: function(iX, iY, iZoom4Init, oOptions){
         var self = this;
 
-        //1.
-        this.mapObj = L.map(this.id, {
-          attributionControl: false
-        }).setView([iX, iY], iZoom4Init);
-
-        //2.
-        L.tileLayer(URL_GIS_MAP, {
-          maxZoom: iZoom4Max,
-          id: 'mapbox.streets'
-        }).addTo(this.mapObj);
-
-        //3.
-        this.mapObj.on('click', function(e){
-          self.$emit("onClick", e.latlng);
-        });
-
-        //4.
-        this.LeafIcon = L.Icon.extend({
-          options: {
-//          shadowUrl: '/static/leaflet/images/leaf-shadow.png',
-//            iconSize:     [92, 95],
-//          shadowSize:   [50, 64],
-//            iconAnchor:   [22, 94],
-//          shadowAnchor: [4, 62],
-//            popupAnchor:  [-3, -76]
-          }
-        });
-
-        //5.
-        L.Control.Watermark = L.Control.extend({
-          onAdd: function(map) {
-            var img = L.DomUtil.create('img');
-
-            img.src = strUrlWater;
-            img.style.width = '50px';
-
-            return img;
-          },
-          onRemove: function(map) {
-            // Nothing to do here
-          }
-        });
-        L.control.watermark = function(opts) {
-          return new L.Control.Watermark(opts);
-        };
+        this.gisObj.Stage.init(this.id, iX, iY, iZoom4Init,
+          oOptions,
+          function (e) {
+            self._onZoom(e);
+          }, function (e) {
+            self._onClick(e);
+          }, function (e) {
+            self._onContextMenu(e);
+          });
       },
       setCenter: function(iX, iY, iZoom4Init){
-        this.mapObj.setView([iX, iY], iZoom4Init);
-      },
-      addMarker: function(iX, iY, strTips){
-        L.marker([iX, iY]).addTo(this.mapObj).bindPopup(strTips);
-      },
-      addCircle: function(iX, iY, iR, strColor, strFillColor, iOpacity, strTips){
-        L.circle([iX, iY], {
-          color: strColor,
-          fillColor: strFillColor,
-          fillOpacity: iOpacity,
-          radius: iR
-        }).addTo(this.mapObj).bindPopup(strTips);
-      },
-      addPolygon: function(arrPoints, strTips){
-        L.polygon(arrPoints).addTo(this.mapObj).bindPopup(strTips);
-      },
-      addIcon: function(strId, iX, iY, strImgUrl, strTips, oBuObj,
-                        oDBClickCallback, oDragCallback, oContextMenuCallback){
-        var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
-        var bCanDrag = oDragCallback == undefined ? false : true;
-        var oMarker = new L.marker([iX, iY], {icon: oIcon, draggable:bCanDrag}).addTo(this.mapObj);
-        oMarker.bindPopup(strTips);
-        oMarker.id = strId;
-        oMarker.buObj = oBuObj;
-        oMarker.on("dblclick", function () {
-          if(oDBClickCallback){
-            oDBClickCallback(strId);
-          }
-        });
-        oMarker.on("dragend", function (event) {
-          if(oDragCallback){
-            oDragCallback(event.target);
-          }
-        });
-        oMarker.on("contextmenu", function(event){
-          if(oContextMenuCallback){
-            oContextMenuCallback(event,
-              event.originalEvent.x,
-              event.originalEvent.y,
-              event.target.buObj);
-          }
-        });
-        this.iconObjs.push(oMarker);
-      },
-      updateIcon: function(strId, iX, iY, strImgUrl, strTips, bIsHide, oBuObj){
-        for(var i=0;i<this.iconObjs.length;i++){
-          var oMarker = this.iconObjs[i];
-          if(oMarker.id == strId){
-            oMarker.setLatLng([iX, iY]);
-            var oIcon = new this.LeafIcon({iconUrl: strImgUrl});
-            oMarker.setIcon(oIcon);
-            oMarker.setPopupContent(strTips);
-
-            if(bIsHide){
-              oMarker.setOpacity(0);
-              oMarker.closePopup();
-            }
-            else{
-              oMarker.setOpacity(1);
-            }
-
-            oMarker.buObj = oBuObj;
-            break;
-          }
-        }
-      },
-      delIcon: function(strId){
-        var iDelIndex = undefined;
-        for(var i=0;i<this.iconObjs.length;i++){
-          var oMarker = this.iconObjs[i];
-          if(oMarker.id == strId) {
-            this.mapObj.removeLayer(oMarker);
-            iDelIndex = i;
-            break;
-          }
-        }
-
-        if(undefined != iDelIndex){
-          this.iconObjs.splice(iDelIndex, iDelIndex);
-        }
-      },
-      getNeedDiffIconLst: function(lstDevId){
-        var oRes = {
-          delDevIdLst: [],
-          addDevIdLst: [],
-          updateDevIdLst: []
-        };
-
-        //1.get delDevIdLst/updateDevIdLst
-        for(var i=0;i<this.iconObjs.length;i++){
-          var oMarker = this.iconObjs[i];
-
-          var bIsExists = false;
-          for(var j=0;j<lstDevId.length;j++){
-            var strId = lstDevId[j];
-            if(oMarker.id == strId) {
-              bIsExists = true;
-              break;
-            }
-          }
-
-          if(!bIsExists){
-            oRes.delDevIdLst.push(oMarker.id);
-          }
-          else{
-            oRes.updateDevIdLst.push(strId);
-          }
-        }
-
-        //2.get addDevIdLst
-        for(var j=0;j<lstDevId.length;j++){
-          var strId = lstDevId[j];
-
-          var bIsExists = false;
-          for(var i=0;i<this.iconObjs.length;i++){
-            var oMarker = this.iconObjs[i];
-
-            if(oMarker.id == strId) {
-              bIsExists = true;
-              break;
-            }
-          }
-
-          if(!bIsExists){
-            oRes.addDevIdLst.push(strId);
-          }
-        }
-
-        return oRes;
-      },
-      addWater: function(){
-        L.control.watermark({ position: 'bottomleft' }).addTo(this.mapObj);
-      },
-      addHeatMap: function(arrHeatData){
-        L.heatLayer(arrHeatData, {radius: 10}).addTo(this.mapObj);
+        this.gisObj.Stage.setCenter(iX, iY, iZoom4Init);
       },
       showOrHide: function(bIsShow){
         this.isShow = bIsShow ? "block":"none";
-      }
+      },
+      //#endregion
+
+      //#region Layer
+      findById: function(strId){
+        var oRes = this.gisObj.Layer.findById(strId);
+        return oRes;
+      },
+      getDiffLst: function(lstItemId, arrItemUiType){
+        var oRes = this.gisObj.Layer.getDiffLst(lstItemId,
+          arrItemUiType, this.gisObj);
+        return oRes;
+      },
+      //#endregion
+
+      //#region Marker/Icon/DivIcon
+      addMarker: function(strId, iX, iY, strImgClass, iImgWidth,
+                          oBuObj){
+        var self = this;
+
+        this.gisObj.Sprite.Node.addMarker(strId, iX, iY,
+          strImgClass, iImgWidth, oBuObj,
+          this.gisObj,
+          function (e) {
+            self._onMarkerDBClick(e);
+          },
+          function (e) {
+            self._onMarkerDrag(e);
+          });
+        //#region event
+
+
+
+        //#endregion
+      },
+      delMarker: function (strId) {
+        this.gisObj.Sprite.Node.delMarker(strId, this.gisObj);
+      },
+      setImgClass: function (strId, strImgClass, iImgWidth) {
+        this.gisObj.Sprite.Node.setImgClass(strId,
+          strImgClass, iImgWidth, this.gisObj);
+      },
+      setOpacity4Marker: function (strId, iOpacity) {
+        this.gisObj.Sprite.Node.setOpacity4Marker(strId, iOpacity,
+          this.gisObj);
+      },
+      setPos4Marker: function (strId, iX, iY) {
+        this.gisObj.Sprite.Node.setPos4Marker(strId, iX, iY,
+          this.gisObj);
+      },
+      setTips4Marker: function (strId, strTips) {
+        this.gisObj.Sprite.Node.setTips4Marker(strId, strTips,
+          this.gisObj);
+      },
+      setBuObj4Marker: function (strId, oBuObj) {
+        this.gisObj.Sprite.Node.setBuObj4Marker(strId, oBuObj, this.gisObj);
+      },
+      setHide4Marker: function (strId, bIsHide) {
+        this.gisObj.Sprite.Node.setHide4Marker(strId, bIsHide, this.gisObj);
+      },
+      //#endregion
+
+      //#region Circle
+      addCircle: function(strId, iX, iY, iR,
+                          oBuObj){
+        var self = this;
+
+        this.gisObj.Sprite.Node.addCircle(strId, iX, iY, iR,
+          oBuObj,
+          this.gisObj,
+          function (e) {
+            self._onCircleDBClick(e);
+          });
+      },
+      delCircle: function (strId) {
+        this.gisObj.Sprite.Node.delCircle(strId, this.gisObj);
+      },
+      //#endregion
+
+      //#region Polygon
+      addPolygon: function(strId, arrPoints, oBuObj){
+        this.gisObj.Sprite.Node.addPolygon(strId, arrPoints, oBuObj,
+          this.gisObj);
+      },
+      //#endregion
+
+      //#region Group
+      addGroup: function(oBuObj4Group){
+        this.gisObj.Sprite.NodeGroup.addGroup(oBuObj4Group, this.gisObj);
+      },
+      expandAllGroup: function (strUiType) {
+        this.gisObj.Sprite.NodeGroup.expandAllGroup(strUiType, this.gisObj);
+      },
+      collapseAllGroup: function (strUiType) {
+        this.gisObj.Sprite.NodeGroup.collapseAllGroup(strUiType, this.gisObj);
+      },
+      delGroup: function(strId){
+        this.gisObj.Sprite.NodeGroup.delGroup(strId, this.gisObj);
+      },
+      //#endregion
+
+      //#region Polyline
+      drawLines: function (arrBuObj4Lines) {
+        this.gisObj.Sprite.LinkGroup.drawLines(arrBuObj4Lines, this.gisObj);
+      },
+      //#endregion
+
+      //#endregion
+//
+//      addHeatMap: function(arrHeatData){
+//        L.heatLayer(arrHeatData, {radius: 10}).addTo(this.mapObj);
+//      },
     }
   }
 </script>

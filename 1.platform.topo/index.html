@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shit</title>
+    <link type="text/css" rel="stylesheet" href="css/MarvelTopo.css"/>
+    <script type="application/javascript" src="lib/konva.js"></script>
+    <script type="application/javascript" src="lib/keyboard.min.js"></script>
+    <script type="application/javascript" src="lib/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="js/_1_stage/MarvelTopoResource.js"></script>
+    <script type="application/javascript" src="js/_1_stage/MarvelTopoStage.js"></script>
+    <script type="application/javascript" src="js/_2_layer/MarvelTopoLayer.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_1_node/MarvelTopoNodeGroup.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_1_node/MarvelTopoNode.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_2_link/MarvelTopoLinkGroup.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_2_link/MarvelTopoLink.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_3_box/MarvelTopoBoxGroup.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/_3_box/MarvelTopoBox.js"></script>
+    <script type="application/javascript" src="js/_3_sprite/MarvelTopoSprite.js"></script>
+    <script type="application/javascript" src="js/MarvelTopo.js"></script>
+    <script>
+        $(document).ready(function(){
+            //#region Mock
+
+            //#region resources
+
+            var THEME_KEY = "dark";
+
+            var IMG_MAP = {
+                nodeGroup: "image/" + THEME_KEY + "/nodeGroup1.svg",
+                nodeGroupExpand: "image/" + THEME_KEY + "/nodeGroupExpand.svg",
+                node: "image/" + THEME_KEY + "/node1.svg"
+            };
+
+            var THEME_DARK = {
+                dark: {
+                    node: {
+                        labelColor: "#fff",
+                        selectColor: "rgba(255,255,255,0.25)"
+                    },
+                    link: {
+                        labelColor: "#fff",
+                        linkColor: {
+                            linkType1: "#ababb5",
+                            linkType2: "#FF4c4c",
+                            linkType3: "#ff8833"
+                        }
+                    }
+                }
+            };
+
+            //#endregion
+
+            //#region node
+
+            //#region 光站点
+            var arrNodeGroup = [];
+            for(var i=0;i<2;i++) {
+                var iX = Math.random() * 400;
+                var iY = Math.random() * 200;
+                var oNodeGroup = {
+                    id: "nodeGroup" + i,
+                    x: iX,
+                    y: iY,
+                    uiImgKey: "nodeGroup",
+                    uiImgKey4Expand: "nodeGroupExpand",
+                    uiLabel: "nodeGroup" + i,
+                    uiExpandNode: false,
+                    uiExpandNodeWidth: 200,
+                    uiExpandNodeHeight: 200,
+                    uiNode: true,
+                    children: [{
+                        id: "node" + i + "_1",
+                        x: 50,
+                        y: 50,
+                        uiImgKey: "node",
+                        uiLabel: "node" + i + "_1",
+                        uiNode: true
+                    }, {
+                        id: "node" + i + "_2",
+                        x: 100,
+                        y: 100,
+                        uiImgKey: "node",
+                        uiLabel: "node" + i + "_2",
+                        uiNode: true
+                    }]
+                };
+                arrNodeGroup.push(oNodeGroup);
+            }
+            //#endregion
+
+            //#region 网元
+            var arrNode = [];
+            for(var i=0;i<2;i++){
+                var iX = Math.random() * 400;
+                var iY = Math.random() * 200;
+                var oNode = {
+                    id: "node" + i,
+                    x: iX,
+                    y: iY,
+                    uiImgKey: "node",
+                    uiLabel: "node" + i,
+                    uiNode: true
+                };
+                arrNode.push(oNode);
+            }
+            //#endregion
+
+            //#endregion
+
+            //#region link
+
+            //#region 网元
+            var arrNodeBase = [];
+            for(var i=0;i<3;i++){
+                var iX = Math.random() * 400;
+                var iY = Math.random() * 200;
+                var oNode = {
+                    id: "nodeBase" + i,
+                    x: iX,
+                    y: iY,
+                    uiImgKey: "node",
+                    uiLabel: "nodeBase" + i,
+                    uiNode: true
+                };
+                arrNodeBase.push(oNode);
+            }
+            //#endregion
+
+            //#region 网元与网元之间的单条链路
+            var arrLinkBase = [];
+            for(var i=0;i<3;i++){
+                var oLink = {
+                    id: "link" + i,
+                    srcNodeId: "nodeBase0",
+                    dstNodeId: "nodeBase1",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "link" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLink: true,
+                    uiLinkColorKey: "linkType1",
+                    uiLinkWidth: 3,
+                    uiDash: [10,5]
+                };
+                arrLinkBase.push(oLink);
+            }
+            //#endregion
+
+            //#region 网元与网元之间的捆绑链路
+            for(var i = 0; i < 2; i++){
+                //oLink1和oLink2为一组
+                var oLink1 = {
+                    id: "gLink" + i + "_" + i,
+                    srcNodeId: "nodeBase" + i,
+                    dstNodeId: "nodeBase" + (i + 1),
+                    uiLinkGroupId: "groupLink" + i + "_" + i,
+                    uiLink: true,
+                    uiLinkExpand: false,
+                    uiLabelL: "nodeBase" + i,
+                    uiLabelM: "link" + i,
+                    uiLabelR: "nodeBase" + (i + 1),
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                var oLink2 = {
+                    id: "gLink" + i + "_" + (i + 1),
+                    srcNodeId: "nodeBase" + i,
+                    dstNodeId: "nodeBase" + (i + 1),
+                    uiLinkGroupId: "groupLink" + i + "_" + i,
+                    uiLink: true,
+                    uiLinkExpand: false,
+                    uiLabelL: "nodeBase" + i,
+                    uiLabelM: "link" + i,
+                    uiLabelR: "nodeBase" + (i + 1),
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                //oLink3和oLink4为一组
+                var oLink3 = {
+                    id: "gLink" + i + "_" + (i + 2),
+                    srcNodeId: "nodeBase" + i,
+                    dstNodeId: "nodeBase" + (i + 1),
+                    uiLinkGroupId: "groupLink" + i + "_" + (i + 1),
+                    uiLink: true,
+                    uiLinkExpand: false,
+                    uiLabelL: "nodeBase" + i,
+                    uiLabelM: "link" + i,
+                    uiLabelR: "nodeBase" + (i + 1),
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+
+                var oLink4 = {
+                    id: "gLink" + i + "_" + (i + 3),
+                    srcNodeId: "nodeBase" + i,
+                    dstNodeId: "nodeBase" + (i + 1),
+                    uiLinkGroupId: "groupLink" + i + "_" + (i + 1),
+                    uiLink: true,
+                    uiLinkExpand: false,
+                    uiLabelL: "nodeBase" + i,
+                    uiLabelM: "link" + i,
+                    uiLabelR: "nodeBase" + (i + 1),
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+
+                arrLinkBase.push(oLink1);
+                arrLinkBase.push(oLink2);
+                arrLinkBase.push(oLink3);
+                arrLinkBase.push(oLink4);
+            }
+            //#endregion
+
+            //#region 网元与光设备之间的捆绑链路
+            for(var i = 100; i < 101; i++){
+                var oLink1 = {
+                    id: "gLink" + i + 0,
+                    srcNodeId: "nodeBase2",
+                    dstNodeId: "node1_1",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 0,
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                var oLink2 = {
+                    id: "gLink" + i + 1,
+                    srcNodeId: "nodeBase2",
+                    dstNodeId: "node1_1",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 0,
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                var oLink3 = {
+                    id: "gLink" + i + 2,
+                    srcNodeId: "nodeBase2",
+                    dstNodeId: "node1_2",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 1,
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+                var oLink4 = {
+                    id: "gLink" + i + 3,
+                    srcNodeId: "nodeBase2",
+                    dstNodeId: "node1_2",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 1,
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+                arrLinkBase.push(oLink1);
+                arrLinkBase.push(oLink2);
+                arrLinkBase.push(oLink3);
+                arrLinkBase.push(oLink4);
+            }
+            //#endregion
+
+            //#region 光设备与光设备之间的捆绑链路
+            for(var i = 200; i < 201; i++){
+                var oLink1 = {
+                    id: "gLink" + i + 0,
+                    srcNodeId: "node0_1",
+                    dstNodeId: "node1_1",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 0,
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                var oLink2 = {
+                    id: "gLink" + i + 1,
+                    srcNodeId: "node0_1",
+                    dstNodeId: "node1_1",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 0,
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3
+                };
+                var oLink3 = {
+                    id: "gLink" + i + 2,
+                    srcNodeId: "node0_2",
+                    dstNodeId: "node1_2",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 1,
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+                var oLink4 = {
+                    id: "gLink" + i + 3,
+                    srcNodeId: "node0_2",
+                    dstNodeId: "node1_2",
+                    uiLabelL: "nodeBase0",
+                    uiLabelM: "gLink" + i,
+                    uiLabelR: "nodeBase1",
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "groupLink" + i + 1,
+                    uiLinkColorKey: "linkType3",
+                    uiLinkWidth: 3
+                };
+                arrLinkBase.push(oLink1);
+                arrLinkBase.push(oLink2);
+                arrLinkBase.push(oLink3);
+                arrLinkBase.push(oLink4);
+            }
+            //#endregion
+
+            //#endregion
+
+            //#endregion
+
+            //#region demo
+
+            //Topo
+            var oTopo = new $.MarvelTopo();
+            //Resource
+            oTopo.Resource.init(THEME_KEY, IMG_MAP, THEME_DARK, function(){
+                //Stage
+                oTopo.ins.stage =  oTopo.Stage.init("id1",
+                    window.innerWidth, window.innerHeight, oTopo);
+                oTopo.ins.layerLink = oTopo.Layer.init(oTopo);
+                oTopo.ins.layerNode = oTopo.Layer.init(oTopo);
+
+                //Node
+                for(var i=0;i<arrNodeGroup.length;i++){
+                    oTopo.Sprite.NodeGroup.draw(arrNodeGroup[i], oTopo);
+                }
+                for(var i=0;i<arrNode.length;i++){
+                    oTopo.Sprite.Node.draw(arrNode[i], oTopo);
+                }
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
+
+                //Link
+                for(var i=0;i<arrNodeBase.length;i++){
+                    oTopo.Sprite.Node.draw(arrNodeBase[i], oTopo);
+                }
+                oTopo.Sprite.LinkGroup.draw(arrLinkBase, oTopo);
+
+                oTopo.Layer.reDraw(oTopo.ins.layerLink);
+            });
+
+            $("#expandNodeGroup").click(function(){
+                oTopo.Sprite.NodeGroup.expandAllNodeGroup(oTopo);
+            });
+            $("#collapseNodeGroup").click(function(){
+                oTopo.Sprite.NodeGroup.collapseAllNodeGroup(oTopo);
+            });
+
+            $("#expandLinkGroup").click(function(){
+                oTopo.Sprite.LinkGroup.expandAllLinkGroup(oTopo);
+            });
+            $("#collapseLinkGroup").click(function(){
+                oTopo.Sprite.LinkGroup.collapseAllLinkGroup(oTopo);
+            });
+
+            //#endregion
+        });
+    </script>
+</head>
+<body>
+    <button id="expandNodeGroup">expandNodeGroup</button>
+    <button id="collapseNodeGroup">collapseNodeGroup</button>
+    <button id="expandLinkGroup">expandLinkGroup</button>
+    <button id="collapseLinkGroup">collapseLinkGroup</button>
+    <div id="id1"></div>
+</body>
+</html>
