@@ -102,8 +102,8 @@
       delMarker: function (strId) {
         this.gisObj.Sprite.Node.delMarker(strId, this.gisObj);
       },
-      setImgClass: function (strId, strImgClass, iImgWidth) {
-        this.gisObj.Sprite.Node.setImgClass(strId,
+      setImgUrl: function (strId, strImgClass, iImgWidth) {
+        this.gisObj.Sprite.Node.setImgUrl(strId,
           strImgClass, iImgWidth, this.gisObj);
       },
       setOpacity4Marker: function (strId, iOpacity) {

@@ -47,7 +47,7 @@
                     oGis.Sprite.Node.addMarker(oBuObj4Child.id,
                         oBuObj4Child.x,
                         oBuObj4Child.y,
-                        oBuObj4Child.uiImgClass,
+                        oBuObj4Child.uiImgUrl,
                         oBuObj4Child.uiImgWidth,
                         oBuObj4Child, oGis, function () {
 
@@ -60,7 +60,7 @@
                 oGis.Sprite.Node.addMarker4Group(oBuObj4Group.id,
                     oBuObj4Group.x,
                     oBuObj4Group.y,
-                    oBuObj4Group.uiImgClass,
+                    oBuObj4Group.uiImgUrl,
                     oBuObj4Group.uiImgWidth,
                     oBuObj4Group, oGis, function () {
                         _dblClickMarker(oBuObj4Group, oGis);

@@ -167,36 +167,36 @@
       this.$refs.ref0.init(51.505, -0.09, 13, {
         hasZoomCtrl: true
       });
-      this.$refs.ref0.addMarker("marker1", 51.5, -0.09, "site4HW", 32, {
+      this.$refs.ref0.addMarker("marker1", 51.5, -0.09, "/static/gis/lib/images/node1.svg", 32, {
         id: "marker1",
         x: 51.5,
         y: -0.09,
         uiType: "ne",
-        uiImgClass: "site4HW",
+        uiImgUrl: "/static/gis/lib/images/node1.svg",
         uiImgWidth: 32,
         uiLabel: "marker1",
         uiTips: "<b>marker1</b><br>11111",
         uiDraggable: true,
         uiOpacity: 1
       });
-      this.$refs.ref0.addMarker("marker2", 51.50344816877402, -0.09883403778076173, "site4HW", 32, {
+      this.$refs.ref0.addMarker("marker2", 51.50344816877402, -0.09883403778076173, "/static/gis/lib/images/node1.svg", 32, {
         id: "marker2",
         x: 51.50344816877402,
         y: -0.09883403778076173,
         uiType: "ne",
-        uiImgClass: "site4HW",
+        uiImgUrl: "lib/images/node1.svg",
         uiImgWidth: 32,
         uiLabel: "marker2",
         uiTips: "<b>marker2</b><br>11111",
         uiDraggable: true,
         uiOpacity: 1
       });
-      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "site4HW", 32, {
+      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "/static/gis/lib/images/node1.svg", 32, {
         id: "marker3",
         x: 51.5,
         y: -0.08,
         uiType: "ne",
-        uiImgClass: "site4HW",
+        uiImgUrl: "/static/gis/lib/images/node1.svg",
         uiImgWidth: 32,
         uiLabel: "marker3",
         uiTips: "<b>marker3</b><br>11111",
@@ -233,7 +233,7 @@
         x: 51.49994457056707,
         y: -0.10597944259643556,
         uiType: "site",
-        uiImgClass: "site4ALU",
+        uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
         uiImgWidth: 32,
         uiLabel: "site1",
         uiTips: "<b>site1</b><br>11111",
@@ -247,7 +247,7 @@
           x: 51.49992987708078,
           y: -0.10618329048156738,
           uiType: "neInSite",
-          uiImgClass: "site4HW",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
           uiImgWidth: 32,
           uiLabel: "site1_ne1",
           uiTips: "<b>site1_ne1</b><br>11111",
@@ -258,7 +258,7 @@
           x: 51.49999332628028,
           y: -0.10580241680145265,
           uiType: "neInSite",
-          uiImgClass: "site4HW",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
           uiImgWidth: 32,
           uiLabel: "site1_ne2",
           uiTips: "<b>site1_ne2</b><br>11111",
@@ -272,7 +272,7 @@
         x: 51.49894457056707,
         y: -0.10597944259643556,
         uiType: "site",
-        uiImgClass: "site4ALU",
+        uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
         uiImgWidth: 32,
         uiLabel: "site2",
         uiTips: "<b>site2</b><br>11111",
@@ -286,7 +286,7 @@
           x: 51.49892987708078,
           y: -0.10618329048156738,
           uiType: "neInSite",
-          uiImgClass: "site4HW",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
           uiImgWidth: 32,
           uiLabel: "site2_ne1",
           uiTips: "<b>site2_ne1</b><br>11111",
@@ -297,7 +297,7 @@
           x: 51.49899332628028,
           y: -0.10580241680145265,
           uiType: "neInSite",
-          uiImgClass: "site4HW",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
           uiImgWidth: 32,
           uiLabel: "site2_ne2",
           uiTips: "<b>site2_ne2</b><br>11111",
@@ -342,7 +342,7 @@
         var self = this;
 
         this.$refs.ref0.delMarker("marker3");
-        this.$refs.ref0.setImgClass("marker1", "site4ALU", 32);
+        this.$refs.ref0.setImgUrl("marker1", "/static/gis/lib/images/nodeGroup1.svg", 32);
         this.$refs.ref0.setOpacity4Marker("marker1", 0.5);
         this.$refs.ref0.setPos4Marker("marker1", 51.502, -0.09);
         this.$refs.ref0.setTips4Marker("marker1", "fuck world!!");

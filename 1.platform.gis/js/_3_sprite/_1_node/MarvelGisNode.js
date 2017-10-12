@@ -45,7 +45,7 @@
         //#region addMarker
 
         this.addMarker = function(strId, iX, iY,
-                                  strImgClass, iImgWidth,
+                                  strImgUrl, iImgWidth,
                                   oBuObj,
                                   oGis,
                                   oCallbackOnMarkerDBClick,
@@ -53,7 +53,7 @@
             //#region init
 
             var oMarker = _initMarker(strId, iX, iY,
-                strImgClass, iImgWidth,
+                strImgUrl, iImgWidth,
                 oBuObj,
                 oGis);
 
@@ -67,11 +67,12 @@
             //#endregion
         };
 
-        var _initMarker = function(strId, iX, iY, strImgClass, iImgWidth,
+        var _initMarker = function(strId, iX, iY, strImgUrl, iImgWidth,
                                oBuObj, oGis) {
-            var oIcon = L.divIcon({
-                html: "<div style='margin-top:" + iImgWidth + "px;'>" + oBuObj.uiLabel + "</div>",
-                className: strImgClass,
+            var oIcon = L.icon({
+                // html: "<div style='margin-top:" + iImgWidth + "px;'>" + oBuObj.uiLabel + "</div>",
+                // className: strImgUrl,
+                iconUrl: strImgUrl,
                 iconSize: [iImgWidth, iImgWidth],
                 iconAnchor: [iImgWidth/2, iImgWidth/2],
                 popupAnchor: [0, -iImgWidth/2]
@@ -89,11 +90,11 @@
             return oMarker;
         };
 
-        this.addMarker4Group = function (strId, iX, iY, strImgClass, iImgWidth,
+        this.addMarker4Group = function (strId, iX, iY, strImgUrl, iImgWidth,
                                          oBuObj, oGis, oCallbackOnMarkerDBlClick) {
             //#region init
 
-            var oMarker = _initMarker(strId, iX, iY, strImgClass, iImgWidth,
+            var oMarker = _initMarker(strId, iX, iY, strImgUrl, iImgWidth,
                 oBuObj, oGis);
 
             //#endregion
@@ -122,12 +123,13 @@
 
         //#region updateMarker
 
-        this.setImgClass = function(strId, strImgClass, iImgWidth, oGis) {
+        this.setImgUrl = function(strId, strImgUrl, iImgWidth, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
             if(oMarker){
-                var oIcon = L.divIcon({
-                    html: "<div style='margin-top:" + iImgWidth + "px;'>" + oMarker.buObj.uiLabel + "</div>",
-                    className: strImgClass,
+                var oIcon = L.icon({
+                    // html: "<div style='margin-top:" + iImgWidth + "px;'>" + oMarker.buObj.uiLabel + "</div>",
+                    // className: strImgUrl,
+                    iconUrl: strImgUrl,
                     iconSize: [iImgWidth, iImgWidth],
                     iconAnchor: [iImgWidth/2, iImgWidth/2],
                     popupAnchor: [0, -iImgWidth/2]
