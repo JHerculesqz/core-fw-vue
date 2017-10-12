@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'MarvelTopo',
     props: ["theme", "id"],
@@ -81,10 +80,8 @@
       updateTopo: function (oTopoData) {
         this.oTopo.Api.updateTopo(this.oTopo, oTopoData);
       }
-
     }
   }
-
 </script>
 
 <style scoped>

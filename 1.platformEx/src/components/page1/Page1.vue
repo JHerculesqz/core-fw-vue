@@ -20,8 +20,6 @@
 <script>
   //#region fui
   import {MarvelAccordion} from "marvel-fui2";
-  import Css1 from "marvel-fui2/static/icomoon/style.css";
-  import Css2 from "marvel-fui2/static/walle/fui.css";
   //#endregion
   //#region 1.quickStart
   import Page4Install from '@/components/page3/1.quickStart/Page4Install'

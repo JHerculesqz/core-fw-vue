@@ -16,8 +16,23 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="width: 100%;height: 300px;">
-              <marvel-leaflet ref="ref0" id="gisMapId1" v-on:onClick="onClick"></marvel-leaflet>
+            <button v-on:click="oTest4Map">test4Map(setCenter)</button>
+            <button v-on:click="oTest4Map2">test4Map(showOrHide)</button>
+            <button v-on:click="oTest4Map3">test4Map3(getDiffLst)</button>
+            <button v-on:click="oTest4Marker">test4Marker</button>
+            <button v-on:click="oTest4Circle">test4Circle</button>
+            <button v-on:click="oTest4Group">test4Group(expandAllGroup)</button>
+            <button v-on:click="oTest4Group2">test4Group(collapseAllGroup)</button>
+            <button v-on:click="oTest4Group3">oTest4Group(delGroup)</button>
+            <button v-on:click="oTest4Line">test4Line(delPolyline)</button>
+            <div style="width: 100%;height: 500px;">
+              <marvel-leaflet ref="ref0" id="gisMapId1"
+                              v-on:onZoom="onZoom"
+                              v-on:onClick="onClick"
+                              v-on:onContextMenu="onContextMenu"
+                              v-on:onMarkerDBClick="onMarkerDBClick"
+                              v-on:onMarkerDrag="onMarkerDrag"
+                              v-on:onCircleDBClick="onCircleDBClick"></marvel-leaflet>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -42,8 +57,6 @@
 <script>
   //#region fui
   import {MarvelTab, MarvelTabItem} from "marvel-fui2";
-  import Css1 from "marvel-fui2/static/icomoon/style.css";
-  import Css2 from "marvel-fui2/static/walle/fui.css";
   import MarvelHight from "marvel-fui2/src/walle/component/highlight";
   import {MarvelLeaflet} from "marvel-fui2";
   //#endregion
@@ -70,39 +83,293 @@
     },
     mounted: function(){
       //#region custom
-      this.$refs.ref0.init(51.505, -0.09, 13, 18, "/static/leaflet/images/shit.png");
-      this.$refs.ref0.setCenter(51.505, -0.09, 18);
-      this.$refs.ref0.addMarker(51.5, -0.09, "<b>Hello world!</b><br>Hello world!");
-      this.$refs.ref0.addCircle(51.508, -0.11, 500, "red", "#f03", 0.5, "1");
-      this.$refs.ref0.addPolygon([
+
+      //#region Mock
+
+      var arrLines = [];
+
+      //#region 网元与网元
+
+      arrLines.push({
+        id: "link1",
+        srcNodeId: "marker1",
+        dstNodeId: "marker2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link1",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //#region 网元与站点之间
+
+      arrLines.push({
+        id: "link2",
+        srcNodeId: "marker2",
+        dstNodeId: "site1_ne1",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+      arrLines.push({
+        id: "link3",
+        srcNodeId: "marker2",
+        dstNodeId: "site1_ne2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //region 站点与站点之间
+
+      arrLines.push({
+        id: "link4",
+        srcNodeId: "site2_ne1",
+        dstNodeId: "site1_ne1",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+      arrLines.push({
+        id: "link5",
+        srcNodeId: "site2_ne2",
+        dstNodeId: "site1_ne2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //#endregion
+
+      this.$refs.ref0.init(51.505, -0.09, 13, {
+        hasZoomCtrl: true
+      });
+      this.$refs.ref0.addMarker("marker1", 51.5, -0.09, "site4HW", 32, {
+        id: "marker1",
+        x: 51.5,
+        y: -0.09,
+        uiType: "ne",
+        uiImgClass: "site4HW",
+        uiImgWidth: 32,
+        uiLabel: "marker1",
+        uiTips: "<b>marker1</b><br>11111",
+        uiDraggable: true,
+        uiOpacity: 1
+      });
+      this.$refs.ref0.addMarker("marker2", 51.50344816877402, -0.09883403778076173, "site4HW", 32, {
+        id: "marker2",
+        x: 51.50344816877402,
+        y: -0.09883403778076173,
+        uiType: "ne",
+        uiImgClass: "site4HW",
+        uiImgWidth: 32,
+        uiLabel: "marker2",
+        uiTips: "<b>marker2</b><br>11111",
+        uiDraggable: true,
+        uiOpacity: 1
+      });
+      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "site4HW", 32, {
+        id: "marker3",
+        x: 51.5,
+        y: -0.08,
+        uiType: "ne",
+        uiImgClass: "site4HW",
+        uiImgWidth: 32,
+        uiLabel: "marker3",
+        uiTips: "<b>marker3</b><br>11111",
+        uiDraggable: true,
+        uiOpacity: 1
+      });
+      this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
+        id: "circle1",
+        x: 51.5,
+        y: -0.08,
+        r: 30,
+        uiType: "circle",
+        uiColor: "red",
+        uiFillColor: "#f03",
+        uiTips: "<b>circle1</b><br>11111",
+        uiFillOpacity: 0.5
+      });
+      this.$refs.ref0.addPolygon("polygon1", [
         [51.509, -0.08],
         [51.503, -0.06],
-        [51.51, -0.047]], "2");
-      this.$refs.ref0.addIcon("id1", 51.5, -0.11, "/static/leaflet/images/shit.png", "1", {name: 1},
-        this.onDBClick, this.onDrag);
-      this.$refs.ref0.addIcon("id2", 51.5, -0.13, "/static/leaflet/images/shit.png", "2", {name: 2},
-        this.onDBClick);
-      this.$refs.ref0.updateIcon("id2", 51.5, -0.18, "/static/leaflet/images/shit.png", "22", {name: 22});
-      this.$refs.ref0.addWater();
-      this.$refs.ref0.addHeatMap([
-        [51.5, -0.11, "1"],
-        [51.5, -0.13, "2"],
-        [51.5, -0.11, "3"],
-        [51.5, -0.13, "4"],
-        [51.5, -0.11, "5"]
-      ]);
+        [51.51, -0.047]
+      ], {
+        id: "polygon1",
+        points: [
+          [51.509, -0.08],
+          [51.503, -0.06],
+          [51.51, -0.047]
+        ],
+        uiTips: "polygon1"
+      });
+      this.$refs.ref0.addGroup({
+        uiExpand: false,
+        id: "site1",
+        x: 51.49994457056707,
+        y: -0.10597944259643556,
+        uiType: "site",
+        uiImgClass: "site4ALU",
+        uiImgWidth: 32,
+        uiLabel: "site1",
+        uiTips: "<b>site1</b><br>11111",
+        uiOpacity: 1,
+        r: 30,
+        uiColor: "red",
+        uiFillColor: "#f03",
+        uiFillOpacity: 0.5,
+        children:[{
+          id: "site1_ne1",
+          x: 51.49992987708078,
+          y: -0.10618329048156738,
+          uiType: "neInSite",
+          uiImgClass: "site4HW",
+          uiImgWidth: 32,
+          uiLabel: "site1_ne1",
+          uiTips: "<b>site1_ne1</b><br>11111",
+          uiDraggable: false,
+          uiOpacity: 1
+        }, {
+          id: "site1_ne2",
+          x: 51.49999332628028,
+          y: -0.10580241680145265,
+          uiType: "neInSite",
+          uiImgClass: "site4HW",
+          uiImgWidth: 32,
+          uiLabel: "site1_ne2",
+          uiTips: "<b>site1_ne2</b><br>11111",
+          uiDraggable: false,
+          uiOpacity: 1
+        }]
+      });
+      this.$refs.ref0.addGroup({
+        uiExpand: false,
+        id: "site2",
+        x: 51.49894457056707,
+        y: -0.10597944259643556,
+        uiType: "site",
+        uiImgClass: "site4ALU",
+        uiImgWidth: 32,
+        uiLabel: "site2",
+        uiTips: "<b>site2</b><br>11111",
+        uiOpacity: 1,
+        r: 30,
+        uiColor: "red",
+        uiFillColor: "#f03",
+        uiFillOpacity: 0.5,
+        children:[{
+          id: "site2_ne1",
+          x: 51.49892987708078,
+          y: -0.10618329048156738,
+          uiType: "neInSite",
+          uiImgClass: "site4HW",
+          uiImgWidth: 32,
+          uiLabel: "site2_ne1",
+          uiTips: "<b>site2_ne1</b><br>11111",
+          uiDraggable: false,
+          uiOpacity: 1
+        }, {
+          id: "site2_ne2",
+          x: 51.49899332628028,
+          y: -0.10580241680145265,
+          uiType: "neInSite",
+          uiImgClass: "site4HW",
+          uiImgWidth: 32,
+          uiLabel: "site2_ne2",
+          uiTips: "<b>site2_ne2</b><br>11111",
+          uiDraggable: false,
+          uiOpacity: 1
+        }]
+      });
+      this.$refs.ref0.drawLines(arrLines);
       //#endregion
     },
     methods: {
       //#region inner
+      onZoom: function (e) {
+        console.log(e);
+      },
       onClick: function(oPoint){
         console.log(oPoint);
       },
-      onDBClick: function(strId){
-        console.log(strId);
+      onContextMenu: function (e) {
+        console.log(e);
       },
-      onDrag: function(oItem){
-        console.log(oItem);
+      oTest4Map: function () {
+        this.$refs.ref0.setCenter(51.505, -0.09, 10);
+      },
+      oTest4Map2: function () {
+        this.show = !this.show;
+        this.$refs.ref0.showOrHide(this.show);
+      },
+      oTest4Map3: function () {
+        var oResDiff = this.$refs.ref0.getDiffLst(
+          ["marker2", "marker3", "marker4"],
+          ["site", "ne"]);
+        console.log(oResDiff);
+      },
+      onMarkerDBClick: function (e) {
+        console.log(e);
+      },
+      onMarkerDrag: function (e) {
+        console.log(e);
+      },
+      oTest4Marker: function () {
+        var self = this;
+
+        this.$refs.ref0.delMarker("marker3");
+        this.$refs.ref0.setImgClass("marker1", "site4ALU", 32);
+        this.$refs.ref0.setOpacity4Marker("marker1", 0.5);
+        this.$refs.ref0.setPos4Marker("marker1", 51.502, -0.09);
+        this.$refs.ref0.setTips4Marker("marker1", "fuck world!!");
+        this.$refs.ref0.setBuObj4Marker("marker1", {a: 11});
+        this.$refs.ref0.setHide4Marker("marker2", true);
+        setTimeout(function () {
+          self.$refs.ref0.setHide4Marker("marker2", false);
+        }, 2000);
+      },
+      oTest4Circle: function () {
+        this.$refs.ref0.delCircle("circle1");
+      },
+      onCircleDBClick: function (e) {
+        console.log(e);
+      },
+      oTest4Group: function (e) {
+        this.$refs.ref0.expandAllGroup("site");
+      },
+      oTest4Group2: function (e) {
+        this.$refs.ref0.collapseAllGroup("site");
+      },
+      oTest4Group3: function(e){
+        this.$refs.ref0.delGroup("site1");
+      },
+      oTest4Line: function (e) {
+        this.$refs.ref0.delPolyline("site1");
       }
       //#endregion
       //#region callback

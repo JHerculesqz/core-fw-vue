@@ -33,8 +33,6 @@ npm install marvel-fui2 --save-dev
 <script>
   //#region fui
   import {MarvelTab, MarvelTabItem} from "marvel-fui2";
-  import Css1 from "marvel-fui2/static/icomoon/style.css";
-  import Css2 from "marvel-fui2/static/walle/fui.css";
   import MarvelHight from "marvel-fui2/src/walle/component/highlight";
   import {MarvelAccordion} from "marvel-fui2";
   //#endregion
