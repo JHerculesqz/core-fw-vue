@@ -30,9 +30,12 @@
                               v-on:onZoom="onZoom"
                               v-on:onClick="onClick"
                               v-on:onContextMenu="onContextMenu"
-                              v-on:onMarkerDBClick="onMarkerDBClick"
-                              v-on:onMarkerDrag="onMarkerDrag"
-                              v-on:onCircleDBClick="onCircleDBClick"></marvel-leaflet>
+                              v-on:onNodeDblClick="onNodeDblClick"
+                              v-on:onNodeDrag="onNodeDrag"
+                              v-on:onNodeClick="onNodeClick"
+                              v-on:onNodeGroupClick="onNodeGroupClick"
+                              v-on:onLinkClick="onLinkClick"
+                              v-on:onCircleDblclick="onCircleDblclick"></marvel-leaflet>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -42,7 +45,7 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-&lt;marvel-leaflet ref="ref0" id="gisMapId1" v-on:onClick="onClick"&gt;&lt;/marvel-leaflet&gt;
+
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -77,98 +80,25 @@
         }],
         //#endregion
         //#region custom data
-
+        show: true,
         //#endregion
       }
     },
     mounted: function(){
       //#region custom
 
-      //#region Mock
+      //#region mock
 
-      var arrLines = [];
-
-      //#region 网元与网元
-
-      arrLines.push({
-        id: "link1",
-        srcNodeId: "marker1",
-        dstNodeId: "marker2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link1",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //#region 网元与站点之间
-
-      arrLines.push({
-        id: "link2",
-        srcNodeId: "marker2",
-        dstNodeId: "site1_ne1",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-      arrLines.push({
-        id: "link3",
-        srcNodeId: "marker2",
-        dstNodeId: "site1_ne2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //region 站点与站点之间
-
-      arrLines.push({
-        id: "link4",
-        srcNodeId: "site2_ne1",
-        dstNodeId: "site1_ne1",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-      arrLines.push({
-        id: "link5",
-        srcNodeId: "site2_ne2",
-        dstNodeId: "site1_ne2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //#endregion
-
-      this.$refs.ref0.init(51.505, -0.09, 13, {
-        hasZoomCtrl: true
-      });
-      this.$refs.ref0.addMarker("marker1", 51.5, -0.09, "/static/gis/lib/images/node1.svg", 32, {
+      var arrNodes = [];
+      var arrNodeGroups = [];
+      var arrLinks = [];
+      var oTopoData = {
+        nodes: arrNodes,
+        nodeGroups: arrNodeGroups,
+        links: arrLinks
+      };
+      //#region node
+      arrNodes.push({
         id: "marker1",
         x: 51.5,
         y: -0.09,
@@ -180,55 +110,22 @@
         uiDraggable: true,
         uiOpacity: 1
       });
-      this.$refs.ref0.addMarker("marker2", 51.50344816877402, -0.09883403778076173, "/static/gis/lib/images/node1.svg", 32, {
+      arrNodes.push({
         id: "marker2",
         x: 51.50344816877402,
         y: -0.09883403778076173,
         uiType: "ne",
-        uiImgUrl: "lib/images/node1.svg",
+        uiImgUrl: "/static/gis/lib/images/node1.svg",
         uiImgWidth: 32,
         uiLabel: "marker2",
         uiTips: "<b>marker2</b><br>11111",
         uiDraggable: true,
         uiOpacity: 1
       });
-      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "/static/gis/lib/images/node1.svg", 32, {
-        id: "marker3",
-        x: 51.5,
-        y: -0.08,
-        uiType: "ne",
-        uiImgUrl: "/static/gis/lib/images/node1.svg",
-        uiImgWidth: 32,
-        uiLabel: "marker3",
-        uiTips: "<b>marker3</b><br>11111",
-        uiDraggable: true,
-        uiOpacity: 1
-      });
-      this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
-        id: "circle1",
-        x: 51.5,
-        y: -0.08,
-        r: 30,
-        uiType: "circle",
-        uiColor: "red",
-        uiFillColor: "#f03",
-        uiTips: "<b>circle1</b><br>11111",
-        uiFillOpacity: 0.5
-      });
-      this.$refs.ref0.addPolygon("polygon1", [
-        [51.509, -0.08],
-        [51.503, -0.06],
-        [51.51, -0.047]
-      ], {
-        id: "polygon1",
-        points: [
-          [51.509, -0.08],
-          [51.503, -0.06],
-          [51.51, -0.047]
-        ],
-        uiTips: "polygon1"
-      });
-      this.$refs.ref0.addGroup({
+      //#endregion
+
+      //#region nodeGroup
+      arrNodeGroups.push({
         uiExpand: false,
         id: "site1",
         x: 51.49994457056707,
@@ -267,7 +164,7 @@
           uiOpacity: 1
         }]
       });
-      this.$refs.ref0.addGroup({
+      arrNodeGroups.push({
         uiExpand: false,
         id: "site2",
         x: 51.49894457056707,
@@ -306,7 +203,133 @@
           uiOpacity: 1
         }]
       });
-      this.$refs.ref0.drawLines(arrLines);
+      //#endregion
+
+      //#region link
+
+      //#region 网元与网元
+
+      arrLinks.push({
+        id: "link1",
+        srcNodeId: "marker1",
+        dstNodeId: "marker2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link1",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //#region 网元与站点之间
+
+      arrLinks.push({
+        id: "link2",
+        srcNodeId: "marker2",
+        dstNodeId: "site1_ne1",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+      arrLinks.push({
+        id: "link3",
+        srcNodeId: "marker2",
+        dstNodeId: "site1_ne2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //region 站点与站点之间
+
+      arrLinks.push({
+        id: "link4",
+        srcNodeId: "site2_ne1",
+        dstNodeId: "site1_ne1",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+      arrLinks.push({
+        id: "link5",
+        srcNodeId: "site2_ne2",
+        dstNodeId: "site1_ne2",
+        uiType: "link",
+        uiColor: "red",
+        uiWeight: 3,
+        uiOpacity: 1,
+        uiDashArray: "5, 10",
+        uiTips: "link2",
+        uiDirection: 2
+      });
+
+      //#endregion
+
+      //#endregion
+
+      //#endregion
+
+      //init
+      this.$refs.ref0.init(51.505, -0.09, 13, {
+        hasZoomCtrl: true
+      });
+      //draw
+      this.$refs.ref0.draw(oTopoData);
+      //basicShape marker/circle/ploygon
+      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "/static/gis/lib/images/node1.svg", 32, {
+        id: "marker3",
+        x: 51.5,
+        y: -0.08,
+        uiType: "ne",
+        uiImgUrl: "/static/gis/lib/images/node1.svg",
+        uiImgWidth: 32,
+        uiLabel: "marker3",
+        uiTips: "<b>marker3</b><br>11111",
+        uiDraggable: true,
+        uiOpacity: 1
+      });
+      this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
+        id: "circle1",
+        x: 51.5,
+        y: -0.08,
+        r: 30,
+        uiType: "circle",
+        uiColor: "red",
+        uiFillColor: "#f03",
+        uiTips: "<b>circle1</b><br>11111",
+        uiFillOpacity: 0.5
+      });
+      this.$refs.ref0.addPolygon("polygon1", [
+        [51.509, -0.08],
+        [51.503, -0.06],
+        [51.51, -0.047]
+      ], {
+        id: "polygon1",
+        points: [
+          [51.509, -0.08],
+          [51.503, -0.06],
+          [51.51, -0.047]
+        ],
+        uiTips: "polygon1"
+      });
+
       //#endregion
     },
     methods: {
@@ -318,6 +341,24 @@
         console.log(oPoint);
       },
       onContextMenu: function (e) {
+        console.log(e);
+      },
+      onNodeDblClick: function (e) {
+        console.log(e);
+      },
+      onNodeDrag: function (e) {
+        console.log(e);
+      },
+      onNodeClick: function(e){
+        console.log(e);
+      },
+      onNodeGroupClick: function (e) {
+        console.log(e);
+      },
+      onLinkClick: function (e) {
+        console.log(e);
+      },
+      onCircleDblclick: function (e) {
         console.log(e);
       },
       oTest4Map: function () {
@@ -333,17 +374,11 @@
           ["site", "ne"]);
         console.log(oResDiff);
       },
-      onMarkerDBClick: function (e) {
-        console.log(e);
-      },
-      onMarkerDrag: function (e) {
-        console.log(e);
-      },
       oTest4Marker: function () {
         var self = this;
 
         this.$refs.ref0.delMarker("marker3");
-        this.$refs.ref0.setImgUrl("marker1", "site4ALU", 32);
+        this.$refs.ref0.setImgUrl("marker1", "/static/gis/lib/images/nodeGroup1.svg", 32);
         this.$refs.ref0.setOpacity4Marker("marker1", 0.5);
         this.$refs.ref0.setPos4Marker("marker1", 51.502, -0.09);
         this.$refs.ref0.setTips4Marker("marker1", "fuck world!!");
@@ -356,9 +391,6 @@
       oTest4Circle: function () {
         this.$refs.ref0.delCircle("circle1");
       },
-      onCircleDBClick: function (e) {
-        console.log(e);
-      },
       oTest4Group: function (e) {
         this.$refs.ref0.expandAllGroup("site");
       },
@@ -369,7 +401,7 @@
         this.$refs.ref0.delGroup("site1");
       },
       oTest4Line: function (e) {
-        this.$refs.ref0.delPolyline("site1");
+        this.$refs.ref0.delPolyline("link1");
       }
       //#endregion
       //#region callback

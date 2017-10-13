@@ -23,6 +23,7 @@
       //#region inner
 
       //#endregion
+
       //#region callback
       _onZoom: function(e){
         this.$emit("onZoom", e);
@@ -33,14 +34,23 @@
       _onContextMenu: function (e) {
         this.$emit("onContextMenu", e);
       },
-      _onMarkerDBClick: function(e){
-        this.$emit("onMarkerDBClick", e);
+      _onNodeDblClick: function(e){
+        this.$emit("onNodeDblClick", e);
       },
-      _onMarkerDrag: function(e){
-        this.$emit("onMarkerDrag", e);
+      _onNodeDrag: function(e){
+        this.$emit("onNodeDrag", e);
       },
-      _onCircleDBClick: function(e){
-        this.$emit("onCircleDBClick", e);
+      _onNodeClick: function(e){
+        this.$emit("onNodeClick", e);
+      },
+      _onNodeGroupClick: function(e){
+        this.$emit("onNodeGroupClick", e);
+      },
+      _onLinkClick: function(e){
+        this.$emit("onLinkClick", e);
+      },
+      _onCircleDblclick: function(e){
+        this.$emit("onCircleDblclick", e);
       },
       //#endregion
       //#region 3rd
@@ -48,19 +58,58 @@
       //#region Map
       init: function(iX, iY, iZoom4Init, oOptions){
         var self = this;
-
-        this.gisObj.Stage.init(this.id, iX, iY, iZoom4Init,
-          oOptions,
-          function (e) {
+        var eventOptions = {
+          //region Stage
+          callbackOnZoom: function(e){
+            console.log("callbackOnZoom");
             self._onZoom(e);
-          }, function (e) {
+          },
+          callbackOnClick: function(e){
+            console.log("callbackOnClick");
             self._onClick(e);
-          }, function (e) {
+          },
+          callbackOnContextmenu: function(e){
+            console.log("callbackOnContextmenu");
             self._onContextMenu(e);
-          });
+          },
+          //endregion
+          //region node
+          callbackOnNodeDblClick: function(e){
+            console.log("callbackOnNodeDblClick");
+            self._onNodeDblClick(e);
+          },
+          callbackOnNodeDrag: function(e){
+            console.log("callbackOnNodeDrag");
+            self._onNodeDrag(e);
+          },
+          callbackOnNodeClick: function(e){
+            console.log("callbackOnNodeClick");
+            self._onNodeClick(e);
+          },
+          //endregion
+          //region nodeGroup
+          callbackOnNodeGroupClick: function(e){
+            console.log("callbackOnNodeGroupClick");
+            self._onNodeGroupClick(e);
+          },
+          //endregion
+          //region link
+          callbackOnLinkClick: function(e){
+            console.log("callbackOnLinkClick");
+            self._onLinkClick(e);
+          },
+          //endregion
+          //region basicShape
+          callbackOnCircleDblclick: function(e){
+            console.log("callbackOnCircleDblclick");
+            self._onCircleDblclick(e);
+          }
+          //endregion
+        };
+        this.gisObj.Api.init(this.id, iX, iY, iZoom4Init, oOptions, eventOptions, this.gisObj);
       },
       setCenter: function(iX, iY, iZoom4Init){
-        this.gisObj.Stage.setCenter(iX, iY, iZoom4Init);
+        this.gisObj.Api.setCenter(iX, iY, iZoom4Init, this.gisObj);
       },
       showOrHide: function(bIsShow){
         this.isShow = bIsShow ? "block":"none";
@@ -69,105 +118,88 @@
 
       //#region Layer
       findById: function(strId){
-        var oRes = this.gisObj.Layer.findById(strId);
+        var oRes = this.gisObj.Api.findById(strId);
         return oRes;
       },
       getDiffLst: function(lstItemId, arrItemUiType){
-        var oRes = this.gisObj.Layer.getDiffLst(lstItemId,
+        var oRes = this.gisObj.Api.getDiffLst(lstItemId,
           arrItemUiType, this.gisObj);
         return oRes;
       },
       //#endregion
 
+      //#region topo
+
+      draw: function(oTopoData){
+        this.gisObj.Api.draw(oTopoData, this.gisObj);
+      },
+
+      //#endegion
+
       //#region Marker/Icon/DivIcon
       addMarker: function(strId, iX, iY, strImgClass, iImgWidth,
                           oBuObj){
-        var self = this;
-
-        this.gisObj.Sprite.Node.addMarker(strId, iX, iY,
-          strImgClass, iImgWidth, oBuObj,
-          this.gisObj,
-          function (e) {
-            self._onMarkerDBClick(e);
-          },
-          function (e) {
-            self._onMarkerDrag(e);
-          });
-        //#region event
-
-
-
-        //#endregion
+        this.gisObj.Api.addMarker(strId, iX, iY,
+          strImgClass, iImgWidth, oBuObj, this.gisObj);
       },
       delMarker: function (strId) {
-        this.gisObj.Sprite.Node.delMarker(strId, this.gisObj);
+        this.gisObj.Api.delMarker(strId, this.gisObj);
       },
       setImgUrl: function (strId, strImgClass, iImgWidth) {
-        this.gisObj.Sprite.Node.setImgUrl(strId,
-          strImgClass, iImgWidth, this.gisObj);
+        this.gisObj.Api.setImgUrl(strId, strImgClass, iImgWidth, this.gisObj);
       },
       setOpacity4Marker: function (strId, iOpacity) {
-        this.gisObj.Sprite.Node.setOpacity4Marker(strId, iOpacity,
+        this.gisObj.Api.setOpacity4Marker(strId, iOpacity,
           this.gisObj);
       },
       setPos4Marker: function (strId, iX, iY) {
-        this.gisObj.Sprite.Node.setPos4Marker(strId, iX, iY,
+        this.gisObj.Api.setPos4Marker(strId, iX, iY,
           this.gisObj);
       },
       setTips4Marker: function (strId, strTips) {
-        this.gisObj.Sprite.Node.setTips4Marker(strId, strTips,
+        this.gisObj.Api.setTips4Marker(strId, strTips,
           this.gisObj);
       },
       setBuObj4Marker: function (strId, oBuObj) {
-        this.gisObj.Sprite.Node.setBuObj4Marker(strId, oBuObj, this.gisObj);
+        this.gisObj.Api.setBuObj4Marker(strId, oBuObj, this.gisObj);
       },
       setHide4Marker: function (strId, bIsHide) {
-        this.gisObj.Sprite.Node.setHide4Marker(strId, bIsHide, this.gisObj);
+        this.gisObj.Api.setHide4Marker(strId, bIsHide, this.gisObj);
       },
       //#endregion
 
       //#region Circle
       addCircle: function(strId, iX, iY, iR,
                           oBuObj){
-        var self = this;
-
-        this.gisObj.Sprite.Node.addCircle(strId, iX, iY, iR,
-          oBuObj,
-          this.gisObj,
-          function (e) {
-            self._onCircleDBClick(e);
-          });
+        this.gisObj.Api.addCircle(strId, iX, iY, iR, oBuObj, this.gisObj);
       },
       delCircle: function (strId) {
-        this.gisObj.Sprite.Node.delCircle(strId, this.gisObj);
+        this.gisObj.Api.delCircle(strId, this.gisObj);
       },
       //#endregion
 
       //#region Polygon
       addPolygon: function(strId, arrPoints, oBuObj){
-        this.gisObj.Sprite.Node.addPolygon(strId, arrPoints, oBuObj,
+        this.gisObj.Api.addPolygon(strId, arrPoints, oBuObj,
           this.gisObj);
       },
       //#endregion
 
       //#region Group
-      addGroup: function(oBuObj4Group){
-        this.gisObj.Sprite.NodeGroup.addGroup(oBuObj4Group, this.gisObj);
-      },
       expandAllGroup: function (strUiType) {
-        this.gisObj.Sprite.NodeGroup.expandAllGroup(strUiType, this.gisObj);
+        this.gisObj.Api.expandAllGroup(strUiType, this.gisObj);
       },
       collapseAllGroup: function (strUiType) {
-        this.gisObj.Sprite.NodeGroup.collapseAllGroup(strUiType, this.gisObj);
+        this.gisObj.Api.collapseAllGroup(strUiType, this.gisObj);
       },
       delGroup: function(strId){
-        this.gisObj.Sprite.NodeGroup.delGroup(strId, this.gisObj);
+        this.gisObj.Api.delGroup(strId, this.gisObj);
       },
       //#endregion
 
-      //#region Polyline
-      drawLines: function (arrBuObj4Lines) {
-        this.gisObj.Sprite.LinkGroup.drawLines(arrBuObj4Lines, this.gisObj);
+      //#region link
+      delPolyline: function(strId){
+        this.gisObj.Api.delPolyline(strId, this.gisObj);
       },
       //#endregion
 

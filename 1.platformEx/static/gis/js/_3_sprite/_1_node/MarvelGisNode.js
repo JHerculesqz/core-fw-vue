@@ -1,81 +1,84 @@
-(function($){
+(function ($) {
     /**
      * Marker/Icon/DivIcon/Circle
      */
-    $.MarvelGisNode = function() {
+    $.MarvelGisNode = function () {
         var self = this;
 
-        //#region Const
+        //region Const
 
-        //#endregion
+        //endregion
 
-        //#region init
+        //region init
 
-        //#endregion
+        //endregion
 
-        //#region event
+        //region event
 
-        var _onMarkerDBClick = function(oMarker,
-                                        oCallbackOnMarkerDBClick){
-            oMarker.on("dblclick", function(e){
-                oCallbackOnMarkerDBClick(e);
+        var _onMarkerDBClick = function (oMarker,
+                                         oGis) {
+            oMarker.on("dblclick", function (e) {
+                oGis.Stage.eventHandler.callbackOnNodeDblClick(e);
             });
         };
 
-        var _onMarkerDrag = function(oMarker,
-                                     oCallbackOnMarkerDrag){
-            oMarker.on("dragend", function(e){
-                oCallbackOnMarkerDrag(e);
+        var _onMarkerDrag = function (oMarker, oGis) {
+            oMarker.on("dragend", function (e) {
+                oGis.Stage.eventHandler.callbackOnNodeDrag(e);
             });
         };
 
-        var _onCircleDBClick = function(oCircle,
-                                        oCallbackOnCircleDBClick){
-            oCircle.on("dblclick", function(e){
-                oCallbackOnCircleDBClick(e);
+        var _onMarkClick = function(oMarker, oGis){
+            oMarker.on("click", function (e) {
+                oGis.Stage.eventHandler.callbackOnNodeClick(e);
             });
         };
 
-        //#endregion
+        var _onCircleDBClick = function (oCircle, oGis) {
+            oCircle.on("dblclick", function (e) {
+                oGis.Stage.eventHandler.callbackOnCircleDblclick(e);
+            });
+        };
 
-        //#region imsg
+        //endregion
 
-        //#region Marker
+        //region imsg
 
-        //#region addMarker
+        //region Marker
 
-        this.addMarker = function(strId, iX, iY,
-                                  strImgUrl, iImgWidth,
-                                  oBuObj,
-                                  oGis,
-                                  oCallbackOnMarkerDBClick,
-                                  oCallbackOnMarkerDrag){
-            //#region init
+        //region addMarker
+
+        this.addMarker = function (strId, iX, iY,
+                                   strImgUrl, iImgWidth,
+                                   oBuObj,
+                                   oGis) {
+            //region init
 
             var oMarker = _initMarker(strId, iX, iY,
                 strImgUrl, iImgWidth,
                 oBuObj,
                 oGis);
 
-            //#endregion
+            //endregion
 
-            //#region event
+            //region event
 
-            _onMarkerDBClick(oMarker, oCallbackOnMarkerDBClick);
-            _onMarkerDrag(oMarker, oCallbackOnMarkerDrag);
+            _onMarkerDBClick(oMarker, oGis);
+            _onMarkerDrag(oMarker, oGis);
+            _onMarkClick(oMarker, oGis);
 
-            //#endregion
+            //endregion
         };
 
-        var _initMarker = function(strId, iX, iY, strImgUrl, iImgWidth,
-                               oBuObj, oGis) {
+        var _initMarker = function (strId, iX, iY, strImgUrl, iImgWidth,
+                                    oBuObj, oGis) {
             var oIcon = L.icon({
                 // html: "<div style='margin-top:" + iImgWidth + "px;'>" + oBuObj.uiLabel + "</div>",
                 // className: strImgUrl,
                 iconUrl: strImgUrl,
                 iconSize: [iImgWidth, iImgWidth],
-                iconAnchor: [iImgWidth/2, iImgWidth/2],
-                popupAnchor: [0, -iImgWidth/2]
+                iconAnchor: [iImgWidth / 2, iImgWidth / 2],
+                popupAnchor: [0, -iImgWidth / 2]
             });
             var oMarker = L.marker([iX, iY], {
                 icon: oIcon,
@@ -91,114 +94,119 @@
         };
 
         this.addMarker4Group = function (strId, iX, iY, strImgUrl, iImgWidth,
-                                         oBuObj, oGis, oCallbackOnMarkerDBlClick) {
-            //#region init
+                                         oBuObj, oGis,
+                                         oCallbackOnMarkerDBlClick,
+                                         oCallbackOnMarkerClick) {
+            //region init
 
             var oMarker = _initMarker(strId, iX, iY, strImgUrl, iImgWidth,
                 oBuObj, oGis);
 
-            //#endregion
+            //endregion
 
-            //#region event
+            //region event
 
             oMarker.on("dblclick", function (e) {
-                oCallbackOnMarkerDBlClick();
+                oCallbackOnMarkerDBlClick(e);
+            });
+            oMarker.on("click", function (e) {
+                oCallbackOnMarkerClick(e);
             });
 
-            //#endregion
+            //endregion
         };
 
-        //#endregion
+        //endregion
 
-        //#region delMarker
+        //region delMarker
 
-        this.delMarker = function(strId, oGis) {
+        this.delMarker = function (strId, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 oMarker.remove();
             }
         };
 
-        //#endregion
+        //endregion
 
-        //#region updateMarker
+        //region updateMarker
 
-        this.setImgUrl = function(strId, strImgUrl, iImgWidth, oGis) {
+        this.setImgUrl = function (strId, strImgUrl, iImgWidth, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 var oIcon = L.icon({
                     // html: "<div style='margin-top:" + iImgWidth + "px;'>" + oMarker.buObj.uiLabel + "</div>",
                     // className: strImgUrl,
                     iconUrl: strImgUrl,
                     iconSize: [iImgWidth, iImgWidth],
-                    iconAnchor: [iImgWidth/2, iImgWidth/2],
-                    popupAnchor: [0, -iImgWidth/2]
+                    iconAnchor: [iImgWidth / 2, iImgWidth / 2],
+                    popupAnchor: [0, -iImgWidth / 2]
                 });
                 oMarker.setIcon(oIcon);
             }
         };
 
-        this.setOpacity4Marker = function(strId, iOpacity, oGis) {
+        this.setOpacity4Marker = function (strId, iOpacity, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 oMarker.setOpacity(iOpacity);
             }
         };
 
-        this.setPos4Marker = function(strId, iX, iY, oGis) {
+        this.setPos4Marker = function (strId, iX, iY, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 var oPos = L.latLng(iX, iY);
                 oMarker.setLatLng(oPos);
             }
         };
 
-        this.setTips4Marker = function(strId, strTips, oGis) {
+        this.setTips4Marker = function (strId, strTips, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 oMarker.setPopupContent(strTips);
             }
         };
 
-        this.setBuObj4Marker = function(strId, oBuObj, oGis) {
+        this.setBuObj4Marker = function (strId, oBuObj, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
+            if (oMarker) {
                 oMarker.buObj = oBuObj;
             }
         };
 
-        this.setHide4Marker = function(strId, bIsHide, oGis) {
+        this.setHide4Marker = function (strId, bIsHide, oGis) {
             var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
-                if(bIsHide){
+            if (oMarker) {
+                if (bIsHide) {
                     oMarker.setOpacity(0);
                     oMarker.closePopup();
                 }
-                else{
+                else {
                     oMarker.setOpacity(1);
                 }
             }
         };
 
-        //#endregion
+        //endregion
 
-        //#endregion
+        //endregion
 
-        //#region Circle
+        //region Circle
 
-        this.addCircle = function(strId, iX, iY, iR,
-                            oBuObj, oGis, oCallbackOnCircleDBClick){
-            //#region init
+        this.addCircle = function (strId, iX, iY, iR,
+                                   oBuObj, oGis) {
+            //region init
 
             var oCircle = _initCircle(strId, iX, iY, iR, oBuObj, oGis);
 
-            //#endregion
+            //endregion
 
-            //#region event
+            //region event
 
-            _onCircleDBClick(oCircle, oCallbackOnCircleDBClick);
+            _onCircleDBClick(oCircle, oGis);
 
-            //#endregion
+            //endregion
         };
 
         var _initCircle = function (strId, iX, iY, iR, oBuObj, oGis) {
@@ -218,47 +226,52 @@
 
         this.delCircle = function (strId, oGis) {
             var oCircle = oGis.Layer.findById(strId, oGis);
-            if(oCircle){
+            if (oCircle) {
                 oCircle.remove();
             }
         };
 
-        this.addCircle4Group = function(strId, iX, iY, iR, oBuObj, oGis, oCallbackOnCircleDBClick){
-            //#region init
+        this.addCircle4Group = function (strId, iX, iY, iR, oBuObj, oGis,
+                                         oCallbackOnCircleDBClick,
+                                         oCallbackOnCircleClick) {
+            //region init
 
             var oCircle = _initCircle(strId, iX, iY, iR, oBuObj, oGis);
 
-            //#endregion
+            //endregion
 
-            //#region event
+            //region event
 
-            oCircle.on("dblclick", function(e){
+            oCircle.on("dblclick", function (e) {
                 oCallbackOnCircleDBClick();
             });
+            oCircle.on("click", function (e) {
+                oCallbackOnCircleClick(e);
+            });
 
-            //#endregion
+            //endregion
         };
 
-        //#endregion
+        //endregion
 
-        //#region Polygon
+        //region Polygon
 
-        this.addPolygon = function(strId, arrPoints, oBuObj, oGis){
-            //#region init
+        this.addPolygon = function (strId, arrPoints, oBuObj, oGis) {
+            //region init
             var oPolygon = L.polygon(arrPoints);
             oPolygon.id = strId;
             oPolygon.buObj = oBuObj;
             oPolygon.bindPopup(oBuObj.uiTips);
             oPolygon.addTo(oGis.Stage.mapObj);
-            //#endregion
+            //endregion
 
-            //#region event
+            //region event
 
-            //#endregion
+            //endregion
         };
 
-        //#endregion
+        //endregion
 
-        //#endregion
+        //endregion
     }
 })(jQuery);
