@@ -33,7 +33,41 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
+                <code class="html">
+                  &lt;MarvelPrompt :status="status" :content="content"&gt;&lt;/MarvelPrompt&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+
+    <!--2级 start-->
+    <div class="title level2">用户消息提示</div>
+    <div class="describe">
+      用户消息提示
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems1">
+        <marvel-tab-item :isActive="tabItems1[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:100%; height: 100%;">
+              <button v-on:click="onClick">设置</button>
+              <marvel-prompt-ex ref="ref0"
+                                label="用户日志"
+                                icon="icon-mail4"></marvel-prompt-ex>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
                 <code class="html">
                   &lt;MarvelPrompt :status="status" :content="content"&gt;&lt;/MarvelPrompt&gt;
                 </code>
@@ -51,11 +85,12 @@
   //#region fui
   import {MarvelTab, MarvelTabItem} from "marvel-fui2";
   import MarvelHight from "marvel-fui2/src/walle/component/highlight";
-  import {MarvelPrompt} from "marvel-fui2";
+  import {MarvelPrompt, MarvelPromptEx} from "marvel-fui2";
   //#endregion
 
   export default {
     components: {
+      MarvelPromptEx,
       MarvelPrompt,
       MarvelTab,
       MarvelTabItem
@@ -89,9 +124,16 @@
             status: '2',
             content: 'xxx共和国倒闭了，xxx共和国倒闭了，xxx共和国倒闭了, xxx共和国倒闭了'
           }
-        ]
+        ],
+        hasNotify: false
         //#endregion
       };
+    },
+    methods: {
+      onClick: function () {
+        this.hasNotify = !this.hasNotify;
+        this.$refs.ref0.setNotify(this.hasNotify);
+      }
     }
   }
 

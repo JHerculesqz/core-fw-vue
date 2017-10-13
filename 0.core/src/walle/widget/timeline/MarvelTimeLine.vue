@@ -33,14 +33,14 @@
 </template>
 
 <script>
-
   export default {
+    name: "MarvelTimeLine",
+    props: ['title', 'items'],
     data: function(){
       return {
 
       }
     },
-    props: ['title', 'items'],
     methods: {
       classObj: function(status){
         if(status == '0'){

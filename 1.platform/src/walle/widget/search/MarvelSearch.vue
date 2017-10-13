@@ -11,12 +11,13 @@
 <script>
 
   export default {
+    name: "MarvelSearch",
+    props: ['placeholder', 'mixin'],
     data: function(){
       return {
         inputVal: ''
       }
     },
-    props: ['placeholder', 'mixin'],
     methods: {
       search: function(){
         this.$emit("search", this.inputVal);

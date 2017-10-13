@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
   import MarvelDropDownButton from '../button/MarvelDropDownButton.vue';
   import MarvelSearch from './MarvelSearch.vue';
 
@@ -29,6 +28,7 @@
       MarvelDropDownButton,
       MarvelSearch
     },
+    name: "MarvelSearchWithDropDown",
     data: function () {
       return {
 

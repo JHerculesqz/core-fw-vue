@@ -49,6 +49,7 @@ import MarvelLegend from "./walle/widget/legend/MarvelLegend.vue"
 import MarvelLoading from "./walle/widget/loading/MarvelLoading.vue"
 import MarvelLoadingMini from "./walle/widget/loading/MarvelLoadingMini.vue"
 import MarvelPrompt from "./walle/widget/prompt/MarvelPrompt.vue"
+import MarvelPromptEx from "./walle/widget/prompt/MarvelPromptEx.vue"
 import MarvelToolbar from "./walle/widget/toolbar/MarvelToolbar.vue"
 import MarvelWarning from "./walle/widget/warning/MarvelWarning.vue"
 //#endregion
@@ -126,6 +127,7 @@ export {
     MarvelLoading,
     MarvelLoadingMini,
     MarvelPrompt,
+    MarvelPromptEx,
     MarvelToolbar,
     MarvelWarning,
     //#endregion

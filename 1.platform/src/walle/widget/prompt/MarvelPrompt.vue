@@ -11,8 +11,8 @@
 </template>
 
 <script>
-
   export default {
+    name: "MarvelPrompt",
     data: function(){
       return {
 
