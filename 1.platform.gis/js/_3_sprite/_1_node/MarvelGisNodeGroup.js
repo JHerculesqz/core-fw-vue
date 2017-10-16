@@ -82,6 +82,8 @@
                     if (oLayer.buObj.uiType == strUiType) {
                         if (!oLayer.buObj.uiExpand) {
                             _expandGroup(oLayer.buObj, oGis);
+                            //联动链路
+                            oGis.Sprite.LinkGroup.response2NodeEvent4ReDraw(oLayer.buObj, oGis);
                         }
                     }
                 }
@@ -105,6 +107,8 @@
                     if (oLayer.buObj.uiType == strUiType) {
                         if (oLayer.buObj.uiExpand) {
                             _collapseGroup(oLayer.buObj, oGis);
+                            //联动链路
+                            oGis.Sprite.LinkGroup.response2NodeEvent4ReDraw(oLayer.buObj, oGis);
                         }
                     }
                 }
@@ -164,6 +168,21 @@
                 });
             }
             return oTargetBuObj;
+        };
+
+        this.setOpacity4Group = function(strId, iOpacity, oGis){
+            var oNodeGroup = oGis.Layer.findById(strId, oGis);
+            if(oNodeGroup){
+                var oBuObj = oNodeGroup.buObj;
+                //如果是展开
+                if(oBuObj.uiExpand === true){
+                    oGis.Sprite.Node.setOpacity4Circle(strId, iOpacity, oGis);
+                }
+                //如果是折叠
+                else if(oBuObj.uiExpand === false){
+                    oGis.Sprite.Node.setOpacity4Marker(strId, iOpacity, oGis);
+                }
+            }
         };
 
         //endregion
