@@ -124,10 +124,34 @@
             var oMarker = oGis.Layer.findById(strId, oGis);
             if (oMarker) {
                 oMarker.remove();
+                //删除附属图标
+                if(oMarker.attachIcon){
+                    oMarker.attachIcon.remove();
+                }
             }
         };
 
         //endregion
+
+        this.addAttachedIcon4Marker = function(strId, strImgUrl, oGis){
+            //找到Marker
+            var oMarker = oGis.Layer.findById(strId, oGis);
+            if(oMarker){
+                var oAttachedIcon = L.marker([oMarker._latlng.lat, oMarker._latlng.lng]);
+                oMarker.attachIcon = oAttachedIcon;
+                oAttachedIcon.addTo(oGis.Stage.mapObj);
+            }
+        };
+
+        this.delAttachedIcon4Marker = function(strId, oGis){
+            //找到Marker
+            var oMarker = oGis.Layer.findById(strId, oGis);
+            if(oMarker){
+                if(oMarker.attachIcon){
+                    oMarker.attachIcon.remove();
+                }
+            }
+        };
 
         //region updateMarker
 
@@ -250,6 +274,15 @@
             });
 
             //endregion
+        };
+
+        this.setOpacity4Circle = function(strId, iOpacity, oGis){
+            var oCircle = oGis.Layer.findById(strId, oGis);
+            if(oCircle){
+                oCircle.setStyle({
+                    opacity: iOpacity
+                });
+            }
         };
 
         //endregion

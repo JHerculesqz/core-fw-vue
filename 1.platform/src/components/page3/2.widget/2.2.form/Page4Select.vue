@@ -66,7 +66,7 @@
             <!--2级DemoView start-->
             <button v-on:click="onClick4Switch">getStatus</button>
             <br>
-            <marvel-switch ref="ref4" id="id5"></marvel-switch>
+            <marvel-switch ref="ref4" id="id5" :check="false"></marvel-switch>
             <marvel-switch ref="ref5" id="id6"
                            v-on:onChange="onChange4Switch"></marvel-switch>
             <br>
@@ -112,6 +112,8 @@
                               label="x1" showLabel="false"></marvel-check-box>
             <marvel-check-box ref="ref9" id="id10"
                               label="x2" showLabel="true"
+                              buObj="buObj..."
+                              v-bind:check="true"
                               v-on:onChange="onChange4Check"></marvel-check-box>
             <br>
             <marvel-check-box ref="ref10" id="id11"
@@ -243,13 +245,13 @@
       this.$refs.ref2.setStatus(false, true);
       this.$refs.ref3.setStatus(true, true);
       //2.
-      this.$refs.ref4.setStatus(false, false);
+//      this.$refs.ref4.setStatus(false, false);
       this.$refs.ref5.setStatus(true, false);
       this.$refs.ref6.setStatus(false, true);
       this.$refs.ref7.setStatus(true, true);
       //3.
       this.$refs.ref8.setStatus(false, false);
-      this.$refs.ref9.setStatus(true, false);
+//      this.$refs.ref9.setStatus(true, false);
       this.$refs.ref10.setStatus(false, true);
       this.$refs.ref11.setStatus(true, true);
       //#endregion
@@ -277,8 +279,8 @@
           this.$refs.ref8.getCheckItem() + "," +
           this.$refs.ref9.getCheckItem());
       },
-      onChange4Check: function(strOldVal, strNewVal){
-        console.log("[CheckBox]change..." + strNewVal);
+      onChange4Check: function(strOldVal, strNewVal, oBuObj){
+        console.log("[CheckBox]change..." + strNewVal + "," + oBuObj);
       },
       onClick4SelectCard: function(){
         console.log("[SelectCard]..." + this.$refs.ref12.getSelectItem());

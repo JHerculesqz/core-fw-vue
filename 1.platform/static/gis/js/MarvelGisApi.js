@@ -3,6 +3,12 @@
  */
 (function ($) {
     $.MarvelGisApi = function () {
+        //region Const
+        const NODE_TYPE="ne";
+        const SITE_TYPE="site";
+        const LINK_TYPE="link";
+        //endregion
+
         //region Fields
         var self = this;
         //endregion
@@ -52,6 +58,31 @@
             oGis.Sprite.LinkGroup.drawLines(oTopoData.links, oGis);
         };
 
+        this.getTopoData = function(oGis){
+            var oTopoData = {
+                nodes: [],
+                nodeGroups: [],
+                links: []
+            };
+
+            oGis.Stage.mapObj.eachLayer(function(oLayer, index){
+                var oBuObj = oLayer.buObj;
+                if(oBuObj){
+                    if(oBuObj.uiType == NODE_TYPE){
+                        oTopoData.nodes.push(oBuObj);
+                    }
+                    else if(oBuObj.uiType == SITE_TYPE){
+                        oTopoData.nodeGroups.push(oBuObj);
+                    }
+                    else if(oBuObj.uiType == LINK_TYPE){
+                        oTopoData.links.push(oBuObj);
+                    }
+                }
+            });
+
+            return oTopoData;
+        };
+
         //endregion
 
         //region node
@@ -88,6 +119,14 @@
         this.setHide4Marker = function (strId, bIsHide, oGis) {
             oGis.Sprite.Node.setHide4Marker(strId, bIsHide, oGis);
         };
+
+        this.addAttachedIcon4Marker = function(strId, strImgUrl, oGis){
+            oGis.Sprite.Node.addAttachedIcon4Marker(strId, strImgUrl, oGis);
+        };
+
+        this.delAttachedIcon4Marker = function(strId, oGis){
+            oGis.Sprite.Node.delAttachedIcon4Marker(strId, oGis);
+        };
         //endregion
 
         //region circle
@@ -120,6 +159,10 @@
 
         this.delGroup = function(strId, oGis){
             oGis.Sprite.NodeGroup.delGroup(strId, oGis);
+        };
+
+        this.setOpacity4Group = function(strId, iOpacity, oGis){
+            oGis.Sprite.NodeGroup.setOpacity4Group(strId, iOpacity, oGis);
         };
 
         //endregion

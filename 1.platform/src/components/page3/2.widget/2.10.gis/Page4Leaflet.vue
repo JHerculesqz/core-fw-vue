@@ -20,11 +20,14 @@
             <button v-on:click="oTest4Map2">test4Map(showOrHide)</button>
             <button v-on:click="oTest4Map3">test4Map3(getDiffLst)</button>
             <button v-on:click="oTest4Marker">test4Marker</button>
+            <button v-on:click="oTest4AttachedIcon">test4AttachedIcon</button>
             <button v-on:click="oTest4Circle">test4Circle</button>
             <button v-on:click="oTest4Group">test4Group(expandAllGroup)</button>
             <button v-on:click="oTest4Group2">test4Group(collapseAllGroup)</button>
             <button v-on:click="oTest4Group3">oTest4Group(delGroup)</button>
+            <button v-on:click="oTest4Group4">test4Group(setOpacity4Group)</button>
             <button v-on:click="oTest4Line">test4Line(delPolyline)</button>
+            <button v-on:click="oTest4Topo">test4Topo</button>
             <div style="width: 100%;height: 500px;">
               <marvel-leaflet ref="ref0" id="gisMapId1"
                               v-on:onZoom="onZoom"
@@ -374,7 +377,6 @@
       },
       oTest4Marker: function () {
         var self = this;
-
         this.$refs.ref0.delMarker("marker3");
         this.$refs.ref0.setImgUrl("marker1", "/static/gis/lib/images/nodeGroup1.svg", 32);
         this.$refs.ref0.setOpacity4Marker("marker1", 0.5);
@@ -384,6 +386,13 @@
         this.$refs.ref0.setHide4Marker("marker2", true);
         setTimeout(function () {
           self.$refs.ref0.setHide4Marker("marker2", false);
+        }, 2000);
+      },
+      oTest4AttachedIcon: function(){
+        var self = this;
+        this.$refs.ref0.addAttachedIcon4Marker("marker1", "");
+        setTimeout(function(){
+          self.$refs.ref0.delAttachedIcon4Marker("marker1");
         }, 2000);
       },
       oTest4Circle: function () {
@@ -398,8 +407,16 @@
       oTest4Group3: function(e){
         this.$refs.ref0.delGroup("site1");
       },
+      oTest4Group4: function(){
+        this.$refs.ref0.setOpacity4Group("site2", 0.5);
+      },
       oTest4Line: function (e) {
         this.$refs.ref0.delPolyline("link1");
+      },
+      oTest4Topo: function(){
+        var oTopoData = this.$refs.ref0.getTopoData();
+        console.log("TopoCache is ");
+        console.log(oTopoData);
       }
       //#endregion
       //#region callback
