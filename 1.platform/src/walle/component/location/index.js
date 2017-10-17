@@ -9,8 +9,8 @@ export default {
       navigator.geolocation.getCurrentPosition(function(position){
         if(oCallbackOK){
           var oRes = {
-            x: position.coords.longitude,
-            y: position.coords.latitude
+            x: position.coords.latitude,
+            y: position.coords.longitude
           };
           oCallbackOK(oRes);
         }
@@ -29,8 +29,8 @@ export default {
       if(this.getStatus() == BMAP_STATUS_SUCCESS){
         if(oCallbackOK){
           var oRes = {
-            x: r.point.lng,
-            y: r.point.lat
+            x: r.point.lat,
+            y: r.point.lng
           };
           oCallbackOK(oRes);
         }
