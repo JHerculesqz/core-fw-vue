@@ -36,6 +36,36 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">LocationByBD</div>
+    <div class="describe">
+      LocationByBD
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 180px;height:100%">
+              <button v-on:click="onClickEx">获取</button>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -60,6 +90,13 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems2: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
 
@@ -70,9 +107,14 @@
       //#region inner
       onClick: function(){
         MarvelLocation.getLocation(function(oPos){
-          console.log(oPos);
+          alert(oPos);
         });
-      }
+      },
+      onClickEx: function(){
+        MarvelLocation.getLocationByBD(function(oPos){
+          alert(oPos);
+        });
+      },
       //#endregion
       //#region callback
 

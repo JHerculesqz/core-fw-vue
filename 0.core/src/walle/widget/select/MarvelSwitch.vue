@@ -13,10 +13,10 @@
 <script>
   export default {
     name: 'MarvelSwitch',
-    props: ["id"],
+    props: ["id", "check"],
     data: function() {
         return {
-          checkItem: true,
+          checkItem: this.check === false ? false : true,
           isDisable: false,
         }
     },

@@ -129,11 +129,12 @@
       //#endregion
 
       //#region topo
-
       draw: function(oTopoData){
         this.gisObj.Api.draw(oTopoData, this.gisObj);
       },
-
+      getTopoData: function(){
+        return this.gisObj.Api.getTopoData(this.gisObj);
+      },
       //#endegion
 
       //#region Marker/Icon/DivIcon
@@ -166,6 +167,12 @@
       setHide4Marker: function (strId, bIsHide) {
         this.gisObj.Api.setHide4Marker(strId, bIsHide, this.gisObj);
       },
+      addAttachedIcon4Marker: function(strId, strImgUrl){
+        this.gisObj.Api.addAttachedIcon4Marker(strId, strImgUrl, this.gisObj);
+      },
+      delAttachedIcon4Marker: function(strId){
+        this.gisObj.Api.delAttachedIcon4Marker(strId, this.gisObj);
+      },
       //#endregion
 
       //#region Circle
@@ -194,6 +201,9 @@
       },
       delGroup: function(strId){
         this.gisObj.Api.delGroup(strId, this.gisObj);
+      },
+      setOpacity4Group: function(strId, iOpacity){
+        this.gisObj.Api.setOpacity4Group(strId, iOpacity, this.gisObj);
       },
       //#endregion
 

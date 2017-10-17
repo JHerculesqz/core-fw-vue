@@ -351,10 +351,24 @@
             $("#oTest4Group3").click(function () {
                 oGis.Api.delGroup("site1", oGis);
             });
+            $("#oTest4Group4").click(function () {
+                oGis.Api.setOpacity4Group("site2", 0.5, oGis);
+            });
             $("#oTest4Line").click(function () {
                 oGis.Api.delPolyline("link1", oGis);
             });
+            $("#oTest4AttachedIcon").click(function(){
+                oGis.Api.addAttachedIcon4Marker("marker1", "", oGis);
+                setTimeout(function(){
+                    oGis.Api.delAttachedIcon4Marker("marker1", oGis);
+                }, 2000);
+            });
+            $("#oTest4Topo").click(function(){
+                var oTopoData = oGis.Api.getTopoData(oGis);
+                console.log("TopoCache is ");
+                console.log(oTopoData);
 
+            });
             //endregion
         });
     </script>
@@ -364,11 +378,14 @@
 <button id="oTest4Map2">test4Map(showOrHide)</button>
 <button id="oTest4Map3">test4Map3(getDiffLst)</button>
 <button id="oTest4Marker">test4Marker</button>
+<button id="oTest4AttachedIcon">test4AttachedIcon</button>
 <button id="oTest4Circle">test4Circle</button>
 <button id="oTest4Group">test4Group(expandAllGroup)</button>
 <button id="oTest4Group2">test4Group(collapseAllGroup)</button>
 <button id="oTest4Group3">test4Group(delGroup)</button>
+<button id="oTest4Group4">test4Group(setOpacity4Group)</button>
 <button id="oTest4Line">test4Line(delPolyline)</button>
+<button id="oTest4Topo">test4Topo</button>
 <div class="gisMap" id="id1"
      style="width: 100%;height: 500px;display:block;"></div>
 </body>

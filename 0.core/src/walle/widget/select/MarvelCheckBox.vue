@@ -16,10 +16,10 @@
 <script>
   export default {
     name: 'MarvelCheckBox',
-    props: ["id", "label", "showLabel"],
+    props: ["id", "label", "showLabel", "check", "buObj"],
     data: function() {
         return {
-          checkItem: false,
+          checkItem: this.check === true ? true : false,
           isDisable: false,
           isShowLabel: true
         }
@@ -38,7 +38,7 @@
     },
     watch: {
       checkItem: function(strNewVal, strOldVal){
-        this.$emit("onChange", strOldVal, strNewVal);
+        this.$emit("onChange", strOldVal, strNewVal, this.buObj);
       }
     }
   }
