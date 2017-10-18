@@ -43,6 +43,9 @@
       _onNodeClick: function(e){
         this.$emit("onNodeClick", e);
       },
+      _onNodeContextMenu: function (e) {
+        this.$emit("onNodeContextMenu", e);
+      },
       _onNodeGroupClick: function(e){
         this.$emit("onNodeGroupClick", e);
       },
@@ -53,6 +56,7 @@
         this.$emit("onCircleDblclick", e);
       },
       //#endregion
+
       //#region 3rd
 
       //#region Map
@@ -85,6 +89,10 @@
           callbackOnNodeClick: function(e){
             console.log("callbackOnNodeClick");
             self._onNodeClick(e);
+          },
+          callbackOnNodeContextMenu: function(e){
+            console.log("callbackOnNodeContextMenu");
+            self._onNodeContextMenu(e);
           },
           //endregion
           //region nodeGroup
@@ -214,7 +222,8 @@
       //#endregion
 
       //#endregion
-//
+
+      //#endregion
 //      addHeatMap: function(arrHeatData){
 //        L.heatLayer(arrHeatData, {radius: 10}).addTo(this.mapObj);
 //      },

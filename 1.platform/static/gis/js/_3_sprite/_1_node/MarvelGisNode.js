@@ -34,6 +34,12 @@
             });
         };
 
+        var _onMarkerContextMenu = function (oMarker, oGis) {
+            oMarker.on("contextmenu", function (e) {
+                oGis.Stage.eventHandler.callbackOnNodeContextMenu(e);
+            });
+        };
+
         var _onCircleDBClick = function (oCircle, oGis) {
             oCircle.on("dblclick", function (e) {
                 oGis.Stage.eventHandler.callbackOnCircleDblclick(e);
@@ -66,6 +72,7 @@
             _onMarkerDBClick(oMarker, oGis);
             _onMarkerDrag(oMarker, oGis);
             _onMarkClick(oMarker, oGis);
+            _onMarkerContextMenu(oMarker, oGis);
 
             //endregion
         };
@@ -133,26 +140,6 @@
 
         //endregion
 
-        this.addAttachedIcon4Marker = function(strId, strImgUrl, oGis){
-            //找到Marker
-            var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
-                var oAttachedIcon = L.marker([oMarker._latlng.lat, oMarker._latlng.lng]);
-                oMarker.attachIcon = oAttachedIcon;
-                oAttachedIcon.addTo(oGis.Stage.mapObj);
-            }
-        };
-
-        this.delAttachedIcon4Marker = function(strId, oGis){
-            //找到Marker
-            var oMarker = oGis.Layer.findById(strId, oGis);
-            if(oMarker){
-                if(oMarker.attachIcon){
-                    oMarker.attachIcon.remove();
-                }
-            }
-        };
-
         //region updateMarker
 
         this.setImgUrl = function (strId, strImgUrl, iImgWidth, oGis) {
@@ -213,6 +200,30 @@
         };
 
         //endregion
+
+        //#region attachMarker
+
+        this.addAttachedIcon4Marker = function(strId, strImgUrl, oGis){
+            //找到Marker
+            var oMarker = oGis.Layer.findById(strId, oGis);
+            if(oMarker){
+                var oAttachedIcon = L.marker([oMarker._latlng.lat, oMarker._latlng.lng]);
+                oMarker.attachIcon = oAttachedIcon;
+                oAttachedIcon.addTo(oGis.Stage.mapObj);
+            }
+        };
+
+        this.delAttachedIcon4Marker = function(strId, oGis){
+            //找到Marker
+            var oMarker = oGis.Layer.findById(strId, oGis);
+            if(oMarker){
+                if(oMarker.attachIcon){
+                    oMarker.attachIcon.remove();
+                }
+            }
+        };
+
+        //#endregion
 
         //endregion
 

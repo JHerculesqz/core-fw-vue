@@ -22,6 +22,7 @@
             callbackOnNodeDrag: function(e){},
             callbackOnNodeClick: function(e){},
             callbackOnCircleDblclick: function(e){},
+            callbackOnNodeContextMenu: function (e) {},
             //endregion
             //region nodeGroup
             callbackOnNodeGroupClick: function(e){},

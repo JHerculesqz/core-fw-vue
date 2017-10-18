@@ -36,6 +36,7 @@
                               v-on:onNodeDblClick="onNodeDblClick"
                               v-on:onNodeDrag="onNodeDrag"
                               v-on:onNodeClick="onNodeClick"
+                              v-on:onNodeContextMenu="onNodeContextMenu"
                               v-on:onNodeGroupClick="onNodeGroupClick"
                               v-on:onLinkClick="onLinkClick"
                               v-on:onCircleDblclick="onCircleDblclick"></marvel-leaflet>
@@ -351,6 +352,9 @@
         console.log(e);
       },
       onNodeClick: function(e){
+        console.log(e);
+      },
+      onNodeContextMenu: function (e) {
         console.log(e);
       },
       onNodeGroupClick: function (e) {
