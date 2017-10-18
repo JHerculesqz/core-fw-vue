@@ -56,6 +56,7 @@ import MarvelWarning from "./walle/widget/warning/MarvelWarning.vue"
 //#region 2.widget.grid
 import MarvelGrid from "./walle/widget/grid/MarvelGrid.vue"
 import MarvelList1 from "./walle/widget/list/MarvelList1.vue"
+import MarvelList2 from "./walle/widget/list/MarvelList2.vue"
 //#endregion
 //#region 2.widget.tree
 import MarvelZTree from "./walle/widget/tree/MarvelZTree.vue"
@@ -134,6 +135,7 @@ export {
     //#region 2.widget.grid
     MarvelGrid,
     MarvelList1,
+    MarvelList2,
     //#endregion
     //#region 2.widget.tree
     MarvelZTree,

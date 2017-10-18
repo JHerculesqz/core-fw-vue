@@ -69,6 +69,7 @@
   //#region 2.6.widget.grid
   import Page4Grid from '@/components/page3/2.widget/2.6.grid/Page4Grid'
   import Page4List1 from '@/components/page3/2.widget/2.6.grid/Page4List1'
+  import Page4List2 from '@/components/page3/2.widget/2.6.grid/Page4List2'
   //#endregion
   //#region 2.7.widget.tree
   import Page4ZTree from '@/components/page3/2.widget/2.7.tree/Page4ZTree'
@@ -134,6 +135,7 @@
       //#region 2.6.widget.grid
       Page4Grid,
       Page4List1,
+      Page4List2,
       //#endregion
       //#region 2.7.widget.tree
       Page4ZTree,
@@ -288,14 +290,8 @@
             id: "Page4Location",
             label: "location"
           }, {
-            id: "",
-            label: "局部消息"
-          }, {
             id: "Page4Prompt",
             label: "全局消息"
-          }, {
-            id: "",
-            label: "系统消息"
           }, {
             id: "Page4Toolbar",
             label: "Toolbar"
@@ -312,7 +308,10 @@
             label: "表格"
           }, {
             id: "Page4List1",
-            label: "悬浮List"
+            label: "悬浮List1"
+          }, {
+            id: "Page4List2",
+            label: "悬浮List2"
           }]
         }, {
           label: "控件(树)",
