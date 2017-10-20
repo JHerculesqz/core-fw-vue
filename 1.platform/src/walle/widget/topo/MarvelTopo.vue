@@ -12,6 +12,20 @@
       };
     },
     methods: {
+      //region event
+      _onNodeClick: function(oNode, oEvent){
+        this.$emit("onNodeClick", oNode, oEvent);
+      },
+      _onNodeGroupClick: function(oNodeGroup, oEvent){
+        this.$emit("onNodeGroupClick", oNodeGroup, oEvent);
+      },
+      _onLinkGroupClick: function(oLinkGroup, oEvent){
+        this.$emit("onLinkGroupClick", oLinkGroup, oEvent);
+      },
+      _onLinkClick: function(oLink, oEvent){
+        this.$emit("onLinkClick", oLink, oEvent);
+      },
+      //endregion
       init: function (oAfterCallBack) {
         //#region resources
         var IMG_MAP = {
@@ -38,6 +52,27 @@
         };
         //#endregion
         //#region Topo
+        var self = this;
+        var oEventOptions = {
+          //region node
+          callbackOnNodeClick: function(oNode, oEvent){
+            self._onNodeClick(oNode, oEvent);
+          },
+          //endregion
+          //region nodeGroup
+          callbackOnNodeGroupClick: function(oNodeGroup, oEvent){
+            self._onNodeGroupClick(oNodeGroup, oEvent);
+          },
+          //endregion
+          //region link
+          callbackOnLinkGroupClick: function(oLinkGroup, oEvent){
+            self._onLinkGroupClick(oLinkGroup, oEvent);
+          },
+          callbackOnLinkClick: function(oLink, oEvent){
+            self._onLinkClick(oLink, oEvent);
+          }
+          //endregion
+        };
         var oTopo = new window.$.MarvelTopo();
         this.oTopo = oTopo;
         //init
@@ -45,7 +80,8 @@
           id: this.id,
           themeKey: this.theme,
           imgMap: IMG_MAP,
-          themeSetting: THEME_DARK
+          themeSetting: THEME_DARK,
+          eventOptions: oEventOptions,
         }, function () {
           oAfterCallBack();
         });
@@ -79,6 +115,9 @@
       },
       updateTopo: function (oTopoData) {
         this.oTopo.Api.updateTopo(this.oTopo, oTopoData);
+      },
+      createNode: function(oBuObj){
+        this.oTopo.Api.createNode(oBuObj, this.oTopo);
       }
     }
   }

@@ -39,7 +39,7 @@
 
             //0.oGroup
             var oGroup = new Konva.Group({
-                id: oBuObj.id,
+                id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
                 x: oGroupExistsPos.x,
                 y: oGroupExistsPos.y,
                 draggable: true
@@ -89,7 +89,8 @@
                 oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
             });
             oGroup.on("click", function(evt){
-                self._onNodeGroupOrNodeClick(oGroup, oTopo);
+                evt.evt.stopPropagation();
+                self._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
             });
             oGroup.on('dragmove', function(evt){
                 //var arrSelectNode = _getSelectNodeGroupAndNodes(oTopo);
@@ -99,8 +100,7 @@
                 //    oSelectNode.y(oSelectNode.y() + evt.evt.offsetY);
                 //}
 
-                //1.联动关联的链路
-                oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
+                self.onNodeOrNodeGroupMove(oGroup, oTopo);
             });
 
             //#endregion
@@ -126,7 +126,7 @@
 
             //0.oGroup
             var oGroup = new Konva.Group({
-                id: oBuObj.id,
+                id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
                 x: oGroupExistsPos.x,
                 y: oGroupExistsPos.y,
                 opacity: oBuObj.opacity ? oBuObj.opacity : 1.0,
@@ -186,11 +186,11 @@
                 oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
             });
             oGroup.on("click", function(evt){
-                self._onNodeGroupOrNodeClick(oGroup, oTopo);
+                evt.evt.stopPropagation();
+                self._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
             });
             oGroup.on('dragmove', function(evt){
-                //1.联动关联的链路
-                oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
+                self.onNodeOrNodeGroupMove(oGroup, oTopo);
             });
 
             //#endregion
@@ -229,31 +229,52 @@
         var _onExpandGroupDBClick = function(oBuObj, oGroup, oTopo){
             _drawCollapse(oBuObj, oGroup, oTopo);
         };
-        this._onNodeGroupOrNodeClick = function(oGroup, oTopo){
+        this._onNodeGroupOrNodeClick = function(oGroup, evt, oTopo){
             //1.ctrl press
             if(keyboardJS.isCtrlPress){
                 if(oGroup.tag.uiSelectNode == undefined || false == oGroup.tag.uiSelectNode){
                     //1.1.select current oGroup
                     oGroup.tag.uiSelectNode = true;
                     _setSelectNodeStyle(oGroup.children[0], oTopo);
+                    oTopo.Layer.reDraw(oTopo.ins.layerNode);
                 }
                 else {
-                    //1.2.select current oGroup
+                    //1.2.unSelect current oGroup
                     oGroup.tag.uiSelectNode = false;
                     _setUnSelectNodeStyle(oGroup.children[0], oTopo);
+                    oTopo.Layer.reDraw(oTopo.ins.layerNode);
                 }
             }
             //2.ctrl not press
             else{
                 //2.1.unSelectAll
-                oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
+                self.unSelectNodeGroupAndNodes(oTopo);
+                oTopo.Sprite.LinkGroup.unSelectLinks(oTopo);
 
                 //2.2.select current oGroup
                 oGroup.tag.uiSelectNode = true;
                 _setSelectNodeStyle(oGroup.children[0], oTopo);
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
+            }
+            //3.external event
+            if(oGroup.tag.children){
+                oTopo.Stage.eventOptions.callbackOnNodeGroupClick(oGroup.tag, evt);
+            }
+            else{
+                oTopo.Stage.eventOptions.callbackOnNodeClick(oGroup.tag, evt);
             }
         };
 
+        this.onNodeOrNodeGroupMove = function(oGroup, oTopo){
+            //1.联动关联的链路
+            oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
+            //2.更新node的坐标
+            _updatePosition(oGroup.tag, oGroup);
+        };
+        var _updatePosition = function(oBuObj, oGroup){
+            oBuObj.x = oGroup.x();
+            oBuObj.y = oGroup.y();
+        };
         //#endregion
 
         //#region style
@@ -266,14 +287,14 @@
         };
 
         var _setSelectNodeStyle = function(oImage, oTopo){
-            // oImage.fillEnabled(true);
-            // oImage.fill(oTopo.Resource.getTheme().node.selectColor);
+            //oImage.fillEnabled(true);
+            //oImage.fill(oTopo.Resource.getTheme().node.selectColor);
             oImage.strokeEnabled(true);
             oImage.stroke(oTopo.Resource.getTheme().node.selectColor);
             oImage.strokeWidth(4);
             oImage.lineJoin("round");
             oImage.lineCap("round");
-            oTopo.Layer.reDraw(oTopo.ins.layerNode);
+            //oTopo.Layer.reDraw(oTopo.ins.layerNode);
         };
 
         var _setUnSelectNodeStyle = function(oImage){
@@ -340,12 +361,12 @@
             //2.遍历，unSelect
             for(var i=0;i<arrSelectNode.length;i++) {
                 var oSelectNode = arrSelectNode[i];
-                oSelectNode.tag.uiSelectNode = true;
+                oSelectNode.tag.uiSelectNode = false;
                 _setUnSelectNodeStyle(oSelectNode.children[0]);
             }
 
             oTopo.Layer.reDraw(oTopo.ins.layerNode);
-            oTopo.Layer.reDraw(oTopo.ins.layerLink);
+            //oTopo.Layer.reDraw(oTopo.ins.layerLink);
         };
 
         this.zoomInSelectNodeGroupAndNodes = function(oTopo){
@@ -417,6 +438,16 @@
             }
             return undefined;
         };
+
+        this.selectNodesById = function(arrNodeIds, oTopo){
+            arrNodeIds.forEach(function(nodeId, index){
+                var oNodeGroup = oTopo.Stage.findOne(nodeId, oTopo);
+                oNodeGroup.tag.uiSelectNode = true;
+                _setSelectNodeStyle(oNodeGroup.children[0], oTopo);
+            });
+            oTopo.Layer.reDraw(oTopo.ins.layerNode);
+        };
+
 
         //#endregion
     }

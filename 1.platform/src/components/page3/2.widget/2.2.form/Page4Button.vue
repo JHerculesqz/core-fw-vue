@@ -184,6 +184,9 @@
           <marvel-tab-item :isActive="tabItems5[0].isActive">
             <div class="showAreaInner">
               <marvel-txt-button classCustom="classCustom1" label="normal"
+                                 v-on:onClick="onClick"
+                                 isWarn=ture></marvel-txt-button>
+              <marvel-txt-button classCustom="classCustom1" label="normal"
                                  v-on:onClick="onClick"></marvel-txt-button>
               <marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown"
                                  v-on:onClick="onClick"></marvel-txt-button>
@@ -216,7 +219,8 @@
             <div class="showAreaInner">
               <button v-on:click="onDropDownClick">getCheckItem</button>
               <marvel-drop-down-button ref="ref14" disable="" theme="dark" width="100%"
-                                       v-on:onClick="onClick"></marvel-drop-down-button>
+                                       maxHeight="30px"
+                                       v-on:onOptionSelect="onOptionSelect"></marvel-drop-down-button>
             </div>
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems6[1].isActive">
@@ -374,6 +378,9 @@
       },
       onDropDownClick: function () {
         console.log(this.$refs.ref14.getSelectItem());
+      },
+      onOptionSelect: function(oItem){
+        console.log(oItem);
       },
       onClick4TabBtn: function () {
         this.$refs.ref4TabBtn.setActive(true);

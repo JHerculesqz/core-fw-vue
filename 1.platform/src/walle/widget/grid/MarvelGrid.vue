@@ -8,12 +8,25 @@
           <!--<marvel-check-box ref="ref8" id="id9"-->
           <!--label="selectAll" showLabel="false"></marvel-check-box>-->
           <!--</th>-->
-          <th v-for="title in titles" v-bind:style="{ width: title.width }">{{ title.label }}</th>
+          <th v-for="(title,index) in titles" v-bind:style="{ width: title.width }">
+            <div v-if="title.type == 'checkBox'" class="checkBoxWrapper">
+              <div class="checkBox">
+                <input type="checkbox" v-bind:id="'title_'+[gridId]+[index]"
+                       v-model="checkTitleItem"
+                       v-on:click="onTitleCheck">
+                <label v-bind:for="'title_'+[gridId]+[index]"></label>
+              </div>
+            </div>
+            <div v-else>
+              {{title.label}}aaaa
+            </div>
+
+          </th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="row in rowsInPage" v-on:click="onClickRow(row)">
-          <td v-for="cell in row"
+        <tr v-for="(row,index) in rowsInPage" v-on:click="onClickRow(row)">
+          <td v-for="(cell,iCellIndex) in row"
               v-bind:style="{ width: _getWidth(row.indexOf(cell)) }">
             <div v-if="cell.type == 'text'" :title="cell.value">
               {{ cell.value }}
@@ -30,6 +43,31 @@
                       v-bind:class="[cell.value]"
                       v-bind:style="{ color: cell.color }"></span>
               <span :title="cell.label">{{ cell.label }}</span>
+            </div>
+            <div v-else-if="cell.type == 'checkBox'" class="checkBoxWrapper">
+              <div class="checkBox">
+                <input type="checkbox" v-bind:id="'row_'+[gridId]+[index]"
+                       v-model="cell.isCheck"
+                       v-on:click="onRowCheck(row)"/>
+                <label v-bind:for="'row_'+[gridId]+[index]"></label>
+              </div>
+            </div>
+            <div v-else-if="cell.type == 'radioBox'" class="radioWrapper">
+              <div class="radio">
+                <input type="radio" v-bind:id="'row_'+[gridId]+[index]"
+                       v-bind:value="[index]"
+                       v-bind:name="radioGroup"
+                       v-model="radioGroup"
+                       v-on:click="onRowRadioCheck(row)"/>
+                <label v-bind:for="'row_'+[gridId]+[index]"></label>
+              </div>
+            </div>
+            <div v-else-if="cell.type == 'input'" class="inputWrapper" id="[index]">
+              <div class="radio">
+                <input type="text" class="inputDefault"
+                       v-model="inputMsgs[index]"
+                       v-on:click="updateRow(index,iCellIndex)"/>
+              </div>
             </div>
           </td>
         </tr>
@@ -57,14 +95,24 @@
   export default {
     components: {MarvelCheckBox},
     name: 'MarvelGrid',
-    props: ["titles", "rows", "limit", "theme"],
+    props: ["titles", "rows", "limit", "theme","inputMsgs","gridId"],
     data: function() {
       return {
         totalPageCount: 1,
         curPageIndex: 1,
         limitEx: 5,
         skip: 0,
-        rowsInPage: []
+        rowsInPage: [],
+        //#region checkbox
+        checkTitleItem: false,
+
+
+        //#endregion
+        //#region radio
+        radioGroup:[]
+
+        //#endregion
+
       }
     },
     computed: {
@@ -95,6 +143,7 @@
       }
     },
     methods: {
+      //#region inner
       _getWidth: function(iColIndex){
         for(var i=0;i<this.titles.length;i++){
           if(i == iColIndex){
@@ -118,10 +167,80 @@
           this.curPageIndex += 1;
         }
       },
+      //#region check
+      onTitleCheck:function(){
+        for(var i=0;i<this.rows.length;i++){
+          this.rows[i][0].isCheck = this.checkTitleItem;
+        }
+        console.log(this.checkTitleItem);
+        this._onTitleCheckOrUncheck(this.checkTitleItem);
+      },
+      onRowCheck:function(oRow){
+        var j=0;
+        for(var i=0;i<this.rows.length;i++){
+          if(this.rows[i][0].isCheck){
+            this.checkTitleItem = true;
+            break;
+          }
+          else{
+            j++;
+          }
+          if(j==this.rows.length){
+            this.checkTitleItem = false;
+          }
+          console.log(j);
+          console.log(this.checkTitleItem);
+          this._onRowCheckOrUncheck(oRow);
+        }
+      },
+      //#endregion
+      //#region input
+      updateRow:function(iRowIndex,iCellIndex){
+        var self=this;
+        var oOldRowValue=this.rows[iRowIndex][iCellIndex].value;
+        this.rows[iRowIndex][iCellIndex].value=this.inputMsgs[iRowIndex];
+        this._afteUpdateRow(iRowIndex,oOldRowValue);
+
+      },
+      //#endregion
+
+      //#endregion
+
+      //#region callback
       onClickRow: function(oRow){
-          this.$emit("onClickRow",oRow);
-      }
-    }
+        this.$emit("onClickRow",oRow);
+      },
+      //#region check
+      _onTitleCheckOrUncheck:function(bIscheckTitleItem){
+        this.$emit("onTitleCheckOrUncheck",bIscheckTitleItem);
+      },
+      _onRowCheckOrUncheck:function(oRow){
+        this.$emit("onRowCheckOrUnCheck",oRow);
+      },
+      //#endregion
+      //#region radion
+      onRowRadionCheck:function(oRow){
+        this.$emit("onRowRadionCheckOrUnCheck",oRow);
+      },
+      _afteUpdateRow:function(iRowIndex,oOldRowValue){
+        var self = this;
+        this.$emit("updateRow",this.rows[iRowIndex],function(bIsSuccess){
+          if(bIsSuccess){
+            //do nothing
+          }
+          else{
+            self.inputMsgs[iRowIndex]=oOldRowValue;
+          }
+        })
+      },
+      //#endregion
+      //#endregion
+
+      //#region 3rd
+
+      //#endregion
+    },
+
   }
 </script>
 
@@ -353,4 +472,235 @@
   .dark .footArea .foot .text{
     color: #ffffff;
   }
+
+  /*sl start*/
+  /*check start*/
+  *{box-sizing: border-box}
+  .checkBoxWrapper{
+    display: inline-block;
+  }
+  .dpn{
+    display: none;
+  }
+  .checkBoxWrapper .checkBox{
+    width: 16px;
+    height: 16px;
+    position: relative;
+    float: left;
+  }
+  .checkBoxWrapper .checkBox input[type=checkbox]{
+    /*pos*/
+    margin: 0;
+    padding: 0;
+    /*style*/
+    visibility: hidden;
+  }
+  .checkBoxWrapper .checkBox input[type=checkbox]:checked + label:after{
+    /*pos*/
+    /*style*/
+    opacity: 1;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+  }
+  .checkBoxWrapper .checkBox input[type=checkbox]:checked + label{
+    /*pos*/
+    /*style*/
+    background: #3399ff;
+    border: 1px solid rgba(0,0,0,0);
+  }
+  .checkBoxWrapper .checkBox input[type=checkbox]:disabled + label:after{
+    /*pos*/
+    /*style*/
+    border: 2px solid #999999;
+    border-top: none;
+    border-right: none;
+  }
+  .checkBoxWrapper .checkBox input[type=checkbox]:disabled + label{
+    /*pos*/
+    /*style*/
+    border: 1px solid #999999;
+    background-color: #f0f0f0;
+    pointer-events: none;
+  }
+  .checkBoxWrapper .checkBox label{
+    /*pos*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    /*style*/
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+  .checkBoxWrapper .checkBox label:hover{
+    border: 1px solid #60b0ff;
+  }
+  .checkBoxWrapper .checkBox label:after{
+    /*pos*/
+    position: absolute;
+    width: 7px;
+    height: 4px;
+    top: 3px;
+    left: 2px;
+    /*style*/
+    opacity: 0;
+    content: '';
+    background: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  /*check end*/
+  /*radio start*/
+  .radioWrapper{
+    display: inline-block;
+  }
+  .dpn{
+    display: none;
+  }
+  .radioWrapper .radio{
+    width:16px;
+    height:16px;
+    position:relative;
+    float: left;
+  }
+  .radioWrapper .radio input[type=radio]{
+    /*pos*/
+    margin: 0;
+    padding: 0;
+    /*style*/
+    visibility:hidden;
+  }
+  .radioWrapper .radio input[type=radio]:checked + label:after{
+    /*pos*/
+    /*style*/
+    opacity: 1;
+    border-top: none;
+    border-right: none;
+  }
+  .radioWrapper .radio input[type=radio]:checked + label{
+    /*pos*/
+    /*style*/
+    background-color: #3399ff;
+  }
+  .radioWrapper .radio input[type=radio]:disabled + label:after{
+    /*pos*/
+    /*style*/
+    background-color: #aaa;
+  }
+  .radioWrapper .radio input[type=radio]:disabled + label{
+    /*pos*/
+    /*style*/
+    border:1px solid #999999;
+    background-color: #f0f0f0;
+    pointer-events: none;
+  }
+  .radioWrapper .radio label{
+    /*pos*/
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    /*style*/
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+  .radioWrapper .radio label:hover{
+    border: 1px solid #60b0ff;
+  }
+  .radioWrapper .radio label:after{
+    /*pos*/
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    top: 4px;
+    left: 4px;
+    /*style*/
+    opacity: 0;
+    content: '';
+    background-color: #fff;
+  }
+  /*radio end*/
+  /*input start*/
+  .inputWrapper{
+    width: 100%;
+  }
+  .inputWrapper .inputDefault{
+    padding: 0 10px;
+    height: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+  }
+  .inputWrapper .inputDefault:hover, .inputWrapper .inputDefault:focus{
+    border: 1px solid #3399ff;
+  }
+  .inputWrapper .errorTip{
+    color: #ff4c4c;
+    line-height: 36px;
+    font-size: 14px;
+    display: none;
+  }
+  .inputWrapper .errorTip:before{
+    margin-right: 10px;
+  }
+
+  .error .inputDefault{
+    border: 1px solid #ff4c4c !important;
+  }
+  .error .errorTip{
+    display: block;
+  }
+
+  .disable .inputDefault{
+    background-color: #f0f0f0;
+    pointer-events: none;
+  }
+  .dark{
+    background-color: transparent;
+  }
+  .dark .inputDefault{
+    border: 1px solid #8b90b3;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: transparent;
+  }
+
+  .mini .inputDefault{
+    height: 22px;
+    line-height: 22px;
+    font-size: 12px;
+  }
+  /*input end*/
+  /*sl end*/
 </style>

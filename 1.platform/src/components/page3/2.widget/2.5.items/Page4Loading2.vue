@@ -16,12 +16,10 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <marvel-frame hasMargin="false" media="24,24,24,24" classCustom="classCustom1">
-              <button v-on:click="showEx">show</button>
-              <button v-on:click="setProgress">setProgress</button>
-              <button v-on:click="hideEx">hide</button>
-              <marvel-loading-mini ref="ref0"></marvel-loading-mini>
-            </marvel-frame>
+            <button v-on:click="showEx">show</button>
+            <button v-on:click="setProgress">setProgress</button>
+            <button v-on:click="hideEx">hide</button>
+            <marvel-loading-mini ref="ref0" v-on:onCancel="loadingOnCancel"></marvel-loading-mini>
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
@@ -94,10 +92,12 @@
       },
       hideEx: function(){
         this.$refs.ref0.hideEx();
-      }
+      },
       //#endregion
       //#region callback
-
+      loadingOnCancel:function(){
+        console.log("loadingCancel");
+      }
       //#endregion
       //#region 3rd
 

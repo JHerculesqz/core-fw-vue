@@ -68,6 +68,7 @@
             <br>
             <marvel-switch ref="ref4" id="id5" :check="false"></marvel-switch>
             <marvel-switch ref="ref5" id="id6"
+                           buObj="buObj..."
                            v-on:onChange="onChange4Switch"></marvel-switch>
             <br>
             <marvel-switch ref="ref6" id="id7"></marvel-switch>
@@ -82,8 +83,8 @@
                 <code class="html">
 &lt;button v-on:click="onClick4Switch"&gt;getStatus&lt;/button&gt;
 &lt;br&gt;
-&lt;marvel-switch ref="ref4" id="id5"&gt;&lt;/marvel-switch&gt;
-&lt;marvel-switch ref="ref5" id="id6"
+&lt;marvel-switch ref="ref4" id="id5" :check="false"&gt;&lt;/marvel-switch&gt;
+&lt;marvel-switch ref="ref5" id="id6" buObj="buObj..."
                v-on:onChange="onChange4Switch"&gt;&lt;/marvel-switch&gt;
 &lt;br&gt;
 &lt;marvel-switch ref="ref6" id="id7"&gt;&lt;/marvel-switch&gt;
@@ -132,7 +133,7 @@
 &lt;br&gt;
 &lt;marvel-check-box ref="ref8" id="id9"
                   label="x1" showLabel="false"&gt;&lt;/marvel-check-box&gt;
-&lt;marvel-check-box ref="ref9" id="id10"
+&lt;marvel-check-box ref="ref9" id="id10" buObj="buObj..." v-bind:check="true"
                   label="x2" showLabel="true"
                   v-on:onChange="onChange4Check"&gt;&lt;/marvel-check-box&gt;
 &lt;br&gt;
@@ -271,8 +272,8 @@
           this.$refs.ref4.getCheckItem() + "," +
           this.$refs.ref5.getCheckItem());
       },
-      onChange4Switch: function(strOldVal, strNewVal){
-        console.log("[Switch]change..." + strNewVal);
+      onChange4Switch: function(strOldVal, strNewVal, buObj){
+        console.log("[Switch]change..." + strNewVal + "," + buObj);
       },
       onClick4Check: function(){
         console.log("[CheckBox]getStatus..." +

@@ -41,7 +41,7 @@
             var oPosMid = _getBezierPoint(oPosStart, oPosEnd, iOffsetHeight);
 
             var oLine = new Konva.Line({
-                id: oBuObj.id,
+                id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
                 points: [oPosStart.x, oPosStart.y, oPosMid.x, oPosMid.y, oPosEnd.x, oPosEnd.y],
                 stroke: oTopo.Resource.getTheme().link.linkColor[oBuObj.uiLinkColorKey],
                 strokeWidth: oBuObj.uiLinkWidth,

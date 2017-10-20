@@ -188,7 +188,7 @@
                             polygon: false,
                             pathOptions: {
                                 stroke: true,
-                                color: oBuObj.uiColor,
+                                color: oBuObj.uiColor
                             }
                         })
                     }]
@@ -207,7 +207,7 @@
                             polygon: false,
                             pathOptions: {
                                 stroke: true,
-                                color: oBuObj.uiColor,
+                                color: oBuObj.uiColor
                             }
                         })
                     },{
@@ -219,7 +219,7 @@
                             polygon: false,
                             pathOptions: {
                                 stroke: true,
-                                color: oBuObj.uiColor,
+                                color: oBuObj.uiColor
                             }
                         })
                     }]
@@ -279,6 +279,42 @@
                 }
             });
             return arrTargetLinks;
+        };
+
+        this.setOpacity4Link = function(strId, iOpacity, oGis){
+            var oPolyLine = oGis.Layer.findById(strId, oGis);
+            if(oPolyLine){
+                oPolyLine.setStyle({
+                    opacity: iOpacity
+                });
+                //更新箭头
+                if(oPolyLine.children.length){
+                    oPolyLine.children.forEach(function(oChild, index){
+                        oChild.options.patterns.forEach(function(oPattern, index){
+                            oPattern.symbol.options.pathOptions.opacity = iOpacity;
+                        });
+                        oChild.redraw();
+                    });
+                }
+            }
+        };
+
+        this.setColor4Link = function(strId, oColor, oGis){
+            var oPolyLine = oGis.Layer.findById(strId, oGis);
+            if(oPolyLine){
+                oPolyLine.setStyle({
+                    color: oColor
+                });
+                //更新箭头
+                if(oPolyLine.children.length){
+                    oPolyLine.children.forEach(function(oChild, index){
+                        oChild.options.patterns.forEach(function(oPattern, index){
+                            oPattern.symbol.options.pathOptions.color = oColor;
+                        });
+                        oChild.redraw();
+                    });
+                }
+            }
         };
 
         //endregion

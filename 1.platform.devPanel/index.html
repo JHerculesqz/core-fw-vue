@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <link type="text/css" rel="stylesheet" href="css/MarvelDevPanel.css"/>
+    <script type="application/javascript" src="lib/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="js/plugins/MarvelDevPanel_1.js"></script>
+    <script type="application/javascript" src="js/MarvelDevPanel.js"></script>
+    <script type="application/javascript" src="lib/svg.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //1.init
+            var oMarvelDevPanel = new $.MarvelDevPanel();
+            var oOptions = {
+                "6000": {
+                    url: "image/dev1.svg",
+                    obj: new $.MarvelDevPanel_1(),
+                    events: {
+                        click4BD1: function (e) {
+                            console.log(e);
+                        },
+                        click4BD2: function (e) {
+                            console.log(e);
+                        },
+                        click4BD3: function (e) {
+                            console.log(e);
+                        },
+                        click4BD4: function (e) {
+                            console.log(e);
+                        },
+                        click4BD5: function (e) {
+                            console.log(e);
+                        },
+                        click4BD6: function (e) {
+                            console.log(e);
+                        },
+                        click4BD7: function (e) {
+                            console.log(e);
+                        },
+                        click4BD8: function (e) {
+                            console.log(e);
+                        },
+                        click4BD9: function (e) {
+                            console.log(e);
+                        },
+                        click4BD10: function (e) {
+                            console.log(e);
+                        },
+                        click4BD11: function (e) {
+                            console.log(e);
+                        },
+                        click4BD12: function (e) {
+                            console.log(e);
+                        },
+                        click4BD13: function (e) {
+                            console.log(e);
+                        },
+                        click4BD14: function (e) {
+                            console.log(e);
+                        },
+                        click4BD15: function (e) {
+                            console.log(e);
+                        }
+                    }
+                }
+            };
+            oMarvelDevPanel.init("drawing", oOptions);
+
+            //2.initPlugin
+            oMarvelDevPanel.initPlugin("6000");
+
+            var oPlugin = oMarvelDevPanel.getPlugin("6000");
+            console.log(oPlugin);
+            oPlugin.setLightColor("l1", "red");
+            oPlugin.setLightColor("l15", "red");
+        });
+    </script>
+</head>
+<body>
+<div id="drawing"></div>
+</body>
+</html>

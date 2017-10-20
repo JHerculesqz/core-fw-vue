@@ -22,8 +22,15 @@
             <button v-on:click="onClickCollapseLinkGroup">collapseLinkGroup</button>
             <button v-on:click="onClickSelectNodes">selectNodes</button>
             <button v-on:click="onClickSelectLinks">selectLinks</button>
+            <button v-on:click="onClickGetTopoData">getTopoData</button>
+            <button v-on:click="onClickUpdateTopo">updateTopo</button>
+            <button v-on:click="onClickCreateNode">createNode</button>
             <div style="width: 800px; height: 340px;">
-              <marvel-topo ref="ref4Topo" id="topo" theme="dark"></marvel-topo>
+              <marvel-topo ref="ref4Topo" id="topo" theme="dark"
+                           v-on:onNodeClick="onNodeClick"
+                           v-on:onNodeGroupClick="onNodeGroupClick"
+                           v-on:onLinkGroupClick="onLinkGroupClick"
+                           v-on:onLinkClick="onLinkClick"></marvel-topo>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -71,11 +78,11 @@
         }],
         //#endregion
         //#region custom data
-
+        createNodeId: "crateNodeId1"
         //#endregion
       }
     },
-    mounted: function(){
+    mounted: function () {
       //#region custom
       var oTopoData = {
         nodes: [],
@@ -365,31 +372,80 @@
       //#endregion
 
       var self = this;
-      this.$refs.ref4Topo.init(function(){
+      this.$refs.ref4Topo.init(function () {
         self.$refs.ref4Topo.draw(oTopoData);
       });
       //#endregion
     },
     methods: {
       //#region inner
-      onClickExpandNodeGroup: function(){
+      //region event
+      onNodeClick: function(oNode, oEvent){
+        console.log("onNodeClick");
+        console.log(oNode);
+      },
+      onNodeGroupClick: function(oNodeGroup, oEvent){
+        console.log("onNodeGroupClick");
+        console.log(oNodeGroup);
+      },
+      onLinkGroupClick: function(oLinkGroup, oEvent){
+        console.log("onLinkGroupClick");
+        console.log(oLinkGroup);
+      },
+      onLinkClick: function(oLink, oEvent){
+        console.log("onLinkClick");
+        console.log(oLink);
+      },
+      //endregion
+      //region test
+      onClickExpandNodeGroup: function () {
         this.$refs.ref4Topo.expandAllNodeGroup();
       },
-      onClickCollapseNodeGroup: function(){
+      onClickCollapseNodeGroup: function () {
         this.$refs.ref4Topo.collapseAllNodeGroup();
       },
-      onClickExpandLinkGroup: function(){
+      onClickExpandLinkGroup: function () {
         this.$refs.ref4Topo.expandAllLinkGroup();
       },
-      onClickCollapseLinkGroup: function(){
+      onClickCollapseLinkGroup: function () {
         this.$refs.ref4Topo.collapseAllLinkGroup();
       },
-      onClickSelectNodes: function(){
+      onClickSelectNodes: function () {
         this.$refs.ref4Topo.selectNodesById(["node0", "node1"]);
       },
-      onClickSelectLinks: function(){
-        this.$refs.ref4Topo.selectLinksById(["link0", "link1", "link2"]);
+      onClickSelectLinks: function () {
+        this.$refs.ref4Topo.selectLinksById(["link0", "link1", "link2", "gLink1_2"]);
+      },
+      onClickGetTopoData: function () {
+        var oTopoData = this.$refs.ref4Topo.getTopoData();
+        console.log(oTopoData);
+      },
+      onClickUpdateTopo: function () {
+        var oTopoData = this.$refs.ref4Topo.getTopoData();
+        var oLink = {
+          id: "link1000",
+          srcNodeId: "nodeBase0",
+          dstNodeId: "nodeBase1",
+          uiLabelL: "nodeBase0",
+          uiLabelM: "link1000",
+          uiLabelR: "nodeBase1",
+          uiLink: true,
+          uiLinkColorKey: "linkType1",
+          uiLinkWidth: 3
+        };
+        oTopoData.links.push(oLink);
+        this.$refs.ref4Topo.updateTopo(oTopoData);
+      },
+      onClickCreateNode: function () {
+        this.$refs.ref4Topo.createNode({
+          id: this.createNodeId,
+          uiImgKey: "node",
+          uiLabel: this.createNodeId,
+          uiNode: true
+        });
+        this.createNodeId += 1;
       }
+      //endregion
       //#endregion
       //#region callback
 
@@ -408,61 +464,74 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   .title {
     color: #4d4d4d;
   }
+
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
+
   .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
+
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
+
   .showArea {
     width: 100%;
   }
+
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
+
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
+
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
     height: 100%;
   }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
     height: 450px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 

@@ -1,33 +1,53 @@
 <template>
   <div class="widgetShowSession">
-    <!--1级 start-->
-    <div class="title level1">Loading</div>
-    <div class="describe">
-      Loading
-    </div>
-    <!--1级 end-->
-    <!--2级 start-->
-    <div class="title level2">Loading</div>
-    <div class="describe">
-      Loading
-    </div>
-    <div class="showArea">
-      <marvel-frame hasMargin="false" media="24,24,24,24" classCustom="classCustom1">
-        <button v-on:click="showGlobal">showGlobal</button>
-        <button v-on:click="showLeft">showLeft</button>
-        <button v-on:click="hideLeft">hideLeft</button>
-        <button v-on:click="showRight">showRight</button>
-        <button v-on:click="hideRight">hideRight</button>
-        <marvel-loading ref="ref0" :isGlobal="true"></marvel-loading>
-        <marvel-frame hasMargin="false" media="12,12,12,12" classCustom="classCustom2">
-          <marvel-loading ref="ref1" :isGlobal="false"></marvel-loading>
-        </marvel-frame>
-        <marvel-frame hasMargin="false" media="12,12,12,12" classCustom="classCustom3">
-          <marvel-loading ref="ref2" :isGlobal="false"></marvel-loading>
-        </marvel-frame>
-      </marvel-frame>
-    </div>
-    <!--2级 end-->
+      <!--1级 start-->
+      <div class="title level1">Loading</div>
+      <div class="describe">
+        Loading
+      </div>
+      <!--1级 end-->
+      <!--2级 start-->
+      <div class="title level2">Loading</div>
+      <div class="describe">
+        Loading
+      </div>
+      <div class="showArea">
+        <marvel-tab :tabItems="tabItems1">
+          <marvel-tab-item :isActive="tabItems1[0].isActive">
+            <div class="showAreaInner">
+              <!--2级DemoView start-->
+              <div class="showArea">
+                <button v-on:click="showGlobal">showGlobal</button>
+                <button v-on:click="showLeft">showLeft</button>
+                <button v-on:click="hideLeft">hideLeft</button>
+                <button v-on:click="showRight">showRight</button>
+                <button v-on:click="hideRight">hideRight</button>
+                <marvel-loading ref="ref0" :isGlobal="true" v-on:onCancel="loadingOnCancel"></marvel-loading>
+                <div class="loadingArea1">
+                  <marvel-loading ref="ref1" :isGlobal="false" v-on:onCancel="loadingOnCancel"></marvel-loading>
+                </div>
+                <div class="loadingArea2">
+                  <marvel-loading ref="ref2" :isGlobal="false" v-on:onCancel="loadingOnCancel"></marvel-loading>
+                </div>
+              </div>
+              <!--2级DemoView end-->
+            </div>
+          </marvel-tab-item>
+          <marvel-tab-item :isActive="tabItems1[1].isActive">
+            <div class="codeArea">
+              <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+                  &lt;marvel-loading ref="ref0" :isGlobal="true" v-on:onCancel="LoadingOnCancel"&gt;&lt;/marvel-loading&gt;
+                  &lt;marvel-loading ref="ref1" :isGlobal="false" v-on:onCancel="LoadingOnCancel"&gt;&lt;/marvel-loading&gt;
+                </code>
+              </pre>
+              <!--2级CodeView end-->
+            </div>
+          </marvel-tab-item>
+        </marvel-tab>
+      </div>
+      <!--2级 end-->
   </div>
 </template>
 
@@ -75,6 +95,9 @@
       },
       hideRight: function(){
         this.$refs.ref2.imsgMarvelLoadingHide();
+      },
+      loadingOnCancel:function(){
+        console.log("loadingCancel");
       }
       //#endregion
       //#region callback
@@ -151,13 +174,27 @@
   /*document custom style end*/
   /*custom style start*/
   .classCustom1{
-    height: 300px;margin-bottom: 10px;
+    height: 300px; margin-bottom: 10px;
   }
   .classCustom2{
     height: 300px;margin-bottom: 10px;background-color: #fff;border: dashed;
   }
   .classCustom3{
     height: 300px;margin-bottom: 10px;background-color: #fff;border: dashed;
+  }
+  .loadingArea1{
+    width: 50%;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    float: left;
+  }
+  .loadingArea2{
+    width: 50%;
+    height: 100px;
+    background-color: blue;
+    position: relative;
+    float: left;
   }
   /*custom style end*/
 </style>

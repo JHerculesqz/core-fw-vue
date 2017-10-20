@@ -9,7 +9,8 @@
         <div class="name">{{ selectItem.label }}</div>
         <div class="expandAndFolderIcon icon-marvelIcon-24"></div>
       </div>
-      <div class="options" v-bind:class="{ hide: !show }">
+      <div class="options" v-bind:class="{ hide: !show }"
+        v-bind:style="{'max-height': maxHeight}">
         <div class="optionItem"
              v-for="item in items"
              v-bind:class="{ mouseDown: item.label == selectItem.label }"
@@ -25,7 +26,7 @@
 <script>
   export default {
     name: 'MarvelDropDownButton',
-    props: ["disable", "theme", "width"],
+    props: ["disable", "theme", "width", "maxHeight"],
     data: function() {
         return {
           items: [],
@@ -49,6 +50,7 @@
       selectClick: function(oItem){
         this.selectItem = oItem;
         this.showOrHide();
+        this.$emit('onOptionSelect', oItem);
       },
       getSelectItem: function(){
         return this.selectItem.label;
@@ -68,6 +70,7 @@
     font-size: 14px;
     display: inline-block;
     border-radius: 2px;
+    position: relative;
   }
   .dropdownBtn:hover{
     border: 1px solid #3399ff;
@@ -103,6 +106,11 @@
 
   .dropdownBtn .options{
     border-top: 1px solid #ccc;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
   }
   .dropdownBtn .options .optionItem{
     height: 32px;
@@ -183,6 +191,7 @@
 
   .dark .dropdownBtn .options{
     border-top: 1px solid #8b90b3;
+    background-color: #1e1f36;
   }
   .dark .dropdownBtn .options .optionItem{
     background-color: #1e1f36;

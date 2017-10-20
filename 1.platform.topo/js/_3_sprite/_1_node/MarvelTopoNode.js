@@ -9,6 +9,19 @@
 
         //#endregion
 
+        //region Fields
+
+        //region createNode
+        const STATUS_START = 1;
+        const STATUS_FREE = 0;
+        var createNodeData = {
+            status: STATUS_FREE,
+            buObj: undefined
+        };
+        //endregion
+
+        //endregion
+
         //#region draw
 
         this.draw = function(oBuObj, oTopo){
@@ -21,7 +34,7 @@
             //#region 2.node
 
             var oGroup = new Konva.Group({
-                id: oBuObj.id,
+                id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
                 x: oPos.x,
                 y: oPos.y,
                 draggable: true
@@ -65,11 +78,12 @@
                 oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
             });
             oGroup.on('click', function(evt) {
-                oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, oTopo);
+                oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
+                evt.cancelBubble = true;
+                evt.evt.stopPropagation();
             });
             oGroup.on('dragmove', function(evt){
-                //1.联动关联的链路
-                oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
+                oTopo.Sprite.NodeGroup.onNodeOrNodeGroupMove(oGroup, oTopo);
             });
 
             return oGroup;
@@ -85,7 +99,7 @@
             //#region 2.node
 
             var oGroup = new Konva.Group({
-                id: oBuObj.id,
+                id: oTopo.Stage.getIdentityValue(oBuObj.id, oTopo),
                 x: oPos.x,
                 y: oPos.y,
                 draggable: true,
@@ -144,12 +158,12 @@
                 oTopo.Sprite.NodeGroup._onNodeGroupOrNodeMouseOut(oGroup, oTopo);
             });
             oGroup.on('click', function(evt) {
-                evt.cancelBubble = true;
-                oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, oTopo);
+                oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
+                evt.evt.cancelBubble = true;
+                evt.evt.stopPropagation();
             });
             oGroup.on('dragmove', function(evt){
-                //TODO:调用LinkGroup
-                oTopo.Sprite.LinkGroup.response2NodeEvent4ReDraw(oGroup.tag, oTopo);
+                oTopo.Sprite.NodeGroup.onNodeOrNodeGroupMove(oGroup, oTopo);
             });
 
             //#endregion
@@ -177,8 +191,10 @@
         //#region imsg
 
         this.getCenterPos = function(oGroup){
-            var x = oGroup.children[0].width() / 2 + oGroup.x();
-            var y = oGroup.children[0].height() / 2 + oGroup.y();
+            var width = oGroup.children[0].width();
+            var height = oGroup.children[0].height();
+            var x = width / 2 + oGroup.x();
+            var y = height / 2 + oGroup.y();
             for(;;){
                 var oGroup = oGroup.getParent();
                 if(oGroup && oGroup.nodeType === "Group"){
@@ -191,7 +207,80 @@
             }
             return {
                 x: x,
-                y: y
+                y: y,
+                width: width,
+                height: height
+            }
+        };
+
+        this.createNode = function(oBuObj, oTopo){
+            oTopo.Stage.model = oTopo.Stage.MODEL_CREATE_NODE;
+            //save cache
+            createNodeData.buObj = oBuObj;
+            createNodeData.status = STATUS_START;
+        };
+
+        this.stageEventMouseOver = function(oEvent, oTopo){
+            //update buObj prop
+            var oStage = oEvent.currentTarget;
+            createNodeData.buObj.x = oStage.pointerPos.x;
+            createNodeData.buObj.y = oStage.pointerPos.y;
+            //绘制网元
+            self.draw(createNodeData.buObj, oTopo);
+            oTopo.Layer.reDraw(oTopo.ins.layerNode);
+        };
+
+        this.stageEventMouseMove = function(oEvent, oTopo){
+            var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
+            if(oNode){
+                //更新网元坐标
+                oNode.x(oEvent.currentTarget.pointerPos.x);
+                oNode.y(oEvent.currentTarget.pointerPos.y);
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
+            }
+        };
+
+        this.stageEventMouseDown = function(oEvent, oTopo){
+            var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
+            if(oNode){
+                //保存原始坐标
+                oNode.tag.oX = oEvent.currentTarget.pointerPos.x;
+                oNode.tag.oY = oEvent.currentTarget.pointerPos.y;
+                //保存坐标，在网元移动的时候会同步更新
+                oNode.tag.x = oEvent.currentTarget.pointerPos.x;
+                oNode.tag.y = oEvent.currentTarget.pointerPos.y;
+                oNode.x(oEvent.currentTarget.pointerPos.x);
+                oNode.y(oEvent.currentTarget.pointerPos.y);
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
+            }
+            //createNodeEnd
+            _createNodeEnd(oTopo);
+        };
+
+        var _createNodeEnd = function(oTopo){
+            oTopo.Stage.model = oTopo.Stage.MODEL_EMPTY;
+            //clear cache
+            createNodeData.buObj = undefined;
+            createNodeData.status = STATUS_FREE;
+        };
+
+        this.stageEventMouseOut = function(oEvent, oTopo){
+            var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
+            if(oNode){
+                oNode.destroy();
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
+            }
+        };
+
+        this.eventEscPress = function(oEvent, oTopo){
+            if(createNodeData.status == STATUS_START){
+                var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
+                if(oNode){
+                    oNode.destroy();
+                    oTopo.Layer.reDraw(oTopo.ins.layerNode);
+                }
+                //取消创建
+                _createNodeEnd(oTopo);
             }
         };
 

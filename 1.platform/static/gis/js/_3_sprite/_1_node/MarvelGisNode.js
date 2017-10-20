@@ -46,6 +46,24 @@
             });
         };
 
+        var _onPolygonMouseover = function(oPolygon, oGis){
+            oPolygon.on("mouseover", function(){
+                oPolygon.setStyle({
+                    color: "#ffa600",
+                    weight: 5
+                });
+            });
+        };
+
+        var _onPolygonMouseout = function(oPolygon, oGis){
+            oPolygon.on("mouseout", function(){
+                oPolygon.setStyle({
+                    color: oPolygon.buObj.uiColor,
+                    weight: 2
+                });
+            });
+        };
+
         //endregion
 
         //region imsg
@@ -302,7 +320,14 @@
 
         this.addPolygon = function (strId, arrPoints, oBuObj, oGis) {
             //region init
-            var oPolygon = L.polygon(arrPoints);
+            var oPolygon = L.polygon(arrPoints, {
+                color: oBuObj.uiColor,
+                weight: 2,
+                //opacity: 0.8,
+                fillOpacity: 0.5,
+                dashArray: "5,5",
+                fillColor: oBuObj.uiFillColor
+            });
             oPolygon.id = strId;
             oPolygon.buObj = oBuObj;
             oPolygon.bindPopup(oBuObj.uiTips);
@@ -310,8 +335,16 @@
             //endregion
 
             //region event
-
+            _onPolygonMouseover(oPolygon, oGis);
+            _onPolygonMouseout(oPolygon, oGis);
             //endregion
+        };
+
+        this.delPolygon = function(strId, oGis){
+            var oPolygon = oGis.Layer.findById(strId, oGis);
+            if(oPolygon){
+                oPolygon.remove();
+            }
         };
 
         //endregion

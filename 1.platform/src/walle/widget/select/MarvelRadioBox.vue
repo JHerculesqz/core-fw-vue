@@ -2,7 +2,7 @@
   <!--radio start-->
   <div class="radioWrapper">
     <div class="radio">
-      <input type="radio" v-bind:id="[id]"
+      <input type="radio" v-bind:id="[id]" v-bind:name="group"
              v-bind:value="label" v-model="$parent[group]" v-on:change="onClick"
              :disabled="isDisable"/>
       <label v-bind:for="[id]"></label>

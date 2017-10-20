@@ -18,7 +18,7 @@
           <div class="currentRate" v-bind:style="{ width: progress + 'px' }"></div>
         </div>
         <div class="loadingTip">{{ progress }}%</div>
-        <div class="loadingCancel" v-on:click="hideEx">{{ cancelLabel }}</div>
+        <div class="loadingCancel" v-on:click="cancelEx">{{ cancelLabel }}</div>
       </div>
     </div>
   </div>
@@ -52,6 +52,10 @@
         this.show = false;
         this.progress = 0;
         this.progressMsg = "";
+      },
+      cancelEx: function(){
+        this.hideEx();
+        this.$emit("onCancel");
       }
     }
   }

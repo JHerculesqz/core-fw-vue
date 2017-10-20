@@ -27,6 +27,10 @@
             <button v-on:click="oTest4Group3">oTest4Group(delGroup)</button>
             <button v-on:click="oTest4Group4">test4Group(setOpacity4Group)</button>
             <button v-on:click="oTest4Line">test4Line(delPolyline)</button>
+            <button v-on:click="oTest4Line2">test4Line(setOpacity4Link)</button>
+            <button v-on:click="oTest4Line3">test4Line(setColor4Link)</button>
+            <button v-on:click="oTest4Polygon">test4Polygon(addPolygon)</button>
+            <button v-on:click="oTest4Polygon2">test4Polygon(delPolygon)</button>
             <button v-on:click="oTest4Topo">test4Topo</button>
             <div style="width: 100%;height: 500px;">
               <marvel-leaflet ref="ref0" id="gisMapId1"
@@ -36,7 +40,6 @@
                               v-on:onNodeDblClick="onNodeDblClick"
                               v-on:onNodeDrag="onNodeDrag"
                               v-on:onNodeClick="onNodeClick"
-                              v-on:onNodeContextMenu="onNodeContextMenu"
                               v-on:onNodeGroupClick="onNodeGroupClick"
                               v-on:onLinkClick="onLinkClick"
                               v-on:onCircleDblclick="onCircleDblclick"></marvel-leaflet>
@@ -330,6 +333,8 @@
           [51.503, -0.06],
           [51.51, -0.047]
         ],
+        uiFillColor: "#FAE09B",
+        uiColor: "#FFFFFF",
         uiTips: "polygon1"
       });
       //#endregion
@@ -352,9 +357,6 @@
         console.log(e);
       },
       onNodeClick: function(e){
-        console.log(e);
-      },
-      onNodeContextMenu: function (e) {
         console.log(e);
       },
       onNodeGroupClick: function (e) {
@@ -416,6 +418,38 @@
       },
       oTest4Line: function (e) {
         this.$refs.ref0.delPolyline("link1");
+      },
+      oTest4Line2: function(e){
+        this.$refs.ref0.setOpacity4Link("link1", 0.5);
+      },
+      oTest4Line3: function(e){
+        this.$refs.ref0.setColor4Link("link1", "green");
+      },
+      oTest4Polygon: function(e){
+        this.$refs.ref0.addPolygon("polygon2", [
+          [51.50286581276557, -0.10449886322021486],
+          [51.49931274551157, -0.10814666748046876],
+          [51.49803036749742, -0.10563611984252931],
+          [51.4983509653836, -0.09994983673095705],
+          [51.49992720552339, -0.0982332229614258],
+          [51.50473573689897, -0.09630203247070312]
+        ], {
+          id: "polygon2",
+          points: [
+            [51.50286581276557, -0.10449886322021486],
+            [51.49931274551157, -0.10814666748046876],
+            [51.49803036749742, -0.10563611984252931],
+            [51.4983509653836, -0.09994983673095705],
+            [51.49992720552339, -0.0982332229614258],
+            [51.50473573689897, -0.09630203247070312]
+          ],
+          uiFillColor: "#ffa600",
+          uiColor: "#ffffff",
+          uiTips: "polygon2"
+        });
+      },
+      oTest4Polygon2: function(e){
+        this.$refs.ref0.delPolygon("polygon2");
       },
       oTest4Topo: function(){
         var oTopoData = this.$refs.ref0.getTopoData();

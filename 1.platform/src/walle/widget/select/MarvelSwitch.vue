@@ -13,7 +13,7 @@
 <script>
   export default {
     name: 'MarvelSwitch',
-    props: ["id", "check"],
+    props: ["id", "check", "buObj"],
     data: function() {
         return {
           checkItem: this.check === false ? false : true,
@@ -31,7 +31,7 @@
     },
     watch: {
       checkItem: function(strNewVal, strOldVal){
-        this.$emit("onChange", strOldVal, strNewVal);
+        this.$emit("onChange", strOldVal, strNewVal, this.buObj);
       }
     }
   }

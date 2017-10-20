@@ -8,6 +8,8 @@
         this.Stage = new $.MarvelTopoStage();
         this.Layer = new $.MarvelTopoLayer();
         this.Sprite = new $.MarvelTopoSprite();
+        this.Api = new $.MarvelTopoApi();
+        this.Utils = new $.MarvelTopoUtils();
 
         this.ins = {
             stage: undefined,

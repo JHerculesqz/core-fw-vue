@@ -18,7 +18,7 @@
             <!--2级DemoView start-->
             <div style="height: 100px;">
               <marvel-toolbar v-bind:items="items" theme=""
-                              v-on:onToolbarItemClick="onToolbarItemClick"></marvel-toolbar>
+                              v-on:onToolbarItemClick="onToolbarItemClick" v-on:onToolbarSubItemClick="onToolbarSubItemClick" ></marvel-toolbar>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -67,7 +67,16 @@
         items: [{
           id: 1,
           label: "拓扑还原",
-          icon: "icon-drawer"
+          icon: "icon-drawer",
+          subMenu:[{
+            id:"a",
+            label:"aaaaaaaaaaaaaaa",
+            icon:"icon-drawer"
+          },{
+            id:"b",
+            label:"bbb",
+            icon:"icon-drawer"
+          }]
         }, {
           id: 2,
           label: "保存",
@@ -79,7 +88,16 @@
         }, {
           id: 4,
           label: "导出",
-          icon: "icon-drawer"
+          icon: "icon-drawer",
+          subMenu:[{
+            id:"c",
+            label:"ccc",
+            icon:"icon-drawer"
+          },{
+            id:"d",
+            label:"ddd",
+            icon:"icon-drawer"
+          }]
         }, {
           id: 5,
           label: "布局对齐",
@@ -95,6 +113,9 @@
     methods: {
       //#region inner
       onToolbarItemClick: function (oItem) {
+        console.log(oItem);
+      },
+      onToolbarSubItemClick:function(oItem, oParent){
         console.log(oItem);
       }
       //#endregion

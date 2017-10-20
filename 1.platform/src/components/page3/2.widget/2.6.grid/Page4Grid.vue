@@ -17,7 +17,12 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="width:500px;height:300px;">
-              <marvel-grid :titles="titles" :rows="rows" theme="dark"></marvel-grid>
+              <marvel-grid :titles="titles" :rows="rows" :inputMsgs="inputMsgs" theme="dark" gridId="demo"
+                           v-on:onClickRow="onClickRow"
+                           v-on:onTitleCheckOrUncheck="onTitleCheckOrUncheck"
+                           v-on:onRowCheckOrUnCheck="onRowCheckOrUnCheck"
+                           v-on:updateRow="updateRow"
+                           v-on:onRowRadionCheckOrUnCheck="onRowRadionCheckOrUnCheck"></marvel-grid>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -66,7 +71,8 @@
         //#region custom data
         titles: [{
           label: "列1",
-          width: "25%"
+          width: "25%",
+          type:"checkBox"
         }, {
           label: "列2",
           width: "25%"
@@ -79,7 +85,8 @@
         }],
         skip: 0,
         limit: 10,
-        rows: []
+        rows: [],
+        inputMsgs:[],
         //#endregion
       }
     },
@@ -90,10 +97,26 @@
       for (var i = 0; i < 2; i++) {
         var oRow = [];
         for (var j = 0; j < 4; j++) {
-          var oCell = {
-            value: "value" + i,
-            type: "text"
-          };
+          if(j==0){
+            var oCell = {
+              value: "value" + i,
+              type: "checkBox",
+              isCheck:false
+            };
+          }
+          else if(j==1){
+            var oCell = {
+              value: "value" + i,
+              type: "input"
+            };
+            this.inputMsgs.push(oCell.value);
+          }
+          else{
+            var oCell = {
+              value: "value" + i,
+              type: "text"
+            };
+          }
           oRow.push(oCell);
         }
         this.rows.push(oRow);
@@ -102,20 +125,30 @@
       for (var i = 0; i < 2; i++) {
         var oRow = [];
         for (var j = 0; j < 4; j++) {
-          var oCell = {
-            value: [{
-              value: "icon-location2",
-              onClick: function () {
-                alert(Math.random());
-              }
-            }, {
-              value: "icon-location2",
-              onClick: function () {
-                alert(Math.random());
-              }
-            }],
-            type: "icon"
-          };
+          if(j==0){
+            var oCell={
+              value:"value" +i,
+              type:"checkBox",
+              isCheck:false
+            };
+          }
+          else{
+            var oCell = {
+              value: [{
+                value: "icon-location2",
+                onClick: function () {
+                  alert(Math.random());
+                }
+              }, {
+                value: "icon-location2",
+                onClick: function () {
+                  alert(Math.random());
+                }
+              }],
+              type: "icon"
+            };
+          }
+
           oRow.push(oCell);
         }
         this.rows.push(oRow);
@@ -124,12 +157,22 @@
       for (var i = 0; i < 2; i++) {
         var oRow = [];
         for (var j = 0; j < 4; j++) {
-          var oCell = {
-            value: "icon-podcast",
-            color: "#28aad3",
-            label: "shit",
-            type: "textIcon"
-          };
+          if(j==0){
+            var oCell={
+              value:"value" +i,
+              type:"checkBox",
+              isCheck:false
+            };
+          }
+          else{
+            var oCell = {
+              value: "icon-podcast",
+              color: "#28aad3",
+              label: "shit",
+              type: "textIcon"
+            };
+          }
+
           oRow.push(oCell);
         }
         this.rows.push(oRow);
@@ -138,6 +181,24 @@
     },
     methods: {
       //#region inner
+    onClickRow:function(){
+      console.log("onClickRow");
+    },
+    onTitleCheckOrUncheck:function(oRow){
+      console.log("onTitleCheckOrUncheck"+oRow);
+    },
+    onRowCheckOrUnCheck:function(oRow){
+      console.log("onRowCheckOrUnCheck");
+    },
+    updateRow:function(oRow,oCallBack){
+      console.log("updateRow");
+      oCallBack(true);
+    },
+    onRowRadionCheckOrUnCheck:function(oRow){
+      console.log(oRow);
+    }
+
+
 
       //#endregion
       //#region callback

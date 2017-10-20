@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="loadingTip" v-text="loadingMsg"></div>
-      <div class="loadingCancel" title="取消" v-on:click="imsgMarvelLoadingHide">X</div>
+      <div class="loadingCancel" title="取消" v-on:click="imsgMarvelLoadingCancel">X</div>
     </div>
   </div>
   <!-- maskLoading end-->
@@ -41,6 +41,10 @@
       imsgMarvelLoadingHide: function(){
         this.show = false;
         this.loadingMsg = "";
+      },
+      imsgMarvelLoadingCancel:function(){
+        this.imsgMarvelLoadingHide();
+        this.$emit("onCancel");
       }
     }
   }

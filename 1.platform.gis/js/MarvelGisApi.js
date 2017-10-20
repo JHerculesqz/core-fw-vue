@@ -140,9 +140,15 @@
         //endregion
 
         //region polygon
+
         this.addPolygon = function (strId, arrPoints, oBuObj, oGis) {
             oGis.Sprite.Node.addPolygon(strId, arrPoints, oBuObj, oGis);
         };
+
+        this.delPolygon = function(strId, oGis){
+            oGis.Sprite.Node.delPolygon(strId, oGis);
+        };
+
         //endregion
 
         //endregion
@@ -172,6 +178,15 @@
         this.delPolyline = function(strId, oGis){
             oGis.Sprite.LinkGroup.delPolyline(strId, oGis);
         };
+
+        this.setOpacity4Link = function(strId, iOpacity, oGis){
+            oGis.Sprite.LinkGroup.setOpacity4Link(strId, iOpacity, oGis);
+        };
+
+        this.setColor4Link = function(strId, oColor, oGis){
+            oGis.Sprite.LinkGroup.setColor4Link(strId, oColor, oGis);
+        };
+
 
         //endregion
 

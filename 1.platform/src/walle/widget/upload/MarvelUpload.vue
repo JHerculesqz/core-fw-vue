@@ -26,6 +26,10 @@
       },
       getFile: function(){
           return this.file;
+      },
+      clearCache:function(){
+        this.file = undefined;
+        this.fileName = "";
       }
     }
   }
