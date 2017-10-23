@@ -83,6 +83,9 @@
   //#region 2.10.widget.gis
   import Page4Leaflet from '@/components/page3/2.widget/2.10.gis/Page4Leaflet'
   //#endregion
+  //#region 2.11.widget.devPanel
+  import Page4DevPanel from '@/components/page3/2.widget/2.11.devPanel/Page4DevPanel'
+  //#endregion
 
   export default {
     components: {
@@ -147,7 +150,10 @@
       Page4Topo,
       //#endregion
       //#region 2.10.widget.gis
-      Page4Leaflet
+      Page4Leaflet,
+      //#endregion
+      //#region 2.11.widget.devPanel
+      Page4DevPanel
       //#endregion
     },
     name: 'page1',
@@ -344,6 +350,14 @@
           subItems: [{
             id: "Page4Leaflet",
             label: "GIS"
+          }]
+        }, {
+          label: "控件(devPanel)",
+          icon: "icon-pacman",
+          expand: false,
+          subItems: [{
+            id: "Page4DevPanel",
+            label: "DevPanel"
           }]
         }, {
           label: "典型页面",
