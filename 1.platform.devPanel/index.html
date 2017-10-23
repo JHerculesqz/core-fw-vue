@@ -33,16 +33,25 @@
             $("#id1").click(function () {
                 var oPlugin = oMarvelDevPanel.getPlugin("6000");
                 setInterval(function () {
-                    var i = Math.random();
-                    if(i < 0.3){
-                        oPlugin.setLightColor("l1", "#FF0001");
-                    }
-                    else if(i > 0.3 && i < 0.5){
-                        oPlugin.setLightColor("l1", "#008C01");
-                    }
-                    else{
-                        oPlugin.setLightColor("l1", "#FFD400");
-                    }
+                    oPlugin.setLightColor("l1", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l2", Math.random() > 0.5 ? "#FF0001" : "#FFD400");
+                    oPlugin.setLightColor("l3", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l4", Math.random() > 0.5 ? "#FF0001" : "#FFD400");
+                    oPlugin.setLightColor("l5", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l6", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l7", Math.random() > 0.5 ? "#FF0001" : "#FFD400");
+                    oPlugin.setLightColor("l8", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l9", Math.random() > 0.5 ? "#FF0001" : "#FFD400");
+                    oPlugin.setLightColor("l10", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l11", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l12", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l13", Math.random() > 0.5 ? "#FFD400" : "#008C01");
+                    oPlugin.setLightColor("l14", Math.random() > 0.5 ? "#FF0001" : "#FFD400");
+                    oPlugin.setLightColor("l15", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l16", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l17", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l18", Math.random() > 0.5 ? "#FF0001" : "#008C01");
+                    oPlugin.setLightColor("l19", Math.random() > 0.5 ? "#FF0001" : "#008C01");
                 }, 1000);
             });
         });

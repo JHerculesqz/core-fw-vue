@@ -128,7 +128,9 @@
         //region imsg
 
         this.setLightColor = function (strId, strColor) {
-            var oLight = SVG.get(strId);
+            var oLightG = SVG.get(strId);
+            var oLight = SVG.adopt(oLightG.node.lastElementChild);
+            console.log(oLight);
             if(oLight != undefined){
                 oLight.fill({color: strColor});
             }
