@@ -165,6 +165,37 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+
+    <!--2级 start-->
+    <div class="title level2">折线图</div>
+    <div class="describe">
+      折线图
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems6">
+        <marvel-tab-item :isActive="tabItems6[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 500px; height: 350px">
+              <marvel-chart-line ref="ref6" id="id6" theme="dark"></marvel-chart-line>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems6[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -174,12 +205,14 @@
   import MarvelChartScatter from "@/walle/widget/echart/MarvelChartScatter";
   import MarvelChartStackLine from "@/walle/widget/echart/MarvelChartStackLine";
   import MarvelChartScatter2 from "@/walle/widget/echart/MarvelChartScatter2";
+  import MarvelChartLine from "@/walle/widget/echart/MarvelChartLine";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
 
   export default {
     name: 'page4Chart',
     components: {
+      MarvelChartLine,
       MarvelChartScatter2,
       MarvelChartStackLine,
       MarvelChartScatter,
@@ -232,6 +265,16 @@
           }
         ],
         tabItems5: [
+          {
+            label: "Demo View",
+            isActive: true
+          },
+          {
+            label: "Code View",
+            isActive: false
+          }
+        ],
+        tabItems6: [
           {
             label: "Demo View",
             isActive: true
@@ -341,8 +384,13 @@
             value: [12, 6, 6, 50]
           }]
         },
+        lineData: {
+          title: "温度",
+          data: []
+        },
         interval1: null,
-        interval2: null
+        interval2: null,
+        interval3: null,
         //#endregion
       }
     },
@@ -474,6 +522,17 @@
       self.$refs.ref4.setData(self.scatterData2);
       //4.
       self.$refs.ref5.setData(self.stackLineData);
+      //5.
+      var i = 1;
+      this.interval3 = setInterval(function () {
+        var oNow = new Date();
+        var oTime = new Date(+oNow + i * 1000*60*60*24);
+        var strTime = [oTime.getFullYear(), oTime.getMonth() + 1, oTime.getDate()].join('-');
+        var oValue = Math.random();
+        self.lineData.data.push({name: strTime, value: [strTime, oValue]});
+        i++;
+        self.$refs.ref6.setData(self.lineData);
+      }, 2000);
       //#endregion
     },
     beforeDestroy: function(){
@@ -483,6 +542,9 @@
       }
       if(this.interval2 != null){
         clearInterval(this.interval2);
+      }
+      if(this.interval3 != null){
+        clearInterval(this.interval3);
       }
       //#endregion
     },
