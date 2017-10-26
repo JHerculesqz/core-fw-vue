@@ -196,6 +196,37 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+
+    <!--2级 start-->
+    <div class="title level2">饼图</div>
+    <div class="describe">
+      饼图
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems6">
+        <marvel-tab-item :isActive="tabItems6[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 500px; height: 350px">
+              <marvel-chart-pie ref="ref7" id="id7" theme="dark"></marvel-chart-pie>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems6[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -208,10 +239,12 @@
   import MarvelChartLine from "@/walle/widget/echart/MarvelChartLine";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelChartPie from "../../../../walle/widget/echart/MarvelChartPie";
 
   export default {
     name: 'page4Chart',
     components: {
+      MarvelChartPie,
       MarvelChartLine,
       MarvelChartScatter2,
       MarvelChartStackLine,
@@ -388,6 +421,19 @@
           title: "温度",
           data: []
         },
+        pieData: {
+          title: "性别",
+          subTitle: "联合国出品",
+          radius: "50%",
+          legendItems: ["男", "女", "不男不女", "伪娘", "女汉子"],
+          data: [
+            {name: "男", value: 10},
+            {name: "女", value: 20},
+            {name: "不男不女", value: 10},
+            {name: "伪娘", value: 30},
+            {name: "女汉子", value: 30},
+          ],
+        },
         interval1: null,
         interval2: null,
         interval3: null,
@@ -533,6 +579,8 @@
         i++;
         self.$refs.ref6.setData(self.lineData);
       }, 2000);
+      //6.
+      self.$refs.ref7.setData(self.pieData);
       //#endregion
     },
     beforeDestroy: function(){
