@@ -33,15 +33,55 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-&lt;button v-on:click="onClickDialogShow"&gt;show&lt;/button&gt;
-&lt;marvel-dialog theme="dark" :showDialog="showDialog"
-               title="上传" width="500" height="300"
-               v-on:onClickDialogClose="onClickDialogClose"&gt;
-  &lt;div slot="dialogCont"&gt;111111&lt;/div&gt;
-  &lt;div slot="dialogFoot"&gt;
+                  &lt;button v-on:click="onClickDialogShow"&gt;show&lt;/button&gt;
+                  &lt;marvel-dialog theme="dark" :showDialog="showDialog"
+                  title="上传" width="500" height="300"
+                  v-on:onClickDialogClose="onClickDialogClose"&gt;
+                  &lt;div slot="dialogCont"&gt;111111&lt;/div&gt;
+                  &lt;div slot="dialogFoot"&gt;
 
-  &lt;/div&gt;
-&lt;/marvel-dialog&gt;
+                  &lt;/div&gt;
+                  &lt;/marvel-dialog&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">Confirm Dialog</div>
+    <div class="describe">
+      Confirm Dialog
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <button v-on:click="onClickConfirmShow">show</button>
+            <marvel-confirm :showConfirm="showConfirm"
+                            confirmCont="这是一个提示确认框"
+                            theme="dark"
+                            tipType="tip"
+                            v-on:onClickOK="onClickConfirmOK"
+                            v-on:onClickCancel="onClickConfirmCancel"></marvel-confirm>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+                  &lt;button v-on:click="onClickConfirmShow"&gt;show&lt;/button&gt;
+                  &lt;marvel-confirm :showConfirm="showConfirm"
+                                  v-on:onClickConfirmClose="onClickConfirmClose"
+                                  confirmCont="这是一个提示确认框"
+                                  theme="dark"
+                                  tipType="tip"
+                  &gt;&lt;/marvel-confirm&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -58,6 +98,7 @@
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
   import MarvelDialog from "@/walle/widget/dialog/MarvelDialog";
+  import MarvelConfirm from "@/walle/widget/dialog/MarvelConfirm";
   import MarvelButton from "@/walle/widget/button/MarvelButton";
 
   export default {
@@ -65,6 +106,7 @@
     components: {
       MarvelButton,
       MarvelDialog,
+      MarvelConfirm,
       MarvelTabItem,
       MarvelTab,
     },
@@ -78,9 +120,17 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems2: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
-        showDialog: false
+        showDialog: false,
+        showConfirm: false
         //#endregion
       }
     },
@@ -91,16 +141,32 @@
     },
     methods: {
       //#region inner
+
+      //#region dialog
+
       onClickDialogShow: function () {
         this.showDialog = true;
       },
       onClickDialogClose: function(){
         this.showDialog = false;
       },
-      onClickCancel: function(){
-        this.showDialog = false;
-        alert("Cancel");
+
+      //#endregion
+
+      //#region confirm dialog
+
+      onClickConfirmShow: function () {
+        this.showConfirm = true;
+      },
+      onClickConfirmOK: function(){
+        this.showConfirm = false;
+      },
+      onClickConfirmCancel: function(){
+        this.showConfirm = false;
       }
+
+      //#endregion
+
       //#endregion
       //#region callback
 

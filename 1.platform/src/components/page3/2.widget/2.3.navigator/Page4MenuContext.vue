@@ -7,9 +7,9 @@
     </div>
     <!--1级 end-->
     <!--2级 start-->
-    <div class="title level2">右键菜单</div>
+    <div class="title level2">右键菜单--图片版</div>
     <div class="describe">
-      右键菜单
+      右键菜单--图片版
     </div>
     <div class="showArea">
       <marvel-tab :tabItems="tabItems1">
@@ -40,6 +40,40 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">右键菜单--文字版</div>
+    <div class="describe">
+      右键菜单--文字版
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <button v-on:click.stop="onClick2">show</button>
+            <marvel-menu-context2 ref="ref1"
+                                 :items="items4TextContext"
+                                 v-on:onMenuItemClick="onMenuItemClick2"></marvel-menu-context2>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+                  &lt;button v-on:click.stop="onClick2"&gt;show&lt;/button&gt;
+                  &lt;marvel-menu-context2 ref="ref1"
+                                  :items="items4TextContext"
+                                  v-on:onMenuItemClick="onMenuItemClick2"&gt;&lt;/marvel-menu-context2&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -48,11 +82,13 @@
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
   import MarvelMenuContext from "@/walle/widget/menu/MarvelMenuContext"
+  import MarvelMenuContext2 from "@/walle/widget/menu/MarvelMenuContext2"
 
   export default {
     name: 'page4Menu',
     components: {MarvelTabItem,
-      MarvelTab,MarvelMenuContext},
+      MarvelTab,MarvelMenuContext,
+      MarvelMenuContext2},
     data: function() {
       return {
         //#region document data
@@ -108,6 +144,11 @@
           icon: "icon-pencil",
           color: "",
           label: "编辑"
+        }],
+        items4TextContext:[{
+          label: "contextMenu1"
+        },{
+          label: "contextMenu2"
         }]
         //#endregion
       }
@@ -115,9 +156,16 @@
     methods: {
       //#region inner
       onClick: function(){
-        this.$refs.ref0.showSubMenu(500,400);
+        console.log("1");
+        this.$refs.ref0.showSubMenu(500,200);
+      },
+      onClick2: function(){
+        this.$refs.ref1.showSubMenu(500,400);
       },
       onMenuItemClick: function(strMenuItemLabel){
+        alert(strMenuItemLabel);
+      },
+      onMenuItemClick2: function(strMenuItemLabel){
         alert(strMenuItemLabel);
       }
       //#endregion

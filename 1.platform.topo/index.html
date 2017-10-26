@@ -36,6 +36,10 @@
 
             var THEME_DARK = {
                 dark: {
+                    stage: {
+                        bgColor: "#272743",
+                        bgImg: "url('image/dark/bg.png')"
+                    },
                     node: {
                         labelColor: "#fff",
                         selectColor: "rgba(255,255,255,0.25)"
@@ -46,7 +50,16 @@
                         linkColor: {
                             linkType1: "#ababb5",
                             linkType2: "#FF4c4c",
-                            linkType3: "#ff8833"
+                            linkType3: "#ff8833",
+                            linkType_fiber: "#8b90b3",
+                            linkType_lu_1: "#3b3e4c",
+                            linkType_lu_2: "#3dcca6",
+                            linkType_lu_3: "#ff8833",
+                            linkType_lu_4: "#ff4c4c",
+                            linkType_wf: "#006ad4",
+                            linkType_fp: "#f464ac",
+                            linkType_rw: "#3399ff",
+                            linkType_rp: "#94c94f"
                         }
                     }
                 }
@@ -137,7 +150,7 @@
                     uiLabelM: "link" + i,
                     uiLabelR: "nodeBase1",
                     uiLink: true,
-                    uiLinkColorKey: "linkType1",
+                    uiLinkColorKey: "linkType_fiber",
                     uiLinkWidth: 3,
                     uiDirection: 2,
                     uiDash: [10, 5]
@@ -415,7 +428,7 @@
                     uiLabelM: "link1000",
                     uiLabelR: "nodeBase1",
                     uiLink: true,
-                    uiLinkColorKey: "linkType1",
+                    uiLinkColorKey: "linkType_fiber",
                     uiLinkWidth: 3
                 };
                 oTopoData.links.push(oLink);

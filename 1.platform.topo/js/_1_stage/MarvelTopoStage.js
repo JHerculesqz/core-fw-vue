@@ -27,7 +27,6 @@
             callbackOnLinkGroupClick: function(oLinkGroup, oEvent){},
             callbackOnLinkClick: function(oLink, oEvent){}
             //endregion
-
         };
 
         //#endregion
@@ -52,16 +51,18 @@
             });
 
             //init oStageRect
-            var oStageLayer = new Konva.Layer();
+            var oStageLayer = new Konva.Layer({
+                draggable: false,
+                visible: true
+            });
             oStage.add(oStageLayer);
             var oStageRect = new Konva.Rect({
                 id: "oStageRect",
                 x: 0,
                 y: 0,
-                //stroke: "red",
+                //stroke: "white",
                 width: oStage.getWidth(),
-                height: oStage.getHeight(),
-                //draggable: true
+                height: oStage.getHeight()
             });
             oStageLayer.add(oStageRect);
             oTopo.Layer.reDraw(oStageLayer);
@@ -71,10 +72,10 @@
 
             //#region 3.event
 
-            _initEventWheel(strId, oStage);
+            _initEventWheel(strId, oStage, oStageLayer);
+            _initEventDragend(oStage, oStageLayer);
             _initEventAddMinus(oTopo);
             _initEventClick(oStageRect, oTopo);
-            //_initEventClickEx(strId, oTopo);
             _initEventCtrlPress(oTopo);
             _initEventMouseDown(oStage, oTopo);
             _initEventMouseUp(oStage, oTopo);
@@ -82,6 +83,7 @@
             _initEventMouseOver(oStage, oTopo);
             _initEventMouseOut(oStage, oTopo);
             _initEventEscPress(oTopo);
+
             //#endregion
 
             //region initEventOpions
@@ -100,7 +102,7 @@
 
         //#region event
 
-        var _initEventWheel = function(strId, oStage){
+        var _initEventWheel = function(strId, oStage, oStageLayer){
             document.getElementById(strId).addEventListener('wheel', function(e){
                 e.preventDefault();
                 var oldScale = oStage.scaleX();
@@ -118,7 +120,26 @@
                     y: -(mousePointTo.y - oStage.getPointerPosition().y / newScale) * newScale
                 };
                 oStage.position(newPos);
+                //oStageLayer不缩放 确保oStageLayer处于原始位置
+                oStageLayer.offsetX(newPos.x);
+                oStageLayer.offsetY(newPos.y);
+                oStageLayer.scale({
+                    x: 1/newScale, y: 1/newScale
+                });
                 oStage.batchDraw();
+            });
+        };
+
+        var _initEventDragend = function(oStage, oStageLayer){
+            oStage.on("dragend", function(evt){
+                var oTarget = evt.target;
+                //oStageLayer不移动 确保oStageLayer处于原始位置
+                if(oTarget.nodeType === "Stage"){
+                    var position = oTarget.position();
+                    oStageLayer.offsetX(position.x);
+                    oStageLayer.offsetY(position.y);
+                    oStageLayer.batchDraw();
+                }
             });
         };
 
@@ -130,21 +151,14 @@
                 oTopo.Sprite.NodeGroup.zoomOutSelectNodeGroupAndNodes(oTopo);
             });
         };
+
         var _initEventClick = function(oStageRect, oTopo){
             oStageRect.on("click", function(evt){
                 oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
                 oTopo.Sprite.LinkGroup.unSelectLinks(oTopo);
             });
         };
-        var _initEventClickEx = function(strId, oTopo){
-            document.getElementById(strId).addEventListener("click", function(evt){
-                console.log(evt);
-                oTopo.Sprite.NodeGroup.unSelectNodeGroupAndNodes(oTopo);
-                oTopo.Sprite.LinkGroup.unSelectLinks(oTopo);
-                //console.log("_initEventClickEx");
-            });
 
-        };
         var _initEventCtrlPress = function(oTopo){
             keyboardJS.bind('ctrl', function(e) {
                 keyboardJS.isCtrlPress = true;
@@ -152,6 +166,7 @@
                 keyboardJS.isCtrlPress = false;
             });
         };
+
         var _initEventMouseDown = function(oStage, oTopo){
             oStage.on("contentMousedown", function(e){
                 if(self.model === self.MODEL_CREATE_NODE){
@@ -159,6 +174,7 @@
                 }
             });
         };
+
         var _initEventMouseUp = function(oStage, oTopo){
             oStage.on("contentMouseup", function(e){
                 if(self.model === self.MODEL_CREATE_NODE){
@@ -166,6 +182,7 @@
                 }
             });
         };
+
         var _initEventMouseMove = function(oStage, oTopo){
             oStage.on("contentMousemove", function(e){
                 if(self.model === self.MODEL_CREATE_NODE){
@@ -173,6 +190,7 @@
                 }
             });
         };
+
         var _initEventMouseOver = function(oStage, oTopo){
             oStage.on("contentMouseover", function(e){
                 if(self.model === self.MODEL_CREATE_NODE){
@@ -180,6 +198,7 @@
                 }
             });
         };
+
         var _initEventMouseOut = function(oStage, oTopo){
             oStage.on("contentMouseout", function(e){
                 if(self.model === self.MODEL_CREATE_NODE){
@@ -187,6 +206,7 @@
                 }
             });
         };
+
         var _initEventEscPress = function(oTopo){
             keyboardJS.bind('esc', function(e){
                 //down

@@ -81,6 +81,7 @@
                 oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
                 evt.cancelBubble = true;
                 evt.evt.stopPropagation();
+                console.log("nodeClick");
             });
             oGroup.on('dragmove', function(evt){
                 oTopo.Sprite.NodeGroup.onNodeOrNodeGroupMove(oGroup, oTopo);
@@ -222,9 +223,9 @@
 
         this.stageEventMouseOver = function(oEvent, oTopo){
             //update buObj prop
-            var oStage = oEvent.currentTarget;
-            createNodeData.buObj.x = oStage.pointerPos.x;
-            createNodeData.buObj.y = oStage.pointerPos.y;
+            var oPos = _getPos4CreateNode(oEvent.currentTarget);
+            createNodeData.buObj.x = oPos.x;
+            createNodeData.buObj.y = oPos.y;
             //绘制网元
             self.draw(createNodeData.buObj, oTopo);
             oTopo.Layer.reDraw(oTopo.ins.layerNode);
@@ -233,9 +234,10 @@
         this.stageEventMouseMove = function(oEvent, oTopo){
             var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
             if(oNode){
+                var oPos = _getPos4CreateNode(oEvent.currentTarget);
                 //更新网元坐标
-                oNode.x(oEvent.currentTarget.pointerPos.x);
-                oNode.y(oEvent.currentTarget.pointerPos.y);
+                oNode.x(oPos.x);
+                oNode.y(oPos.y);
                 oTopo.Layer.reDraw(oTopo.ins.layerNode);
             }
         };
@@ -243,18 +245,27 @@
         this.stageEventMouseDown = function(oEvent, oTopo){
             var oNode = oTopo.Stage.findOne(createNodeData.buObj.id, oTopo);
             if(oNode){
+                var oPos = _getPos4CreateNode(oEvent.currentTarget);
                 //保存原始坐标
-                oNode.tag.oX = oEvent.currentTarget.pointerPos.x;
-                oNode.tag.oY = oEvent.currentTarget.pointerPos.y;
+                oNode.tag.oX = oPos.x;
+                oNode.tag.oY = oPos.y;
                 //保存坐标，在网元移动的时候会同步更新
-                oNode.tag.x = oEvent.currentTarget.pointerPos.x;
-                oNode.tag.y = oEvent.currentTarget.pointerPos.y;
-                oNode.x(oEvent.currentTarget.pointerPos.x);
-                oNode.y(oEvent.currentTarget.pointerPos.y);
+                oNode.tag.x = oPos.x;
+                oNode.tag.y = oPos.y;
+                oNode.x(oPos.x);
+                oNode.y(oPos.y);
                 oTopo.Layer.reDraw(oTopo.ins.layerNode);
             }
             //createNodeEnd
             _createNodeEnd(oTopo);
+        };
+
+        var _getPos4CreateNode = function(oStage){
+            var iScale = oStage.scaleX();
+            return {
+                x: (oStage.pointerPos.x - oStage.x()) / iScale,
+                y: (oStage.pointerPos.y - oStage.y()) / iScale
+            };
         };
 
         var _createNodeEnd = function(oTopo){
