@@ -16,7 +16,8 @@
         const STATUS_FREE = 0;
         var createNodeData = {
             status: STATUS_FREE,
-            buObj: undefined
+            buObj: undefined,
+            callback: undefined
         };
         //endregion
 
@@ -79,9 +80,8 @@
             });
             oGroup.on('click', function(evt) {
                 oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
-                evt.cancelBubble = true;
-                evt.evt.stopPropagation();
-                console.log("nodeClick");
+                //evt.cancelBubble = true;
+                //evt.evt.stopPropagation();
             });
             oGroup.on('dragmove', function(evt){
                 oTopo.Sprite.NodeGroup.onNodeOrNodeGroupMove(oGroup, oTopo);
@@ -160,8 +160,8 @@
             });
             oGroup.on('click', function(evt) {
                 oTopo.Sprite.NodeGroup._onNodeGroupOrNodeClick(oGroup, evt, oTopo);
-                evt.evt.cancelBubble = true;
-                evt.evt.stopPropagation();
+                //evt.evt.cancelBubble = true;
+                //evt.evt.stopPropagation();
             });
             oGroup.on('dragmove', function(evt){
                 oTopo.Sprite.NodeGroup.onNodeOrNodeGroupMove(oGroup, oTopo);
@@ -214,11 +214,12 @@
             }
         };
 
-        this.createNode = function(oBuObj, oTopo){
+        this.createNode = function(oBuObj, oAfterCallback, oTopo){
             oTopo.Stage.model = oTopo.Stage.MODEL_CREATE_NODE;
             //save cache
             createNodeData.buObj = oBuObj;
             createNodeData.status = STATUS_START;
+            createNodeData.callback = oAfterCallback;
         };
 
         this.stageEventMouseOver = function(oEvent, oTopo){
@@ -257,7 +258,7 @@
                 oTopo.Layer.reDraw(oTopo.ins.layerNode);
             }
             //createNodeEnd
-            _createNodeEnd(oTopo);
+            _createNodeEnd(oTopo, true);
         };
 
         var _getPos4CreateNode = function(oStage){
@@ -268,11 +269,15 @@
             };
         };
 
-        var _createNodeEnd = function(oTopo){
+        var _createNodeEnd = function(oTopo, bCreatedSuccessful){
             oTopo.Stage.model = oTopo.Stage.MODEL_EMPTY;
+            if(typeof createNodeData.callback == "function"){
+                createNodeData.callback(createNodeData.buObj, bCreatedSuccessful);
+            }
             //clear cache
             createNodeData.buObj = undefined;
             createNodeData.status = STATUS_FREE;
+            createNodeData.callback = undefined;
         };
 
         this.stageEventMouseOut = function(oEvent, oTopo){
@@ -291,7 +296,7 @@
                     oTopo.Layer.reDraw(oTopo.ins.layerNode);
                 }
                 //取消创建
-                _createNodeEnd(oTopo);
+                _createNodeEnd(oTopo, false);
             }
         };
 

@@ -11,6 +11,11 @@
     <script type="application/javascript"
             src="lib/plugins/leaflet.polylineDecorator/leaflet.polylineDecorator.js"></script>
     <script type="application/javascript" src="lib/plugins/zoomify/leaflet-deepzoom.js"></script>
+    <script type="application/javascript" src="lib/plugins/leaflet-easyPrint/bundle.js"></script>
+    <link type="text/css" rel="stylesheet"
+          href="lib/plugins/leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css"/>
+    <script type="application/javascript"
+            src="lib/plugins/leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
     <script type="application/javascript" src="js/_1_stage/MarvelGisStage.js"></script>
     <script type="application/javascript" src="js/_2_layer/MarvelGisLayer.js"></script>
     <script type="application/javascript" src="js/_3_sprite/MarvelGisSprite.js"></script>
@@ -276,7 +281,10 @@
                 //endregion
             };
             oGis.Api.init("id1", 51.505, -0.09, 13, {
-                hasZoomCtrl: true
+                hasZoomCtrl: true,
+                mess: true,
+                messTmpLine: "#fff",
+                messResLine: "#fff",
             }, eventOptions, oGis);
             //draw
             oGis.Api.draw(oTopoData, oGis);
@@ -465,7 +473,7 @@
             oGis2.Api.init("id2", 0, 0, 0, {
                 hasZoomCtrl: true,
                 indoorMap: true,
-                indoorMapUrl: "image/dzc_output_files/"
+                indoorMapUrl: "image/2/dzc_output_files/"
             }, eventOptions2, oGis2);
             oGis2.Api.addMarker("car1", 85.03051981587062, -179.42871093750003,
                 "lib/images/node1.svg", 32, {
@@ -504,9 +512,9 @@
 <button id="oTest4Polygon2">test4Polygon(delPolygon)</button>
 <button id="oTest4Topo">test4Topo</button>
 <div class="gisMap" id="id1"
-     style="width: 100%;height: 500px;display:block;"></div>
+     style="width: 100%;height: 500px;"></div>
 <div>室内地图</div>
 <div class="indoorMap" id="id2"
-     style="width: 100%;height: 500px;display:block;"></div>
+     style="width: 100%;height: 500px;"></div>
 </body>
 </html>

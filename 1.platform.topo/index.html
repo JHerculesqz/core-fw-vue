@@ -322,7 +322,7 @@
                     uiLinkGroupId: "groupLink" + i + 1,
                     uiLinkColorKey: "linkType3",
                     uiLinkWidth: 3,
-                    uiDirection:2
+                    uiDirection: 2
                 };
                 var oLink4 = {
                     id: "gLink" + i + 3,
@@ -336,7 +336,7 @@
                     uiLinkGroupId: "groupLink" + i + 1,
                     uiLinkColorKey: "linkType3",
                     uiLinkWidth: 3,
-                    uiDirection:1
+                    uiDirection: 1
                 };
                 arrLinkBase.push(oLink1);
                 arrLinkBase.push(oLink2);
@@ -354,33 +354,44 @@
             //Topo
             var oEventOptions = {
                 //region node
-                callbackOnNodeClick: function(oNode, oEvent){
+                callbackOnNodeClick: function (oNode, oEvent) {
                     console.log("callbackOnNodeClick");
                     console.log(oNode);
                     console.log(oEvent);
                 },
                 //endregion
                 //region nodeGroup
-                callbackOnNodeGroupClick: function(oNodeGroup, oEvent){
+                callbackOnNodeGroupClick: function (oNodeGroup, oEvent) {
                     console.log("callbackOnNodeGroupClick");
                     console.log(oNodeGroup);
                     console.log(oEvent);
                 },
                 //endregion
                 //region link
-                callbackOnLinkGroupClick: function(oLinkGroup, oEvent){
+                callbackOnLinkGroupClick: function (oLinkGroup, oEvent) {
                     console.log("callbackOnLinkGroupClick");
                     console.log(oLinkGroup);
                     console.log(oEvent);
                 },
-                callbackOnLinkClick: function(oLink, oEvent){
+                callbackOnLinkClick: function (oLink, oEvent) {
                     console.log("callbackOnLinkClick");
                     console.log(oLink);
                     console.log(oEvent);
+                },
+                //endregion
+                //region stage
+                callbackOnRightClick: function (oBuObj, iX, iY) {
+                    console.log("rightClick");
+                    console.log(oBuObj);
+                    console.log("position is x: " + iX + ", y: " + iY);
+                },
+                callbackOnPositionUpdate: function (bUpdate) {
+                    console.log("callbackOnPositionUpdate: " + bUpdate);
                 }
                 //endregion
             };
             var oTopo = new $.MarvelTopo();
+            window.oTopo = oTopo;
             oTopo.Api.init(oTopo, {
                 id: "id1",
                 themeKey: THEME_KEY,
@@ -435,29 +446,54 @@
                 oTopo.Api.updateTopo(oTopo, oTopoData);
             });
             var createNodeId = "createNodeId1";
-            $("#createNode").click(function(){
+            $("#createNode").click(function () {
                 oTopo.Api.createNode({
                     id: createNodeId,
                     uiImgKey: "node",
                     uiLabel: createNodeId,
                     uiNode: true
+                }, function (oBuObj, bOk) {
+                    console.log("createNode: " + bOk);
                 }, oTopo);
                 createNodeId += 1;
+            });
+            $("#savePosition").click(function () {
+                oTopo.Api.savePosition(oTopo);
+            });
+            $("#resetPosition").click(function () {
+                oTopo.Api.resetPosition(oTopo);
+            });
+            $("#isPositionUpdate").click(function () {
+                var bUpdate = oTopo.Api.isPositionUpdate(oTopo);
+                console.log(bUpdate);
+            });
+            $("#setBestView").click(function () {
+                oTopo.Api.setBestView(oTopo);
             });
             //#endregion
         });
     </script>
 </head>
-<body>
-<button id="expandNodeGroup">expandNodeGroup</button>
-<button id="collapseNodeGroup">collapseNodeGroup</button>
-<button id="expandLinkGroup">expandLinkGroup</button>
-<button id="collapseLinkGroup">collapseLinkGroup</button>
-<button id="selectNodes">selectNodes</button>
-<button id="selectLinks">selectLinks</button>
-<button id="getTopoData">getTopoData</button>
-<button id="updateTopo">updateTopo</button>
-<button id="createNode">createNode</button>
-<div id="id1" style="width:1200px; height:600px;"></div>
+<body style="box-sizing: border-box; margin: 0; padding: 10px;">
+<div style="width: 100%; height: 30px;">
+    <button id="expandNodeGroup">expandNodeGroup</button>
+    <button id="collapseNodeGroup">collapseNodeGroup</button>
+    <button id="expandLinkGroup">expandLinkGroup</button>
+    <button id="collapseLinkGroup">collapseLinkGroup</button>
+    <button id="selectNodes">selectNodes</button>
+    <button id="selectLinks">selectLinks</button>
+    <button id="getTopoData">getTopoData</button>
+    <button id="updateTopo">updateTopo</button>
+    <button id="createNode">createNode</button>
+    <button id="savePosition">savePosition</button>
+    <button id="resetPosition">resetPosition</button>
+    <button id="isPositionUpdate">isPositionUpdate</button>
+    <button id="setBestView">setBestView</button>
+</div>
+<div>
+    <div id="id1" style="width:1200px; height:600px; z-index: 1000; position: relative;"></div>
+    <div style="width: 600px; height: 600px; border-right: 1px solid red; z-index: 999; position:absolute; top: 40px; pointer-events: none;"></div>
+    <div style="width: 1200px; height: 300px; border-bottom: 1px solid red; z-index: 999; position:absolute; top: 40px; pointer-events: none;"></div>
+</div>
 </body>
 </html>

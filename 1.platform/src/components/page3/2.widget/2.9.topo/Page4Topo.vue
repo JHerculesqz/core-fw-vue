@@ -25,12 +25,18 @@
             <button v-on:click="onClickGetTopoData">getTopoData</button>
             <button v-on:click="onClickUpdateTopo">updateTopo</button>
             <button v-on:click="onClickCreateNode">createNode</button>
-            <div style="width: 800px; height: 340px;">
+            <button v-on:click="savePosition">savePosition</button>
+            <button v-on:click="resetPosition">resetPosition</button>
+            <button v-on:click="isPositionUpdate">isPositionUpdate</button>
+            <button v-on:click="setBestView">setBestView</button>
+            <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
                            v-on:onNodeGroupClick="onNodeGroupClick"
                            v-on:onLinkGroupClick="onLinkGroupClick"
-                           v-on:onLinkClick="onLinkClick"></marvel-topo>
+                           v-on:onLinkClick="onLinkClick"
+                           v-on:onRightClick="onRightClick"
+                           v-on:onPositionUpdate="onPositionUpdate"></marvel-topo>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -380,21 +386,29 @@
     methods: {
       //#region inner
       //region event
-      onNodeClick: function(oNode, oEvent){
+      onNodeClick: function (oNode, oEvent) {
         console.log("onNodeClick");
         console.log(oNode);
       },
-      onNodeGroupClick: function(oNodeGroup, oEvent){
+      onNodeGroupClick: function (oNodeGroup, oEvent) {
         console.log("onNodeGroupClick");
         console.log(oNodeGroup);
       },
-      onLinkGroupClick: function(oLinkGroup, oEvent){
+      onLinkGroupClick: function (oLinkGroup, oEvent) {
         console.log("onLinkGroupClick");
         console.log(oLinkGroup);
       },
-      onLinkClick: function(oLink, oEvent){
+      onLinkClick: function (oLink, oEvent) {
         console.log("onLinkClick");
         console.log(oLink);
+      },
+      onRightClick: function(oBuObj, iX, iY, oEvent){
+        console.log("onRightClick");
+        console.log("x: " + iX + ",y: " + iY);
+      },
+      onPositionUpdate: function(bUpdate){
+        console.log("onLinkClick");
+        console.log("positionUpdate: " + bUpdate);
       },
       //endregion
       //region test
@@ -442,8 +456,23 @@
           uiImgKey: "node",
           uiLabel: this.createNodeId,
           uiNode: true
+        }, function (oBuObj, bOk) {
+          console.log("createNode: " + bOk);
         });
         this.createNodeId += 1;
+      },
+      savePosition: function () {
+        this.$refs.ref4Topo.savePosition();
+      },
+      resetPosition: function () {
+        this.$refs.ref4Topo.resetPosition();
+      },
+      isPositionUpdate: function () {
+        var bUpdate = this.$refs.ref4Topo.isPositionUpdate();
+        console.log(bUpdate);
+      },
+      setBestView: function () {
+        this.$refs.ref4Topo.setBestView();
       }
       //endregion
       //#endregion
@@ -529,7 +558,7 @@
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
-    height: 450px;
+    height: 550px;
   }
 
   /*document custom style end*/

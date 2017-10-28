@@ -6,6 +6,7 @@
 
         var ZOOM_SCALE = 1.15;
         var MIN_SCALE = 0.02;
+        var BACKGROUND_SHAPE_ID = "oStageBackground";
 
         this.MODEL_EMPTY='';
         this.MODEL_CREATE_NODE = 'createNode';
@@ -25,7 +26,11 @@
             //endregion
             //region linkGroup
             callbackOnLinkGroupClick: function(oLinkGroup, oEvent){},
-            callbackOnLinkClick: function(oLink, oEvent){}
+            callbackOnLinkClick: function(oLink, oEvent){},
+            //endregion
+            //region stage
+            callbackOnRightClick: function(oBuObj, iX, iY, oEvent){}, //oBuObj为background时,表示点击的是背景
+            callbackOnPositionUpdate: function(bUpdate){}
             //endregion
         };
 
@@ -57,7 +62,7 @@
             });
             oStage.add(oStageLayer);
             var oStageRect = new Konva.Rect({
-                id: "oStageRect",
+                id: BACKGROUND_SHAPE_ID,
                 x: 0,
                 y: 0,
                 //stroke: "white",
@@ -72,17 +77,25 @@
 
             //#region 3.event
 
-            _initEventWheel(strId, oStage, oStageLayer);
-            _initEventDragend(oStage, oStageLayer);
+            //滚轮缩放
+            _initEventWheel(strId, oStage, oTopo);
+            //stage拖动
+            _initEventDragend(oStage, oTopo);
+            //放大、缩小网元
             _initEventAddMinus(oTopo);
+            //点击画布
             _initEventClick(oStageRect, oTopo);
+            //快捷键ctrl、esc
             _initEventCtrlPress(oTopo);
+            _initEventEscPress(oTopo);
+            //鼠标事件
             _initEventMouseDown(oStage, oTopo);
             _initEventMouseUp(oStage, oTopo);
             _initEventMouseMove(oStage, oTopo);
             _initEventMouseOver(oStage, oTopo);
             _initEventMouseOut(oStage, oTopo);
-            _initEventEscPress(oTopo);
+            //右键事件
+            _initContextmenu(oStage, oTopo);
 
             //#endregion
 
@@ -102,7 +115,7 @@
 
         //#region event
 
-        var _initEventWheel = function(strId, oStage, oStageLayer){
+        var _initEventWheel = function(strId, oStage, oTopo){
             document.getElementById(strId).addEventListener('wheel', function(e){
                 e.preventDefault();
                 var oldScale = oStage.scaleX();
@@ -120,25 +133,19 @@
                     y: -(mousePointTo.y - oStage.getPointerPosition().y / newScale) * newScale
                 };
                 oStage.position(newPos);
-                //oStageLayer不缩放 确保oStageLayer处于原始位置
-                oStageLayer.offsetX(newPos.x);
-                oStageLayer.offsetY(newPos.y);
-                oStageLayer.scale({
-                    x: 1/newScale, y: 1/newScale
-                });
+                //重置backgroundLayer
+                self.reSetBackgroundLayer(oTopo);
                 oStage.batchDraw();
             });
         };
 
-        var _initEventDragend = function(oStage, oStageLayer){
+        var _initEventDragend = function(oStage, oTopo){
             oStage.on("dragend", function(evt){
                 var oTarget = evt.target;
                 //oStageLayer不移动 确保oStageLayer处于原始位置
                 if(oTarget.nodeType === "Stage"){
-                    var position = oTarget.position();
-                    oStageLayer.offsetX(position.x);
-                    oStageLayer.offsetY(position.y);
-                    oStageLayer.batchDraw();
+                    //重置backgroundLayer
+                    self.reSetBackgroundLayer(oTopo);
                 }
             });
         };
@@ -217,9 +224,57 @@
                 //up
             });
         };
+
+        var _initContextmenu = function(oStage, oTopo){
+            //屏蔽默认的右键事件
+            oStage.on("contentContextmenu", function(e){
+                e.evt.preventDefault();
+            });
+
+            oStage.on("click", function(e){
+                if(oTopo.Utils.isRightClick(e.evt)){
+                    var oBuObj;
+                    //点击的是背景画布
+                    if(e.target.attrs.id == BACKGROUND_SHAPE_ID){
+                        oBuObj = "background";
+                    }
+                    //点击的是画布上的元素
+                    else{
+                        oBuObj = self.getBuObjByEventTarget(e.target);
+                    }
+                    self.eventOptions.callbackOnRightClick(oBuObj, e.evt.clientX, e.evt.clientY, e);
+                }
+                e.evt.stopPropagation();
+            });
+        };
+
+
+
         //#endregion
 
         //#region imsg
+
+        this.getBuObjByEventTarget = function(oEventTarget){
+            if(oEventTarget.tag){
+                return oEventTarget.tag;
+            }
+            else{
+                return self.getBuObjByEventTarget(oEventTarget.parent);
+            }
+        };
+
+        this.reSetBackgroundLayer = function(oTopo){
+            //1.重置scale
+            oTopo.ins.layerBg.scale({
+                x: 1 / oTopo.ins.stage.scaleX(),
+                y: 1 / oTopo.ins.stage.scaleY()
+            });
+            //2.重置offset
+            oTopo.ins.layerBg.offsetX(oTopo.ins.stage.x());
+            oTopo.ins.layerBg.offsetY(oTopo.ins.stage.y());
+            //3.绘制
+            oTopo.ins.layerBg.batchDraw();
+        };
 
         this.clearAllGroups = function(oTopo){
             var arrGroup = oTopo.ins.stage.find("Group");
