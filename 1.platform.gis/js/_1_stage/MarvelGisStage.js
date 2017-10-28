@@ -74,7 +74,7 @@
                     id: 'mapbox.streets',
                     token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
                 });
-                var oTileLayer2 = L.tileLayer(URL_GIS_MAP2, {
+                var oTileLayer2 = L.tileLayer(URL_GIS_MAP, {
                     attribution: "",
                     id: 'mapbox.satellite',
                     token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
@@ -89,7 +89,7 @@
                     zoom: iZoom4Init,
                     worldCopyJump: true,
                     doubleClickZoom: false,
-                    layers:[oTileLayer1, oTileLayer2]
+                    layers:[oTileLayer1]
                 });
                 self.mapObj.doubleClickZoom.disable();
                 self._ctrlScale();
