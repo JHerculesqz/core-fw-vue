@@ -5,6 +5,7 @@
         //region Const
 
         var URL_GIS_MAP = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}';
+        var URL_GIS_MAP2 = "https://api.mapbox.com/styles/v1/jherculesqz/cj99csbwi2bzy2qp3mhtqcrkx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamhlcmN1bGVzcXoiLCJhIjoiY2o4anNybjZqMDZnczMybXZxaHNhMDRlMyJ9.fR2DM7aypSp8q4AxE6uL5w";
 
         //endregion
 
@@ -36,43 +37,75 @@
         //region init
 
         this.init = function(strId, iX, iY, iZoom4Init, oOptions, eventOptions){
-            //region 0.init tileLayer
-            var oTileLayer1 = L.tileLayer(URL_GIS_MAP, {
-                attribution: "",
-                id: 'mapbox.streets',
-                token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
-            });
-            var oTileLayer2 = L.tileLayer(URL_GIS_MAP, {
-                attribution: "",
-                id: 'mapbox.satellite',
-                token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
-            });
-            //endregion
+            if(oOptions.indoorMap){
+                //region 0.init mapObj
+                self.mapObj = L.map(strId, {
+                    attributionControl: false,
+                    zoomControl: oOptions.hasZoomCtrl == undefined ? true : oOptions.hasZoomCtrl,
+                    center: [iX, iY],
+                    zoom: iZoom4Init,
+                    worldCopyJump: true,
+                    doubleClickZoom: false
+                });
+                self.mapObj.doubleClickZoom.disable();
+                L.control.scale().addTo(this.mapObj);
+                //endregion
 
-            //region 1.init mapObj
-            self.mapObj = L.map(strId, {
-                attributionControl: false,
-                zoomControl: oOptions.hasZoomCtrl == undefined ? true : oOptions.hasZoomCtrl,
-                center: [iX, iY],
-                zoom: iZoom4Init,
-                worldCopyJump: true,
-                doubleClickZoom: false,
-                layers:[oTileLayer1, oTileLayer2]
-            });
-            self.mapObj.doubleClickZoom.disable();
-            L.control.scale().addTo(this.mapObj);
-            L.control.layers({
-                "卫星": oTileLayer2,
-                "道路": oTileLayer1,
-            }).addTo(this.mapObj);
-            //endregion
+                //region 1.init tileLayer
+                var oIndoorLayer = L.tileLayer.deepzoom(oOptions.indoorMapUrl, {
+                    width: 4020,
+                    height: 2680
+                }, self.mapObj);
+                oIndoorLayer.addTo(self.mapObj);
+                self.mapObj.fitBounds(oIndoorLayer.options.bounds);
+                //endregion
 
-            //region 2.event
-            $.extend(self.eventHandler, eventOptions);
-            _onZoom();
-            _onClick();
-            _onContextMenu();
-            //endregion
+                //region 2.event
+                $.extend(self.eventHandler, eventOptions);
+                _onZoom();
+                _onClick();
+                _onContextMenu();
+                //endregion
+            }
+            else{
+                //region 0.init tileLayer
+                var oTileLayer1 = L.tileLayer(URL_GIS_MAP2, {
+                    attribution: "",
+                    id: 'mapbox.streets',
+                    token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                });
+                var oTileLayer2 = L.tileLayer(URL_GIS_MAP2, {
+                    attribution: "",
+                    id: 'mapbox.satellite',
+                    token: "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                });
+                //endregion
+
+                //region 1.init mapObj
+                self.mapObj = L.map(strId, {
+                    attributionControl: false,
+                    zoomControl: oOptions.hasZoomCtrl == undefined ? true : oOptions.hasZoomCtrl,
+                    center: [iX, iY],
+                    zoom: iZoom4Init,
+                    worldCopyJump: true,
+                    doubleClickZoom: false,
+                    layers:[oTileLayer1, oTileLayer2]
+                });
+                self.mapObj.doubleClickZoom.disable();
+                L.control.scale().addTo(this.mapObj);
+                L.control.layers({
+                    "卫星": oTileLayer2,
+                    "道路": oTileLayer1,
+                }).addTo(this.mapObj);
+                //endregion
+
+                //region 2.event
+                $.extend(self.eventHandler, eventOptions);
+                _onZoom();
+                _onClick();
+                _onContextMenu();
+                //endregion
+            }
         };
 
         //endregion
