@@ -294,7 +294,10 @@
 
       //init
       this.$refs.ref0.init(51.505, -0.09, 13, {
-        hasZoomCtrl: true
+        hasZoomCtrl: true,
+        mess: true,
+        messTmpLine: "#fff",
+        messResLine: "#fff",
       });
       //draw
       this.$refs.ref0.draw(oTopoData);
