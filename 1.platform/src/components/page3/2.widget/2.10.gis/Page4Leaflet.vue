@@ -16,9 +16,11 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
+            <button v-on:click="oTestData">test4Data(init)</button>
             <button v-on:click="oTest4Map">test4Map(setCenter)</button>
             <button v-on:click="oTest4Map2">test4Map(showOrHide)</button>
-            <button v-on:click="oTest4Map3">test4Map3(getDiffLst)</button>
+            <button v-on:click="oTest4Layer1">test4Layer(getDiffLst)</button>
+            <button v-on:click="oTest4Layer2">test4Layer(toGeoJSON)</button>
             <button v-on:click="oTest4Marker">test4Marker</button>
             <button v-on:click="oTest4AttachedIcon">test4AttachedIcon</button>
             <button v-on:click="oTest4Circle">test4Circle</button>
@@ -93,252 +95,13 @@
     mounted: function(){
       //#region custom
 
-      //#region mock
-
-      var arrNodes = [];
-      var arrNodeGroups = [];
-      var arrLinks = [];
-      var oTopoData = {
-        nodes: arrNodes,
-        nodeGroups: arrNodeGroups,
-        links: arrLinks
-      };
-      //#region node
-      arrNodes.push({
-        id: "marker1",
-        x: 51.5,
-        y: -0.09,
-        uiType: "ne",
-        uiImgUrl: "/static/gis/lib/images/node1.svg",
-        uiImgWidth: 32,
-        uiLabel: "marker1",
-        uiTips: "<b>marker1</b><br>11111",
-        uiDraggable: true,
-        uiOpacity: 1
-      });
-      arrNodes.push({
-        id: "marker2",
-        x: 51.50344816877402,
-        y: -0.09883403778076173,
-        uiType: "ne",
-        uiImgUrl: "/static/gis/lib/images/node1.svg",
-        uiImgWidth: 32,
-        uiLabel: "marker2",
-        uiTips: "<b>marker2</b><br>11111",
-        uiDraggable: true,
-        uiOpacity: 1
-      });
-      //#endregion
-
-      //#region nodeGroup
-      arrNodeGroups.push({
-        uiExpand: false,
-        id: "site1",
-        x: 51.49994457056707,
-        y: -0.10597944259643556,
-        uiType: "site",
-        uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
-        uiImgWidth: 32,
-        uiLabel: "site1",
-        uiTips: "<b>site1</b><br>11111",
-        uiOpacity: 1,
-        r: 30,
-        uiColor: "red",
-        uiFillColor: "#f03",
-        uiFillOpacity: 0.5,
-        children:[{
-          id: "site1_ne1",
-          x: 51.49992987708078,
-          y: -0.10618329048156738,
-          uiType: "neInSite",
-          uiImgUrl: "/static/gis/lib/images/node1.svg",
-          uiImgWidth: 32,
-          uiLabel: "site1_ne1",
-          uiTips: "<b>site1_ne1</b><br>11111",
-          uiDraggable: false,
-          uiOpacity: 1
-        }, {
-          id: "site1_ne2",
-          x: 51.49999332628028,
-          y: -0.10580241680145265,
-          uiType: "neInSite",
-          uiImgUrl: "/static/gis/lib/images/node1.svg",
-          uiImgWidth: 32,
-          uiLabel: "site1_ne2",
-          uiTips: "<b>site1_ne2</b><br>11111",
-          uiDraggable: false,
-          uiOpacity: 1
-        }]
-      });
-      arrNodeGroups.push({
-        uiExpand: false,
-        id: "site2",
-        x: 51.49894457056707,
-        y: -0.10597944259643556,
-        uiType: "site",
-        uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
-        uiImgWidth: 32,
-        uiLabel: "site2",
-        uiTips: "<b>site2</b><br>11111",
-        uiOpacity: 1,
-        r: 30,
-        uiColor: "red",
-        uiFillColor: "#f03",
-        uiFillOpacity: 0.5,
-        children:[{
-          id: "site2_ne1",
-          x: 51.49892987708078,
-          y: -0.10618329048156738,
-          uiType: "neInSite",
-          uiImgUrl: "/static/gis/lib/images/node1.svg",
-          uiImgWidth: 32,
-          uiLabel: "site2_ne1",
-          uiTips: "<b>site2_ne1</b><br>11111",
-          uiDraggable: false,
-          uiOpacity: 1
-        }, {
-          id: "site2_ne2",
-          x: 51.49899332628028,
-          y: -0.10580241680145265,
-          uiType: "neInSite",
-          uiImgUrl: "/static/gis/lib/images/node1.svg",
-          uiImgWidth: 32,
-          uiLabel: "site2_ne2",
-          uiTips: "<b>site2_ne2</b><br>11111",
-          uiDraggable: false,
-          uiOpacity: 1
-        }]
-      });
-      //#endregion
-
-      //#region link
-
-      //#region 网元与网元
-
-      arrLinks.push({
-        id: "link1",
-        srcNodeId: "marker1",
-        dstNodeId: "marker2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link1",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //#region 网元与站点之间
-
-      arrLinks.push({
-        id: "link2",
-        srcNodeId: "marker2",
-        dstNodeId: "site1_ne1",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-      arrLinks.push({
-        id: "link3",
-        srcNodeId: "marker2",
-        dstNodeId: "site1_ne2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //region 站点与站点之间
-
-      arrLinks.push({
-        id: "link4",
-        srcNodeId: "site2_ne1",
-        dstNodeId: "site1_ne1",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-      arrLinks.push({
-        id: "link5",
-        srcNodeId: "site2_ne2",
-        dstNodeId: "site1_ne2",
-        uiType: "link",
-        uiColor: "red",
-        uiWeight: 3,
-        uiOpacity: 1,
-        uiDashArray: "5, 10",
-        uiTips: "link2",
-        uiDirection: 2
-      });
-
-      //#endregion
-
-      //#endregion
-
-      //#endregion
-
       //init
       this.$refs.ref0.init(51.505, -0.09, 13, {
         hasZoomCtrl: true,
         mess: true,
         messTmpLine: "#fff",
         messResLine: "#fff",
-      });
-      //draw
-      this.$refs.ref0.draw(oTopoData);
-      //basicShape marker/circle/ploygon
-      this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "/static/gis/lib/images/node1.svg", 32, {
-        id: "marker3",
-        x: 51.5,
-        y: -0.08,
-        uiType: "ne",
-        uiImgUrl: "/static/gis/lib/images/node1.svg",
-        uiImgWidth: 32,
-        uiLabel: "marker3",
-        uiTips: "<b>marker3</b><br>11111",
-        uiDraggable: true,
-        uiOpacity: 1
-      });
-      this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
-        id: "circle1",
-        x: 51.5,
-        y: -0.08,
-        r: 30,
-        uiType: "circle",
-        uiColor: "red",
-        uiFillColor: "#f03",
-        uiTips: "<b>circle1</b><br>11111",
-        uiFillOpacity: 0.5
-      });
-      this.$refs.ref0.addPolygon("polygon1", [
-        [51.509, -0.08],
-        [51.503, -0.06],
-        [51.51, -0.047]
-      ], {
-        id: "polygon1",
-        points: [
-          [51.509, -0.08],
-          [51.503, -0.06],
-          [51.51, -0.047]
-        ],
-        uiFillColor: "#FAE09B",
-        uiColor: "#FFFFFF",
-        uiTips: "polygon1"
+        pm: true,
       });
       //#endregion
     },
@@ -371,6 +134,248 @@
       onCircleDblclick: function (e) {
         console.log(e);
       },
+      oTestData: function () {
+        //#region mock
+
+        var arrNodes = [];
+        var arrNodeGroups = [];
+        var arrLinks = [];
+        var oTopoData = {
+          nodes: arrNodes,
+          nodeGroups: arrNodeGroups,
+          links: arrLinks
+        };
+        //#region node
+        arrNodes.push({
+          id: "marker1",
+          x: 51.5,
+          y: -0.09,
+          uiType: "ne",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
+          uiImgWidth: 32,
+          uiLabel: "marker1",
+          uiTips: "<b>marker1</b><br>11111",
+          uiDraggable: true,
+          uiOpacity: 1
+        });
+        arrNodes.push({
+          id: "marker2",
+          x: 51.50344816877402,
+          y: -0.09883403778076173,
+          uiType: "ne",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
+          uiImgWidth: 32,
+          uiLabel: "marker2",
+          uiTips: "<b>marker2</b><br>11111",
+          uiDraggable: true,
+          uiOpacity: 1
+        });
+        //#endregion
+
+        //#region nodeGroup
+        arrNodeGroups.push({
+          uiExpand: false,
+          id: "site1",
+          x: 51.49994457056707,
+          y: -0.10597944259643556,
+          uiType: "site",
+          uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
+          uiImgWidth: 32,
+          uiLabel: "site1",
+          uiTips: "<b>site1</b><br>11111",
+          uiOpacity: 1,
+          r: 30,
+          uiColor: "red",
+          uiFillColor: "#f03",
+          uiFillOpacity: 0.5,
+          children:[{
+            id: "site1_ne1",
+            x: 51.49992987708078,
+            y: -0.10618329048156738,
+            uiType: "neInSite",
+            uiImgUrl: "/static/gis/lib/images/node1.svg",
+            uiImgWidth: 32,
+            uiLabel: "site1_ne1",
+            uiTips: "<b>site1_ne1</b><br>11111",
+            uiDraggable: false,
+            uiOpacity: 1
+          }, {
+            id: "site1_ne2",
+            x: 51.49999332628028,
+            y: -0.10580241680145265,
+            uiType: "neInSite",
+            uiImgUrl: "/static/gis/lib/images/node1.svg",
+            uiImgWidth: 32,
+            uiLabel: "site1_ne2",
+            uiTips: "<b>site1_ne2</b><br>11111",
+            uiDraggable: false,
+            uiOpacity: 1
+          }]
+        });
+        arrNodeGroups.push({
+          uiExpand: false,
+          id: "site2",
+          x: 51.49894457056707,
+          y: -0.10597944259643556,
+          uiType: "site",
+          uiImgUrl: "/static/gis/lib/images/nodeGroup1.svg",
+          uiImgWidth: 32,
+          uiLabel: "site2",
+          uiTips: "<b>site2</b><br>11111",
+          uiOpacity: 1,
+          r: 30,
+          uiColor: "red",
+          uiFillColor: "#f03",
+          uiFillOpacity: 0.5,
+          children:[{
+            id: "site2_ne1",
+            x: 51.49892987708078,
+            y: -0.10618329048156738,
+            uiType: "neInSite",
+            uiImgUrl: "/static/gis/lib/images/node1.svg",
+            uiImgWidth: 32,
+            uiLabel: "site2_ne1",
+            uiTips: "<b>site2_ne1</b><br>11111",
+            uiDraggable: false,
+            uiOpacity: 1
+          }, {
+            id: "site2_ne2",
+            x: 51.49899332628028,
+            y: -0.10580241680145265,
+            uiType: "neInSite",
+            uiImgUrl: "/static/gis/lib/images/node1.svg",
+            uiImgWidth: 32,
+            uiLabel: "site2_ne2",
+            uiTips: "<b>site2_ne2</b><br>11111",
+            uiDraggable: false,
+            uiOpacity: 1
+          }]
+        });
+        //#endregion
+
+        //#region link
+
+        //#region 网元与网元
+
+        arrLinks.push({
+          id: "link1",
+          srcNodeId: "marker1",
+          dstNodeId: "marker2",
+          uiType: "link",
+          uiColor: "red",
+          uiWeight: 3,
+          uiOpacity: 1,
+          uiDashArray: "5, 10",
+          uiTips: "link1",
+          uiDirection: 2
+        });
+
+        //#endregion
+
+        //#region 网元与站点之间
+
+        arrLinks.push({
+          id: "link2",
+          srcNodeId: "marker2",
+          dstNodeId: "site1_ne1",
+          uiType: "link",
+          uiColor: "red",
+          uiWeight: 3,
+          uiOpacity: 1,
+          uiDashArray: "5, 10",
+          uiTips: "link2",
+          uiDirection: 2
+        });
+        arrLinks.push({
+          id: "link3",
+          srcNodeId: "marker2",
+          dstNodeId: "site1_ne2",
+          uiType: "link",
+          uiColor: "red",
+          uiWeight: 3,
+          uiOpacity: 1,
+          uiDashArray: "5, 10",
+          uiTips: "link2",
+          uiDirection: 2
+        });
+
+        //#endregion
+
+        //region 站点与站点之间
+
+        arrLinks.push({
+          id: "link4",
+          srcNodeId: "site2_ne1",
+          dstNodeId: "site1_ne1",
+          uiType: "link",
+          uiColor: "red",
+          uiWeight: 3,
+          uiOpacity: 1,
+          uiDashArray: "5, 10",
+          uiTips: "link2",
+          uiDirection: 2
+        });
+        arrLinks.push({
+          id: "link5",
+          srcNodeId: "site2_ne2",
+          dstNodeId: "site1_ne2",
+          uiType: "link",
+          uiColor: "red",
+          uiWeight: 3,
+          uiOpacity: 1,
+          uiDashArray: "5, 10",
+          uiTips: "link2",
+          uiDirection: 2
+        });
+
+        //#endregion
+
+        //#endregion
+
+        //#endregion
+
+        //draw
+        this.$refs.ref0.draw(oTopoData);
+        //basicShape marker/circle/ploygon
+        this.$refs.ref0.addMarker("marker3", 51.5, -0.08, "/static/gis/lib/images/node1.svg", 32, {
+          id: "marker3",
+          x: 51.5,
+          y: -0.08,
+          uiType: "ne",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
+          uiImgWidth: 32,
+          uiLabel: "marker3",
+          uiTips: "<b>marker3</b><br>11111",
+          uiDraggable: true,
+          uiOpacity: 1
+        });
+        this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
+          id: "circle1",
+          x: 51.5,
+          y: -0.08,
+          r: 30,
+          uiType: "circle",
+          uiColor: "red",
+          uiFillColor: "#f03",
+          uiTips: "<b>circle1</b><br>11111",
+          uiFillOpacity: 0.5
+        });
+        this.$refs.ref0.addPolygon("polygon1", [
+          [51.509, -0.08],
+          [51.503, -0.06],
+          [51.51, -0.047]
+        ], {
+          id: "polygon1",
+          points: [
+            [51.509, -0.08],
+            [51.503, -0.06],
+            [51.51, -0.047]
+          ],
+          uiFillColor: "#FAE09B",
+          uiColor: "#FFFFFF",
+          uiTips: "polygon1"
+        });
+      },
       oTest4Map: function () {
         this.$refs.ref0.setCenter(51.505, -0.09, 10);
       },
@@ -378,11 +383,15 @@
         this.show = !this.show;
         this.$refs.ref0.showOrHide(this.show);
       },
-      oTest4Map3: function () {
+      oTest4Layer1: function () {
         var oResDiff = this.$refs.ref0.getDiffLst(
-            ["marker2", "marker3", "marker4"],
+          ["marker2", "marker3", "marker4"],
           ["site", "ne"]);
         console.log(oResDiff);
+      },
+      oTest4Layer2: function () {
+        var arrGeoJSON = this.$refs.ref0.toGeoJSON();
+        console.log(arrGeoJSON);
       },
       oTest4Marker: function () {
         var self = this;
