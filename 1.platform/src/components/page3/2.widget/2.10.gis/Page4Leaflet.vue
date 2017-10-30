@@ -98,6 +98,7 @@
       //init
       this.$refs.ref0.init(51.505, -0.09, 13, {
         hasZoomCtrl: true,
+        export: true,
         mess: true,
         messTmpLine: "#fff",
         messResLine: "#fff",
