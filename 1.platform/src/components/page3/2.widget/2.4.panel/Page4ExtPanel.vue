@@ -21,7 +21,7 @@
                 theme="dark"
                 height="100"
                 show="false"
-                canDrag="false">
+                canDrag="true">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-bottom-ext-panel>
             </div>
@@ -37,7 +37,7 @@
   theme="dark"
   height="100"
   show="true"
-  canDrag="false"&gt;
+  canDrag="true"&gt;
                   &lt;div slot="content" style="color: #fff"&gt;hello world&lt;/div&gt;
                 &lt;/marvel-bottom-ext-panel&gt;
                 </code>
@@ -63,7 +63,7 @@
                 theme="dark"
                 width="100"
                 show="true"
-                canDrag="false">
+                canDrag="true">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-left-ext-panel>
             </div>
@@ -79,7 +79,7 @@
   theme="dark"
   width="100"
   show="true"
-  canDrag="false"&gt;
+  canDrag="true"&gt;
                   &lt;div slot="content" style="color: #fff"&gt;hello world&lt;/div&gt;
                 &lt;/marvel-left-ext-panel&gt;
                 </code>
@@ -105,7 +105,7 @@
                 theme="dark"
                 width="100"
                 show="true"
-                canDrag="false">
+                canDrag="true">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-right-ext-panel>
             </div>
@@ -117,7 +117,13 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-
+                  &lt;marvel-right-ext-panel
+                    theme="dark"
+                    width="100"
+                    show="true"
+                    canDrag="true"&gt;
+                  &lt;div slot="content" style="color: #fff"&gt;hello world&lt;/div&gt;
+          &lt;/marvel-right-ext-panel&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -226,6 +232,7 @@
     float: left;
   }
   .showAreaInner {
+    height: 100%;
     padding-top: 36px;
     box-sizing: border-box;
   }

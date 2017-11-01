@@ -109,16 +109,22 @@
           uiImgKey: "nodeGroup",
           uiImgKey4Expand: "nodeGroupExpand",
           uiLabel: "nodeGroup" + i,
+          uiTip: "nodeGroup" + i,
+          uiTitle: "nodeGroup" + i,
           uiExpandNode: false,
           uiExpandNodeWidth: 200,
           uiExpandNodeHeight: 200,
           uiNode: true,
+          opacity: 0,
           children: [{
             id: "node" + i + "_1",
             x: 50,
             y: 50,
             uiImgKey: "node",
             uiLabel: "node" + i + "_1",
+            uiTip: "node" + i + "_1",
+            uiTitle: "node" + i + "_1",
+            uiChild: true,
             uiNode: true
           }, {
             id: "node" + i + "_2",
@@ -126,6 +132,9 @@
             y: 100,
             uiImgKey: "node",
             uiLabel: "node" + i + "_2",
+            uiTip: "node" + i + "_2",
+            uiTitle: "node" + i + "_2",
+            uiChild: true,
             uiNode: true
           }]
         };
@@ -145,6 +154,8 @@
           y: iY,
           uiImgKey: "node",
           uiLabel: "node" + i,
+          uiTip: "node" + i + "\n" + "This is a tip demo",
+          uiTitle: "node" + i,
           uiNode: true
         };
         arrNode.push(oNode);
@@ -158,6 +169,8 @@
           y: iY,
           uiImgKey: "node",
           uiLabel: "nodeBase" + i,
+          uiTip: "nodeBase" + i,
+          uiTitle: "nodeBase" + i,
           uiNode: true
         };
         arrNode.push(oNode);
@@ -169,7 +182,7 @@
 
       //#region link
       var arrLink = [];
-      //#region 网元与网元之间的单条链路
+      //region 网元之间的虚链路
       for (var i = 0; i < 3; i++) {
         var oLink = {
           id: "link" + i,
@@ -177,18 +190,19 @@
           dstNodeId: "nodeBase1",
           uiLabelL: "nodeBase0",
           uiLabelM: "link" + i,
+          uiTip: "link" + i,
+          uiTitle: "link" + i,
           uiLabelR: "nodeBase1",
           uiLink: true,
-          uiLinkColorKey: "linkType1",
+          uiLinkColorKey: "linkType_fiber",
           uiLinkWidth: 3,
           uiDirection: 2,
           uiDash: [10, 5]
         };
         arrLink.push(oLink);
       }
-      //#endregion
-
-      //#region 网元与网元之间的捆绑链路
+      //endregion
+      //region 网元之间的捆绑链路
       for (var i = 0; i < 2; i++) {
         //oLink1和oLink2为一组
         var oLink1 = {
@@ -199,7 +213,9 @@
           uiLink: true,
           uiLinkExpand: false,
           uiLabelL: "nodeBase" + i,
-          uiLabelM: "link" + i,
+          uiLabelM: "gLink" + i + "_" + i,
+          uiTip: "gLink" + i + "_" + i,
+          uiTitle: "gLink" + i + "_" + i,
           uiLabelR: "nodeBase" + (i + 1),
           uiLinkColorKey: "linkType2",
           uiLinkWidth: 3
@@ -212,7 +228,9 @@
           uiLink: true,
           uiLinkExpand: false,
           uiLabelL: "nodeBase" + i,
-          uiLabelM: "link" + i,
+          uiLabelM: "gLink" + i + "_" + (i + 1),
+          uiTip: "gLink" + i + "_" + (i + 1),
+          uiTitle: "gLink" + i + "_" + (i + 1),
           uiLabelR: "nodeBase" + (i + 1),
           uiLinkColorKey: "linkType2",
           uiLinkWidth: 3
@@ -226,7 +244,9 @@
           uiLink: true,
           uiLinkExpand: false,
           uiLabelL: "nodeBase" + i,
-          uiLabelM: "link" + i,
+          uiLabelM: "gLink" + i + "_" + (i + 2),
+          uiTip: "gLink" + i + "_" + (i + 2),
+          uiTitle: "gLink" + i + "_" + (i + 2),
           uiLabelR: "nodeBase" + (i + 1),
           uiLinkColorKey: "linkType3",
           uiLinkWidth: 3
@@ -240,7 +260,9 @@
           uiLink: true,
           uiLinkExpand: false,
           uiLabelL: "nodeBase" + i,
-          uiLabelM: "link" + i,
+          uiLabelM: "gLink" + i + "_" + (i + 3),
+          uiTip: "gLink" + i + "_" + (i + 3),
+          uiTitle: "gLink" + i + "_" + (i + 3),
           uiLabelR: "nodeBase" + (i + 1),
           uiLinkColorKey: "linkType3",
           uiLinkWidth: 3
@@ -251,9 +273,8 @@
         arrLink.push(oLink3);
         arrLink.push(oLink4);
       }
-      //#endregion
-
-      //#region 网元与光设备之间的捆绑链路
+      //endregion
+      //region 站点内设备与站点外设备之间的链路
       for (var i = 100; i < 101; i++) {
         var oLink1 = {
           id: "gLink" + i + 0,
@@ -261,6 +282,8 @@
           dstNodeId: "node1_1",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -274,6 +297,8 @@
           dstNodeId: "node1_1",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -287,6 +312,8 @@
           dstNodeId: "node1_2",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -300,6 +327,8 @@
           dstNodeId: "node1_2",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -312,9 +341,8 @@
         arrLink.push(oLink3);
         arrLink.push(oLink4);
       }
-      //#endregion
-
-      //#region 光设备与光设备之间的捆绑链路
+      //endregion
+      //region 站点内设备与站点内的设备之间的链路
       for (var i = 200; i < 201; i++) {
         var oLink1 = {
           id: "gLink" + i + 0,
@@ -322,6 +350,8 @@
           dstNodeId: "node1_1",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -335,6 +365,8 @@
           dstNodeId: "node1_1",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
@@ -348,12 +380,15 @@
           dstNodeId: "node1_2",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
           uiLinkGroupId: "groupLink" + i + 1,
           uiLinkColorKey: "linkType3",
-          uiLinkWidth: 3
+          uiLinkWidth: 3,
+          uiDirection: 2
         };
         var oLink4 = {
           id: "gLink" + i + 3,
@@ -361,19 +396,22 @@
           dstNodeId: "node1_2",
           uiLabelL: "nodeBase0",
           uiLabelM: "gLink" + i,
+          uiTip: "gLink" + i,
+          uiTitle: "gLink" + i,
           uiLabelR: "nodeBase1",
           uiLinkExpand: false,
           uiLink: true,
           uiLinkGroupId: "groupLink" + i + 1,
           uiLinkColorKey: "linkType3",
-          uiLinkWidth: 3
+          uiLinkWidth: 3,
+          uiDirection: 1
         };
         arrLink.push(oLink1);
         arrLink.push(oLink2);
         arrLink.push(oLink3);
         arrLink.push(oLink4);
       }
-      //#endregion
+      //endregion
       oTopoData.links = arrLink;
       //#endregion
 
