@@ -104,6 +104,12 @@
         //#endregion
       }
     },
+    mounted: function () {
+
+    },
+    destroyed: function () {
+
+    },
     methods:{
       //#region inner
       doSth: function(){
