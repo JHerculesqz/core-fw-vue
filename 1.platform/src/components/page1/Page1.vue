@@ -56,6 +56,7 @@
   import Page4DashBoard from '@/components/page3/2.widget/2.4.panel/Page4DashBoard'
   import Page4Dialog from '@/components/page3/2.widget/2.4.panel/Page4Dialog'
   import Page4ExtPanel from '@/components/page3/2.widget/2.4.panel/Page4ExtPanel'
+  import Page4FoldPanel from '@/components/page3/2.widget/2.4.panel/Page4FoldPanel'
   //#endregion
   //#region 2.5.widget.items
   import Page4Legend from '@/components/page3/2.widget/2.5.items/Page4Legend'
@@ -125,6 +126,7 @@
       Page4DashBoard,
       Page4Dialog,
       Page4ExtPanel,
+      Page4FoldPanel,
       //#endregion
       //#region 2.5.widget.items
       Page4Legend,
@@ -278,6 +280,9 @@
           }, {
             id: "Page4ExtPanel",
             label: "扩展面板"
+          }, {
+            id: "Page4FoldPanel",
+            label: "折叠面板"
           }]
         }, {
           label: "控件(小部件)",
