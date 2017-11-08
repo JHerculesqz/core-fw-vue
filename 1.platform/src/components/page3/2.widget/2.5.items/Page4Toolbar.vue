@@ -16,9 +16,11 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="height: 100px;">
+            <div style="height: 100%;">
               <marvel-toolbar v-bind:items="items" theme=""
-                              v-on:onToolbarItemClick="onToolbarItemClick" v-on:onToolbarSubItemClick="onToolbarSubItemClick" ></marvel-toolbar>
+                              v-on:onToolbarItemClick="onToolbarItemClick" v-on:onToolbarSubItemClick="onToolbarSubItemClick" >
+                <div slot="保存">保存自定义子菜单</div>
+              </marvel-toolbar>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -80,7 +82,8 @@
         }, {
           id: 2,
           label: "保存",
-          icon: "icon-drawer"
+          icon: "icon-drawer",
+          hasCustomSubPanel:true
         }, {
           id: 3,
           label: "重置",
