@@ -93,6 +93,37 @@
     </div>
     <!--2级 end-->
 
+    <!--2级 start-->
+    <div class="title level2">表格-3</div>
+    <div class="describe">
+      表格-3
+    </div>
+    <div class="showArea" style="height: 450px;">
+      <marvel-tab :tabItems="tabItems3">
+        <marvel-tab-item :isActive="tabItems3[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:800px;height:300px;">
+              <marvel-grid-m :titles="titles4GridM"
+                             :rows="rows4GridM"></marvel-grid-m>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems3[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="js">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -102,10 +133,12 @@
   import MarvelHight from "@/walle/component/highlight";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelGridEx from "@/walle/widget/grid/MarvelGridEx";
+  import MarvelGridM from "../../../../walle/widget/grid/MarvelGridM";
 
   export default {
     name: 'page4Grid',
     components: {
+      MarvelGridM,
       MarvelTabItem,
       MarvelTab,
       MarvelGrid,
@@ -128,8 +161,16 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems3: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
+        //#region grid
         titles: [{
           label: "列1",
           width: "25%",
@@ -194,10 +235,18 @@
         rowsEx: [],
         inputMsgsEx: [],
         //endregion
+        //#region gridM
+        titles4GridM: ["故障设备", "告警ID"],
+        rows4GridM: [],
+        //#endregion
+        //#endregion
       }
     },
     mounted: function () {
       //#region custom
+
+      //#region grid
+
       this.rows = [];
       //1.
       for (var i = 0; i < 2; i++) {
@@ -328,11 +377,33 @@
           }],
         });
         this.rowsEx.push(oRow);
-      };
+      }
+      ;
       //endregion
+
+      //#region gridM
+
+      for(var i=0;i<100;i++){
+        var oRow = {
+          item0: "#ff0022",
+          item1: "ZY201711081707" + i,
+          item2: "Process",
+          item3: "SDN9900" + i,
+          item4: "102/205/220/300/299/2876",
+          item5: "2017-11-08 17:07",
+        };
+        this.rows4GridM.push(oRow);
+      }
+
+      //#endregion
+
+      //#endregion
     },
     methods: {
       //#region inner
+
+      //#region grid
+
       onClickRow: function (oRow) {
         console.log(oRow);
       },
@@ -354,13 +425,16 @@
         console.log(oRow);
       },
 
+      //#endregion
+
       //region gridEx
+
       //region callback
-      editCellFinishedEx: function(oRow, oCell, oOldVal, oNewVal, oAfterCallback){
+      editCellFinishedEx: function (oRow, oCell, oOldVal, oNewVal, oAfterCallback) {
         console.log("editCellFinishedEx:" + "oldValue: " + oOldVal + ",oNewVal: " + oNewVal);
         //这里对oNewVal进行校验，如果校验通过那么就调用oAfterCallback
         let bValidate = true;
-        if(bValidate){
+        if (bValidate) {
           oAfterCallback();
         }
       },
@@ -382,34 +456,40 @@
       onRowRadioCheckEx: function (oRow) {
         console.log(oRow);
       },
-      onOptionChangeEx: function(oRow, oCell, srtOldValue, strNewValue){
+      onOptionChangeEx: function (oRow, oCell, srtOldValue, strNewValue) {
         console.log("onOptionChangeEx");
       },
       //endregion
       //region test
-      setRowColorEx: function(){
+      setRowColorEx: function () {
         this.$refs.gridEx.setRowColor(0);
       },
-      removeRowColorEx: function(){
+      removeRowColorEx: function () {
         this.$refs.gridEx.removeRowColor(0);
       },
-      getSelectRows4CheckboxEx: function(){
+      getSelectRows4CheckboxEx: function () {
         let arrRows = this.$refs.gridEx.getSelectRows4Checkbox();
         console.log(arrRows);
       },
-      getSelectRow4RadioboxEx: function(){
+      getSelectRow4RadioboxEx: function () {
         let oRow = this.$refs.gridEx.getSelectRow4Radiobox();
         console.log(oRow);
       },
-      removeRowEx: function(){
+      removeRowEx: function () {
         this.$refs.gridEx.removeRow(0);
       },
-      getRowsEx: function(){
+      getRowsEx: function () {
         let arrRows = this.$refs.gridEx.getRows();
         console.log(arrRows);
       },
       //endregion
+
       //endregion
+
+      //#region gridM
+
+      //#endregion
+
       //#endregion
       //#region callback
 
