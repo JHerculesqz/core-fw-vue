@@ -103,9 +103,10 @@
         <marvel-tab-item :isActive="tabItems3[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="width:800px;height:300px;">
+            <div style="height:300px; background-color: #fafafa;">
               <marvel-grid-m :titles="titles4GridM"
-                             :rows="rows4GridM"></marvel-grid-m>
+                             :rows="rows4GridM"
+                             v-on:onClickMore="onClickMore"></marvel-grid-m>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -383,7 +384,7 @@
 
       //#region gridM
 
-      for(var i=0;i<100;i++){
+      for (var i = 0; i < 100; i++) {
         var oRow = {
           item0: "#ff0022",
           item1: "ZY201711081707" + i,
@@ -487,6 +488,10 @@
       //endregion
 
       //#region gridM
+
+      onClickMore: function (oRow) {
+        console.log(oRow);
+      },
 
       //#endregion
 
