@@ -146,7 +146,7 @@
         <marvel-tab :tabItems="tabItems4">
           <marvel-tab-item :isActive="tabItems4[0].isActive">
             <div class="showAreaInner">
-              <marvel-icon-button classCustom="classCustom1" label="normal"
+              <marvel-icon-button classCustom="classCustom1" label="normal" theme="dark"
                                   icon="icon-home3"
                                   v-on:onClick="onClick"></marvel-icon-button>
               <marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown"

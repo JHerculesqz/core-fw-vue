@@ -411,7 +411,7 @@
       },
       oTest4AttachedIcon: function(){
         var self = this;
-        this.$refs.ref0.addAttachedIcon4Marker("marker1", "");
+        this.$refs.ref0.addAttachedIcon4Marker("marker1", "/static/gis/lib/images/location-01.svg");
         setTimeout(function(){
           self.$refs.ref0.delAttachedIcon4Marker("marker1");
         }, 2000);

@@ -29,13 +29,19 @@
             <button v-on:click="resetPosition">resetPosition</button>
             <button v-on:click="isPositionUpdate">isPositionUpdate</button>
             <button v-on:click="setBestView">setBestView</button>
+            <button v-on:click="hideOrShowNode">hideOrShowNode</button>
+            <button v-on:click="hideOrShowLink">hideOrShowLink</button>
             <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
+                           v-on:onGenerateNodeProp="onGenerateNodeProp"
+                           v-on:onGenerateNodeTip="onGenerateNodeTip"
                            v-on:onNodeGroupClick="onNodeGroupClick"
                            v-on:onLinkGroupClick="onLinkGroupClick"
                            v-on:onLinkClick="onLinkClick"
                            v-on:onRightClick="onRightClick"
+                           v-on:onGenerateLinkProp="onGenerateLinkProp"
+                           v-on:onGenerateLinkTip="onGenerateLinkTip"
                            v-on:onPositionUpdate="onPositionUpdate"></marvel-topo>
             </div>
             <!--2级DemoView end-->
@@ -115,7 +121,7 @@
           uiExpandNodeWidth: 200,
           uiExpandNodeHeight: 200,
           uiNode: true,
-          opacity: 0,
+          uiOpacity: 1,
           children: [{
             id: "node" + i + "_1",
             x: 50,
@@ -175,6 +181,18 @@
         };
         arrNode.push(oNode);
       }
+      arrNode.push({
+        id: "nodexxx",
+        x: 0,
+        y: 0,
+        uiHide: false, //隐藏
+        uiOpacity: 0.5,
+        uiImgKey: "node",
+        uiLabel: "nodexxx",
+        uiTip: "nodexxx",
+        uiTitle: "nodexxx",
+        uiNode: true
+      });
       oTopoData.nodes = arrNode;
       //#endregion
 
@@ -425,8 +443,24 @@
       //#region inner
       //region event
       onNodeClick: function (oNode, oEvent) {
-        console.log("onNodeClick");
         console.log(oNode);
+      },
+      onGenerateNodeProp: function (oNode) {
+        if (oNode.children) {
+          oNode.uiLabel = "Group:" + oNode.id;
+        }
+        else {
+          oNode.uiLabel = oNode.id;
+        }
+      },
+      onGenerateNodeTip: function (oNode) {
+        oNode.uiTitle = oNode.id;
+        if (oNode.children) {
+          oNode.uiTip = "This is a nodeGroup";
+        }
+        else {
+          oNode.uiTip = "This is a node";
+        }
       },
       onNodeGroupClick: function (oNodeGroup, oEvent) {
         console.log("onNodeGroupClick");
@@ -440,11 +474,30 @@
         console.log("onLinkClick");
         console.log(oLink);
       },
-      onRightClick: function(oBuObj, iX, iY, oEvent){
+      onRightClick: function (oBuObj, iX, iY, oEvent) {
         console.log("onRightClick");
         console.log("x: " + iX + ",y: " + iY);
       },
-      onPositionUpdate: function(bUpdate){
+      onGenerateLinkProp: function (oLink) {
+        if (oLink.children) {
+          oLink.uiLabelM = "Group: " + oLink.id;
+          oLink.uiLinkColorKey = oLink.children[0].uiLinkColorKey;
+        }
+        else {
+          oLink.uiLabelM = oLink.id;
+        }
+        oLink.uiLinkWidth = 3;
+      },
+      onGenerateLinkTip: function (oLink) {
+        oLink.uiTitle = oLink.id;
+        if (oLink.children) {
+          oLink.uiTip = "This is a group link, has " + oLink.children.length + " links";
+        }
+        else {
+          oLink.uiTip = "This is a link";
+        }
+      },
+      onPositionUpdate: function (bUpdate) {
         console.log("onLinkClick");
         console.log("positionUpdate: " + bUpdate);
       },
@@ -511,7 +564,35 @@
       },
       setBestView: function () {
         this.$refs.ref4Topo.setBestView();
-      }
+      },
+      hideOrShowNode: function(){
+        var oTopoData = this.$refs.ref4Topo.getTopoData();
+        oTopoData.nodes.forEach(function(oNode, index){
+          if(oNode.id == "nodeBase2"){
+            if(oNode.uiHide == undefined){
+              oNode.uiHide = true;
+            }
+            else{
+              oNode.uiHide = !oNode.uiHide;
+            }
+          }
+        });
+        this.$refs.ref4Topo.updateTopo(oTopoData);
+      },
+      hideOrShowLink: function(){
+        var oTopoData = this.$refs.ref4Topo.getTopoData();
+        oTopoData.links.forEach(function(oLink, index){
+          if(oLink.id == "link0"){
+            if(oLink.uiHide == undefined){
+              oLink.uiHide = true;
+            }
+            else{
+              oLink.uiHide = !oLink.uiHide;
+            }
+          }
+        });
+        this.$refs.ref4Topo.updateTopo(oTopoData);
+      },
       //endregion
       //#endregion
       //#region callback
