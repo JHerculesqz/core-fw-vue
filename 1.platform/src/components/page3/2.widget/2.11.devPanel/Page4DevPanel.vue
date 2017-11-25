@@ -74,10 +74,10 @@
       var self = this;
 
       this.$refs.refDevPanel.init();
-      this.$refs.refDevPanel.initPlugin("6000");
+      this.$refs.refDevPanel.initPlugin("GK_1000");
 
       MarvelTimer.startTimer(function () {
-        var oPlugin = self.$refs.refDevPanel.getPlugin("6000");
+        var oPlugin = self.$refs.refDevPanel.getPlugin("GK_1000");
         if(oPlugin){
           var i = Math.random();
           if(i < 0.3){
