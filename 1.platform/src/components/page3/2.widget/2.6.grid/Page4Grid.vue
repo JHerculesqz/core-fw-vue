@@ -59,10 +59,13 @@
             <button @click="getSelectRow4RadioboxEx">getSelectRow4Radiobox</button>
             <button @click="removeRowEx">removeRow</button>
             <button @click="getRowsEx">getRows</button>
+            <button @click="getActiveRowsEx">getActiveRows</button>
+            <button @click="resetRowEx">resetRow</button>
             <div style="width:800px;height:300px; background-color: #000000">
               <marvel-grid-ex ref="gridEx"
                               :titles="titlesEx"
                               :rows="rowsEx"
+                              :limit="15"
                               :inputMsgs="inputMsgsEx"
                               theme="dark"
                               gridId="demoEx"
@@ -125,6 +128,38 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">表格-优先级排列表</div>
+    <div class="describe">
+      表格-优先级排列表
+    </div>
+    <div class="showArea" style="height: 450px;">
+      <marvel-tab :tabItems="tabItems4">
+        <marvel-tab-item :isActive="tabItems4[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="height:300px; background-color: #fafafa;">
+              <button @click="getPriorityList">getPriorityList</button>
+              <marvel-grid-priority :list="list4Priority" theme=""
+                ></marvel-grid-priority>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems4[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="js">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -134,7 +169,8 @@
   import MarvelHight from "@/walle/component/highlight";
   import MarvelGrid from "@/walle/widget/grid/MarvelGrid";
   import MarvelGridEx from "@/walle/widget/grid/MarvelGridEx";
-  import MarvelGridM from "../../../../walle/widget/grid/MarvelGridM";
+  import MarvelGridM from "@/walle/widget/grid/MarvelGridM";
+  import MarvelGridPriority from "@/walle/widget/grid/MarvelGridPriority";
 
   export default {
     name: 'page4Grid',
@@ -143,7 +179,8 @@
       MarvelTabItem,
       MarvelTab,
       MarvelGrid,
-      MarvelGridEx
+      MarvelGridEx,
+      MarvelGridPriority
     },
     data: function () {
       return {
@@ -163,6 +200,13 @@
           isActive: false
         }],
         tabItems3: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems4: [{
           label: "Demo View",
           isActive: true
         }, {
@@ -197,39 +241,39 @@
           key: "checkBox",
           type: "checkBox", //或者为 "checkBox"
           visible: true,
-          width: "5%",
+          width: "40px",
         }, {
           label: "name",
           key: "name",
           type: "text",
           visible: true,
           orderBy: true,
-          width: "19%"
+          width: "100px"
         }, {
           label: "描述信息",
           key: "description",
           type: "input",
           visible: true,
           orderBy: true,
-          width: "19%"
+          width: "200px"
         }, {
           label: "操作",
           key: "operation",
           type: "icon",
           visible: true,
-          width: "19%"
+          width: "200px"
         }, {
           label: "链接",
           key: "link",
           type: "textIcon",
           visible: true,
-          width: "19%"
+          width: "200px"
         }, {
           label: "配置项",
           key: "config",
           type: "dropdown",
           visible: true,
-          width: "19%"
+          width: "200px"
         }],
         skipEx: 0,
         limitEx: 10,
@@ -239,6 +283,45 @@
         //#region gridM
         titles4GridM: ["故障设备", "告警ID"],
         rows4GridM: [],
+        //#endregion
+        //#region gridPriority
+        list4Priority:[
+          {
+            name:"aaa",
+            id:"aaa",
+            priority:1
+          },
+          {
+            name:"bbb",
+            id:"bbb",
+            priority:2
+          },
+          {
+            name:"ccc",
+            id:"ccc",
+            priority:3
+          },
+          {
+            name:"ddd",
+            id:"ddd",
+            priority:4
+          },
+          {
+            name:"eee",
+            id:"eee",
+            priority:5
+          },
+          {
+            name:"fff",
+            id:"fff",
+            priority:6
+          },
+          {
+            name:"ggg",
+            id:"ggg",
+            priority:7
+          }
+        ]
         //#endregion
         //#endregion
       }
@@ -451,7 +534,11 @@
       onTitleCheckOrUncheckEx: function (isChecked) {
         console.log("onTitleCheckOrUncheck" + isChecked);
       },
-      onRowCheckOrUnCheckEx: function (oRow) {
+      onRowCheckOrUnCheckEx: function (oRow, isChecked) {
+        let strId = this.$refs.gridEx.getCellValueByKey("id", oRow);
+        if(strId == 1){
+          this.$refs.gridEx.setRowColor(strId, true);
+        }
         console.log("onRowCheckOrUnCheck");
       },
       onRowRadioCheckEx: function (oRow) {
@@ -483,6 +570,15 @@
         let arrRows = this.$refs.gridEx.getRows();
         console.log(arrRows);
       },
+      getActiveRowsEx: function(){
+        let arrRow = this.$refs.gridEx.getActiveRows();
+        console.log(arrRow);
+      },
+      resetRowEx: function(){
+        let arrRow = this.$refs.gridEx.getRows();
+        arrRow.splice(arrRow.length-1);
+        this.rowsEx = arrRow;
+      },
       //endregion
 
       //endregion
@@ -492,6 +588,14 @@
       onClickMore: function (oRow) {
         console.log(oRow);
       },
+
+      //#endregion
+
+      //#region gridPriority
+
+      getPriorityList: function(){
+        console.log(this.list4Priority);
+      }
 
       //#endregion
 

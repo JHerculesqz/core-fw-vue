@@ -31,6 +31,7 @@
             <button v-on:click="setBestView">setBestView</button>
             <button v-on:click="hideOrShowNode">hideOrShowNode</button>
             <button v-on:click="hideOrShowLink">hideOrShowLink</button>
+            <button v-on:click="getSelectedData">getSelectedData</button>
             <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
@@ -474,8 +475,9 @@
         console.log("onLinkClick");
         console.log(oLink);
       },
-      onRightClick: function (oBuObj, iX, iY, oEvent) {
+      onRightClick: function (oData, iX, iY, oEvent) {
         console.log("onRightClick");
+        console.log(oData);
         console.log("x: " + iX + ",y: " + iY);
       },
       onGenerateLinkProp: function (oLink) {
@@ -592,6 +594,10 @@
           }
         });
         this.$refs.ref4Topo.updateTopo(oTopoData);
+      },
+      getSelectedData: function(){
+        var oData = this.$refs.ref4Topo.getSelectedData();
+        console.log(oData);
       },
       //endregion
       //#endregion

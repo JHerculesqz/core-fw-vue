@@ -19,6 +19,7 @@
               <!--2级DemoView start-->
               <button @click="getCheckNodes">getCheckNodes</button>
               <button @click="getCheckLeafNodes">getCheckLeafNodes</button>
+              <button @click="foldOrUnfoldNode">foldOrUnfoldNode</button>
               <div class="treeArea">
                 <marvel-z-tree ref="tree" theme="dark"
                                :treeData="treeData"
@@ -166,7 +167,10 @@
       getCheckLeafNodes: function () {
         var arrRes = this.$refs.tree.getCheckLeafNodes();
         console.log(arrRes);
-      }
+      },
+      foldOrUnfoldNode: function(){
+        this.treeData[0].bOpen = !this.treeData[0].bOpen;
+      },
       //#endregion
       //#region callback
 
