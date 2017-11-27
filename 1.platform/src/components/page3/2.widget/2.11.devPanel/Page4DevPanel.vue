@@ -18,7 +18,9 @@
             <!--2级DemoView start-->
             <div style="width: 100%;height: 500px;">
               <marvel-dev-panel ref="refDevPanel" id="idDevPanel"
-                                v-on:onClickBD="onClickBD"></marvel-dev-panel>
+                                v-on:afterInitPlugin="afterInitPlugin"
+                                v-on:onClickBD="onClickBD"
+                                v-on:onContextMenuClickBD="onContextMenuClickBD"></marvel-dev-panel>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -52,8 +54,9 @@
     components: {
       MarvelDevPanel,
       MarvelTabItem,
-      MarvelTab},
-    data: function() {
+      MarvelTab
+    },
+    data: function () {
       return {
         //#region document data
         tabItems1: [{
@@ -69,7 +72,7 @@
         //#endregion
       }
     },
-    mounted: function(){
+    mounted: function () {
       //#region custom
       var self = this;
 
@@ -78,15 +81,15 @@
 
       MarvelTimer.startTimer(function () {
         var oPlugin = self.$refs.refDevPanel.getPlugin("GK_1000");
-        if(oPlugin){
+        if (oPlugin) {
           var i = Math.random();
-          if(i < 0.3){
+          if (i < 0.3) {
             oPlugin.setLightColor("l1", "#FF0001");
           }
-          else if(i > 0.3 && i < 0.5){
+          else if (i > 0.3 && i < 0.5) {
             oPlugin.setLightColor("l1", "#008C01");
           }
-          else{
+          else {
             oPlugin.setLightColor("l1", "#FFD400");
           }
         }
@@ -103,8 +106,14 @@
     },
     methods: {
       //#region inner
+      afterInitPlugin: function () {
+        console.log("afterInitPlugin...");
+      },
       onClickBD: function (oBD) {
         console.log(oBD);
+      },
+      onContextMenuClickBD: function (oBD, iX, iY) {
+        console.log(oBD, iX, iY);
       },
       //#endregion
       //#region callback
@@ -119,65 +128,78 @@
 
 <style scoped>
   /*document fix style start*/
-  .widgetShowSession{
+  .widgetShowSession {
     padding: 20px 100px;
-    width:100%;
+    width: 100%;
     box-sizing: border-box;
   }
-  .title{
+
+  .title {
     color: #4d4d4d;
   }
-  .level1{
+
+  .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-  .level2{
+
+  .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-  .describe{
+
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-  .showArea{
-    width:100%;
-  }
-  .codeArea{
+
+  .showArea {
     width: 100%;
-    height:100%;
+  }
+
+  .codeArea {
+    width: 100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-  .codeArea pre,.codeArea code{
+
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-  .showAreaInner{
+
+  .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
-  .showArea{
-    height:640px;
+  .showArea {
+    height: 640px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 
