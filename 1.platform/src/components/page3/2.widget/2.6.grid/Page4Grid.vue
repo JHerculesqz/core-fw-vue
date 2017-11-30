@@ -76,7 +76,8 @@
                               v-on:onTitleCheckOrUncheck="onTitleCheckOrUncheckEx"
                               v-on:onRowCheckOrUnCheck="onRowCheckOrUnCheckEx"
                               v-on:onRowRadioCheck="onRowRadioCheckEx"
-                              v-on:onOptionChange="onOptionChangeEx"></marvel-grid-ex>
+                              v-on:onOptionChange="onOptionChangeEx"
+                              v-on:onClickMultiDropdownItem="onClickMultiDropdownItemEx"></marvel-grid-ex>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -141,7 +142,7 @@
             <div style="height:300px; background-color: #fafafa;">
               <button @click="getPriorityList">getPriorityList</button>
               <marvel-grid-priority :list="list4Priority" theme=""
-                ></marvel-grid-priority>
+              ></marvel-grid-priority>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -274,6 +275,12 @@
           type: "dropdown",
           visible: true,
           width: "200px"
+        }, {
+          label: "目标网元",
+          key: "node",
+          type: "multiDropdown",
+          visible: true,
+          width: "200px"
         }],
         skipEx: 0,
         limitEx: 10,
@@ -285,41 +292,41 @@
         rows4GridM: [],
         //#endregion
         //#region gridPriority
-        list4Priority:[
+        list4Priority: [
           {
-            name:"aaa",
-            id:"aaa",
-            priority:1
+            name: "aaa",
+            id: "aaa",
+            priority: 1
           },
           {
-            name:"bbb",
-            id:"bbb",
-            priority:2
+            name: "bbb",
+            id: "bbb",
+            priority: 2
           },
           {
-            name:"ccc",
-            id:"ccc",
-            priority:3
+            name: "ccc",
+            id: "ccc",
+            priority: 3
           },
           {
-            name:"ddd",
-            id:"ddd",
-            priority:4
+            name: "ddd",
+            id: "ddd",
+            priority: 4
           },
           {
-            name:"eee",
-            id:"eee",
-            priority:5
+            name: "eee",
+            id: "eee",
+            priority: 5
           },
           {
-            name:"fff",
-            id:"fff",
-            priority:6
+            name: "fff",
+            id: "fff",
+            priority: 6
           },
           {
-            name:"ggg",
-            id:"ggg",
-            priority:7
+            name: "ggg",
+            id: "ggg",
+            priority: 7
           }
         ]
         //#endregion
@@ -414,7 +421,7 @@
 
       //region gridEx
       this.rowsEx = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 1000; i++) {
         let oRow = [];
         //key:id用于标识这一列的唯一性，在界面上不会绘制出来
         oRow.push({
@@ -458,6 +465,20 @@
             selected: true
           }, {
             value: "C"
+          }],
+        });
+        oRow.push({
+          key: "node",
+          value: [{
+            value: "Node1",
+            selected: true,
+          }, {
+            value: "Node2",
+            selected: true
+          }, {
+            value: "Node3"
+          }, {
+            value: "Node4"
           }],
         });
         this.rowsEx.push(oRow);
@@ -536,7 +557,7 @@
       },
       onRowCheckOrUnCheckEx: function (oRow, isChecked) {
         let strId = this.$refs.gridEx.getCellValueByKey("id", oRow);
-        if(strId == 1){
+        if (strId == 1) {
           this.$refs.gridEx.setRowColor(strId, true);
         }
         console.log("onRowCheckOrUnCheck");
@@ -546,6 +567,9 @@
       },
       onOptionChangeEx: function (oRow, oCell, srtOldValue, strNewValue) {
         console.log("onOptionChangeEx");
+      },
+      onClickMultiDropdownItemEx: function(oRow, oCell, oItem){
+        console.log("onClickMultiDropdownItemEx");
       },
       //endregion
       //region test
@@ -570,13 +594,13 @@
         let arrRows = this.$refs.gridEx.getRows();
         console.log(arrRows);
       },
-      getActiveRowsEx: function(){
+      getActiveRowsEx: function () {
         let arrRow = this.$refs.gridEx.getActiveRows();
         console.log(arrRow);
       },
-      resetRowEx: function(){
+      resetRowEx: function () {
         let arrRow = this.$refs.gridEx.getRows();
-        arrRow.splice(arrRow.length-1);
+        arrRow.splice(arrRow.length - 1);
         this.rowsEx = arrRow;
       },
       //endregion
@@ -593,7 +617,7 @@
 
       //#region gridPriority
 
-      getPriorityList: function(){
+      getPriorityList: function () {
         console.log(this.list4Priority);
       }
 

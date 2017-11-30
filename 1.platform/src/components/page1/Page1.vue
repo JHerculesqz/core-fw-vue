@@ -66,6 +66,7 @@
   import Page4Prompt from '@/components/page3/2.widget/2.5.items/Page4Prompt'
   import Page4Toolbar from '@/components/page3/2.widget/2.5.items/Page4Toolbar'
   import Page4Warning from '@/components/page3/2.widget/2.5.items/Page4Warning'
+  import Page4Paging from '@/components/page3/2.widget/2.5.items/Page4Paging'
   //#endregion
   //#region 2.6.widget.grid
   import Page4Grid from '@/components/page3/2.widget/2.6.grid/Page4Grid'
@@ -136,6 +137,7 @@
       Page4Prompt,
       Page4Toolbar,
       Page4Warning,
+      Page4Paging,
       //#endregion
       //#region 2.6.widget.grid
       Page4Grid,
@@ -309,6 +311,9 @@
           }, {
             id: "Page4Warning",
             label: "告警板"
+          }, {
+            id: "Page4Paging",
+            label: "分页控件"
           }]
         }, {
           label: "控件(表格)",
