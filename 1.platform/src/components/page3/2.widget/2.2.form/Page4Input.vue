@@ -19,7 +19,8 @@
             <div style="width:200px;">
               <button v-on:click="onClick4Input1">获取</button>
               <marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..."
-                            :inputMsg="inputMsg" theme="dark" size="mini"></marvel-input>
+                            :inputMsg="inputMsg" theme="dark" size="mini"
+                            @onInput="onInput1"></marvel-input>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -27,7 +28,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
 &lt;marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..." :inputMsg = "inputMsg" theme="dark" size="mini"&gt;&lt;/marvel-input&gt;
                 </code>
@@ -59,7 +60,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
 &lt;marvel-input :status="status2" placeHolder="please..." errMsg="输入错误..."&gt;&lt;/marvel-input&gt;
                 </code>
@@ -91,7 +92,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+            <pre v-highlight>
                 <code class="html">
 &lt;marvel-input :status="status3" placeHolder="please..." errMsg="输入错误..."&gt;&lt;/marvel-input&gt;
                 </code>
@@ -116,7 +117,8 @@
             <div style="width:200px;">
               <button v-on:click="onClick4Input4">获取</button>
               <marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
-                                  :inputMsg="inputMsg2" theme="dark" size="mini">
+                                  :inputMsg="inputMsg2" theme="dark" size="mini"
+                                  @onInput="onInput2">
               </marvel-multi-input>
             </div>
             <!--2级DemoView end-->
@@ -224,6 +226,12 @@
       onClick4Input4: function () {
         console.log(this.$refs.ref1.getInputMsg());
       },
+      onInput1: function (strMsg) {
+        console.log(strMsg);
+      },
+      onInput2: function (strMsg) {
+        console.log(strMsg);
+      }
       //#endregion
       //#region callback
 
@@ -242,53 +250,64 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   .title {
     color: #4d4d4d;
   }
+
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
+
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
+
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
+
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
+
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
     width: 100%;
     height: 400px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 

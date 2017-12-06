@@ -17,7 +17,10 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="background-color: #f0f0f0;position: relative;height: 100%;">
+              <button v-on:click="expandBottom">expand</button>
+              <button v-on:click="foldBottom">fold</button>
               <marvel-bottom-ext-panel
+                ref="ref0"
                 theme="dark"
                 height="100"
                 show="false"
@@ -59,7 +62,10 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="background-color: #f0f0f0;position: relative;height: 100%;">
+              <button v-on:click="expandLeft" style="float: right">expand</button>
+              <button v-on:click="foldLeft" style="float: right">fold</button>
               <marvel-left-ext-panel
+                ref="ref1"
                 theme="dark"
                 width="100"
                 show="true"
@@ -101,7 +107,10 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="background-color: #f0f0f0;position: relative;height: 100%;">
+              <button v-on:click="expandRight">expand</button>
+              <button v-on:click="foldRight">fold</button>
               <marvel-right-ext-panel
+                ref="ref2"
                 theme="dark"
                 width="100"
                 show="true"
@@ -174,7 +183,7 @@
         }, {
           label: "Code View",
           isActive: false
-        }],
+        }]
         //#endregion
         //#region custom data
 
@@ -188,7 +197,24 @@
     },
     methods: {
       //#region inner
-
+      expandBottom:function(){
+        this.$refs.ref0.expand(true);
+      },
+      foldBottom:function(){
+        this.$refs.ref0.expand(false);
+      },
+      expandLeft:function(){
+        this.$refs.ref1.expand(true);
+      },
+      foldLeft:function(){
+        this.$refs.ref1.expand(false);
+      },
+      expandRight:function(){
+        this.$refs.ref2.expand(true);
+      },
+      foldRight:function(){
+        this.$refs.ref2.expand(false);
+      }
       //#endregion
       //#region callback
 

@@ -17,6 +17,8 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="height: 100%;">
+              <button v-on:click="disableItem">disableItem</button>
+              <button v-on:click="hideItem">hideItem</button>
               <marvel-toolbar v-bind:items="items" theme=""
                               v-on:onToolbarItemClick="onToolbarItemClick" v-on:onToolbarSubItemClick="onToolbarSubItemClick" >
                 <div slot="保存">保存自定义子菜单</div>
@@ -70,6 +72,8 @@
           id: 1,
           label: "拓扑还原",
           icon: "icon-drawer",
+          visible:true,
+          disable:false,
           subMenu:[{
             id:"a",
             label:"aaaaaaaaaaaaaaa",
@@ -83,14 +87,20 @@
           id: 2,
           label: "保存",
           icon: "icon-drawer",
+          visible:true,
+          disable:false,
           hasCustomSubPanel:true
         }, {
           id: 3,
           label: "重置",
+          visible:true,
+          disable:false,
           icon: "icon-drawer"
         }, {
           id: 4,
           label: "导出",
+          visible:true,
+          disable:false,
           icon: "icon-drawer",
           subMenu:[{
             id:"c",
@@ -104,10 +114,14 @@
         }, {
           id: 5,
           label: "布局对齐",
+          visible:true,
+          disable:false,
           icon: "icon-drawer"
         }, {
           id: 6,
           label: "显示设置",
+          visible:true,
+          disable:false,
           icon: "icon-drawer"
         }]
         //#endregion
@@ -120,6 +134,12 @@
       },
       onToolbarSubItemClick:function(oItem, oParent){
         console.log(oItem);
+      },
+      disableItem:function(){
+        this.items[2].disable = true;
+      },
+      hideItem:function(){
+        this.items[2].visible = false;
       }
       //#endregion
       //#region callback

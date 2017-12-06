@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "konva": "^1.6.8",
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "vue": "^2.3.3",
     "vue-dom-portal": "^0.1.6",

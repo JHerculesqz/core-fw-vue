@@ -70,6 +70,7 @@
                               theme="dark"
                               gridId="demoEx"
                               :editCellFinished="editCellFinishedEx"
+                              :canDrag="true"
                               v-on:onClickRow="onClickRowEx"
                               v-on:onIconClick="onIconClickEx"
                               v-on:onClickTextIcon="onClickTextIconEx"
@@ -87,7 +88,23 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="js">
-&lt;marvel-grid :titles="titles" :rows="rows"&gt;&lt;/marvel-grid&gt;
+&lt;marvel-grid-ex ref="gridEx"
+                :titles="titlesEx"
+                :rows="rowsEx"
+                :limit="15"
+                :inputMsgs="inputMsgsEx"
+                theme="dark"
+                gridId="demoEx"
+                :editCellFinished="editCellFinishedEx"
+                :canDrag="true"
+                v-on:onClickRow="onClickRowEx"
+                v-on:onIconClick="onIconClickEx"
+                v-on:onClickTextIcon="onClickTextIconEx"
+                v-on:onTitleCheckOrUncheck="onTitleCheckOrUncheckEx"
+                v-on:onRowCheckOrUnCheck="onRowCheckOrUnCheckEx"
+                v-on:onRowRadioCheck="onRowRadioCheckEx"
+                v-on:onOptionChange="onOptionChangeEx"
+                v-on:onClickMultiDropdownItem="onClickMultiDropdownItemEx"&gt;&lt;/marvel-grid-ex&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -141,7 +158,7 @@
             <!--2级DemoView start-->
             <div style="height:300px; background-color: #fafafa;">
               <button @click="getPriorityList">getPriorityList</button>
-              <marvel-grid-priority :list="list4Priority" theme=""
+              <marvel-grid-priority :list="list4Priority" theme="dark" title="priority"
               ></marvel-grid-priority>
             </div>
             <!--2级DemoView end-->
@@ -568,7 +585,7 @@
       onOptionChangeEx: function (oRow, oCell, srtOldValue, strNewValue) {
         console.log("onOptionChangeEx");
       },
-      onClickMultiDropdownItemEx: function(oRow, oCell, oItem){
+      onClickMultiDropdownItemEx: function (oRow, oCell, oItem) {
         console.log("onClickMultiDropdownItemEx");
       },
       //endregion
