@@ -14,6 +14,9 @@
             "GK_1000": {
                 plugin: new $.MarvelDevPanel_1()
             },
+            "Raycus_6000": {
+                plugin: new $.MarvelDevPanel_1()
+            },
             "SXL_1": {
                 plugin: new $.MarvelDevPanel_2()
             }

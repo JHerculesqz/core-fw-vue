@@ -51,6 +51,9 @@
           "GK_1000": {
             url: "static/devPanel/image/dev1.svg",
           },
+          "Raycus_6000": {
+            url: "static/devPanel/image/dev1.svg",
+          },
           "SXL_1": {
             url: "static/devPanel/image/dev2.svg",
           },

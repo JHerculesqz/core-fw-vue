@@ -84,13 +84,13 @@
         if (oPlugin) {
           var i = Math.random();
           if (i < 0.3) {
-            oPlugin.setLightColor("l1", "#FF0001");
+            oPlugin.setLightColor("l0Status", "#008c01");
           }
           else if (i > 0.3 && i < 0.5) {
-            oPlugin.setLightColor("l1", "#008C01");
+            oPlugin.setLightColor("l0Status", "#f5df28");
           }
           else {
-            oPlugin.setLightColor("l1", "#FFD400");
+            oPlugin.setLightColor("l0Status", "#808080");
           }
         }
       }, 1000);
