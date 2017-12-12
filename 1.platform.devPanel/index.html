@@ -9,6 +9,9 @@
 
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_1.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_2.js"></script>
+    <script type="application/javascript" src="js/plugins/MarvelDevPanel_3.js"></script>
+    <script type="application/javascript" src="js/plugins/MarvelDevPanel_4.js"></script>
+    <script type="application/javascript" src="js/plugins/MarvelDevPanel_5.js"></script>
     <script type="application/javascript" src="js/MarvelDevPanel.js"></script>
     <script>
         $(document).ready(function () {
@@ -28,10 +31,16 @@
                     },
                 },
                 "GK_1000": {
-                    url: "image/dev1.svg",
+                    url: "image/dev3.svg",
                 },
                 "Raycus_6000": {
-                    url: "image/dev1.svg",
+                    url: "image/dev3.svg",
+                },
+                "Raycus_12000": {
+                    url: "image/dev4.svg",
+                },
+                "Raycus_2000": {
+                    url: "image/dev5.svg",
                 },
                 "SXL_1": {
                     url: "image/dev2.svg",
@@ -40,11 +49,11 @@
             oMarvelDevPanel.init(oOptions);
 
             //2.initPlugin
-            oMarvelDevPanel.initPlugin("GK_1000");
+            oMarvelDevPanel.initPlugin("Raycus_2000");
 
             //3.setLightColor
             $("#id1").click(function () {
-                var oPlugin = oMarvelDevPanel.getPlugin("GK_1000");
+                var oPlugin = oMarvelDevPanel.getPlugin("Raycus_2000");
                 setInterval(function () {
                     oPlugin.setLightColor("l0Warn", Math.random() > 0.5 ? "#ff4c4c" : "#008c01");
                     oPlugin.setLightColor("l0Status", Math.random() > 0.5 ? "#008c01" : "#f5df28");
