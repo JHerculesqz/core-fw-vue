@@ -39,6 +39,41 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+
+
+    <!--2级 start-->
+    <div class="title level2">RackPanel</div>
+    <div class="describe">
+      机柜设计面板
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width: 100%;height: 500px;">
+              <button @click="onClickRemoveNode">removeNode</button>
+              <marvel-dev-panel-ex ref="ref4DevPanelEx" domId="rackPanel"
+                                 @callbackOnClick="callbackOnClick"
+                                 @callbackOnContextmenu="callbackOnContextmenu"></marvel-dev-panel-ex>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems1[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -47,12 +82,14 @@
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
   import MarvelDevPanel from "@/walle/widget/devPanel/MarvelDevPanel";
+  import MarvelDevPanelEx from "@/walle/widget/devPanelEx/MarvelDevPanelEx";
   import MarvelTimer from "@/walle/component/timer";
 
   export default {
     name: 'page4DevPanel',
     components: {
       MarvelDevPanel,
+      MarvelDevPanelEx,
       MarvelTabItem,
       MarvelTab
     },
@@ -60,6 +97,13 @@
       return {
         //#region document data
         tabItems1: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems2: [{
           label: "Demo View",
           isActive: true
         }, {
@@ -95,6 +139,15 @@
         }
       }, 1000);
 
+      //region devPanelEx
+      var options = {
+        buObjId: "jigui_1",
+        imgUrl: "static/devPanelEx/image/rack1.txt",
+        subBuObjIds: ["bd0", "bd1", "bd2", "bd3", "bd4"]
+      };
+      this.$refs.ref4DevPanelEx.init(options);
+      //endregion
+
       //#endregion
     },
     destroy: function () {
@@ -114,6 +167,24 @@
       },
       onContextMenuClickBD: function (oBD, iX, iY) {
         console.log(oBD, iX, iY);
+      },
+      callbackOnClick: function (strBuObjId, strSubBuObjId, evt) {
+        if (strSubBuObjId == "bd1") {
+          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, "static/devPanelEx/image/dev1.txt", function () {
+            console.log("add successfully");
+          });
+        }
+        else if (strSubBuObjId == "bd3") {
+          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, "static/devPanelEx/image/dev1.txt", function () {
+            console.log("add successfully");
+          });
+        }
+      },
+      callbackOnContextmenu: function (strBuObjId, strSubBuObjId, evt) {
+        console.log(strSubBuObjId);
+      },
+      onClickRemoveNode: function () {
+        this.$refs.ref4DevPanelEx.removeNode("bd1");
       },
       //#endregion
       //#region callback

@@ -10,4 +10,7 @@ xcopy %~dp0..\1.platform.topo %~dp0..\1.platform\static\topo\ /s /y
 echo STEP3.xcopy 1.platform.devPanel
 xcopy %~dp0..\1.platform.devPanel %~dp0..\1.platform\static\devPanel\ /s /y
 
+echo STEP3.xcopy 1.platform.devPanelEx
+xcopy %~dp0..\1.platform.devPanelEx %~dp0..\1.platform\static\devPanelEx\ /s /y
+
 pause>null
