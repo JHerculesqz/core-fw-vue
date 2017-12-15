@@ -70,6 +70,7 @@
                               gridId="demoEx"
                               :editCellFinished="editCellFinishedEx"
                               :canDrag="true"
+                              :hasFoot="true"
                               v-on:onClickRow="onClickRowEx"
                               v-on:onIconClick="onIconClickEx"
                               v-on:onClickTextIcon="onClickTextIconEx"

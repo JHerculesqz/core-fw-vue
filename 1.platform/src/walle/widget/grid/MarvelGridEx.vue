@@ -25,7 +25,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
 -->
 <template>
   <div class="gridWrapper">
-    <div class="grid" :class="{ empty: 0 == rows.length }">
+    <div class="grid" :class="contentClass" :style="contentStyle">
       <table class="gridCont" cellspacing="0" cellpadding="0" border="0">
         <thead :style="{left: offSetX}">
         <tr>
@@ -142,7 +142,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
         </tbody>
       </table>
     </div>
-    <div class="footArea">
+    <div v-if="hasFoot" class="footArea">
       <div class="foot">
         <marvel-paging ref="ref4Paging" :totalNum="rows.length" :pages="totalPageCount"
                        @onPageChange="onPageChange"></marvel-paging>
@@ -177,6 +177,10 @@ multiDropdown：下拉框多选，支持度不好，待优化
       canDrag: {
         type: Boolean,
         default: false
+      },
+      hasFoot: {
+        type: Boolean,
+        default: true
       }
     },
     data: function () {
@@ -207,7 +211,8 @@ multiDropdown：下拉框多选，支持度不好，待优化
       document.body.addEventListener("click", this._closeMultipleDropDownPanel);
       //绑定拖动事件
       if (this.canDrag) {
-        document.body.addEventListener("mousemove", this.onResizeMouseMove);
+        let oWrapperFun = _.throttle(this.onResizeMouseMove, 100);
+        document.body.addEventListener("mousemove", oWrapperFun);
         document.body.addEventListener("mouseup", this.onResizeMouseUp);
       }
     },
@@ -223,6 +228,18 @@ multiDropdown：下拉框多选，支持度不好，待优化
       },
       titleCheckboxChecked() {
         return this.selectRowIds.length > 0;
+      },
+      contentClass() {
+        let oClass = [];
+        if (this.rows.length === 0) {
+          oClass.push("empty");
+        }
+        return oClass;
+      },
+      contentStyle() {
+        if (!this.hasFoot) {
+          return {height: "100%"};
+        }
       }
     },
     methods: {
@@ -359,7 +376,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
           console.log("Need to resize column, the title.width can not be percentages");
         }
       },
-      onResizeMouseMove: _.throttle(function (oEvent) {
+      onResizeMouseMove(oEvent) {
         if (this.bMousedown && this.resizeTitle) {
           let iDstClientX = oEvent.clientX;
           let iWidth = Number.parseFloat(this.resizeTitle.width);
@@ -368,7 +385,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
           this.resizeTitle.width = iTargetWidth + "px";
           this.iClientX = iDstClientX;
         }
-      }, 50),
+      },
       onResizeMouseUp(oEvent) {
         this.bMousedown = false;
         this.resizeTitle = undefined;
@@ -548,7 +565,9 @@ multiDropdown：下拉框多选，支持度不好，待优化
       //endregion
       //region page
       _resetCurPage() {
-        this.$refs.ref4Paging.resetCurPageIndex();
+        if (this.hasFoot) {
+          this.$refs.ref4Paging.resetCurPageIndex();
+        }
       },
       onPageChange(iPage) {
         this.curPageIndex = iPage;
@@ -575,7 +594,8 @@ multiDropdown：下拉框多选，支持度不好，待优化
         if (index > -1) {
           this.activeIds.splice(index, 1);
         }
-      },
+      }
+      ,
       getSelectRows4Checkbox() {
         let arrSelectRows = this.rows.filter((oRow) => {
           let oCell = this._getCell("checkBox", oRow);
@@ -860,7 +880,6 @@ multiDropdown：下拉框多选，支持度不好，待优化
     color: #fff !important;
   }
 
-
   /*.gridWrapper .grid tr td .customerSelectOption:hover {*/
   /*color: #3399ff;*/
   /*background-color: #f5f6f7;*/
@@ -935,7 +954,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
   }
 
   /*region dark theme*/
-  .dark .gridWrapper{
+  .dark .gridWrapper {
     background-color: #161C36;
   }
 

@@ -32,6 +32,7 @@
             <button v-on:click="hideOrShowNode">hideOrShowNode</button>
             <button v-on:click="hideOrShowLink">hideOrShowLink</button>
             <button v-on:click="getSelectedData">getSelectedData</button>
+            <button v-on:click="createLink">createLink</button>
             <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
@@ -91,7 +92,8 @@
         }],
         //#endregion
         //#region custom data
-        createNodeId: "crateNodeId1"
+        createNodeId: "crateNodeId1",
+        createLinkId: "createLinkId1"
         //#endregion
       }
     },
@@ -598,6 +600,29 @@
       getSelectedData: function(){
         var oData = this.$refs.ref4Topo.getSelectedData();
         console.log(oData);
+      },
+      createLink: function(){
+        var self = this;
+        this.$refs.ref4Topo.createLink(function(bSuccessful, oSrcNode, oDstNode){
+          if(bSuccessful){
+            var oTopoData = self.$refs.ref4Topo.getTopoData();
+            var oLink = {
+              id: self.createLinkId,
+              srcNodeId: oSrcNode.id,
+              dstNodeId: oDstNode.id,
+              uiLabelL: "nodeBase0",
+              uiLabelM: self.createLinkId,
+              uiLabelR: "nodeBase1",
+              uiLink: true,
+              uiLinkColorKey: "linkType_lu_2",
+              uiLinkWidth: 3
+            };
+            oTopoData.links.push(oLink);
+            self.$refs.ref4Topo.updateTopo(oTopoData);
+
+            self.createLinkId += 1;
+          }
+        });
       },
       //endregion
       //#endregion
