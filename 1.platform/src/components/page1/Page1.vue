@@ -455,4 +455,8 @@
   .page1 .fold{
     width: calc(100% - 76px);
   }
+
+  .dark .rightArea{
+    background-color: #04051b;
+  }
 </style>
