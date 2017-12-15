@@ -4,7 +4,6 @@
 titles：表格的表头
 rows：表格列
 limit：每页显示的行数
-theme: 主题
 gridId: 表格控件实例的唯一标识
 activeColor：行的激活颜色，默认值#395297
 editCellFinished: 可编辑单元格编辑完成后的回调
@@ -25,7 +24,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
 规则：canDrag=true的情况下，列的宽度必须是"200px"的形式不能是百分比的形式
 -->
 <template>
-  <div class="gridWrapper" :class="[theme]">
+  <div class="gridWrapper">
     <div class="grid" :class="{ empty: 0 == rows.length }">
       <table class="gridCont" cellspacing="0" cellpadding="0" border="0">
         <thead :style="{left: offSetX}">
@@ -168,7 +167,6 @@ multiDropdown：下拉框多选，支持度不好，待优化
         type: Number,
         default: 5
       },
-      theme: String,
       gridId: [String, Number],
       activeColor: {
         type: String,
@@ -862,26 +860,6 @@ multiDropdown：下拉框多选，支持度不好，待优化
     color: #fff !important;
   }
 
-  .dark .options {
-    border: 1px solid #3399FF;
-    box-shadow: 0px 3px 6px rgba(255, 255, 255, 0.25);
-    background-color: #1e1f36;
-  }
-
-  .dark .options .optionItem {
-    background-color: #1e1f36;
-    color: #ffffff;
-  }
-
-  .dark .options .optionItem:hover {
-    background-color: #66b3ff;
-    color: #fff;
-  }
-
-  .dark .options .mouseDown {
-    background-color: #3399ff !important;
-    color: #fff !important;
-  }
 
   /*.gridWrapper .grid tr td .customerSelectOption:hover {*/
   /*color: #3399ff;*/
@@ -956,7 +934,8 @@ multiDropdown：下拉框多选，支持度不好，待优化
     font-size: 12px;
   }
 
-  .dark {
+  /*region dark theme*/
+  .dark .gridWrapper{
     background-color: #161C36;
   }
 
@@ -1031,6 +1010,27 @@ multiDropdown：下拉框多选，支持度不好，待优化
     background-color: #1d3b60;
   }
 
+  .dark .options {
+    border: 1px solid #3399FF;
+    box-shadow: 0px 3px 6px rgba(255, 255, 255, 0.25);
+    background-color: #1e1f36;
+  }
+
+  .dark .options .optionItem {
+    background-color: #1e1f36;
+    color: #ffffff;
+  }
+
+  .dark .options .optionItem:hover {
+    background-color: #66b3ff;
+    color: #fff;
+  }
+
+  .dark .options .mouseDown {
+    background-color: #3399ff !important;
+    color: #fff !important;
+  }
+
   .dark .grid tr td .customerSelect {
     border: 1px solid #8b90b3;
     color: #ffffff;
@@ -1088,6 +1088,8 @@ multiDropdown：下拉框多选，支持度不好，待优化
   .dark .footArea .foot .text {
     color: #ffffff;
   }
+
+  /*endregion*/
 
   /*sl start*/
   /*check start*/

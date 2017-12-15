@@ -20,6 +20,9 @@
           <a class="icon-twitter" style="font-size: 20px;"
              href="https://github.com/JHerculesqz/demo-js-vue" target="_blank"></a>
         </li>
+        <li>
+          <a class="icon-droplet" style="font-size: 20px;" v-on:click="themeChange"></a>
+        </li>
       </ul>
     </div>
     <div class="content">
@@ -34,6 +37,8 @@
 </template>
 
 <script>
+  import SkinUtilsEx from "@/walle/component/skin";
+
   export default {
     name: 'app',
     data: function() {
@@ -43,6 +48,16 @@
         //#endregion
       }
     },
+    methods:{
+      themeChange:function(){
+        var bIsDark = document.body.className == "dark";
+        if(bIsDark){
+          SkinUtilsEx.themeChange("");
+        }else{
+          SkinUtilsEx.themeChange("dark");
+        }
+      }
+    }
   }
 </script>
 
