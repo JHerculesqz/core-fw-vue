@@ -146,7 +146,7 @@
         <marvel-tab :tabItems="tabItems4">
           <marvel-tab-item :isActive="tabItems4[0].isActive">
             <div class="showAreaInner">
-              <marvel-icon-button classCustom="classCustom1" label="normal" theme="dark"
+              <marvel-icon-button classCustom="classCustom1" label="normal"
                                   icon="icon-home3"
                                   v-on:onClick="onClick"></marvel-icon-button>
               <marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown"
@@ -218,7 +218,7 @@
           <marvel-tab-item :isActive="tabItems6[0].isActive">
             <div class="showAreaInner">
               <button v-on:click="onDropDownClick">getCheckItem</button>
-              <marvel-drop-down-button ref="ref14" disable="" theme="dark" width="100%"
+              <marvel-drop-down-button ref="ref14" disable="" width="100%"
                                        maxHeight="30px"
                                        v-on:onOptionSelect="onOptionSelect"></marvel-drop-down-button>
             </div>
@@ -464,4 +464,15 @@
     margin-right: 20px;
   }
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

@@ -17,7 +17,7 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <button v-on:click="onClickDialogShow">show</button>
-            <marvel-dialog theme="dark" :showDialog="showDialog"
+            <marvel-dialog :showDialog="showDialog"
                            title="上传" width="500" height="300"
                            v-on:onClickDialogClose="onClickDialogClose">
               <div slot="dialogCont">111111</div>
@@ -34,7 +34,7 @@
             <pre v-highlight>
                 <code class="html">
                   &lt;button v-on:click="onClickDialogShow"&gt;show&lt;/button&gt;
-                  &lt;marvel-dialog theme="dark" :showDialog="showDialog"
+                  &lt;marvel-dialog :showDialog="showDialog"
                   title="上传" width="500" height="300"
                   v-on:onClickDialogClose="onClickDialogClose"&gt;
                   &lt;div slot="dialogCont"&gt;111111&lt;/div&gt;
@@ -63,7 +63,6 @@
             <button v-on:click="onClickConfirmShow">show</button>
             <marvel-confirm :showConfirm="showConfirm"
                             confirmCont="这是一个提示确认框"
-                            theme="dark"
                             tipType="tip"
                             v-on:onClickOK="onClickConfirmOK"
                             v-on:onClickCancel="onClickConfirmCancel"></marvel-confirm>
@@ -79,7 +78,6 @@
                   &lt;marvel-confirm :showConfirm="showConfirm"
                                   v-on:onClickConfirmClose="onClickConfirmClose"
                                   confirmCont="这是一个提示确认框"
-                                  theme="dark"
                                   tipType="tip"
                   &gt;&lt;/marvel-confirm&gt;
                 </code>
@@ -236,4 +234,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

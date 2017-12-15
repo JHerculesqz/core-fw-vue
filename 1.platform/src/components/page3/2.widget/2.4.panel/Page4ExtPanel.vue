@@ -21,7 +21,6 @@
               <button v-on:click="foldBottom">fold</button>
               <marvel-bottom-ext-panel
                 ref="ref0"
-                theme="dark"
                 height="100"
                 show="false"
                 canDrag="true">
@@ -37,7 +36,6 @@
             <pre v-highlight>
                 <code class="html">
 &lt;marvel-bottom-ext-panel
-  theme="dark"
   height="100"
   show="true"
   canDrag="true"&gt;
@@ -66,7 +64,6 @@
               <button v-on:click="foldLeft" style="float: right">fold</button>
               <marvel-left-ext-panel
                 ref="ref1"
-                theme="dark"
                 width="100"
                 show="true"
                 canDrag="true">
@@ -82,7 +79,6 @@
             <pre v-highlight>
                 <code class="html">
 &lt;marvel-left-ext-panel
-  theme="dark"
   width="100"
   show="true"
   canDrag="true"&gt;
@@ -111,7 +107,6 @@
               <button v-on:click="foldRight">fold</button>
               <marvel-right-ext-panel
                 ref="ref2"
-                theme="dark"
                 width="100"
                 show="true"
                 canDrag="true">
@@ -127,7 +122,6 @@
             <pre v-highlight>
                 <code class="html">
                   &lt;marvel-right-ext-panel
-                    theme="dark"
                     width="100"
                     show="true"
                     canDrag="true"&gt;
@@ -285,4 +279,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

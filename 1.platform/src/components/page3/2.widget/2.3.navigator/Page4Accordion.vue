@@ -53,9 +53,8 @@
         <marvel-tab-item :isActive="tabItems2[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="width: 120px;height:100%; background-color: rgb(26, 25, 39);">
+            <div style="width: 120px;height:100%;">
               <marvel-accordion2 v-bind:items="items2"
-                                 theme="dark"
               v-on:onClickItem="onClickItem"
               v-on:onClickSubItem="onClickSubItem"></marvel-accordion2>
             </div>
@@ -87,7 +86,7 @@
         <marvel-tab-item :isActive="tabItems3[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="width: 200px;height:100%; background-color: rgb(26, 25, 39);">
+            <div style="width: 200px;height:100%;">
               <marvel-accordion3 :items="items3" title="fuck"
                                  v-on:onClickItem="onClickItem"></marvel-accordion3>
             </div>
@@ -273,4 +272,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

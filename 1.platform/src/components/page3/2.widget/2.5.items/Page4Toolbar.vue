@@ -19,7 +19,7 @@
             <div style="height: 100%;">
               <button v-on:click="disableItem">disableItem</button>
               <button v-on:click="hideItem">hideItem</button>
-              <marvel-toolbar v-bind:items="items" theme=""
+              <marvel-toolbar v-bind:items="items"
                               v-on:onToolbarItemClick="onToolbarItemClick" v-on:onToolbarSubItemClick="onToolbarSubItemClick" >
                 <div slot="保存">保存自定义子菜单</div>
               </marvel-toolbar>
@@ -210,4 +210,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

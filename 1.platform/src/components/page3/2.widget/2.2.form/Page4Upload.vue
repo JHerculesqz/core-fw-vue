@@ -19,7 +19,7 @@
             <div style="width:200px;">
               <button v-on:click="onTestBtnClick">Test</button>
               <button v-on:click="onClearBtnClick">Clear</button>
-              <marvel-upload ref="ref0" theme="dark" placeHolder="请选择文件"></marvel-upload>
+              <marvel-upload ref="ref0" placeHolder="请选择文件"></marvel-upload>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -29,7 +29,7 @@
             <!--2级CodeView start-->
               <pre v-highlight>
                 <code class="html">
-&lt;marvel-upload ref="ref0" theme="dark" placeHolder="请选择文件"&gt;&lt;/marvel-upload&gt;
+&lt;marvel-upload ref="ref0" placeHolder="请选择文件"&gt;&lt;/marvel-upload&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -154,4 +154,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

@@ -17,7 +17,7 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <button v-on:click="onClick">update Data</button>
-            <marvel-warning :items="items" :theme="theme"></marvel-warning>
+            <marvel-warning :items="items"></marvel-warning>
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
@@ -27,7 +27,7 @@
             <pre v-highlight>
                 <code class="html">
 &lt;button v-on:click="onClick"&gt;update Data&lt;/button&gt;
-&lt;marvel-warning :items="items" :theme="theme"&gt;&lt;/marvel-warning&gt;
+&lt;marvel-warning :items="items"&gt;&lt;/marvel-warning&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -73,8 +73,7 @@
         }, {
           label: "告警:30",
           level: "level4"
-        }],
-        theme: ""
+        }]
         //#endregion
       }
     },
@@ -160,4 +159,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

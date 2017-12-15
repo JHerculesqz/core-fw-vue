@@ -19,7 +19,7 @@
             <div style="width:200px;">
               <button v-on:click="onClick4Input1">获取</button>
               <marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..."
-                            :inputMsg="inputMsg" theme="dark" size="mini"
+                            :inputMsg="inputMsg" size="mini"
                             @onInput="onInput1"></marvel-input>
             </div>
             <!--2级DemoView end-->
@@ -30,7 +30,7 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-&lt;marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..." :inputMsg = "inputMsg" theme="dark" size="mini"&gt;&lt;/marvel-input&gt;
+&lt;marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..." :inputMsg = "inputMsg" size="mini"&gt;&lt;/marvel-input&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -117,7 +117,7 @@
             <div style="width:200px;">
               <button v-on:click="onClick4Input4">获取</button>
               <marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
-                                  :inputMsg="inputMsg2" theme="dark" size="mini"
+                                  :inputMsg="inputMsg2" size="mini"
                                   @onInput="onInput2">
               </marvel-multi-input>
             </div>
@@ -130,7 +130,7 @@
             <pre v-highlight>
                 <code class="html">
 &lt;marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
-                    :inputMsg="inputMsg2" theme="dark" size="mini"&gt;
+                    :inputMsg="inputMsg2" size="mini"&gt;
 &lt;/marvel-multi-input&gt;
                 </code>
               </pre>
@@ -312,4 +312,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

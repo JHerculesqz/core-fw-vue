@@ -21,7 +21,7 @@
               <button @click="getCheckLeafNodes">getCheckLeafNodes</button>
               <button @click="foldOrUnfoldNode">foldOrUnfoldNode</button>
               <div class="treeArea">
-                <marvel-z-tree ref="tree" theme="dark"
+                <marvel-z-tree ref="tree"
                                :treeData="treeData"
                                :options="options"
                                @onCheckboxClick="onCheckboxClick"
@@ -257,7 +257,6 @@
     height: 500px;
   }
   .treeArea{
-    background-color: #000000;
     height: calc(100% - 25px);
   }
   /*document custom style end*/

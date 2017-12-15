@@ -48,11 +48,10 @@
         <marvel-tab-item :isActive="tabItems2[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="background-color: #000000">
+            <div>
               <button v-on:click="setWarn">setWarn</button>
               <button v-on:click="setNotWarn">setNotWarn</button>
               <marvel-wizard-tab ref="ref4WizardTabs"
-                                 theme="dark"
                                  :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
             </div>
             <!--2级DemoView end-->
@@ -63,7 +62,7 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-wizard-tab theme="dark"
+                  &lt;marvel-wizard-tab
                                      :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"&gt;&lt;/marvel-wizard-tab&gt;
                 </code>
               </pre>
@@ -241,4 +240,15 @@
   /*document custom style end*/
   /*custom style start*/
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

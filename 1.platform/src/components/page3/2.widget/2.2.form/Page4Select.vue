@@ -18,14 +18,14 @@
             <!--2级DemoView start-->
             <button v-on:click="onClick4Radio">getStatus</button>
             <br>
-            <marvel-radio-box ref="ref0" id="id1" group="group1" theme="dark"
+            <marvel-radio-box ref="ref0" id="id1" group="group1"
                               label="x1" showLabel="false"></marvel-radio-box>
-            <marvel-radio-box ref="ref1" id="id2" group="group1" theme="dark"
+            <marvel-radio-box ref="ref1" id="id2" group="group1"
                               label="x2" showLabel="true" v-on:onChange="onChange4Radio"></marvel-radio-box>
             <br>
-            <marvel-radio-box ref="ref2" id="id3" group="group2" theme="dark"
+            <marvel-radio-box ref="ref2" id="id3" group="group2"
                               label="x3" showLabel="true"></marvel-radio-box>
-            <marvel-radio-box ref="ref3" id="id4" group="group2" theme="dark"
+            <marvel-radio-box ref="ref3" id="id4" group="group2"
                               label="x4" showLabel="true"></marvel-radio-box>
             <!--2级DemoView end-->
           </div>
@@ -109,17 +109,17 @@
             <!--2级DemoView start-->
             <button v-on:click="onClick4Check">getStatus</button>
             <br>
-            <marvel-check-box ref="ref8" id="id9" theme="dark"
+            <marvel-check-box ref="ref8" id="id9"
                               label="x1" showLabel="false"></marvel-check-box>
-            <marvel-check-box ref="ref9" id="id10" theme="dark"
+            <marvel-check-box ref="ref9" id="id10"
                               label="x2" showLabel="true"
                               buObj="buObj..."
                               v-bind:check="true"
                               v-on:onChange="onChange4Check"></marvel-check-box>
             <br>
-            <marvel-check-box ref="ref10" id="id11" theme="dark"
+            <marvel-check-box ref="ref10" id="id11"
                               label="x3" showLabel="true"></marvel-check-box>
-            <marvel-check-box ref="ref11" id="id12" theme="dark"
+            <marvel-check-box ref="ref11" id="id12"
                               label="x4" showLabel="true"></marvel-check-box>
             <!--2级DemoView end-->
           </div>
@@ -361,4 +361,15 @@
   /*document custom style end*/
   /*custom style start*/
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

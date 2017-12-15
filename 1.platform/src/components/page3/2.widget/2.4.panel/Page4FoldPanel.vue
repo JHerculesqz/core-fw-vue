@@ -16,15 +16,15 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <marvel-fold-panel theme="dark"
+            <marvel-fold-panel
                    :item="foldPanel[0]" class="customClass" v-on:onTitleClick="onTitleClick">
               <slot>aa</slot>
             </marvel-fold-panel>
-            <marvel-fold-panel theme="dark"
+            <marvel-fold-panel
                    :item="foldPanel[1]" class="customClass" v-on:onTitleClick="onTitleClick">
               <slot>bb</slot>
             </marvel-fold-panel>
-            <marvel-fold-panel theme="dark"
+            <marvel-fold-panel
                    :item="foldPanel[2]" class="customClass" v-on:onTitleClick="onTitleClick">
               <slot>cc</slot>
             </marvel-fold-panel>
@@ -37,7 +37,7 @@
             <pre v-highlight>
                 <code class="html">
                   &lt;button v-on:click="onClickDialogShow"&gt;show&lt;/button&gt;
-                  &lt;marvel-dialog theme="dark" :showDialog="showDialog"
+                  &lt;marvel-dialog :showDialog="showDialog"
                   title="上传" width="500" height="300"
                   v-on:onClickDialogClose="onClickDialogClose"&gt;
                   &lt;div slot="dialogCont"&gt;111111&lt;/div&gt;
@@ -189,4 +189,15 @@
     margin-bottom: 0;
   }
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

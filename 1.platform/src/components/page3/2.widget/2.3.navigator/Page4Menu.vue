@@ -17,7 +17,6 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <marvel-menu :items="items"
-                         theme="dark"
                          v-on:menuItemClick="menuItemClick"
                          v-on:subMenuItemClick="subMenuItemClick"></marvel-menu>
             <!--2级DemoView end-->
@@ -275,4 +274,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>

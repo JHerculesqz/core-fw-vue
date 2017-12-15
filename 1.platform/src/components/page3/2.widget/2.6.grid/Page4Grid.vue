@@ -17,7 +17,7 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="width:500px;height:300px;">
-              <marvel-grid :titles="titles" :rows="rows" :inputMsgs="inputMsgs" theme="dark" gridId="demo"
+              <marvel-grid :titles="titles" :rows="rows" :inputMsgs="inputMsgs" gridId="demo"
                            v-on:onClickRow="onClickRow"
                            v-on:onIconClick="onIconClick"
                            v-on:onTitleCheckOrUncheck="onTitleCheckOrUncheck"
@@ -67,7 +67,6 @@
                               :rows="rowsEx"
                               :limit="15"
                               :inputMsgs="inputMsgsEx"
-                              theme="dark"
                               gridId="demoEx"
                               :editCellFinished="editCellFinishedEx"
                               :canDrag="true"
@@ -93,7 +92,6 @@
                 :rows="rowsEx"
                 :limit="15"
                 :inputMsgs="inputMsgsEx"
-                theme="dark"
                 gridId="demoEx"
                 :editCellFinished="editCellFinishedEx"
                 :canDrag="true"
@@ -158,7 +156,7 @@
             <!--2级DemoView start-->
             <div style="height:300px; background-color: #fafafa;">
               <button @click="getPriorityList">getPriorityList</button>
-              <marvel-grid-priority :list="list4Priority" theme="dark" title="priority"
+              <marvel-grid-priority :list="list4Priority" title="priority"
               ></marvel-grid-priority>
             </div>
             <!--2级DemoView end-->
@@ -720,4 +718,15 @@
   /*custom style start*/
 
   /*custom style end*/
+
+  /*region dark theme*/
+
+  .dark .title {
+    color: #ffffff;
+  }
+  .dark .describe {
+    color: #8b90b3;
+  }
+
+  /*endregion*/
 </style>
