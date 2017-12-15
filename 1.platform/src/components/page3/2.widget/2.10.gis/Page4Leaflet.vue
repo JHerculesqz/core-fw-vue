@@ -34,6 +34,7 @@
             <button v-on:click="oTest4Polygon">test4Polygon(addPolygon)</button>
             <button v-on:click="oTest4Polygon2">test4Polygon(delPolygon)</button>
             <button v-on:click="oTest4Topo">test4Topo</button>
+            <button v-on:click="oTest4CreateMarker">test4CreateMarker</button>
             <div style="width: 100%;height: 500px;">
               <marvel-leaflet ref="ref0" id="gisMapId1"
                               v-on:onZoom="onZoom"
@@ -74,9 +75,11 @@
 
   export default {
     name: 'page4Leaflet',
-    components: {MarvelTabItem,
-      MarvelTab,MarvelLeaflet},
-    data: function() {
+    components: {
+      MarvelTabItem,
+      MarvelTab, MarvelLeaflet
+    },
+    data: function () {
       return {
         //#region document data
         tabItems1: [{
@@ -89,10 +92,11 @@
         //#endregion
         //#region custom data
         show: true,
+        createMarkerId: "createMarkerId"
         //#endregion
       }
     },
-    mounted: function(){
+    mounted: function () {
       //#region custom
 
       //init
@@ -113,7 +117,7 @@
       onZoom: function (e) {
         console.log(e);
       },
-      onClick: function(oPoint){
+      onClick: function (oPoint) {
         console.log(oPoint);
       },
       onContextMenu: function (e) {
@@ -125,7 +129,7 @@
       onNodeDrag: function (e) {
         console.log(e);
       },
-      onNodeClick: function(e){
+      onNodeClick: function (e) {
         console.log(e);
       },
       onNodeGroupClick: function (e) {
@@ -191,7 +195,7 @@
           uiColor: "red",
           uiFillColor: "#f03",
           uiFillOpacity: 0.5,
-          children:[{
+          children: [{
             id: "site1_ne1",
             x: 51.49992987708078,
             y: -0.10618329048156738,
@@ -230,7 +234,7 @@
           uiColor: "red",
           uiFillColor: "#f03",
           uiFillOpacity: 0.5,
-          children:[{
+          children: [{
             id: "site2_ne1",
             x: 51.49892987708078,
             y: -0.10618329048156738,
@@ -352,7 +356,7 @@
           uiDraggable: true,
           uiOpacity: 1
         });
-        this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30,{
+        this.$refs.ref0.addCircle("circle1", 51.5, -0.06, 30, {
           id: "circle1",
           x: 51.5,
           y: -0.08,
@@ -409,10 +413,10 @@
           self.$refs.ref0.setHide4Marker("marker2", false);
         }, 2000);
       },
-      oTest4AttachedIcon: function(){
+      oTest4AttachedIcon: function () {
         var self = this;
         this.$refs.ref0.addAttachedIcon4Marker("marker1", "/static/gis/lib/images/location-01.svg");
-        setTimeout(function(){
+        setTimeout(function () {
           self.$refs.ref0.delAttachedIcon4Marker("marker1");
         }, 2000);
       },
@@ -425,22 +429,22 @@
       oTest4Group2: function (e) {
         this.$refs.ref0.collapseAllGroup("site");
       },
-      oTest4Group3: function(e){
+      oTest4Group3: function (e) {
         this.$refs.ref0.delGroup("site1");
       },
-      oTest4Group4: function(){
+      oTest4Group4: function () {
         this.$refs.ref0.setOpacity4Group("site2", 0.5);
       },
       oTest4Line: function (e) {
         this.$refs.ref0.delPolyline("link1");
       },
-      oTest4Line2: function(e){
+      oTest4Line2: function (e) {
         this.$refs.ref0.setOpacity4Link("link1", 0.5);
       },
-      oTest4Line3: function(e){
+      oTest4Line3: function (e) {
         this.$refs.ref0.setColor4Link("link1", "green");
       },
-      oTest4Polygon: function(e){
+      oTest4Polygon: function (e) {
         this.$refs.ref0.addPolygon("polygon2", [
           [51.50286581276557, -0.10449886322021486],
           [51.49931274551157, -0.10814666748046876],
@@ -463,14 +467,32 @@
           uiTips: "polygon2"
         });
       },
-      oTest4Polygon2: function(e){
+      oTest4Polygon2: function (e) {
         this.$refs.ref0.delPolygon("polygon2");
       },
-      oTest4Topo: function(){
+      oTest4Topo: function () {
         var oTopoData = this.$refs.ref0.getTopoData();
         console.log("TopoCache is ");
         console.log(oTopoData);
-      }
+      },
+      oTest4CreateMarker: function () {
+        this.$refs.ref0.createMarker({
+          id: this.createMarkerId,
+          x: 0,
+          y: 0,
+          uiType: "ne",
+          uiImgUrl: "/static/gis/lib/images/node1.svg",
+          uiImgWidth: 32,
+          uiLabel: this.createMarkerId,
+          uiTips: "<b>marker3</b><br>22",
+          uiDraggable: true,
+          uiOpacity: 1
+        }, function (bSuccessful, oBuObj) {
+          console.log("createMarker: " + bSuccessful);
+        });
+
+        this.createMarkerId += 1;
+      },
       //#endregion
       //#region callback
 
@@ -484,65 +506,78 @@
 
 <style scoped>
   /*document fix style start*/
-  .widgetShowSession{
+  .widgetShowSession {
     padding: 20px 100px;
-    width:100%;
+    width: 100%;
     box-sizing: border-box;
   }
-  .title{
+
+  .title {
     color: #4d4d4d;
   }
-  .level1{
+
+  .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-  .level2{
+
+  .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-  .describe{
+
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-  .showArea{
-    width:100%;
-  }
-  .codeArea{
+
+  .showArea {
     width: 100%;
-    height:100%;
+  }
+
+  .codeArea {
+    width: 100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-  .codeArea pre,.codeArea code{
+
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-  .showAreaInner{
+
+  .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
-  .showArea{
-    height:640px;
+  .showArea {
+    height: 640px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 
@@ -553,6 +588,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }
