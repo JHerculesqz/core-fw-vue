@@ -27,7 +27,7 @@
             name: "合束模块"
         }, {
             id: "7",
-            name: "强点模块"
+            name: "强电模块"
         }];
 
         //endregion
