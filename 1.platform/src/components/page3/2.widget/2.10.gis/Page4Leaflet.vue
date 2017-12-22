@@ -489,7 +489,7 @@
           uiOpacity: 1
         }, function (bSuccessful, oBuObj) {
           console.log("createMarker: " + bSuccessful);
-        });
+        }, true);
 
         this.createMarkerId += 1;
       },

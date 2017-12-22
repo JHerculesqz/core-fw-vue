@@ -217,9 +217,10 @@
         <marvel-tab :tabItems="tabItems6">
           <marvel-tab-item :isActive="tabItems6[0].isActive">
             <div class="showAreaInner">
-              <button v-on:click="onDropDownClick">getCheckItem</button>
+              <button v-on:click="onClick4GetSelectItem">getSelectItem</button>
+              <button v-on:click="onClick4GetSelectItemObj">getSelectItemObj</button>
               <marvel-drop-down-button ref="ref14" disable="" width="100%"
-                                       maxHeight="30px"
+                                       maxHeight="100px"
                                        v-on:onOptionSelect="onOptionSelect"></marvel-drop-down-button>
             </div>
           </marvel-tab-item>
@@ -376,10 +377,13 @@
       onClick: function () {
         console.log(1);
       },
-      onDropDownClick: function () {
+      onClick4GetSelectItem: function () {
         console.log(this.$refs.ref14.getSelectItem());
       },
-      onOptionSelect: function(oItem){
+      onClick4GetSelectItemObj: function () {
+        console.log(this.$refs.ref14.getSelectItemObj());
+      },
+      onOptionSelect: function (oItem) {
         console.log(oItem);
       },
       onClick4TabBtn: function () {
@@ -404,65 +408,79 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   .title {
     color: #4d4d4d;
   }
+
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
+
   .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
+
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
+
   .showArea {
     width: 100%;
   }
+
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
+
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
+
   .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
     height: 250px;
   }
+
   /*document custom style end*/
   /*custom style start*/
   .classCustom1 {
     margin-right: 20px;
   }
+
   /*custom style end*/
 
   /*region dark theme*/
@@ -470,6 +488,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

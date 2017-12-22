@@ -53,9 +53,11 @@
             <!--2级DemoView start-->
             <div style="width: 100%;height: 500px;">
               <button @click="onClickRemoveNode">removeNode</button>
+              <button @click="onClickSetActiveStyle">设置选中样式</button>
+              <button @click="onClickRemoveAllActiveStyle">清除所有选中样式</button>
               <marvel-dev-panel-ex ref="ref4DevPanelEx" domId="rackPanel"
-                                 @callbackOnClick="callbackOnClick"
-                                 @callbackOnContextmenu="callbackOnContextmenu"></marvel-dev-panel-ex>
+                                   @callbackOnClick="callbackOnClick"
+                                   @callbackOnContextmenu="callbackOnContextmenu"></marvel-dev-panel-ex>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -170,13 +172,27 @@
       },
       callbackOnClick: function (strBuObjId, strSubBuObjId, evt) {
         if (strSubBuObjId == "bd1") {
-          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, "static/devPanelEx/image/dev1.txt", function () {
+          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, {imgUrl: "static/devPanelEx/image/dev1.txt"}, function () {
             console.log("add successfully");
+          }, {
+            callbackOnClick: function (strSlotId, oBuObj, evt) {
+              console.log("callbackOnClick" + strSlotId);
+            },
+            callbackOnContextmenu: function (strSlotId, oBuObj, evt) {
+              console.log("callbackOnContextmenu" + strSlotId);
+            }
           });
         }
         else if (strSubBuObjId == "bd3") {
-          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, "static/devPanelEx/image/dev1.txt", function () {
+          this.$refs.ref4DevPanelEx.addNode(strSubBuObjId, {imgUrl: "static/devPanelEx/image/dev1.txt"}, function () {
             console.log("add successfully");
+          }, {
+            callbackOnClick: function (strSlotId, oBuObj, evt) {
+              console.log("callbackOnClick" + strSlotId);
+            },
+            callbackOnContextmenu: function (strSlotId, oBuObj, evt) {
+              console.log("callbackOnContextmenu" + strSlotId);
+            }
           });
         }
       },
@@ -186,6 +202,12 @@
       onClickRemoveNode: function () {
         this.$refs.ref4DevPanelEx.removeNode("bd1");
       },
+      onClickSetActiveStyle: function () {
+        this.$refs.ref4DevPanelEx.setActiveStyle("bd1");
+      },
+      onClickRemoveAllActiveStyle: function () {
+        this.$refs.ref4DevPanelEx.removeAllActiveStyle();
+      }
       //#endregion
       //#region callback
 
@@ -281,6 +303,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

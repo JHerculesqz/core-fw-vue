@@ -44,7 +44,7 @@
     <!--2级 end-->
 
     <!--2级 start-->
-    <div class="title level2">表格-2</div>
+    <div class="title level2">表格-2.1</div>
     <div class="describe">
       表格-2
     </div>
@@ -66,7 +66,6 @@
                               :titles="titlesEx"
                               :rows="rowsEx"
                               :limit="15"
-                              :inputMsgs="inputMsgsEx"
                               gridId="demoEx"
                               :editCellFinished="editCellFinishedEx"
                               :canDrag="true"
@@ -114,13 +113,68 @@
     <!--2级 end-->
 
     <!--2级 start-->
+    <div class="title level2">表格-2.2</div>
+    <div class="describe">
+      表格-2.2，和表格2.1是同一个控件，这里演示动态分页的功能。
+    </div>
+    <div class="showArea" style="height: 450px;">
+      <marvel-tab :tabItems="tabItems3">
+        <marvel-tab-item :isActive="tabItems3[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:800px;height:300px; background-color: #000000">
+              <marvel-grid-ex ref="gridEx2_2"
+                              gridId="demoEx2_2"
+                              :titles="titlesEx2"
+                              :rows="rowsEx2"
+                              :dynamicPaging="true"
+                              :totalNum="totalNum"
+                              :totalPage="totalPage"
+                              :canDrag="true"
+                              :hasFoot="true"
+                              v-on:onPageChange="onPageChange"></marvel-grid-ex>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems3[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre v-highlight>
+                <code class="js">
+&lt;marvel-grid-ex ref="gridEx"
+                :titles="titlesEx"
+                :rows="rowsEx"
+                :limit="15"
+                :inputMsgs="inputMsgsEx"
+                gridId="demoEx"
+                :editCellFinished="editCellFinishedEx"
+                :canDrag="true"
+                v-on:onClickRow="onClickRowEx"
+                v-on:onIconClick="onIconClickEx"
+                v-on:onClickTextIcon="onClickTextIconEx"
+                v-on:onTitleCheckOrUncheck="onTitleCheckOrUncheckEx"
+                v-on:onRowCheckOrUnCheck="onRowCheckOrUnCheckEx"
+                v-on:onRowRadioCheck="onRowRadioCheckEx"
+                v-on:onOptionChange="onOptionChangeEx"
+                v-on:onClickMultiDropdownItem="onClickMultiDropdownItemEx"&gt;&lt;/marvel-grid-ex&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
+
+    <!--2级 start-->
     <div class="title level2">表格-3</div>
     <div class="describe">
       表格-3
     </div>
     <div class="showArea" style="height: 450px;">
-      <marvel-tab :tabItems="tabItems3">
-        <marvel-tab-item :isActive="tabItems3[0].isActive">
+      <marvel-tab :tabItems="tabItems4">
+        <marvel-tab-item :isActive="tabItems4[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="height:300px; background-color: #fafafa;">
@@ -131,7 +185,7 @@
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
-        <marvel-tab-item :isActive="tabItems3[1].isActive">
+        <marvel-tab-item :isActive="tabItems4[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
             <pre v-highlight>
@@ -151,19 +205,19 @@
       表格-优先级排列表
     </div>
     <div class="showArea" style="height: 450px;">
-      <marvel-tab :tabItems="tabItems4">
-        <marvel-tab-item :isActive="tabItems4[0].isActive">
+      <marvel-tab :tabItems="tabItems5">
+        <marvel-tab-item :isActive="tabItems5[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div style="height:300px; background-color: #fafafa;">
+            <div style="height:300px;">
               <button @click="getPriorityList">getPriorityList</button>
-              <marvel-grid-priority :list="list4Priority" title="priority"
+              <marvel-grid-priority :list="list4Priority" col1Title="col1Title" col2Title="col2Title"
               ></marvel-grid-priority>
             </div>
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
-        <marvel-tab-item :isActive="tabItems4[1].isActive">
+        <marvel-tab-item :isActive="tabItems5[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
             <pre v-highlight>
@@ -224,6 +278,13 @@
           isActive: false
         }],
         tabItems4: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems5: [{
           label: "Demo View",
           isActive: true
         }, {
@@ -301,7 +362,56 @@
         skipEx: 0,
         limitEx: 10,
         rowsEx: [],
-        inputMsgsEx: [],
+        //endregion
+        //region gridEx2
+        titlesEx2: [{
+          label: "",
+          key: "checkBox",
+          type: "checkBox", //或者为 "checkBox"
+          visible: true,
+          width: "40px",
+        }, {
+          label: "name",
+          key: "name",
+          type: "text",
+          visible: true,
+          orderBy: true,
+          width: "100px"
+        }, {
+          label: "描述信息",
+          key: "description",
+          type: "input",
+          visible: true,
+          orderBy: true,
+          width: "200px"
+        }, {
+          label: "操作",
+          key: "operation",
+          type: "icon",
+          visible: true,
+          width: "200px"
+        }, {
+          label: "链接",
+          key: "link",
+          type: "textIcon",
+          visible: true,
+          width: "200px"
+        }, {
+          label: "配置项",
+          key: "config",
+          type: "dropdown",
+          visible: true,
+          width: "200px"
+        }, {
+          label: "目标网元",
+          key: "node",
+          type: "multiDropdown",
+          visible: true,
+          width: "200px"
+        }],
+        rowsEx2: [],
+        totalNum: 1000,
+        totalPage: 10,
         //endregion
         //#region gridM
         titles4GridM: ["故障设备", "告警ID"],
@@ -502,6 +612,10 @@
       ;
       //endregion
 
+      //region gridEx2.2
+      this._initGridEx2_2(1);
+      //endregion
+
       //#region gridM
 
       for (var i = 0; i < 100; i++) {
@@ -623,6 +737,81 @@
 
       //endregion
 
+      //region gridEx2.2
+      _initGridEx2_2: function (iPageIndex) {
+        this.rowsEx2 = [];
+        let iStart = (iPageIndex - 1) * 100;
+        let iEnd = iPageIndex * 100;
+        for (let i = iStart; i < iEnd; i++) {
+          let oRow = [];
+          //key:id用于标识这一列的唯一性，在界面上不会绘制出来
+          oRow.push({
+            key: "id",
+            value: i
+          });
+          oRow.push({
+            key: "checkBox",
+            value: "",
+            checked: i == 0 ? true : false
+          });
+          oRow.push({
+            key: "name",
+            value: "name_cell" + i
+          });
+          oRow.push({
+            key: "description",
+            value: "input_cell" + i
+          });
+          oRow.push({
+            key: "operation",
+            value: [{
+              value: "icon-location2",
+              color: "red"
+            }, {
+              value: "icon-location2"
+            }]
+          });
+          oRow.push({
+            key: "link",
+            value: "icon-podcast",
+            color: "#28aad3",
+            label: "shit",
+          });
+          oRow.push({
+            key: "config",
+            value: [{
+              value: "A",
+            }, {
+              value: "B",
+              selected: true
+            }, {
+              value: "C"
+            }],
+          });
+          oRow.push({
+            key: "node",
+            value: [{
+              value: "Node1",
+              selected: true,
+            }, {
+              value: "Node2",
+              selected: true
+            }, {
+              value: "Node3"
+            }, {
+              value: "Node4"
+            }],
+          });
+          this.rowsEx2.push(oRow);
+        }
+      },
+      onPageChange: function (iPageIndex) {
+        setTimeout(() => {
+          this._initGridEx2_2(iPageIndex);
+        }, 1000);
+      },
+      //endregion
+
       //#region gridM
 
       onClickMore: function (oRow) {
@@ -725,6 +914,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

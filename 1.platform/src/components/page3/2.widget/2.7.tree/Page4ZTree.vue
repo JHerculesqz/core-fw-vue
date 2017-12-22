@@ -20,6 +20,7 @@
               <button @click="getCheckNodes">getCheckNodes</button>
               <button @click="getCheckLeafNodes">getCheckLeafNodes</button>
               <button @click="foldOrUnfoldNode">foldOrUnfoldNode</button>
+              <button @click="getActiveNodes">getActiveNodes</button>
               <div class="treeArea">
                 <marvel-z-tree ref="tree"
                                :treeData="treeData"
@@ -171,6 +172,10 @@
       foldOrUnfoldNode: function(){
         this.treeData[0].bOpen = !this.treeData[0].bOpen;
       },
+      getActiveNodes: function(){
+        var arrRes = this.$refs.tree.getActiveNodes();
+        console.log(arrRes);
+      }
       //#endregion
       //#region callback
 
