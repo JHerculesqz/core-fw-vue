@@ -72,6 +72,7 @@
   import Page4Grid from '@/components/page3/2.widget/2.6.grid/Page4Grid'
   import Page4List1 from '@/components/page3/2.widget/2.6.grid/Page4List1'
   import Page4List2 from '@/components/page3/2.widget/2.6.grid/Page4List2'
+  import Page4List3 from '@/components/page3/2.widget/2.6.grid/Page4List3'
   //#endregion
   //#region 2.7.widget.tree
   import Page4ZTree from '@/components/page3/2.widget/2.7.tree/Page4ZTree'
@@ -143,6 +144,7 @@
       Page4Grid,
       Page4List1,
       Page4List2,
+      Page4List3,
       //#endregion
       //#region 2.7.widget.tree
       Page4ZTree,
@@ -328,6 +330,9 @@
           }, {
             id: "Page4List2",
             label: "悬浮List2"
+          }, {
+            id: "Page4List3",
+            label: "List3"
           }]
         }, {
           label: "控件(树)",

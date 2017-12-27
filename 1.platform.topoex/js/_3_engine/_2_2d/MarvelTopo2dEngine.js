@@ -724,7 +724,7 @@
 
         //endregion
 
-        //reigon
+        //region topoCanvasAutoFitBy3rd
 
         this.topoCanvasAutoFitBy3rd = function(){
             var iWidth = $("#" + self.m_oOptions.parentId).width();
@@ -778,7 +778,7 @@
             self.setMouseCur("handopen");
         };
 
-        //endrgion
+        //endregion
 
         //region exitBgBy3rd
 
@@ -793,7 +793,7 @@
             self.setMouseCur("none");
         };
 
-        //endregon
+        //endregion
 
         //region enterAdjustPathNode
 
