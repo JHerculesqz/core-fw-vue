@@ -55,7 +55,7 @@
                 }
                 for (var bgLayerKey in self.m_oLayerConf) {
                     var oLayerConf = self.m_oLayerConf[bgLayerKey];
-                    oCanvasContext.globalAlpha = DEFAULT_ALPHA_BG；
+                    oCanvasContext.globalAlpha = DEFAULT_ALPHA_BG;
                     oCanvasContext.lineWidth = 1.5;
                     oCanvasContext.fillStyle = oLayerConf._layerColor;
                     oCanvasContext.beginPath();
