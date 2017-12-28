@@ -61,6 +61,10 @@
             <button @click="getRowsEx">getRows</button>
             <button @click="getActiveRowsEx">getActiveRows</button>
             <button @click="resetRowEx">resetRow</button>
+            <button @click="disableRowEx">disableRow</button>
+            <button @click="enableRowEx">enableRow</button>
+            <button @click="enableAllRowsEx">enableAllRows</button>
+            <button @click="checkRow">checkRow</button>
             <div style="width:800px;height:300px; background-color: #000000">
               <marvel-grid-ex ref="gridEx"
                               :titles="titlesEx"
@@ -585,7 +589,7 @@
         oRow.push({
           key: "config",
           value: [{
-            value: "A",
+            value: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
           }, {
             value: "B",
             selected: true
@@ -732,6 +736,18 @@
         let arrRow = this.$refs.gridEx.getRows();
         arrRow.splice(arrRow.length - 1);
         this.rowsEx = arrRow;
+      },
+      disableRowEx: function () {
+        this.$refs.gridEx.disableRow(1);
+      },
+      enableRowEx: function () {
+        this.$refs.gridEx.enableRow(1);
+      },
+      enableAllRowsEx: function () {
+        this.$refs.gridEx.enableAllRows();
+      },
+      checkRow: function(){
+        this.$refs.gridEx.checkOrUnCheckRow4CheckBox(3, true);
       },
       //endregion
 

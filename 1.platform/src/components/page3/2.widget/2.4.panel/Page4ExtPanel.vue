@@ -23,7 +23,8 @@
                 ref="ref0"
                 height="100"
                 show="false"
-                canDrag="true">
+                canDrag="true"
+                @onExpandBtnClick="onExpandBtnClick1">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-bottom-ext-panel>
             </div>
@@ -66,7 +67,8 @@
                 ref="ref1"
                 width="100"
                 show="true"
-                canDrag="true">
+                canDrag="true"
+                @onExpandBtnClick="onExpandBtnClick2">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-left-ext-panel>
             </div>
@@ -109,7 +111,8 @@
                 ref="ref2"
                 width="100"
                 show="true"
-                canDrag="true">
+                canDrag="true"
+                @onExpandBtnClick="onExpandBtnClick3">
                 <div slot="content" style="color: #fff">hello world</div>
               </marvel-right-ext-panel>
             </div>
@@ -145,6 +148,7 @@
   import MarvelBottomExtPanel from "@/walle/widget/extPanel/MarvelBottomExtPanel";
   import MarvelLeftExtPanel from "@/walle/widget/extPanel/MarvelLeftExtPanel";
   import MarvelRightExtPanel from "@/walle/widget/extPanel/MarvelRightExtPanel";
+
   export default {
     name: 'page4ExtPanel',
     components: {
@@ -191,23 +195,32 @@
     },
     methods: {
       //#region inner
-      expandBottom:function(){
+      expandBottom: function () {
         this.$refs.ref0.expand(true);
       },
-      foldBottom:function(){
+      foldBottom: function () {
         this.$refs.ref0.expand(false);
       },
-      expandLeft:function(){
+      expandLeft: function () {
         this.$refs.ref1.expand(true);
       },
-      foldLeft:function(){
+      foldLeft: function () {
         this.$refs.ref1.expand(false);
       },
-      expandRight:function(){
+      expandRight: function () {
         this.$refs.ref2.expand(true);
       },
-      foldRight:function(){
+      foldRight: function () {
         this.$refs.ref2.expand(false);
+      },
+      onExpandBtnClick1: function (bShow) {
+        console.log(bShow);
+      },
+      onExpandBtnClick2: function (bShow) {
+        console.log(bShow);
+      },
+      onExpandBtnClick3: function (bShow) {
+        console.log(bShow);
       }
       //#endregion
       //#region callback
@@ -227,54 +240,65 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   .title {
     color: #4d4d4d;
   }
+
   .level1 {
     font-size: 32px;
     line-height: 54px;
   }
+
   .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
+
   .codeArea {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
+
   .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
+
   .showAreaInner {
     height: 100%;
     padding-top: 36px;
     box-sizing: border-box;
   }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
+
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
   .showArea {
     width: 100%;
     height: 400px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 
@@ -285,6 +309,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

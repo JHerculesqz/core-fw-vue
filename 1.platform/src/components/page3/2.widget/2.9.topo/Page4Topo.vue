@@ -33,6 +33,7 @@
             <button v-on:click="hideOrShowLink">hideOrShowLink</button>
             <button v-on:click="getSelectedData">getSelectedData</button>
             <button v-on:click="createLink">createLink</button>
+            <button v-on:click="getPosChangeTopoCache">getPosChangeTopoCache</button>
             <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
@@ -553,7 +554,7 @@
           uiNode: true
         }, function (oBuObj, bOk) {
           console.log("createNode: " + bOk);
-        });
+        }, true);
         this.createNodeId += 1;
       },
       savePosition: function () {
@@ -569,42 +570,42 @@
       setBestView: function () {
         this.$refs.ref4Topo.setBestView();
       },
-      hideOrShowNode: function(){
+      hideOrShowNode: function () {
         var oTopoData = this.$refs.ref4Topo.getTopoData();
-        oTopoData.nodes.forEach(function(oNode, index){
-          if(oNode.id == "nodeBase2"){
-            if(oNode.uiHide == undefined){
+        oTopoData.nodes.forEach(function (oNode, index) {
+          if (oNode.id == "nodeBase2") {
+            if (oNode.uiHide == undefined) {
               oNode.uiHide = true;
             }
-            else{
+            else {
               oNode.uiHide = !oNode.uiHide;
             }
           }
         });
         this.$refs.ref4Topo.updateTopo(oTopoData);
       },
-      hideOrShowLink: function(){
+      hideOrShowLink: function () {
         var oTopoData = this.$refs.ref4Topo.getTopoData();
-        oTopoData.links.forEach(function(oLink, index){
-          if(oLink.id == "link0"){
-            if(oLink.uiHide == undefined){
+        oTopoData.links.forEach(function (oLink, index) {
+          if (oLink.id == "link0") {
+            if (oLink.uiHide == undefined) {
               oLink.uiHide = true;
             }
-            else{
+            else {
               oLink.uiHide = !oLink.uiHide;
             }
           }
         });
         this.$refs.ref4Topo.updateTopo(oTopoData);
       },
-      getSelectedData: function(){
+      getSelectedData: function () {
         var oData = this.$refs.ref4Topo.getSelectedData();
         console.log(oData);
       },
-      createLink: function(){
+      createLink: function () {
         var self = this;
-        this.$refs.ref4Topo.createLink(function(bSuccessful, oSrcNode, oDstNode){
-          if(bSuccessful){
+        this.$refs.ref4Topo.createLink(function (bSuccessful, oSrcNode, oDstNode) {
+          if (bSuccessful) {
             var oTopoData = self.$refs.ref4Topo.getTopoData();
             var oLink = {
               id: self.createLinkId,
@@ -624,6 +625,10 @@
           }
         });
       },
+      getPosChangeTopoCache: function () {
+        var oRes = this.$refs.ref4Topo.getPosChangeTopoCache();
+        console.log(oRes);
+      }
       //endregion
       //#endregion
       //#region callback
@@ -721,6 +726,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }
