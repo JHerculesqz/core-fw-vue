@@ -21,6 +21,7 @@
               <button @click="getCheckLeafNodes">getCheckLeafNodes</button>
               <button @click="foldOrUnfoldNode">foldOrUnfoldNode</button>
               <button @click="getActiveNodes">getActiveNodes</button>
+              <button @click="setIconColor">setIconColor</button>
               <div class="treeArea">
                 <marvel-z-tree ref="tree"
                                :treeData="treeData"
@@ -105,6 +106,7 @@
             children: [{
               name: 'ne50021',
               icon: "icon-address-book",
+              iconColor: "#000000"
             }, {
               name: 'ne50022',
               icon: "icon-address-book"
@@ -169,12 +171,18 @@
         var arrRes = this.$refs.tree.getCheckLeafNodes();
         console.log(arrRes);
       },
-      foldOrUnfoldNode: function(){
+      foldOrUnfoldNode: function () {
         this.treeData[0].bOpen = !this.treeData[0].bOpen;
       },
-      getActiveNodes: function(){
+      getActiveNodes: function () {
         var arrRes = this.$refs.tree.getActiveNodes();
         console.log(arrRes);
+      },
+      setIconColor: function () {
+        var arrCheckNodes = this.$refs.tree.getCheckLeafNodes();
+        arrCheckNodes.forEach(function(oNode){
+          oNode.iconColor = "#F7921E";
+        });
       }
       //#endregion
       //#region callback
@@ -261,9 +269,11 @@
   .showArea {
     height: 500px;
   }
-  .treeArea{
+
+  .treeArea {
     height: calc(100% - 25px);
   }
+
   /*document custom style end*/
   /*custom style start*/
 
@@ -274,6 +284,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

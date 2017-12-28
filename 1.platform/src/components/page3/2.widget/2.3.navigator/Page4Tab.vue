@@ -17,7 +17,8 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div style="width: 500px;height: 400px;">
-              <marvel-tab :tabItems="tabItems">
+              <button @click="setActiveTabItem">setActiveTabItem</button>
+              <marvel-tab ref="ref4Tab" :tabItems="tabItems">
                 <marvel-tab-item :isActive="tabItems[0].isActive">
                   1
                 </marvel-tab-item>
@@ -76,8 +77,9 @@
     name: 'page4Tab',
     components: {
       MarvelTabItem,
-      MarvelTab},
-    data: function() {
+      MarvelTab
+    },
+    data: function () {
       return {
         //#region document data
         tabItems1: [{
@@ -105,9 +107,11 @@
         //#endregion
       }
     },
-    methods:{
+    methods: {
       //#region inner
-
+      setActiveTabItem() {
+        this.$refs.ref4Tab.setActiveTabItem("Messages");
+      }
       //#endregion
       //#region callback
 
@@ -121,65 +125,78 @@
 
 <style>
   /*document fix style start*/
-  .widgetShowSession{
+  .widgetShowSession {
     padding: 20px 100px;
-    width:100%;
+    width: 100%;
     box-sizing: border-box;
   }
-  .title{
+
+  .title {
     color: #4d4d4d;
   }
-  .level1{
+
+  .level1 {
     font-size: 32px;
     line-height: 54px;
   }
-  .level2{
+
+  .level2 {
     margin-top: 40px;
     font-size: 22px;
     line-height: 48px;
   }
-  .describe{
+
+  .describe {
     font-size: 14px;
     color: #666;
     line-height: 36px;
   }
-  .showArea{
-    width:100%;
-  }
-  .codeArea{
+
+  .showArea {
     width: 100%;
-    height:100%;
+  }
+
+  .codeArea {
+    width: 100%;
+    height: 100%;
     background-color: #f0f0f0;
     overflow: auto;
   }
-  .codeArea pre,.codeArea code{
+
+  .codeArea pre, .codeArea code {
     padding: 0;
     margin: 0;
     min-width: 100%;
     float: left;
   }
-  .showAreaInner{
+
+  .showAreaInner {
     padding-top: 36px;
     box-sizing: border-box;
   }
-  ::-webkit-scrollbar{
-    width:8px;
-    height:8px;
-    background-color: rgba(0,0,0,0);
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-track{
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
   }
-  ::-webkit-scrollbar-thumb{
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+
   /*document fix  style end*/
   /*document custom style start*/
-  .showArea{
-    height:500px;
+  .showArea {
+    height: 500px;
   }
+
   /*document custom style end*/
   /*custom style start*/
 
@@ -190,6 +207,7 @@
   .dark .title {
     color: #ffffff;
   }
+
   .dark .describe {
     color: #8b90b3;
   }

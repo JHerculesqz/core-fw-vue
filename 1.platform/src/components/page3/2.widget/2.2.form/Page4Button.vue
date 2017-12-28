@@ -19,8 +19,12 @@
             <div class="showAreaInner">
               <!--2级DemoView start-->
               <marvel-primary-button size="large" classCustom="classCustom1" label="Large"
+                                     v-on:onClick="onClick" isWarn=true></marvel-primary-button>
+              <marvel-primary-button classCustom="classCustom1" label="normal"
                                      v-on:onClick="onClick"></marvel-primary-button>
-              <marvel-primary-button classCustom="classCustom1" label="Small"
+              <marvel-primary-button size="small" classCustom="classCustom1" label="small"
+                                     v-on:onClick="onClick"></marvel-primary-button>
+              <marvel-primary-button size="mini" classCustom="classCustom1" label="mini"
                                      v-on:onClick="onClick"></marvel-primary-button>
               <marvel-primary-button ref="ref4" classCustom="classCustom1" label="MouseDown"
                                      v-on:onClick="onClick"></marvel-primary-button>
@@ -36,9 +40,13 @@
               <!--2级CodeView start-->
               <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-primary-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
-                  &lt;marvel-primary-button classCustom="classCustom1" label="Small"
-                  v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
+                  &lt;marvel-primary-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick" isWarn=true&gt;&lt;/marvel-primary-button&gt;
+                  &lt;marvel-primary-button classCustom="classCustom1" label="normal"
+                                         v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
+                  &lt;marvel-primary-button size="small" classCustom="classCustom1" label="small"
+                                         v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
+                  &lt;marvel-primary-button size="mini" classCustom="classCustom1" label="mini"
+                                         v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
                   &lt;marvel-primary-button ref="ref4" classCustom="classCustom1" label="MouseDown"
                   v-on:onClick="onClick"&gt;&lt;/marvel-primary-button&gt;
                   &lt;marvel-primary-button ref="ref5" classCustom="classCustom1" label="Focus"
@@ -62,9 +70,14 @@
         <marvel-tab :tabItems="tabItems2">
           <marvel-tab-item :isActive="tabItems2[0].isActive">
             <div class="showAreaInner">
-              <marvel-button size="large" classCustom="classCustom1" label="Large"
+              <marvel-button size="large" classCustom="classCustom1"
+                             label="Large" isWarn=true
                              v-on:onClick="onClick"></marvel-button>
-              <marvel-button classCustom="classCustom1" label="Small"
+              <marvel-button classCustom="classCustom1" label="normal"
+                             v-on:onClick="onClick"></marvel-button>
+              <marvel-button size="small" classCustom="classCustom1" label="small"
+                             v-on:onClick="onClick"></marvel-button>
+              <marvel-button size="mini" classCustom="classCustom1" label="mini"
                              v-on:onClick="onClick"></marvel-button>
               <marvel-button ref="ref1" classCustom="classCustom1" label="MouseDown"
                              v-on:onClick="onClick"></marvel-button>
@@ -78,8 +91,10 @@
             <div class="codeArea">
               <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick">&lt;/marvel-button&gt;
-                  &lt;marvel-button classCustom="classCustom1" label="Small" v-on:onClick="onClick">&lt;/marvel-button&gt;
+                  &lt;marvel-button size="large" classCustom="classCustom1" label="Large" isWarn=true v-on:onClick="onClick">&lt;/marvel-button&gt;
+                  &lt;marvel-button classCustom="classCustom1" label="normal" v-on:onClick="onClick">&lt;/marvel-button&gt;
+                  &lt;marvel-button size="small" classCustom="classCustom1" label="small" v-on:onClick="onClick">&lt;/marvel-button&gt;
+                  &lt;marvel-button size="mini" classCustom="classCustom1" label="mini" v-on:onClick="onClick">&lt;/marvel-button&gt;
                   &lt;marvel-button ref="ref1" classCustom="classCustom1" label="MouseDown" v-on:onClick="onClick">&lt;/marvel-button&gt;
                   &lt;marvel-button ref="ref2" classCustom="classCustom1" label="Focus" v-on:onClick="onClick">&lt;/marvel-button&gt;
                   &lt;marvel-button ref="ref3" classCustom="classCustom1" label="Disable" v-on:onClick="onClick"&gt;&lt;/marvel-button&gt;
@@ -100,9 +115,15 @@
           <marvel-tab-item :isActive="tabItems3[0].isActive">
             <div class="showAreaInner">
               <marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large"
+                                      icon="icon-home3" isWarn=true
+                                      v-on:onClick="onClick"></marvel-icon-txt-button>
+              <marvel-icon-txt-button classCustom="classCustom1" label="normal"
                                       icon="icon-home3"
                                       v-on:onClick="onClick"></marvel-icon-txt-button>
-              <marvel-icon-txt-button classCustom="classCustom1" label="Small"
+              <marvel-icon-txt-button size="small" classCustom="classCustom1" label="small"
+                                      icon="icon-home3"
+                                      v-on:onClick="onClick"></marvel-icon-txt-button>
+              <marvel-icon-txt-button size="mini" classCustom="classCustom1" label="mini"
                                       icon="icon-home3"
                                       v-on:onClick="onClick"></marvel-icon-txt-button>
               <marvel-icon-txt-button ref="ref7" classCustom="classCustom1" label="MouseDown"
@@ -121,8 +142,12 @@
               <pre v-highlight>
                 <code class="html">
                   &lt;marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large" icon="icon-home3"
+                  isWarn=true v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
+                  &lt;marvel-icon-txt-button classCustom="classCustom1" label="normal" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
-                  &lt;marvel-icon-txt-button classCustom="classCustom1" label="Small" icon="icon-home3"
+                  &lt;marvel-icon-txt-button size="small" classCustom="classCustom1" label="small" icon="icon-home3"
+                  v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
+                  &lt;marvel-icon-txt-button size="mini" classCustom="classCustom1" label="mini" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
                   &lt;marvel-icon-txt-button ref="ref7" classCustom="classCustom1" label="MouseDown" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
@@ -147,7 +172,7 @@
           <marvel-tab-item :isActive="tabItems4[0].isActive">
             <div class="showAreaInner">
               <marvel-icon-button classCustom="classCustom1" label="normal"
-                                  icon="icon-home3"
+                                  icon="icon-home3" isWarn=true
                                   v-on:onClick="onClick"></marvel-icon-button>
               <marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown"
                                   icon="icon-home3"
@@ -161,8 +186,8 @@
             <div class="codeArea">
                <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-icon-button classCustom="classCustom1" label="normal" icon="icon-home3"
-                  v-on:onClick="onClick"&gt;&lt;/marvel-icon-button&gt;
+                  &lt;marvel-icon-button classCustom="classCustom1" label="normal" icon="icon-home3" isWarn=true
+                  isWarn=true v-on:onClick="onClick"&gt;&lt;/marvel-icon-button&gt;
                   &lt;marvel-icon-button ref="ref10" classCustom="classCustom1" label="mouseDown" icon="icon-home3"
                   v-on:onClick="onClick"&gt;&lt;/marvel-icon-button&gt;
                   &lt;marvel-icon-button ref="ref11" classCustom="classCustom1" label="disable" icon="icon-home3"
@@ -184,8 +209,7 @@
           <marvel-tab-item :isActive="tabItems5[0].isActive">
             <div class="showAreaInner">
               <marvel-txt-button classCustom="classCustom1" label="normal"
-                                 v-on:onClick="onClick"
-                                 isWarn=ture></marvel-txt-button>
+                                 v-on:onClick="onClick" isWarn=true></marvel-txt-button>
               <marvel-txt-button classCustom="classCustom1" label="normal"
                                  v-on:onClick="onClick"></marvel-txt-button>
               <marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown"
@@ -198,9 +222,14 @@
             <div class="codeArea">
                <pre v-highlight>
                 <code class="html">
-                  &lt;marvel-txt-button classCustom="classCustom1" label="normal" v-on:onClick="onClick">&lt;/marvel-txt-button&gt;
-                  &lt;marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown" v-on:onClick="onClick">&lt;/marvel-txt-button&gt;
-                  &lt;marvel-txt-button ref="ref13" classCustom="classCustom1" label="disable" v-on:onClick="onClick"&gt;&lt;/marvel-txt-button&gt;
+                  &lt;marvel-txt-button classCustom="classCustom1" label="normal"
+                                     v-on:onClick="onClick" isWarn=true&gt;&lt;/marvel-txt-button&gt;
+                  &lt;marvel-txt-button classCustom="classCustom1" label="normal"
+                                     v-on:onClick="onClick"&gt;&lt;/marvel-txt-button&gt;
+                  &lt;marvel-txt-button ref="ref12" classCustom="classCustom1" label="mouseDown"
+                                     v-on:onClick="onClick"&gt;&lt;/marvel-txt-button&gt;
+                  &lt;marvel-txt-button ref="ref13" classCustom="classCustom1" label="disable"
+                                     v-on:onClick="onClick"&gt;&lt;/marvel-txt-button&gt;
                 </code>
               </pre>
             </div>
@@ -219,6 +248,7 @@
             <div class="showAreaInner">
               <button v-on:click="onClick4GetSelectItem">getSelectItem</button>
               <button v-on:click="onClick4GetSelectItemObj">getSelectItemObj</button>
+              <button v-on:click="onClick4setSelectItem">setSelectItem Item1</button>
               <marvel-drop-down-button ref="ref14" disable="" width="100%"
                                        maxHeight="100px"
                                        v-on:onOptionSelect="onOptionSelect"></marvel-drop-down-button>
@@ -245,7 +275,7 @@
         <marvel-tab :tabItems="tabItems7">
           <marvel-tab-item :isActive="tabItems7[0].isActive">
             <div class="showAreaInner">
-              <marvel-tab-button ref="ref4TabBtn" label="点我"
+              <marvel-tab-button ref="ref4TabBtn" label="点我" isWarn=true
                                  v-on:onClick="onClick4TabBtn"></marvel-tab-button>
             </div>
           </marvel-tab-item>
@@ -253,6 +283,36 @@
             <div class="codeArea">
               <pre v-highlight>
                 <code class="html">
+                  &lt;marvel-tab-button ref="ref4TabBtn" label="点我"  isWarn=true
+                                     v-on:onClick="onClick4TabBtn"&gt;&lt;/marvel-tab-button&gt;
+                </code>
+              </pre>
+            </div>
+          </marvel-tab-item>
+        </marvel-tab>
+      </div>
+      <!--2级 end-->
+      <!--2级 start-->
+      <div class="title level2">下拉框多选控件</div>
+      <div class="describe">
+        下拉框多选
+      </div>
+      <div class="showArea">
+        <marvel-tab :tabItems="tabItems8">
+          <marvel-tab-item :isActive="tabItems8[0].isActive">
+            <div class="showAreaInner">
+              <marvel-multi-drop-down :items="multiItems"
+                                      maxHeight="150px"
+                                      :needCheckAll="true"
+                                      @onAllCheckChangeEvent="onAllCheckChangeEvent"
+                                      @onItemCheckChangeEvent="onItemCheckChangeEvent"></marvel-multi-drop-down>
+            </div>
+          </marvel-tab-item>
+          <marvel-tab-item :isActive="tabItems8[1].isActive">
+            <div class="codeArea">
+              <pre v-highlight>
+                <code class="html">
+
                 </code>
               </pre>
             </div>
@@ -275,6 +335,7 @@
   import MarvelTxtButton from "@/walle/widget/button/MarvelTxtButton";
   import MarvelDropDownButton from "@/walle/widget/button/MarvelDropDownButton";
   import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
+  import MarvelMultiDropDown from "@/walle/widget/button/MarvelMultiDropDown";
 
   export default {
     name: 'page4Button',
@@ -285,7 +346,8 @@
       MarvelDropDownButton,
       MarvelIconTxtButton,
       MarvelButton, MarvelPrimaryButton, MarvelIconButton,
-      MarvelTxtButton
+      MarvelTxtButton,
+      MarvelMultiDropDown
     },
     data: function () {
       return {
@@ -339,22 +401,39 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems8: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
+        //region dropDownBtn
         items: [{
-          label: "Item1",
-          icon: "icon-pencil"
+          label: "Item1"
+//          icon: "icon-pencil"
         }, {
           label: "Item2",
-          icon: "icon-pen"
+//          icon: "icon-pen"
+          icon: ""
         }, {
           label: "Item3",
           icon: "icon-droplet"
         }],
+        //endregion
+        //region multiDropDown
+        multiItems: []
+        //endregion
         //#endregion
       }
     },
+    created() {
+      console.log("created p");
+    },
     mounted: function () {
+      console.log("mounted p");
       //#region custom mounted
       this.$refs.ref1.setBtnMouseDown(true);
       this.$refs.ref2.setBtnFocus(true);
@@ -370,6 +449,15 @@
       this.$refs.ref12.setBtnMouseDown(true);
       this.$refs.ref13.setBtnDisable(true);
       this.$refs.ref14.init(this.items, "Item3");
+      //region multiDropdown
+      for (let i = 0; i < 20; i++) {
+        this.multiItems.push({
+          label: "abcdEFG" + i,
+          checked: i % 2 == 0 ? true : false
+        });
+      }
+
+      //endregion
       //#endregion
     },
     methods: {
@@ -383,12 +471,21 @@
       onClick4GetSelectItemObj: function () {
         console.log(this.$refs.ref14.getSelectItemObj());
       },
+      onClick4setSelectItem: function () {
+        this.$refs.ref14.setSelectItem(this.items[0].label)
+      },
       onOptionSelect: function (oItem) {
         console.log(oItem);
       },
       onClick4TabBtn: function () {
         this.$refs.ref4TabBtn.setActive(true);
         console.log("onClick4TabBtn");
+      },
+      onAllCheckChangeEvent: function (bCheck) {
+        console.log(bCheck);
+      },
+      onItemCheckChangeEvent: function (oItem) {
+        console.log(oItem);
       },
       //#endregion
       //#region callback

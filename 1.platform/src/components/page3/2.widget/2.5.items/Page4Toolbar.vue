@@ -77,18 +77,22 @@
           subMenu:[{
             id:"a",
             label:"aaaaaaaaaaaaaaa",
-            icon:"icon-drawer"
+            icon:"icon-drawer",
+            visible:true,
+            disable:false
           },{
             id:"b",
             label:"bbb",
-            icon:"icon-drawer"
+            icon:"icon-drawer",
+            visible:false,
+            disable:true
           }]
         }, {
           id: 2,
           label: "保存",
           icon: "icon-drawer",
           visible:true,
-          disable:false,
+          disable:true,
           hasCustomSubPanel:true
         }, {
           id: 3,
@@ -105,7 +109,9 @@
           subMenu:[{
             id:"c",
             label:"ccc",
-            icon:"icon-drawer"
+            icon:"icon-drawer",
+            visible:true,
+            disable:true
           },{
             id:"d",
             label:"ddd",

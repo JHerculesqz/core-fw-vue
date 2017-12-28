@@ -55,9 +55,12 @@
               <button @click="onClickRemoveNode">removeNode</button>
               <button @click="onClickSetActiveStyle">设置选中样式</button>
               <button @click="onClickRemoveAllActiveStyle">清除所有选中样式</button>
-              <marvel-dev-panel-ex ref="ref4DevPanelEx" domId="rackPanel"
-                                   @callbackOnClick="callbackOnClick"
-                                   @callbackOnContextmenu="callbackOnContextmenu"></marvel-dev-panel-ex>
+              <button @click="onClickExportPng">导出png</button>
+              <div style="width: 400px; height: 450px">
+                <marvel-dev-panel-ex ref="ref4DevPanelEx" domId="rackPanel"
+                                     @callbackOnClick="callbackOnClick"
+                                     @callbackOnContextmenu="callbackOnContextmenu"></marvel-dev-panel-ex>
+              </div>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -114,7 +117,7 @@
         }],
         //#endregion
         //#region custom data
-
+        devPanelTimer: undefined
         //#endregion
       }
     },
@@ -125,7 +128,7 @@
       this.$refs.refDevPanel.init();
       this.$refs.refDevPanel.initPlugin("GK_1000");
 
-      MarvelTimer.startTimer(function () {
+      this.devPanelTimer = MarvelTimer.startTimer(function () {
         var oPlugin = self.$refs.refDevPanel.getPlugin("GK_1000");
         if (oPlugin) {
           var i = Math.random();
@@ -145,17 +148,20 @@
       var options = {
         buObjId: "jigui_1",
         imgUrl: "static/devPanelEx/image/rack1.txt",
-        subBuObjIds: ["bd0", "bd1", "bd2", "bd3", "bd4"]
+        subBuObjs: [{id: "bd0", dir: 0}, {id: "bd1", dir: 0}, {id: "bd2", dir: 0}, {id: "bd3", dir: 0}, {
+          id: "bd4",
+          dir: 0
+        }]
       };
       this.$refs.ref4DevPanelEx.init(options);
       //endregion
 
       //#endregion
     },
-    destroy: function () {
+    beforeDestroy: function () {
       //#region custom
 
-      MarvelTimer.endTimer();
+      MarvelTimer.endTimer(this.devPanelTimer);
 
       //#endregion
     },
@@ -207,6 +213,9 @@
       },
       onClickRemoveAllActiveStyle: function () {
         this.$refs.ref4DevPanelEx.removeAllActiveStyle();
+      },
+      onClickExportPng: function () {
+        this.$refs.ref4DevPanelEx.exportPng("nb.png");
       }
       //#endregion
       //#region callback
