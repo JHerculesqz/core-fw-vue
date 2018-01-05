@@ -1,8 +1,5 @@
-/**
- * Created by hou on 17/12/22.
- */
 (function($){
-    $.MarvelTopoArea = function() {
+    $.MarvelTopoGeo = function() {
         var self = this;
 
         //region getInscribeRectanglePoints
@@ -14,7 +11,9 @@
          * @param iRadius
          * @returns {{point1: {x: undefined, y: undefined}, point2: {x: undefined, y: undefined}, point3: {x: undefined, y: undefined}, point4: {x: undefined, y: undefined}}}
          */
-        this.getInscribeRectanglePoints = function (iCircleCenterX, iCircleCenterY, iRadius) {
+        this.getInscribeRectanglePoints = function (iCircleCenterX,
+                                                    iCircleCenterY,
+                                                    iRadius) {
             var oRectanglePoints = {
                 point1: {
                     x: undefined,
@@ -33,23 +32,32 @@
                     y: undefined
                 }
             };
-            var iStemp = iRadius * 1.41421356 / 2;
-            oRectanglePoints.point1.x = iCircleCenterX - iStemp;
-            oRectanglePoints.point1.y = iCircleCenterY - iStemp;
-            oRectanglePoints.point2.x = iCircleCenterX + iStemp;
-            oRectanglePoints.point2.y = iCircleCenterY - iStemp;
-            oRectanglePoints.point3.x = iCircleCenterX + iStemp;
-            oRectanglePoints.point3.y = iCircleCenterY + iStemp;
-            oRectanglePoints.point4.x = iCircleCenterX - iStemp;
-            oRectanglePoints.point4.y = iCircleCenterY + iStemp;
+            var iStep = iRadius * 1.41421356 / 2;
+            oRectanglePoints.point1.x = iCircleCenterX - iStep;
+            oRectanglePoints.point1.y = iCircleCenterY - iStep;
+            oRectanglePoints.point2.x = iCircleCenterX + iStep;
+            oRectanglePoints.point2.y = iCircleCenterY - iStep;
+            oRectanglePoints.point3.x = iCircleCenterX + iStep;
+            oRectanglePoints.point3.y = iCircleCenterY + iStep;
+            oRectanglePoints.point4.x = iCircleCenterX - iStep;
+            oRectanglePoints.point4.y = iCircleCenterY + iStep;
 
             return oRectanglePoints;
         };
 
+        //endregion
 
-        //endreigon
+        //#region updateNodePosByLayer
 
-        this.updateNodePosByLayer = function (oProfile, oNode, iOffsetXInDB, iOffsetYInDB) {
+        /**
+         * 计算伪3D图层上拖动点的Offset，以保证不能拖出伪3D图层
+         * @param oNode
+         * @param iOffsetXInDB
+         * @param iOffsetYInDB
+         */
+        this.updateNodePosByLayer = function (oNode,
+                                              iOffsetXInDB,
+                                              iOffsetYInDB) {
             var iOldX = oNode.params.x;
             var iOldY = oNode.params.y;
             //1.左边直线的斜率
@@ -114,7 +122,10 @@
          * @param iNodeDstW
          * @returns {{x: number, y: number}}
          */
-        this.getIntersectionPoint = function (oLink, iCirclePosX, iCirclePosY, iW, iH, iNodeSrcPosX, iNodeSrcPosY, iNodeSrcW, iNodeDstPosX, iNodeDstPosY, iNodeDstW){
+        this.getIntersectionPoint = function (oLink, iCirclePosX, iCirclePosY,
+                                              iW, iH,
+                                              iNodeSrcPosX, iNodeSrcPosY, iNodeSrcW,
+                                              iNodeDstPosX, iNodeDstPosY, iNodeDstW){
             if(oLink.params.src_dst_id == 1){
                 iNodeSrcPosX = iNodeSrcPosX + iNodeSrcW / 2;
                 iNodeSrcPosY = iNodeSrcPosY + iNodeSrcW / 2;
@@ -171,6 +182,5 @@
         };
 
         //endregion
-
     };
 })(jQuery);
