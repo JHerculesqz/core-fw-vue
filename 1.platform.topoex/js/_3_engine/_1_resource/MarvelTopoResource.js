@@ -1,18 +1,8 @@
 (function ($) {
     $.MarvelTopoResource = function () {
-        //region const
-
-        //endregion
+        var self = this;
 
         //region Fields
-
-        var self = this;
-        this.m_oOptions = [{
-            uiImgKey: "default",
-            uiImgW: 32,
-            uiImgH: 32,
-            uiImgPath: "image/default.svg"
-        }];
 
         this.m_mapImage = {
 
@@ -22,12 +12,23 @@
 
         //region init
 
+        /**
+         * 潜规则：
+         * arrImgMap = [{
+         *  uiImgKey: "default",
+         *  uiImgW: 32,
+         *  uiImgH: 32,
+         *  uiImgPath: "image/default.svg"
+         * }]
+         * @param arrImgMap arrImgMap
+         * @param oAfterInitCallback oAfterInitCallback
+         */
         this.init = function (arrImgMap, oAfterInitCallback) {
-            $.extend(self.m_oOptions, arrImgMap);
-
-            var iCount = self.m_oOptions.length;
-            $.each(self.m_oOptions, function (iIndex, oItem) {
-                _initItem(oItem.uiImgKey, oItem.uiImgW, oItem.uiImgH, oItem.uiImgPath, function () {
+            var iCount = arrImgMap.length;
+            $.each(arrImgMap, function (iIndex, oItem) {
+                _initItem(oItem.uiImgKey,
+                    oItem.uiImgW, oItem.uiImgH, oItem.uiImgPath,
+                    function () {
                     if (iIndex === iCount - 1) {
                         oAfterInitCallback();
                     }
@@ -35,19 +36,22 @@
             });
         };
 
-        var _initItem = function (strKey, iUiImgW, iUiImgH, strImageUrl, oCallbackFinish4Item) {
+        var _initItem = function (strKey,
+                                  iUiImgW, iUiImgH, strImageUrl,
+                                  oCallbackFinish4Item) {
             var oImage = new Image();
             oImage.onload = function () {
                 self.m_mapImage[strKey] = {
                     img: oImage,
                     imgW: iUiImgW,
-                    imgH: iUiImgH
+                    imgH: iUiImgH,
+                    imgUrl: strImageUrl,
                 };
                 oCallbackFinish4Item();
             };
             oImage.src = strImageUrl;
         };
 
-        //endregino
+        //endregion
     }
 })(jQuery);
