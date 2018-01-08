@@ -1,10 +1,6 @@
-/**
- * Created by hou on 17/12/22.
- */
 (function($){
     $.MarvelTopoSelect = function(oParent){
         var self = this;
-        var m_oParent = oParent;
 
         //region Const
 
@@ -15,6 +11,8 @@
         //endregion
 
         //region Fields
+
+        var m_oParent = oParent;
 
         this.m_arrSelect = {
             nodeNames: [],
@@ -622,7 +620,7 @@
 
         //endregion
 
-        //region
+        //region unSelectAllBy3rd
 
         this.unSelectAllBy3rd = function(oTopoOverlay, oAfterUnSelectAll){
             for(var i = 0; i < oTopoOverlay.nodes.length; i++){
@@ -737,8 +735,6 @@
             }
         };
 
-
         //endregion
-
     };
 })(jQuery);

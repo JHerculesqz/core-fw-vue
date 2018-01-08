@@ -4,7 +4,12 @@
 (function($){
     $.MarvelTopoArea = function(oParent){
         var self = this;
+
+        //#region Fields
+
         var m_oParent = oParent;
+
+        //#endregion
 
         //region getAreaTopo4Draw
 
@@ -177,7 +182,7 @@
             return oTopoOverlay;
         };
 
-        //endreigon
+        //endregion
 
         //region getVisibleTopo4Draw
 

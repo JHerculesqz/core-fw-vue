@@ -4,9 +4,10 @@
 (function($){
     $.MarvelTopoPos = function(oParent){
         var self = this;
-        var m_oParent = oParent;
 
         //region Fields
+
+        var m_oParent = oParent;
 
         this.m_oTopoUpdatePos = {
             posUpdate: []

@@ -1,6 +1,9 @@
 (function ($) {
     $.MarvelTopo2dEngine = function (oParent) {
-        //region const
+        var self = this;
+
+        //region Const
+
         this.WIDGET_NAME = "MarvelTopo2dEngine";
 
         this.EVENT_DOWN = "EVENT_DOWN";
@@ -20,7 +23,6 @@
 
         //region Fields
 
-        var self = this;
         var m_oParent = oParent;
         this.m_oOptions = undefined;
         this.Event = new $.MarvelTopo2dEngineEvent(self);
@@ -29,7 +31,6 @@
         this.Node = new $.MarvelTopo2dEngineNode(self);
         this.Link = new $.MarvelTopo2dEngineLink(self);
         this.Tip = new $.MarvelTopo2dEngineTip(self);
-
 
         this.m_oCanvas = undefined;
         this.m_oCanvasContext = undefined;
@@ -44,23 +45,21 @@
         //region init
 
         /**
-         *
+         * 初始化2D引擎
          * @param oOptions
          */
-       this.init = function(oOptions){
-           self.m_oOptions = oOptions;
+        this.init = function(oOptions){
+            self.m_oOptions = oOptions;
 
-           //1.init canvas
-           _initCanvas(oOptions);
+            //1.init canvas
+            _initCanvas(oOptions);
 
-           //2.init listener
-           _initListener();
+            //2.init listener
+            _initListener();
 
-           //3.init slideWndWH
-           self.SlideWnd.initSlideWndWH(oOptions);
-       };
-
-        //endregion
+            //3.init slideWndWH
+            self.SlideWnd.initSlideWndWH(oOptions);
+        };
 
         //region _initCanvas
 
@@ -89,7 +88,7 @@
 
             //3.hover
             $("#" + strCanvasId).hover(function(){
-               //1.
+                //1.
                 _exitMoveEvent();
 
                 //2.clearCanvas
@@ -663,6 +662,8 @@
 
         //endregion
 
+        //endregion
+
         // region setMouseCur
 
         this.setMouseCur = function(strType){
@@ -717,7 +718,7 @@
         //region drawRegionDragRectangle
 
         this.drawRegionDragRectangle = function(oFirstMovePoint, oSecondMovePoint){
-          //1.clear canvas
+            //1.clear canvas
             self.m_oVMCanvasContext.clearRect(0, 0, self.m_oVMCanvas.width, self.m_oVMCanvas.height);
             self.Node.drawRegionDragRectangle(oFirstMovePoint, oSecondMovePoint, self.m_oVMCanvasContext);
         };

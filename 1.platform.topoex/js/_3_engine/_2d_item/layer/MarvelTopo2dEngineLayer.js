@@ -1,6 +1,8 @@
 (function ($) {
     $.MarvelTopo2dEngineLayer = function (oParent) {
-        //region const
+        var self = this;
+
+        //region Const
 
         this.WIDGET_NAME = "MarvelTopo2dEngineLayer";
 
@@ -20,7 +22,6 @@
 
         //region Fields
 
-        var self = this;
         var m_oParent = oParent;
 
         this.m_oLayerConf = undefined;
@@ -30,7 +31,15 @@
 
         //#region drawLayer
 
-        this.drawLayer = function (oCanvasContext, oProfile, arrNodes, iCanvasWidth) {
+        /**
+         * 根据间接的原始数据，判断有几个伪3D图层，最终绘制伪3D的图层
+         * @param oCanvasContext
+         * @param oProfile
+         * @param arrNodes
+         * @param iCanvasWidth
+         */
+        this.drawLayer = function (oCanvasContext, oProfile, arrNodes,
+                                   iCanvasWidth) {
             var oNode;
             if (self.m_oLayerConf) {
                 for (var i = 0; i < arrNodes.length(); i++) {
@@ -156,10 +165,6 @@
 
             //3.绘制伪3D背景图层
             _drawLayerBg(oCanvasContext, mapLayerNodes, iCanvasWidth, iBgOffset);
-        };
-
-        this.clearTopoLayer4SwitchLayer = function () {
-            self.m_oLayerCache = {};
         };
 
         var _genLayerMinMaxPoint = function (arrNodes, oProfile, oLayerItem, iCanvasWidth) {
@@ -330,6 +335,11 @@
 
         //region drawTopoLayer
 
+        /**
+         * 根据直接的原始数据(已明确有几个伪3D图层)，最终绘制伪3D的图层
+         * @param arrLayerConf
+         * @param oCanvasContext
+         */
         this.drawTopoLayer = function (arrLayerConf, oCanvasContext) {
             this.m_oLayerConf = {};
             for (var i = 0; i < arrLayerConf.length; i++) {
@@ -383,6 +393,16 @@
 
         //region clearTopoLayer4SwitchTopo
 
+        /**
+         * 清除间接原始数据用到的伪3D图层的缓存
+         */
+        this.clearTopoLayer4SwitchLayer = function () {
+            self.m_oLayerCache = {};
+        };
+
+        /**
+         * 清除直接原始数据用到的伪3D图层的缓存
+         */
         this.clearTopoLayer4SwitchTopo = function () {
             self.m_oLayerConf = undefined;
         };

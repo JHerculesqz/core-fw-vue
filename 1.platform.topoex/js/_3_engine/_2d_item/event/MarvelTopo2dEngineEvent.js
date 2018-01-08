@@ -1,5 +1,13 @@
 (function ($) {
+    /**
+     * TODO:待简化
+     *
+     * @param oParent
+     * @constructor
+     */
     $.MarvelTopo2dEngineEvent = function (oParent) {
+        var self = this;
+
         //region Const
 
         this.WIDGET_NAME = "MarvelTopo2dEngineEvent";
@@ -8,14 +16,20 @@
 
         //region Fields
 
-        var self = this;
         var m_oParent = oParent;
 
         /**
          * mapEvent innerEvent/outerEvent
+         * 潜规则：
+         * m_oMapEvent={
+         *  "zoom" : function(){},
+         *  ....
+         * }
          * @type {{}}
          */
-        var m_oMapEvent = {};
+        var m_oMapEvent = {
+
+        };
 
         //endregion
 

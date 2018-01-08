@@ -1,5 +1,7 @@
 (function ($) {
     $.MarvelTopo2dEngineLink = function (oParent) {
+        var self = this;
+
         //region Const
 
         //Const.path
@@ -43,7 +45,6 @@
 
         //region Fields
 
-        var self = this;
         var m_oParent = oParent;
 
         //endregion
@@ -113,10 +114,6 @@
          * @param oCanvasContext
          */
         this.drawLinks = function(arrLinkGroup, arrNodeGroup, iSlideWndZ, dicImages, oCanvasContext){
-            if(oCanvasContext == undefined){
-                return;
-            }
-
             for(var i = 0; i < m_arrInterval4FlowLink.length; i++){
                 clearInterval(m_arrInterval4FlowLink[i]);
             }
@@ -138,8 +135,6 @@
                 _drawLink(oLinkGroup, mapNodes, iSlideWndZ, dicImages, oCanvasContext);
             }
         };
-
-        //endregion
 
         //region _generateLinkNumber
 
@@ -182,7 +177,6 @@
             if(oLink.params.uiHide){
                 return ;
             }
-
             var strSrcNodeName = oLink.params.srcNodeName;
             var strDstNodeName = oLink.params.dstNodeName;
             var oSrcNode = oNodeMap[strSrcNodeName];
@@ -333,9 +327,6 @@
         };
 
         var _drawLinkDetail = function(oCanvasContext, iSlideWndZ, oLink, dicImages){
-            if(undefined == oCanvasContext){
-                return ;
-            }
             //1.设置链路选中阴影
             _drawLinkShadom(oCanvasContext, oLink);
 
@@ -598,7 +589,7 @@
          * @param oLink
          * @private
          */
-        var _drawLinkShadow = function(oCanvasContext, oLink){
+        var _drawLinkShadom = function(oCanvasContext, oLink){
             if(oLink.params.isSelect){
                 var iLinkFromX = oLink.params.uiSrcPoint1X;
                 var iLinkFromY = oLink.params.uiSrcPoint1Y;
@@ -757,7 +748,7 @@
                 iStep_Length_Y = REAL_STEP * sin_x;
                 //5.1.双色展示
                 if(oLink.params.uiFromColor && oLink.params.uiToColor){
-                   //5.1.从起点画到折点
+                    //5.1.从起点画到折点
                     _drawDashLineByColorAndPos(oCanvasContext, oLink.params.uiFromColor, iLinkFromX, iLinkFromY, iInflectionFromX, iInflectionFromY);
 
                     //5.2.从折点画到中间点
@@ -961,7 +952,7 @@
             var iLinkToY = oLink.params.uiDstPoint1Y;
             var bFlowLinkFlag = true;
             var oInterval4FlowLink = setInterval(function(){
-               oCanvasContext.beginPath();
+                oCanvasContext.beginPath();
                 oCanvasContext.strokeStyle = FLOW_LINK_DEFAULT_BG_COLOR;
                 _penWidth(oLink, oCanvasContext);
                 oCanvasContext.moveTo(oLink.params.uiLinkDirectionSrcCrossX, oLink.params.uiLinkDirectionSrcCrossY);
@@ -1231,7 +1222,7 @@
          * @param oLink
          * @private
          */
-        var _drawDirection = function(oCanvasContext, oLink){
+        var _drawLinkDirection = function(oCanvasContext, oLink){
             if(!oLink.params.uiDirection || LINK_DIRECTION_UNIDIRECTIONAL == oLink.params.uiDirection){
                 oLink.params.uiLinkDirectionSrcCrossX = oLink.params.uiSrcPoint2X;
                 oLink.params.uiLinkDirectionSrcCrossY = oLink.params.uiSrcPoint2Y;
@@ -1356,7 +1347,7 @@
                     strFromColor = oLink.params.uiFromColor
                 }
                 _drawLinkDirectionDetail(oCanvasContext, strFromColor, iLinkLeftDirectionSrcX, iLinkLeftDirectionSrcY, iSrcPoint1X, iSrcPoint1Y,
-                iLinkRightDirectionSrcX, iLinkRightDirectionSrcY, iLinkDirectionSrcCrossX, iLinkDirectionSrcCrossY);
+                    iLinkRightDirectionSrcX, iLinkRightDirectionSrcY, iLinkDirectionSrcCrossX, iLinkDirectionSrcCrossY);
 
                 //5.1.1.画宿节点箭头
                 var strToColor = "#878787";
@@ -1458,6 +1449,8 @@
                 }
             }
         };
+
+        //endregion
 
         //endregion
 
@@ -1576,11 +1569,7 @@
             for(var i = 0; i < m_arrIntervel4FlowLink.length; i++){
                 clearInterval(m_arrIntervel4FlowLink[i]);
             }
-            for(var j = 0; j < m_arrIntervel4HighLightLink.length; j++){
-                clearInterval(m_arrIntervel4HighLightLink[j]);
-            }
             m_arrIntervel4FlowLink = [];
-            m_arrIntervel4HighLightLink = [];
         };
 
         //endregion
