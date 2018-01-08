@@ -41,11 +41,17 @@
             },
             //endregion
             //region stage
+            callbackOnClick: function (oEvent) {},
             callbackOnRightClick: function (oBuObj, iX, iY, oEvent) {
             }, //oBuObj为background时,表示点击的是背景
             callbackOnPositionUpdate: function (bUpdate) {
-            }
+            },
+            callbackOnAreaSelect: function(oSelectTopoData){}
             //endregion
+        };
+
+        this.config = {
+            areaSelect: "node"
         };
 
         //endregion
@@ -89,8 +95,8 @@
             _initEventMouseDown(oStage, oTopo);
             _initEventMouseUp(oStage, oTopo);
             _initEventMouseMove(oStage, oTopo);
-            _initEventMouseOver(oStage, oTopo);
-            _initEventMouseOut(oStage, oTopo);
+            _initEventMouseEnter(oStage, oTopo);
+            _initEventMouseLeave(oStage, oTopo);
             //右键事件
             _initContextmenu(oStage, oTopo);
 
@@ -196,7 +202,7 @@
                 if (self.model === self.MODEL_CREATE_NODE) {
                     oTopo.Sprite.Node.eventEscPress(e, oTopo);
                 }
-                else if(self.model == self.MODEL_CREATE_LINK){
+                else if (self.model == self.MODEL_CREATE_LINK) {
                     oTopo.Sprite.LinkGroup.eventEscPress(e, oTopo);
                 }
             }, function (e) {
@@ -256,18 +262,18 @@
             });
         };
 
-        var _initEventMouseOver = function (oStage, oTopo) {
-            oStage.on("mouseover", function (e) {
+        var _initEventMouseEnter = function (oStage, oTopo) {
+            oStage.on("mouseenter", function (e) {
                 if (self.model === self.MODEL_CREATE_NODE) {
-                    oTopo.Sprite.Node.stageEventMouseOver(e, oTopo);
+                    oTopo.Sprite.Node.stageEventMouseEnter(e, oTopo);
                 }
             });
         };
 
-        var _initEventMouseOut = function (oStage, oTopo) {
-            oStage.on("mouseout", function (e) {
+        var _initEventMouseLeave = function (oStage, oTopo) {
+            oStage.on("mouseleave", function (e) {
                 if (self.model === self.MODEL_CREATE_NODE) {
-                    oTopo.Sprite.Node.stageEventMouseOut(e, oTopo);
+                    oTopo.Sprite.Node.stageEventMouseLeave(e, oTopo);
                 }
             });
         };
@@ -373,6 +379,10 @@
 
         this.updateModel = function (strModel) {
             self.model = strModel;
+        };
+
+        this.setConfig = function (oConfig) {
+            Object.assign(self.config, oConfig);
         };
 
         //endregion

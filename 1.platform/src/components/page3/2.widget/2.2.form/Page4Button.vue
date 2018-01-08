@@ -320,6 +320,34 @@
         </marvel-tab>
       </div>
       <!--2级 end-->
+      <!--2级 start-->
+      <div class="title level2">可输入下拉框控件</div>
+      <div class="describe">
+        可输入下拉框
+      </div>
+      <div class="showArea">
+        <marvel-tab :tabItems="tabItems9">
+          <marvel-tab-item :isActive="tabItems9[0].isActive">
+            <div class="showAreaInner">
+              <button v-on:click="onClick4GetInputDropDownSelectItem">getSelectItem</button>
+              <button v-on:click="onClick4GetInputDropDownSelectItemObj">getSelectItemObj</button>
+              <button v-on:click="onClick4setInputDropDownSelectItem">setSelectItem Item6</button>
+              <marvel-input-drop-down ref="ref15"
+                                      maxHeight="120px"></marvel-input-drop-down>
+            </div>
+          </marvel-tab-item>
+          <marvel-tab-item :isActive="tabItems9[1].isActive">
+            <div class="codeArea">
+              <pre v-highlight>
+                <code class="html">
+
+                </code>
+              </pre>
+            </div>
+          </marvel-tab-item>
+        </marvel-tab>
+      </div>
+      <!--2级 end-->
     </div>
   </div>
 </template>
@@ -336,6 +364,7 @@
   import MarvelDropDownButton from "@/walle/widget/button/MarvelDropDownButton";
   import MarvelTabButton from "@/walle/widget/button/MarvelTabButton";
   import MarvelMultiDropDown from "@/walle/widget/button/MarvelMultiDropDown";
+  import MarvelInputDropDown from "@/walle/widget/button/MarvelInputDropDown";
 
   export default {
     name: 'page4Button',
@@ -347,7 +376,8 @@
       MarvelIconTxtButton,
       MarvelButton, MarvelPrimaryButton, MarvelIconButton,
       MarvelTxtButton,
-      MarvelMultiDropDown
+      MarvelMultiDropDown,
+      MarvelInputDropDown
     },
     data: function () {
       return {
@@ -408,6 +438,13 @@
           label: "Code View",
           isActive: false
         }],
+        tabItems9: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
         //#endregion
         //#region custom data
         //region dropDownBtn
@@ -424,7 +461,22 @@
         }],
         //endregion
         //region multiDropDown
-        multiItems: []
+        multiItems: [],
+        //endregion
+        //region inputDropDown
+        inputItems:[{
+          label: "Item1Name"
+        }, {
+          label: "Item2Name"
+        }, {
+          label: "Item3Name"
+        },{
+          label: "aaaaaaaaaaa"
+        }, {
+          label: "bbbbbbbbbbb"
+        }, {
+          label: "ccccccccccc"
+        }]
         //endregion
         //#endregion
       }
@@ -458,6 +510,8 @@
       }
 
       //endregion
+      this.$refs.ref15.init(this.inputItems, "Item1Name");
+      //region multiDropdown
       //#endregion
     },
     methods: {
@@ -487,6 +541,15 @@
       onItemCheckChangeEvent: function (oItem) {
         console.log(oItem);
       },
+      onClick4GetInputDropDownSelectItem:function(){
+        console.log(this.$refs.ref15.getSelectItem());
+      },
+      onClick4GetInputDropDownSelectItemObj:function(){
+        console.log(this.$refs.ref15.getSelectItemObj());
+      },
+      onClick4setInputDropDownSelectItem:function(){
+        this.$refs.ref15.setSelectItem(this.inputItems[5].label);
+      }
       //#endregion
       //#region callback
 

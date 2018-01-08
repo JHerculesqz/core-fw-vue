@@ -16,7 +16,8 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <button v-on:click="oTestData">test4Data(init)</button>
+            <button v-on:click="oTest4SetConfig">test4SetConfig</button>
+            <button v-on:click="oTestData">test4Data(draw)</button>
             <button v-on:click="oTest4Map">test4Map(setCenter)</button>
             <button v-on:click="oTest4Map2">test4Map(showOrHide)</button>
             <button v-on:click="oTest4Layer1">test4Layer(getDiffLst)</button>
@@ -35,6 +36,8 @@
             <button v-on:click="oTest4Polygon2">test4Polygon(delPolygon)</button>
             <button v-on:click="oTest4Topo">test4Topo</button>
             <button v-on:click="oTest4CreateMarker">test4CreateMarker</button>
+            <button v-on:click="oTest4ShowAllLabel">test4ShowAllLabel</button>
+            <button v-on:click="oTest4HideAllLabel">test4HideAllLabel</button>
             <div style="width: 100%;height: 500px;">
               <marvel-leaflet ref="ref0" id="gisMapId1"
                               v-on:onZoom="onZoom"
@@ -140,6 +143,11 @@
       },
       onCircleDblclick: function (e) {
         console.log(e);
+      },
+      oTest4SetConfig: function () {
+        this.$refs.ref0.setConfig({
+          showLabel: false
+        });
       },
       oTestData: function () {
         //#region mock
@@ -492,6 +500,12 @@
         }, true);
 
         this.createMarkerId += 1;
+      },
+      oTest4ShowAllLabel: function () {
+        this.$refs.ref0.showAllLabel();
+      },
+      oTest4HideAllLabel: function () {
+        this.$refs.ref0.hideAllLabel();
       },
       //#endregion
       //#region callback

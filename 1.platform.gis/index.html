@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="lib/plugins/leaflet.pm/leaflet.pm.css"/>
     <script type="application/javascript" src="lib/plugins/leaflet.pm/leaflet.pm.min.js"></script>
     <script type="application/javascript" src="lib/keyboard.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/MarvelGis.css"/>
     <script type="application/javascript" src="js/_1_stage/MarvelGisStage.js"></script>
     <script type="application/javascript" src="js/_2_layer/MarvelGisLayer.js"></script>
     <script type="application/javascript" src="js/_3_sprite/MarvelGisSprite.js"></script>
@@ -47,7 +48,7 @@
                 uiType: "ne",
                 uiImgUrl: "lib/images/node1.svg",
                 uiImgWidth: 32,
-                uiLabel: "marker1",
+                uiLabel: "marker111111111111111111111111111111111111111111111111111",
                 uiTips: "<b>marker1</b><br>11111",
                 uiDraggable: true,
                 uiOpacity: 1
@@ -232,6 +233,7 @@
 
             //Topo
             var oGis = new $.MarvelGis();
+            window.gis = oGis;
             //init
             var eventOptions = {
                 //region Stage
@@ -284,8 +286,8 @@
                 //endregion
             };
             oGis.Api.init("id1", 51.505, -0.09, 13, {
-                mapUrl: "https://api.mapbox.com/styles/v1/jherculesqz/cj99csbwi2bzy2qp3mhtqcrkx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamhlcmN1bGVzcXoiLCJhIjoiY2o4anNybjZqMDZnczMybXZxaHNhMDRlMyJ9.fR2DM7aypSp8q4AxE6uL5w",
-                //mapUrl: "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}",
+//                mapUrl: "https://api.mapbox.com/styles/v1/jherculesqz/cj99csbwi2bzy2qp3mhtqcrkx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamhlcmN1bGVzcXoiLCJhIjoiY2o4anNybjZqMDZnczMybXZxaHNhMDRlMyJ9.fR2DM7aypSp8q4AxE6uL5w",
+                mapUrl: "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}",
                 hasZoomCtrl: true,
                 export: true,
                 mess: true,
@@ -293,6 +295,11 @@
                 messResLine: "#fff",
                 pm: true,
             }, eventOptions, oGis);
+            $("#oTest4SetConfig").click(function () {
+                oGis.Api.setConfig({
+                    showLabel: false
+                }, oGis);
+            });
             $("#oTest4Data").click(function () {
                 //draw
                 oGis.Api.draw(oTopoData, oGis);
@@ -446,6 +453,12 @@
 
                 createMarkerId += 1;
             });
+            $("#oTest4ShowAllLabel").click(function () {
+                oGis.Api.showAllLabel(oGis);
+            });
+            $("#oTest4HideAllLabel").click(function () {
+                oGis.Api.hideAllLabel(oGis);
+            });
             //endregion
 
             //#region demo2
@@ -527,7 +540,8 @@
     </script>
 </head>
 <body>
-<button id="oTest4Data">test4Data(init)</button>
+<button id="oTest4SetConfig">test4SetConfig</button>
+<button id="oTest4Data">test4Data(draw)</button>
 <button id="oTest4Map1">test4Map(setCenter)</button>
 <button id="oTest4Map2">test4Map(showOrHide)</button>
 <button id="oTest4Layer1">test4Layer(getDiffLst)</button>
@@ -546,6 +560,8 @@
 <button id="oTest4Polygon2">test4Polygon(delPolygon)</button>
 <button id="oTest4Topo">test4Topo(getCache)</button>
 <button id="oTest4CreateMarker">test4CreateMarker</button>
+<button id="oTest4ShowAllLabel">test4ShowAllLabel</button>
+<button id="oTest4HideAllLabel">test4HideAllLabel</button>
 <div class="gisMap" id="id1"
      style="width: 100%;height: 500px;"></div>
 <div>室内地图</div>

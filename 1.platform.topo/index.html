@@ -198,7 +198,8 @@
                     uiTitle: "gLink" + i + "_" + i,
                     uiLabelR: "nodeBase" + (i + 1),
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink2 = {
                     id: "gLink" + i + "_" + (i + 1),
@@ -213,7 +214,8 @@
                     uiTitle: "gLink" + i + "_" + (i + 1),
                     uiLabelR: "nodeBase" + (i + 1),
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 //oLink3和oLink4为一组
                 var oLink3 = {
@@ -229,7 +231,8 @@
                     uiTitle: "gLink" + i + "_" + (i + 2),
                     uiLabelR: "nodeBase" + (i + 1),
                     uiLinkColorKey: "linkType3",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
 
                 var oLink4 = {
@@ -245,7 +248,8 @@
                     uiTitle: "gLink" + i + "_" + (i + 3),
                     uiLabelR: "nodeBase" + (i + 1),
                     uiLinkColorKey: "linkType3",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
 
                 arrLink.push(oLink1);
@@ -269,7 +273,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 0,
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink2 = {
                     id: "gLink" + i + 1,
@@ -284,7 +289,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 0,
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink3 = {
                     id: "gLink" + i + 2,
@@ -299,7 +305,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 1,
                     uiLinkColorKey: "linkType3",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink4 = {
                     id: "gLink" + i + 3,
@@ -314,7 +321,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 1,
                     uiLinkColorKey: "linkType3",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 arrLink.push(oLink1);
                 arrLink.push(oLink2);
@@ -337,7 +345,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 0,
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink2 = {
                     id: "gLink" + i + 1,
@@ -352,7 +361,8 @@
                     uiLink: true,
                     uiLinkGroupId: "groupLink" + i + 0,
                     uiLinkColorKey: "linkType2",
-                    uiLinkWidth: 3
+                    uiLinkWidth: 3,
+                    uiDirection: 1
                 };
                 var oLink3 = {
                     id: "gLink" + i + 2,
@@ -407,21 +417,21 @@
                     console.log(oNode);
                     console.log(oEvent);
                 },
-                callbackGenerateNodeProp: function(oNode){
-                    if(oNode.children){
-                        oNode.uiLabel= "Group:" + oNode.id;
+                callbackGenerateNodeProp: function (oNode) {
+                    if (oNode.children) {
+                        oNode.uiLabel = "Group:" + oNode.id;
                     }
-                    else{
-                        oNode.uiLabel= oNode.id;
+                    else {
+                        oNode.uiLabel = oNode.id;
                     }
                 },
-                callbackGenerateNodeTip: function(oNode){
+                callbackGenerateNodeTip: function (oNode) {
                     oNode.uiTitle = oNode.id;
-                    if(oNode.children){
-                        oNode.uiTip= "This is a nodeGroup";
+                    if (oNode.children) {
+                        oNode.uiTip = "This is a nodeGroup";
                     }
-                    else{
-                        oNode.uiTip= "This is a node";
+                    else {
+                        oNode.uiTip = "This is a node";
                     }
                 },
                 //endregion
@@ -443,27 +453,30 @@
                     console.log(oLink);
                     console.log(oEvent);
                 },
-                callbackGenerateLinkProp: function(oLink){
-                    if(oLink.children){
+                callbackGenerateLinkProp: function (oLink) {
+                    if (oLink.children) {
                         oLink.uiLabelM = "Group: " + oLink.id;
                         oLink.uiLinkColorKey = oLink.children[0].uiLinkColorKey;
                     }
-                    else{
+                    else {
                         oLink.uiLabelM = oLink.id;
                     }
                     oLink.uiLinkWidth = 3;
                 },
-                callbackGenerateLinkTip: function(oLink){
+                callbackGenerateLinkTip: function (oLink) {
                     oLink.uiTitle = oLink.id;
-                    if(oLink.children){
+                    if (oLink.children) {
                         oLink.uiTip = "This is a group link, has " + oLink.children.length + " links";
                     }
-                    else{
+                    else {
                         oLink.uiTip = "This is a link";
                     }
                 },
                 //endregion
                 //region stage
+                callbackOnClick: function (oEvent) {
+                    console.log("click background")
+                },
                 callbackOnRightClick: function (oBuObj, iX, iY) {
                     console.log("rightClick");
                     console.log(oBuObj);
@@ -471,6 +484,9 @@
                 },
                 callbackOnPositionUpdate: function (bUpdate) {
                     console.log("callbackOnPositionUpdate: " + bUpdate);
+                },
+                callbackOnAreaSelect: function (oSelectTopoData) {
+                    console.log(oSelectTopoData);
                 }
                 //endregion
             };
@@ -541,6 +557,29 @@
                 }, true, oTopo);
                 createNodeId += 1;
             });
+            $("#createNodeContinue").click(function () {
+                oTopo.Api.createNodeContinue({
+                    id: createNodeId,
+                    uiImgKey: "node",
+                    uiLabel: createNodeId,
+                    uiNode: true
+                }, function (oBuObj, bOk) {
+                    if (bOk) {
+                        var oTopoData = oTopo.Api.getTopoData(oTopo);
+                        var oNode = {
+                            id: createNodeId + "_" + Math.random() * 100,
+                            uiImgKey: "node",
+                            uiLabel: createNodeId,
+                            x: oBuObj.x,
+                            y: oBuObj.y,
+                            uiNode: true
+                        };
+                        oTopoData.nodes.push(oNode);
+                        oTopo.Api.updateTopo(oTopo, oTopoData);
+                    }
+                }, oTopo);
+                createNodeId += 1;
+            });
             $("#savePosition").click(function () {
                 oTopo.Api.savePosition(oTopo);
             });
@@ -554,42 +593,65 @@
             $("#setBestView").click(function () {
                 oTopo.Api.setBestView(oTopo);
             });
-            $("#hideOrShowNode").click(function(){
+            $("#hideOrShowNode").click(function () {
                 var oTopoData = oTopo.Api.getTopoData(oTopo);
-                oTopoData.nodes.forEach(function(oNode, index){
-                    if(oNode.id == "nodeBase2"){
-                        if(oNode.uiHide == undefined){
+                oTopoData.nodes.forEach(function (oNode, index) {
+                    if (oNode.id == "nodeBase2") {
+                        if (oNode.uiHide == undefined) {
                             oNode.uiHide = true;
                         }
-                        else{
+                        else {
                             oNode.uiHide = !oNode.uiHide;
                         }
                     }
                 });
                 oTopo.Api.updateTopo(oTopo, oTopoData);
             });
-            $("#hideOrShowLink").click(function(){
+            $("#hideOrShowLink").click(function () {
                 var oTopoData = oTopo.Api.getTopoData(oTopo);
-                oTopoData.links.forEach(function(oLink, index){
-                    if(oLink.id == "link0"){
-                        if(oLink.uiHide == undefined){
+                oTopoData.links.forEach(function (oLink, index) {
+                    if (oLink.id == "link0") {
+                        if (oLink.uiHide == undefined) {
                             oLink.uiHide = true;
                         }
-                        else{
+                        else {
                             oLink.uiHide = !oLink.uiHide;
                         }
                     }
                 });
                 oTopo.Api.updateTopo(oTopo, oTopoData);
             });
-            $("#getSelectedData").click(function(){
+            $("#getSelectedData").click(function () {
                 var oData = oTopo.Api.getSelectedData(oTopo);
                 console.log(oData);
             });
             var createLinkId = "createLinkId1";
-            $("#createLink").click(function(){
-                oTopo.Api.createLink(oTopo, function(bSuccessful, oSrcNode, oDstNode){
-                    if(bSuccessful){
+            $("#createLink").click(function () {
+                oTopo.Api.createLink(oTopo, function (bSuccessful, oSrcNode, oDstNode) {
+                    if (bSuccessful) {
+                        var oTopoData = oTopo.Api.getTopoData(oTopo);
+                        var oLink = {
+                            id: createLinkId,
+                            srcNodeId: oSrcNode.id,
+                            dstNodeId: oDstNode.id,
+                            uiLabelL: "nodeBase0",
+                            uiLabelM: createLinkId,
+                            uiLabelR: "nodeBase1",
+                            uiLink: true,
+                            uiLinkColorKey: "linkType_lu_2",
+                            uiLinkWidth: 3,
+                            uiDirection: 1
+                        };
+                        oTopoData.links.push(oLink);
+                        oTopo.Api.updateTopo(oTopo, oTopoData);
+
+                        createLinkId += 1;
+                    }
+                });
+            });
+            $("#createLinkContinue").click(function () {
+                oTopo.Api.createLinkContinue(oTopo, function (bSuccessful, oSrcNode, oDstNode) {
+                    if (bSuccessful) {
                         var oTopoData = oTopo.Api.getTopoData(oTopo);
                         var oLink = {
                             id: createLinkId,
@@ -604,14 +666,22 @@
                         };
                         oTopoData.links.push(oLink);
                         oTopo.Api.updateTopo(oTopo, oTopoData);
-
                         createLinkId += 1;
                     }
                 });
             });
-            $("#getPosChangeTopoCache").click(function(){
+            $("#getPosChangeTopoCache").click(function () {
                 var oRes = oTopo.Api.getPosChangeTopoCache(oTopo);
                 console.log(oRes);
+            });
+            $("#setAreaSelect1").click(function () {
+                oTopo.Api.setConfig(oTopo, {areaSelect: "node"});
+            });
+            $("#setAreaSelect2").click(function () {
+                oTopo.Api.setConfig(oTopo, {areaSelect: "link"});
+            });
+            $("#setAreaSelect3").click(function () {
+                oTopo.Api.setConfig(oTopo, {areaSelect: "all"});
             });
             //endregion
         });
@@ -628,6 +698,7 @@
     <button id="getTopoData">getTopoData</button>
     <button id="updateTopo">updateTopo</button>
     <button id="createNode">createNode</button>
+    <button id="createNodeContinue">createNodeContinue</button>
     <button id="savePosition">savePosition</button>
     <button id="resetPosition">resetPosition</button>
     <button id="isPositionUpdate">isPositionUpdate</button>
@@ -636,7 +707,11 @@
     <button id="hideOrShowLink">hideOrShowLink</button>
     <button id="getSelectedData">getSelectedData</button>
     <button id="createLink">createLink</button>
+    <button id="createLinkContinue">createLinkContinue</button>
     <button id="getPosChangeTopoCache">getPosChangeTopoCache</button>
+    <button id="setAreaSelect1">设置框选网元</button>
+    <button id="setAreaSelect2">设置框选链路</button>
+    <button id="setAreaSelect3">设置框选网元和链路</button>
 </div>
 <div>
     <div id="id1" style="width:1200px; height:600px; z-index: 1000; position: relative;"></div>

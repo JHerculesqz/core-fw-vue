@@ -29,6 +29,7 @@
 
         var ACTIVE_CLASS_NAME = "devPanelEx-rect-active";
         var arr_ActiveIds = [];
+        var HOVER_CLASS_NAME = "devPanelEx-rect-hover";
         //endregion
 
         //region imsg
@@ -85,6 +86,12 @@
                         m_oEventOptions.callbackOnContextmenu(m_oOptions.buObjId, strSubObjId, evt);
                     }
                 });
+                oBD.mouseover(function (evt) {
+                    _onMouseover(oBD, evt);
+                });
+                oBD.mouseout(function (evt) {
+                    _onMouseout(oBD, evt);
+                });
             });
         };
 
@@ -94,6 +101,16 @@
 
         var _isRightClick = function (evt) {
             return evt.button == 2 || evt.which == 3;
+        };
+
+        var _onMouseover = function (oElement, oEvent) {
+            var oChild = oElement.children()[0];
+            oChild.addClass(HOVER_CLASS_NAME);
+        };
+
+        var _onMouseout = function (oElement, oEvent) {
+            var oChild = oElement.children()[0];
+            oChild.removeClass(HOVER_CLASS_NAME);
         };
 
         this.addNode = function (strSlotId, oBuObj, oAfterCallback, oEventCallback) {
@@ -272,6 +289,12 @@
                         }
                         evt.stopPropagation();
                     });
+                    oElement.mouseover(function (evt) {
+                        _onMouseover(oElement, evt);
+                    });
+                    oElement.mouseout(function (evt) {
+                        _onMouseout(oElement, evt);
+                    });
                 });
 
                 //callback
@@ -283,7 +306,7 @@
             _addNode(strSlotId, oBuObj, oHandleData, oAfterCallbackEx, oEventCallback);
         };
 
-        this.addSubNode = function (strFirstSlotId, strSecondSlotId, oBuObj, oAfterCallback) {
+        this.addSubNode = function (strFirstSlotId, strSecondSlotId, oBuObj, oAfterCallback, oEventCallback) {
             $.get(oBuObj.imgUrl, function (data) {
                 //找到主单板
                 var strTargetId = _generateId(strFirstSlotId);
@@ -301,6 +324,23 @@
 
                 //设置属性
                 var oElement = _setLastChildProp(oMainBoard, startPos, strTargetId);
+
+                //event
+                var oEventOptions = Object.assign({
+                    callbackOnClick: function (strFirstSlotId, strSecondSlotId, oBuObj, evt) {
+                    },
+                    callbackOnContextmenu: function (strFirstSlotId, strSecondSlotId, oBuObj, evt) {
+                    }
+                }, oEventCallback);
+                oElement.mousedown(function (evt) {
+                    if (_isLeftClick(evt)) {
+                        oEventOptions.callbackOnClick(strFirstSlotId, strSecondSlotId, oBuObj, evt);
+                    }
+                    else if (_isRightClick(evt)) {
+                        oEventOptions.callbackOnContextmenu(strFirstSlotId, strSecondSlotId, oBuObj, evt);
+                    }
+                    evt.stopPropagation();
+                });
 
                 //callback
                 if (oAfterCallback) {
@@ -326,6 +366,7 @@
                 return;
             }
             var oOptions = options || {};
+            oOptions = Object.assign({encoderOptions: 1, scale: 1}, oOptions);
             saveSvgAsPng(document.getElementById(m_oOptions.id).firstElementChild, strPicName, oOptions);
         };
 

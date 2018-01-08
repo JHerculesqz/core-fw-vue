@@ -21,6 +21,7 @@
             status: STATUS_FREE,
             startObj: undefined,
             endObj: undefined,
+            continue: false,
             callback: undefined
         };
 
@@ -726,9 +727,15 @@
             var radius = Math.sqrt(Math.pow(step, 2) + Math.pow(length / 2, 2));
             var centerLength = length - oNodeSrcPos.width / 2 - oNodeDstPos.width / 2;
             var a3, a4;
-            if (linkCount % 2 == 1) {
+            //1条链路
+            if (linkCount == 1) {
+                a3 = a4 = 0;
+            }
+            //奇数条链路
+            else if (linkCount % 2 == 1) {
                 a3 = a4 = 0.5 * Math.PI / ((linkCount - 1) / 2) * oIndex;
             }
+            //偶数条链路
             else {
                 a3 = a4 = 0.5 * Math.PI / ((linkCount) / 2) * oIndex;
             }
@@ -1026,6 +1033,7 @@
             return arrSelectGroupExists;
         };
 
+        //功能：选中链路，如果链路是捆绑链路的子链路，捆绑链路会自动展开，并选中子链路
         this.selectLinksById = function (arrLinkId, oTopo) {
             var oId2Links = {};
             var arrGroupId4Destroy = [];
@@ -1096,6 +1104,19 @@
             return oLink;
         };
 
+        //功能：选中链路，如果链路是捆绑链路的子链路，捆绑链路不会自动展开
+        this.selectLinksByIdEx = function (arrLinkId, oTopo) {
+            arrLinkId.forEach(function (iLinkId, index) {
+                var oLinkGroup = oTopo.Stage.findOne(iLinkId, oTopo);
+                if (oLinkGroup) {
+                    oLinkGroup.tag.uiSelectLink = true;
+                    _setSelectLinkStyle(oLinkGroup, oTopo);
+                }
+            });
+
+            oTopo.Layer.reDraw(oTopo.ins.layerLink);
+        };
+
         //region createLink
 
         this.createLink = function (oAfterCallback, oTopo) {
@@ -1103,6 +1124,12 @@
             //cache
             createLinkData.status = STATUS_PENDING;
             createLinkData.callback = oAfterCallback;
+        };
+
+        this.createLinkContinue = function (oAfterCallback, oTopo) {
+            self.createLink(oAfterCallback, oTopo);
+            //cache
+            createLinkData.continue = true;
         };
 
         this.stageEventMouseDown = function (evt, oTopo) {
@@ -1122,23 +1149,31 @@
         };
 
         var _createLinkEnd = function (bSuccessful, oTopo) {
-            oTopo.Stage.updateModel(oTopo.Stage.MODEL_EMPTY);
-
+            //callback
+            if (typeof createLinkData.callback == "function") {
+                createLinkData.callback(bSuccessful, createLinkData.startObj, createLinkData.endObj);
+            }
+            //clear mockLink
             var oLinkGroup = oTopo.Stage.findOne(CREATE_MOCK_LINKID, oTopo);
             if (oLinkGroup) {
                 //刪除
                 oLinkGroup.destroy();
                 oTopo.Layer.reDraw(oTopo.ins.layerLink);
             }
-            //callback
-            if (typeof createLinkData.callback == "function") {
-                createLinkData.callback(bSuccessful, createLinkData.startObj, createLinkData.endObj);
+            //连续创建
+            if (createLinkData.continue) {
+                createLinkData.status = STATUS_PENDING;
             }
-            //cache
-            createLinkData.status = STATUS_FREE;
-            createLinkData.callback = undefined;
-            createLinkData.startObj = undefined;
-            createLinkData.endObj = undefined;
+            if (!createLinkData.continue || !bSuccessful) {
+                oTopo.Stage.updateModel(oTopo.Stage.MODEL_EMPTY);
+
+                //cache
+                createLinkData.status = STATUS_FREE;
+                createLinkData.callback = undefined;
+                createLinkData.startObj = undefined;
+                createLinkData.endObj = undefined;
+                createLinkData.continue = false;
+            }
         };
 
         this.stageEventMouseMove = function (evt, oTopo) {

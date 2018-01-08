@@ -17,6 +17,7 @@
             status: STATUS_FREE,
             buObj: undefined,
             autoCreate: true,
+            continue: false,
             callback: undefined
         };
         //endregion
@@ -26,6 +27,12 @@
         //region draw
 
         this.draw = function (oBuObj, oTopo) {
+            //region 0._destroyNodeById
+
+            _destroyNodeById(oBuObj.id, oTopo);
+
+            //endregion
+
             //region 1.getPos
 
             var oPos = _getPos(oBuObj);
@@ -100,6 +107,12 @@
         };
 
         this.drawInGroup = function (oBuObj, oExpandGroupExists, oTopo) {
+            //region 0._destroyNodeById
+
+            _destroyNodeById(oBuObj.id, oTopo);
+
+            //endregion
+
             //region 1.getPos
 
             var oPos = _getPos(oBuObj);
@@ -249,6 +262,8 @@
             }
         };
 
+        //region createNode
+
         this.createNode = function (oBuObj, oAfterCallback, bAutoCreate, oTopo) {
             oTopo.Stage.updateModel(oTopo.Stage.MODEL_CREATE_NODE);
             //save cache
@@ -260,7 +275,13 @@
             createNodeData.callback = oAfterCallback;
         };
 
-        this.stageEventMouseOver = function (oEvent, oTopo) {
+        this.createNodeContinue = function (oBuObj, oAfterCallback, oTopo) {
+            self.createNode(oBuObj, oAfterCallback, false, oTopo);
+            //save cache
+            createNodeData.continue = true;
+        };
+
+        this.stageEventMouseEnter = function (oEvent, oTopo) {
             //update buObj prop
             var oPos = oTopo.Stage.getPointerPos4DrawInStage(oTopo);
             createNodeData.buObj.x = oPos.x;
@@ -300,21 +321,25 @@
         };
 
         var _createNodeEnd = function (oTopo, bCreatedSuccessful) {
-            oTopo.Stage.updateModel(oTopo.Stage.MODEL_EMPTY);
-            if (createNodeData.autoCreate === false) {
-                _destroyNodeById(createNodeData.buObj.id, oTopo);
-            }
             if (typeof createNodeData.callback == "function") {
                 createNodeData.callback(createNodeData.buObj, bCreatedSuccessful);
             }
-            //clear cache
-            createNodeData.buObj = undefined;
-            createNodeData.status = STATUS_FREE;
-            createNodeData.autoCreate = true;
-            createNodeData.callback = undefined;
+            //非连续创建模式
+            if (!createNodeData.continue || !bCreatedSuccessful) {
+                oTopo.Stage.updateModel(oTopo.Stage.MODEL_EMPTY);
+                if (createNodeData.autoCreate === false) {
+                    _destroyNodeById(createNodeData.buObj.id, oTopo);
+                }
+                //clear cache
+                createNodeData.buObj = undefined;
+                createNodeData.status = STATUS_FREE;
+                createNodeData.autoCreate = true;
+                createNodeData.continue = false;
+                createNodeData.callback = undefined;
+            }
         };
 
-        this.stageEventMouseOut = function (oEvent, oTopo) {
+        this.stageEventMouseLeave = function (oEvent, oTopo) {
             _destroyNodeById(createNodeData.buObj.id, oTopo);
         };
 
@@ -337,6 +362,8 @@
                 _createNodeEnd(oTopo, false);
             }
         };
+
+        //endregion
 
         //endregion
     }

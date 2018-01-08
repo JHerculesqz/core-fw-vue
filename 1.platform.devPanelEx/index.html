@@ -17,7 +17,7 @@
                     id: "rackPanel",
                     buObjId: "jigui_1",
                     imgUrl: "image/rack1.txt",
-                    subBuObjs: [{id: "bd0", dir: 0}, {id: "bd1", dir: 0}, {id: "bd2", dir: 0}, {id: "bd3", dir: 0}, {id: "bd4", dir: 0}]
+                    subBuObjs: [{id: "bd1", dir: 0}, {id: "bd2", dir: 0}, {id: "bd3", dir: 0}, {id: "bd4", dir: 0}]
                 };
                 var oEventOptions = {
                     callbackOnClick: function (strBuObjId, strSubBuObjId, evt) {
@@ -49,7 +49,7 @@
                 MarvelRackPanel.removeAllActiveStyle();
             });
             $("#id5").click(function () {
-                MarvelRackPanel.exportPng("nb.png");
+                MarvelRackPanel.exportPng("nb.png", {scale: 5});
             });
         });
     </script>

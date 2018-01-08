@@ -95,6 +95,8 @@
           disable:true,
           hasCustomSubPanel:true
         }, {
+          type:"bar"
+        },{
           id: 3,
           label: "重置",
           visible:true,
@@ -118,6 +120,8 @@
             icon:"icon-drawer"
           }]
         }, {
+          type:"bar"
+        },{
           id: 5,
           label: "布局对齐",
           visible:true,

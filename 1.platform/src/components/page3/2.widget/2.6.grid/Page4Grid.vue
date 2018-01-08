@@ -81,7 +81,8 @@
                               v-on:onRowCheckOrUnCheck="onRowCheckOrUnCheckEx"
                               v-on:onRowRadioCheck="onRowRadioCheckEx"
                               v-on:onOptionChange="onOptionChangeEx"
-                              v-on:onClickMultiDropdownItem="onClickMultiDropdownItemEx"></marvel-grid-ex>
+                              v-on:onClickMultiDropdownItem="onClickMultiDropdownItemEx"
+                              v-on:onClickTextCell="onClickTextCell"></marvel-grid-ex>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -362,6 +363,12 @@
           type: "multiDropdown",
           visible: true,
           width: "200px"
+        }, {
+          label: "自定义",
+          key: "customer",
+          type: "customer",
+          visible: true,
+          width: "200px"
         }],
         skipEx: 0,
         limitEx: 10,
@@ -561,7 +568,8 @@
         oRow.push({
           key: "checkBox",
           value: "",
-          checked: i == 0 ? true : false
+          checked: i == 0 ? true : false,
+          disabled: i % 4 == 0 ? true : false
         });
         oRow.push({
           key: "name",
@@ -610,6 +618,11 @@
           }, {
             value: "Node4"
           }],
+        });
+        oRow.push({
+          key: "customer",
+          type: "text",
+          value: "自定义"
         });
         this.rowsEx.push(oRow);
       }
@@ -701,9 +714,26 @@
       },
       onOptionChangeEx: function (oRow, oCell, srtOldValue, strNewValue) {
         console.log("onOptionChangeEx");
+        if (oCell.key == "customer") {
+          oCell.type = "text";
+          oCell.value = strNewValue + "xxxxxsss";
+        }
       },
       onClickMultiDropdownItemEx: function (oRow, oCell, oItem) {
         console.log("onClickMultiDropdownItemEx");
+      },
+      onClickTextCell: function (oRow, oCell) {
+        if (oCell.key == "customer") {
+          oCell.type = "dropdown";
+          oCell.value = [{
+            value: "A",
+          }, {
+            value: "B",
+            selected: true
+          }, {
+            value: "C",
+          }];
+        }
       },
       //endregion
       //region test
@@ -746,7 +776,7 @@
       enableAllRowsEx: function () {
         this.$refs.gridEx.enableAllRows();
       },
-      checkRow: function(){
+      checkRow: function () {
         this.$refs.gridEx.checkOrUnCheckRow4CheckBox(3, true);
       },
       //endregion

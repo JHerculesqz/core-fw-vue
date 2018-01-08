@@ -25,6 +25,7 @@
             <button v-on:click="onClickGetTopoData">getTopoData</button>
             <button v-on:click="onClickUpdateTopo">updateTopo</button>
             <button v-on:click="onClickCreateNode">createNode</button>
+            <button v-on:click="createNodeContinue">createNodeContinue</button>
             <button v-on:click="savePosition">savePosition</button>
             <button v-on:click="resetPosition">resetPosition</button>
             <button v-on:click="isPositionUpdate">isPositionUpdate</button>
@@ -33,7 +34,11 @@
             <button v-on:click="hideOrShowLink">hideOrShowLink</button>
             <button v-on:click="getSelectedData">getSelectedData</button>
             <button v-on:click="createLink">createLink</button>
+            <button v-on:click="createLinkContinue">createLinkContinue</button>
             <button v-on:click="getPosChangeTopoCache">getPosChangeTopoCache</button>
+            <button v-on:click="setAreaSelect1">设置框选网元</button>
+            <button v-on:click="setAreaSelect2">设置框选链路</button>
+            <button v-on:click="setAreaSelect3">设置框选网元和链路</button>
             <div style="width: 800px; height: 400px;">
               <marvel-topo ref="ref4Topo" id="topo" theme="dark"
                            v-on:onNodeClick="onNodeClick"
@@ -45,7 +50,9 @@
                            v-on:onRightClick="onRightClick"
                            v-on:onGenerateLinkProp="onGenerateLinkProp"
                            v-on:onGenerateLinkTip="onGenerateLinkTip"
-                           v-on:onPositionUpdate="onPositionUpdate"></marvel-topo>
+                           v-on:onPositionUpdate="onPositionUpdate"
+                           v-on:onClick="onClick"
+                           v-on:onAreaSelect="onAreaSelect"></marvel-topo>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -506,6 +513,12 @@
         console.log("onLinkClick");
         console.log("positionUpdate: " + bUpdate);
       },
+      onClick: function (oEvent) {
+        console.log("onClick");
+      },
+      onAreaSelect: function (oSelectTopoData) {
+        console.log(oSelectTopoData);
+      },
       //endregion
       //region test
       onClickExpandNodeGroup: function () {
@@ -556,6 +569,30 @@
           console.log("createNode: " + bOk);
         }, true);
         this.createNodeId += 1;
+      },
+      createNodeContinue: function () {
+        let self = this;
+        this.$refs.ref4Topo.createNodeContinue({
+          id: this.createNodeId,
+          uiImgKey: "node",
+          uiLabel: this.createNodeId,
+          uiNode: true
+        }, function (oBuObj, bOk) {
+          if (bOk) {
+            var oTopoData = self.$refs.ref4Topo.getTopoData();
+            var oNode = {
+              id: self.createNodeId + "_" + Math.random() * 100,
+              uiImgKey: "node",
+              uiLabel: self.createNodeId,
+              x: oBuObj.x,
+              y: oBuObj.y,
+              uiNode: true
+            };
+            oTopoData.nodes.push(oNode);
+            self.$refs.ref4Topo.updateTopo(oTopoData);
+          }
+        });
+        self.createNodeId += 1;
       },
       savePosition: function () {
         this.$refs.ref4Topo.savePosition();
@@ -620,7 +657,28 @@
             };
             oTopoData.links.push(oLink);
             self.$refs.ref4Topo.updateTopo(oTopoData);
-
+            self.createLinkId += 1;
+          }
+        });
+      },
+      createLinkContinue: function () {
+        let self = this;
+        this.$refs.ref4Topo.createLinkContinue(function (bSuccessful, oSrcNode, oDstNode) {
+          if (bSuccessful) {
+            var oTopoData = self.$refs.ref4Topo.getTopoData();
+            var oLink = {
+              id: self.createLinkId,
+              srcNodeId: oSrcNode.id,
+              dstNodeId: oDstNode.id,
+              uiLabelL: "nodeBase0",
+              uiLabelM: self.createLinkId,
+              uiLabelR: "nodeBase1",
+              uiLink: true,
+              uiLinkColorKey: "linkType_lu_2",
+              uiLinkWidth: 3
+            };
+            oTopoData.links.push(oLink);
+            self.$refs.ref4Topo.updateTopo(oTopoData);
             self.createLinkId += 1;
           }
         });
@@ -628,7 +686,16 @@
       getPosChangeTopoCache: function () {
         var oRes = this.$refs.ref4Topo.getPosChangeTopoCache();
         console.log(oRes);
-      }
+      },
+      setAreaSelect1: function () {
+        this.$refs.ref4Topo.setConfig({areaSelect: "node"});
+      },
+      setAreaSelect2: function () {
+        this.$refs.ref4Topo.setConfig({areaSelect: "link"});
+      },
+      setAreaSelect3: function () {
+        this.$refs.ref4Topo.setConfig({areaSelect: "all"});
+      },
       //endregion
       //#endregion
       //#region callback
