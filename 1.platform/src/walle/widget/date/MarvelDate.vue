@@ -114,6 +114,7 @@
     font-size: 16px;
     text-align: right;
     padding: 0 10px;
+    box-sizing: border-box;
   }
 
   .dateSelectWrapper:hover {
