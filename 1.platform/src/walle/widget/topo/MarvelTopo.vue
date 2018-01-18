@@ -50,6 +50,9 @@
         this.$emit("onAreaSelect", oSelectTopoData);
       },
       //endregion
+      hadInit: function () {
+        return this.oTopo ? true : false;
+      },
       init: function (oAfterCallBack) {
         //#region resources
         var IMG_MAP = {

@@ -53,6 +53,14 @@
             oItem.isWarn = false;
           }
         }
+      },
+      setItemActive: function (arrItemIndex) {
+        for (var i = 0; i < this.wizardTabs.length; i++) {
+          var oItem = this.wizardTabs[i];
+          if (arrItemIndex.indexOf(oItem.index) != -1) {
+            this.onClick(oItem)
+          }
+        }
       }
 
       //#endregion

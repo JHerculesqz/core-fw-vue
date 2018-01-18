@@ -17,7 +17,7 @@
           <div class="showAreaInner">
             <!--2级DemoView start-->
             <div>
-              <marvel-crumb :items="items" v-on:onItemClick="onItemClick"></marvel-crumb>
+              <marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"></marvel-crumb>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -27,7 +27,7 @@
             <!--2级CodeView start-->
               <pre v-highlight>
                 <code class="html">
-&lt;marvel-crumb :items="items" v-on:onItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;
+&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -75,8 +75,9 @@
     },
     methods:{
       //#region inner
-      onItemClick: function(strItemLabel){
+      onItemClick: function(strItemLabel, oItem){
         console.log(strItemLabel);
+        console.log(oItem);
       }
       //#endregion
       //#region callback

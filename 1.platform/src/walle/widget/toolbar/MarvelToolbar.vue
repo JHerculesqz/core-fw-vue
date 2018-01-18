@@ -189,13 +189,13 @@
   background-color: rgba(61, 204, 166, 0.4);
 }
 
-.dark .toolbarItem .toolbarItemLabel .toolbarIcon{
+.dark .toolbarItemWrapper .toolbarItem .toolbarItemLabel .toolbarIcon{
   color: #3dcca6;
 }
-.dark .toolbarItem .toolbarItemLabel .toolbarName{
+.dark .toolbarItemWrapper .toolbarItem .toolbarItemLabel .toolbarName{
   color: #ffffff;
 }
-.dark .toolbarItem:hover{
+.dark .toolbarItemWrapper .toolbarItem:hover{
   border: 1px solid #3dcca6;
   background-color: rgba(61, 204, 166, 0.2);
 }
@@ -203,19 +203,19 @@
   background-color: #000000;
   box-shadow: 2px 3px 4px rgba(0,0,0,0.25);
 }
-.dark .toolbarItem .toolbarSubMenu{
+.dark .toolbarItemWrapper .toolbarItem .toolbarSubMenu{
   background-color: #000000;
   box-shadow: 2px 3px 4px rgba(0,0,0,0.25);
 }
-.dark .toolbarItem .toolbarSubMenu .toolbarSubMenuItem{
+.dark .toolbarItemWrapper .toolbarItem .toolbarSubMenu .toolbarSubMenuItem{
 }
-.dark .toolbarItem .toolbarSubMenu .toolbarSubMenuItem:hover .textArea{
+.dark .toolbarItemWrapper .toolbarItem .toolbarSubMenu .toolbarSubMenuItem:hover .textArea{
   color: #3dcca6;
 }
-.dark .toolbarItem .toolbarSubMenu .toolbarSubMenuItem .iconArea{
+.dark .toolbarItemWrapper .toolbarItem .toolbarSubMenu .toolbarSubMenuItem .iconArea{
   color: #3dcca6;
 }
-.dark .toolbarItem .toolbarSubMenu .toolbarSubMenuItem .textArea{
+.dark .toolbarItemWrapper .toolbarItem .toolbarSubMenu .toolbarSubMenuItem .textArea{
   color: #fff;
 }
 .dark .toolbarWrapper .toolbarItemWrapper .toolbarItem .toolbarSubMenu .disable{
@@ -227,13 +227,13 @@
 .dark .toolbarWrapper .toolbarItemWrapper .toolbarItem .toolbarSubMenu .disable .textArea{
   color: #999;
 }
-.dark .disable{
+.dark .toolbarWrapper .toolbarItemWrapper .disable{
   pointer-events: none;
 }
-.dark .disable .toolbarItemLabel .toolbarIcon{
+.dark .toolbarWrapper .toolbarItemWrapper .disable .toolbarItemLabel .toolbarIcon{
   color: #999;
 }
-.dark .disable .toolbarItemLabel .toolbarName{
+.dark .toolbarWrapper .toolbarItemWrapper .disable .toolbarItemLabel .toolbarName{
   color: #999;
 }
 

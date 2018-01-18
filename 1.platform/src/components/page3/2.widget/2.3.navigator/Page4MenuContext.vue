@@ -146,7 +146,16 @@
           label: "编辑"
         }],
         items4TextContext:[{
-          label: "contextMenu1"
+          label: "contextMenu1",
+          subMenu:[{
+            label: "contextSubMenu1"
+          },{
+            label: "contextSubMenu2"
+          },{
+            label: "contextSubMenu3"
+          },{
+            label: "contextSubMenu4"
+          }]
         },{
           label: "contextMenu2"
         }]

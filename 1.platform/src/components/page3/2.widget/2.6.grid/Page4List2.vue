@@ -16,7 +16,8 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <marvel-list2 :bargeCount="listBargeCount" title="Shit"></marvel-list2>
+            <button @click="changeZIndex">changeZIndex to -1</button>
+            <marvel-list2 :bargeCount="listBargeCount" title="Shit" ref="bbb"></marvel-list2>
             <!--2级DemoView end-->
           </div>
         </marvel-tab-item>
@@ -25,8 +26,7 @@
             <!--2级CodeView start-->
             <pre v-highlight>
                 <code class="html">
-&lt;marvel-list1 :items="listItems" :bargeCount="listBargeCount"
-              v-on:onListItemClick="onListItemClick"&gt;&lt;/marvel-list1&gt;
+                  &lt;marvel-list2 :bargeCount="listBargeCount" title="Shit" ref="bbb"&gt;&lt;/marvel-list2&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -72,7 +72,9 @@
     },
     methods:{
       //#region inner
-
+      changeZIndex: function(){
+        this.$refs.bbb.setZIndex(-1);
+      }
       //#endregion
       //#region callback
 

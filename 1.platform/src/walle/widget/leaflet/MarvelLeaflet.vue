@@ -197,6 +197,12 @@
       hideAllLabel: function () {
         this.gisObj.Api.hideAllLabel(this.gisObj);
       },
+      showLabelByIds: function (arrIds) {
+        this.gisObj.Api.showLabelByIds(arrIds, this.gisObj);
+      },
+      hideLabelByIds: function (arrIds) {
+        this.gisObj.Api.hideLabelByIds(arrIds, this.gisObj);
+      },
       //#endregion
 
       //#region Circle

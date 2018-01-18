@@ -65,6 +65,7 @@
             <button @click="enableRowEx">enableRow</button>
             <button @click="enableAllRowsEx">enableAllRows</button>
             <button @click="checkRow">checkRow</button>
+            <button @click="disabledDropDownCell">disabledDropDownCell</button>
             <div style="width:800px;height:300px; background-color: #000000">
               <marvel-grid-ex ref="gridEx"
                               :titles="titlesEx"
@@ -74,6 +75,7 @@
                               :editCellFinished="editCellFinishedEx"
                               :canDrag="true"
                               :hasFoot="true"
+                              detailRowComponent="CustomerGridComponent"
                               v-on:onClickRow="onClickRowEx"
                               v-on:onIconClick="onIconClickEx"
                               v-on:onClickTextIcon="onClickTextIconEx"
@@ -240,6 +242,7 @@
 </template>
 
 <script>
+  import Vue from "vue";
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelHight from "@/walle/component/highlight";
@@ -247,6 +250,7 @@
   import MarvelGridEx from "@/walle/widget/grid/MarvelGridEx";
   import MarvelGridM from "@/walle/widget/grid/MarvelGridM";
   import MarvelGridPriority from "@/walle/widget/grid/MarvelGridPriority";
+  import CustomerGridComponent from "./CustomerGridComponent";
 
   export default {
     name: 'page4Grid',
@@ -256,7 +260,10 @@
       MarvelTab,
       MarvelGrid,
       MarvelGridEx,
-      MarvelGridPriority
+      MarvelGridPriority,
+    },
+    created() {
+      Vue.component(CustomerGridComponent.name, CustomerGridComponent);
     },
     data: function () {
       return {
@@ -778,6 +785,9 @@
       },
       checkRow: function () {
         this.$refs.gridEx.checkOrUnCheckRow4CheckBox(3, true);
+      },
+      disabledDropDownCell: function () {
+        this.$refs.gridEx.disabledDropDownCell(4, "config", true);
       },
       //endregion
 

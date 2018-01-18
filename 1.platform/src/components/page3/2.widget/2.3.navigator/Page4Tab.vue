@@ -18,6 +18,8 @@
             <!--2级DemoView start-->
             <div style="width: 500px;height: 400px;">
               <button @click="setActiveTabItem">setActiveTabItem</button>
+              <button @click="setTabItemHide">hideItem Profile</button>
+              <button @click="setTabItemShow">showItem Profile</button>
               <marvel-tab ref="ref4Tab" :tabItems="tabItems">
                 <marvel-tab-item :isActive="tabItems[0].isActive">
                   1
@@ -111,6 +113,12 @@
       //#region inner
       setActiveTabItem() {
         this.$refs.ref4Tab.setActiveTabItem("Messages");
+      },
+      setTabItemHide() {
+        this.$refs.ref4Tab.setTabItemHide("Profile");
+      },
+      setTabItemShow() {
+        this.$refs.ref4Tab.setTabItemShow("Profile");
       }
       //#endregion
       //#region callback

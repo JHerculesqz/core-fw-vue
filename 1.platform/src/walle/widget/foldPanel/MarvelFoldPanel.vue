@@ -25,7 +25,7 @@
     methods: {
       expandOrFold:function(){
         this.item.bIsExpand = !this.item.bIsExpand;
-        this.$emit('onTitleClick', this.item, this.bIsExpand);
+        this.$emit('onTitleClick', this.item, this.item.bIsExpand);
       }
     }
   }

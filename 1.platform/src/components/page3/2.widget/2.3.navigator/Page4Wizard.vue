@@ -18,7 +18,7 @@
             <!--2级DemoView start-->
             <div>
               <button v-on:click="setProgress">setProgress</button>
-              <marvel-wizard ref="ref0" :items="items"></marvel-wizard>
+              <marvel-wizard ref="ref0" :items="items" :isClickable="true"></marvel-wizard>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -51,6 +51,7 @@
             <div>
               <button v-on:click="setWarn">setWarn</button>
               <button v-on:click="setNotWarn">setNotWarn</button>
+              <button v-on:click="setItemActive">setItemActive</button>
               <marvel-wizard-tab ref="ref4WizardTabs"
                                  :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"></marvel-wizard-tab>
             </div>
@@ -131,12 +132,17 @@
           index: 1,
           label: "拓扑还原",
           isActive: true,
-          isWarn: false,
+          isWarn: false
         }, {
           index: 2,
           label: "业务还原",
           isActive: false,
-          isWarn: true,
+          isWarn: true
+        },{
+          index: 3,
+          label: "业务还原",
+          isActive: false,
+          isWarn: false
         }]
         //#endregion
         //#endregion
@@ -160,6 +166,9 @@
       setNotWarn: function () {
         this.$refs.ref4WizardTabs.setItemWarnOrNot([1], false);
       },
+      setItemActive: function(){
+        this.$refs.ref4WizardTabs.setItemActive([3]);
+      }
       //#endregion
       //#endregion
       //#region callback

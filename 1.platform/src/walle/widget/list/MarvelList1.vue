@@ -1,5 +1,6 @@
 <template>
-  <div class="dashboard2Wrapper animate" v-bind:class="{ expand: isExpand }">
+  <div class="dashboard2Wrapper animate" v-bind:style="{ 'z-index': zIndex }"
+       v-bind:class="{ expand: isExpand }">
     <div class="dashboardExpandFolderIcon animate icon-marvelIcon-26"
          v-on:click="onExpandBtnClick">
       <div class="tipInfo" v-if="bargeCount>0">{{ bargeCount }}</div>
@@ -25,7 +26,8 @@
     props: ["items", "bargeCount"],
     data: function() {
       return {
-        isExpand: false
+        isExpand: false,
+        zIndex:2000
       }
     },
     methods: {
@@ -34,6 +36,9 @@
       },
       onListItemClick: function(oItem){
         this.$emit("onListItemClick", oItem);
+      },
+      setZIndex: function(iNum){
+        this.zIndex = iNum;
       }
     }
   }
@@ -59,7 +64,6 @@
     border-radius: 24px;
     width: 46px;
     height: 46px;
-    z-index: 2000;
   }
   .dashboard2Wrapper .dashboardExpandFolderIcon{
     width: 46px;

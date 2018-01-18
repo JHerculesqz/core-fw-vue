@@ -9,7 +9,7 @@
       <MarvelDropDownButton ref="ref1"></MarvelDropDownButton>
       <!-- dropdown_button end-->
     </div>
-    <div class="searchArea" v-bind:style="{ width : searchAreaW }">
+    <div class="searchArea">
       <!-- search start-->
       <MarvelSearch @search="search" :placeholder="placeholder" mixin="true"></MarvelSearch>
       <!-- search end-->
@@ -31,7 +31,6 @@
     name: "MarvelSearchWithDropDown",
     data: function () {
       return {
-        searchAreaW: "",
       }
     },
     props: ["placeholder", "selectItems"],
@@ -51,11 +50,6 @@
         }
       }
       this.$refs.ref1.init(this.selectItems, selectLabel);
-
-      this.$nextTick(function () {
-        var iDropW = parseInt(this.$refs.ref1.$el.clientWidth) + 5;
-        this.searchAreaW = "calc( 100% - " + iDropW + "px)";
-      });
     },
   }
 
@@ -65,7 +59,7 @@
   /*search dropDown*/
   .search_dropDown {
     height: 32px;
-    display: inline-block;
+    display: table;
     position: relative;
     white-space: nowrap;
     border: 1px solid #cccccc;
@@ -79,7 +73,7 @@
 
   .search_dropDown .dropdownArea {
     display: inline-block;
-    height: 32px;
+    height: 30px;
     float: left;
     position: relative;
     top: -1px;
@@ -87,12 +81,9 @@
   }
 
   .search_dropDown .searchArea {
-    display: inline-block;
+    display: table-cell;
     height: 30px;
-    position: absolute;
-    right: -1px;
-    top: -1px;
-    float: left;
+    width: 100%;
   }
 
   /*region dark theme*/

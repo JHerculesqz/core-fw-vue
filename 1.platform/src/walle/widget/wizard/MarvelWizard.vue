@@ -4,7 +4,7 @@
   <div class="wizardsWrapper">
     <div class="wizardsItem"
          v-for="item in items"
-         v-bind:class="{ complected: item.complected }"
+         v-bind:class="[{ complected: item.complected }, {unClickable:isClickable === false}]"
          v-bind:style="{ width: 100 / items.length + '%' }" v-on:click="onWizardClick(item)">
       <div class="name">{{ item.label }}</div>
       <div class="decoration">
@@ -20,7 +20,7 @@
 <script>
   export default {
     name: 'MarvelWizard',
-    props: ["items"],
+    props: ["items", "isClickable"],
     data: function() {
         return {
 
@@ -49,8 +49,8 @@
         }
       },
       onWizardClick: function(oItem){
-          this.setProgress(oItem.index);
-          this.$emit("onWizardClick", oItem);
+        this.setProgress(oItem.index);
+        this.$emit("onWizardClick", oItem);
       }
     }
   }
@@ -65,6 +65,10 @@
   .wizardsWrapper .wizardsItem{
     height: 100%;
     float: left;
+    cursor: pointer;
+  }
+  .wizardsWrapper .unClickable{
+    pointer-events: none;
   }
   .wizardsWrapper .wizardsItem .name{
     height: 16px;

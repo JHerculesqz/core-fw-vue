@@ -38,6 +38,8 @@
             <button v-on:click="oTest4CreateMarker">test4CreateMarker</button>
             <button v-on:click="oTest4ShowAllLabel">test4ShowAllLabel</button>
             <button v-on:click="oTest4HideAllLabel">test4HideAllLabel</button>
+            <button v-on:click="oTest4ShowLabelByIds">oTest4ShowLabelByIds</button>
+            <button v-on:click="oTest4HideLabelByIds">oTest4HideLabelByIds</button>
             <div style="width: 100%;height: 500px;">
               <marvel-leaflet ref="ref0" id="gisMapId1"
                               v-on:onZoom="onZoom"
@@ -506,6 +508,12 @@
       },
       oTest4HideAllLabel: function () {
         this.$refs.ref0.hideAllLabel();
+      },
+      oTest4ShowLabelByIds: function(){
+        this.$refs.ref0.showLabelByIds(["marker1", "marker2"]);
+      },
+      oTest4HideLabelByIds: function(){
+        this.$refs.ref0.hideLabelByIds(["marker1", "marker2"]);
       },
       //#endregion
       //#region callback

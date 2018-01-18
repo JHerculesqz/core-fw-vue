@@ -4,7 +4,7 @@
     <div class="tabWrapper theme1">
       <div class="headArea">
         <div class="headItem" v-for="tabItem in tabItems"
-             v-bind:class="{ active : tabItem.isActive }"
+             v-bind:class="[{ active : tabItem.isActive }, { dpn : tabItem.isHide }]"
              v-on:click="onTabClick(tabItem.label)">
           {{ tabItem.label }}
         </div>
@@ -24,6 +24,14 @@
     data: function () {
       return {}
     },
+    mounted:function(){
+      for (var iIndex = 0; iIndex < this.tabItems.length; iIndex++) {
+        var oTabItem = this.tabItems[iIndex];
+        if (!oTabItem.hasOwnProperty("isHide")) {
+          this.$set(oTabItem,"isHide", false);
+        }
+      }
+    },
     methods: {
       onTabClick: function (strTabLabel) {
         for (var iIndex = 0; iIndex < this.tabItems.length; iIndex++) {
@@ -37,6 +45,42 @@
         }
         this.$emit("onTabClick", strTabLabel)
       },
+      setTabItemHide: function (strTabLabel) {
+        for (var iIndex = 0; iIndex < this.tabItems.length; iIndex++) {
+          //设置隐藏状态
+          var oTabItem = this.tabItems[iIndex];
+          if (oTabItem.label == strTabLabel) {
+            oTabItem.isHide = true;
+            console.log("hide " + oTabItem.label);
+            console.log(this.tabItems);
+
+            //若当前需要隐藏的tabItem为选中状态 则须选择另一项可见的tabItem为选中项
+            if(oTabItem.isActive ==true){
+              for (var iIndex = 0; iIndex < this.tabItems.length; iIndex++) {
+                var oTabItem = this.tabItems[iIndex];
+                if (oTabItem.isHide === false && oTabItem.isActive === false){
+                  this.setActiveTabItem(oTabItem.label);
+                  break;
+                }
+              }
+            }
+
+            break;
+          }
+        }
+      },
+      setTabItemShow: function (strTabLabel) {
+        for (var iIndex = 0; iIndex < this.tabItems.length; iIndex++) {
+          //设置隐藏状态
+          var oTabItem = this.tabItems[iIndex];
+          if (oTabItem.label == strTabLabel) {
+            this.tabItems[iIndex].isHide = false;
+            console.log("show " + this.tabItems[iIndex].label);
+            console.log(this.tabItems);
+            break;
+          }
+        }
+      },
       setActiveTabItem: function (strTabLabel) {
         this.tabItems.forEach((oItem) => {
           if (oItem.label == strTabLabel) {
@@ -46,7 +90,7 @@
             oItem.isActive = false;
           }
         });
-      }
+      },
     }
   }
 </script>

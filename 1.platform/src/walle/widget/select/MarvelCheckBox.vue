@@ -7,7 +7,7 @@
              :disabled="isDisable"/>
       <label v-bind:for="[id]"></label>
     </div>
-    <label v-bind:for="[id]" class="checkBoxLabel "
+    <label v-bind:for="[id]" class="checkBoxLabel" v-bind:title="label"
            v-bind:class="{ dpn: isShowLabel }">{{ label }}</label>
   </div>
   <!--checkBox end-->
@@ -137,6 +137,10 @@
   }
   .checkBoxWrapper .checkBoxLabel{
     margin: 0 0 0 5px;
+    width: calc(100% - 21px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding: 0;
     float: left;
     font-size: 14px;

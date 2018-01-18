@@ -218,7 +218,7 @@
     border: 1px solid #ccc;
     background-color: #ffffff;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
     left: -1px;
     bottom: -1px;
