@@ -185,6 +185,14 @@
             return oSprites;
         };
 
+        this.showLabelByIds = function(arrIds, oGis){
+            oGis.Sprite.Node.showLabelByIds(arrIds, oGis);
+        };
+
+        this.hideLabelByIds = function(arrIds, oGis){
+            oGis.Sprite.Node.hideLabelByIds(arrIds, oGis);
+        };
+
         //endregion
 
         //region circle

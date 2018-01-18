@@ -258,6 +258,20 @@
             }
         };
 
+        this.showLabelByIds = function (arrIds, oGis) {
+            arrIds.forEach(function (strId) {
+                var oMarker = oGis.Layer.findById(strId, oGis);
+                self.showLabel(oMarker);
+            });
+        };
+
+        this.hideLabelByIds = function (arrIds, oGis) {
+            arrIds.forEach(function (strId) {
+                var oMarker = oGis.Layer.findById(strId, oGis);
+                self.hideLabel(oMarker);
+            });
+        };
+
         //endregion
 
         //#region attachMarker

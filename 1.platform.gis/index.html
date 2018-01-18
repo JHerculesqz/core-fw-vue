@@ -459,6 +459,12 @@
             $("#oTest4HideAllLabel").click(function () {
                 oGis.Api.hideAllLabel(oGis);
             });
+            $("#oTest4ShowLabelByIds").click(function () {
+                oGis.Api.showLabelByIds(["marker1", "marker2"], oGis);
+            });
+            $("#oTest4HideLabelByIds").click(function () {
+                oGis.Api.hideLabelByIds(["marker1", "marker2"], oGis);
+            });
             //endregion
 
             //#region demo2
@@ -562,6 +568,8 @@
 <button id="oTest4CreateMarker">test4CreateMarker</button>
 <button id="oTest4ShowAllLabel">test4ShowAllLabel</button>
 <button id="oTest4HideAllLabel">test4HideAllLabel</button>
+<button id="oTest4ShowLabelByIds">oTest4ShowLabelByIds</button>
+<button id="oTest4HideLabelByIds">oTest4HideLabelByIds</button>
 <div class="gisMap" id="id1"
      style="width: 100%;height: 500px;"></div>
 <div>室内地图</div>
