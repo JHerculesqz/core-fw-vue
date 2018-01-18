@@ -132,19 +132,77 @@
                 visible: oBuObj.uiHide == true ? false : true,
                 opacity: oBuObj.uiOpacity != undefined ? oBuObj.uiOpacity : 1.0,
                 dragBoundFunc: function (pos) {
-                    var x = oExpandGroupExists.getChildren()[0].x();
-                    var y = oExpandGroupExists.getChildren()[0].y();
-                    var radius = oExpandGroupExists.tag.uiRadius;
-                    var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
-                    if (scale < 1) {
-                        return {
-                            y: Math.round((pos.y - y) * scale + y),
-                            x: Math.round((pos.x - x) * scale + x)
-                        };
+                    //pos中的坐标是在canvas上的坐标
+                    //算法1：限制在矩形中
+                    // var iScale = oTopo.ins.stage.scaleX();
+                    // var iXMin = oExpandGroupExists.x() * iScale + oTopo.ins.stage.x();
+                    // var iXMax = (oExpandGroupExists.x() + oExpandGroupExists.getChildren()[0].width()) * iScale + oTopo.ins.stage.x();
+                    // var iYMin = oExpandGroupExists.y() * iScale + oTopo.ins.stage.y();
+                    // var iYMax = (oExpandGroupExists.y() + oExpandGroupExists.getChildren()[0].height()) * iScale + oTopo.ins.stage.y();
+                    // var iTargetX = pos.x;
+                    // var iTargetY = pos.y;
+                    // if (iTargetX <= iXMin) {
+                    //     iTargetX = iXMin;
+                    // }
+                    // else if (iTargetX >= iXMax) {
+                    //     iTargetX = iXMax;
+                    // }
+                    // if (iTargetY <= iYMin) {
+                    //     iTargetY = iYMin;
+                    // }
+                    // else if (iTargetY >= iYMax) {
+                    //     iTargetY = iYMax;
+                    // }
+                    // return {
+                    //     x: iTargetX,
+                    //     y: iTargetY
+                    // };
+
+                    //算法2：限制在圆形中
+                    //圆心的坐标
+                    var iScale = oTopo.ins.stage.scaleX();
+                    var iX = (oExpandGroupExists.x() + oExpandGroupExists.getChildren()[0].width() / 2) * iScale + oTopo.ins.stage.x();
+                    var iY = (oExpandGroupExists.y() + oExpandGroupExists.getChildren()[0].height() / 2) * iScale + oTopo.ins.stage.y();
+                    var radius = (oExpandGroupExists.getChildren()[0].width() / 2) * iScale;
+
+                    var iNodeSize = oGroup.getChildren()[0].width() * iScale;
+                    var a;
+                    if (iX == pos.x) {
+                        a = Math.PI / 2;
                     }
                     else {
-                        return pos;
+                        a = Math.atan((iY - pos.y) / (iX - pos.x));
                     }
+
+                    var iTopX = iX - Math.cos(a) * radius;
+                    var iTopY = iY - Math.sin(a) * radius;
+                    var iBottomX = iX + Math.cos(a) * radius;
+                    var iBottomY = iY + Math.sin(a) * radius;
+
+                    var iXMin = Math.min(iTopX, iBottomX);
+                    var iXMax = Math.max(iTopX, iBottomX);
+
+                    var iYMin = Math.min(iTopY, iBottomY);
+                    var iYMax = Math.max(iTopY, iBottomY);
+
+                    var iTargetX = pos.x;
+                    var iTargetY = pos.y;
+                    if (iTargetX <= iXMin) {
+                        iTargetX = iXMin;
+                    }
+                    else if (iTargetX >= iXMax - iNodeSize) {
+                        iTargetX = iXMax - iNodeSize;
+                    }
+                    if (iTargetY <= iYMin) {
+                        iTargetY = iYMin;
+                    }
+                    else if (iTargetY >= iYMax - iNodeSize) {
+                        iTargetY = iYMax - iNodeSize;
+                    }
+                    return {
+                        x: iTargetX,
+                        y: iTargetY
+                    };
                 }
             });
             oGroup.tag = oBuObj;

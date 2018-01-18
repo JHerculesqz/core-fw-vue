@@ -152,6 +152,11 @@
                     arrLinks4Hide.push(oLink);
                     continue;
                 }
+                //如果是同一个站点中两个设备之间的链路，当站点折叠的时候，链路的源宿点都是同一个站点
+                if (oNodeSrc.id() == oNodeDst.id()) {
+                    arrLinks4Hide.push(oLink);
+                    continue;
+                }
                 arrLinks4Show.push(oLink);
             }
 
@@ -304,10 +309,10 @@
                 _onLinkClick(oGroup, evt, oTopo);
             });
             oGroup.on("mouseover", function (evt) {
-                _setMouseHoverStyle(this, oTopo)
+                _setMouseHoverStyle(oGroup, oTopo)
             });
             oGroup.on("mouseout", function (evt) {
-                _setMouseHoverOutStyle(this, oTopo);
+                _setMouseHoverOutStyle(oGroup, oTopo);
             });
             oGroup.on("dblclick", function (evt) {
                 console.log("link dblclick");
@@ -530,12 +535,25 @@
             });
         };
 
-        var _setMouseHoverStyle = function (oLine, oTopo) {
+        var _setMouseHoverStyle = function (oGroup, oTopo) {
+            document.body.style.cursor = 'pointer';
 
+            oGroup.children.forEach(function (oChild) {
+                oChild.shadowEnabled(true);
+                oChild.shadowColor("rgba(255,255,255,0.75)");
+                oChild.shadowBlur(5);
+            });
+
+            oTopo.Layer.reDraw(oTopo.ins.layerLink);
         };
 
-        var _setMouseHoverOutStyle = function (oLine, oTopo) {
+        var _setMouseHoverOutStyle = function (oGroup, oTopo) {
+            document.body.style.cursor = 'default';
 
+            oGroup.children.forEach(function (oChild) {
+                oChild.shadowEnabled(false);
+            });
+            oTopo.Layer.reDraw(oTopo.ins.layerLink);
         };
 
         var _dblClickLink = function (arrSrcLinks, oGroup, oTopo) {
@@ -909,6 +927,7 @@
         //region imsg
 
         this.response2NodeEvent4ReDraw = function (oNode, oTopo) {
+            var oId2Link = {};
             var arrLinks = [];
             var oGroups = oTopo.Stage.findGroupByTagAttr("uiLink", true, oTopo);
             oGroups.forEach(function (oGroup, index) {
@@ -916,10 +935,12 @@
                 //直接和这个Node相连的链路
                 if (oNode.id === oBuObj.srcNodeId || oNode.id === oBuObj.dstNodeId) {
                     if (_isGroupLink(oBuObj)) {
-                        arrLinks = arrLinks.concat(oBuObj.children);
+                        oBuObj.children.forEach(function (oChildBuObj) {
+                            oId2Link[oChildBuObj.id] = oChildBuObj;
+                        });
                     }
                     else {
-                        arrLinks.push(oBuObj);
+                        oId2Link[oBuObj.id] = oBuObj;
                     }
                 }
                 //和这个Node的childNode相连的链路
@@ -927,15 +948,23 @@
                     oNode.children.forEach(function (oChildNode, index) {
                         if (oChildNode.id === oBuObj.srcNodeId || oChildNode.id === oBuObj.dstNodeId) {
                             if (_isGroupLink(oBuObj)) {
-                                arrLinks = arrLinks.concat(oBuObj.children);
+                                oBuObj.children.forEach(function (oChildBuObj) {
+                                    oId2Link[oChildBuObj.id] = oChildBuObj;
+                                });
                             }
                             else {
-                                arrLinks.push(oBuObj);
+                                oId2Link[oBuObj.id] = oBuObj;
                             }
                         }
                     });
                 }
             });
+
+            for (var key in oId2Link) {
+                var value = oId2Link[key];
+                arrLinks.push(value);
+            }
+
             //绘制
             this.draw(arrLinks, oTopo);
         };

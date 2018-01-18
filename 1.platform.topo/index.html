@@ -402,7 +402,27 @@
                 arrLink.push(oLink4);
             }
             //endregion
-
+            //region 同一个站点内的设备之间的链路
+            for (var i = 300; i <= 301; i++) {
+                var oLink = {
+                    id: i,
+                    srcNodeId: "node0_1",
+                    dstNodeId: "node0_2",
+                    uiLabelL: i,
+                    uiLabelM: i,
+                    uiTip: i,
+                    uiTitle: i,
+                    uiLabelR: i,
+                    uiLinkExpand: false,
+                    uiLink: true,
+                    uiLinkGroupId: "node_in_siteExss",
+                    uiLinkColorKey: "linkType2",
+                    uiLinkWidth: 3,
+                    uiDirection: 1
+                };
+                arrLink.push(oLink);
+            }
+            //endregion
             //endregion
 
             //endregion
@@ -683,6 +703,52 @@
             $("#setAreaSelect3").click(function () {
                 oTopo.Api.setConfig(oTopo, {areaSelect: "all"});
             });
+            $("#circleTest").click(function () {
+                var oGroup = new Konva.Group({
+                    id: "xxxxssssdddd",
+                    x: 40,
+                    y: 40
+                });
+
+                var oCircle = new Konva.Circle({
+                    radius: 40,
+                    fill: "red",
+                    fillEnabled: false,
+                    stroke: "green",
+                    strokeWidth: 4,
+                    dash: [10, 10],
+//                    angle: 180
+                });
+                oGroup.add(oCircle);
+
+                oGroup.on("click", function () {
+                    console.log("sssfff");
+                });
+
+                oTopo.ins.layerNode.add(oGroup);
+                oTopo.ins.layerNode.batchDraw();
+            });
+            $("#rectTest").click(function () {
+                var oRect = oTopo.ins.stage.findOne("#rect");
+                if (oRect) {
+                    console.log("x: " + oRect.x() + ", y: " + oRect.y() + ", width: " + oRect.width() + ", height: " + oRect.height());
+                }
+                else {
+                    oRect = new Konva.Rect({
+                        id: "rect",
+                        x: 10,
+                        y: 10,
+                        width: 100,
+                        height: 100,
+                        stroke: "red",
+                        strokeWidth: 5
+                    });
+
+                    oTopo.ins.layerNode.add(oRect);
+                    oTopo.ins.layerNode.batchDraw();
+                }
+
+            });
             //endregion
         });
     </script>
@@ -712,6 +778,8 @@
     <button id="setAreaSelect1">设置框选网元</button>
     <button id="setAreaSelect2">设置框选链路</button>
     <button id="setAreaSelect3">设置框选网元和链路</button>
+    <button id="circleTest">circleTest</button>
+    <button id="rectTest">rectTest</button>
 </div>
 <div>
     <div id="id1" style="width:1200px; height:600px; z-index: 1000; position: relative;"></div>
