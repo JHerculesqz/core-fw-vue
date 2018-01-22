@@ -11,9 +11,6 @@
         this.m_oDraw;
 
         this.m_oOptions = {
-            "GK_1000": {
-                plugin: new $.MarvelDevPanel_3()
-            },
             "Raycus_6000": {
                 plugin: new $.MarvelDevPanel_3()
             },
@@ -34,6 +31,9 @@
             },
             "car": {
                 plugin: new $.MarvelDevPanel_8()
+            },
+            "GK_1000": {
+                plugin: new $.MarvelDevPanel_9()
             },
         };
 

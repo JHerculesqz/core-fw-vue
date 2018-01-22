@@ -4,3 +4,6 @@
     opacity: 0.5;
     fill-opacity: 0.1;
 }
+.devPanelEx-rect-hover{
+    opacity: 0.3;
+}

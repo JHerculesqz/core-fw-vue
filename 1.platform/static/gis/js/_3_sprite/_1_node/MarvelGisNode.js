@@ -111,7 +111,7 @@
                                     oBuObj, oGis) {
             var oIcon = L.icon({
                 // html: "<div style='margin-top:" + iImgWidth + "px;'>" + oBuObj.uiLabel + "</div>",
-                // className: strImgUrl,
+                // className: "leaflet-customer-icon",
                 iconUrl: strImgUrl,
                 iconSize: [iImgWidth, iImgWidth],
                 iconAnchor: [iImgWidth / 2, iImgWidth / 2],
@@ -129,8 +129,21 @@
                 maxWidth: 99999999,
             }).setContent(oBuObj.uiTips);
             oMarker.bindPopup(oPopup);
-            oMarker.addTo(oGis.Stage.mapObj);
 
+            //label
+            if (oGis.Stage.config.showLabel && oBuObj.uiLabel !== "") {
+                var toolTip = L.tooltip({
+                    direction: "bottom",
+                    permanent: true,
+                    sticky: false,
+                    className: "leaflet-customer-label",
+                    offset: [0, iImgWidth / 2],
+                }).setContent(oBuObj.uiLabel);
+                oMarker.bindTooltip(toolTip);
+            }
+
+            //addToMap
+            oMarker.addTo(oGis.Stage.mapObj);
             return oMarker;
         };
 
@@ -231,6 +244,32 @@
                     oMarker.setOpacity(1);
                 }
             }
+        };
+
+        this.hideLabel = function (oMarker) {
+            if (oMarker) {
+                oMarker.closeTooltip();
+            }
+        };
+
+        this.showLabel = function (oMarker) {
+            if (oMarker) {
+                oMarker.openTooltip();
+            }
+        };
+
+        this.showLabelByIds = function (arrIds, oGis) {
+            arrIds.forEach(function (strId) {
+                var oMarker = oGis.Layer.findById(strId, oGis);
+                self.showLabel(oMarker);
+            });
+        };
+
+        this.hideLabelByIds = function (arrIds, oGis) {
+            arrIds.forEach(function (strId) {
+                var oMarker = oGis.Layer.findById(strId, oGis);
+                self.hideLabel(oMarker);
+            });
         };
 
         //endregion

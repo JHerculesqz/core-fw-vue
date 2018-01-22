@@ -155,15 +155,27 @@
             oGroup.tag = oBuObj;
 
             //1.oImage
-            var oImage = new Konva.Image({
-                x: 0,
-                y: 0,
-                image: oTopo.Resource.m_mapImage[oBuObj.uiImgKey4Expand],
+            // var oImage = new Konva.Image({
+            //     x: 0,
+            //     y: 0,
+            //     image: oTopo.Resource.m_mapImage[oBuObj.uiImgKey4Expand],
+            //     opacity: oGroup.opacity(),
+            //     width: oBuObj.uiExpandNodeWidth,
+            //     height: oBuObj.uiExpandNodeHeight
+            // });
+            // oGroup.add(oImage);
+
+            var oCircle = new Konva.Circle({
+                x: oBuObj.uiExpandNodeWidth / 2,
+                y: oBuObj.uiExpandNodeWidth / 2,
+                radius: oBuObj.uiExpandNodeWidth / 2,
                 opacity: oGroup.opacity(),
-                width: oBuObj.uiExpandNodeWidth,
-                height: oBuObj.uiExpandNodeHeight
+                fillEnabled: false,
+                stroke: "#ffffff",
+                strokeWidth: 5,
+                dash: [10, 10],
             });
-            oGroup.add(oImage);
+            oGroup.add(oCircle);
 
             //2.oLabel
             var oLabel = new Konva.Text({
@@ -318,7 +330,7 @@
         var _handle4SelectNode = function (oGroup, evt, oTopo) {
             //1.选中样式
             oGroup.tag.uiSelectNode = true;
-            _setSelectNodeStyle(oGroup.children[0], oTopo);
+            _setSelectNodeStyle(oGroup, oTopo);
 
             //2.tooltips
             _addToolTips(oGroup, evt, oTopo);
@@ -415,7 +427,7 @@
         var _handle4UnSelectNode = function (oGroup, evt, oTopo) {
             //1.去选中样式
             oGroup.tag.uiSelectNode = false;
-            _setUnSelectNodeStyle(oGroup.children[0], oTopo);
+            _setUnSelectNodeStyle(oGroup, oTopo);
             //2.tooltips
             var arrLabel = [];
             arrLabel = oGroup.children.filter(function (oChild, index) {
@@ -429,35 +441,76 @@
             });
         };
 
-        var _setSelectNodeStyle = function (oImage, oTopo) {
-            //oImage.fillEnabled(true);
-            //oImage.fill(oTopo.Resource.getTheme().node.selectColor);
-            oImage.strokeEnabled(true);
-            oImage.stroke(oTopo.Resource.getTheme().node.selectColor);
-            oImage.strokeWidth(4);
-            oImage.lineJoin("round");
-            oImage.lineCap("round");
-            //oTopo.Layer.reDraw(oTopo.ins.layerNode);
+        var _setSelectNodeStyle = function (oGroup, oTopo) {
+            var oImageOrShape = oGroup.children[0];
+            if (oImageOrShape.className == "Circle") {
+                var arrRes = oGroup.children.filter(function (oChild) {
+                    if (oChild.className == "Rect") {
+                        return true;
+                    }
+                    return false;
+                });
+                if (arrRes.length) {
+                    arrRes[0].visible(true);
+                }
+                else {
+                    var oRect = new Konva.Rect({
+                        width: oImageOrShape.width(),
+                        height: oImageOrShape.height(),
+                        fillEnabled: false,
+                        stroke: oTopo.Resource.getTheme().node.selectColor,
+                        strokeWidth: 4,
+                        opacity: 0.75,
+                        shadowColor: oTopo.Resource.getTheme().node.selectColor,
+                        shadowBlur: 20
+                    });
+                    oGroup.add(oRect);
+
+                    oTopo.Layer.reDraw(oTopo.ins.layerNode);
+                }
+            }
+            else if (oImageOrShape.className == "Image") {
+                //oImageOrShape.fillEnabled(true);
+                //oImageOrShape.fill(oTopo.Resource.getTheme().node.selectColor);
+                oImageOrShape.strokeEnabled(true);
+                oImageOrShape.stroke(oTopo.Resource.getTheme().node.selectColor);
+                oImageOrShape.strokeWidth(4);
+                oImageOrShape.lineJoin("round");
+                oImageOrShape.lineCap("round");
+            }
         };
 
-        var _setUnSelectNodeStyle = function (oImage) {
-            // oImage.fillEnabled(false);
-            oImage.strokeEnabled(false);
+        var _setUnSelectNodeStyle = function (oGroup) {
+            var oImageOrShape = oGroup.children[0];
+            if (oImageOrShape.className == "Circle") {
+                var arrRes = oGroup.children.filter(function (oChild) {
+                    if (oChild.className == "Rect") {
+                        return true;
+                    }
+                    return false;
+                });
+                if (arrRes.length) {
+                    arrRes[0].visible(false);
+                }
+            }
+            else if (oImageOrShape.className == "Image") {
+                oImageOrShape.strokeEnabled(false);
+            }
         };
 
-        var _setMouseHoverStyle = function (oImage, oTopo) {
+        var _setMouseHoverStyle = function (oImageOrShape, oTopo) {
             document.body.style.cursor = 'pointer';
 
-            oImage.shadowEnabled(true);
-            oImage.shadowColor("rgba(255,255,255,0.75)");
-            oImage.shadowBlur(5);
+            oImageOrShape.shadowEnabled(true);
+            oImageOrShape.shadowColor("rgba(255,255,255,0.75)");
+            oImageOrShape.shadowBlur(5);
             oTopo.Layer.reDraw(oTopo.ins.layerNode);
         };
 
-        var _setMouseHoverOutStyle = function (oImage, oTopo) {
+        var _setMouseHoverOutStyle = function (oImageOrShape, oTopo) {
             document.body.style.cursor = 'default';
 
-            oImage.shadowEnabled(false);
+            oImageOrShape.shadowEnabled(false);
             oTopo.Layer.reDraw(oTopo.ins.layerNode);
         };
 
@@ -587,7 +640,7 @@
                 var oNodeGroup = oTopo.Stage.findOne(nodeId, oTopo);
                 if (oNodeGroup) {
                     oNodeGroup.tag.uiSelectNode = true;
-                    _setSelectNodeStyle(oNodeGroup.children[0], oTopo);
+                    _setSelectNodeStyle(oNodeGroup, oTopo);
                 }
                 else {
                     notFoundId.push(nodeId);
@@ -611,7 +664,7 @@
                 var oNodeGroup = oTopo.Stage.findOne(strNodeId, oTopo);
                 if (oNodeGroup) {
                     oNodeGroup.tag.uiSelectNode = true;
-                    _setSelectNodeStyle(oNodeGroup.children[0], oTopo);
+                    _setSelectNodeStyle(oNodeGroup, oTopo);
                 }
             });
 
@@ -659,7 +712,7 @@
                 });
 
                 //redraw
-                oTopo.ins.layerNode.batchDraw();
+                oTopo.Layer.reDraw(oTopo.ins.layerNode);
             }
 
             //update status

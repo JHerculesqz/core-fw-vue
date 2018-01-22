@@ -173,6 +173,10 @@
             oTopo.Sprite.Node.createNode(oBuObj, oAfterCallback, bAutoCreate, oTopo);
         };
 
+        this.createNodeContinue = function (oBuObj, oAfterCallback, oTopo) {
+            oTopo.Sprite.Node.createNodeContinue(oBuObj, oAfterCallback, oTopo);
+        };
+
         this.savePosition = function (oTopo) {
             //1.savePos
             var oTopoData = self.getTopoData(oTopo);
@@ -371,6 +375,14 @@
 
         this.createLink = function (oTopo, oAfterCallback) {
             oTopo.Sprite.LinkGroup.createLink(oAfterCallback, oTopo);
+        };
+
+        this.createLinkContinue = function (oTopo, oAfterCallback) {
+            oTopo.Sprite.LinkGroup.createLinkContinue(oAfterCallback, oTopo);
+        };
+
+        this.setConfig = function (oTopo, oConfig) {
+            oTopo.Stage.setConfig(oConfig);
         };
 
         //endregion

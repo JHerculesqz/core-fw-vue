@@ -4,9 +4,9 @@
 (function ($) {
     $.MarvelGisApi = function () {
         //region Const
-        const NODE_TYPE="ne";
-        const SITE_TYPE="site";
-        const LINK_TYPE="link";
+        const NODE_TYPE = "ne";
+        const SITE_TYPE = "site";
+        const LINK_TYPE = "link";
         //endregion
 
         //region Fields
@@ -19,6 +19,10 @@
 
         this.setCenter = function (iX, iY, iZoom4Init, oGis) {
             oGis.Stage.setCenter(iX, iY, iZoom4Init);
+        };
+
+        this.setConfig = function (oConfig, oGis) {
+            oGis.Stage.setConfig(oConfig);
         };
 
         //endregion
@@ -63,23 +67,23 @@
             oGis.Sprite.LinkGroup.drawLines(oTopoData.links, oGis);
         };
 
-        this.getTopoData = function(oGis){
+        this.getTopoData = function (oGis) {
             var oTopoData = {
                 nodes: [],
                 nodeGroups: [],
                 links: []
             };
 
-            oGis.Stage.mapObj.eachLayer(function(oLayer, index){
+            oGis.Stage.mapObj.eachLayer(function (oLayer, index) {
                 var oBuObj = oLayer.buObj;
-                if(oBuObj){
-                    if(oBuObj.uiType == NODE_TYPE){
+                if (oBuObj) {
+                    if (oBuObj.uiType == NODE_TYPE) {
                         oTopoData.nodes.push(oBuObj);
                     }
-                    else if(oBuObj.uiType == SITE_TYPE){
+                    else if (oBuObj.uiType == SITE_TYPE) {
                         oTopoData.nodeGroups.push(oBuObj);
                     }
-                    else if(oBuObj.uiType == LINK_TYPE){
+                    else if (oBuObj.uiType == LINK_TYPE) {
                         oTopoData.links.push(oBuObj);
                     }
                 }
@@ -125,18 +129,70 @@
             oGis.Sprite.Node.setHide4Marker(strId, bIsHide, oGis);
         };
 
-        this.addAttachedIcon4Marker = function(strId, strImgUrl, oGis){
+        this.addAttachedIcon4Marker = function (strId, strImgUrl, oGis) {
             oGis.Sprite.Node.addAttachedIcon4Marker(strId, strImgUrl, oGis);
         };
 
-        this.delAttachedIcon4Marker = function(strId, oGis){
+        this.delAttachedIcon4Marker = function (strId, oGis) {
             oGis.Sprite.Node.delAttachedIcon4Marker(strId, oGis);
         };
-        
-        this.createMarker = function(oBuObj, oAfterCallback, bAutoCreate, oGis){
+
+        this.createMarker = function (oBuObj, oAfterCallback, bAutoCreate, oGis) {
             oGis.Sprite.Node.createMarker(oBuObj, oAfterCallback, bAutoCreate, oGis);
         };
-        
+
+        this.showAllLabel = function (oGis) {
+            var oSprites = _getTopoDataSprite(oGis);
+            oSprites.nodeSprites.forEach(function(oNodeSprite){
+                oGis.Sprite.Node.showLabel(oNodeSprite);
+            });
+            oSprites.nodeGroupSprites.forEach(function(oNodeSprite){
+                oGis.Sprite.Node.showLabel(oNodeSprite);
+            });
+        };
+
+        this.hideAllLabel = function (oGis) {
+            var oSprites = _getTopoDataSprite(oGis);
+            oSprites.nodeSprites.forEach(function(oNodeSprite){
+                oGis.Sprite.Node.hideLabel(oNodeSprite);
+            });
+            oSprites.nodeGroupSprites.forEach(function(oNodeSprite){
+                oGis.Sprite.Node.hideLabel(oNodeSprite);
+            });
+        };
+
+        var _getTopoDataSprite = function (oGis) {
+            var oSprites = {
+                nodeSprites: [],
+                nodeGroupSprites: [],
+                linkSprites: []
+            };
+            oGis.Stage.mapObj.eachLayer(function (oLayer) {
+                var oBuObj = oLayer.buObj;
+                if (oBuObj) {
+                    if (oBuObj.uiType == NODE_TYPE) {
+                        oSprites.nodeSprites.push(oLayer);
+                    }
+                    else if (oBuObj.uiType == SITE_TYPE) {
+                        oSprites.nodeGroupSprites.push(oLayer);
+                    }
+                    else if (oBuObj.uiType == LINK_TYPE) {
+                        oSprites.linkSprites.push(oLayer);
+                    }
+                }
+            });
+
+            return oSprites;
+        };
+
+        this.showLabelByIds = function(arrIds, oGis){
+            oGis.Sprite.Node.showLabelByIds(arrIds, oGis);
+        };
+
+        this.hideLabelByIds = function(arrIds, oGis){
+            oGis.Sprite.Node.hideLabelByIds(arrIds, oGis);
+        };
+
         //endregion
 
         //region circle
@@ -155,7 +211,7 @@
             oGis.Sprite.Node.addPolygon(strId, arrPoints, oBuObj, oGis);
         };
 
-        this.delPolygon = function(strId, oGis){
+        this.delPolygon = function (strId, oGis) {
             oGis.Sprite.Node.delPolygon(strId, oGis);
         };
 
@@ -165,19 +221,19 @@
 
         //region nodeGroup
 
-        this.expandAllGroup = function(strUiType, oGis){
+        this.expandAllGroup = function (strUiType, oGis) {
             oGis.Sprite.NodeGroup.expandAllGroup(strUiType, oGis);
         };
 
-        this.collapseAllGroup = function(strUiType, oGis){
+        this.collapseAllGroup = function (strUiType, oGis) {
             oGis.Sprite.NodeGroup.collapseAllGroup(strUiType, oGis);
         };
 
-        this.delGroup = function(strId, oGis){
+        this.delGroup = function (strId, oGis) {
             oGis.Sprite.NodeGroup.delGroup(strId, oGis);
         };
 
-        this.setOpacity4Group = function(strId, iOpacity, oGis){
+        this.setOpacity4Group = function (strId, iOpacity, oGis) {
             oGis.Sprite.NodeGroup.setOpacity4Group(strId, iOpacity, oGis);
         };
 
@@ -185,15 +241,15 @@
 
         //region linkGroup
 
-        this.delPolyline = function(strId, oGis){
+        this.delPolyline = function (strId, oGis) {
             oGis.Sprite.LinkGroup.delPolyline(strId, oGis);
         };
 
-        this.setOpacity4Link = function(strId, iOpacity, oGis){
+        this.setOpacity4Link = function (strId, iOpacity, oGis) {
             oGis.Sprite.LinkGroup.setOpacity4Link(strId, iOpacity, oGis);
         };
 
-        this.setColor4Link = function(strId, oColor, oGis){
+        this.setColor4Link = function (strId, oColor, oGis) {
             oGis.Sprite.LinkGroup.setColor4Link(strId, oColor, oGis);
         };
 

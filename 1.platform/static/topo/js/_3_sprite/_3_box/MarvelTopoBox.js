@@ -42,6 +42,9 @@
             oRect4AreaSelect.x = oPos.x;
             oRect4AreaSelect.y = oPos.y;
             _updateStatus(REACT_STATE_START);
+
+            //event
+            oTopo.Stage.eventOptions.callbackOnClick(oEvent);
         };
 
         this.stageEventMouseMove = function (oEvent, oTopo) {
@@ -83,7 +86,7 @@
                 var iMinY = Math.min(oRect4AreaSelect.y, oPos.y);
                 var iMaxY = Math.max(oRect4AreaSelect.y, oPos.y);
 
-                _selectNodesInArea({
+                _selectSpritesInArea({
                     iMinX: iMinX,
                     iMaxX: iMaxX,
                     iMinY: iMinY,
@@ -92,10 +95,27 @@
 
                 //删除
                 self.delReact(oRect4AreaSelect.id, oTopo);
+
+                //event
+                var oSelectTopoDate = oTopo.Api.getSelectedData(oTopo);
+                oTopo.Stage.eventOptions.callbackOnAreaSelect(oSelectTopoDate);
             }
 
             //更新status
             _updateStatus(REACT_STATE_EMPYT);
+        };
+
+        var _selectSpritesInArea = function (oArea, oTopo) {
+            if (oTopo.Stage.config.areaSelect == "node") {
+                _selectNodesInArea(oArea, oTopo);
+            }
+            else if (oTopo.Stage.config.areaSelect == "link") {
+                _selectLinksInArea(oArea, oTopo);
+            }
+            else if (oTopo.Stage.config.areaSelect == "all") {
+                _selectNodesInArea(oArea, oTopo);
+                _selectLinksInArea(oArea, oTopo);
+            }
         };
 
         var _selectNodesInArea = function (oArea, oTopo) {
@@ -115,6 +135,55 @@
 
             //select
             oTopo.Sprite.NodeGroup.selectNodesById(arrNodeId, oTopo);
+
+            return arrNodeId;
+        };
+
+        var _selectLinksInArea = function (oArea, oTopo) {
+            var arrNodeSprites = oTopo.Stage.findGroupByTagAttr("uiNode", true, oTopo);
+            var arrNodeId = [];
+            arrNodeSprites.forEach(function (oSprite, index) {
+                var oSpritePos = oTopo.Sprite.Node.getAbsPos(oSprite);
+                var iX = oSpritePos.x;
+                var iY = oSpritePos.y;
+                var oBuObj = oSprite.tag;
+                if (iX >= oArea.iMinX && iX <= oArea.iMaxX) {
+                    if (iY >= oArea.iMinY && iY <= oArea.iMaxY) {
+                        arrNodeId.push(oBuObj.id);
+
+                        if (oBuObj.children && oBuObj.children.length) {
+                            //选中的折叠网元需要把子节点也当成选中节点
+                            if (!oBuObj.uiExpandNode) {
+                                oBuObj.children.forEach(function (oChild) {
+                                    arrNodeId.push(oChild.id);
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+
+            //找到链路id
+            var arrLinkIds = [];
+            var arrSprites = oTopo.Stage.findGroupByTagAttr("uiLink", true, oTopo);
+            arrSprites.forEach(function (oSprite) {
+                var oBuObj = oSprite.tag;
+                var index = arrNodeId.indexOf(oBuObj.srcNodeId);
+                if (index > -1) {
+                    arrLinkIds.push(oBuObj.id);
+                }
+                else {
+                    index = arrNodeId.indexOf(oBuObj.dstNodeId);
+                    if (index > -1) {
+                        arrLinkIds.push(oBuObj.id);
+                    }
+                }
+            });
+
+            //select
+            oTopo.Sprite.LinkGroup.selectLinksByIdEx(arrLinkIds, oTopo);
+
+            return arrLinkIds;
         };
 
         var _updateStatus = function (strStatus) {

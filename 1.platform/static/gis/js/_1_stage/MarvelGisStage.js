@@ -43,6 +43,9 @@
             },
             //endregion
         };
+        this.config = {
+            showLabel: true
+        };
         var model = self.MODEL_EMPTY;
         //endregion
 
@@ -101,6 +104,7 @@
                     zoom: iZoom4Init,
                     worldCopyJump: true,
                     doubleClickZoom: false,
+                    preferCanvas: true,
                     layers: [oTileLayer1]
                 });
                 self.mapObj.doubleClickZoom.disable();
@@ -290,13 +294,13 @@
 
         //region 快捷键
 
-        var _initEventEscPress = function(oGis){
+        var _initEventEscPress = function (oGis) {
             keyboardJS.bind('esc', function (e) {
                 //down
                 if (model === self.MODEL_CREATE_MARK) {
                     oGis.Sprite.Node.eventEscPress(e, oGis);
                 }
-                else if(model == self.MODEL_EMPTY){
+                else if (model == self.MODEL_EMPTY) {
 
                 }
             }, function (e) {
@@ -320,6 +324,10 @@
 
         this.updateModel = function (strModel) {
             model = strModel;
+        };
+
+        this.setConfig = function (oConfig) {
+            Object.assign(self.config, oConfig);
         };
 
         //endregion

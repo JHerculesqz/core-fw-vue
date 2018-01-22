@@ -51,9 +51,6 @@
           "SXL_1": {
             url: "static/devPanel/image/dev2.svg",
           },
-          "GK_1000": {
-            url: "static/devPanel/image/dev3.svg",
-          },
           "Raycus_6000": {
             url: "static/devPanel/image/dev3.svg",
           },
@@ -71,6 +68,9 @@
           },
           "car": {
             url: "static/devPanel/image/car.svg",
+          },
+          "GK_1000": {
+            url: "static/devPanel/image/gk.svg",
           },
         };
         this.m_oMarvelDevPanel.init(oOptions);
