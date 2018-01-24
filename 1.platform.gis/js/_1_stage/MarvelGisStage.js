@@ -102,6 +102,7 @@
                     zoomControl: oOptions.hasZoomCtrl == undefined ? true : oOptions.hasZoomCtrl,
                     center: [iX, iY],
                     zoom: iZoom4Init,
+                    minZoom: 3,
                     worldCopyJump: true,
                     doubleClickZoom: false,
                     preferCanvas: true,
