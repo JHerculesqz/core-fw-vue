@@ -237,10 +237,12 @@
       //#endregion
 
       //#region 3rd
-
+      setSkip: function (iSkip) {
+        this.curPageIndex = iSkip + 1;
+        this.skip = iSkip;
+      },
       //#endregion
     },
-
   }
 </script>
 
