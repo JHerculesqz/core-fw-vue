@@ -37,5 +37,17 @@ export default {
     var oMonth = parseInt(strMonth, 10);
     var oDay= new Date(strYear, oMonth, 0);
     return oDay.getDate();
-  }
+  },
+  nowByObj: function () {
+    var oNow = new Date();
+
+
+    var oRes = {
+      year: oNow.getFullYear(),
+      month: oNow.getMonth() + 1,
+      day: oNow.getDate(),
+    };
+
+    return oRes;
+  },
 }
