@@ -14,6 +14,9 @@
             "Raycus_6000": {
                 plugin: new $.MarvelDevPanel_3()
             },
+            "Raycus_6000_1": {
+                plugin: new $.MarvelDevPanel_3_1()
+            },
             "Raycus_12000": {
                 plugin: new $.MarvelDevPanel_4()
             },

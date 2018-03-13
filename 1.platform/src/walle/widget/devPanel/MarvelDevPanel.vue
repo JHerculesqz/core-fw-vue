@@ -54,6 +54,9 @@
           "Raycus_6000": {
             url: "static/devPanel/image/dev3.svg",
           },
+          "Raycus_6000_1": {
+            url: "static/devPanel/image/dev3_1.svg",
+          },
           "Raycus_12000": {
             url: "static/devPanel/image/dev4.svg",
           },

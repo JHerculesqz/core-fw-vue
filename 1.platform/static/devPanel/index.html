@@ -8,6 +8,7 @@
     <script type="application/javascript" src="lib/svg.min.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_2.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_3.js"></script>
+    <script type="application/javascript" src="js/plugins/MarvelDevPanel_3_1.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_4.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_5.js"></script>
     <script type="application/javascript" src="js/plugins/MarvelDevPanel_6.js"></script>
@@ -34,6 +35,9 @@
                 },
                 "Raycus_6000": {
                     url: "image/dev3.svg",
+                },
+                "Raycus_6000_1": {
+                    url: "image/dev3_1.svg",
                 },
                 "Raycus_12000": {
                     url: "image/dev4.svg",
@@ -64,7 +68,7 @@
 
             //3.setLightColor
             $("#id1").click(function () {
-                var oPlugin = oMarvelDevPanel.getPlugin("Raycus_2000");
+                var oPlugin = oMarvelDevPanel.getPlugin("car");
                 setInterval(function () {
                     oPlugin.setLightColor("l0Warn", Math.random() > 0.5 ? "#ff4c4c" : "#008c01");
                     oPlugin.setLightColor("l0Status", Math.random() > 0.5 ? "#008c01" : "#f5df28");
