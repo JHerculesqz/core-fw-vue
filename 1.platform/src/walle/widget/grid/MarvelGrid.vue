@@ -36,6 +36,7 @@
                       v-for="icon in cell.value"
                       v-bind:class="[icon.value]"
                       v-bind:style="{ color: icon.color }"
+                      :title="icon.tip"
                       v-on:click="onIconClick(row, icon)"></span>
             </div>
             <div v-else-if="cell.type == 'textIcon'">
@@ -63,9 +64,10 @@
               </div>
             </div>
             <div v-else-if="cell.type == 'input'" class="inputWrapper" id="[index]">
-              <div class="radio">
+              <div class="radio" :class="{disable:cell.bIsDisabled}">
                 <input type="text" class="inputDefault"
                        v-model="inputMsgs[index]"
+                       :disabled="cell.bIsDisabled"
                        v-on:click="updateRow(index,iCellIndex)"/>
               </div>
             </div>
