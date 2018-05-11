@@ -20,7 +20,15 @@
       this.chartObj.on("click", function (params) {
         if (params.componentType == "series" &&
           params.componentSubType == "bar") {
-          self.$emit("onBarItemClick", params);
+
+          var oBuObj = undefined;
+          if(self.chartData.lstBuObj != undefined){
+            if (params.dataIndex <= self.chartData.lstBuObj.length - 1) {
+              oBuObj = self.chartData.lstBuObj[params.dataIndex];
+            }
+          }
+
+          self.$emit("onBarItemClick", params, oBuObj);
         }
       });
     },

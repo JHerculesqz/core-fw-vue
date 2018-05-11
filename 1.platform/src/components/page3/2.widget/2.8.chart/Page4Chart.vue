@@ -136,7 +136,7 @@
     <!--2级 end-->
 
     <!--2级 start-->
-    <div class="title level2">柱状图</div>
+    <div class="title level2">复杂柱状图</div>
     <div class="describe">
       柱状图
     </div>
@@ -483,6 +483,7 @@
           title: "分数",
           xData: ["张三", "李四", "王五", "麻子六"],
           yData: [100, 70, 40, 10],
+          lstBuObj: ["张三ID", "李四ID", "王五ID", "麻子六ID"],
         },
         interval1: null,
         interval2: null,
@@ -653,8 +654,9 @@
       onScatterItemClick: function (oItem) {
         console.log(oItem);
       },
-      onBarItemClick: function (oItem) {
+      onBarItemClick: function (oItem, oBuObj) {
         console.log(oItem);
+        console.log(oBuObj);
       }
       //#endregion
       //#region callback
