@@ -1,5 +1,5 @@
-(function($){
-    $.MarvelDevPanel = function() {
+(function ($) {
+    $.MarvelDevPanel = function () {
         var self = this;
 
         //region Const
@@ -54,7 +54,6 @@
         //region event
 
 
-
         //endregion
 
         //region imsg
@@ -63,21 +62,25 @@
             var self = this;
 
             var oOption = this.m_oOptions[strDevType];
-            if(oOption != undefined){
-                $("#" + this.m_oOptions.id).load(oOption.url, function(oData){
+            if (oOption != undefined) {
+                $("#" + this.m_oOptions.id).load(oOption.url, function (oData) {
                     self.m_oDraw.svg(oData);
                     oOption.plugin.init(self.m_oOptions);
                     self.m_oOptions.events.afterInitPlugin();
                 });
+                return true;
+            }
+            else {
+                return false;
             }
         };
 
         this.getPlugin = function (strDevType) {
             var oOption = this.m_oOptions[strDevType];
-            if(oOption != undefined){
+            if (oOption != undefined) {
                 return oOption.plugin;
             }
-            else{
+            else {
                 return undefined;
             }
         };
