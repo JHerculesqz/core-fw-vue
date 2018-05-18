@@ -11,7 +11,7 @@ export default {
     this.parentDiv = document.querySelector(strParentDivId);
 
     //2.get total/step
-    this.total = this.div.offsetHeight;
+    this.total = this.div.offsetTop;
     this.step = this.total / 10;//this.total / 1000;
 
     //4._scroll
