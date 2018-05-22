@@ -50,10 +50,17 @@
     methods: {
       init: function (lstItems, strSelectItemLabel) {
         this.items = lstItems;
-        for (var i = 0; i < this.items.length; i++) {
-          var oItem = this.items[i];
-          if (oItem.label == strSelectItemLabel) {
-            this.selectItem = oItem;
+
+        if(strSelectItemLabel == undefined){
+           this.selectItem = {label: "", icon: ""};
+        }
+        else {
+          for (var i = 0; i < this.items.length; i++) {
+            var oItem = this.items[i];
+            if (oItem.label == strSelectItemLabel) {
+              this.selectItem = oItem;
+              break;
+            }
           }
         }
       },
