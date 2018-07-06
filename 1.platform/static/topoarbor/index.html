@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Very NB Topo</title>
+    <script type="application/javascript" src="lib/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="lib/arbor.js"></script>
+    <script type="application/javascript" src="lib/arbor-tween.js"></script>
+    <script type="application/javascript" src="js/MarvelArbor.js"></script>
+    <script type="application/javascript" src="js/MarvelCanvas.js"></script>
+    <script type="application/javascript" src="js/MarvelArborAPI.js"></script>
+    <script>
+        $(document).ready(function () {
+            var oMarvelArborAPI = new $.MarvelArborAPI();
+            oMarvelArborAPI.canvas.init("viewport");
+            oMarvelArborAPI.arborEx.init();
+
+            var oNodes = {};
+            for (var i = 0; i < 10; i++) {
+                oNodes["node" + i] = {
+                    label: "node" + i
+                };
+            }
+            var oLinks = {};
+            for (var i = 0; i < 10; i++) {
+                for (var j = i; j < 10; j++) {
+                    var oLinkDst = {};
+                    oLinkDst["node" + j] = { };
+                    oLinks["node" + i] = oLinkDst;
+                }
+            }
+            oMarvelArborAPI.arborEx.setData(oNodes, oLinks);
+        });
+    </script>
+</head>
+<body style="box-sizing: border-box; margin: 0; padding: 0px;">
+<canvas id="viewport" width="800" height="600"></canvas>
+</body>
+</html>
