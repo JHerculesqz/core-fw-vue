@@ -38,18 +38,18 @@
     props: ["model", "treeItemOptions"],
     data: function () {
       return {
-        open: this.model.bOpen === true
+        open: this.model.open === true
       }
     },
     beforeMount: function () {
       //如果是父节点
       if (this.isFolder) {
-        if (!this.model.hasOwnProperty("bOpen")) {
-          this.$set(this.model, "bOpen", true);
+        if (!this.model.hasOwnProperty("open")) {
+          this.$set(this.model, "open", true);
         }
       }
-      if (!this.model.hasOwnProperty("bShow")) {
-        this.$set(this.model, "bShow", true);
+      if (!this.model.hasOwnProperty("show")) {
+        this.$set(this.model, "show", true);
       }
       if (!this.model.hasOwnProperty("check")) {
         this.$set(this.model, "check", false);
@@ -84,7 +84,7 @@
         }
       },
       showNode: function () {
-        return this.model.bShow !== false;
+        return this.model.show !== false;
       },
       activeClass: function () {
         if (this.treeItemOptions.hasActiveStyle) {
@@ -124,7 +124,7 @@
       }
     },
     watch: {
-      "model.bOpen": function (oNewValue, oOldValue) {
+      "model.open": function (oNewValue, oOldValue) {
         this.open = oNewValue;
       }
     }

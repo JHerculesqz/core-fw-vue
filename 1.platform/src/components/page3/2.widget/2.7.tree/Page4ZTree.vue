@@ -91,8 +91,8 @@
         treeData: [{
           name: 'Root1',
           icon: "icon-address-book",
-          bOpen: true,
-          bShow: true,
+          open: true,
+          show: true,
           check: true,
           children: [{
             name: 'ne5001',
@@ -101,7 +101,7 @@
           }, {
             name: 'ne5002',
             icon: "icon-address-book",
-            bOpen: true,
+            open: true,
             check: false,
             children: [{
               name: 'ne50021',
@@ -114,7 +114,7 @@
           }, {
             name: 'ne5003',
             icon: "icon-address-book",
-            bOpen: false,
+            open: false,
             children: [{
               name: 'ne50031',
               icon: "icon-address-book"
@@ -129,19 +129,19 @@
         }, {
           name: 'Root2',
           icon: "icon-address-book",
-          bShow: true,
+          show: true,
           children: [{
             name: "ne6001",
             icon: "icon-address-book"
           }, {
             name: "ne6002",
             icon: "icon-address-book",
-            bShow: false,
+            show: false,
           }]
         }, {
           name: 'Root3',
           icon: "icon-address-book",
-          bShow: false,
+          show: false,
           children: [{
             name: "ne7001",
             icon: "icon-address-book"
@@ -172,7 +172,7 @@
         console.log(arrRes);
       },
       foldOrUnfoldNode: function () {
-        this.treeData[0].bOpen = !this.treeData[0].bOpen;
+        this.treeData[0].open = !this.treeData[0].open;
       },
       getActiveNodes: function () {
         var arrRes = this.$refs.tree.getActiveNodes();
