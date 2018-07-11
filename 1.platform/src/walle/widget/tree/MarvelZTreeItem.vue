@@ -207,6 +207,7 @@
 
   .active {
     background-color: #3399ff;
+    color: #ffffff !important;
   }
 
   .treeItemSubItems {
