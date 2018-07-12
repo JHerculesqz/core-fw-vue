@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <pre>
-      <code v-bind:class="langType">
+  <div class="marvelHighLightWrapper">
+    <pre class="marvelHighLightPre">
+      <code class="marvelHighLightCode" v-bind:class="langType" v-if="show">
         {{sourceCode}}
       </code>
     </pre>
@@ -21,35 +21,36 @@
 
   export default {
     name: 'MarvelHighLight',
-    props: ["langType", "sourceCode"],
     data: function () {
       return {
-
+        langType:"",
+        sourceCode:"",
+        show:true,
       }
     },
     mounted: function(){
       //#region Custom
 
-      this._initEx();
-
       //#endregion
-    },
-    updated: function(){
-      hightlightCode();
     },
     methods: {
       //#region inner
-
-      _initEx: function(){
-        hightlightCode();
-      },
-
       //#endregion
       //#region callback
 
       //#endregion
       //#region 3rd
-
+      setData: function (strLangType, strSourceCode) {
+        this.show = false;
+        this.langType = strLangType;
+        this.sourceCode = strSourceCode;
+        this.$nextTick(function(){
+          this.show = true;
+          this.$nextTick(function(){
+            hightlightCode();
+          });
+        });
+      }
       //#endregion
     }
   }
@@ -57,4 +58,16 @@
 
 <style scoped>
 
+  .marvelHighLightWrapper{
+    padding: 0;
+    margin: 0;
+  }
+  .marvelHighLightPre{
+    padding: 0;
+    margin: 0;
+  }
+  .marvelHighLightCode{
+    padding: 0;
+    margin: 0;
+  }
 </style>

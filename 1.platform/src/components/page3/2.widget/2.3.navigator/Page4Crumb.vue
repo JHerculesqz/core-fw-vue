@@ -25,8 +25,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <marvel-high-light lang-type="js" source-code="
-            console.log(111111);"></marvel-high-light>
+            <marvel-high-light ref="crumbCode"></marvel-high-light>
               <!--<pre v-highlight>-->
                 <!--<code class="html">-->
 <!--&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;-->
@@ -77,8 +76,25 @@
         //#endregion
       }
     },
+    mounted:function(){
+      //#region init
+      this._initEx();
+      //#endregion
+    },
     methods:{
       //#region inner
+
+      //#region lifeCycle
+
+      _initEx: function(){
+        var strLangType = "js";
+        var strCode = '<marvel-crumb :items=\"items\" v-on:onCrumbItemClick=\"onItemClick\"></marvel-crumb>';
+        this.$refs.crumbCode.setData(strLangType, strCode);
+      },
+
+      //#endregoin
+
+
       onItemClick: function(strItemLabel, oItem){
         console.log(strItemLabel);
         console.log(oItem);
