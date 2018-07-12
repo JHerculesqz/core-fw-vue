@@ -25,11 +25,13 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
-                <code class="html">
-&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;
-                </code>
-              </pre>
+            <marvel-hight-light lang-type="js" source-code="
+            console.log(111111);"></marvel-hight-light>
+              <!--<pre v-highlight>-->
+                <!--<code class="html">-->
+<!--&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;-->
+                <!--</code>-->
+              <!--</pre>-->
             <!--2级CodeView end-->
           </div>
         </marvel-tab-item>
@@ -43,10 +45,12 @@
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb"
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelHightLight from "../../../../walle/widget/highlight/MarvelHighLight";
 
   export default {
     name: 'page4Crumb',
     components: {
+      MarvelHightLight,
       MarvelCrumb,
       MarvelTab,
       MarvelTabItem
