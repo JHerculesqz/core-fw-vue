@@ -25,8 +25,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <marvel-hight-light lang-type="js" source-code="
-            console.log(111111);"></marvel-hight-light>
+            <marvel-high-light ref="crumbCode"></marvel-high-light>
               <!--<pre v-highlight>-->
                 <!--<code class="html">-->
 <!--&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;-->
@@ -45,12 +44,12 @@
   import MarvelCrumb from "@/walle/widget/crumb/MarvelCrumb"
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
-  import MarvelHightLight from "../../../../walle/widget/highlight/MarvelHighLight";
+  import MarvelHighLight from "../../../../walle/widget/highlight/MarvelHighLight";
 
   export default {
     name: 'page4Crumb',
     components: {
-      MarvelHightLight,
+      MarvelHighLight,
       MarvelCrumb,
       MarvelTab,
       MarvelTabItem
@@ -77,8 +76,25 @@
         //#endregion
       }
     },
+    mounted:function(){
+      //#region init
+      this._initEx();
+      //#endregion
+    },
     methods:{
       //#region inner
+
+      //#region lifeCycle
+
+      _initEx: function(){
+        var strLangType = "js";
+        var strCode = '<marvel-crumb :items=\"items\" v-on:onCrumbItemClick=\"onItemClick\"></marvel-crumb>';
+        this.$refs.crumbCode.setData(strLangType, strCode);
+      },
+
+      //#endregoin
+
+
       onItemClick: function(strItemLabel, oItem){
         console.log(strItemLabel);
         console.log(oItem);
