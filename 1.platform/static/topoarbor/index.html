@@ -4,36 +4,59 @@
     <meta charset="UTF-8">
     <title>Very NB Topo</title>
     <script type="application/javascript" src="lib/jquery-3.2.1.min.js"></script>
-    <script type="application/javascript" src="lib/arbor.js"></script>
-    <script type="application/javascript" src="lib/arbor-tween.js"></script>
+    <script type="application/javascript" src="lib/sigma.min.js"></script>
+    <script type="application/javascript" src="lib/plugins/sigma.layout.forceAtlas2.min.js"></script>
+    <script type="application/javascript" src="js/MarvelSigma.js"></script>
     <script type="application/javascript" src="js/MarvelArbor.js"></script>
     <script type="application/javascript" src="js/MarvelCanvas.js"></script>
     <script type="application/javascript" src="js/MarvelArborAPI.js"></script>
     <script>
         $(document).ready(function () {
             var oMarvelArborAPI = new $.MarvelArborAPI();
-            oMarvelArborAPI.canvas.init("viewport");
-            oMarvelArborAPI.arborEx.init();
 
-            var oNodes = {};
-            for (var i = 0; i < 10; i++) {
-                oNodes["node" + i] = {
-                    label: "node" + i
-                };
+            oMarvelArborAPI.sigmaEx.init("viewport", function (e) {
+                console.log(e);
+            });
+
+            var arrNodes = [];
+            for (var i = 0; i < 10; i++){
+                arrNodes.push({
+                    id: 'n' + i,
+                    label: 'Node ' + i,
+                    x: Math.random(),
+                    y: Math.random(),
+                    size: Math.random(),
+                    color: ['#666', '#abc', '#eee', '#ff00aa'][Math.random() * 4 | 0]
+                });
             }
-            var oLinks = {};
-            for (var i = 0; i < 10; i++) {
-                for (var j = i; j < 10; j++) {
-                    var oLinkDst = {};
-                    oLinkDst["node" + j] = { };
-                    oLinks["node" + i] = oLinkDst;
-                }
-            }
-            oMarvelArborAPI.arborEx.setData(oNodes, oLinks);
+            oMarvelArborAPI.sigmaEx.setData(arrNodes, []);
+
+            //#region abor保留
+
+//            oMarvelArborAPI.canvas.init("viewport");
+//            oMarvelArborAPI.arborEx.init();
+//
+//            var oNodes = {};
+//            for (var i = 0; i < 10; i++) {
+//                oNodes["node" + i] = {
+//                    label: "node" + i
+//                };
+//            }
+//            var oLinks = {};
+//            for (var i = 0; i < 10; i++) {
+//                for (var j = i; j < 10; j++) {
+//                    var oLinkDst = {};
+//                    oLinkDst["node" + j] = { };
+//                    oLinks["node" + i] = oLinkDst;
+//                }
+//            }
+//            oMarvelArborAPI.arborEx.setData(oNodes, oLinks);
+
+            //#endregion
         });
     </script>
 </head>
-<body style="box-sizing: border-box; margin: 0; padding: 0px;">
-<canvas id="viewport" width="800" height="600"></canvas>
+<body>
+<div id="viewport" style="width: 800px;height: 600px;"></div>
 </body>
 </html>

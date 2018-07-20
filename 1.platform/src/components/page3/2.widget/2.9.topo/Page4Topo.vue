@@ -95,10 +95,7 @@
             <!--2级CodeView start-->
             <pre>
                 <code class="html">
-              &lt;marvel-topo-arbor ref="ref4TopoArbor"
-                                 id="ref4TopoArbor"
-                                 theme="dark"&gt;
-              &lt;/marvel-topo-arbor&gt;
+
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -168,6 +165,7 @@
           nodeGroups: [],
           links: []
         };
+
         //#region node
 
         //#region 光站点
@@ -758,26 +756,55 @@
 
       initTopoArbor: function () {
         //init
-        this.$refs.ref4TopoArbor.init();
+        this.$refs.ref4TopoArbor.init(function (e) {
+          console.log(e);
+        });
 
-        //generate data
-        var oNodes = {};
+        //gen Data
+        var arrNodes = [];
         for (var i = 0; i < 10; i++) {
-          oNodes["node" + i] = {
-            label: "node" + i
-          };
+          arrNodes.push({
+            id: 'n' + i,
+            label: 'Node ' + i,
+            x: 10 + Math.random(),
+            y: 10 + Math.random(),
+            size: 0.5,
+            color: ['#666', '#abc', '#eee', '#ff00aa'][Math.random() * 4 | 0]
+          });
         }
-        var oLinks = {};
+        var arrLinks = [];
         for (var i = 0; i < 10; i++) {
-          for (var j = i; j < 10; j++) {
-            var oLinkDst = {};
-            oLinkDst["node" + j] = {};
-            oLinks["node" + i] = oLinkDst;
-          }
+          arrLinks.push({
+            id: 'e' + i,
+            source: 'n' + (Math.random() * 10 | 0),
+            target: 'n' + (Math.random() * 10 | 0),
+            size: Math.random(),
+            color: ['#666', '#abc', '#eee', '#ff00aa'][Math.random() * 4 | 0]
+          });
         }
+
+        //#region abor保留
+
+//        //generate data
+//        var oNodes = {};
+//        for (var i = 0; i < 10; i++) {
+//          oNodes["node" + i] = {
+//            label: "node" + i
+//          };
+//        }
+//        var oLinks = {};
+//        for (var i = 0; i < 10; i++) {
+//          for (var j = i; j < 10; j++) {
+//            var oLinkDst = {};
+//            oLinkDst["node" + j] = {};
+//            oLinks["node" + i] = oLinkDst;
+//          }
+//        }
+
+        //#endregion
 
         //add data
-        this.$refs.ref4TopoArbor.setData(oNodes, oLinks);
+        this.$refs.ref4TopoArbor.setData(arrNodes, arrLinks);
       },
 
       //#endregion

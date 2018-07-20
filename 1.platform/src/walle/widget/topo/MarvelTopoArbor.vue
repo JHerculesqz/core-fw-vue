@@ -1,5 +1,5 @@
 <template>
-  <canvas v-bind:id="id" class="marvelTopoArbor"></canvas>
+  <div v-bind:id="id" class="marvelTopoArbor"></div>
 </template>
 
 <script>
@@ -22,14 +22,15 @@
 
       //region 3rd
 
-      init: function () {
+      init: function (oCallback) {
         this.api = new window.$.MarvelArborAPI();
-        this.api.canvas.init(this.id);
-        this.api.arborEx.init();
+        this.api.sigmaEx.init(this.id, function (e) {
+          oCallback(e);
+        });
       },
 
       setData: function (arrNodes, arrLinks) {
-        this.api.arborEx.setData(arrNodes, arrLinks);
+        this.api.sigmaEx.setData(arrNodes, arrLinks);
       },
 
       //endregion
@@ -39,6 +40,7 @@
 
 <style scoped>
   .marvelTopoArbor {
+    position: relative;
     width: 100%;
     height: 100%;
   }
