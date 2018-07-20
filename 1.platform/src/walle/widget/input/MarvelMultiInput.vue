@@ -5,6 +5,7 @@
               :title="placeHolder"
               v-model="inputMsg"
               @input="onInput"></textarea>
+    <div class="errorTip icon-notification">{{ errMsg }}</div>
   </div>
 </template>
 
@@ -13,7 +14,7 @@
 
   export default {
     name: 'MarvelMultiInput',
-    props: ["status", "placeHolder", "size", "height"],
+    props: ["status", "placeHolder", "errMsg", "size", "height"],
     data: function () {
       return {
         inputMsg: ""
@@ -57,8 +58,23 @@
     border: 1px solid #3399ff;
   }
 
+  .inputWrapper .errorTip {
+    color: #ff4c4c;
+    line-height: 36px;
+    font-size: 14px;
+    display: none;
+  }
+
+  .inputWrapper .errorTip:before {
+    margin-right: 10px;
+  }
+
   .error textarea {
     border: 1px solid #ff4c4c !important;
+  }
+
+  .error .errorTip {
+    display: block;
   }
 
   .disable textarea {

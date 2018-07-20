@@ -603,6 +603,9 @@
 .icon-copy:before {
   content: "\e99b";
 }
+.icon-type:before {
+  content: "\e99b";
+}
 .icon-paste:before {
   content: "\e99c";
 }
