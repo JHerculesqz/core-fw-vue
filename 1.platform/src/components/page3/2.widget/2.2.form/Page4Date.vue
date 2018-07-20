@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-date yearStart="2014" yearEnd="2030" yearSelect="2017" monthSelect="2" daySelect="3"&gt;&lt;/marvel-date&gt;
                 </code>

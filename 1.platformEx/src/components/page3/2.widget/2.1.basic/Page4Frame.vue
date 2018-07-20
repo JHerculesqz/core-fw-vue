@@ -28,7 +28,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 &lt;div class="page4Frame"&gt;
   &lt;marvel-frame media="24,24,24,24" hasMargin="true" classCustom="classCustom1"&gt;

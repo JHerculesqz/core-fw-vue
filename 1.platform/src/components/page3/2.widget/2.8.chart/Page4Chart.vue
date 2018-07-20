@@ -27,7 +27,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-chart-gauge ref="ref1" id="id1" theme="dark"&gt;&lt;/marvel-chart-gauge&gt;
                 </code>
@@ -60,7 +60,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-chart-radar ref="ref2" id="id2" theme="dark"&gt;&lt;/marvel-chart-radar&gt;
                 </code>
@@ -91,7 +91,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-chart-scatter ref="ref3" id="id3" theme="dark"&gt;&lt;/marvel-chart-scatter&gt;
                 </code>
@@ -123,7 +123,7 @@
         <marvel-tab-item :isActive="tabItems4[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-chart-scatter2 ref="ref4" id="id4" theme="dark" v-on:onClick="onScatterItemClick"&gt;&lt;/marvel-chart-scatter2&gt;
                 </code>
@@ -154,7 +154,7 @@
         <marvel-tab-item :isActive="tabItems5[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-chart-stack-line ref="ref5" id="id5" theme="dark"&gt;&lt;/marvel-chart-stack-line&gt;
                 </code>
@@ -185,7 +185,7 @@
         <marvel-tab-item :isActive="tabItems6[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 
                 </code>
@@ -216,7 +216,7 @@
         <marvel-tab-item :isActive="tabItems6[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 
                 </code>
@@ -249,7 +249,7 @@
         <marvel-tab-item :isActive="tabItems7[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 
                 </code>

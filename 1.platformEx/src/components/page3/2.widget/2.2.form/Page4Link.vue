@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-link label="导航链接" classCustom="classCustom1"
               v-on:onClick="onClick"&gt;&lt;/marvel-link&gt;

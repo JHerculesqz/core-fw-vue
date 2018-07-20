@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click.stop="onClick"&gt;show&lt;/button&gt;
 &lt;marvel-menu-context ref="ref0"
@@ -60,7 +60,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;button v-on:click.stop="onClick2"&gt;show&lt;/button&gt;
                   &lt;marvel-menu-context2 ref="ref1"

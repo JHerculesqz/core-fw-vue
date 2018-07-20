@@ -24,7 +24,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click="onClick"&gt;update Data&lt;/button&gt;
 &lt;marvel-warning :items="items" :theme="theme"&gt;&lt;/marvel-warning&gt;

@@ -33,7 +33,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;MarvelPrompt :status="status" :content="content"&gt;&lt;/MarvelPrompt&gt;
                 </code>
@@ -64,7 +64,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;MarvelPromptGlobal :oPrompts="oGlobalPrompts"&gt;&lt;/MarvelPromptGlobal&gt;
                 </code>
@@ -97,7 +97,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;MarvelPrompt :status="status" :content="content"&gt;&lt;/MarvelPrompt&gt;
                 </code>

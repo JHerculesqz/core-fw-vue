@@ -16,7 +16,7 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 npm install marvel-fui2 --save-dev
                 </code>

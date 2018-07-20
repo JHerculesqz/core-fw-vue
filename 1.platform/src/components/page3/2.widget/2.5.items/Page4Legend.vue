@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;div style="width:500px;height: 150px; background-color: #f0f0f0;"&gt;
   &lt;marvel-legend :legendItems="items"

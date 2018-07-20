@@ -24,7 +24,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-list1 :items="listItems" :bargeCount="listBargeCount"
               v-on:onListItemClick="onListItemClick"&gt;&lt;/marvel-list1&gt;

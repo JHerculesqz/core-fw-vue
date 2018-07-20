@@ -27,7 +27,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-upload ref="ref0" placeHolder="请选择文件"&gt;&lt;/marvel-upload&gt;
                 </code>
@@ -58,7 +58,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-upload-simple btnName="文件上传"
                       @onUploadFile="onUploadFile"&gt;&lt;/marvel-upload-simple&gt;

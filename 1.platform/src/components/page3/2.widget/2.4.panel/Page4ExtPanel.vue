@@ -34,7 +34,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-bottom-ext-panel
   height="100"
@@ -78,7 +78,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-left-ext-panel
   width="100"
@@ -122,7 +122,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;marvel-right-ext-panel
                     width="100"

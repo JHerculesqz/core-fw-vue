@@ -25,7 +25,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;MarvelSearch placeholder="请输入关键字..." v-on:search="search1"&gt;&lt;/MarvelSearch&gt;
                 </code>
@@ -56,7 +56,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;MarvelSearchWithDropDown placeholder="请输入关键字..." @search="search2"
                                             :selectItems="selectItems"&gt;&lt;/MarvelSearchWithDropDown&gt;

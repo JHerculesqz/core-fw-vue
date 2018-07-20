@@ -27,7 +27,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 &lt;marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..." :inputMsg = "inputMsg" theme="dark" size="mini"&gt;&lt;/marvel-input&gt;
                 </code>
@@ -59,7 +59,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 &lt;marvel-input :status="status2" placeHolder="please..." errMsg="输入错误..."&gt;&lt;/marvel-input&gt;
                 </code>
@@ -91,7 +91,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 &lt;marvel-input :status="status3" placeHolder="please..." errMsg="输入错误..."&gt;&lt;/marvel-input&gt;
                 </code>
@@ -125,7 +125,7 @@
         <marvel-tab-item :isActive="tabItems4[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
                     :inputMsg="inputMsg2" theme="dark" size="mini"&gt;

@@ -33,7 +33,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click="onClick4Radio"&gt;getStatus&lt;/button&gt;
 &lt;br&gt;
@@ -79,7 +79,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click="onClick4Switch"&gt;getStatus&lt;/button&gt;
 &lt;br&gt;
@@ -127,7 +127,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click="onClick4Check"&gt;getStatus&lt;/button&gt;
 &lt;br&gt;
@@ -167,7 +167,7 @@
         <marvel-tab-item :isActive="tabItems4[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;button v-on:click="onClick4SelectCard"&gt;获取&lt;/button&gt;&lt;br&gt;
 &lt;marvel-select-card ref="ref12" :items="items" size="mini"&gt;&lt;/marvel-select-card&gt;

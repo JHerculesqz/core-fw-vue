@@ -28,7 +28,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-accordion isFolder="false" hasShadow="true"
                   title="abc" titleIcon="icon-calculator"
@@ -64,7 +64,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-accordion2 v-bind:items="items2" theme="dark"&gt;&lt;/marvel-accordion2&gt;
                 </code>
@@ -96,7 +96,7 @@
         <marvel-tab-item :isActive="tabItems3[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 
                 </code>

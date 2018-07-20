@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="js">
 &lt;marvel-layout1 hasMargin="true" classCustom="classCustom1"&gt;
   &lt;div slot="head"&gt;head&lt;/div&gt;

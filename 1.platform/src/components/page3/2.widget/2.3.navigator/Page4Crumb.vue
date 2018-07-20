@@ -26,7 +26,7 @@
           <div class="codeArea">
             <!--2级CodeView start-->
             <marvel-high-light ref="crumbCode"></marvel-high-light>
-              <!--<pre v-highlight>-->
+              <!--<pre>-->
                 <!--<code class="html">-->
 <!--&lt;marvel-crumb :items="items" v-on:onCrumbItemClick="onItemClick"&gt;&lt;/marvel-crumb&gt;-->
                 <!--</code>-->
@@ -95,9 +95,9 @@
       //#endregoin
 
 
-      onItemClick: function(strItemLabel, oItem){
+      onItemClick: function(strItemLabel, iItemIndex){
         console.log(strItemLabel);
-        console.log(oItem);
+        console.log(iItemIndex);
       }
       //#endregion
       //#region callback

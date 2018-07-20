@@ -38,7 +38,7 @@
           <marvel-tab-item :isActive="tabItems1[1].isActive">
             <div class="codeArea">
               <!--2级CodeView start-->
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;marvel-primary-button size="large" classCustom="classCustom1" label="Large" v-on:onClick="onClick" isWarn=true&gt;&lt;/marvel-primary-button&gt;
                   &lt;marvel-primary-button classCustom="classCustom1" label="normal"
@@ -89,7 +89,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems2[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;marvel-button size="large" classCustom="classCustom1" label="Large" isWarn=true v-on:onClick="onClick">&lt;/marvel-button&gt;
                   &lt;marvel-button classCustom="classCustom1" label="normal" v-on:onClick="onClick">&lt;/marvel-button&gt;
@@ -139,7 +139,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems3[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;marvel-icon-txt-button size="large" classCustom="classCustom1" label="Large" icon="icon-home3"
                   isWarn=true v-on:onClick="onClick"&gt;&lt;/marvel-icon-txt-button&gt;
@@ -184,7 +184,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems4[1].isActive">
             <div class="codeArea">
-               <pre v-highlight>
+               <pre>
                 <code class="html">
                   &lt;marvel-icon-button classCustom="classCustom1" label="normal" icon="icon-home3" isWarn=true
                   isWarn=true v-on:onClick="onClick"&gt;&lt;/marvel-icon-button&gt;
@@ -220,7 +220,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems5[1].isActive">
             <div class="codeArea">
-               <pre v-highlight>
+               <pre>
                 <code class="html">
                   &lt;marvel-txt-button classCustom="classCustom1" label="normal"
                                      v-on:onClick="onClick" isWarn=true&gt;&lt;/marvel-txt-button&gt;
@@ -256,7 +256,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems6[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 &lt;marvel-drop-down-button ref="ref14" classCustom="classCustom1" v-on:onClick="onClick"&gt;&lt;/marvel-drop-down-button&gt;
                 </code>
@@ -281,7 +281,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems7[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
                   &lt;marvel-tab-button ref="ref4TabBtn" label="点我"  isWarn=true
                                      v-on:onClick="onClick4TabBtn"&gt;&lt;/marvel-tab-button&gt;
@@ -310,7 +310,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems8[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 
                 </code>
@@ -338,7 +338,7 @@
           </marvel-tab-item>
           <marvel-tab-item :isActive="tabItems9[1].isActive">
             <div class="codeArea">
-              <pre v-highlight>
+              <pre>
                 <code class="html">
 
                 </code>

@@ -26,7 +26,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;marvel-wizard ref="ref0" :items="items"&gt;&lt;/marvel-wizard&gt;
                 </code>
@@ -61,7 +61,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;marvel-wizard-tab
                                      :wizardTabs="wizardTabs" v-on:onClick="onClickWizardTab"&gt;&lt;/marvel-wizard-tab&gt;

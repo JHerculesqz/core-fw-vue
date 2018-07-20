@@ -36,7 +36,7 @@
           <marvel-tab-item :isActive="tabItems1[1].isActive">
             <div class="codeArea">
               <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;marvel-loading ref="ref0" :isGlobal="true" v-on:onCancel="LoadingOnCancel"&gt;&lt;/marvel-loading&gt;
                   &lt;marvel-loading ref="ref1" :isGlobal="false" v-on:onCancel="LoadingOnCancel"&gt;&lt;/marvel-loading&gt;

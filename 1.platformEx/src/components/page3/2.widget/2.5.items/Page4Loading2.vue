@@ -28,7 +28,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
 &lt;marvel-frame hasMargin="false" media="24,24,24,24" classCustom="classCustom1"&gt;
   &lt;button v-on:click="showEx"&gt;show&lt;/button&gt;

@@ -25,7 +25,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="js">
 &lt;marvel-grid :titles="titles" :rows="rows"&gt;&lt;/marvel-grid&gt;
                 </code>

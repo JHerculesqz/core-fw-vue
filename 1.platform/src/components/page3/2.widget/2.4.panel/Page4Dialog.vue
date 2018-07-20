@@ -31,7 +31,7 @@
         <marvel-tab-item :isActive="tabItems1[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;button v-on:click="onClickDialogShow"&gt;show&lt;/button&gt;
                   &lt;marvel-dialog :showDialog="showDialog"
@@ -72,7 +72,7 @@
         <marvel-tab-item :isActive="tabItems2[1].isActive">
           <div class="codeArea">
             <!--2级CodeView start-->
-            <pre v-highlight>
+            <pre>
                 <code class="html">
                   &lt;button v-on:click="onClickConfirmShow"&gt;show&lt;/button&gt;
                   &lt;marvel-confirm :showConfirm="showConfirm"
