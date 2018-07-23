@@ -10,7 +10,7 @@
 
 <script>
   import * as hljs from 'highlight.js'
-  import "highlight.js/styles/atom-one-dark.css"
+  import "highlight.js/styles/atom-one-light.css"
 
   const hightlightCode = () => {
     let blocks = document.querySelectorAll('pre code');
