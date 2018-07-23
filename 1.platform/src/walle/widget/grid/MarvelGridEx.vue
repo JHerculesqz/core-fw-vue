@@ -5,7 +5,6 @@ titles：表格的表头
 rows：表格列
 limit：每页显示的行数
 gridId: 表格控件实例的唯一标识
-activeColor：行的激活颜色，默认值#395297
 editCellFinished: 可编辑单元格编辑完成后的回调
 sortRowsFunc: 自定义排序的回调，不传的话，按照默认的规则排序
 canDrag: 是否可以拖拽列
@@ -37,7 +36,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
           <th class="gridTitle" v-if="useDetailRow()" style="width: 35px"></th>
           <template v-for="(title,index) in titles">
             <template v-if="title.visible">
-              <th class="gridTitle" :style="{ width: title.width }">
+              <th class="gridTitle" :style="{ width: title.width }" :title="title.label">
                 <div v-if="title.type == 'checkBox'" class="checkBoxWrapper">
                   <div class="checkBox">
                     <input type="checkbox" :id="gridId"
@@ -63,7 +62,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
         </thead>
         <tbody>
         <template v-for="(row,index) in rowsInPage">
-          <tr :style="getTrStyle(row)" @click.stop="onClickRow(row)">
+          <tr :class="getTrStyle(row)" @click.stop="onClickRow(row)">
             <td v-if="useDetailRow()" style="width: 35px" :class="foldOrUnFold(row)"
                 @click.stop="onClickFoldOrUnFold(row)"></td>
             <template v-for="title in titles" v-if="title.visible">
@@ -207,14 +206,6 @@ multiDropdown：下拉框多选，支持度不好，待优化
         default: 5
       },
       gridId: [String, Number],
-      activeColor: {
-        type: String,
-        default: "#395297" //浅色 #c6e3ff
-      },
-      disabledColor: {
-        type: String,
-        default: "#606b9a" //浅色#e0e0e0
-      },
       editCellFinished: Function,
       sortRowsFunc: Function,
       canDrag: {
@@ -552,17 +543,13 @@ multiDropdown：下拉框多选，支持度不好，待优化
         this.$emit("onClickRow", oRow);
       },
       getTrStyle(oRow) {
-        let oStyle = {};
+        let oStyle = "";
         let strId = this.getCellValueByKey("id", oRow);
         if (this.activeIds.indexOf(strId) > -1) {
-          Object.assign(oStyle, {
-            "background-color": this.activeColor
-          });
+          oStyle = "activeRow";
         }
         if (this.disabledIds.indexOf(strId) > -1) {
-          Object.assign(oStyle, {
-            "background-color": this.disabledColor
-          });
+          oStyle = "disabledRow";
         }
         return oStyle;
       },
@@ -1065,6 +1052,15 @@ multiDropdown：下拉框多选，支持度不好，待优化
     color: #999999;
   }
 
+  .gridWrapper .grid .gridCont tbody .activeRow{
+    background-color: #60b0ff !important;
+  }
+
+  .gridWrapper .grid .gridCont tbody .disabledRow{
+    background-color: #dcdcdc !important;
+    pointer-events: none;
+  }
+
   .gridWrapper .grid .gridCont tbody tr td div {
     overflow: hidden;
     white-space: nowrap;
@@ -1317,6 +1313,15 @@ multiDropdown：下拉框多选，支持度不好，待优化
   .dark .gridWrapper .grid .gridCont tbody tr td select:disabled {
     background-color: #070a48;
     color: #999999;
+  }
+
+  .dark .gridWrapper .grid .gridCont tbody .activeRow{
+    background-color: #395297 !important;
+  }
+
+  .dark .gridWrapper .grid .gridCont tbody .disabledRow{
+    background-color: #3f414a  !important;
+    pointer-events: none;
   }
 
   .dark .grid .gridCont tbody tr td:last-child {

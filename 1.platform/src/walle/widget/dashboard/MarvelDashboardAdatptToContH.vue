@@ -1,14 +1,14 @@
 <template>
-  <div class="dashboardWrapper">
-    <div class="cont">
-      <div class="contArea">
-        <slot name="contArea"></slot>
-      </div>
-    </div>
+  <div class="dashboardAdaptToContWrapper">
     <div class="title">
       <div class="titleArea">{{ title }}</div>
       <div class="titleCustomArea">
         <slot name="customArea"></slot>
+      </div>
+    </div>
+    <div class="cont">
+      <div class="contArea">
+        <slot name="contArea"></slot>
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'MarvelDashboard',
+    name: 'MarvelDashboardAdaptToContH',
     props: ["title"],
     data: function() {
         return {
@@ -27,53 +27,44 @@
 </script>
 
 <style scoped>
-  .dashboardWrapper{
+  .dashboardAdaptToContWrapper{
     background-color: #fff;
     border-radius: 2px;
-    height: 100%;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.05);
     position:relative;
   }
-  .dashboardWrapper .title{
+  .dashboardAdaptToContWrapper .title{
     height:48px;
     padding: 0 20px;
-    top:0;
-    left:0;
-    position:absolute;
     width:100%;
     box-sizing:border-box;
   }
-  .dashboardWrapper .title .titleArea{
+  .dashboardAdaptToContWrapper .title .titleArea{
     color: #999;
     line-height: 48px;
     font-size: 20px;
     font-family: arial, "微软雅黑", sans-serif;
     float: left;
   }
-  .dashboardWrapper .title .titleCustomArea{
+  .dashboardAdaptToContWrapper .title .titleCustomArea{
     float: right;
   }
-  .dashboardWrapper .cont{
-    height: calc(100% - 48px);
+  .dashboardAdaptToContWrapper .cont{
     padding: 0 20px 20px 20px;
     box-sizing: border-box;
-    position:absolute;
     width:100%;
-    top:48px;
-    left:0;
   }
-  .dashboardWrapper .cont .contArea{
-    height: 100%;
+  .dashboardAdaptToContWrapper .cont .contArea{
     background: url("/static/walle/emptyTip3.png") no-repeat center;
     background-size: 18%;
   }
 
   /*region dark theme*/
 
-  .dark .dashboardWrapper{
+  .dark .dashboardAdaptToContWrapper{
     background-color: #282746;
   }
-  .dark .dashboardWrapper .title .titleArea{
+  .dark .dashboardAdaptToContWrapper .title .titleArea{
     color: #ffffff;
   }
 

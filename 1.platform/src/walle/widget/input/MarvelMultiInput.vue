@@ -100,6 +100,10 @@
     box-shadow: none;
   }
 
+  .dark .disable textarea{
+    background-color: rgba(0,0,0,0.4);
+  }
+
   /*endregion*/
 
 </style>

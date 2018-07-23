@@ -2,9 +2,9 @@
   font-family: 'icomoon';
   src:  url('fonts/icomoon.eot?ol5yx2');
   src:  url('fonts/icomoon.eot?ol5yx2#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?ol5yx2') format('truetype'),
-    url('fonts/icomoon.woff?ol5yx2') format('woff'),
-    url('fonts/icomoon.svg?ol5yx2#icomoon') format('svg');
+  url('fonts/icomoon.ttf?ol5yx2') format('truetype'),
+  url('fonts/icomoon.woff?ol5yx2') format('woff'),
+  url('fonts/icomoon.svg?ol5yx2#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -36,7 +36,7 @@
   content: "\e902";
 
 }
-.icon-Java:before {
+.icon-java:before {
   content: "\e903";
 
 }
@@ -452,19 +452,23 @@
   content: "\e96a";
 
 }
-.icon-Project:before {
+.icon-project:before {
   content: "\e96b";
 
 }
-.icon-Python:before {
+.icon-py:before {
   content: "\e96c";
 
 }
-.icon-Xml:before {
+.icon-xml:before {
   content: "\e96d";
 
 }
-.icon-Yang:before {
+.icon-yang:before {
+  content: "\e96e";
+
+}
+.icon-yin:before {
   content: "\e96e";
 
 }

@@ -1,26 +1,26 @@
 <template>
   <div></div>
   <!--<div v-bind:class="{ hasMargin: isMargin }">-->
-    <!--<div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">-->
-      <!--<slot></slot>-->
-    <!--</div>-->
+  <!--<div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">-->
+  <!--<slot></slot>-->
+  <!--</div>-->
   <!--</div>-->
 </template>
 
 <script>
-//  import StrUtils from "@/walle/component/str";
+  //  import StrUtils from "@/walle/component/str";
 
   export default {
     name: 'MarvelFrame',
 //    props: ["media", "hasMargin", "classCustom"],
     data: function() {
-        return {
+      return {
 //          isMargin: false,
 //          classLarge: "large-24",
 //          classMiddle: "middle-12",
 //          classSmall: "small-8",
 //          classMini: "mini-4"
-        }
+      }
     },
     mounted: function () {
 //      //1.hasMargin
@@ -59,7 +59,9 @@
   .middle-1,.middle-2,.middle-3,.middle-4,.middle-5,.middle-6,.middle-7,.middle-8,.middle-9,.middle-10,.middle-11,.middle-12,
   .middle-13,.middle-14,.middle-15,.middle-16,.middle-17,.middle-18,.middle-19,.middle-20,.middle-21,.middle-22,.middle-23,.middle-24,
   .large-1,.large-2,.large-3,.large-4,.large-5,.large-6,.large-7,.large-8,.large-9,.large-10,.large-11,.large-12,
-  .large-13,.large-14,.large-15,.large-16,.large-17,.large-18,.large-19,.large-20,.large-21,.large-22,.large-23,.large-24{
+  .large-13,.large-14,.large-15,.large-16,.large-17,.large-18,.large-19,.large-20,.large-21,.large-22,.large-23,.large-24
+  .huge-1,.huge-2,.huge-3,.huge-4,.huge-5,.huge-6,.huge-7,.huge-8,.huge-9,.huge-10,.huge-11,.huge-12,
+  .huge-13,.huge-14,.huge-15,.huge-16,.huge-17,.huge-18,.huge-19,.huge-20,.huge-21,.huge-22,.huge-23,.huge-24{
     position: relative;
     min-height: 1px;
   }
@@ -281,6 +283,61 @@
     .hasMargin>.large-22{width: calc(91.66666667% - 20px);display:inline-block; float: left;}
     .hasMargin>.large-23{width: calc(95.8333332% - 20px);display:inline-block; float: left;}
     .hasMargin>.large-24{width: calc(100% - 20px);display:inline-block; float: left;}
+  }
+
+  /*设备宽度大于1500*/
+  @media (min-width: 1500px) {
+    .huge-0{display:none; float: left;}
+    .huge-1{width: 4.16666666%;display:inline-block; float: left;}
+    .huge-2{width: 8.33333333%;display:inline-block; float: left;}
+    .huge-3{width: 12.5%;display:inline-block; float: left;}
+    .huge-4{width: 16.66666667%;display:inline-block; float: left;}
+    .huge-5{width: 20.83333333%;display:inline-block; float: left;}
+    .huge-6{width: 25%;display:inline-block; float: left;}
+    .huge-7{width: 29.16666666%;display:inline-block; float: left;}
+    .huge-8{width: 33.33333333%;display:inline-block; float: left;}
+    .huge-9{width: 37.49999999%;display:inline-block; float: left;}
+    .huge-10{width: 41.66666667%;display:inline-block; float: left;}
+    .huge-11{width: 45.83333333%;display:inline-block; float: left;}
+    .huge-12{width: 50%;display:inline-block; float: left;}
+    .huge-13{width: 54.16666666%;display:inline-block; float: left;}
+    .huge-14{width: 58.33333333%;display:inline-block; float: left;}
+    .huge-15{width: 62.49999999%;display:inline-block; float: left;}
+    .huge-16{width: 66.66666667%;display:inline-block; float: left;}
+    .huge-17{width: 70.83333333%;display:inline-block; float: left;}
+    .huge-18{width: 75%;display:inline-block; float: left;}
+    .huge-19{width: 79.16666666%;display:inline-block; float: left;}
+    .huge-20{width: 83.33333333%;display:inline-block; float: left;}
+    .huge-21{width: 87.49999999%;display:inline-block; float: left;}
+    .huge-22{width: 91.66666667%;display:inline-block; float: left;}
+    .huge-23{width: 95.8333332%;display:inline-block; float: left;}
+    .huge-24{width: 100%;display:inline-block; float: left;}
+
+    .hasMargin>.huge-0{display:none; float: left;}
+    .hasMargin>.huge-1{width: calc(4.16666666% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-2{width: calc(8.33333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-3{width: calc(12.5% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-4{width: calc(16.66666667% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-5{width: calc(20.83333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-6{width: calc(25% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-7{width: calc(29.16666666% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-8{width: calc(33.33333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-9{width: calc(37.49999999% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-10{width: calc(41.66666667% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-11{width: calc(45.83333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-12{width: calc(50% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-13{width: calc(54.16666666% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-14{width: calc(58.33333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-15{width: calc(62.49999999% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-16{width: calc(66.66666667% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-17{width: calc(70.83333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-18{width: calc(75% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-19{width: calc(79.16666666% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-20{width: calc(83.33333333% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-21{width: calc(87.49999999% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-22{width: calc(91.66666667% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-23{width: calc(95.8333332% - 20px);display:inline-block; float: left;}
+    .hasMargin>.huge-24{width: calc(100% - 20px);display:inline-block; float: left;}
   }
 
 </style>

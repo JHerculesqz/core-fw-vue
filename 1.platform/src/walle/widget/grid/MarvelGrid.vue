@@ -8,7 +8,7 @@
           <!--<marvel-check-box ref="ref8" id="id9"-->
           <!--label="selectAll" showLabel="false"></marvel-check-box>-->
           <!--</th>-->
-          <th v-for="(title,index) in titles" v-bind:style="{ width: title.width }">
+          <th v-for="(title,index) in titles" v-bind:style="{ width: title.width }" :title="title.label">
             <div v-if="title.type == 'checkBox'" class="checkBoxWrapper">
               <div class="checkBox">
                 <input type="checkbox" v-bind:id="'title_'+[gridId]+[index]"
@@ -446,7 +446,7 @@
     background-color: #161C36;
   }
   .dark .grid .gridCont tbody tr:nth-child(even){
-    background-color: #263257;
+    background-color: #13213c;
   }
   .dark .grid .gridCont tbody tr:hover{
     background-color: #1d3b60;

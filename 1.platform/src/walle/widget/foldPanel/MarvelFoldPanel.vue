@@ -62,14 +62,14 @@
     padding: 10px;
     height: calc(100% - 32px);
     box-sizing: border-box;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.04);
   }
 
 
   /*region dark theme*/
 
   .dark .foldPanelTitle{
-    background-color: #36365b;
+    background-color: #e1e4e5;
   }
   .dark .title{
     color: #ffffff;
