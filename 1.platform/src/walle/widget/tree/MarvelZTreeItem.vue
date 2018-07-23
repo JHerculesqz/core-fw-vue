@@ -194,8 +194,6 @@
     color: #333333;
     cursor: pointer;
     white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     font-size: 14px;
     float: left;
     padding: 0 4px;

@@ -32,6 +32,7 @@
   import Page4Icon from '@/components/page3/2.widget/2.1.basic/Page4Icon'
   import Page4Layout1 from '@/components/page3/2.widget/2.1.basic/Page4Layout1'
   import Page4Layout2 from '@/components/page3/2.widget/2.1.basic/Page4Layout2'
+  import Page4Animate from "../page3/2.widget/2.1.basic/Page4Animate";
   //#endregion
   //#region 2.2.widget.form
   import Page4Button from '@/components/page3/2.widget/2.2.form/Page4Button'
@@ -104,6 +105,7 @@
       Page4Icon,
       Page4Layout1,
       Page4Layout2,
+      Page4Animate,
       //#endregion
       //#region 2.2.widget.form
       Page4Button,
@@ -212,6 +214,9 @@
           }, {
             id: "Page4Layout2",
             label: "布局2"
+          }, {
+            id: "Page4Animate",
+            label: "动画"
           }]
         }, {
           label: "控件(表单)",

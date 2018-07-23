@@ -195,7 +195,6 @@
     border: 1px solid #cccccc;
     box-sizing: border-box;
     padding: 10px;
-    overflow-x: hidden;
     overflow-y: auto;
     margin: 0;
   }
