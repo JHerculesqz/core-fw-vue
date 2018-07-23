@@ -16,11 +16,17 @@
         <marvel-tab-item :isActive="tabItems1[0].isActive">
           <div class="showAreaInner">
             <!--2级DemoView start-->
-            <div class="page4Frame">
-              <marvel-frame media="24,24,24,24" hasMargin="true" classCustom="classCustom1">
-                <marvel-frame media="20,12,4,0" hasMargin="false" classCustom="classCustom2">1</marvel-frame>
-                <marvel-frame media="4,12,20,24" hasMargin="false" classCustom="classCustom3">2</marvel-frame>
-              </marvel-frame>
+            <div ref="parent" class="page4Frame hasMargin">
+              <marvel-primary-button size="small" label="setItemNum(20)"
+                                     v-on:onClick="setItemNum(20)"></marvel-primary-button>
+              <marvel-primary-button size="small" label="setItemNum(8)"
+                                     v-on:onClick="setItemNum(8)"></marvel-primary-button>
+              <marvel-primary-button size="small" label="setItemNum(3)"
+                                     v-on:onClick="setItemNum(3)" style="clear:both;"></marvel-primary-button>
+              <marvel-frame ref="pageframe"></marvel-frame>
+              <div v-for="(oBlock, index) in blockItems"
+                   :class="itemStyle"
+                   style="background-color: #d5d5d5; height: 32px;margin-bottom: 10px;" >{{index}}</div>
             </div>
             <!--2级DemoView end-->
           </div>
@@ -30,12 +36,6 @@
             <!--2级CodeView start-->
               <pre>
                 <code class="html">
-&lt;div class="page4Frame"&gt;
-  &lt;marvel-frame media="24,24,24,24" hasMargin="true" classCustom="classCustom1"&gt;
-  &lt;marvel-frame media="20,12,4,0" hasMargin="false" classCustom="classCustom2"&gt;1&lt;/marvel-frame&gt;
-  &lt;marvel-frame media="4,12,20,24" hasMargin="false" classCustom="classCustom3"&gt;2&lt;/marvel-frame&gt;
-  &lt;/marvel-frame&gt;
-&lt;/div&gt;
                 </code>
               </pre>
             <!--2级CodeView end-->
@@ -51,10 +51,12 @@
   import MarvelFrame from '@/walle/widget/frame/MarvelFrame';
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
+  import MarvelPrimaryButton from "../../../../walle/widget/button/MarvelPrimaryButton";
 
   export default {
     name: 'page4Frame',
     components: {
+      MarvelPrimaryButton,
       MarvelFrame,
       MarvelTab,
       MarvelTabItem
@@ -68,9 +70,40 @@
         }, {
           label: "Code View",
           isActive: false
-        }]
+        }],
+        //#endregion
+        //#region frame
+        blockItems:[],
+        itemStyle:"",
         //#endregion
       }
+    },
+    methods:{
+
+      //#region inner
+
+      setItemNum: function (iNum) {
+        this.blockItems = [];
+        this.$nextTick(function () {
+          for(var i = 0; i< iNum; i++){
+            this.blockItems.push({
+              item: i
+            });
+          }
+        });
+
+        var strParentW = parseInt(this.$refs.parent.offsetWidth);
+        this.itemStyle = this.$refs.pageframe.getItemWAdaptToFixParent(iNum, 200, strParentW);
+      }
+
+      //#endregion
+
+      //#region callback
+      //#endregion
+
+      //#region 3rd
+      //#endregion
+
     }
   }
 </script>

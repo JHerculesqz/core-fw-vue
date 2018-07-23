@@ -1,46 +1,133 @@
 <template>
   <div></div>
-  <!--<div v-bind:class="{ hasMargin: isMargin }">-->
-  <!--<div v-bind:class="[classLarge,classMiddle,classSmall,classMini,classCustom]">-->
-  <!--<slot></slot>-->
-  <!--</div>-->
-  <!--</div>-->
 </template>
 
 <script>
-  //  import StrUtils from "@/walle/component/str";
 
   export default {
     name: 'MarvelFrame',
-//    props: ["media", "hasMargin", "classCustom"],
+   props: [],
     data: function() {
       return {
-//          isMargin: false,
-//          classLarge: "large-24",
-//          classMiddle: "middle-12",
-//          classSmall: "small-8",
-//          classMini: "mini-4"
+        //#region const
+
+        arrScreens:[{
+          iWidth:0,
+          size:"mini"
+        },{
+          iWidth:768,
+          size:"small"
+        },{
+          iWidth:992,
+          size:"middle"
+        },{
+          iWidth:1200,
+          size:"large"
+        },{
+          iWidth:1500,
+          size:"huge"
+        }],
+
+        //#endregion
       }
     },
     mounted: function () {
-//      //1.hasMargin
-//      this.isMargin = this.hasMargin == "true";
-//
-//      //2.media
-//      var strMedia = this.media;
-//      var arrMedia = StrUtils.split(strMedia, ",");
-//      if(arrMedia[0] != undefined){
-//        this.classLarge = "large-" + arrMedia[0];
-//      }
-//      if(arrMedia[1] != undefined){
-//        this.classMiddle = "middle-" + arrMedia[1];
-//      }
-//      if(arrMedia[2] != undefined){
-//        this.classSmall = "small-" + arrMedia[2];
-//      }
-//      if(arrMedia[3] != undefined){
-//        this.classMini = "mini-" + arrMedia[3];
-//      }
+
+    },
+    methods:{
+      //#region inner
+      //#endregion
+      //#region callback
+      //#endregion
+      //#region 3rd
+
+      getItemWAdaptToScreen:function(iNum4Items, iItemMiniWidth, iParentW){
+        var strItemStyle = "";
+        var iBodyW = document.body.clientWidth;
+
+        //个数小于等于4 始终横向占满展示
+        if(iNum4Items <= 4){
+          strItemStyle = "mini-24";
+        }
+        //个数大于4 小于等于8
+        else if(4 < iNum4Items && iNum4Items <= 8){
+          var iGap = iBodyW - iParentW;
+
+          for(var i = 0; i<this.arrScreens.length; i++){
+            var iMaxItemNumInRow = Math.floor((this.arrScreens[i].iWidth - iGap)/iItemMiniWidth);
+            //宽度足够，则展示成两列
+            if(iMaxItemNumInRow>=2){
+              strItemStyle = strItemStyle + " " + this.arrScreens[i].size +"-12";
+              break;
+            }
+            //宽度不够，则横向占满展示
+            else{
+              strItemStyle = strItemStyle + " " + this.arrScreens[i].size + "-24";
+            }
+          }
+        }else if(iNum4Items > 8){
+          var iGap = iBodyW - iParentW;
+
+          for(var i = 0; i<this.arrScreens.length; i++){
+            var iMaxItemNumInRow = Math.floor((this.arrScreens[i].iWidth - iGap)/iItemMiniWidth);
+            //宽度足够，则展示成三列
+            if(iMaxItemNumInRow>=3){
+              strItemStyle = strItemStyle + " " + this.arrScreens[i].size +"-8";
+              break;
+            }
+            else if(iMaxItemNumInRow == 2){
+              strItemStyle = strItemStyle + " " + this.arrScreens[i].size +"-12";
+            }
+            //宽度不够，则横向占满展示
+            else{
+              strItemStyle = strItemStyle + " " + this.arrScreens[i].size + "-24";
+            }
+          }
+        }
+
+        return strItemStyle;
+      },
+
+      getItemWAdaptToFixParent:function (iNum4Items, iItemMiniWidth, iParentW) {
+        var strItemStyle = "";
+
+        //个数小于等于4 始终横向占满展示
+        if(iNum4Items <= 4){
+          strItemStyle = "mini-24";
+        }
+        //个数大于4 小于等于8
+        else if(4 < iNum4Items && iNum4Items <= 8){
+          var iMaxItemNumInRow = Math.floor(iParentW/iItemMiniWidth);
+
+          //宽度足够，则展示成两列
+          if(iMaxItemNumInRow>=2){
+            strItemStyle = "mini-12";
+          }
+          //宽度不够，则横向占满展示
+          else{
+            strItemStyle = "mini-24";
+          }
+        }else if(iNum4Items > 8){
+          var iMaxItemNumInRow = Math.floor(iParentW/iItemMiniWidth);
+
+          //宽度足够，则展示成三列
+          if(iMaxItemNumInRow>=3){
+            strItemStyle = "mini-8";
+          }
+          //宽度可展示两列，则展示成两列
+          else if(iMaxItemNumInRow == 2){
+            strItemStyle = "mini-12";
+          }
+          //宽度不够，则横向占满展示
+          else{
+            strItemStyle = "mini-24";
+          }
+        }
+
+        return strItemStyle;
+      }
+
+      //#endregion
     }
   }
 </script>
