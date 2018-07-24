@@ -207,6 +207,7 @@
   .treeItemCont .treeItemName span{
     color: #999999;
     padding-left: 6px;
+    font-style: italic;
   }
 
   .active {
@@ -245,6 +246,7 @@
   .dark .treeItemName span{
     color: #45559a;
     padding-left: 6px;
+    font-style: italic;
   }
 
   .dark .active {

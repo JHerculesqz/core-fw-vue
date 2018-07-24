@@ -40,6 +40,41 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">图例Ex</div>
+    <div class="describe">
+      图例Ex
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:500px;height: 150px; background-color: #f0f0f0;">
+              <marvel-legend-ex :legendItems="items2"
+                                v-on:onLegendItemClick="onLegendItemClick2"></marvel-legend-ex>
+
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre>
+                <code class="html">
+&lt;div style="width:500px;height: 150px; background-color: #f0f0f0;"&gt;
+  &lt;marvel-legend :legendItems="items"
+                 v-on:onLegendItemClick="onLegendItemClick"&gt;&lt;/marvel-legend&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -47,10 +82,12 @@
   import MarvelTab from "@/walle/widget/tab/MarvelTab";
   import MarvelTabItem from "@/walle/widget/tab/MarvelTabItem";
   import MarvelLegend from "@/walle/widget/legend/MarvelLegend";
+  import MarvelLegendEx from "../../../../walle/widget/legend/MarvelLegendEx";
 
   export default {
     name: 'page4Legend',
     components: {
+      MarvelLegendEx,
       MarvelTabItem,
       MarvelTab,
       MarvelLegend},
@@ -58,6 +95,13 @@
       return {
         //#region document data
         tabItems1: [{
+          label: "Demo View",
+          isActive: true
+        }, {
+          label: "Code View",
+          isActive: false
+        }],
+        tabItems2: [{
           label: "Demo View",
           isActive: true
         }, {
@@ -78,6 +122,16 @@
           label: "离线",
           level: "level6",
           isHide:false
+        }],
+        items2: [{
+          label: "在线",
+          color: "#ff4c4c"
+        }, {
+          label: "待机",
+          color: "#4cff4c"
+        }, {
+          label: "离线",
+          color: "#4c4cff"
         }]
         //#endregion
       }
@@ -86,6 +140,9 @@
       //#region inner
       onLegendItemClick: function(){
         console.log(this.items);
+      },
+      onLegendItemClick2:function (oItem) {
+        console.log(oItem);
       }
       //#endregion
       //#region callback
