@@ -33,6 +33,12 @@
         this.api.sigmaEx.setData(arrNodes, arrLinks);
       },
 
+      updateData: function (oCallback) {
+        this.api.sigmaEx.updateData(function (oNode) {
+          oCallback(oNode);
+        });
+      },
+
       //endregion
     }
   }

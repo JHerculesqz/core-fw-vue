@@ -760,51 +760,54 @@
           console.log(e);
         });
 
-        //gen Data
+        //setData
+        var N = 100;
+        var TYPES = ["container", "list", "key", "description", "leaf", "type", "leaf-list"];
         var arrNodes = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < N; i++) {
           arrNodes.push({
             id: 'n' + i,
             label: 'Node ' + i,
-            x: 10 + Math.random(),
-            y: 10 + Math.random(),
-            size: 0.5,
-            color: ['#666', '#abc', '#eee', '#ff00aa'][Math.random() * 4 | 0]
+            x: Math.random(),
+            y: Math.random(),
+            size: 0 == i ? 3 : 1.2,
+            type: TYPES[(Math.random() * 6 | 0)]
           });
         }
         var arrLinks = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < N; i++) {
           arrLinks.push({
             id: 'e' + i,
-            source: 'n' + (Math.random() * 10 | 0),
-            target: 'n' + (Math.random() * 10 | 0),
-            size: Math.random(),
-            color: ['#666', '#abc', '#eee', '#ff00aa'][Math.random() * 4 | 0]
+            source: 'n' + (Math.random() * N | 0),
+            target: 'n' + (Math.random() * N | 0)
           });
         }
-
-        //#region abor保留
-
-//        //generate data
-//        var oNodes = {};
-//        for (var i = 0; i < 10; i++) {
-//          oNodes["node" + i] = {
-//            label: "node" + i
-//          };
-//        }
-//        var oLinks = {};
-//        for (var i = 0; i < 10; i++) {
-//          for (var j = i; j < 10; j++) {
-//            var oLinkDst = {};
-//            oLinkDst["node" + j] = {};
-//            oLinks["node" + i] = oLinkDst;
-//          }
-//        }
-
-        //#endregion
-
-        //add data
         this.$refs.ref4TopoArbor.setData(arrNodes, arrLinks);
+
+        //updateData
+        this.$refs.ref4TopoArbor.updateData(function (oNode) {
+          if (oNode.type == "container") {
+            oNode.color = "#243f6a";
+          }
+          else if (oNode.type == "list") {
+            oNode.color = "#487ed4";
+          }
+          else if (oNode.type == "key") {
+            oNode.color = "#6cbe3f";
+          }
+          else if (oNode.type == "description") {
+            oNode.color = "#90fda9";
+          }
+          else if (oNode.type == "leaf") {
+            oNode.color = "#b53d13";
+          }
+          else if (oNode.type == "type") {
+            oNode.color = "#d97c7e";
+          }
+          else if (oNode.type == "leaf-list") {
+            oNode.color = "#fdbbe8";
+          }
+        });
       },
 
       //#endregion
