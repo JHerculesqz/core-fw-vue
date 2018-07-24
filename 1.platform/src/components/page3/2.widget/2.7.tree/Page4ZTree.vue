@@ -90,60 +90,74 @@
         },
         treeData: [{
           name: 'Root1',
+          subName:"'Root1SubName'",
           icon: "icon-address-book",
           open: true,
           show: true,
           check: true,
           children: [{
             name: 'ne5001',
+            subName: 'ne5001',
             icon: "icon-address-book",
             check: true
           }, {
             name: 'ne5002',
+            subName: 'ne5002',
             icon: "icon-address-book",
             open: true,
             check: false,
             children: [{
               name: 'ne50021',
+              subName: 'ne50021',
               icon: "icon-address-book",
               iconColor: "#000000"
             }, {
               name: 'ne50022',
+              subName: 'ne50022',
               icon: "icon-address-book"
             }]
           }, {
             name: 'ne5003',
+            subName: 'ne5003',
             icon: "icon-address-book",
             open: false,
             children: [{
               name: 'ne50031',
+              subName: 'ne50031',
               icon: "icon-address-book"
             }, {
               name: 'ne50032',
+              subName: 'ne50032',
               icon: "icon-address-book"
             }, {
               name: 'ne50033',
+              subName: 'ne50033',
               icon: "icon-address-book"
             }]
           }]
         }, {
           name: 'Root2',
+          subName: 'Root2',
           icon: "icon-address-book",
           show: true,
           children: [{
             name: "ne6001",
+            subName: "ne6001",
             icon: "icon-address-book"
           }, {
             name: "ne6002",
+            subName: "ne6002",
             icon: "icon-address-book",
             show: false,
           }]
         }, {
           name: 'Root3',
+          subName: 'Root3',
           icon: "icon-address-book",
           show: false,
           children: [{
             name: "ne7001",
+            subName: "ne7001",
             icon: "icon-address-book"
           }]
         }],

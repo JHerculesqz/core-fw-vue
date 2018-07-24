@@ -1,9 +1,7 @@
 <template>
   <div class="marvelHighLightWrapper">
     <pre class="marvelHighLightPre">
-      <code class="marvelHighLightCode" v-bind:class="langType" v-if="show">
-        {{sourceCode}}
-      </code>
+      <code class="marvelHighLightCode" v-bind:class="langType" v-if="show">{{sourceCode}}</code>
     </pre>
   </div>
 </template>

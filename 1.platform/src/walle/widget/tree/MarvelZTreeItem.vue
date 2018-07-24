@@ -17,6 +17,7 @@
            v-bind:title="model.name"
            v-on:click.stop="onTreeNodeClickInner">
         {{model.name}}
+        <span v-if="model.subName != undefined">{{model.subName}}</span>
       </div>
     </div>
     <ul class="treeItemSubItems" v-show="open" v-if="isFolder">
@@ -203,6 +204,11 @@
     color: #3399ff;
   }
 
+  .treeItemCont .treeItemName span{
+    color: #999999;
+    padding-left: 6px;
+  }
+
   .active {
     background-color: #3399ff;
     color: #ffffff !important;
@@ -234,6 +240,11 @@
 
   .dark .treeItemName:hover {
     color: #3dcca6;
+  }
+
+  .dark .treeItemName span{
+    color: #45559a;
+    padding-left: 6px;
   }
 
   .dark .active {

@@ -70,6 +70,39 @@
       </marvel-tab>
     </div>
     <!--2级 end-->
+    <!--2级 start-->
+    <div class="title level2">文件上传自定义</div>
+    <div class="describe">
+      文件上传自定义
+    </div>
+    <div class="showArea">
+      <marvel-tab :tabItems="tabItems2">
+        <marvel-tab-item :isActive="tabItems2[0].isActive">
+          <div class="showAreaInner">
+            <!--2级DemoView start-->
+            <div style="width:200px;">
+              <marvel-upload-custom @onUploadFile="onUploadFile">
+                <div class="icon-upload"></div>
+              </marvel-upload-custom>
+            </div>
+            <!--2级DemoView end-->
+          </div>
+        </marvel-tab-item>
+        <marvel-tab-item :isActive="tabItems2[1].isActive">
+          <div class="codeArea">
+            <!--2级CodeView start-->
+            <pre>
+                <code class="html">
+&lt;marvel-upload-simple btnName="文件上传"
+                      @onUploadFile="onUploadFile"&gt;&lt;/marvel-upload-simple&gt;
+                </code>
+              </pre>
+            <!--2级CodeView end-->
+          </div>
+        </marvel-tab-item>
+      </marvel-tab>
+    </div>
+    <!--2级 end-->
   </div>
 </template>
 
@@ -79,10 +112,12 @@
   import MarvelHight from "@/walle/component/highlight";
   import MarvelUpload from "@/walle/widget/upload/MarvelUpload";
   import MarvelUploadSimple from "@/walle/widget/upload/MarvelUploadSimple";
+  import MarvelUploadCustom from "../../../../walle/widget/upload/MarvelUploadCustom";
 
   export default {
     name: 'page4Upload',
     components: {
+      MarvelUploadCustom,
       MarvelUpload,
       MarvelTab,
       MarvelTabItem,

@@ -46,12 +46,12 @@
 
   .slideInLeft{
     position: relative;
-    animation: slideInLeft 0.4s ease-out;
+    animation: slideInLeft 2s;
   }
 
   @keyframes slideInLeft {
     0% {
-      right: 160px;
+      right: 500px;
     }
     77%{
       right: 0px;
@@ -60,12 +60,12 @@
 
   .slideInRight{
     position: relative;
-    animation: slideInRight 0.4s ease-out;
+    animation: slideInRight 2s;
   }
 
   @keyframes slideInRight {
     0% {
-      left: 160px;
+      left: 500px;
     }
     77%{
       left: 0px;
