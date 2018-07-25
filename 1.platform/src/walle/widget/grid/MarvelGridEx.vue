@@ -111,6 +111,7 @@ multiDropdown：下拉框多选，支持度不好，待优化
                        v-for="icon in getCellValueByKey(title.key, row)"
                        :class="[icon.value]"
                        :style="{ color: icon.color }"
+                       :title="icon.label"
                        @click.stop="onIconClick(title.key, row, icon)">
                  </span>
               </td>

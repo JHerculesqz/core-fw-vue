@@ -590,9 +590,11 @@
           key: "operation",
           value: [{
             value: "icon-location2",
-            color: "red"
+            color: "red",
+            label: "lallalala"
           }, {
-            value: "icon-location2"
+            value: "icon-location2",
+            label: "lallalalasdfasfsfa"
           }]
         });
         oRow.push({
@@ -633,7 +635,6 @@
         });
         this.rowsEx.push(oRow);
       }
-      ;
       //endregion
 
       //region gridEx2.2
@@ -822,9 +823,11 @@
             key: "operation",
             value: [{
               value: "icon-location2",
-              color: "red"
+              color: "red",
+              label: "lallalala"
             }, {
-              value: "icon-location2"
+              value: "icon-location2",
+              label: "lallalala"
             }]
           });
           oRow.push({
