@@ -136,4 +136,34 @@
   /*endregion*/
 
 
+  /*blackBg theme*/
+
+  .blackBg .placeHolder{
+    color: #aaa;
+  }
+
+  .blackBg .inputWrapper .inputDefault {
+    border: 1px solid #ccc;
+    color: #eee;
+    background-color: rgba(0,0,0,0);
+  }
+
+  .blackBg .inputWrapper .inputDefault:hover, .inputWrapper .inputDefault:focus {
+    border: 1px solid #3399ff;
+  }
+
+  .blackBg .inputWrapper .errorTip {
+    color: #ff4c4c;
+  }
+
+  .blackBg .error .inputDefault {
+    border: 1px solid #ff4c4c !important;
+  }
+
+  .blackBg .disable .inputDefault {
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  /*endregion*/
+
 </style>

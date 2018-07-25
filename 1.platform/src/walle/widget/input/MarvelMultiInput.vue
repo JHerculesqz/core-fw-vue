@@ -106,4 +106,25 @@
 
   /*endregion*/
 
+  /*blackBg theme*/
+
+  .blackBg .inputWrapper textarea {
+    border: 1px solid #ccc;
+    color: #eee;
+  }
+
+  .blackBg .inputWrapper textarea:hover, .inputWrapper textarea:focus {
+    border: 1px solid #3399ff;
+  }
+
+  .blackBg .inputWrapper .errorTip {
+    color: #ff4c4c;
+  }
+
+  .blackBg .error textarea {
+    border: 1px solid #ff4c4c !important;
+  }
+
+  /*endregion*/
+
 </style>

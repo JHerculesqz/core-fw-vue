@@ -1707,4 +1707,132 @@ multiDropdown：下拉框多选，支持度不好，待优化
 
   /*input end*/
   /*sl end*/
+
+
+  /*blackBg theme*/
+
+  .blackBg .gridWrapper {
+    background-color: #000;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont {
+    border: 1px solid #000;
+  }
+
+  .blackBg table thead .canClick:hover {
+    color: #3399ff;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont thead tr th {
+    background-color: #322b2b;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+    color: #eee;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont thead tr th:last-child:after {
+    background-color: #322b2b;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr td {
+    color: #aaa;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr td select:disabled {
+    background-color: rgba(255,255,255,0.1);
+    color: #999999;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody .activeRow{
+    background-color: #60b0ff !important;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody .disabledRow{
+    background-color: rgba(255,255,255,0.1) !important;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr .iconOnly:hover {
+    color: #3399ff !important;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr .textIcon:hover {
+    color: #3399ff !important;
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr:nth-child(odd) {
+    background-color: rgba(0,160,255,0.14);
+  }
+
+  .blackBg .gridWrapper .grid .gridCont tbody tr:hover {
+    background-color: rgba(0,200,250,0.3);
+  }
+
+  .blackBg .gridWrapper .grid tr td .customerSelect {
+    border: 1px solid #444;
+    color: #eee;
+  }
+
+  .blackBg .gridWrapper .grid tr td .customerSelect:hover {
+    border: 1px solid #3399ff;
+  }
+
+  .blackBg .gridWrapper .grid tr td .customerSelectOption {
+    color: #eee;
+    background-color: #000;
+  }
+
+  .blackBg .options {
+    border-top: 1px solid #444;
+    background-color: #000;
+  }
+
+  .blackBg .options .optionItem {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .blackBg .options .optionItem:hover {
+    background-color: rgba(0,124,247, 0.3);
+    color: #3399ff;
+  }
+
+  .blackBg .options .mouseDown {
+    background-color: #3399ff !important;
+    color: #fff !important;
+  }
+
+  .blackBg .gridWrapper .grid tr td .multiSelected {
+    background-color: #66b3ff;
+  }
+
+  .blackBg .gridWrapper .footArea {
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+  }
+
+  .blackBg .gridWrapper .footArea .foot .pageSwitch .item {
+    color: #aaa;
+  }
+
+  .blackBg .gridWrapper .footArea .foot .pageSwitch .item:hover {
+    color: #fff;
+    background-color: #60b0ff;
+  }
+
+  .blackBg .gridWrapper .footArea .foot .pageSwitch .current {
+    color: #fff;
+    background-color: #3399ff !important;
+  }
+
+  .blackBg .gridWrapper .footArea .foot .pageDrop {
+    border: 1px solid #444;
+  }
+
+  .blackBg .gridWrapper .footArea .foot .text {
+    color: #aaa;
+  }
+
+  /*endregion*/
 </style>

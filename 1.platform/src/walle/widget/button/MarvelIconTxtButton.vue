@@ -144,4 +144,42 @@
   }
 
   /*endregion*/
+
+  /*blackBg theme*/
+
+  .blackBg .iconTextBtn{
+    border: 1px solid #999;
+    color: #eee;
+  }
+  .blackBg .iconTextBtn:before{
+    color: #3399ff;
+  }
+  .blackBg .iconTextBtn:hover{
+    border: 1px solid #60b0ff;
+    background-color: rgba(0,127,255,0.3);
+  }
+
+  .blackBg .tip:after{
+    background-color: #ff4400;
+  }
+
+  .blackBg .mouseDown{
+    background-color: rgba(0,127,255,0.3);
+    color: #3399ff;
+    border: 1px solid #3399ff;
+  }
+  .blackBg .focus{
+    color: #3399ff;
+    border: 1px solid #3399ff;
+  }
+  .blackBg .disable{
+    background-color: rgba(255,255,255,0.2);
+    color: #aaa;
+    border: 1px solid #999;
+  }
+  .blackBg .disable:before{
+    color: #aaa;
+  }
+
+  /*endregion*/
 </style>

@@ -136,4 +136,28 @@
   }
 
   /*endregion*/
+
+  /*blackBg theme*/
+
+  .blackBg .tipDialogBg{
+    background-color: rgba(0,0,0,0.7);
+  }
+  .blackBg .tipDialogBg .tipDialogWrapper{
+    box-shadow: 0 0 30px 2px rgba(255,255,255,0.2);
+    background-color: #000;
+  }
+  .blackBg .tipDialogTitleArea .titleName:before{
+    background-color: #3399ff;
+  }
+  .blackBg .tipDialogTitleArea .titleName{
+    color: #eee;
+  }
+  .blackBg .tipDialogTitleArea .closeBtn{
+    color: #aaa;
+  }
+  .blackBg .tipDialogBg .tipDialogWrapper .tipDialogBtnArea{
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  /*endregion*/
 </style>

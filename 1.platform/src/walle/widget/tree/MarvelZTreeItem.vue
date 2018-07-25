@@ -201,7 +201,7 @@
   }
 
   .treeItemCont .treeItemName:hover {
-    color: #3399ff;
+    color: #417de2;
   }
 
   .treeItemCont .treeItemName span{
@@ -211,8 +211,7 @@
   }
 
   .active {
-    background-color: #3399ff;
-    color: #ffffff !important;
+    color: #3399ff !important;
   }
 
   .treeItemSubItems {
@@ -240,7 +239,7 @@
   }
 
   .dark .treeItemName:hover {
-    color: #3dcca6;
+    color: #3eb593;
   }
 
   .dark .treeItemName span{
@@ -250,8 +249,43 @@
   }
 
   .dark .active {
-    background-color: rgba(61, 202, 166, 0.4);
-    border: 1px solid #3dcca6;
+    color:#3dcca6 !important;
   }
+
+  /*darkBg theme*/
+
+  .blackBg .treeItemCont .treeItemCustomIcon {
+    color: #3399ff;
+  }
+
+  .blackBg .treeItemIcon {
+    color: #FFFFFF;
+  }
+
+  .blackBg .treeItemCont .icon-minus {
+    color: #3399ff;
+  }
+
+  .blackBg .treeItemCont .icon-plus {
+    color: #aaa;
+  }
+
+  .blackBg .treeItemCont .treeItemName {
+    color: #eeeeee;
+  }
+
+  .blackBg .treeItemCont .treeItemName:hover {
+    color: #417de2;
+  }
+
+  .blackBg .treeItemCont .treeItemName span{
+    color: #888;
+  }
+
+  .blackBg .active {
+    color: #3399ff !important;
+  }
+
+  /*endregion*/
 
 </style>

@@ -403,4 +403,74 @@
   }
 
   /*endregion*/
+
+  /*blackBg theme*/
+
+  .blackBg .dropdownBtn {
+    border: 1px solid #ccc;
+  }
+
+  .blackBg .dropdownBtn:hover {
+    border: 1px solid #3399ff;
+  }
+
+  .blackBg .dropdownBtn .label .icon {
+    color: #3399ff;
+  }
+
+  .dropdownBtn .label .name {
+    color: #aaa;
+  }
+
+  .blackBg .dropdownBtn .label .expandAndFolderIcon {
+    color: #aaa;
+  }
+
+  .blackBg .dropdownBtn .options {
+    border: 1px solid #ccc;
+    background-color: #000;
+  }
+
+  .blackBg .dropdownBtn .options:hover {
+    border-left: 1px solid #3399ff;
+    border-right: 1px solid #3399ff;
+    border-bottom: 1px solid #3399ff;
+  }
+
+  .blackBg .dropdownBtn .options .optionItem {
+    background-color: #000;
+  }
+
+  .blackBg .dropdownBtn .options .optionItem .icon {
+    color: #3399ff;
+  }
+
+  .blackBg .dropdownBtn .options .optionItem:hover {
+    background-color: rgba(0, 124, 247, 0.2);
+  }
+
+  .blackBg .dropdownBtn .options .optionItem:hover .name {
+    color: #3399ff;
+  }
+
+  .blackBg .dropdownBtn .options .mouseDown {
+    background-color: #3399ff !important;
+  }
+
+  .blackBg .dropdownBtn .options .mouseDown .name, .dropdownBtn .options .mouseDown .icon {
+    color: #fff !important;
+  }
+
+  .blackBg .disable .label {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  .blackBg .disable .label .icon, .disable .label .expandAndFolderIcon {
+    color: #aaa;
+  }
+
+  .blackBg .disable .label .name {
+    color: #999;
+  }
+  /*endregion*/
 </style>

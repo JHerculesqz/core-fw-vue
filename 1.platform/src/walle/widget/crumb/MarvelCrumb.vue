@@ -68,4 +68,17 @@
   }
 
   /*endregion*/
+
+  /*blackBg theme*/
+  .blackBg .crumbWrapper .crumbItem .name,.crumbWrapper .crumbItem .symbol{
+    color: #aaa;
+  }
+  .blackBg .crumbWrapper .crumbItem .name:hover{
+    color: #3399ff;
+  }
+  .blackBg .crumbWrapper .crumbItem:last-child .name:hover{
+    color: #aaa;
+  }
+
+  /*endregion*/
 </style>

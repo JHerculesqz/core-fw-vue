@@ -78,4 +78,15 @@
   }
 
   /*endregion region*/
+
+  /*blackBg theme*/
+
+  .blackBg .dashboardWrapper{
+    background-color: #000;
+    box-shadow: 0px 0px 6px rgba(255,255,255,0.05);
+  }
+  .blackBg .dashboardWrapper .title .titleArea{
+    color: #aaa;
+  }
+  /*endregion*/
 </style>

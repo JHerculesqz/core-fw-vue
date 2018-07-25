@@ -220,4 +220,40 @@
 
   /*endregion*/
 
+  /*blackBg theme*/
+
+  .blackBg .tabWrapper {
+    border: 1px solid #444;
+  }
+
+  .blackBg .tabWrapper .headArea {
+    border-bottom: 1px solid #444;
+  }
+
+  .blackBg .tabWrapper .headArea .headItem {
+    color: #eee;
+  }
+
+  .blackBg .tabWrapper .headArea .headItem:hover {
+    color: #3399ff;
+  }
+
+  .blackBg .tabWrapper .contArea {
+    background-color: #000;
+  }
+
+  .blackBg .theme1 .headArea .active {
+    border-bottom: 3px solid #3399ff;
+  }
+
+  .blackBg .theme2 .headArea .active {
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    background-color: #ffffff;
+
+  }
+
+  /*endregion*/
+
 </style>

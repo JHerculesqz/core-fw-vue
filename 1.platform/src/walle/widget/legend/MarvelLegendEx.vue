@@ -77,4 +77,17 @@
   }
 
   /*endregion*/
+
+  /*blackBg theme*/
+
+  .blackBg .legendWrapper .legendCont{
+    background-color: #111;
+    box-shadow: 1px 1px 2px rgba(255,255,255,0.15);
+  }
+
+  .blackBg .legendWrapper .LegendItem .text{
+    color: #eee;
+  }
+
+  /*endregion*/
 </style>
