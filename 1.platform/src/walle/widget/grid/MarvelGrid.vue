@@ -66,9 +66,9 @@
             <div v-else-if="cell.type == 'input'" class="inputWrapper" id="[index]">
               <div class="radio" :class="{disable:cell.bIsDisabled}">
                 <input type="text" class="inputDefault"
-                       v-model="inputMsgs[index]"
+                       v-model="inputMsgs[skip + index]"
                        :disabled="cell.bIsDisabled"
-                       v-on:click="updateRow(index,iCellIndex)"/>
+                       @input="updateRow(index,iCellIndex)"/>
               </div>
             </div>
           </td>
