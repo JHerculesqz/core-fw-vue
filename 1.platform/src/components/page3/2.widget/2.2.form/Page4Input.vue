@@ -20,6 +20,7 @@
               <button v-on:click="onClick4Input1">获取</button>
               <marvel-input ref="ref0" :status="status1" placeHolder="please..." errMsg="输入错误..."
                             :inputMsg="inputMsg" size="mini"
+                            @onBlur="onBlur1"
                             @onInput="onInput1"></marvel-input>
             </div>
             <!--2级DemoView end-->
@@ -118,6 +119,7 @@
               <button v-on:click="onClick4Input4">获取</button>
               <marvel-multi-input ref="ref1" :status="status4" placeHolder="please..."
                                   :inputMsg="inputMsg2" size="mini"
+                                  @onBlur="onBlur2"
                                   @onInput="onInput2">
               </marvel-multi-input>
             </div>
@@ -230,6 +232,14 @@
         console.log(strMsg);
       },
       onInput2: function (strMsg) {
+        console.log(strMsg);
+      },
+      onBlur1: function (strMsg) {
+        console.log("onBlur:");
+        console.log(strMsg);
+      },
+      onBlur2: function (strMsg) {
+        console.log("onBlur:");
         console.log(strMsg);
       }
       //#endregion

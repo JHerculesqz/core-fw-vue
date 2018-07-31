@@ -4,6 +4,7 @@
     <textarea :placeholder="placeHolder"
               :title="placeHolder"
               v-model="inputMsg"
+              v-on:blur="onBlur"
               @input="onInput"></textarea>
     <div class="errorTip icon-notification">{{ errMsg }}</div>
   </div>
@@ -29,7 +30,10 @@
       },
       onInput: _.debounce(function (event) {
         this.$emit("onInput", this.inputMsg);
-      }, 1000)
+      }, 1000),
+      onBlur: function () {
+        this.$emit("onBlur", this.inputMsg);
+      },
     }
   }
 </script>
