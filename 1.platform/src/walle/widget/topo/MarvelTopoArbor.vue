@@ -39,6 +39,10 @@
         });
       },
 
+      refresh: function () {
+        this.api.sigmaEx.refresh();
+      }
+
       //endregion
     }
   }

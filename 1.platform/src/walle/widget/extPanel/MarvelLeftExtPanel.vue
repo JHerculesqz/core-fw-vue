@@ -1,7 +1,7 @@
 <template>
   <div class="leftExtPanelWrapper">
     <div class="content"
-         v-bind:style="{width: iWidth + 'px'}"
+         v-bind:style="{width: iWidth + 'px','min-width':minW + 'px','max-width':maxW + 'px'}"
          v-show="showEx">
       <slot name="content"></slot>
       <div class="draggableHandel" v-show="canDragEx"
@@ -20,7 +20,7 @@
 <script>
   export default{
     name: 'MarvelLeftExtPanel',
-    props: ['width', 'show', 'canDrag'],
+    props: ['width', 'show', 'canDrag', 'minW', 'maxW'],
     data: function() {
       return {
         showEx: this.show == "true",
@@ -28,7 +28,9 @@
         bIsDragging:false,
         iWidth:0,
         iBasicWidth:0,
-        iMouseDownX:0
+        iMouseDownX:0,
+        iMinW:undefined,
+        iMaxW:undefined,
       }
     },
     computed: {
@@ -51,8 +53,29 @@
       mouseMove:function(e){
         if(this.bIsDragging){
           var x = e.pageX;
-          this.iWidth = this.iBasicWidth + (x - this.iMouseDownX);
+          var calcW = this.iBasicWidth + (x - this.iMouseDownX);
+
+          //如果有最大最小值的限制 且当前值在取值区间内
+          if(this.iMinW != undefined && this.iMaxW != undefined && calcW >= this.iMinW && calcW <= this.iMaxW){
+            this._afterCalcW(calcW);
+          }
+          //仅有最小值限制 且当前值大于最小值
+          else if(this.iMinW != undefined && this.iMaxW == undefined && calcW >= this.iMinW){
+            this._afterCalcW(calcW);
+          }
+          //仅有最大值限制 且当前值小于最大值
+          else if(this.iMinW == undefined && this.iMaxW != undefined && calcW <= this.iMaxW){
+            this._afterCalcW(calcW);
+          }
+          //无最大最小值限制
+          else if(this.iMinW == undefined && this.iMaxW == undefined){
+            this._afterCalcW(calcW);
+          }
         }
+      },
+      _afterCalcW: function(calcW){
+        this.iWidth = calcW;
+        this.$emit("onDrag", this.iWidth);
       },
       mouseUp:function(){
         if(this.bIsDragging){
@@ -71,6 +94,13 @@
     mounted:function(){
       this.iWidth = parseInt(this.width);
       this.iBasicWidth = parseInt(this.width);
+
+      if(this.minW != undefined){
+        this.iMinW = parseInt(this.minW);
+      }
+      if(this.maxW != undefined){
+        this.iMaxW = parseInt(this.maxW);
+      }
     }
   }
 </script>
@@ -135,6 +165,20 @@
     border-bottom:10px solid transparent;
     border-left:16px solid #1a1927;
     color: #3dcca6;
+  }
+
+  /*endregion*/
+
+  /*region blackBg*/
+
+  .blackBg .content{
+    background-color: #333840;
+  }
+  .blackBg .expandBtn{
+    border-top:10px solid transparent;
+    border-bottom:10px solid transparent;
+    border-left:16px solid #333840;
+    color: #61b5fd;
   }
 
   /*endregion*/

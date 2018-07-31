@@ -63,6 +63,7 @@
   .marvelHighLightPre{
     padding: 0;
     margin: 0;
+    white-space: pre-line;
   }
   .marvelHighLightCode{
     padding: 0;

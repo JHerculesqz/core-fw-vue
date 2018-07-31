@@ -103,6 +103,15 @@
 
         //#endregion
 
+        //#region refresh
+
+        this.refresh = function () {
+            self.sigmaObj.refresh();
+        };
+
+        //#endregion
+
+
         //#region private
 
         this.clearData = function () {

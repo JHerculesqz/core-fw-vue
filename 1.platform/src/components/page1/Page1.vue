@@ -37,6 +37,7 @@
   //#region 2.2.widget.form
   import Page4Button from '@/components/page3/2.widget/2.2.form/Page4Button'
   import Page4Date from '@/components/page3/2.widget/2.2.form/Page4Date'
+  import page4DiffMatchPatch from '@/components/page3/2.widget/2.2.form/Page4DiffMatchPatch'
   import Page4Input from '@/components/page3/2.widget/2.2.form/Page4Input'
   import Page4Link from '@/components/page3/2.widget/2.2.form/Page4Link'
   import Page4Search from '@/components/page3/2.widget/2.2.form/Page4Search'
@@ -110,6 +111,7 @@
       //#region 2.2.widget.form
       Page4Button,
       Page4Date,
+      page4DiffMatchPatch,
       Page4Input,
       Page4Link,
       Page4Search,
@@ -228,6 +230,9 @@
           }, {
             id: "Page4Date",
             label: "时间日期"
+          },{
+            id: "page4DiffMatchPatch",
+            label: "文本对比"
           }, {
             id: "Page4Input",
             label: "文本输入"

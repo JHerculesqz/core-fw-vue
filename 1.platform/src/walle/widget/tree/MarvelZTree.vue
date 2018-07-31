@@ -1,13 +1,19 @@
 <template>
-  <ul id="demo" class="treeWrapper">
-    <div v-for="(item, index) in treeNodes">
-      <marvel-z-tree-item v-bind:model="item"
-                          v-bind:key="item.key"
-                          v-bind:treeItemOptions="treeItemOptions"
-                          v-on:onCheckboxClick="onCheckboxClick"
-                          v-on:onTreeNodeClick="onTreeNodeClick"></marvel-z-tree-item>
+  <div class="treeWrapper">
+    <ul id="demo" class="treeCont">
+      <div v-for="(item, index) in treeNodes">
+        <marvel-z-tree-item v-bind:model="item"
+                            v-bind:key="item.key"
+                            v-bind:treeItemOptions="treeItemOptions"
+                            v-on:onCheckboxClick="onCheckboxClick"
+                            v-on:onTreeNodeClick="onTreeNodeClick"></marvel-z-tree-item>
+      </div>
+    </ul>
+    <div class="expandFolderIconWrapper">
+      <div class="icon icon-marvelIcon-27" title="全部展开" v-on:click="expandAll(treeNodes)"></div>
+      <div class="icon icon-marvelIcon-28" title="全部折叠" v-on:click="folderAll(treeNodes)"></div>
     </div>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -59,6 +65,29 @@
           }
         });
       },
+
+      //#region expand and folder
+
+      expandAll:function(arrNodes){
+        for(var i = 0; i< arrNodes.length; i++){
+          arrNodes[i].open = true;
+
+          if(arrNodes[i].children != undefined && arrNodes[i].children.length>0){
+            this.expandAll(arrNodes[i].children);
+          }
+        }
+      },
+      folderAll:function(arrNodes){
+        for(var i = 0; i< arrNodes.length; i++){
+          arrNodes[i].open = false;
+
+          if(arrNodes[i].children != undefined && arrNodes[i].children.length>0){
+            this.folderAll(arrNodes[i].children);
+          }
+        }
+      },
+
+      //#endregion
       //endregion
       //region callback
       onCheckboxClick: function (oTreeNode) {
@@ -197,9 +226,62 @@
     padding: 10px;
     overflow-y: auto;
     margin: 0;
+    position: relative;
+  }
+
+  .treeCont{
+    padding: 0;
+    margin: 0;
+  }
+
+  .expandFolderIconWrapper{
+    position: absolute;
+    padding: 3px;
+    white-space: nowrap;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    display: none;
+  }
+
+  .expandFolderIconWrapper .icon{
+    display: inline-block;
+    color: #3399ff;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    transform: rotate(45deg);
+  }
+
+  .expandFolderIconWrapper .icon:hover{
+    color: #65bdff;
+  }
+
+  .treeWrapper:hover .expandFolderIconWrapper{
+    display: block;
   }
 
   .dark {
     border: 1px solid #04032a;
   }
+
+  /*region blackBg*/
+
+  .blackBg .expandFolderIconWrapper{
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  .blackBg .expandFolderIconWrapper .icon{
+    color: #3399ff;
+  }
+
+  .blackBg .expandFolderIconWrapper .icon:hover{
+    color: #65bdff;
+  }
+
+  /*endregion*/
 </style>

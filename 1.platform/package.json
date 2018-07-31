@@ -12,6 +12,7 @@
     "test": "npm run e2e"
   },
   "dependencies": {
+    "diff-match-patch": "^1.0.1",
     "konva": "^1.6.8",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

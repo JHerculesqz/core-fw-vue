@@ -3,7 +3,8 @@
   <div class="crumbWrapper">
     <div class="crumbItem" v-for="(item, index) in items">
       <div class="name" v-on:click="onCrumbItemClick(item.label, index)">{{ item.label }}</div>
-      <div class="symbol icon-marvelIcon-02"></div>
+      <div v-if="customSeparateSymbol == undefined" class="symbol icon-marvelIcon-02"></div>
+      <div v-if="customSeparateSymbol != undefined" class="customSeparateSymbol">{{customSeparateSymbol}}</div>
     </div>
   </div>
   <!--crumb End-->
@@ -12,7 +13,7 @@
 <script>
   export default {
     name: 'MarvelCrumb',
-    props: ["items"],
+    props: ["items","customSeparateSymbol"],
     data: function() {
         return {
 
@@ -42,6 +43,13 @@
     margin-right: 5px;
     cursor: pointer;
   }
+  .customSeparateSymbol{
+    float: left;
+    font-size: 12px;
+    color: #666;
+    line-height: 14px;
+    margin-right: 5px;
+  }
   .crumbWrapper .crumbItem .name:hover{
     color: #3399ff;
   }
@@ -54,10 +62,16 @@
   .crumbWrapper .crumbItem:last-child .symbol{
     display: none;
   }
+  .crumbWrapper .crumbItem:last-child .customSeparateSymbol{
+    display: none;
+  }
 
   /*region dark theme*/
 
   .dark .crumbItem .name,.dark .crumbItem .symbol{
+    color: #fff;
+  }
+  .dark .crumbItem .name,.dark .crumbItem .customSeparateSymbol{
     color: #fff;
   }
   .dark .crumbItem .name:hover{
@@ -71,6 +85,9 @@
 
   /*blackBg theme*/
   .blackBg .crumbWrapper .crumbItem .name,.crumbWrapper .crumbItem .symbol{
+    color: #aaa;
+  }
+  .blackBg .crumbWrapper .crumbItem .name,.crumbWrapper .crumbItem .customSeparateSymbol{
     color: #aaa;
   }
   .blackBg .crumbWrapper .crumbItem .name:hover{

@@ -1,6 +1,6 @@
 <template>
   <!--checkBoxSlide start-->
-  <div class="checkBoxSlideWrapper">
+  <div class="checkBoxSlideWrapper" :title="title">
     <div class="checkBoxSlide">
       <input type="checkbox" v-bind:id="[id]" v-model="checkItem"
              :disabled="isDisable"/>
@@ -13,7 +13,7 @@
 <script>
   export default {
     name: 'MarvelSwitch',
-    props: ["id", "check", "buObj"],
+    props: ["id", "check", "buObj", "title"],
     data: function() {
         return {
           checkItem: this.check === false ? false : true,
@@ -83,9 +83,9 @@
   .checkBoxSlideWrapper .checkBoxSlide label{
     /*pos*/
     width: 38px;
-    height: 4px;
+    height: 16px;
     position: absolute;
-    top: 8px;
+    top: 2px;
     left: 0;
     /*style*/
     background-color: #666;
@@ -104,7 +104,7 @@
     width: 18px;
     height: 18px;
     position: absolute;
-    top: -8px;
+    top: -2px;
     left: 0px;
     border-radius: 100%;
     content: "";

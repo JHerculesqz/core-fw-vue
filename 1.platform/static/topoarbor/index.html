@@ -42,10 +42,7 @@
                         target: 'n' + (Math.random() * N | 0)
                     });
                 }
-                oMarvelArborAPI.sigmaEx.setData(arrNodes, arrLinks, {
-                    clear: true,
-                    layout: true
-                });
+                oMarvelArborAPI.sigmaEx.setData(arrNodes, arrLinks);
             });
             $("#updateDataBtn").click(function () {
                 oMarvelArborAPI.sigmaEx.updateData(function (oNode) {
