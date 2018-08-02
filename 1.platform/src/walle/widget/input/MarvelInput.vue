@@ -1,6 +1,6 @@
 <template>
   <div class="inputWrapper" v-bind:class="[status, size]">
-    <div class="placeHolder" v-show="inputMsg === ''">{{placeHolder}}</div>
+    <div class="placeHolder" v-show="inputMsg === '' || inputMsg === undefined">{{placeHolder}}</div>
     <input class="inputDefault" type="text"
            :title="placeHolder"
            v-model="inputMsg"
