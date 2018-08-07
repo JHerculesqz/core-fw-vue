@@ -16,7 +16,7 @@
         <div v-if="needCheckAll" class="optionItem"
              @click.stop>
           <input type="checkbox" :checked="itemAllChecked" @change.stop="onAllCheckBoxChange">
-          <label class="name">全选</label>
+          <label class="name">{{$t('marvelMultiDropdown_selectAll')}}</label>
         </div>
         <div v-for="item in items"
              class="optionItem"
@@ -30,6 +30,17 @@
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "marvelMultiDropdown_selectAll": "Select All"
+  },
+  "zh": {
+    "marvelMultiDropdown_selectAll": "全选"
+  }
+}
+</i18n>
 
 <script>
   export default {

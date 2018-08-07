@@ -192,7 +192,6 @@
         return activeNodes;
       },
       setActiveNodeStyleByName(strName){
-        console.log(strName);
         if (this.treeItemOptions.hasActiveStyle) {
           for (let k in this.treeMap) {
             let val = this.treeMap[k];

@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="loadingTip" v-text="loadingMsg"></div>
-      <div class="loadingCancel" title="取消" v-on:click="imsgMarvelLoadingCancel">X</div>
+      <div class="loadingCancel" :title="$t('marvelLoading_cancel')" v-on:click="imsgMarvelLoadingCancel">X</div>
     </div>
   </div>
   <!-- maskLoading end-->
@@ -22,6 +22,17 @@
 应从"fixed"、"relative"、"absolute"中选择合适属性值使用(若父容器为body，则可忽略此条规则)。
   -->
 </template>
+
+<i18n>
+  {
+  "en": {
+  "marvelLoading_cancel": "Cancel"
+  },
+  "zh": {
+  "marvelLoading_cancel": "取消"
+  }
+  }
+</i18n>
 
 <script>
   export default {

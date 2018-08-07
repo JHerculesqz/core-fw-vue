@@ -86,14 +86,28 @@
           <div class="item icon-marvelIcon-02" v-on:click="onNextClick"></div>
         </div>
         <!--<div class="text">跳转</div><input class="pageDrop"><div class="text">页</div>-->
-        <div class="text">共{{ rows.length}}条</div>
+        <div class="text">{{$t('marvelGrid_total')}}{{ rows.length}}{{$t('marvelGrid_num')}}</div>
       </div>
     </div>
   </div>
 </template>
 
+<i18n>
+  {
+  "en": {
+  "marvelGrid_total": "Total",
+  "marvelGrid_num": " "
+  },
+  "zh": {
+  "marvelGrid_total": "共",
+  "marvelGrid_num": "条"
+  }
+  }
+</i18n>
+
 <script>
   import MarvelCheckBox from "../select/MarvelCheckBox.vue";
+
   export default {
     components: {MarvelCheckBox},
     name: 'MarvelGrid',
@@ -107,8 +121,6 @@
         rowsInPage: [],
         //#region checkbox
         checkTitleItem: false,
-
-
         //#endregion
         //#region radio
         radioGroup:[]

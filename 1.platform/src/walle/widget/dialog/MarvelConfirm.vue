@@ -18,17 +18,31 @@
         </div>
       </div>
       <div class="tipDialogBtnArea">
-        <marvel-icon-txt-button label="确定" icon="icon-checkmark"
+        <marvel-icon-txt-button :label="$t('marvelConfirm_confirm')" icon="icon-checkmark"
                                 v-on:onClick="onClickOK"></marvel-icon-txt-button>
-        <marvel-icon-txt-button label="取消" icon="icon-cross"
+        <marvel-icon-txt-button :label="$t('marvelConfirm_cancel')" icon="icon-cross"
                                 v-on:onClick="onClickCancel"></marvel-icon-txt-button>
       </div>
     </div>
   </div>
 </template>
 
+<i18n>
+  {
+  "en": {
+  "marvelConfirm_confirm": "OK",
+  "marvelConfirm_cancel": "Cancel"
+  },
+  "zh": {
+  "marvelConfirm_confirm": "确定",
+  "marvelConfirm_cancel": "取消"
+  }
+  }
+</i18n>
+
 <script>
   import MarvelIconTxtButton from "../button/MarvelIconTxtButton";
+
   export default {
     components: {MarvelIconTxtButton},
     name: 'MarvelConfirmDialog',

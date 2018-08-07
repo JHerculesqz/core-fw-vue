@@ -30,16 +30,31 @@
 
     </div>
     <div class="select-page">
-      跳转
+      <span>{{$t('marvelPaging_to')}}</span>
       <select v-model="curPageIndex"
               @change.stop="onChangePage">
         <option v-for="item in pagesEx" :value="item">{{item}}</option>
       </select>
     </div>
 
-    <div class="text">共{{totalNum}}条</div>
+    <div class="text">{{$t('marvelPaging_total')}}{{totalNum}}{{$t('marvelPaging_num')}}</div>
   </div>
 </template>
+
+<i18n>
+  {
+  "en": {
+  "marvelPaging_to": "To",
+  "marvelPaging_total": "Total",
+  "marvelPaging_num": " "
+  },
+  "zh": {
+  "marvelPaging_to": "跳转",
+  "marvelPaging_total": "共",
+  "marvelPaging_num": "条"
+  }
+  }
+</i18n>
 
 <script>
   export default {

@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" v-bind:class="{ dpn: !isActive }">
+  <div class="cont" v-bind:class="{ uiSink: !isActive }">
     <slot></slot>
   </div>
 </template>
@@ -49,13 +49,16 @@
     height: calc(100% - 30px);
     clear: both;
     background-color: #ffffff;
+    position: relative;
   }
   .tabWrapper .contArea .cont{
     width: 100%;
     height: 100%;
   }
-  .dpn{
-    display: none;
+  .uiSink{
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
   }
 
   .theme1 .headArea .headItem{
